@@ -305,10 +305,10 @@ private function hGet1stOutputLineFromCommand( byref cmd as string ) as string
 	end if
 
 	dim ln as string
-	input #f, ln
+	line input #f, ln
 
 	close f
-	return ln
+	return trim( ln )
 end function
 
 '' Pass some arguments to gcc/clang and read the results. Returns an empty string on
@@ -838,13 +838,13 @@ private function hLinkFiles( ) as integer
 		case FB_CPUFAMILY_X86_64
 			ldcline += "-arch x86_64 "
 		case FB_CPUFAMILY_ARM
-			ldcline += "-arch armv7 "
+			'' fixme: this is clearly too specific
+			ldcline += "-arch armv6 "
 		case FB_CPUFAMILY_AARCH64
 			ldcline += "-arch arm64 "
 		end select
 
 	'' Amiga-like targets: no special ld emulation flags needed
-	'' (we use the cross-gcc as linker driver)
 	case FB_COMPTARGET_AMIGA, FB_COMPTARGET_AROS, _
 		FB_COMPTARGET_MORPHOS, FB_COMPTARGET_AMIGAOS4
 
@@ -1130,9 +1130,11 @@ private function hLinkFiles( ) as integer
 		wend
 	end scope
 
-	'' And the sysroot
+	'' And the sysroot (Darwin uses -syslibroot, handled separately)
 	if( len( fbc.sysroot ) ) then
-		ldcline += " --sysroot=" + fbc.sysroot
+		if( fbGetOption( FB_COMPOPT_TARGET ) <> FB_COMPTARGET_DARWIN ) then
+			ldcline += " --sysroot=" + fbc.sysroot
+		end if
 	end if
 
 	'' crt begin objects
@@ -1333,8 +1335,29 @@ private function hLinkFiles( ) as integer
 	end select
 
 	if( fbGetOption( FB_COMPOPT_TARGET ) = FB_COMPTARGET_DARWIN ) then
-		ldcline += " -platform_version macos 11.0.0 11.0.0"
-		ldcline += " -syslibroot /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk"
+		scope
+			'' Fallback SDK version for cross-compilation when xcrun is unavailable.
+		'' Overridden at runtime by xcrun --show-sdk-version on native macOS.
+		dim as string sdkver = "14.0"
+			dim as string sysroot
+			if( len( fbc.sysroot ) > 0 ) then
+				sysroot = fbc.sysroot
+#ifdef __FB_DARWIN__
+			else
+				sysroot = hGet1stOutputLineFromCommand( "xcrun --show-sdk-path" )
+				dim as string v = hGet1stOutputLineFromCommand( "xcrun --show-sdk-version" )
+				if( len( v ) > 0 ) then sdkver = v
+#endif
+			end if
+			if( fbGetCpuFamily( ) = FB_CPUFAMILY_AARCH64 ) then
+				ldcline += " -platform_version macos 11.0.0 " + sdkver
+			else
+				ldcline += " -platform_version macos 10.4.0 " + sdkver
+			end if
+			if( len( sysroot ) > 0 ) then
+				ldcline += " -syslibroot " + QUOTE + sysroot + QUOTE
+			end if
+		end scope
 	end if
 
 	'' This is required for 64-bit modules on *nix-y platforms
@@ -1667,7 +1690,7 @@ dim shared as FBGNUOSINFO gnuosmap(0 to ...) => _
 	(@"netbsd"     , FB_COMPTARGET_NETBSD   ), _
 	(@"openbsd"    , FB_COMPTARGET_OPENBSD  ), _
 	(@"xbox"       , FB_COMPTARGET_XBOX     ), _
-	(@"amigaos4"   , FB_COMPTARGET_AMIGAOS4 ), _ '' Must appear before amigaos
+	(@"amigaos4"   , FB_COMPTARGET_AMIGAOS4 ), _
 	(@"amigaos"    , FB_COMPTARGET_AMIGA    ), _
 	(@"aros"       , FB_COMPTARGET_AROS     ), _
 	(@"morphos"    , FB_COMPTARGET_MORPHOS  )  _
@@ -4444,7 +4467,6 @@ private sub hAddDefaultLibs( )
 		if( fbGetOption( FB_COMPOPT_PROFILE ) = FB_PROFILE_OPT_GMON ) then
 			fbcAddDefLib( "gmon" )
 		end if
-
 
 	case FB_COMPTARGET_AMIGA
 		fbcAddDefLib( "gcc" )
