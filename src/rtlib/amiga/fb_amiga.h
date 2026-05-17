@@ -9,25 +9,23 @@
 
 #define FBCALL
 
-/* Newline sequences */
 #define FB_NEWLINE "\n"
 #define FB_NEWLINE_WSTR _LC("\n")
 #define FB_BINARY_NEWLINE "\r\n"
 #define FB_BINARY_NEWLINE_WSTR _LC("\r\n")
 
-/* printf format modifier for long long */
 #define FB_LL_FMTMOD "ll"
-
-/* Path separator */
 #define FB_HOST_PATHDIV "/"
-
-/* Console pages (no virtual console support) */
 #define FB_CONSOLE_MAXPAGES 1
 
-/* File offset type - AmigaOS uses 32-bit file offsets */
+/* File offset type */
+#if defined(HOST_AROS) && defined(HOST_64BIT)
+typedef long long fb_off_t;
+#else
 typedef long fb_off_t;
+#endif
 
-/* No background thread locking (no MT support yet) */
+/* No background thread locking (no MT support) */
 #define BG_LOCK()
 #define BG_UNLOCK()
 
