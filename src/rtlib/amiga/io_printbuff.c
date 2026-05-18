@@ -1,29 +1,15 @@
 /* Console output for AmigaOS/AROS/MorphOS */
 #include "../fb.h"
 #include <string.h>
+#include <stdlib.h>
 
 #if defined(HOST_AMIGAOS)
-/* AmigaOS 3.x: use dos.library Write() via inline asm */
-extern struct Library *DOSBase;
-
-static long dos_Output(void) {
-    register struct Library *a6 __asm("a6") = DOSBase;
-    register long res __asm("d0");
-    __asm volatile ("jsr -60(%%a6)" : "=r"(res) : "r"(a6) : "a0","a1","d1","memory");
-    return res;
-}
-
-static void dos_Write_fh(long fh, const void *buf, long len) {
-    register struct Library *a6 __asm("a6") = DOSBase;
-    register long d1 __asm("d1") = fh;
-    register const void *d2 __asm("d2") = buf;
-    register long d3 __asm("d3") = len;
-    __asm volatile ("jsr -48(%%a6)" : : "r"(a6), "r"(d1), "r"(d2), "r"(d3) : "d0","a0","a1","memory");
-}
+#include <proto/dos.h>
+extern struct DosLibrary *DOSBase;
 
 void fb_ConsolePrintBufferEx(const void *buffer, size_t len, int mask) {
-    long out = dos_Output();
-    if (out && len > 0) dos_Write_fh(out, buffer, (long)len);
+    BPTR out = Output();
+    if (out && len > 0) Write(out, (APTR)buffer, (LONG)len);
 }
 
 #else

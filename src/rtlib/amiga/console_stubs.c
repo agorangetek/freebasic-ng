@@ -216,7 +216,7 @@ void fb_ConsoleSleep(int msecs) {
         long in = dos_Input();
         if (in) { char c; dos_Read(in, &c, 1); }
     } else if (msecs == 0) {
-        /* Just yield */
+        /* Yield CPU timeslice */
         dos_Delay(1);
     } else {
         long ticks = msecs / 20;
