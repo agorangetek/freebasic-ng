@@ -23,6 +23,10 @@ void fb_hIntlExit(void) {
 }
 #endif
 
+#if !defined(HOST_AMIGAOS)
+void fb_hIntlExit(void) { }
+#endif
+
 int fb_DrvIntlGet(int item) {
 #if defined(HOST_AMIGAOS)
     ensure_locale();
@@ -76,7 +80,7 @@ int fb_DrvIntlGetMonthName(int month, int abbreviated, char *buf, size_t buflen)
 #if defined(HOST_AMIGAOS)
     ensure_locale();
     if (locale) {
-        /* MON_1 = 14, ABMON_1 = 26 in locale.library */
+        /* Use named constants from libraries/locale.h */
         const char *s = GetLocaleStr(locale, abbreviated ? (ABMON_1 + month - 1) : (MON_1 + month - 1));
         if (s && s[0]) { strncpy(buf, s, buflen - 1); buf[buflen-1] = '\0'; return 0; }
     }
@@ -93,7 +97,7 @@ int fb_DrvIntlGetWeekdayName(int weekday, int abbreviated, char *buf, size_t buf
 #if defined(HOST_AMIGAOS)
     ensure_locale();
     if (locale) {
-        /* DAY_1 = 7, ABDAY_1 = 1 in locale.library */
+        /* Use named constants from libraries/locale.h */
         const char *s = GetLocaleStr(locale, abbreviated ? (ABDAY_1 + weekday) : (DAY_1 + weekday));
         if (s && s[0]) { strncpy(buf, s, buflen - 1); buf[buflen-1] = '\0'; return 0; }
     }

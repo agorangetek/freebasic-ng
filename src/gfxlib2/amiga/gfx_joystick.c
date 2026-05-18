@@ -54,5 +54,7 @@ FBCALL int fb_GfxGetJoystick(int id, ssize_t *buttons, float *a1, float *a2, flo
 #endif
 
 void fb_GfxJoystickExit(void) {
+#if defined(HOST_AMIGAOS)
     if (LowLevelBase) { CloseLibrary(LowLevelBase); LowLevelBase = NULL; }
+#endif
 }

@@ -4,7 +4,7 @@
 void fb_hInit(void) { }
 void fb_hEnd(int errlevel) {
     (void)errlevel;
-#if defined(HOST_AMIGAOS)
+#if defined(HOST_AMIGA)
     extern void fb_hIntlExit(void);
     fb_hIntlExit();
 #endif
