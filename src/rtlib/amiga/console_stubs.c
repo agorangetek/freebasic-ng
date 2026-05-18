@@ -30,6 +30,7 @@ static void con_write(const char *s) {
 #define dos_Input() STDIN_FILENO
 #define dos_Output() STDOUT_FILENO
 #define dos_Read(fh, buf, len) read(STDIN_FILENO, buf, len)
+#define dos_Write(fh, buf, len) write(STDOUT_FILENO, buf, len)
 static int dos_WaitForChar_posix(int fd, long timeout_us) {
     struct timeval tv;
     fd_set fds;
@@ -89,8 +90,18 @@ unsigned int fb_ConsoleGetColorAtt(void) { return con_fg | (con_bg << 4); }
 
 /* --- Clear --- */
 void fb_ConsoleClear(int mode) {
-    con_write("\033[2J\033[H");
-    con_x = 1; con_y = 1;
+    switch (mode) {
+        case 0: /* Clear screen and home cursor */
+            con_write("\033[2J\033[H");
+            con_x = 1; con_y = 1;
+            break;
+        case 1: /* No-op (clear active page - not applicable) */
+            break;
+        case 2: /* Clear active view */
+            con_write("\033[2J\033[H");
+            con_x = 1; con_y = 1;
+            break;
+    }
 }
 
 /* --- Scroll --- */
@@ -229,15 +240,10 @@ void fb_ConsoleSleep(int msecs) {
 FBCALL unsigned int fb_ConsoleReadXY(int col, int row, int colorflag) { return 32; }
 int fb_ConsoleIsRedirected(int is_input) {
 #if defined(HOST_AMIGAOS)
-    extern struct Library *DOSBase;
     long fh = is_input ? dos_Input() : dos_Output();
     if (!fh) return 1;
-    /* dos.library IsInteractive() offset -216 */
-    register struct Library *a6 __asm("a6") = DOSBase;
-    register long d1 __asm("d1") = fh;
-    register long res __asm("d0");
-    __asm volatile ("jsr -216(%%a6)" : "=r"(res) : "r"(a6), "r"(d1) : "a0","a1","memory");
-    return res ? 0 : 1; /* interactive = not redirected */
+    /* dos.library IsInteractive() */
+    return IsInteractive((BPTR)fh) ? 0 : 1;
 #else
     int fd = is_input ? STDIN_FILENO : STDOUT_FILENO;
     return isatty(fd) ? 0 : 1;

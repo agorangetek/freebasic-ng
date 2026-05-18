@@ -305,10 +305,10 @@ private function hGet1stOutputLineFromCommand( byref cmd as string ) as string
 	end if
 
 	dim ln as string
-	line input #f, ln
+	input #f, ln
 
 	close f
-	return trim( ln )
+	return ln
 end function
 
 '' Pass some arguments to gcc/clang and read the results. Returns an empty string on
@@ -840,8 +840,6 @@ private function hLinkFiles( ) as integer
 		case FB_CPUFAMILY_ARM
 			'' fixme: this is clearly too specific
 			ldcline += "-arch armv6 "
-		case FB_CPUFAMILY_AARCH64
-			ldcline += "-arch arm64 "
 		end select
 
 	'' Amiga-like targets: no special ld emulation flags needed
@@ -1130,11 +1128,9 @@ private function hLinkFiles( ) as integer
 		wend
 	end scope
 
-	'' And the sysroot (Darwin uses -syslibroot, handled separately)
+	'' And the sysroot
 	if( len( fbc.sysroot ) ) then
-		if( fbGetOption( FB_COMPOPT_TARGET ) <> FB_COMPTARGET_DARWIN ) then
-			ldcline += " --sysroot=" + fbc.sysroot
-		end if
+		ldcline += " --sysroot=" + fbc.sysroot
 	end if
 
 	'' crt begin objects
@@ -1176,8 +1172,6 @@ private function hLinkFiles( ) as integer
 		FB_COMPTARGET_NETBSD, FB_COMPTARGET_DRAGONFLY, FB_COMPTARGET_SOLARIS
 
 		if( fbGetOption( FB_COMPOPT_OUTTYPE ) = FB_OUTTYPE_EXECUTABLE) then
-			'' Darwin doesn't need CRT startup objects on modern macOS
-			if (fbGetOption( FB_COMPOPT_TARGET ) <> FB_COMPTARGET_DARWIN) then
 			if( fbGetOption( FB_COMPOPT_PROFILE ) ) then
 				select case as const fbGetOption( FB_COMPOPT_TARGET )
 				case FB_COMPTARGET_OPENBSD, FB_COMPTARGET_NETBSD
@@ -1192,7 +1186,6 @@ private function hLinkFiles( ) as integer
 				case else
 					ldcline += hFindLib( "crt1.o" )
 				end select
-			end if
 			end if
 		end if
 
@@ -1335,29 +1328,7 @@ private function hLinkFiles( ) as integer
 	end select
 
 	if( fbGetOption( FB_COMPOPT_TARGET ) = FB_COMPTARGET_DARWIN ) then
-		scope
-			'' Fallback SDK version for cross-compilation when xcrun is unavailable.
-		'' Overridden at runtime by xcrun --show-sdk-version on native macOS.
-		dim as string sdkver = "14.0"
-			dim as string sysroot
-			if( len( fbc.sysroot ) > 0 ) then
-				sysroot = fbc.sysroot
-#ifdef __FB_DARWIN__
-			else
-				sysroot = hGet1stOutputLineFromCommand( "xcrun --show-sdk-path" )
-				dim as string v = hGet1stOutputLineFromCommand( "xcrun --show-sdk-version" )
-				if( len( v ) > 0 ) then sdkver = v
-#endif
-			end if
-			if( fbGetCpuFamily( ) = FB_CPUFAMILY_AARCH64 ) then
-				ldcline += " -platform_version macos 11.0.0 " + sdkver
-			else
-				ldcline += " -platform_version macos 10.4.0 " + sdkver
-			end if
-			if( len( sysroot ) > 0 ) then
-				ldcline += " -syslibroot " + QUOTE + sysroot + QUOTE
-			end if
-		end scope
+		ldcline += " -macosx_version_min 10.4"
 	end if
 
 	'' This is required for 64-bit modules on *nix-y platforms
@@ -1366,7 +1337,8 @@ private function hLinkFiles( ) as integer
 	select case as const fbGetOption( FB_COMPOPT_TARGET )
 	case FB_COMPTARGET_LINUX, FB_COMPTARGET_FREEBSD, _
 		FB_COMPTARGET_OPENBSD, FB_COMPTARGET_NETBSD, _
-		FB_COMPTARGET_DRAGONFLY, FB_COMPTARGET_SOLARIS
+		FB_COMPTARGET_DRAGONFLY, FB_COMPTARGET_SOLARIS, _
+		FB_COMPTARGET_DARWIN
 		dim as long outtype = fbGetOption( FB_COMPOPT_OUTTYPE )
 		if outtype = FB_OUTTYPE_EXECUTABLE OrElse outtype = FB_OUTTYPE_DYNAMICLIB Then
 			dim as long cpufamily = fbGetCpuFamily( )
@@ -4350,9 +4322,28 @@ private sub hAddDefaultLibs( )
 		end if
 
 	case FB_COMPTARGET_DARWIN
+		fbcAddDefLib( "gcc" )
 		fbcAddDefLib( "System" )
 		fbcAddDefLib( "pthread" )
 		fbcAddDefLib( "ncurses" )
+
+	case FB_COMPTARGET_AMIGA
+		fbcAddDefLib( "gcc" )
+		fbcAddDefLib( "c" )
+		fbcAddDefLib( "amiga" )
+		fbcAddDefLib( "m" )
+
+	case FB_COMPTARGET_AROS
+		fbcAddDefLib( "gcc" )
+		fbcAddDefLib( "arosc" )
+		fbcAddDefLib( "autoinit" )
+		fbcAddDefLib( "c" )
+		fbcAddDefLib( "m" )
+
+	case FB_COMPTARGET_MORPHOS, FB_COMPTARGET_AMIGAOS4
+		fbcAddDefLib( "gcc" )
+		fbcAddDefLib( "c" )
+		fbcAddDefLib( "m" )
 
 	case FB_COMPTARGET_DOS
 		fbcAddDefLib( "gcc" )
@@ -4467,28 +4458,6 @@ private sub hAddDefaultLibs( )
 		if( fbGetOption( FB_COMPOPT_PROFILE ) = FB_PROFILE_OPT_GMON ) then
 			fbcAddDefLib( "gmon" )
 		end if
-
-	case FB_COMPTARGET_AMIGA
-		fbcAddDefLib( "gcc" )
-		fbcAddDefLib( "amiga" )
-		fbcAddDefLib( "m" )
-
-	case FB_COMPTARGET_AROS
-		fbcAddDefLib( "gcc" )
-		fbcAddDefLib( "arosc" )
-		fbcAddDefLib( "autoinit" )
-		fbcAddDefLib( "m" )
-
-	case FB_COMPTARGET_MORPHOS
-		fbcAddDefLib( "gcc" )
-		fbcAddDefLib( "c" )
-		fbcAddDefLib( "m" )
-
-	case FB_COMPTARGET_AMIGAOS4
-		fbcAddDefLib( "gcc" )
-		fbcAddDefLib( "c" )
-		fbcAddDefLib( "m" )
-		fbcAddDefLib( "auto" )
 
 	end select
 

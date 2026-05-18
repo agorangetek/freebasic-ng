@@ -18,11 +18,10 @@ extern struct ExecBase *SysBase;
 
 FBCALL void fb_Beep(void) {
 #if defined(HOST_AMIGAOS)
-    /* Open intuition.library transiently for DisplayBeep */
-    struct IntuitionBase *ib = (struct IntuitionBase *)OpenLibrary("intuition.library", 36);
-    if (ib) {
+    struct IntuitionBase *IntuitionBase = (struct IntuitionBase *)OpenLibrary("intuition.library", 36);
+    if (IntuitionBase) {
         DisplayBeep(NULL);
-        CloseLibrary((struct Library *)ib);
+        CloseLibrary((struct Library *)IntuitionBase);
     }
 #endif
 }
