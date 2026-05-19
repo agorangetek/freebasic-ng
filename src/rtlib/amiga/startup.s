@@ -45,7 +45,6 @@ dosname: .asciz "dos.library"
 
     .globl _SysBase
     .globl _DOSBase
-    .globl _LocaleBase
     .bss
 _SysBase:    .long 0
 _cmdline:    .long 0
@@ -53,7 +52,6 @@ _cmdlen:     .long 0
     .globl _cmdline
     .globl _cmdlen
 _DOSBase:    .long 0
-_LocaleBase: .long 0
 | __impure_ptr: newlib reentrancy pointer. Initialized by crt0 if using newlib.
 | Set to 0 here; newlib's startup will override if linked.
 __impure_ptr: .long 0

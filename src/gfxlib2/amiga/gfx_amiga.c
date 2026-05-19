@@ -9,8 +9,8 @@
 #include <intuition/screens.h>
 
 extern struct ExecBase *SysBase;
-static struct IntuitionBase *IntuitionBase;
-static struct GfxBase *GfxBase;
+struct IntuitionBase *IntuitionBase;
+struct GfxBase *GfxBase;
 static struct Screen *amiga_screen;
 static struct Window *amiga_window;
 static int mouse_x, mouse_y, mouse_z, mouse_buttons;
@@ -26,21 +26,21 @@ static const unsigned char amiga_to_fb_scancode[128] = {
     SC_8, SC_9, SC_0, SC_MINUS, SC_EQUALS, SC_BACKSLASH, 0, SC_DELETE,
     /* 0x10-0x1F: Q W E R T Y U I O P [ ] x x x KP0 */
     SC_Q, SC_W, SC_E, SC_R, SC_T, SC_Y, SC_U, SC_I,
-    SC_O, SC_P, SC_LEFTBRACKET, SC_RIGHTBRACKET, 0, 0, 0, SC_KEYPAD0,
+    SC_O, SC_P, SC_LEFTBRACKET, SC_RIGHTBRACKET, 0, 0, 0, SC_INSERT,
     /* 0x20-0x2F: A S D F G H J K L ; ' x x x x KP. */
     SC_A, SC_S, SC_D, SC_F, SC_G, SC_H, SC_J, SC_K,
-    SC_L, SC_SEMICOLON, SC_QUOTE, 0, 0, 0, 0, SC_KEYPADDOT,
+    SC_L, SC_SEMICOLON, SC_QUOTE, 0, 0, 0, 0, SC_DELETE,
     /* 0x30-0x3F: x Z X C V B N M , . / x x x x x */
     0, SC_Z, SC_X, SC_C, SC_V, SC_B, SC_N, SC_M,
     SC_COMMA, SC_PERIOD, SC_SLASH, 0, 0, 0, 0, 0,
     /* 0x40-0x4F: Space BS Tab Enter Ret Esc x x x x KP- x Up Down Right Left */
     SC_SPACE, SC_BACKSPACE, SC_TAB, SC_ENTER, SC_ENTER, SC_ESCAPE, 0, 0,
-    0, 0, SC_KEYPADMINUS, 0, SC_UP, SC_DOWN, SC_RIGHT, SC_LEFT,
+    0, 0, 0x4A, 0, SC_UP, SC_DOWN, SC_RIGHT, SC_LEFT,
     /* 0x50-0x5F: F1-F10 x x */
     SC_F1, SC_F2, SC_F3, SC_F4, SC_F5, SC_F6, SC_F7, SC_F8,
     SC_F9, SC_F10, 0, 0, 0, 0, 0, 0,
     /* 0x60-0x6F: LShift RShift CapsLk Ctrl LAlt RAlt LAmiga RAmiga ... */
-    SC_LSHIFT, SC_RSHIFT, SC_CAPSLOCK, SC_CONTROL, SC_LALT, SC_RALT, 0, 0,
+    SC_LSHIFT, SC_RSHIFT, SC_CAPSLOCK, SC_CONTROL, SC_ALT, SC_ALTGR, 0, 0,
     0, 0, 0, 0, 0, 0, 0, 0,
     /* 0x70-0x7F: unused */
     0, 0, 0, 0, 0, 0, 0, 0,
@@ -201,3 +201,12 @@ void fb_hScreenInfo(ssize_t *width, ssize_t *height, ssize_t *depth, ssize_t *re
 }
 
 #endif /* HOST_AMIGAOS */
+
+#if defined(HOST_AMIGA) && !defined(HOST_AMIGAOS)
+/* AROS/MorphOS/AmigaOS4: no native gfx driver yet */
+const GFXDRIVER *__fb_gfx_drivers_list[] = { NULL };
+
+void fb_hScreenInfo(ssize_t *width, ssize_t *height, ssize_t *depth, ssize_t *refresh) {
+    *width = 640; *height = 480; *depth = 8; *refresh = 50;
+}
+#endif

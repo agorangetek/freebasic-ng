@@ -7,7 +7,7 @@
 #include <libraries/lowlevel.h>
 
 extern struct ExecBase *SysBase;
-static struct Library *LowLevelBase;
+struct Library *LowLevelBase;
 
 FBCALL int fb_GfxGetJoystick(int id, ssize_t *buttons, float *a1, float *a2, float *a3,
                       float *a4, float *a5, float *a6, float *a7, float *a8) {
@@ -49,6 +49,15 @@ FBCALL int fb_GfxGetJoystick(int id, ssize_t *buttons, float *a1, float *a2, flo
 /* AROS/MorphOS - stub */
 FBCALL int fb_GfxGetJoystick(int id, ssize_t *buttons, float *a1, float *a2, float *a3,
                       float *a4, float *a5, float *a6, float *a7, float *a8) {
+    if (buttons) *buttons = -1;
+    if (a1) *a1 = -1000.0f;
+    if (a2) *a2 = -1000.0f;
+    if (a3) *a3 = -1000.0f;
+    if (a4) *a4 = -1000.0f;
+    if (a5) *a5 = -1000.0f;
+    if (a6) *a6 = -1000.0f;
+    if (a7) *a7 = -1000.0f;
+    if (a8) *a8 = -1000.0f;
     return fb_ErrorSetNum(FB_RTERROR_ILLEGALFUNCTIONCALL);
 }
 #endif

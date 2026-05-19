@@ -24,7 +24,7 @@ void fb_hRtInit( void )
 #ifdef ENABLE_MT
 	fb_TlsInit( );
 #endif
-#ifndef HOST_AMIGA
+	#ifndef HOST_AMIGA
 	fb_AllocateMainFBThread();
 #endif
 
@@ -112,10 +112,10 @@ FBCALL void fb_Init( int argc, char **argv, int lang )
 	__fb_ctx.argv = argv;
 	__fb_ctx.lang = lang;
 
-#if defined(HOST_JS) || defined(HOST_AMIGA)
-	/* No CRT constructor support - call init/exit directly */
-	fb_hRtInit();
-#endif
+#ifdef HOST_JS
+    // global constructors and destructors are not supported by emscripten
+    fb_hRtInit();
+#endif // HOST_JS
 }
 
 /* called by FB program,
@@ -125,9 +125,10 @@ FBCALL void fb_End( int errlevel )
 	if( __fb_ctx.exit_gfxlib2 )
 		__fb_ctx.exit_gfxlib2( );
 
-#if defined(HOST_JS) || defined(HOST_AMIGA)
-	fb_hRtExit();
-#endif
+#ifdef HOST_JS
+    // global constructors and destructors are not supported by emscripten
+    fb_hRtExit();
+#endif // HOST_JS
 
 	exit( errlevel );
 }
