@@ -94,7 +94,9 @@ int fb_SerialRead(FB_FILE *handle, void *pvHandle, void *data, size_t *pLength) 
 
 int fb_SerialReadWstr(FB_FILE *handle, void *pvHandle, FB_WCHAR *data, size_t *pLength) {
     size_t byte_len = *pLength;
-    char *tmp = (char *)malloc(byte_len);
+    if (byte_len == 0) return fb_ErrorSetNum(FB_RTERROR_OK);
+    char stack_buf[256];
+    char *tmp = (byte_len <= sizeof(stack_buf)) ? stack_buf : (char *)malloc(byte_len);
     if (!tmp) return fb_ErrorSetNum(FB_RTERROR_OUTOFMEM);
     int ret = fb_SerialRead(handle, pvHandle, tmp, &byte_len);
     if (ret == FB_RTERROR_OK) {
@@ -102,7 +104,7 @@ int fb_SerialReadWstr(FB_FILE *handle, void *pvHandle, FB_WCHAR *data, size_t *p
         for (i = 0; i < byte_len; i++) data[i] = (FB_WCHAR)(unsigned char)tmp[i];
         *pLength = byte_len;
     }
-    free(tmp);
+    if (tmp != stack_buf) free(tmp);
     return ret;
 }
 

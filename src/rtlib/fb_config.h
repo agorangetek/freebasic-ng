@@ -49,12 +49,15 @@
 #elif defined(__amigaos4__)
 	#define HOST_AMIGAOS4
 	#define HOST_AMIGA
+	#define HOST_UNIX
 #elif defined(__AROS__)
 	#define HOST_AROS
 	#define HOST_AMIGA
+	#define HOST_UNIX
 #elif defined(__MORPHOS__)
 	#define HOST_MORPHOS
 	#define HOST_AMIGA
+	#define HOST_UNIX
 #elif defined(AMIGA) || defined(__amigaos__) || defined(__AMIGA__)
 	#define HOST_AMIGAOS
 	#define HOST_AMIGA

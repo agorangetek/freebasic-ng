@@ -16,7 +16,7 @@ static struct Window *amiga_window;
 static int mouse_x, mouse_y, mouse_z, mouse_buttons;
 static struct RastPort tmp_rp;
 static struct BitMap *tmp_bm;
-static int tmp_bm_width;
+static int tmp_bm_width, tmp_bm_height;
 
 
 /* Amiga scancode to FreeBASIC (PC Set 1) scancode mapping */
@@ -129,14 +129,15 @@ static void driver_update(void) {
     int w = __fb_gfx->w, h = __fb_gfx->h;
 
     /* Allocate/reallocate temp bitmap for WritePixelArray8 */
-    if (!tmp_bm || tmp_bm_width != w) {
+    if (!tmp_bm || tmp_bm_width != w || tmp_bm_height != h) {
         if (tmp_bm) FreeBitMap(tmp_bm);
         tmp_bm = AllocBitMap(w, h, amiga_screen->RastPort.BitMap->Depth, 0,
                              amiga_screen->RastPort.BitMap);
-        if (!tmp_bm) { tmp_bm_width = 0; return; }
+        if (!tmp_bm) { tmp_bm_width = 0; tmp_bm_height = 0; return; }
         InitRastPort(&tmp_rp);
         tmp_rp.BitMap = tmp_bm;
         tmp_bm_width = w;
+        tmp_bm_height = h;
     }
 
     WritePixelArray8(rp, 0, 0, w - 1, h - 1, src, &tmp_rp);

@@ -99,7 +99,7 @@ FBSTRING *fb_DrvIntlGetMonthName(int month, int short_names) {
     size_t name_len = strlen(name);
     FBSTRING *result = fb_hStrAllocTemp(NULL, name_len);
     if (result)
-        FB_MEMCPY(result->data, name, name_len + 1);
+        FB_MEMCPY(result->data, name, name_len);
     return result;
 }
 
@@ -126,7 +126,7 @@ FBSTRING *fb_DrvIntlGetWeekdayName(int weekday, int short_names) {
     size_t name_len = strlen(name);
     FBSTRING *result = fb_hStrAllocTemp(NULL, name_len);
     if (result)
-        FB_MEMCPY(result->data, name, name_len + 1);
+        FB_MEMCPY(result->data, name, name_len);
     return result;
 }
 
