@@ -207,8 +207,12 @@ jobs:
               for source in sorted(root.rglob("*")):
                   if source.is_file():
                       output.write(source, source.relative_to(root.parent).as_posix())
+          with zipfile.ZipFile(archive) as input:
+              corrupt_member = input.testzip()
+              if corrupt_member:
+                  raise RuntimeError(f"corrupt ZIP member: {corrupt_member}")
+              input.extractall("clean-room")
           PY
-          tar -xf "$archive" -C clean-room
           python scripts/verify-installed-fbc.py --prefix "clean-room/$root" --expected-host "$EXPECTED_HOST"
 
       - name: Generate an SPDX SBOM
