@@ -80,7 +80,6 @@ cat > "$OUTPUT" <<FORMULA
 class FreebasicNg < Formula
   desc "Modern compiler for the FreeBASIC language"
   homepage "https://github.com/metaneutrons/freebasic-ng"
-  version "${VERSION}"
   license all_of: ["GPL-2.0-or-later", "LGPL-2.1-or-later"]
 
   on_macos do
