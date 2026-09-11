@@ -196,7 +196,18 @@ jobs:
           root="freebasic-ng-${VERSION}-${TARGET}"
           archive="dist/${root}.zip"
           mkdir -p dist clean-room
-          tar -a -cf "$archive" -C package "$root"
+          python - "$root" "$archive" <<'PY'
+          from pathlib import Path
+          import sys
+          import zipfile
+
+          root = Path("package") / sys.argv[1]
+          archive = Path(sys.argv[2])
+          with zipfile.ZipFile(archive, "w", zipfile.ZIP_DEFLATED) as output:
+              for source in sorted(root.rglob("*")):
+                  if source.is_file():
+                      output.write(source, source.relative_to(root.parent).as_posix())
+          PY
           tar -xf "$archive" -C clean-room
           python scripts/verify-installed-fbc.py --prefix "clean-room/$root" --expected-host "$EXPECTED_HOST"
 
