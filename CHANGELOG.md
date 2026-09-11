@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.21.4](https://github.com/metaneutrons/freebasic-ng/compare/freebasic-ng-v1.21.3...freebasic-ng-v1.21.4) (2026-09-11)
+
+
+### Bug Fixes
+
+* **release:** exclude checksum inventory from itself ([#84](https://github.com/metaneutrons/freebasic-ng/issues/84)) ([2eb2d8f](https://github.com/metaneutrons/freebasic-ng/commit/2eb2d8f70d49cdb7462ebfa943a703004c58dd1b))
+
 ## [1.21.3](https://github.com/metaneutrons/freebasic-ng/compare/freebasic-ng-v1.21.2...freebasic-ng-v1.21.3) (2026-09-11)
 
 
