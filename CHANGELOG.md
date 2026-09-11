@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.21.3](https://github.com/metaneutrons/freebasic-ng/compare/freebasic-ng-v1.21.2...freebasic-ng-v1.21.3) (2026-09-11)
+
+
+### Bug Fixes
+
+* **release:** sign Windows ARM archive in candidate job ([#82](https://github.com/metaneutrons/freebasic-ng/issues/82)) ([113ad12](https://github.com/metaneutrons/freebasic-ng/commit/113ad1210267f21381c9ac8c863cca18e7441040))
+
 ## [1.21.2](https://github.com/metaneutrons/freebasic-ng/compare/freebasic-ng-v1.21.1...freebasic-ng-v1.21.2) (2026-09-11)
 
 
