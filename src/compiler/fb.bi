@@ -2,8 +2,8 @@
 #define __FB_BI__
 
 const FB_VER_MAJOR  = "1"  '' x-release-please-major
-const FB_VER_MINOR  = "21" '' x-release-please-minor
-const FB_VER_PATCH  = "4"  '' x-release-please-patch
+const FB_VER_MINOR  = "22" '' x-release-please-minor
+const FB_VER_PATCH  = "0"  '' x-release-please-patch
 const FB_VERSION    = FB_VER_MAJOR + "." + FB_VER_MINOR + "." + FB_VER_PATCH
 const FB_BUILD_DATE = __DATE__
 const FB_BUILD_DATE_ISO = __DATE_ISO__
