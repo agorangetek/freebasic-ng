@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.21.1](https://github.com/metaneutrons/freebasic-ng/compare/freebasic-ng-v1.21.0...freebasic-ng-v1.21.1) (2026-09-11)
+
+
+### Bug Fixes
+
+* **release:** create valid Windows ZIP archives ([#78](https://github.com/metaneutrons/freebasic-ng/issues/78)) ([3e72c5e](https://github.com/metaneutrons/freebasic-ng/commit/3e72c5e6f9a15ac97c8d4bcecae8a55ebac00794))
+
 ## [1.21.0](https://github.com/metaneutrons/freebasic-ng/compare/freebasic-ng-v1.20.0...freebasic-ng-v1.21.0) (2026-09-11)
 
 
