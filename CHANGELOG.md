@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.22.1](https://github.com/metaneutrons/freebasic-ng/compare/v1.22.0...v1.22.1) (2026-09-11)
+
+
+### Bug Fixes
+
+* **packaging:** satisfy Homebrew formula audit ([#94](https://github.com/metaneutrons/freebasic-ng/issues/94)) ([4874ea9](https://github.com/metaneutrons/freebasic-ng/commit/4874ea940dc9aae272694a7e00e531fa5bdc5cb0))
+
 ## [1.22.0](https://github.com/metaneutrons/freebasic-ng/compare/v1.21.4...v1.22.0) (2026-09-11)
 
 
