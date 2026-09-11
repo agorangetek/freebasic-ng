@@ -9,7 +9,7 @@
       "include-component-in-tag": true,
       "draft": true,
       "force-tag-creation": true,
-      "version-file": "version.mk"
+      "extra-files": ["version.mk"]
     }
   }
 }
