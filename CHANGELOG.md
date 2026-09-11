@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.21.2](https://github.com/metaneutrons/freebasic-ng/compare/freebasic-ng-v1.21.1...freebasic-ng-v1.21.2) (2026-09-11)
+
+
+### Bug Fixes
+
+* **release:** extract Windows ZIP archives with zipfile ([#80](https://github.com/metaneutrons/freebasic-ng/issues/80)) ([acf4ede](https://github.com/metaneutrons/freebasic-ng/commit/acf4eded46d959424485e99419cedeb1564b3dd0))
+
 ## [1.21.1](https://github.com/metaneutrons/freebasic-ng/compare/freebasic-ng-v1.21.0...freebasic-ng-v1.21.1) (2026-09-11)
 
 
