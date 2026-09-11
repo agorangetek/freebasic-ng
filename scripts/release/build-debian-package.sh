@@ -84,7 +84,7 @@ Section: devel
 Priority: optional
 Architecture: ${architecture}
 Maintainer: metaneutrons <https://github.com/metaneutrons>
-Depends: gcc, binutils, ${runtime_dependencies}
+Depends: gcc, binutils, libncurses-dev, ${runtime_dependencies}
 Description: FreeBASIC-NG compiler
  FreeBASIC-NG is an independent, maintained FreeBASIC compiler fork.
 CONTROL
