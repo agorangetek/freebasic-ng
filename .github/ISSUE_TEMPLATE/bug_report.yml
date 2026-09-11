@@ -10,7 +10,7 @@ body:
     id: version
     attributes:
       label: FreeBASIC-NG version and platform
-      placeholder: "freebasic-ng-v1.20.0 on Linux x86_64"
+      placeholder: "v1.20.0 on Linux x86_64"
     validations:
       required: true
   - type: textarea

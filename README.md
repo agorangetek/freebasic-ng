@@ -19,7 +19,7 @@ upstream base and the fork's compatibility policy are documented in
 | Debian and Homebrew package | `freebasic-ng` |
 | AUR source and binary packages | `freebasic-ng`, `freebasic-ng-bin` |
 
-Release tags use `freebasic-ng-v<version>` and release assets use the
+Release tags use `v<version>` and release assets use the
 `freebasic-ng-<version>-<platform>` prefix.
 
 ## Build

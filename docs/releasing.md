@@ -1,8 +1,8 @@
-# M1 release process
+# M1 and M2 release process
 
 Release Please observes conventional commits on main, opens a version PR and,
 when that PR is merged, creates a draft GitHub release and an immutable
-freebasic-ng-v&lt;version&gt; tag. It authenticates through the existing
+v&lt;version&gt; tag. It authenticates through the existing
 organisation-wide `metaneutrons-release-please` GitHub App; no personal token
 is acceptable. Although that App has a shared parent key and broad
 installation, this workflow requests and verifies an installation token scoped
@@ -23,9 +23,20 @@ present. Each archive has:
 - a signed SHA256SUMS inventory covering the archives, SBOMs and bundles.
 
 It downloads the assets from the draft release and verifies the checksum
-inventory before the draft is made visible. The M1 workflow deliberately has
-no APT, Homebrew or AUR credentials or publication steps. Those distribution
-channels are M2 work.
+inventory before the draft is made visible. M2 adds native Debian packages for
+`amd64` and `arm64`, a signed source archive, and measured Homebrew plus AUR
+source/binary metadata to that same candidate. Before visibility, clean
+Bookworm, Homebrew on both macOS architectures, and Arch Linux x86_64/aarch64
+qualification lanes install the generated packages and compile a program with
+`fbc`. Qualification receives no channel credentials.
+
+Merging the Release Please version PR is the explicit stable-release decision.
+For a stable `v<version>` tag, the workflow first proves every channel's
+credentials and destination scope without writing, then publishes the verified
+candidate, publishes Homebrew and AUR metadata, promotes the GitHub release,
+and finally dispatches the APT archive. A deliberately planned prerelease tag
+such as `v<version>-m2.1` performs the complete build and package qualification
+but remains a GitHub prerelease and cannot write to package channels.
 
 ## Required GitHub configuration
 

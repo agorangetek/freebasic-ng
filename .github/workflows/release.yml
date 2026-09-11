@@ -2,8 +2,8 @@ name: Release
 
 # Release Please is the sole tag creator.  It dispatches this workflow against
 # that tag, which makes release identity explicit and prevents a tag push from
-# starting competing publication runs.  Every release produced here remains a
-# GitHub prerelease during M1; APT, Homebrew and AUR promotion are M2 work.
+# starting competing publication runs.  A candidate stays a GitHub prerelease
+# until its host archives and all M2 package channels have been qualified.
 on:
   workflow_dispatch:
 
@@ -23,6 +23,7 @@ jobs:
       version: ${{ steps.identity.outputs.version }}
       tag: ${{ steps.identity.outputs.tag }}
       source_date_epoch: ${{ steps.identity.outputs.source_date_epoch }}
+      is_prerelease: ${{ steps.identity.outputs.is_prerelease }}
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.0
         with:
@@ -38,11 +39,11 @@ jobs:
             exit 1
           fi
           tag="$GITHUB_REF_NAME"
-          if [[ ! "$tag" =~ ^freebasic-ng-v[0-9]+\.[0-9]+\.[0-9]+(-[0-9A-Za-z.-]+)?$ ]]; then
+          if [[ ! "$tag" =~ ^v[0-9]+\.[0-9]+\.[0-9]+(-[0-9A-Za-z.-]+)?$ ]]; then
             echo "::error::invalid FreeBASIC-NG release tag: $tag"
             exit 1
           fi
-          version="${tag#freebasic-ng-v}"
+          version="${tag#v}"
           version="${version%%-*}"
           manifest_version=$(jq -r '."."' .release-please-manifest.json)
           source_version=$(sed -nE 's/^FBVERSION[[:space:]]*:=[[:space:]]*([0-9]+\.[0-9]+\.[0-9]+)$/\1/p' version.mk)
@@ -58,10 +59,15 @@ jobs:
             echo "::error::the tag points to $source_commit, not the checked-out $GITHUB_SHA"
             exit 1
           fi
+          is_prerelease=false
+          if [[ "$tag" == *-* ]]; then
+            is_prerelease=true
+          fi
           {
             echo "version=$version"
             echo "tag=$tag"
             echo "source_date_epoch=$(git show -s --format=%ct "$source_commit")"
+            echo "is_prerelease=$is_prerelease"
           } >> "$GITHUB_OUTPUT"
 
   build:
@@ -247,16 +253,120 @@ jobs:
           if-no-files-found: error
           retention-days: 14
 
+  debian:
+    name: Build and qualify Debian ${{ matrix.architecture }}
+    needs: metadata
+    runs-on: ${{ matrix.runner }}
+    timeout-minutes: 60
+    permissions:
+      contents: read
+      id-token: write
+      attestations: write
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - architecture: amd64
+            runner: ubuntu-24.04
+          - architecture: arm64
+            runner: ubuntu-24.04-arm
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.0
+        with:
+          persist-credentials: false
+
+      - name: Build a native Bookworm package
+        shell: bash
+        env:
+          VERSION: ${{ needs.metadata.outputs.version }}
+          ARCHITECTURE: ${{ matrix.architecture }}
+        run: |
+          set -euo pipefail
+          mkdir -p dist "$RUNNER_TEMP/debian-work"
+          docker run --rm \
+            --env VERSION \
+            --volume "$GITHUB_WORKSPACE:/source:ro" \
+            --volume "$RUNNER_TEMP/debian-work:/work" \
+            --volume "$GITHUB_WORKSPACE/dist:/out" \
+            debian:bookworm-slim bash -euxo pipefail -c '
+              apt-get update
+              apt-get install -y --no-install-recommends \
+                build-essential cmake dpkg-dev libffi-dev libgpm-dev \
+                libncurses-dev libx11-dev ninja-build python3
+              /source/scripts/release/build-debian-package.sh \
+                --source-dir /source --work-dir /work/build --output-dir /out \
+                --version "${VERSION}"
+            '
+          package="dist/freebasic-ng_${VERSION}-1_${ARCHITECTURE}.deb"
+          test -f "$package"
+          dpkg-deb --field "$package" Package Version Architecture
+
+      - name: Install and run the package in a fresh Bookworm container
+        shell: bash
+        env:
+          VERSION: ${{ needs.metadata.outputs.version }}
+          ARCHITECTURE: ${{ matrix.architecture }}
+        run: |
+          set -euo pipefail
+          package="freebasic-ng_${VERSION}-1_${ARCHITECTURE}.deb"
+          docker run --rm --volume "$GITHUB_WORKSPACE/dist:/out:ro" \
+            debian:bookworm-slim bash -euxo pipefail -c '
+              apt-get update
+              apt-get install -y "/out/'"$package"'"
+              printf "Print \\\"FreeBASIC-NG Debian package smoke\\\"\\n" > /tmp/smoke.bas
+              cd /tmp
+              fbc smoke.bas -x smoke
+              test "$(./smoke)" = "FreeBASIC-NG Debian package smoke"
+              fbc --version | grep -F "Version '"${VERSION}"'"
+            '
+
+      - name: Generate an SPDX SBOM
+        uses: anchore/sbom-action@3ad7283483fc7af8ff2b4ea19663c2d5ca935e26 # v0.24.2
+        with:
+          file: dist/freebasic-ng_${{ needs.metadata.outputs.version }}-1_${{ matrix.architecture }}.deb
+          format: spdx-json
+          output-file: dist/freebasic-ng_${{ needs.metadata.outputs.version }}-1_${{ matrix.architecture }}.deb.spdx.json
+          upload-artifact: false
+
+      - uses: sigstore/cosign-installer@6f9f17788090df1f26f669e9d70d6ae9567deba6 # v4.1.2
+        with:
+          cosign-release: v3.1.1
+
+      - name: Keylessly sign the Debian package
+        shell: bash
+        env:
+          VERSION: ${{ needs.metadata.outputs.version }}
+          ARCHITECTURE: ${{ matrix.architecture }}
+        run: |
+          set -euo pipefail
+          subject="dist/freebasic-ng_${VERSION}-1_${ARCHITECTURE}.deb"
+          cosign sign-blob --yes --bundle "${subject}.sigstore.json" "$subject"
+
+      - uses: actions/attest-build-provenance@4d101475d8b20a2381f78447822ac1eab6504dd8 # v4.2.2
+        with:
+          subject-path: dist/freebasic-ng_${{ needs.metadata.outputs.version }}-1_${{ matrix.architecture }}.deb
+
+      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.0
+        with:
+          name: release-debian-${{ matrix.architecture }}
+          path: dist/*
+          if-no-files-found: error
+          retention-days: 14
+
   candidate:
     name: Verify release candidate
-    needs: [metadata, build]
+    needs: [metadata, build, debian]
     runs-on: ubuntu-24.04
     timeout-minutes: 30
     permissions:
       contents: read
       id-token: write
-      attestations: read
+      attestations: write
     steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.0
+        with:
+          persist-credentials: false
+
       - uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
         with:
           pattern: release-*
@@ -269,6 +379,30 @@ jobs:
         with:
           cosign-release: v3.1.1
 
+      - name: Archive, sign and attest the exact release source
+        shell: bash
+        env:
+          VERSION: ${{ needs.metadata.outputs.version }}
+        run: |
+          set -euo pipefail
+          source="candidate/freebasic-ng-${VERSION}-source.tar.gz"
+          git archive --format=tar.gz --prefix="freebasic-ng-${VERSION}/" "$GITHUB_SHA" > "$source"
+          tar -tzf "$source" | grep -Fx "freebasic-ng-${VERSION}/CMakeLists.txt"
+          tar -tzf "$source" | grep -Fx "freebasic-ng-${VERSION}/bootstrap/provenance.json"
+          cosign sign-blob --yes --bundle "${source}.sigstore.json" "$source"
+
+      - name: Generate an SPDX SBOM for the source archive
+        uses: anchore/sbom-action@3ad7283483fc7af8ff2b4ea19663c2d5ca935e26 # v0.24.2
+        with:
+          file: candidate/freebasic-ng-${{ needs.metadata.outputs.version }}-source.tar.gz
+          format: spdx-json
+          output-file: candidate/freebasic-ng-${{ needs.metadata.outputs.version }}-source.tar.gz.spdx.json
+          upload-artifact: false
+
+      - uses: actions/attest-build-provenance@4d101475d8b20a2381f78447822ac1eab6504dd8 # v4.2.2
+        with:
+          subject-path: candidate/freebasic-ng-${{ needs.metadata.outputs.version }}-source.tar.gz
+
       - name: Keylessly sign the Windows ARM release archive
         shell: bash
         env:
@@ -278,7 +412,7 @@ jobs:
           subject="candidate/freebasic-ng-${VERSION}-win32-aarch64.zip"
           cosign sign-blob --yes --bundle "${subject}.sigstore.json" "$subject"
 
-      - name: Require all target archives and SBOMs
+      - name: Require all host archives, Debian packages and the source archive
         shell: bash
         env:
           VERSION: ${{ needs.metadata.outputs.version }}
@@ -291,6 +425,9 @@ jobs:
             "freebasic-ng-${VERSION}-darwin-aarch64.tar.xz"
             "freebasic-ng-${VERSION}-win64.zip"
             "freebasic-ng-${VERSION}-win32-aarch64.zip"
+            "freebasic-ng_${VERSION}-1_amd64.deb"
+            "freebasic-ng_${VERSION}-1_arm64.deb"
+            "freebasic-ng-${VERSION}-source.tar.gz"
           )
           for payload in "${payloads[@]}"; do
             for suffix in '' '.spdx.json' '.sigstore.json'; do
@@ -300,7 +437,7 @@ jobs:
               }
             done
           done
-          test "$(find candidate -maxdepth 1 -type f | wc -l | tr -d ' ')" = 18
+          test "$(find candidate -maxdepth 1 -type f | wc -l | tr -d ' ')" = 27
           for sbom in candidate/*.spdx.json; do
             jq -e '.spdxVersion | startswith("SPDX-")' "$sbom" >/dev/null
           done
@@ -322,6 +459,42 @@ jobs:
             gh attestation verify "$subject" --repo "$GITHUB_REPOSITORY"
           done
 
+      - name: Generate measured Homebrew and AUR metadata
+        shell: bash
+        env:
+          VERSION: ${{ needs.metadata.outputs.version }}
+          TAG: ${{ needs.metadata.outputs.tag }}
+        run: |
+          set -euo pipefail
+          base="https://github.com/${GITHUB_REPOSITORY}/releases/download/${TAG}"
+          scripts/release/generate-homebrew-formula.sh \
+            --version "$VERSION" --base-url "$base" --candidate-dir candidate \
+            --output candidate/freebasic-ng.rb
+          scripts/release/generate-pkgbuild-source.sh \
+            --version "$VERSION" --base-url "$base" --candidate-dir candidate \
+            --output candidate/PKGBUILD.freebasic-ng
+          scripts/release/generate-pkgbuild-bin.sh \
+            --version "$VERSION" --base-url "$base" --candidate-dir candidate \
+            --output candidate/PKGBUILD.freebasic-ng-bin
+          ruby -c candidate/freebasic-ng.rb
+          bash -n candidate/PKGBUILD.freebasic-ng candidate/PKGBUILD.freebasic-ng-bin
+          test "$(grep -Fc "/releases/download/${TAG}/" candidate/freebasic-ng.rb)" = 2
+
+      - name: Sign and attest the generated channel metadata
+        shell: bash
+        run: |
+          set -euo pipefail
+          for subject in candidate/freebasic-ng.rb candidate/PKGBUILD.freebasic-ng candidate/PKGBUILD.freebasic-ng-bin; do
+            cosign sign-blob --yes --bundle "${subject}.sigstore.json" "$subject"
+          done
+
+      - uses: actions/attest-build-provenance@4d101475d8b20a2381f78447822ac1eab6504dd8 # v4.2.2
+        with:
+          subject-path: |
+            candidate/freebasic-ng.rb
+            candidate/PKGBUILD.freebasic-ng
+            candidate/PKGBUILD.freebasic-ng-bin
+
       - name: Write the signed checksum inventory
         shell: bash
         run: |
@@ -339,9 +512,270 @@ jobs:
           if-no-files-found: error
           retention-days: 14
 
+  homebrew-qualify:
+    name: Qualify Homebrew (${{ matrix.runner }})
+    needs: [metadata, candidate]
+    runs-on: ${{ matrix.runner }}
+    timeout-minutes: 30
+    strategy:
+      fail-fast: false
+      matrix:
+        runner: [macos-15, macos-15-intel]
+    steps:
+      - uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
+        with:
+          name: release-candidate
+          path: candidate
+
+      - uses: Homebrew/actions/setup-homebrew@3cdb78d0f62ad29dd32de765782654f4eedea607 # 2026.08.31.1
+        with:
+          core: false
+          cask: false
+
+      - name: Audit, install and run the exact generated formula
+        shell: bash
+        env:
+          HOMEBREW_NO_AUTO_UPDATE: '1'
+          HOMEBREW_NO_ANALYTICS: '1'
+        run: |
+          set -euo pipefail
+          port=38080
+          tap=freebasic-ng/qualification
+          python3 -m http.server "$port" --bind 127.0.0.1 --directory candidate \
+            >"$RUNNER_TEMP/http.log" 2>&1 &
+          server_pid=$!
+          cleanup() {
+            brew uninstall freebasic-ng >/dev/null 2>&1 || true
+            brew untap "$tap" >/dev/null 2>&1 || true
+            kill "$server_pid" 2>/dev/null || true
+          }
+          trap cleanup EXIT
+          for attempt in {1..20}; do
+            curl --fail --silent "http://127.0.0.1:${port}/freebasic-ng.rb" >/dev/null && break
+            if [[ "$attempt" == 20 ]]; then
+              echo '::error::the local candidate server did not become ready'
+              exit 1
+            fi
+            sleep 1
+          done
+          brew tap-new --no-git "$tap"
+          formula="$(brew --repository "$tap")/Formula/freebasic-ng.rb"
+          sed -E "s#https://github.com/${GITHUB_REPOSITORY}/releases/download/[^/\"]+#http://127.0.0.1:${port}#g" \
+            candidate/freebasic-ng.rb > "$formula"
+          ruby -c "$formula"
+          brew audit --strict "$tap/freebasic-ng"
+          brew install "$tap/freebasic-ng"
+          brew test "$tap/freebasic-ng"
+          test -d "$(brew --cellar freebasic-ng)/${{ needs.metadata.outputs.version }}"
+          brew uninstall freebasic-ng
+          brew untap "$tap"
+          kill "$server_pid"
+          trap - EXIT
+
+  aur-qualify:
+    name: Qualify AUR ${{ matrix.architecture }}
+    needs: [metadata, candidate]
+    runs-on: ${{ matrix.runner }}
+    timeout-minutes: 60
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - architecture: x86_64
+            runner: ubuntu-24.04
+            image: archlinux:base-devel@sha256:a26046b7363dad8e2614858f4313949ae9b05c9c5f31de343a54864b9e20806f
+          - architecture: aarch64
+            runner: ubuntu-24.04-arm
+            image: menci/archlinuxarm@sha256:43a69f30992b0acb0936b4cc4be3ab0b83e71db3fa2dfee371866e877ef40393
+    steps:
+      - uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
+        with:
+          name: release-candidate
+          path: candidate
+
+      - name: Build, install and run both qualified AUR packages
+        shell: bash
+        env:
+          VERSION: ${{ needs.metadata.outputs.version }}
+          IMAGE: ${{ matrix.image }}
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/aur-work"
+          docker run --rm \
+            --env VERSION \
+            --volume "$GITHUB_WORKSPACE/candidate:/candidate:ro" \
+            --volume "$RUNNER_TEMP/aur-work:/work" \
+            "$IMAGE" bash -euxo pipefail -c '
+              sed -i "/^#DisableSandboxFilesystem/a DisableSandboxFilesystem\\nDisableSandboxSyscalls" /etc/pacman.conf
+              pacman -Syu --noconfirm --needed \
+                base-devel cmake gpm libffi libx11 ncurses ninja python
+              useradd --create-home builder
+
+              qualify() {
+                package_name="$1"
+                generated="$2"
+                work="/work/${package_name}"
+                install -d -o builder -g builder "$work"
+                cp "/candidate/${generated}" "$work/PKGBUILD"
+                sed -i "s#https://github.com/.*/releases/download/[^/]*#file:///candidate#g" "$work/PKGBUILD"
+                chown builder:builder "$work/PKGBUILD"
+                su builder -c "cd \"$work\" && makepkg --cleanbuild --noconfirm"
+                mapfile -t packages < <(find "$work" -maxdepth 1 -type f \
+                  -name "${package_name}-${VERSION}-*.pkg.tar.*" ! -name "*debug*" | sort)
+                test "${#packages[@]}" = 1
+                bsdtar -tf "${packages[0]}" | grep -Fx usr/bin/fbc
+                pacman -U --noconfirm "${packages[0]}"
+                cd /tmp
+                printf "Print \\\"FreeBASIC-NG AUR package smoke\\\"\\n" > smoke.bas
+                fbc smoke.bas -x smoke
+                test "$(./smoke)" = "FreeBASIC-NG AUR package smoke"
+                fbc --version | grep -F "Version ${VERSION}"
+                pacman -Rdd --noconfirm "$package_name"
+              }
+
+              qualify freebasic-ng PKGBUILD.freebasic-ng
+              qualify freebasic-ng-bin PKGBUILD.freebasic-ng-bin
+            '
+
+  preflight-homebrew:
+    name: Preflight Homebrew publication
+    needs: metadata
+    if: needs.metadata.outputs.is_prerelease == 'false'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    environment: release-homebrew
+    env:
+      TAP_REPO: ${{ vars.HOMEBREW_TAP_REPO }}
+    steps:
+      - name: Validate the configured tap coordinates
+        id: tap
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [[ ! "$TAP_REPO" =~ ^[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+$ ]]; then
+            echo '::error::HOMEBREW_TAP_REPO must be owner/repository'
+            exit 1
+          fi
+          echo "owner=${TAP_REPO%%/*}" >> "$GITHUB_OUTPUT"
+          echo "repo=${TAP_REPO##*/}" >> "$GITHUB_OUTPUT"
+
+      - name: Mint a tap-only installation token
+        id: token
+        uses: actions/create-github-app-token@bcd2ba49218906704ab6c1aa796996da409d3eb1 # v3.2.0
+        with:
+          client-id: ${{ vars.HOMEBREW_APP_CLIENT_ID }}
+          private-key: ${{ secrets.HOMEBREW_APP_PRIVATE_KEY }}
+          owner: ${{ steps.tap.outputs.owner }}
+          repositories: ${{ steps.tap.outputs.repo }}
+          permission-administration: read
+          permission-contents: write
+          permission-pull-requests: write
+          permission-checks: read
+          permission-statuses: read
+
+      - name: Prove the token scope and protected default branch
+        shell: bash
+        env:
+          GH_TOKEN: ${{ steps.token.outputs.token }}
+        run: |
+          set -euo pipefail
+          mapfile -t reach < <(gh api /installation/repositories --jq '.repositories[].full_name' | sort)
+          if [[ ${#reach[@]} -ne 1 || "${reach[0]}" != "$TAP_REPO" ]]; then
+            echo "::error::the tap token reaches ${#reach[@]} repositories, expected only ${TAP_REPO}"
+            exit 1
+          fi
+          gh api "repos/${TAP_REPO}/branches/main" --jq '.protected' | grep -Fx true
+
+  preflight-aur:
+    name: Preflight AUR publication
+    needs: metadata
+    if: needs.metadata.outputs.is_prerelease == 'false'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    environment: release-aur
+    env:
+      AUR_SOURCE_PACKAGE_NAME: ${{ vars.AUR_SOURCE_PACKAGE_NAME }}
+      AUR_BINARY_PACKAGE_NAME: ${{ vars.AUR_BINARY_PACKAGE_NAME }}
+      AUR_SSH_PRIVATE_KEY: ${{ secrets.AUR_SSH_PRIVATE_KEY }}
+      AUR_SSH_KNOWN_HOSTS: ${{ vars.AUR_SSH_KNOWN_HOSTS }}
+    steps:
+      - name: Verify package identities and read-only SSH access
+        shell: bash
+        run: |
+          set -euo pipefail
+          for package in "$AUR_SOURCE_PACKAGE_NAME" "$AUR_BINARY_PACKAGE_NAME"; do
+            [[ "$package" =~ ^[a-z0-9][a-z0-9+._-]*$ ]] || {
+              echo '::error::AUR package names must be lowercase package basenames'; exit 1;
+            }
+          done
+          [[ "$AUR_SOURCE_PACKAGE_NAME" != "$AUR_BINARY_PACKAGE_NAME" ]] || {
+            echo '::error::AUR source and binary package names must differ'; exit 1;
+          }
+          ssh_dir="$RUNNER_TEMP/aur-preflight"
+          install -d -m 0700 "$ssh_dir"
+          trap 'command rm -rf "$ssh_dir"' EXIT
+          printf '%s\n' "$AUR_SSH_PRIVATE_KEY" > "$ssh_dir/aur"
+          printf '%s\n' "$AUR_SSH_KNOWN_HOSTS" > "$ssh_dir/known_hosts"
+          chmod 0600 "$ssh_dir/aur"
+          ssh-keygen -F aur.archlinux.org -f "$ssh_dir/known_hosts" >/dev/null
+          ssh -i "$ssh_dir/aur" -o IdentitiesOnly=yes -o BatchMode=yes \
+            -o StrictHostKeyChecking=yes -o UserKnownHostsFile="$ssh_dir/known_hosts" \
+            aur@aur.archlinux.org help >/dev/null
+
+  preflight-apt:
+    name: Preflight APT archive dispatch
+    needs: metadata
+    if: needs.metadata.outputs.is_prerelease == 'false'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    environment: release-apt
+    env:
+      ARCHIVE_REPO: metaneutrons/apt-archive
+    steps:
+      - name: Mint an archive-only installation token
+        id: token
+        uses: actions/create-github-app-token@bcd2ba49218906704ab6c1aa796996da409d3eb1 # v3.2.0
+        with:
+          client-id: ${{ vars.ARCHIVE_DISPATCH_CLIENT_ID }}
+          private-key: ${{ secrets.ARCHIVE_DISPATCH_PRIVATE_KEY }}
+          owner: metaneutrons
+          repositories: apt-archive
+          permission-actions: write
+          permission-contents: read
+
+      - name: Prove the token scope and active archive workflow
+        shell: bash
+        env:
+          GH_TOKEN: ${{ steps.token.outputs.token }}
+        run: |
+          set -euo pipefail
+          mapfile -t reach < <(gh api /installation/repositories --jq '.repositories[].full_name' | sort)
+          if [[ ${#reach[@]} -ne 1 || "${reach[0]}" != "$ARCHIVE_REPO" ]]; then
+            echo "::error::the archive token reaches ${#reach[@]} repositories, expected only ${ARCHIVE_REPO}"
+            exit 1
+          fi
+          gh api "repos/${ARCHIVE_REPO}/actions/workflows/publish.yml" --jq .state | grep -Fx active
+
   stage:
     name: Publish the verified prerelease
-    needs: [metadata, candidate]
+    needs:
+      - metadata
+      - candidate
+      - homebrew-qualify
+      - aur-qualify
+      - preflight-homebrew
+      - preflight-aur
+      - preflight-apt
+    if: >-
+      always() &&
+      needs.metadata.result == 'success' &&
+      needs.candidate.result == 'success' &&
+      needs.homebrew-qualify.result == 'success' &&
+      needs.aur-qualify.result == 'success' &&
+      (needs.metadata.outputs.is_prerelease == 'true' ||
+      (needs.preflight-homebrew.result == 'success' &&
+      needs.preflight-aur.result == 'success' &&
+      needs.preflight-apt.result == 'success'))
     runs-on: ubuntu-24.04
     timeout-minutes: 15
     permissions:
@@ -376,3 +810,382 @@ jobs:
           gh release download "$TAG" --repo "$GITHUB_REPOSITORY" --dir isolated
           (cd isolated && sha256sum -c SHA256SUMS)
           gh release edit "$TAG" --repo "$GITHUB_REPOSITORY" --draft=false --prerelease --latest=false
+
+  publish-homebrew:
+    name: Publish the Homebrew formula
+    needs: [metadata, stage, preflight-homebrew]
+    if: needs.metadata.outputs.is_prerelease == 'false'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 90
+    environment: release-homebrew
+    env:
+      TAP_REPO: ${{ vars.HOMEBREW_TAP_REPO }}
+      VERSION: ${{ needs.metadata.outputs.version }}
+      TAG: ${{ needs.metadata.outputs.tag }}
+    steps:
+      - uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
+        with:
+          name: release-candidate
+          path: candidate
+
+      - name: Validate the configured tap coordinates
+        id: tap
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [[ ! "$TAP_REPO" =~ ^[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+$ ]]; then
+            echo '::error::HOMEBREW_TAP_REPO must be owner/repository'
+            exit 1
+          fi
+          echo "owner=${TAP_REPO%%/*}" >> "$GITHUB_OUTPUT"
+          echo "repo=${TAP_REPO##*/}" >> "$GITHUB_OUTPUT"
+
+      - name: Mint a tap-only installation token
+        id: token-open
+        uses: actions/create-github-app-token@bcd2ba49218906704ab6c1aa796996da409d3eb1 # v3.2.0
+        with:
+          client-id: ${{ vars.HOMEBREW_APP_CLIENT_ID }}
+          private-key: ${{ secrets.HOMEBREW_APP_PRIVATE_KEY }}
+          owner: ${{ steps.tap.outputs.owner }}
+          repositories: ${{ steps.tap.outputs.repo }}
+          permission-administration: read
+          permission-contents: write
+          permission-pull-requests: write
+          permission-checks: read
+          permission-statuses: read
+
+      - name: Prove that the token reaches only the tap
+        id: bot
+        shell: bash
+        env:
+          GH_TOKEN: ${{ steps.token-open.outputs.token }}
+          APP_SLUG: ${{ steps.token-open.outputs.app-slug }}
+        run: |
+          set -euo pipefail
+          mapfile -t reach < <(gh api /installation/repositories --jq '.repositories[].full_name' | sort)
+          printf 'the token reaches: %s\n' "${reach[*]:-nothing}"
+          if [[ ${#reach[@]} -ne 1 || "${reach[0]}" != "$TAP_REPO" ]]; then
+            echo "::error::the tap token reaches ${#reach[@]} repositories, expected only ${TAP_REPO}"
+            exit 1
+          fi
+          login="${APP_SLUG}[bot]"
+          id=$(gh api "/users/${login}" --jq .id)
+          [[ -n "$id" && "$id" != null ]] || { echo '::error::the App bot has no public user id'; exit 1; }
+          echo "login=$login" >> "$GITHUB_OUTPUT"
+          echo "email=${id}+${login}@users.noreply.github.com" >> "$GITHUB_OUTPUT"
+
+      - name: Open the measured formula update
+        id: update
+        shell: bash
+        env:
+          GH_TOKEN: ${{ steps.token-open.outputs.token }}
+          TAP_TOKEN: ${{ steps.token-open.outputs.token }}
+          BOT_LOGIN: ${{ steps.bot.outputs.login }}
+          BOT_EMAIL: ${{ steps.bot.outputs.email }}
+        run: |
+          set -euo pipefail
+          source_formula="$GITHUB_WORKSPACE/candidate/freebasic-ng.rb"
+          git clone "https://x-access-token:${TAP_TOKEN}@github.com/${TAP_REPO}.git" "$RUNNER_TEMP/tap"
+          cd "$RUNNER_TEMP/tap"
+          if [[ -f Formula/freebasic-ng.rb ]] && cmp -s "$source_formula" Formula/freebasic-ng.rb; then
+            echo 'pr=' >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          branch="release/freebasic-ng-${VERSION}-${GITHUB_RUN_ID}"
+          echo "branch=$branch" >> "$GITHUB_OUTPUT"
+          git switch -c "$branch"
+          install -m 0644 "$source_formula" Formula/freebasic-ng.rb
+          git config user.name "$BOT_LOGIN"
+          git config user.email "$BOT_EMAIL"
+          git add Formula/freebasic-ng.rb
+          if [[ -x scripts/generate-readme.sh ]]; then
+            scripts/generate-readme.sh
+            git add README.md
+          fi
+          git commit -m "freebasic-ng ${VERSION}"
+          git push -u origin "$branch"
+          pr=$(gh pr create --repo "$TAP_REPO" --base main --head "$branch" \
+            --title "freebasic-ng ${VERSION}" \
+            --body "Automated update from verified ${TAG} candidate assets.")
+          echo "pr=$pr" >> "$GITHUB_OUTPUT"
+          head=$(gh pr view "$pr" --repo "$TAP_REPO" --json headRefOid --jq .headRefOid)
+          echo "head=$head" >> "$GITHUB_OUTPUT"
+
+      - name: Remove an orphaned tap branch
+        if: failure() && steps.update.outputs.branch != '' && steps.update.outputs.pr == ''
+        env:
+          GH_TOKEN: ${{ steps.token-open.outputs.token }}
+          BRANCH: ${{ steps.update.outputs.branch }}
+        run: gh api -X DELETE "repos/${TAP_REPO}/git/refs/heads/${BRANCH}"
+
+      - name: Require the tap's own qualification
+        if: steps.update.outputs.pr != ''
+        shell: bash
+        env:
+          GH_TOKEN: ${{ steps.token-open.outputs.token }}
+          PR: ${{ steps.update.outputs.pr }}
+        run: |
+          set -euo pipefail
+          for attempt in {1..18}; do
+            gh pr checks "$PR" --repo "$TAP_REPO" >/dev/null 2>&1 && break
+            [[ "$attempt" != 18 ]] || { echo '::error::the tap reported no checks'; exit 1; }
+            sleep 10
+          done
+          timeout 45m gh pr checks "$PR" --repo "$TAP_REPO" --watch --fail-fast --interval 20
+
+      - name: Mint a fresh token for the merge
+        id: token-merge
+        uses: actions/create-github-app-token@bcd2ba49218906704ab6c1aa796996da409d3eb1 # v3.2.0
+        with:
+          client-id: ${{ vars.HOMEBREW_APP_CLIENT_ID }}
+          private-key: ${{ secrets.HOMEBREW_APP_PRIVATE_KEY }}
+          owner: ${{ steps.tap.outputs.owner }}
+          repositories: ${{ steps.tap.outputs.repo }}
+          permission-administration: read
+          permission-contents: write
+          permission-pull-requests: write
+          permission-checks: read
+          permission-statuses: read
+
+      - name: Recheck and merge the qualified formula
+        if: steps.update.outputs.pr != ''
+        shell: bash
+        env:
+          GH_TOKEN: ${{ steps.token-merge.outputs.token }}
+          PR: ${{ steps.update.outputs.pr }}
+          EXPECTED_HEAD: ${{ steps.update.outputs.head }}
+        run: |
+          set -euo pipefail
+          current_head=$(gh pr view "$PR" --repo "$TAP_REPO" --json headRefOid --jq .headRefOid)
+          [[ "$current_head" == "$EXPECTED_HEAD" ]] || {
+            echo '::error::the formula pull request changed after qualification'; exit 1;
+          }
+          branch=$(gh api "repos/${TAP_REPO}/branches/main")
+          [[ $(printf '%s' "$branch" | jq -r .protected) == true ]] || {
+            echo '::error::tap main is not protected'; exit 1;
+          }
+          gh pr merge "$PR" --repo "$TAP_REPO" --squash --delete-branch
+
+      - name: Verify the formula on protected main
+        shell: bash
+        env:
+          GH_TOKEN: ${{ steps.token-merge.outputs.token }}
+        run: |
+          set -euo pipefail
+          gh api "repos/${TAP_REPO}/contents/Formula/freebasic-ng.rb?ref=main" \
+            --jq .content | base64 --decode > "$RUNNER_TEMP/published.rb"
+          cmp "$RUNNER_TEMP/published.rb" candidate/freebasic-ng.rb
+
+  publish-aur:
+    name: Publish both AUR packages
+    needs: [metadata, stage, preflight-aur, publish-homebrew]
+    if: needs.metadata.outputs.is_prerelease == 'false'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    environment: release-aur
+    env:
+      VERSION: ${{ needs.metadata.outputs.version }}
+      AUR_SOURCE_PACKAGE_NAME: ${{ vars.AUR_SOURCE_PACKAGE_NAME }}
+      AUR_BINARY_PACKAGE_NAME: ${{ vars.AUR_BINARY_PACKAGE_NAME }}
+      AUR_SSH_PRIVATE_KEY: ${{ secrets.AUR_SSH_PRIVATE_KEY }}
+      AUR_SSH_KNOWN_HOSTS: ${{ vars.AUR_SSH_KNOWN_HOSTS }}
+    steps:
+      - uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
+        with:
+          name: release-candidate
+          path: candidate
+
+      - name: Publish the generated PKGBUILDs through pinned SSH
+        shell: bash
+        run: |
+          set -euo pipefail
+          for package in "$AUR_SOURCE_PACKAGE_NAME" "$AUR_BINARY_PACKAGE_NAME"; do
+            [[ "$package" =~ ^[a-z0-9][a-z0-9+._-]*$ ]] || {
+              echo '::error::AUR package names must be lowercase package basenames'; exit 1;
+            }
+          done
+          [[ "$AUR_SOURCE_PACKAGE_NAME" != "$AUR_BINARY_PACKAGE_NAME" ]] || {
+            echo '::error::AUR source and binary package names must differ'; exit 1;
+          }
+          install -d -m 0700 "$RUNNER_TEMP/ssh"
+          install -m 0600 /dev/null "$RUNNER_TEMP/ssh/aur"
+          printf '%s\n' "$AUR_SSH_PRIVATE_KEY" > "$RUNNER_TEMP/ssh/aur"
+          printf '%s\n' "$AUR_SSH_KNOWN_HOSTS" > "$RUNNER_TEMP/ssh/known_hosts"
+          export GIT_SSH_COMMAND="ssh -i $RUNNER_TEMP/ssh/aur -o IdentitiesOnly=yes -o BatchMode=yes -o StrictHostKeyChecking=yes -o UserKnownHostsFile=$RUNNER_TEMP/ssh/known_hosts"
+          ssh -i "$RUNNER_TEMP/ssh/aur" -o IdentitiesOnly=yes -o BatchMode=yes \
+            -o StrictHostKeyChecking=yes -o UserKnownHostsFile="$RUNNER_TEMP/ssh/known_hosts" \
+            aur@aur.archlinux.org help >/dev/null
+
+          publish_one() {
+            local package="$1"
+            local generated="$2"
+            local work="$RUNNER_TEMP/aur-${package}"
+            local count
+            count=$(curl --fail --silent --show-error --get \
+              --data-urlencode 'v=5' --data-urlencode 'type=info' \
+              --data-urlencode "arg[]=${package}" https://aur.archlinux.org/rpc | \
+              jq -r .resultcount)
+            case "$count" in
+              0)
+                git init --initial-branch=master "$work"
+                git -C "$work" remote add origin "ssh://aur@aur.archlinux.org/${package}.git"
+                ;;
+              1)
+                git clone "ssh://aur@aur.archlinux.org/${package}.git" "$work"
+                ;;
+              *)
+                echo "::error::AUR RPC returned ${count} records for ${package}"; return 1;
+                ;;
+            esac
+            install -m 0644 "$GITHUB_WORKSPACE/candidate/${generated}" "$work/PKGBUILD"
+            docker run --rm --user "$(id -u):$(id -g)" --env HOME=/tmp \
+              --volume "$work:/pkg" --workdir /pkg \
+              archlinux:base-devel@sha256:a26046b7363dad8e2614858f4313949ae9b05c9c5f31de343a54864b9e20806f \
+              makepkg --printsrcinfo > "$work/.SRCINFO"
+            if [[ -z $(git -C "$work" status --short) ]]; then
+              echo "AUR ${package} already has this metadata"
+              return 0
+            fi
+            git -C "$work" config user.name 'freebasic-ng release automation'
+            git -C "$work" config user.email 'aur@metaneutrons.github.io'
+            git -C "$work" add PKGBUILD .SRCINFO
+            git -C "$work" commit -m "${package} ${VERSION}-1"
+            git -C "$work" push origin HEAD:master
+          }
+
+          publish_one "$AUR_SOURCE_PACKAGE_NAME" PKGBUILD.freebasic-ng
+          publish_one "$AUR_BINARY_PACKAGE_NAME" PKGBUILD.freebasic-ng-bin
+
+      - name: Verify the public AUR metadata
+        shell: bash
+        run: |
+          set -euo pipefail
+          for package in "$AUR_SOURCE_PACKAGE_NAME" "$AUR_BINARY_PACKAGE_NAME"; do
+            for attempt in {1..20}; do
+              if curl --fail --silent --show-error --get \
+                --data-urlencode 'v=5' --data-urlencode 'type=info' \
+                --data-urlencode "arg[]=${package}" https://aur.archlinux.org/rpc | \
+                jq -e --arg version "${VERSION}-1" \
+                  '.resultcount == 1 and .results[0].Version == $version' >/dev/null; then
+                break
+              fi
+              [[ "$attempt" != 20 ]] || {
+                echo "::error::AUR did not publish ${package} ${VERSION}-1"; exit 1;
+              }
+              sleep 15
+            done
+          done
+
+  promote:
+    name: Promote the fully qualified release
+    needs: [metadata, stage, publish-homebrew, publish-aur]
+    if: needs.metadata.outputs.is_prerelease == 'false'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    permissions:
+      contents: write
+    steps:
+      - name: Promote without changing the verified assets
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TAG: ${{ needs.metadata.outputs.tag }}
+        run: |
+          set -euo pipefail
+          gh release edit "$TAG" --repo "$GITHUB_REPOSITORY" --prerelease=false --latest
+
+  archive-dispatch:
+    name: Hand the release to the APT archive
+    needs: [metadata, preflight-apt, promote]
+    if: needs.metadata.outputs.is_prerelease == 'false'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    environment: release-apt
+    env:
+      ARCHIVE_REPO: metaneutrons/apt-archive
+      ARCHIVE_DOMAIN: metaneutrons.cc
+      ARCHIVE_HOST: deb.metaneutrons.cc
+      ARCHIVE_PROJECT: freebasic-ng
+      VERSION: ${{ needs.metadata.outputs.version }}
+    steps:
+      - name: Mint an archive-only installation token
+        id: token
+        uses: actions/create-github-app-token@bcd2ba49218906704ab6c1aa796996da409d3eb1 # v3.2.0
+        with:
+          client-id: ${{ vars.ARCHIVE_DISPATCH_CLIENT_ID }}
+          private-key: ${{ secrets.ARCHIVE_DISPATCH_PRIVATE_KEY }}
+          owner: metaneutrons
+          repositories: apt-archive
+          permission-actions: write
+          permission-contents: read
+
+      - name: Prove that the token reaches only the archive
+        shell: bash
+        env:
+          GH_TOKEN: ${{ steps.token.outputs.token }}
+        run: |
+          set -euo pipefail
+          mapfile -t reach < <(gh api /installation/repositories --jq '.repositories[].full_name' | sort)
+          if [[ ${#reach[@]} -ne 1 || "${reach[0]}" != "$ARCHIVE_REPO" ]]; then
+            echo "::error::the archive token reaches ${#reach[@]} repositories, expected only ${ARCHIVE_REPO}"
+            exit 1
+          fi
+
+      - name: Dispatch and observe the archive publication
+        shell: bash
+        env:
+          GH_TOKEN: ${{ steps.token.outputs.token }}
+        run: |
+          set -euo pipefail
+          branch=$(gh api "repos/${ARCHIVE_REPO}" --jq .default_branch)
+          before=$(gh run list --repo "$ARCHIVE_REPO" --workflow=publish.yml \
+            --limit 1 --json databaseId --jq '.[0].databaseId // 0')
+          gh workflow run publish.yml --repo "$ARCHIVE_REPO" --ref "$branch" \
+            -f domain="$ARCHIVE_DOMAIN" -f project="$ARCHIVE_PROJECT"
+          run_id=0
+          for _ in {1..24}; do
+            sleep 5
+            candidate=$(gh run list --repo "$ARCHIVE_REPO" --workflow=publish.yml \
+              --limit 1 --json databaseId --jq '.[0].databaseId // 0')
+            if [[ "$candidate" != "$before" ]]; then run_id="$candidate"; break; fi
+          done
+          [[ "$run_id" != 0 ]] || { echo '::error::the archive dispatch started no run'; exit 1; }
+          gh run watch "$run_id" --repo "$ARCHIVE_REPO" --exit-status --interval 20
+
+      - name: Verify the archive through Acquire-By-Hash
+        shell: bash
+        run: |
+          set -euo pipefail
+          base="https://${ARCHIVE_HOST}"
+          curl --fail --silent --show-error --location \
+            "${base}/dists/rolling/InRelease" -o "$RUNNER_TEMP/InRelease"
+          for arch in amd64 arm64; do
+            path="main/binary-${arch}/Packages.gz"
+            digest=$(ARCH_PATH="$path" python3 - "$RUNNER_TEMP/InRelease" <<'PY'
+          import os
+          import re
+          import sys
+
+          wanted = os.environ["ARCH_PATH"]
+          field = re.compile(r"^[A-Za-z][A-Za-z0-9-]*:")
+          in_sha512 = False
+          for line in open(sys.argv[1], encoding="utf-8", errors="replace"):
+              if field.match(line):
+                  in_sha512 = line.startswith("SHA512:")
+                  continue
+              if in_sha512 and line.startswith(" "):
+                  parts = line.split()
+                  if len(parts) == 3 and parts[2] == wanted:
+                      print(parts[0])
+                      break
+          PY
+          )
+            [[ -n "$digest" ]] || { echo "::error::InRelease has no SHA512 for ${path}"; exit 1; }
+            curl --fail --silent --show-error --location \
+              "${base}/dists/rolling/main/binary-${arch}/by-hash/SHA512/${digest}" \
+              -o "$RUNNER_TEMP/Packages-${arch}.gz"
+            [[ $(sha512sum "$RUNNER_TEMP/Packages-${arch}.gz" | cut -d' ' -f1) == "$digest" ]] || {
+              echo "::error::by-hash mismatch for ${path}"; exit 1;
+            }
+            gzip -dc "$RUNNER_TEMP/Packages-${arch}.gz" | grep -Fqx "Version: ${VERSION}-1"
+          done
