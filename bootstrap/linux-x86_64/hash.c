@@ -116,18 +116,18 @@ void HASHEND( struct $5THASH* HASH$1 )
 	struct $8HASHITEM* NXT$1;
 	struct $8HASHLIST* LIST$1;
 	LIST$1 = *(struct $8HASHLIST**)HASH$1;
-	if( *(int64*)((uint8*)HASH$1 + 16ll) == 0ll ) goto label$23;
+	if( *(int64*)((uint8*)HASH$1 + 16ll) == 0ll) goto label$23;
 	{
 		{
 			I$1 = 0ll;
-			int64 TMP$21$3;
-			TMP$21$3 = *(int64*)((uint8*)HASH$1 + 8ll) + -1ll;
+			int64 TMP$20$3;
+			TMP$20$3 = *(int64*)((uint8*)HASH$1 + 8ll) + -1ll;
 			goto label$24;
 			label$27:;
 			{
 				ITEM$1 = *(struct $8HASHITEM**)LIST$1;
 				label$28:;
-				if( ITEM$1 == (struct $8HASHITEM*)0ull ) goto label$29;
+				if( ITEM$1 == (struct $8HASHITEM*)0ull) goto label$29;
 				{
 					NXT$1 = *(struct $8HASHITEM**)((uint8*)ITEM$1 + 24ll);
 					free( *(void**)ITEM$1 );
@@ -142,7 +142,7 @@ void HASHEND( struct $5THASH* HASH$1 )
 			label$25:;
 			I$1 = I$1 + 1ll;
 			label$24:;
-			if( I$1 <= TMP$21$3 ) goto label$27;
+			if( I$1 <= TMP$20$3) goto label$27;
 			label$26:;
 		}
 	}
@@ -151,14 +151,14 @@ void HASHEND( struct $5THASH* HASH$1 )
 	{
 		{
 			I$1 = 0ll;
-			int64 TMP$22$3;
-			TMP$22$3 = *(int64*)((uint8*)HASH$1 + 8ll) + -1ll;
+			int64 TMP$21$3;
+			TMP$21$3 = *(int64*)((uint8*)HASH$1 + 8ll) + -1ll;
 			goto label$30;
 			label$33:;
 			{
 				ITEM$1 = *(struct $8HASHITEM**)LIST$1;
 				label$34:;
-				if( ITEM$1 == (struct $8HASHITEM*)0ull ) goto label$35;
+				if( ITEM$1 == (struct $8HASHITEM*)0ull) goto label$35;
 				{
 					NXT$1 = *(struct $8HASHITEM**)((uint8*)ITEM$1 + 24ll);
 					*(char**)ITEM$1 = (char*)0ull;
@@ -172,7 +172,7 @@ void HASHEND( struct $5THASH* HASH$1 )
 			label$31:;
 			I$1 = I$1 + 1ll;
 			label$30:;
-			if( I$1 <= TMP$22$3 ) goto label$33;
+			if( I$1 <= TMP$21$3) goto label$33;
 			label$32:;
 		}
 	}
@@ -191,7 +191,7 @@ uint64 HASHHASH( char* S$1 )
 	uint64 INDEX$1;
 	INDEX$1 = 0ull;
 	label$38:;
-	if( (int64)(uint8)*S$1 == 0ll ) goto label$39;
+	if( (int64)(uint8)*S$1 == 0ll) goto label$39;
 	{
 		INDEX$1 = ((uint64)(int64)(uint8)*S$1 + (INDEX$1 << (5ll & 63ll))) - INDEX$1;
 		S$1 = (char*)((uint8*)S$1 + 1ll);
@@ -215,17 +215,17 @@ void* HASHLOOKUPEX( struct $5THASH* HASH$1, char* SYMBOL$1, uint64 INDEX$1 )
 	INDEX$1 = INDEX$1 % *(uint64*)((uint8*)HASH$1 + 8ll);
 	LIST$1 = (struct $8HASHLIST*)((uint8*)*(struct $8HASHLIST**)HASH$1 + ((int64)INDEX$1 << (4ll & 63ll)));
 	ITEM$1 = *(struct $8HASHITEM**)LIST$1;
-	if( ITEM$1 != (struct $8HASHITEM*)0ull ) goto label$43;
+	if( ITEM$1 != (struct $8HASHITEM*)0ull) goto label$43;
 	{
 		goto label$41;
 	}
 	label$43:;
 	label$42:;
 	label$44:;
-	if( ITEM$1 == (struct $8HASHITEM*)0ull ) goto label$45;
+	if( ITEM$1 == (struct $8HASHITEM*)0ull) goto label$45;
 	{
 		int32 vr$8 = fb_StrCompare( *(void**)ITEM$1, 0ll, (void*)SYMBOL$1, 0ll );
-		if( (int64)vr$8 != 0ll ) goto label$47;
+		if( (int64)vr$8 != 0ll) goto label$47;
 		{
 			fb$result$1 = *(void**)((uint8*)ITEM$1 + 8ll);
 			goto label$41;
@@ -258,7 +258,7 @@ struct $8HASHITEM* HASHADD( struct $5THASH* HASH$1, char* SYMBOL$1, void* USERDA
 	__builtin_memset( &fb$result$1, 0, 8ll );
 	label$62:;
 	struct $8HASHITEM* ITEM$1;
-	if( INDEX$1 != 18446744073709551615ull ) goto label$65;
+	if( INDEX$1 != 18446744073709551615ull) goto label$65;
 	{
 		uint64 vr$1 = HASHHASH( SYMBOL$1 );
 		INDEX$1 = vr$1;
@@ -269,7 +269,7 @@ struct $8HASHITEM* HASHADD( struct $5THASH* HASH$1, char* SYMBOL$1, void* USERDA
 	struct $8HASHITEM* vr$7 = HASHNEWITEM( (struct $8HASHLIST*)((uint8*)*(struct $8HASHLIST**)HASH$1 + ((int64)INDEX$1 << (4ll & 63ll))) );
 	ITEM$1 = vr$7;
 	fb$result$1 = ITEM$1;
-	if( ITEM$1 != (struct $8HASHITEM*)0ull ) goto label$67;
+	if( ITEM$1 != (struct $8HASHITEM*)0ull) goto label$67;
 	{
 		goto label$63;
 	}
@@ -285,7 +285,7 @@ void HASHDEL( struct $5THASH* HASH$1, struct $8HASHITEM* ITEM$1, uint64 INDEX$1 
 {
 	label$68:;
 	struct $8HASHLIST* LIST$1;
-	if( ITEM$1 != (struct $8HASHITEM*)0ull ) goto label$71;
+	if( ITEM$1 != (struct $8HASHITEM*)0ull) goto label$71;
 	{
 		goto label$69;
 	}
@@ -293,7 +293,7 @@ void HASHDEL( struct $5THASH* HASH$1, struct $8HASHITEM* ITEM$1, uint64 INDEX$1 
 	label$70:;
 	INDEX$1 = INDEX$1 % *(uint64*)((uint8*)HASH$1 + 8ll);
 	LIST$1 = (struct $8HASHLIST*)((uint8*)*(struct $8HASHLIST**)HASH$1 + ((int64)INDEX$1 << (4ll & 63ll)));
-	if( *(int64*)((uint8*)HASH$1 + 16ll) == 0ll ) goto label$73;
+	if( *(int64*)((uint8*)HASH$1 + 16ll) == 0ll) goto label$73;
 	{
 		free( *(void**)ITEM$1 );
 	}
@@ -310,7 +310,7 @@ void STRSETADD( struct $7TSTRSET* SET$1, FBSTRING* S$1, int64 USERDATA$1 )
 	label$74:;
 	struct $11TSTRSETITEM* I$1;
 	int64 vr$0 = fb_StrLen( (void*)S$1, -1ll );
-	if( vr$0 != 0ll ) goto label$77;
+	if( vr$0 != 0ll) goto label$77;
 	{
 		goto label$75;
 	}
@@ -318,7 +318,7 @@ void STRSETADD( struct $7TSTRSET* SET$1, FBSTRING* S$1, int64 USERDATA$1 )
 	label$76:;
 	void* vr$4 = HASHLOOKUP( (struct $5THASH*)((uint8*)SET$1 + 64ll), (char*)*(char**)S$1 );
 	I$1 = (struct $11TSTRSETITEM*)vr$4;
-	if( I$1 == (struct $11TSTRSETITEM*)0ull ) goto label$79;
+	if( I$1 == (struct $11TSTRSETITEM*)0ull) goto label$79;
 	{
 		goto label$75;
 	}
@@ -330,7 +330,7 @@ void STRSETADD( struct $7TSTRSET* SET$1, FBSTRING* S$1, int64 USERDATA$1 )
 	*(int64*)((uint8*)I$1 + 24ll) = USERDATA$1;
 	*(struct $8HASHITEM**)((uint8*)I$1 + 32ll) = (struct $8HASHITEM*)0ull;
 	int64 vr$14 = fb_StrLen( (void*)I$1, -1ll );
-	if( vr$14 != 0ll ) goto label$81;
+	if( vr$14 != 0ll) goto label$81;
 	{
 		goto label$75;
 	}
@@ -346,7 +346,7 @@ void STRSETDEL( struct $7TSTRSET* SET$1, FBSTRING* S$1 )
 {
 	label$82:;
 	int64 vr$0 = fb_StrLen( (void*)S$1, -1ll );
-	if( vr$0 != 0ll ) goto label$85;
+	if( vr$0 != 0ll) goto label$85;
 	{
 		goto label$83;
 	}
@@ -358,7 +358,7 @@ void STRSETDEL( struct $7TSTRSET* SET$1, FBSTRING* S$1 )
 	struct $11TSTRSETITEM* SETITEM$1;
 	void* vr$6 = HASHLOOKUPEX( (struct $5THASH*)((uint8*)SET$1 + 64ll), (char*)*(char**)S$1, INDEX$1 );
 	SETITEM$1 = (struct $11TSTRSETITEM*)vr$6;
-	if( SETITEM$1 == (struct $11TSTRSETITEM*)0ull ) goto label$87;
+	if( SETITEM$1 == (struct $11TSTRSETITEM*)0ull) goto label$87;
 	{
 		HASHDEL( (struct $5THASH*)((uint8*)SET$1 + 64ll), *(struct $8HASHITEM**)((uint8*)SETITEM$1 + 32ll), INDEX$1 );
 		*(struct $8HASHITEM**)((uint8*)SETITEM$1 + 32ll) = (struct $8HASHITEM*)0ull;
@@ -366,9 +366,9 @@ void STRSETDEL( struct $7TSTRSET* SET$1, FBSTRING* S$1 )
 		void* vr$13 = LISTGETHEAD( (struct $5TLIST*)SET$1 );
 		I$2 = (struct $11TSTRSETITEM*)vr$13;
 		label$88:;
-		if( I$2 == (struct $11TSTRSETITEM*)0ull ) goto label$89;
+		if( I$2 == (struct $11TSTRSETITEM*)0ull) goto label$89;
 		{
-			if( I$2 != SETITEM$1 ) goto label$91;
+			if( I$2 != SETITEM$1) goto label$91;
 			{
 				fb_StrAssign( (void*)I$2, -1ll, (void*)"", 1ll, 0 );
 				LISTDELNODE( (struct $5TLIST*)SET$1, (void*)I$2 );
@@ -388,10 +388,10 @@ void STRSETDEL( struct $7TSTRSET* SET$1, FBSTRING* S$1 )
 	void* vr$21 = LISTGETHEAD( (struct $5TLIST*)SET$1 );
 	I$1 = (struct $11TSTRSETITEM*)vr$21;
 	label$92:;
-	if( I$1 == (struct $11TSTRSETITEM*)0ull ) goto label$93;
+	if( I$1 == (struct $11TSTRSETITEM*)0ull) goto label$93;
 	{
 		int32 vr$24 = fb_StrCompare( (void*)I$1, -1ll, (void*)S$1, -1ll );
-		if( (int64)vr$24 != 0ll ) goto label$95;
+		if( (int64)vr$24 != 0ll) goto label$95;
 		{
 			fb_StrAssign( (void*)I$1, -1ll, (void*)"", 1ll, 0 );
 			LISTDELNODE( (struct $5TLIST*)SET$1, (void*)I$1 );
@@ -414,7 +414,7 @@ void STRSETCOPY( struct $7TSTRSET* TARGET$1, struct $7TSTRSET* SOURCE$1 )
 	void* vr$2 = LISTGETHEAD( (struct $5TLIST*)SOURCE$1 );
 	I$1 = (struct $11TSTRSETITEM*)vr$2;
 	label$98:;
-	if( I$1 == (struct $11TSTRSETITEM*)0ull ) goto label$99;
+	if( I$1 == (struct $11TSTRSETITEM*)0ull) goto label$99;
 	{
 		STRSETADD( TARGET$1, (FBSTRING*)I$1, *(int64*)((uint8*)I$1 + 24ll) );
 		void* vr$6 = LISTGETNEXT( (void*)I$1 );
@@ -441,7 +441,7 @@ void STRSETEND( struct $7TSTRSET* SET$1 )
 	void* vr$4 = LISTGETHEAD( (struct $5TLIST*)SET$1 );
 	I$1 = (struct $11TSTRSETITEM*)vr$4;
 	label$104:;
-	if( I$1 == (struct $11TSTRSETITEM*)0ull ) goto label$105;
+	if( I$1 == (struct $11TSTRSETITEM*)0ull) goto label$105;
 	{
 		fb_StrAssign( (void*)I$1, -1ll, (void*)"", 1ll, 0 );
 		void* vr$7 = LISTGETNEXT( (void*)I$1 );
@@ -472,7 +472,7 @@ static void LAZYINIT( void )
 {
 	label$10:;
 	*(int64*)&ITEMPOOL$ = *(int64*)&ITEMPOOL$ + 1ll;
-	if( *(int64*)&ITEMPOOL$ <= 1ll ) goto label$13;
+	if( *(int64*)&ITEMPOOL$ <= 1ll) goto label$13;
 	{
 		goto label$11;
 	}
@@ -486,7 +486,7 @@ static void LAZYEND( void )
 {
 	label$14:;
 	*(int64*)&ITEMPOOL$ = *(int64*)&ITEMPOOL$ + -1ll;
-	if( *(int64*)&ITEMPOOL$ <= 0ll ) goto label$17;
+	if( *(int64*)&ITEMPOOL$ <= 0ll) goto label$17;
 	{
 		goto label$15;
 	}
@@ -504,7 +504,7 @@ static struct $8HASHITEM* HASHNEWITEM( struct $8HASHLIST* LIST$1 )
 	struct $8HASHITEM* ITEM$1;
 	void* vr$2 = LISTNEWNODE( (struct $5TLIST*)((uint8*)&ITEMPOOL$ + 8ll) );
 	ITEM$1 = (struct $8HASHITEM*)vr$2;
-	if( *(struct $8HASHITEM**)((uint8*)LIST$1 + 8ll) == (struct $8HASHITEM*)0ull ) goto label$53;
+	if( *(struct $8HASHITEM**)((uint8*)LIST$1 + 8ll) == (struct $8HASHITEM*)0ull) goto label$53;
 	{
 		*(struct $8HASHITEM**)((uint8*)*(struct $8HASHITEM**)((uint8*)LIST$1 + 8ll) + 24ll) = ITEM$1;
 	}
@@ -527,7 +527,7 @@ static void HASHDELITEM( struct $8HASHLIST* LIST$1, struct $8HASHITEM* ITEM$1 )
 	label$54:;
 	struct $8HASHITEM* PRV$1;
 	struct $8HASHITEM* NXT$1;
-	if( ITEM$1 != (struct $8HASHITEM*)0ull ) goto label$57;
+	if( ITEM$1 != (struct $8HASHITEM*)0ull) goto label$57;
 	{
 		goto label$55;
 	}
@@ -535,7 +535,7 @@ static void HASHDELITEM( struct $8HASHLIST* LIST$1, struct $8HASHITEM* ITEM$1 )
 	label$56:;
 	PRV$1 = *(struct $8HASHITEM**)((uint8*)ITEM$1 + 16ll);
 	NXT$1 = *(struct $8HASHITEM**)((uint8*)ITEM$1 + 24ll);
-	if( PRV$1 == (struct $8HASHITEM*)0ull ) goto label$59;
+	if( PRV$1 == (struct $8HASHITEM*)0ull) goto label$59;
 	{
 		*(struct $8HASHITEM**)((uint8*)PRV$1 + 24ll) = NXT$1;
 	}
@@ -545,7 +545,7 @@ static void HASHDELITEM( struct $8HASHLIST* LIST$1, struct $8HASHITEM* ITEM$1 )
 		*(struct $8HASHITEM**)LIST$1 = NXT$1;
 	}
 	label$58:;
-	if( NXT$1 == (struct $8HASHITEM*)0ull ) goto label$61;
+	if( NXT$1 == (struct $8HASHITEM*)0ull) goto label$61;
 	{
 		*(struct $8HASHITEM**)((uint8*)NXT$1 + 16ll) = PRV$1;
 	}

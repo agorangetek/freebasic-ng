@@ -49,8 +49,8 @@ struct $6TFLIST {
 	struct $7TLISTTB* LISTTB;
 };
 __FB_STATIC_ASSERT( sizeof( struct $6TFLIST ) == 112 );
-typedef int64 (*tmp$41)( void );
-typedef void (*tmp$40)( void );
+typedef int64 (*tmp$40)( void );
+typedef void (*tmp$39)( void );
 typedef int64 $19EMIT_NODECLASS_ENUM;
 typedef int64 $10IR_EMITOPT;
 typedef int64 $15IRVREGTYPE_ENUM;
@@ -436,9 +436,9 @@ struct $8FBS_ENUM {
 __FB_STATIC_ASSERT( sizeof( struct $8FBS_ENUM ) == 96 );
 typedef int64 $11FB_FUNCMODE;
 typedef int64 $21FB_PROC_RETURN_METHOD;
-typedef int64 (*tmp$35)( struct $8FBSYMBOL* );
+typedef int64 (*tmp$34)( struct $8FBSYMBOL* );
 struct $10FB_PROCRTL {
-	tmp$35 CALLBACK;
+	tmp$34 CALLBACK;
 };
 __FB_STATIC_ASSERT( sizeof( struct $10FB_PROCRTL ) == 8 );
 struct $10FB_PROCOVL {
@@ -543,9 +543,9 @@ struct $9FB_DEFTOK {
 };
 __FB_STATIC_ASSERT( sizeof( struct $9FB_DEFTOK ) == 32 );
 typedef int64 $15FB_DEFINE_FLAGS;
-typedef FBSTRING* (*tmp$29)( void );
-typedef FBSTRING* (*tmp$30)( void*, int64* );
-typedef uint32* (*tmp$31)( void*, int64* );
+typedef FBSTRING* (*tmp$28)( void );
+typedef FBSTRING* (*tmp$29)( void*, int64* );
+typedef uint32* (*tmp$30)( void*, int64* );
 struct $10FBS_DEFINE {
 	int64 PARAMS;
 	struct $11FB_DEFPARAM* PARAMHEAD;
@@ -557,11 +557,11 @@ struct $10FBS_DEFINE {
 	int64 ISARGLESS;
 	$15FB_DEFINE_FLAGS FLAGS;
 	union {
-		tmp$29 DPROCZ;
-		tmp$30 MPROCZ;
+		tmp$28 DPROCZ;
+		tmp$29 MPROCZ;
 	};
 	union {
-		tmp$31 MPROCW;
+		tmp$30 MPROCW;
 	};
 };
 __FB_STATIC_ASSERT( sizeof( struct $10FBS_DEFINE ) == 56 );
@@ -786,25 +786,25 @@ struct $9EMIT_NODE {
 	int64 REGFREETB[2];
 };
 __FB_STATIC_ASSERT( sizeof( struct $9EMIT_NODE ) == 88 );
-typedef void (*tmp$47)( struct $6IRVREG*, struct $6IRVREG* );
-typedef void (*tmp$55)( struct $6IRVREG* );
-typedef void (*tmp$96)( struct $6IRVREG*, struct $8FBSYMBOL*, struct $6IRVREG*, struct $6IRVREG*, $10IR_EMITOPT );
-typedef void (*tmp$97)( struct $6IRVREG*, int64 );
-typedef void (*tmp$98)( struct $6IRVREG*, struct $8FBSYMBOL*, int64 );
-typedef void (*tmp$44)( struct $8FBSYMBOL* );
-typedef void (*tmp$52)( char* );
-typedef void (*tmp$99)( struct $8FBSYMBOL*, uint64*, struct $8FBSYMBOL**, int64, struct $8FBSYMBOL*, uint64, uint64 );
-typedef void (*tmp$100)( struct $6IRVREG*, struct $6IRVREG*, int64, int64 );
-typedef void (*tmp$101)( struct $8FBSYMBOL*, int64, int64, char* );
+typedef void (*tmp$46)( struct $6IRVREG*, struct $6IRVREG* );
+typedef void (*tmp$54)( struct $6IRVREG* );
+typedef void (*tmp$95)( struct $6IRVREG*, struct $8FBSYMBOL*, struct $6IRVREG*, struct $6IRVREG*, $10IR_EMITOPT );
+typedef void (*tmp$96)( struct $6IRVREG*, int64 );
+typedef void (*tmp$97)( struct $6IRVREG*, struct $8FBSYMBOL*, int64 );
+typedef void (*tmp$43)( struct $8FBSYMBOL* );
+typedef void (*tmp$51)( char* );
+typedef void (*tmp$98)( struct $8FBSYMBOL*, uint64*, struct $8FBSYMBOL**, int64, struct $8FBSYMBOL*, uint64, uint64 );
+typedef void (*tmp$99)( struct $6IRVREG*, struct $6IRVREG*, int64, int64 );
+typedef void (*tmp$100)( struct $8FBSYMBOL*, int64, int64, char* );
 struct $8REGCLASS;
-typedef int64 (*tmp$86)( struct $8REGCLASS*, struct $6IRVREG*, struct $6IRVREG*, uint64 );
-typedef int64 (*tmp$87)( struct $8REGCLASS*, int64, struct $6IRVREG*, struct $6IRVREG* );
-typedef void (*tmp$88)( struct $8REGCLASS*, int64 );
-typedef int64 (*tmp$89)( struct $8REGCLASS*, int64 );
-typedef void (*tmp$90)( struct $8REGCLASS*, int64, struct $6IRVREG*, struct $6IRVREG* );
-typedef int64 (*tmp$91)( struct $8REGCLASS* );
-typedef struct $6IRVREG* (*tmp$92)( struct $8REGCLASS*, int64, struct $6IRVREG** );
-typedef void (*tmp$93)( struct $8REGCLASS* );
+typedef int64 (*tmp$85)( struct $8REGCLASS*, struct $6IRVREG*, struct $6IRVREG*, uint64 );
+typedef int64 (*tmp$86)( struct $8REGCLASS*, int64, struct $6IRVREG*, struct $6IRVREG* );
+typedef void (*tmp$87)( struct $8REGCLASS*, int64 );
+typedef int64 (*tmp$88)( struct $8REGCLASS*, int64 );
+typedef void (*tmp$89)( struct $8REGCLASS*, int64, struct $6IRVREG*, struct $6IRVREG* );
+typedef int64 (*tmp$90)( struct $8REGCLASS* );
+typedef struct $6IRVREG* (*tmp$91)( struct $8REGCLASS*, int64, struct $6IRVREG** );
+typedef void (*tmp$92)( struct $8REGCLASS* );
 struct $7REG_REG;
 struct $7REG_REG {
 	int64 NUM;
@@ -827,19 +827,19 @@ struct $10REG_STKCTX {
 };
 __FB_STATIC_ASSERT( sizeof( struct $10REG_STKCTX ) == 72 );
 struct $8REGCLASS {
-	tmp$86 ENSURE;
-	tmp$86 _ALLOCATE;
-	tmp$87 ALLOCATEREG;
-	tmp$88 FREE;
-	tmp$89 ISFREE;
-	tmp$90 SETOWNER;
-	tmp$91 GETMAXREGS;
-	tmp$91 GETFIRST;
-	tmp$89 GETNEXT;
-	tmp$92 GETVREG;
-	tmp$89 GETREALREG;
-	tmp$93 CLEAR;
-	tmp$93 DUMP;
+	tmp$85 ENSURE;
+	tmp$85 _ALLOCATE;
+	tmp$86 ALLOCATEREG;
+	tmp$87 FREE;
+	tmp$88 ISFREE;
+	tmp$89 SETOWNER;
+	tmp$90 GETMAXREGS;
+	tmp$90 GETFIRST;
+	tmp$88 GETNEXT;
+	tmp$91 GETVREG;
+	tmp$88 GETREALREG;
+	tmp$92 CLEAR;
+	tmp$92 DUMP;
 	int64 CLASS;
 	int64 ISSTACK;
 	int64 REGS;
@@ -920,7 +920,7 @@ struct $8FBARRAY1I10AST_OPINFOE {
 	struct $16__FB_ARRAYDIMTB$ DIMTB[1];
 };
 __FB_STATIC_ASSERT( sizeof( struct $8FBARRAY1I10AST_OPINFOE ) == 72 );
-static struct $8FBARRAY1I10AST_OPINFOE tmp$83$;
+static struct $8FBARRAY1I10AST_OPINFOE tmp$82$;
 extern struct $13SYMB_DATATYPE SYMB_DTYPETB$[26];
 struct $8FBARRAY1I13SYMB_DATATYPEE {
 	struct $13SYMB_DATATYPE* DATA;
@@ -932,7 +932,7 @@ struct $8FBARRAY1I13SYMB_DATATYPEE {
 	struct $16__FB_ARRAYDIMTB$ DIMTB[1];
 };
 __FB_STATIC_ASSERT( sizeof( struct $8FBARRAY1I13SYMB_DATATYPEE ) == 72 );
-static struct $8FBARRAY1I13SYMB_DATATYPEE tmp$84$;
+static struct $8FBARRAY1I13SYMB_DATATYPEE tmp$83$;
 struct $8FBARRAY2IlE {
 	int64* DATA;
 	int64* PTR;
@@ -943,7 +943,7 @@ struct $8FBARRAY2IlE {
 	struct $16__FB_ARRAYDIMTB$ DIMTB[2];
 };
 __FB_STATIC_ASSERT( sizeof( struct $8FBARRAY2IlE ) == 96 );
-static struct $8FBARRAY2IlE tmp$85$;
+static struct $8FBARRAY2IlE tmp$84$;
 typedef int64 $10FB_OUTTYPE;
 typedef int64 $10FB_BACKEND;
 typedef int64 $13FB_COMPTARGET;
@@ -1092,39 +1092,39 @@ struct $5FBENV {
 __FB_STATIC_ASSERT( sizeof( struct $5FBENV ) == 1824 );
 extern struct $5FBENV ENV$;
 typedef int64 $14IR_OPTIONVALUE;
-typedef int64 (*tmp$42)( $14IR_OPTIONVALUE );
-typedef int64 (*tmp$43)( int64, int64 );
-typedef void (*tmp$102)( int64, int64, int64, int64* );
-typedef void (*tmp$103)( int64, int64, int64*, int64* );
-typedef char* (*tmp$46)( void );
-typedef void (*tmp$45)( struct $8FBSYMBOL*, struct $8FBSYMBOL* );
-typedef void (*tmp$104)( struct $8FBSYMBOL*, int64, struct $8FBSYMBOL*, struct $8FBSYMBOL* );
-typedef void (*tmp$105)( int64, int64 );
-typedef char* (*tmp$106)( int64 );
-typedef char* (*tmp$107)( int64, int64 );
+typedef int64 (*tmp$41)( $14IR_OPTIONVALUE );
+typedef int64 (*tmp$42)( int64, int64 );
+typedef void (*tmp$101)( int64, int64, int64, int64* );
+typedef void (*tmp$102)( int64, int64, int64*, int64* );
+typedef char* (*tmp$45)( void );
+typedef void (*tmp$44)( struct $8FBSYMBOL*, struct $8FBSYMBOL* );
+typedef void (*tmp$103)( struct $8FBSYMBOL*, int64, struct $8FBSYMBOL*, struct $8FBSYMBOL* );
+typedef void (*tmp$104)( int64, int64 );
+typedef char* (*tmp$105)( int64 );
+typedef char* (*tmp$106)( int64, int64 );
 struct $9EMIT_VTBL {
-	tmp$41 INIT;
-	tmp$40 END;
-	tmp$42 GETOPTIONVALUE;
-	tmp$41 OPEN;
-	tmp$40 CLOSE;
-	tmp$43 ISREGPRESERVED;
-	tmp$43 GETFREEPRESERVEDREG;
-	tmp$102 GETARGREG;
-	tmp$103 GETRESULTREG;
-	tmp$46 PROCGETFRAMEREGNAME;
-	tmp$44 PROCBEGIN;
-	tmp$44 PROCEND;
-	tmp$45 PROCHEADER;
-	tmp$104 PROCFOOTER;
-	tmp$45 PROCALLOCARG;
-	tmp$45 PROCALLOCLOCAL;
-	tmp$44 PROCALLOCSTATICVARS;
-	tmp$44 SCOPEBEGIN;
-	tmp$44 SCOPEEND;
-	tmp$105 SETSECTION;
-	tmp$106 GETTYPESTRING;
-	tmp$107 GETSECTIONSTRING;
+	tmp$40 INIT;
+	tmp$39 END;
+	tmp$41 GETOPTIONVALUE;
+	tmp$40 OPEN;
+	tmp$39 CLOSE;
+	tmp$42 ISREGPRESERVED;
+	tmp$42 GETFREEPRESERVEDREG;
+	tmp$101 GETARGREG;
+	tmp$102 GETRESULTREG;
+	tmp$45 PROCGETFRAMEREGNAME;
+	tmp$43 PROCBEGIN;
+	tmp$43 PROCEND;
+	tmp$44 PROCHEADER;
+	tmp$103 PROCFOOTER;
+	tmp$44 PROCALLOCARG;
+	tmp$44 PROCALLOCLOCAL;
+	tmp$43 PROCALLOCSTATICVARS;
+	tmp$43 SCOPEBEGIN;
+	tmp$43 SCOPEEND;
+	tmp$104 SETSECTION;
+	tmp$105 GETTYPESTRING;
+	tmp$106 GETSECTIONSTRING;
 };
 __FB_STATIC_ASSERT( sizeof( struct $9EMIT_VTBL ) == 176 );
 struct $7EMITCTX {
@@ -1152,7 +1152,7 @@ struct $8FBARRAY1IPvE {
 	struct $16__FB_ARRAYDIMTB$ DIMTB[1];
 };
 __FB_STATIC_ASSERT( sizeof( struct $8FBARRAY1IPvE ) == 72 );
-static struct $8FBARRAY1IPvE tmp$108$;
+static struct $8FBARRAY1IPvE tmp$107$;
 struct $7EMITCTX EMIT$;
 
 int64 EMITINIT( void )
@@ -1160,7 +1160,7 @@ int64 EMITINIT( void )
 	int64 fb$result$1;
 	__builtin_memset( &fb$result$1, 0, 8ll );
 	label$10:;
-	if( *(int64*)&EMIT$ == 0ll ) goto label$13;
+	if( *(int64*)&EMIT$ == 0ll) goto label$13;
 	{
 		fb$result$1 = -1ll;
 		goto label$11;
@@ -1172,7 +1172,7 @@ int64 EMITINIT( void )
 	FLISTINIT( (struct $6TFLIST*)((uint8*)&EMIT$ + 144ll), 6144ll, 120ll );
 	*(int64*)&EMIT$ = -1ll;
 	*(int64*)((uint8*)&EMIT$ + 8ll) = 0ll;
-	int64 vr$3 = (*(tmp$41*)((uint8*)&EMIT$ + 296ll))(  );
+	int64 vr$3 = (*(tmp$40*)((uint8*)&EMIT$ + 296ll))(  );
 	fb$result$1 = vr$3;
 	label$11:;
 	return fb$result$1;
@@ -1181,13 +1181,13 @@ int64 EMITINIT( void )
 void EMITEND( void )
 {
 	label$14:;
-	if( *(int64*)&EMIT$ != 0ll ) goto label$17;
+	if( *(int64*)&EMIT$ != 0ll) goto label$17;
 	{
 		goto label$15;
 	}
 	label$17:;
 	label$16:;
-	(*(tmp$40*)((uint8*)&EMIT$ + 304ll))(  );
+	(*(tmp$39*)((uint8*)&EMIT$ + 304ll))(  );
 	*(int64*)&EMIT$ = 0ll;
 	label$15:;
 }
@@ -1196,12 +1196,12 @@ void EMITWRITESTR( char* S$1, int64 ADDTAB$1 )
 {
 	label$18:;
 	static FBSTRING OSTR$1;
-	if( ADDTAB$1 == 0ll ) goto label$21;
+	if( ADDTAB$1 == 0ll) goto label$21;
 	{
-		FBSTRING TMP$110$2;
+		FBSTRING TMP$109$2;
 		fb_StrAssign( (void*)&OSTR$1, -1ll, (void*)"\x09", 2ll, 0 );
-		__builtin_memset( &TMP$110$2, 0, 24ll );
-		FBSTRING* vr$2 = fb_StrConcat( &TMP$110$2, (void*)&OSTR$1, -1ll, (void*)S$1, 0ll );
+		__builtin_memset( &TMP$109$2, 0, 24ll );
+		FBSTRING* vr$2 = fb_StrConcat( &TMP$109$2, (void*)&OSTR$1, -1ll, (void*)S$1, 0ll );
 		fb_StrAssign( (void*)&OSTR$1, -1ll, (void*)vr$2, -1ll, 0 );
 	}
 	goto label$20;
@@ -1212,7 +1212,7 @@ void EMITWRITESTR( char* S$1, int64 ADDTAB$1 )
 	label$20:;
 	fb_StrConcatAssign( (void*)&OSTR$1, -1ll, (void*)"\x0A", 2ll, 0 );
 	int32 vr$4 = fb_FilePutStrLarge( (int32)*(int64*)((uint8*)&ENV$ + 920ll), 0ll, (void*)&OSTR$1, -1ll );
-	if( (int64)vr$4 == 0ll ) goto label$23;
+	if( (int64)vr$4 == 0ll) goto label$23;
 	{
 	}
 	label$23:;
@@ -1236,7 +1236,7 @@ void EMITRESET( void )
 		label$27:;
 		C$1 = C$1 + 1ll;
 		label$26:;
-		if( C$1 <= 1ll ) goto label$29;
+		if( C$1 <= 1ll) goto label$29;
 		label$28:;
 	}
 	label$25:;
@@ -1250,12 +1250,12 @@ void EMITFLUSH( void )
 	void* vr$1 = FLISTGETHEAD( (struct $6TFLIST*)((uint8*)&EMIT$ + 32ll) );
 	N$1 = (struct $9EMIT_NODE*)vr$1;
 	label$59:;
-	if( N$1 == (struct $9EMIT_NODE*)0ull ) goto label$60;
+	if( N$1 == (struct $9EMIT_NODE*)0ull) goto label$60;
 	{
 		*(struct $9EMIT_NODE**)((uint8*)&EMIT$ + 256ll) = N$1;
 		{
-			uint64 TMP$115$3;
-			TMP$115$3 = *(uint64*)N$1;
+			uint64 TMP$114$3;
+			TMP$114$3 = *(uint64*)N$1;
 			goto label$62;
 			label$63:;
 			{
@@ -1263,38 +1263,38 @@ void EMITFLUSH( void )
 			goto label$61;
 			label$64:;
 			{
-				(*(tmp$47*)((uint8*)*(void***)((uint8*)&EMIT$ + 472ll) + (*(int64*)((uint8*)N$1 + 16ll) << (3ll & 63ll))))( *(struct $6IRVREG**)((uint8*)N$1 + 24ll), *(struct $6IRVREG**)((uint8*)N$1 + 32ll) );
+				(*(tmp$46*)((uint8*)*(void***)((uint8*)&EMIT$ + 472ll) + (*(int64*)((uint8*)N$1 + 16ll) << (3ll & 63ll))))( *(struct $6IRVREG**)((uint8*)N$1 + 24ll), *(struct $6IRVREG**)((uint8*)N$1 + 32ll) );
 			}
 			goto label$61;
 			label$65:;
 			{
-				(*(tmp$55*)((uint8*)*(void***)((uint8*)&EMIT$ + 472ll) + (*(int64*)((uint8*)N$1 + 16ll) << (3ll & 63ll))))( *(struct $6IRVREG**)((uint8*)N$1 + 24ll) );
+				(*(tmp$54*)((uint8*)*(void***)((uint8*)&EMIT$ + 472ll) + (*(int64*)((uint8*)N$1 + 16ll) << (3ll & 63ll))))( *(struct $6IRVREG**)((uint8*)N$1 + 24ll) );
 			}
 			goto label$61;
 			label$66:;
 			{
-				(*(tmp$96*)((uint8*)*(void***)((uint8*)&EMIT$ + 472ll) + (*(int64*)((uint8*)N$1 + 16ll) << (3ll & 63ll))))( *(struct $6IRVREG**)((uint8*)N$1 + 24ll), *(struct $8FBSYMBOL**)((uint8*)N$1 + 32ll), *(struct $6IRVREG**)((uint8*)N$1 + 40ll), *(struct $6IRVREG**)((uint8*)N$1 + 48ll), *($10IR_EMITOPT*)((uint8*)N$1 + 8ll) );
+				(*(tmp$95*)((uint8*)*(void***)((uint8*)&EMIT$ + 472ll) + (*(int64*)((uint8*)N$1 + 16ll) << (3ll & 63ll))))( *(struct $6IRVREG**)((uint8*)N$1 + 24ll), *(struct $8FBSYMBOL**)((uint8*)N$1 + 32ll), *(struct $6IRVREG**)((uint8*)N$1 + 40ll), *(struct $6IRVREG**)((uint8*)N$1 + 48ll), *($10IR_EMITOPT*)((uint8*)N$1 + 8ll) );
 			}
 			goto label$61;
 			label$67:;
 			{
-				(*(tmp$97*)((uint8*)*(void***)((uint8*)&EMIT$ + 472ll) + (*(int64*)((uint8*)N$1 + 16ll) << (3ll & 63ll))))( *(struct $6IRVREG**)((uint8*)N$1 + 24ll), *(int64*)((uint8*)N$1 + 32ll) );
+				(*(tmp$96*)((uint8*)*(void***)((uint8*)&EMIT$ + 472ll) + (*(int64*)((uint8*)N$1 + 16ll) << (3ll & 63ll))))( *(struct $6IRVREG**)((uint8*)N$1 + 24ll), *(int64*)((uint8*)N$1 + 32ll) );
 			}
 			goto label$61;
 			label$68:;
 			{
-				(*(tmp$98*)((uint8*)*(void***)((uint8*)&EMIT$ + 472ll) + (*(int64*)((uint8*)N$1 + 16ll) << (3ll & 63ll))))( *(struct $6IRVREG**)((uint8*)N$1 + 24ll), *(struct $8FBSYMBOL**)((uint8*)N$1 + 32ll), *(int64*)((uint8*)N$1 + 40ll) );
+				(*(tmp$97*)((uint8*)*(void***)((uint8*)&EMIT$ + 472ll) + (*(int64*)((uint8*)N$1 + 16ll) << (3ll & 63ll))))( *(struct $6IRVREG**)((uint8*)N$1 + 24ll), *(struct $8FBSYMBOL**)((uint8*)N$1 + 32ll), *(int64*)((uint8*)N$1 + 40ll) );
 			}
 			goto label$61;
 			label$69:;
 			{
-				(*(tmp$44*)((uint8*)*(void***)((uint8*)&EMIT$ + 472ll) + (*(int64*)((uint8*)N$1 + 16ll) << (3ll & 63ll))))( *(struct $8FBSYMBOL**)((uint8*)N$1 + 24ll) );
+				(*(tmp$43*)((uint8*)*(void***)((uint8*)&EMIT$ + 472ll) + (*(int64*)((uint8*)N$1 + 16ll) << (3ll & 63ll))))( *(struct $8FBSYMBOL**)((uint8*)N$1 + 24ll) );
 			}
 			goto label$61;
 			label$70:;
 			{
-				(*(tmp$52*)((uint8*)*(void***)((uint8*)&EMIT$ + 472ll) + 1064ll))( *(char**)((uint8*)N$1 + 24ll) );
-				if( *(char**)((uint8*)N$1 + 24ll) == (char*)0ull ) goto label$72;
+				(*(tmp$51*)((uint8*)*(void***)((uint8*)&EMIT$ + 472ll) + 1064ll))( *(char**)((uint8*)N$1 + 24ll) );
+				if( *(char**)((uint8*)N$1 + 24ll) == (char*)0ull) goto label$72;
 				{
 					free( *(void**)((uint8*)N$1 + 24ll) );
 				}
@@ -1304,23 +1304,23 @@ void EMITFLUSH( void )
 			goto label$61;
 			label$73:;
 			{
-				(*(tmp$99*)((uint8*)*(void***)((uint8*)&EMIT$ + 472ll) + 1072ll))( *(struct $8FBSYMBOL**)((uint8*)N$1 + 16ll), *(uint64**)((uint8*)N$1 + 24ll), *(struct $8FBSYMBOL***)((uint8*)N$1 + 32ll), *(int64*)((uint8*)N$1 + 40ll), *(struct $8FBSYMBOL**)((uint8*)N$1 + 48ll), *(uint64*)((uint8*)N$1 + 56ll), *(uint64*)((uint8*)N$1 + 64ll) );
+				(*(tmp$98*)((uint8*)*(void***)((uint8*)&EMIT$ + 472ll) + 1072ll))( *(struct $8FBSYMBOL**)((uint8*)N$1 + 16ll), *(uint64**)((uint8*)N$1 + 24ll), *(struct $8FBSYMBOL***)((uint8*)N$1 + 32ll), *(int64*)((uint8*)N$1 + 40ll), *(struct $8FBSYMBOL**)((uint8*)N$1 + 48ll), *(uint64*)((uint8*)N$1 + 56ll), *(uint64*)((uint8*)N$1 + 64ll) );
 				free( *(void**)((uint8*)N$1 + 24ll) );
 				free( *(void**)((uint8*)N$1 + 32ll) );
 			}
 			goto label$61;
 			label$74:;
 			{
-				(*(tmp$100*)((uint8*)*(void***)((uint8*)&EMIT$ + 472ll) + (*(int64*)((uint8*)N$1 + 16ll) << (3ll & 63ll))))( *(struct $6IRVREG**)((uint8*)N$1 + 24ll), *(struct $6IRVREG**)((uint8*)N$1 + 32ll), *(int64*)((uint8*)N$1 + 40ll), *(int64*)((uint8*)N$1 + 48ll) );
+				(*(tmp$99*)((uint8*)*(void***)((uint8*)&EMIT$ + 472ll) + (*(int64*)((uint8*)N$1 + 16ll) << (3ll & 63ll))))( *(struct $6IRVREG**)((uint8*)N$1 + 24ll), *(struct $6IRVREG**)((uint8*)N$1 + 32ll), *(int64*)((uint8*)N$1 + 40ll), *(int64*)((uint8*)N$1 + 48ll) );
 			}
 			goto label$61;
 			label$75:;
 			{
-				(*(tmp$101*)((uint8*)*(void***)((uint8*)&EMIT$ + 472ll) + (*(int64*)((uint8*)N$1 + 16ll) << (3ll & 63ll))))( *(struct $8FBSYMBOL**)((uint8*)N$1 + 24ll), *(int64*)((uint8*)N$1 + 32ll), *(int64*)((uint8*)N$1 + 48ll), *(char**)((uint8*)N$1 + 40ll) );
+				(*(tmp$100*)((uint8*)*(void***)((uint8*)&EMIT$ + 472ll) + (*(int64*)((uint8*)N$1 + 16ll) << (3ll & 63ll))))( *(struct $8FBSYMBOL**)((uint8*)N$1 + 24ll), *(int64*)((uint8*)N$1 + 32ll), *(int64*)((uint8*)N$1 + 48ll), *(char**)((uint8*)N$1 + 40ll) );
 			}
 			goto label$61;
 			label$62:;
-			static const void* tmp$116[11ll] = {
+			static const void* tmp$115[11ll] = {
 				&&label$63,
 				&&label$64,
 				&&label$65,
@@ -1333,8 +1333,8 @@ void EMITFLUSH( void )
 				&&label$74,
 				&&label$75,
 			};
-			if( TMP$115$3 > 10ull ) goto label$61;
-			goto *tmp$116[TMP$115$3 - 0ull];
+			if( TMP$114$3 > 10ull ) goto label$61;
+			goto *tmp$115[TMP$114$3 - 0ull];
 			label$61:;
 		}
 		void* vr$63 = FLISTGETNEXT( (void*)N$1 );
@@ -1361,28 +1361,28 @@ struct $9EMIT_NODE* EMITLOAD( struct $6IRVREG* DVREG$1, struct $6IRVREG* SVREG$1
 	__builtin_memset( &fb$result$1, 0, 8ll );
 	label$111:;
 	{
-		int64 TMP$118$2;
-		uint64 TMP$119$2;
-		if( (*(int64*)((uint8*)DVREG$1 + 8ll) & 480ll) == 0ll ) goto label$113;
-		TMP$118$2 = 24ll;
+		int64 TMP$117$2;
+		uint64 TMP$118$2;
+		if( (*(int64*)((uint8*)DVREG$1 + 8ll) & 480ll) == 0ll) goto label$113;
+		TMP$117$2 = 24ll;
 		goto label$148;
 		label$113:;
-		TMP$118$2 = *(int64*)((uint8*)DVREG$1 + 8ll) & 31ll;
+		TMP$117$2 = *(int64*)((uint8*)DVREG$1 + 8ll) & 31ll;
 		label$148:;
-		TMP$119$2 = *(uint64*)(((int64)(struct $13SYMB_DATATYPE*)SYMB_DTYPETB$ + (TMP$118$2 * 56ll)) + 40ll);
+		TMP$118$2 = *(uint64*)(((int64)(struct $13SYMB_DATATYPE*)SYMB_DTYPETB$ + (TMP$117$2 * 56ll)) + 40ll);
 		goto label$115;
 		label$116:;
 		{
 			{
-				int64 TMP$120$4;
-				uint64 TMP$121$4;
-				if( (*(int64*)((uint8*)SVREG$1 + 8ll) & 480ll) == 0ll ) goto label$117;
-				TMP$120$4 = 24ll;
+				int64 TMP$119$4;
+				uint64 TMP$120$4;
+				if( (*(int64*)((uint8*)SVREG$1 + 8ll) & 480ll) == 0ll) goto label$117;
+				TMP$119$4 = 24ll;
 				goto label$149;
 				label$117:;
-				TMP$120$4 = *(int64*)((uint8*)SVREG$1 + 8ll) & 31ll;
+				TMP$119$4 = *(int64*)((uint8*)SVREG$1 + 8ll) & 31ll;
 				label$149:;
-				TMP$121$4 = *(uint64*)(((int64)(struct $13SYMB_DATATYPE*)SYMB_DTYPETB$ + (TMP$120$4 * 56ll)) + 40ll);
+				TMP$120$4 = *(uint64*)(((int64)(struct $13SYMB_DATATYPE*)SYMB_DTYPETB$ + (TMP$119$4 * 56ll)) + 40ll);
 				goto label$119;
 				label$120:;
 				{
@@ -1409,7 +1409,7 @@ struct $9EMIT_NODE* EMITLOAD( struct $6IRVREG* DVREG$1, struct $6IRVREG* SVREG$1
 				}
 				goto label$118;
 				label$119:;
-				static const void* tmp$128[11ll] = {
+				static const void* tmp$127[11ll] = {
 					&&label$122,
 					&&label$123,
 					&&label$123,
@@ -1422,8 +1422,8 @@ struct $9EMIT_NODE* EMITLOAD( struct $6IRVREG* DVREG$1, struct $6IRVREG* SVREG$1
 					&&label$121,
 					&&label$121,
 				};
-				if( TMP$121$4 > 10ull ) goto label$123;
-				goto *tmp$128[TMP$121$4 - 0ull];
+				if( TMP$120$4 > 10ull ) goto label$123;
+				goto *tmp$127[TMP$120$4 - 0ull];
 				label$118:;
 			}
 		}
@@ -1431,15 +1431,15 @@ struct $9EMIT_NODE* EMITLOAD( struct $6IRVREG* DVREG$1, struct $6IRVREG* SVREG$1
 		label$124:;
 		{
 			{
-				int64 TMP$122$4;
-				uint64 TMP$123$4;
-				if( (*(int64*)((uint8*)SVREG$1 + 8ll) & 480ll) == 0ll ) goto label$125;
-				TMP$122$4 = 24ll;
+				int64 TMP$121$4;
+				uint64 TMP$122$4;
+				if( (*(int64*)((uint8*)SVREG$1 + 8ll) & 480ll) == 0ll) goto label$125;
+				TMP$121$4 = 24ll;
 				goto label$150;
 				label$125:;
-				TMP$122$4 = *(int64*)((uint8*)SVREG$1 + 8ll) & 31ll;
+				TMP$121$4 = *(int64*)((uint8*)SVREG$1 + 8ll) & 31ll;
 				label$150:;
-				TMP$123$4 = *(uint64*)(((int64)(struct $13SYMB_DATATYPE*)SYMB_DTYPETB$ + (TMP$122$4 * 56ll)) + 40ll);
+				TMP$122$4 = *(uint64*)(((int64)(struct $13SYMB_DATATYPE*)SYMB_DTYPETB$ + (TMP$121$4 * 56ll)) + 40ll);
 				goto label$127;
 				label$128:;
 				{
@@ -1466,7 +1466,7 @@ struct $9EMIT_NODE* EMITLOAD( struct $6IRVREG* DVREG$1, struct $6IRVREG* SVREG$1
 				}
 				goto label$126;
 				label$127:;
-				static const void* tmp$129[11ll] = {
+				static const void* tmp$128[11ll] = {
 					&&label$130,
 					&&label$131,
 					&&label$131,
@@ -1479,8 +1479,8 @@ struct $9EMIT_NODE* EMITLOAD( struct $6IRVREG* DVREG$1, struct $6IRVREG* SVREG$1
 					&&label$129,
 					&&label$129,
 				};
-				if( TMP$123$4 > 10ull ) goto label$131;
-				goto *tmp$129[TMP$123$4 - 0ull];
+				if( TMP$122$4 > 10ull ) goto label$131;
+				goto *tmp$128[TMP$122$4 - 0ull];
 				label$126:;
 			}
 		}
@@ -1488,15 +1488,15 @@ struct $9EMIT_NODE* EMITLOAD( struct $6IRVREG* DVREG$1, struct $6IRVREG* SVREG$1
 		label$132:;
 		{
 			{
-				int64 TMP$124$4;
-				uint64 TMP$125$4;
-				if( (*(int64*)((uint8*)SVREG$1 + 8ll) & 480ll) == 0ll ) goto label$133;
-				TMP$124$4 = 24ll;
+				int64 TMP$123$4;
+				uint64 TMP$124$4;
+				if( (*(int64*)((uint8*)SVREG$1 + 8ll) & 480ll) == 0ll) goto label$133;
+				TMP$123$4 = 24ll;
 				goto label$151;
 				label$133:;
-				TMP$124$4 = *(int64*)((uint8*)SVREG$1 + 8ll) & 31ll;
+				TMP$123$4 = *(int64*)((uint8*)SVREG$1 + 8ll) & 31ll;
 				label$151:;
-				TMP$125$4 = *(uint64*)(((int64)(struct $13SYMB_DATATYPE*)SYMB_DTYPETB$ + (TMP$124$4 * 56ll)) + 40ll);
+				TMP$124$4 = *(uint64*)(((int64)(struct $13SYMB_DATATYPE*)SYMB_DTYPETB$ + (TMP$123$4 * 56ll)) + 40ll);
 				goto label$135;
 				label$136:;
 				{
@@ -1523,7 +1523,7 @@ struct $9EMIT_NODE* EMITLOAD( struct $6IRVREG* DVREG$1, struct $6IRVREG* SVREG$1
 				}
 				goto label$134;
 				label$135:;
-				static const void* tmp$130[11ll] = {
+				static const void* tmp$129[11ll] = {
 					&&label$138,
 					&&label$139,
 					&&label$139,
@@ -1536,8 +1536,8 @@ struct $9EMIT_NODE* EMITLOAD( struct $6IRVREG* DVREG$1, struct $6IRVREG* SVREG$1
 					&&label$137,
 					&&label$137,
 				};
-				if( TMP$125$4 > 10ull ) goto label$139;
-				goto *tmp$130[TMP$125$4 - 0ull];
+				if( TMP$124$4 > 10ull ) goto label$139;
+				goto *tmp$129[TMP$124$4 - 0ull];
 				label$134:;
 			}
 		}
@@ -1545,15 +1545,15 @@ struct $9EMIT_NODE* EMITLOAD( struct $6IRVREG* DVREG$1, struct $6IRVREG* SVREG$1
 		label$140:;
 		{
 			{
-				int64 TMP$126$4;
-				uint64 TMP$127$4;
-				if( (*(int64*)((uint8*)SVREG$1 + 8ll) & 480ll) == 0ll ) goto label$141;
-				TMP$126$4 = 24ll;
+				int64 TMP$125$4;
+				uint64 TMP$126$4;
+				if( (*(int64*)((uint8*)SVREG$1 + 8ll) & 480ll) == 0ll) goto label$141;
+				TMP$125$4 = 24ll;
 				goto label$152;
 				label$141:;
-				TMP$126$4 = *(int64*)((uint8*)SVREG$1 + 8ll) & 31ll;
+				TMP$125$4 = *(int64*)((uint8*)SVREG$1 + 8ll) & 31ll;
 				label$152:;
-				TMP$127$4 = *(uint64*)(((int64)(struct $13SYMB_DATATYPE*)SYMB_DTYPETB$ + (TMP$126$4 * 56ll)) + 40ll);
+				TMP$126$4 = *(uint64*)(((int64)(struct $13SYMB_DATATYPE*)SYMB_DTYPETB$ + (TMP$125$4 * 56ll)) + 40ll);
 				goto label$143;
 				label$144:;
 				{
@@ -1580,7 +1580,7 @@ struct $9EMIT_NODE* EMITLOAD( struct $6IRVREG* DVREG$1, struct $6IRVREG* SVREG$1
 				}
 				goto label$142;
 				label$143:;
-				static const void* tmp$131[11ll] = {
+				static const void* tmp$130[11ll] = {
 					&&label$146,
 					&&label$147,
 					&&label$147,
@@ -1593,14 +1593,14 @@ struct $9EMIT_NODE* EMITLOAD( struct $6IRVREG* DVREG$1, struct $6IRVREG* SVREG$1
 					&&label$145,
 					&&label$145,
 				};
-				if( TMP$127$4 > 10ull ) goto label$147;
-				goto *tmp$131[TMP$127$4 - 0ull];
+				if( TMP$126$4 > 10ull ) goto label$147;
+				goto *tmp$130[TMP$126$4 - 0ull];
 				label$142:;
 			}
 		}
 		goto label$114;
 		label$115:;
-		static const void* tmp$132[11ll] = {
+		static const void* tmp$131[11ll] = {
 			&&label$132,
 			&&label$140,
 			&&label$140,
@@ -1613,8 +1613,8 @@ struct $9EMIT_NODE* EMITLOAD( struct $6IRVREG* DVREG$1, struct $6IRVREG* SVREG$1
 			&&label$124,
 			&&label$124,
 		};
-		if( TMP$119$2 > 10ull ) goto label$140;
-		goto *tmp$132[TMP$119$2 - 0ull];
+		if( TMP$118$2 > 10ull ) goto label$140;
+		goto *tmp$131[TMP$118$2 - 0ull];
 		label$114:;
 	}
 	label$112:;
@@ -1627,28 +1627,28 @@ struct $9EMIT_NODE* EMITSTORE( struct $6IRVREG* DVREG$1, struct $6IRVREG* SVREG$
 	__builtin_memset( &fb$result$1, 0, 8ll );
 	label$153:;
 	{
-		int64 TMP$133$2;
-		uint64 TMP$134$2;
-		if( (*(int64*)((uint8*)DVREG$1 + 8ll) & 480ll) == 0ll ) goto label$155;
-		TMP$133$2 = 24ll;
+		int64 TMP$132$2;
+		uint64 TMP$133$2;
+		if( (*(int64*)((uint8*)DVREG$1 + 8ll) & 480ll) == 0ll) goto label$155;
+		TMP$132$2 = 24ll;
 		goto label$190;
 		label$155:;
-		TMP$133$2 = *(int64*)((uint8*)DVREG$1 + 8ll) & 31ll;
+		TMP$132$2 = *(int64*)((uint8*)DVREG$1 + 8ll) & 31ll;
 		label$190:;
-		TMP$134$2 = *(uint64*)(((int64)(struct $13SYMB_DATATYPE*)SYMB_DTYPETB$ + (TMP$133$2 * 56ll)) + 40ll);
+		TMP$133$2 = *(uint64*)(((int64)(struct $13SYMB_DATATYPE*)SYMB_DTYPETB$ + (TMP$132$2 * 56ll)) + 40ll);
 		goto label$157;
 		label$158:;
 		{
 			{
-				int64 TMP$135$4;
-				uint64 TMP$136$4;
-				if( (*(int64*)((uint8*)SVREG$1 + 8ll) & 480ll) == 0ll ) goto label$159;
-				TMP$135$4 = 24ll;
+				int64 TMP$134$4;
+				uint64 TMP$135$4;
+				if( (*(int64*)((uint8*)SVREG$1 + 8ll) & 480ll) == 0ll) goto label$159;
+				TMP$134$4 = 24ll;
 				goto label$191;
 				label$159:;
-				TMP$135$4 = *(int64*)((uint8*)SVREG$1 + 8ll) & 31ll;
+				TMP$134$4 = *(int64*)((uint8*)SVREG$1 + 8ll) & 31ll;
 				label$191:;
-				TMP$136$4 = *(uint64*)(((int64)(struct $13SYMB_DATATYPE*)SYMB_DTYPETB$ + (TMP$135$4 * 56ll)) + 40ll);
+				TMP$135$4 = *(uint64*)(((int64)(struct $13SYMB_DATATYPE*)SYMB_DTYPETB$ + (TMP$134$4 * 56ll)) + 40ll);
 				goto label$161;
 				label$162:;
 				{
@@ -1675,7 +1675,7 @@ struct $9EMIT_NODE* EMITSTORE( struct $6IRVREG* DVREG$1, struct $6IRVREG* SVREG$
 				}
 				goto label$160;
 				label$161:;
-				static const void* tmp$143[11ll] = {
+				static const void* tmp$142[11ll] = {
 					&&label$164,
 					&&label$165,
 					&&label$165,
@@ -1688,8 +1688,8 @@ struct $9EMIT_NODE* EMITSTORE( struct $6IRVREG* DVREG$1, struct $6IRVREG* SVREG$
 					&&label$163,
 					&&label$163,
 				};
-				if( TMP$136$4 > 10ull ) goto label$165;
-				goto *tmp$143[TMP$136$4 - 0ull];
+				if( TMP$135$4 > 10ull ) goto label$165;
+				goto *tmp$142[TMP$135$4 - 0ull];
 				label$160:;
 			}
 		}
@@ -1697,15 +1697,15 @@ struct $9EMIT_NODE* EMITSTORE( struct $6IRVREG* DVREG$1, struct $6IRVREG* SVREG$
 		label$166:;
 		{
 			{
-				int64 TMP$137$4;
-				uint64 TMP$138$4;
-				if( (*(int64*)((uint8*)SVREG$1 + 8ll) & 480ll) == 0ll ) goto label$167;
-				TMP$137$4 = 24ll;
+				int64 TMP$136$4;
+				uint64 TMP$137$4;
+				if( (*(int64*)((uint8*)SVREG$1 + 8ll) & 480ll) == 0ll) goto label$167;
+				TMP$136$4 = 24ll;
 				goto label$192;
 				label$167:;
-				TMP$137$4 = *(int64*)((uint8*)SVREG$1 + 8ll) & 31ll;
+				TMP$136$4 = *(int64*)((uint8*)SVREG$1 + 8ll) & 31ll;
 				label$192:;
-				TMP$138$4 = *(uint64*)(((int64)(struct $13SYMB_DATATYPE*)SYMB_DTYPETB$ + (TMP$137$4 * 56ll)) + 40ll);
+				TMP$137$4 = *(uint64*)(((int64)(struct $13SYMB_DATATYPE*)SYMB_DTYPETB$ + (TMP$136$4 * 56ll)) + 40ll);
 				goto label$169;
 				label$170:;
 				{
@@ -1732,7 +1732,7 @@ struct $9EMIT_NODE* EMITSTORE( struct $6IRVREG* DVREG$1, struct $6IRVREG* SVREG$
 				}
 				goto label$168;
 				label$169:;
-				static const void* tmp$144[11ll] = {
+				static const void* tmp$143[11ll] = {
 					&&label$172,
 					&&label$173,
 					&&label$173,
@@ -1745,8 +1745,8 @@ struct $9EMIT_NODE* EMITSTORE( struct $6IRVREG* DVREG$1, struct $6IRVREG* SVREG$
 					&&label$171,
 					&&label$171,
 				};
-				if( TMP$138$4 > 10ull ) goto label$173;
-				goto *tmp$144[TMP$138$4 - 0ull];
+				if( TMP$137$4 > 10ull ) goto label$173;
+				goto *tmp$143[TMP$137$4 - 0ull];
 				label$168:;
 			}
 		}
@@ -1754,15 +1754,15 @@ struct $9EMIT_NODE* EMITSTORE( struct $6IRVREG* DVREG$1, struct $6IRVREG* SVREG$
 		label$174:;
 		{
 			{
-				int64 TMP$139$4;
-				uint64 TMP$140$4;
-				if( (*(int64*)((uint8*)SVREG$1 + 8ll) & 480ll) == 0ll ) goto label$175;
-				TMP$139$4 = 24ll;
+				int64 TMP$138$4;
+				uint64 TMP$139$4;
+				if( (*(int64*)((uint8*)SVREG$1 + 8ll) & 480ll) == 0ll) goto label$175;
+				TMP$138$4 = 24ll;
 				goto label$193;
 				label$175:;
-				TMP$139$4 = *(int64*)((uint8*)SVREG$1 + 8ll) & 31ll;
+				TMP$138$4 = *(int64*)((uint8*)SVREG$1 + 8ll) & 31ll;
 				label$193:;
-				TMP$140$4 = *(uint64*)(((int64)(struct $13SYMB_DATATYPE*)SYMB_DTYPETB$ + (TMP$139$4 * 56ll)) + 40ll);
+				TMP$139$4 = *(uint64*)(((int64)(struct $13SYMB_DATATYPE*)SYMB_DTYPETB$ + (TMP$138$4 * 56ll)) + 40ll);
 				goto label$177;
 				label$178:;
 				{
@@ -1789,7 +1789,7 @@ struct $9EMIT_NODE* EMITSTORE( struct $6IRVREG* DVREG$1, struct $6IRVREG* SVREG$
 				}
 				goto label$176;
 				label$177:;
-				static const void* tmp$145[11ll] = {
+				static const void* tmp$144[11ll] = {
 					&&label$180,
 					&&label$181,
 					&&label$181,
@@ -1802,8 +1802,8 @@ struct $9EMIT_NODE* EMITSTORE( struct $6IRVREG* DVREG$1, struct $6IRVREG* SVREG$
 					&&label$179,
 					&&label$179,
 				};
-				if( TMP$140$4 > 10ull ) goto label$181;
-				goto *tmp$145[TMP$140$4 - 0ull];
+				if( TMP$139$4 > 10ull ) goto label$181;
+				goto *tmp$144[TMP$139$4 - 0ull];
 				label$176:;
 			}
 		}
@@ -1811,15 +1811,15 @@ struct $9EMIT_NODE* EMITSTORE( struct $6IRVREG* DVREG$1, struct $6IRVREG* SVREG$
 		label$182:;
 		{
 			{
-				int64 TMP$141$4;
-				uint64 TMP$142$4;
-				if( (*(int64*)((uint8*)SVREG$1 + 8ll) & 480ll) == 0ll ) goto label$183;
-				TMP$141$4 = 24ll;
+				int64 TMP$140$4;
+				uint64 TMP$141$4;
+				if( (*(int64*)((uint8*)SVREG$1 + 8ll) & 480ll) == 0ll) goto label$183;
+				TMP$140$4 = 24ll;
 				goto label$194;
 				label$183:;
-				TMP$141$4 = *(int64*)((uint8*)SVREG$1 + 8ll) & 31ll;
+				TMP$140$4 = *(int64*)((uint8*)SVREG$1 + 8ll) & 31ll;
 				label$194:;
-				TMP$142$4 = *(uint64*)(((int64)(struct $13SYMB_DATATYPE*)SYMB_DTYPETB$ + (TMP$141$4 * 56ll)) + 40ll);
+				TMP$141$4 = *(uint64*)(((int64)(struct $13SYMB_DATATYPE*)SYMB_DTYPETB$ + (TMP$140$4 * 56ll)) + 40ll);
 				goto label$185;
 				label$186:;
 				{
@@ -1846,7 +1846,7 @@ struct $9EMIT_NODE* EMITSTORE( struct $6IRVREG* DVREG$1, struct $6IRVREG* SVREG$
 				}
 				goto label$184;
 				label$185:;
-				static const void* tmp$146[11ll] = {
+				static const void* tmp$145[11ll] = {
 					&&label$188,
 					&&label$189,
 					&&label$189,
@@ -1859,14 +1859,14 @@ struct $9EMIT_NODE* EMITSTORE( struct $6IRVREG* DVREG$1, struct $6IRVREG* SVREG$
 					&&label$187,
 					&&label$187,
 				};
-				if( TMP$142$4 > 10ull ) goto label$189;
-				goto *tmp$146[TMP$142$4 - 0ull];
+				if( TMP$141$4 > 10ull ) goto label$189;
+				goto *tmp$145[TMP$141$4 - 0ull];
 				label$184:;
 			}
 		}
 		goto label$156;
 		label$157:;
-		static const void* tmp$147[11ll] = {
+		static const void* tmp$146[11ll] = {
 			&&label$174,
 			&&label$182,
 			&&label$182,
@@ -1879,8 +1879,8 @@ struct $9EMIT_NODE* EMITSTORE( struct $6IRVREG* DVREG$1, struct $6IRVREG* SVREG$
 			&&label$166,
 			&&label$166,
 		};
-		if( TMP$134$2 > 10ull ) goto label$182;
-		goto *tmp$147[TMP$134$2 - 0ull];
+		if( TMP$133$2 > 10ull ) goto label$182;
+		goto *tmp$146[TMP$133$2 - 0ull];
 		label$156:;
 	}
 	label$154:;
@@ -1893,15 +1893,15 @@ struct $9EMIT_NODE* EMITMOV( struct $6IRVREG* DVREG$1, struct $6IRVREG* SVREG$1 
 	__builtin_memset( &fb$result$1, 0, 8ll );
 	label$195:;
 	{
-		int64 TMP$148$2;
-		uint64 TMP$149$2;
-		if( (*(int64*)((uint8*)DVREG$1 + 8ll) & 480ll) == 0ll ) goto label$197;
-		TMP$148$2 = 24ll;
+		int64 TMP$147$2;
+		uint64 TMP$148$2;
+		if( (*(int64*)((uint8*)DVREG$1 + 8ll) & 480ll) == 0ll) goto label$197;
+		TMP$147$2 = 24ll;
 		goto label$203;
 		label$197:;
-		TMP$148$2 = *(int64*)((uint8*)DVREG$1 + 8ll) & 31ll;
+		TMP$147$2 = *(int64*)((uint8*)DVREG$1 + 8ll) & 31ll;
 		label$203:;
-		TMP$149$2 = *(uint64*)(((int64)(struct $13SYMB_DATATYPE*)SYMB_DTYPETB$ + (TMP$148$2 * 56ll)) + 40ll);
+		TMP$148$2 = *(uint64*)(((int64)(struct $13SYMB_DATATYPE*)SYMB_DTYPETB$ + (TMP$147$2 * 56ll)) + 40ll);
 		goto label$199;
 		label$200:;
 		{
@@ -1922,14 +1922,14 @@ struct $9EMIT_NODE* EMITMOV( struct $6IRVREG* DVREG$1, struct $6IRVREG* SVREG$1 
 		}
 		goto label$198;
 		label$199:;
-		static const void* tmp$150[4ll] = {
+		static const void* tmp$149[4ll] = {
 			&&label$200,
 			&&label$200,
 			&&label$201,
 			&&label$201,
 		};
-		if( (TMP$149$2 - 7ull) > 3ull ) goto label$202;
-		goto *tmp$150[TMP$149$2 - 7ull];
+		if( (TMP$148$2 - 7ull) > 3ull ) goto label$202;
+		goto *tmp$149[TMP$148$2 - 7ull];
 		label$198:;
 	}
 	label$196:;
@@ -1942,15 +1942,15 @@ struct $9EMIT_NODE* EMITADD( struct $6IRVREG* DVREG$1, struct $6IRVREG* SVREG$1 
 	__builtin_memset( &fb$result$1, 0, 8ll );
 	label$204:;
 	{
-		int64 TMP$151$2;
-		uint64 TMP$152$2;
-		if( (*(int64*)((uint8*)DVREG$1 + 8ll) & 480ll) == 0ll ) goto label$206;
-		TMP$151$2 = 24ll;
+		int64 TMP$150$2;
+		uint64 TMP$151$2;
+		if( (*(int64*)((uint8*)DVREG$1 + 8ll) & 480ll) == 0ll) goto label$206;
+		TMP$150$2 = 24ll;
 		goto label$212;
 		label$206:;
-		TMP$151$2 = *(int64*)((uint8*)DVREG$1 + 8ll) & 31ll;
+		TMP$150$2 = *(int64*)((uint8*)DVREG$1 + 8ll) & 31ll;
 		label$212:;
-		TMP$152$2 = *(uint64*)(((int64)(struct $13SYMB_DATATYPE*)SYMB_DTYPETB$ + (TMP$151$2 * 56ll)) + 40ll);
+		TMP$151$2 = *(uint64*)(((int64)(struct $13SYMB_DATATYPE*)SYMB_DTYPETB$ + (TMP$150$2 * 56ll)) + 40ll);
 		goto label$208;
 		label$209:;
 		{
@@ -1971,14 +1971,14 @@ struct $9EMIT_NODE* EMITADD( struct $6IRVREG* DVREG$1, struct $6IRVREG* SVREG$1 
 		}
 		goto label$207;
 		label$208:;
-		static const void* tmp$153[4ll] = {
+		static const void* tmp$152[4ll] = {
 			&&label$209,
 			&&label$209,
 			&&label$210,
 			&&label$210,
 		};
-		if( (TMP$152$2 - 7ull) > 3ull ) goto label$211;
-		goto *tmp$153[TMP$152$2 - 7ull];
+		if( (TMP$151$2 - 7ull) > 3ull ) goto label$211;
+		goto *tmp$152[TMP$151$2 - 7ull];
 		label$207:;
 	}
 	label$205:;
@@ -1991,15 +1991,15 @@ struct $9EMIT_NODE* EMITSUB( struct $6IRVREG* DVREG$1, struct $6IRVREG* SVREG$1 
 	__builtin_memset( &fb$result$1, 0, 8ll );
 	label$213:;
 	{
-		int64 TMP$154$2;
-		uint64 TMP$155$2;
-		if( (*(int64*)((uint8*)DVREG$1 + 8ll) & 480ll) == 0ll ) goto label$215;
-		TMP$154$2 = 24ll;
+		int64 TMP$153$2;
+		uint64 TMP$154$2;
+		if( (*(int64*)((uint8*)DVREG$1 + 8ll) & 480ll) == 0ll) goto label$215;
+		TMP$153$2 = 24ll;
 		goto label$221;
 		label$215:;
-		TMP$154$2 = *(int64*)((uint8*)DVREG$1 + 8ll) & 31ll;
+		TMP$153$2 = *(int64*)((uint8*)DVREG$1 + 8ll) & 31ll;
 		label$221:;
-		TMP$155$2 = *(uint64*)(((int64)(struct $13SYMB_DATATYPE*)SYMB_DTYPETB$ + (TMP$154$2 * 56ll)) + 40ll);
+		TMP$154$2 = *(uint64*)(((int64)(struct $13SYMB_DATATYPE*)SYMB_DTYPETB$ + (TMP$153$2 * 56ll)) + 40ll);
 		goto label$217;
 		label$218:;
 		{
@@ -2020,14 +2020,14 @@ struct $9EMIT_NODE* EMITSUB( struct $6IRVREG* DVREG$1, struct $6IRVREG* SVREG$1 
 		}
 		goto label$216;
 		label$217:;
-		static const void* tmp$156[4ll] = {
+		static const void* tmp$155[4ll] = {
 			&&label$218,
 			&&label$218,
 			&&label$219,
 			&&label$219,
 		};
-		if( (TMP$155$2 - 7ull) > 3ull ) goto label$220;
-		goto *tmp$156[TMP$155$2 - 7ull];
+		if( (TMP$154$2 - 7ull) > 3ull ) goto label$220;
+		goto *tmp$155[TMP$154$2 - 7ull];
 		label$216:;
 	}
 	label$214:;
@@ -2040,15 +2040,15 @@ struct $9EMIT_NODE* EMITMUL( struct $6IRVREG* DVREG$1, struct $6IRVREG* SVREG$1 
 	__builtin_memset( &fb$result$1, 0, 8ll );
 	label$222:;
 	{
-		int64 TMP$157$2;
-		uint64 TMP$158$2;
-		if( (*(int64*)((uint8*)DVREG$1 + 8ll) & 480ll) == 0ll ) goto label$224;
-		TMP$157$2 = 24ll;
+		int64 TMP$156$2;
+		uint64 TMP$157$2;
+		if( (*(int64*)((uint8*)DVREG$1 + 8ll) & 480ll) == 0ll) goto label$224;
+		TMP$156$2 = 24ll;
 		goto label$230;
 		label$224:;
-		TMP$157$2 = *(int64*)((uint8*)DVREG$1 + 8ll) & 31ll;
+		TMP$156$2 = *(int64*)((uint8*)DVREG$1 + 8ll) & 31ll;
 		label$230:;
-		TMP$158$2 = *(uint64*)(((int64)(struct $13SYMB_DATATYPE*)SYMB_DTYPETB$ + (TMP$157$2 * 56ll)) + 40ll);
+		TMP$157$2 = *(uint64*)(((int64)(struct $13SYMB_DATATYPE*)SYMB_DTYPETB$ + (TMP$156$2 * 56ll)) + 40ll);
 		goto label$226;
 		label$227:;
 		{
@@ -2069,14 +2069,14 @@ struct $9EMIT_NODE* EMITMUL( struct $6IRVREG* DVREG$1, struct $6IRVREG* SVREG$1 
 		}
 		goto label$225;
 		label$226:;
-		static const void* tmp$159[4ll] = {
+		static const void* tmp$158[4ll] = {
 			&&label$227,
 			&&label$227,
 			&&label$228,
 			&&label$228,
 		};
-		if( (TMP$158$2 - 7ull) > 3ull ) goto label$229;
-		goto *tmp$159[TMP$158$2 - 7ull];
+		if( (TMP$157$2 - 7ull) > 3ull ) goto label$229;
+		goto *tmp$158[TMP$157$2 - 7ull];
 		label$225:;
 	}
 	label$223:;
@@ -2122,18 +2122,18 @@ struct $9EMIT_NODE* EMITSHL( struct $6IRVREG* DVREG$1, struct $6IRVREG* SVREG$1 
 	__builtin_memset( &fb$result$1, 0, 8ll );
 	label$237:;
 	{
+		int64 TMP$159$2;
 		int64 TMP$160$2;
-		int64 TMP$161$2;
-		if( (*(int64*)((uint8*)DVREG$1 + 8ll) & 480ll) == 0ll ) goto label$239;
-		TMP$160$2 = 24ll;
+		if( (*(int64*)((uint8*)DVREG$1 + 8ll) & 480ll) == 0ll) goto label$239;
+		TMP$159$2 = 24ll;
 		goto label$245;
 		label$239:;
-		TMP$160$2 = *(int64*)((uint8*)DVREG$1 + 8ll) & 31ll;
+		TMP$159$2 = *(int64*)((uint8*)DVREG$1 + 8ll) & 31ll;
 		label$245:;
-		TMP$161$2 = *(int64*)(((int64)(struct $13SYMB_DATATYPE*)SYMB_DTYPETB$ + (TMP$160$2 * 56ll)) + 40ll);
-		if( TMP$161$2 == 7ll ) goto label$242;
+		TMP$160$2 = *(int64*)(((int64)(struct $13SYMB_DATATYPE*)SYMB_DTYPETB$ + (TMP$159$2 * 56ll)) + 40ll);
+		if( TMP$160$2 == 7ll) goto label$242;
 		label$243:;
-		if( TMP$161$2 != 8ll ) goto label$241;
+		if( TMP$160$2 != 8ll) goto label$241;
 		label$242:;
 		{
 			struct $9EMIT_NODE* vr$6 = HNEWBOP( 52ll, DVREG$1, SVREG$1 );
@@ -2158,18 +2158,18 @@ struct $9EMIT_NODE* EMITSHR( struct $6IRVREG* DVREG$1, struct $6IRVREG* SVREG$1 
 	__builtin_memset( &fb$result$1, 0, 8ll );
 	label$246:;
 	{
+		int64 TMP$161$2;
 		int64 TMP$162$2;
-		int64 TMP$163$2;
-		if( (*(int64*)((uint8*)DVREG$1 + 8ll) & 480ll) == 0ll ) goto label$248;
-		TMP$162$2 = 24ll;
+		if( (*(int64*)((uint8*)DVREG$1 + 8ll) & 480ll) == 0ll) goto label$248;
+		TMP$161$2 = 24ll;
 		goto label$254;
 		label$248:;
-		TMP$162$2 = *(int64*)((uint8*)DVREG$1 + 8ll) & 31ll;
+		TMP$161$2 = *(int64*)((uint8*)DVREG$1 + 8ll) & 31ll;
 		label$254:;
-		TMP$163$2 = *(int64*)(((int64)(struct $13SYMB_DATATYPE*)SYMB_DTYPETB$ + (TMP$162$2 * 56ll)) + 40ll);
-		if( TMP$163$2 == 7ll ) goto label$251;
+		TMP$162$2 = *(int64*)(((int64)(struct $13SYMB_DATATYPE*)SYMB_DTYPETB$ + (TMP$161$2 * 56ll)) + 40ll);
+		if( TMP$162$2 == 7ll) goto label$251;
 		label$252:;
-		if( TMP$163$2 != 8ll ) goto label$250;
+		if( TMP$162$2 != 8ll) goto label$250;
 		label$251:;
 		{
 			struct $9EMIT_NODE* vr$6 = HNEWBOP( 54ll, DVREG$1, SVREG$1 );
@@ -2194,18 +2194,18 @@ struct $9EMIT_NODE* EMITAND( struct $6IRVREG* DVREG$1, struct $6IRVREG* SVREG$1 
 	__builtin_memset( &fb$result$1, 0, 8ll );
 	label$255:;
 	{
+		int64 TMP$163$2;
 		int64 TMP$164$2;
-		int64 TMP$165$2;
-		if( (*(int64*)((uint8*)DVREG$1 + 8ll) & 480ll) == 0ll ) goto label$257;
-		TMP$164$2 = 24ll;
+		if( (*(int64*)((uint8*)DVREG$1 + 8ll) & 480ll) == 0ll) goto label$257;
+		TMP$163$2 = 24ll;
 		goto label$263;
 		label$257:;
-		TMP$164$2 = *(int64*)((uint8*)DVREG$1 + 8ll) & 31ll;
+		TMP$163$2 = *(int64*)((uint8*)DVREG$1 + 8ll) & 31ll;
 		label$263:;
-		TMP$165$2 = *(int64*)(((int64)(struct $13SYMB_DATATYPE*)SYMB_DTYPETB$ + (TMP$164$2 * 56ll)) + 40ll);
-		if( TMP$165$2 == 7ll ) goto label$260;
+		TMP$164$2 = *(int64*)(((int64)(struct $13SYMB_DATATYPE*)SYMB_DTYPETB$ + (TMP$163$2 * 56ll)) + 40ll);
+		if( TMP$164$2 == 7ll) goto label$260;
 		label$261:;
-		if( TMP$165$2 != 8ll ) goto label$259;
+		if( TMP$164$2 != 8ll) goto label$259;
 		label$260:;
 		{
 			struct $9EMIT_NODE* vr$6 = HNEWBOP( 56ll, DVREG$1, SVREG$1 );
@@ -2230,18 +2230,18 @@ struct $9EMIT_NODE* EMITOR( struct $6IRVREG* DVREG$1, struct $6IRVREG* SVREG$1 )
 	__builtin_memset( &fb$result$1, 0, 8ll );
 	label$264:;
 	{
+		int64 TMP$165$2;
 		int64 TMP$166$2;
-		int64 TMP$167$2;
-		if( (*(int64*)((uint8*)DVREG$1 + 8ll) & 480ll) == 0ll ) goto label$266;
-		TMP$166$2 = 24ll;
+		if( (*(int64*)((uint8*)DVREG$1 + 8ll) & 480ll) == 0ll) goto label$266;
+		TMP$165$2 = 24ll;
 		goto label$272;
 		label$266:;
-		TMP$166$2 = *(int64*)((uint8*)DVREG$1 + 8ll) & 31ll;
+		TMP$165$2 = *(int64*)((uint8*)DVREG$1 + 8ll) & 31ll;
 		label$272:;
-		TMP$167$2 = *(int64*)(((int64)(struct $13SYMB_DATATYPE*)SYMB_DTYPETB$ + (TMP$166$2 * 56ll)) + 40ll);
-		if( TMP$167$2 == 7ll ) goto label$269;
+		TMP$166$2 = *(int64*)(((int64)(struct $13SYMB_DATATYPE*)SYMB_DTYPETB$ + (TMP$165$2 * 56ll)) + 40ll);
+		if( TMP$166$2 == 7ll) goto label$269;
 		label$270:;
-		if( TMP$167$2 != 8ll ) goto label$268;
+		if( TMP$166$2 != 8ll) goto label$268;
 		label$269:;
 		{
 			struct $9EMIT_NODE* vr$6 = HNEWBOP( 58ll, DVREG$1, SVREG$1 );
@@ -2266,18 +2266,18 @@ struct $9EMIT_NODE* EMITXOR( struct $6IRVREG* DVREG$1, struct $6IRVREG* SVREG$1 
 	__builtin_memset( &fb$result$1, 0, 8ll );
 	label$273:;
 	{
+		int64 TMP$167$2;
 		int64 TMP$168$2;
-		int64 TMP$169$2;
-		if( (*(int64*)((uint8*)DVREG$1 + 8ll) & 480ll) == 0ll ) goto label$275;
-		TMP$168$2 = 24ll;
+		if( (*(int64*)((uint8*)DVREG$1 + 8ll) & 480ll) == 0ll) goto label$275;
+		TMP$167$2 = 24ll;
 		goto label$281;
 		label$275:;
-		TMP$168$2 = *(int64*)((uint8*)DVREG$1 + 8ll) & 31ll;
+		TMP$167$2 = *(int64*)((uint8*)DVREG$1 + 8ll) & 31ll;
 		label$281:;
-		TMP$169$2 = *(int64*)(((int64)(struct $13SYMB_DATATYPE*)SYMB_DTYPETB$ + (TMP$168$2 * 56ll)) + 40ll);
-		if( TMP$169$2 == 7ll ) goto label$278;
+		TMP$168$2 = *(int64*)(((int64)(struct $13SYMB_DATATYPE*)SYMB_DTYPETB$ + (TMP$167$2 * 56ll)) + 40ll);
+		if( TMP$168$2 == 7ll) goto label$278;
 		label$279:;
-		if( TMP$169$2 != 8ll ) goto label$277;
+		if( TMP$168$2 != 8ll) goto label$277;
 		label$278:;
 		{
 			struct $9EMIT_NODE* vr$6 = HNEWBOP( 60ll, DVREG$1, SVREG$1 );
@@ -2302,18 +2302,18 @@ struct $9EMIT_NODE* EMITEQV( struct $6IRVREG* DVREG$1, struct $6IRVREG* SVREG$1 
 	__builtin_memset( &fb$result$1, 0, 8ll );
 	label$282:;
 	{
+		int64 TMP$169$2;
 		int64 TMP$170$2;
-		int64 TMP$171$2;
-		if( (*(int64*)((uint8*)DVREG$1 + 8ll) & 480ll) == 0ll ) goto label$284;
-		TMP$170$2 = 24ll;
+		if( (*(int64*)((uint8*)DVREG$1 + 8ll) & 480ll) == 0ll) goto label$284;
+		TMP$169$2 = 24ll;
 		goto label$290;
 		label$284:;
-		TMP$170$2 = *(int64*)((uint8*)DVREG$1 + 8ll) & 31ll;
+		TMP$169$2 = *(int64*)((uint8*)DVREG$1 + 8ll) & 31ll;
 		label$290:;
-		TMP$171$2 = *(int64*)(((int64)(struct $13SYMB_DATATYPE*)SYMB_DTYPETB$ + (TMP$170$2 * 56ll)) + 40ll);
-		if( TMP$171$2 == 7ll ) goto label$287;
+		TMP$170$2 = *(int64*)(((int64)(struct $13SYMB_DATATYPE*)SYMB_DTYPETB$ + (TMP$169$2 * 56ll)) + 40ll);
+		if( TMP$170$2 == 7ll) goto label$287;
 		label$288:;
-		if( TMP$171$2 != 8ll ) goto label$286;
+		if( TMP$170$2 != 8ll) goto label$286;
 		label$287:;
 		{
 			struct $9EMIT_NODE* vr$6 = HNEWBOP( 62ll, DVREG$1, SVREG$1 );
@@ -2338,18 +2338,18 @@ struct $9EMIT_NODE* EMITIMP( struct $6IRVREG* DVREG$1, struct $6IRVREG* SVREG$1 
 	__builtin_memset( &fb$result$1, 0, 8ll );
 	label$291:;
 	{
+		int64 TMP$171$2;
 		int64 TMP$172$2;
-		int64 TMP$173$2;
-		if( (*(int64*)((uint8*)DVREG$1 + 8ll) & 480ll) == 0ll ) goto label$293;
-		TMP$172$2 = 24ll;
+		if( (*(int64*)((uint8*)DVREG$1 + 8ll) & 480ll) == 0ll) goto label$293;
+		TMP$171$2 = 24ll;
 		goto label$299;
 		label$293:;
-		TMP$172$2 = *(int64*)((uint8*)DVREG$1 + 8ll) & 31ll;
+		TMP$171$2 = *(int64*)((uint8*)DVREG$1 + 8ll) & 31ll;
 		label$299:;
-		TMP$173$2 = *(int64*)(((int64)(struct $13SYMB_DATATYPE*)SYMB_DTYPETB$ + (TMP$172$2 * 56ll)) + 40ll);
-		if( TMP$173$2 == 7ll ) goto label$296;
+		TMP$172$2 = *(int64*)(((int64)(struct $13SYMB_DATATYPE*)SYMB_DTYPETB$ + (TMP$171$2 * 56ll)) + 40ll);
+		if( TMP$172$2 == 7ll) goto label$296;
 		label$297:;
-		if( TMP$173$2 != 8ll ) goto label$295;
+		if( TMP$172$2 != 8ll) goto label$295;
 		label$296:;
 		{
 			struct $9EMIT_NODE* vr$6 = HNEWBOP( 64ll, DVREG$1, SVREG$1 );
@@ -2418,18 +2418,18 @@ struct $9EMIT_NODE* EMITGT( struct $6IRVREG* RVREG$1, struct $8FBSYMBOL* LABEL$1
 	__builtin_memset( &fb$result$1, 0, 8ll );
 	label$308:;
 	{
+		int64 TMP$173$2;
 		int64 TMP$174$2;
-		int64 TMP$175$2;
-		if( (*(int64*)((uint8*)DVREG$1 + 8ll) & 480ll) == 0ll ) goto label$310;
-		TMP$174$2 = 24ll;
+		if( (*(int64*)((uint8*)DVREG$1 + 8ll) & 480ll) == 0ll) goto label$310;
+		TMP$173$2 = 24ll;
 		goto label$319;
 		label$310:;
-		TMP$174$2 = *(int64*)((uint8*)DVREG$1 + 8ll) & 31ll;
+		TMP$173$2 = *(int64*)((uint8*)DVREG$1 + 8ll) & 31ll;
 		label$319:;
-		TMP$175$2 = *(int64*)(((int64)(struct $13SYMB_DATATYPE*)SYMB_DTYPETB$ + (TMP$174$2 * 56ll)) + 40ll);
-		if( TMP$175$2 == 7ll ) goto label$313;
+		TMP$174$2 = *(int64*)(((int64)(struct $13SYMB_DATATYPE*)SYMB_DTYPETB$ + (TMP$173$2 * 56ll)) + 40ll);
+		if( TMP$174$2 == 7ll) goto label$313;
 		label$314:;
-		if( TMP$175$2 != 8ll ) goto label$312;
+		if( TMP$174$2 != 8ll) goto label$312;
 		label$313:;
 		{
 			struct $9EMIT_NODE* vr$6 = HNEWREL( 71ll, RVREG$1, LABEL$1, DVREG$1, SVREG$1, OPTIONS$1 );
@@ -2437,9 +2437,9 @@ struct $9EMIT_NODE* EMITGT( struct $6IRVREG* RVREG$1, struct $8FBSYMBOL* LABEL$1
 		}
 		goto label$311;
 		label$312:;
-		if( TMP$175$2 == 9ll ) goto label$316;
+		if( TMP$174$2 == 9ll) goto label$316;
 		label$317:;
-		if( TMP$175$2 != 10ll ) goto label$315;
+		if( TMP$174$2 != 10ll) goto label$315;
 		label$316:;
 		{
 			struct $9EMIT_NODE* vr$7 = HNEWREL( 70ll, RVREG$1, LABEL$1, DVREG$1, SVREG$1, OPTIONS$1 );
@@ -2464,18 +2464,18 @@ struct $9EMIT_NODE* EMITLT( struct $6IRVREG* RVREG$1, struct $8FBSYMBOL* LABEL$1
 	__builtin_memset( &fb$result$1, 0, 8ll );
 	label$320:;
 	{
+		int64 TMP$175$2;
 		int64 TMP$176$2;
-		int64 TMP$177$2;
-		if( (*(int64*)((uint8*)DVREG$1 + 8ll) & 480ll) == 0ll ) goto label$322;
-		TMP$176$2 = 24ll;
+		if( (*(int64*)((uint8*)DVREG$1 + 8ll) & 480ll) == 0ll) goto label$322;
+		TMP$175$2 = 24ll;
 		goto label$331;
 		label$322:;
-		TMP$176$2 = *(int64*)((uint8*)DVREG$1 + 8ll) & 31ll;
+		TMP$175$2 = *(int64*)((uint8*)DVREG$1 + 8ll) & 31ll;
 		label$331:;
-		TMP$177$2 = *(int64*)(((int64)(struct $13SYMB_DATATYPE*)SYMB_DTYPETB$ + (TMP$176$2 * 56ll)) + 40ll);
-		if( TMP$177$2 == 7ll ) goto label$325;
+		TMP$176$2 = *(int64*)(((int64)(struct $13SYMB_DATATYPE*)SYMB_DTYPETB$ + (TMP$175$2 * 56ll)) + 40ll);
+		if( TMP$176$2 == 7ll) goto label$325;
 		label$326:;
-		if( TMP$177$2 != 8ll ) goto label$324;
+		if( TMP$176$2 != 8ll) goto label$324;
 		label$325:;
 		{
 			struct $9EMIT_NODE* vr$6 = HNEWREL( 74ll, RVREG$1, LABEL$1, DVREG$1, SVREG$1, OPTIONS$1 );
@@ -2483,9 +2483,9 @@ struct $9EMIT_NODE* EMITLT( struct $6IRVREG* RVREG$1, struct $8FBSYMBOL* LABEL$1
 		}
 		goto label$323;
 		label$324:;
-		if( TMP$177$2 == 9ll ) goto label$328;
+		if( TMP$176$2 == 9ll) goto label$328;
 		label$329:;
-		if( TMP$177$2 != 10ll ) goto label$327;
+		if( TMP$176$2 != 10ll) goto label$327;
 		label$328:;
 		{
 			struct $9EMIT_NODE* vr$7 = HNEWREL( 73ll, RVREG$1, LABEL$1, DVREG$1, SVREG$1, OPTIONS$1 );
@@ -2510,18 +2510,18 @@ struct $9EMIT_NODE* EMITEQ( struct $6IRVREG* RVREG$1, struct $8FBSYMBOL* LABEL$1
 	__builtin_memset( &fb$result$1, 0, 8ll );
 	label$332:;
 	{
+		int64 TMP$177$2;
 		int64 TMP$178$2;
-		int64 TMP$179$2;
-		if( (*(int64*)((uint8*)DVREG$1 + 8ll) & 480ll) == 0ll ) goto label$334;
-		TMP$178$2 = 24ll;
+		if( (*(int64*)((uint8*)DVREG$1 + 8ll) & 480ll) == 0ll) goto label$334;
+		TMP$177$2 = 24ll;
 		goto label$343;
 		label$334:;
-		TMP$178$2 = *(int64*)((uint8*)DVREG$1 + 8ll) & 31ll;
+		TMP$177$2 = *(int64*)((uint8*)DVREG$1 + 8ll) & 31ll;
 		label$343:;
-		TMP$179$2 = *(int64*)(((int64)(struct $13SYMB_DATATYPE*)SYMB_DTYPETB$ + (TMP$178$2 * 56ll)) + 40ll);
-		if( TMP$179$2 == 7ll ) goto label$337;
+		TMP$178$2 = *(int64*)(((int64)(struct $13SYMB_DATATYPE*)SYMB_DTYPETB$ + (TMP$177$2 * 56ll)) + 40ll);
+		if( TMP$178$2 == 7ll) goto label$337;
 		label$338:;
-		if( TMP$179$2 != 8ll ) goto label$336;
+		if( TMP$178$2 != 8ll) goto label$336;
 		label$337:;
 		{
 			struct $9EMIT_NODE* vr$6 = HNEWREL( 77ll, RVREG$1, LABEL$1, DVREG$1, SVREG$1, OPTIONS$1 );
@@ -2529,9 +2529,9 @@ struct $9EMIT_NODE* EMITEQ( struct $6IRVREG* RVREG$1, struct $8FBSYMBOL* LABEL$1
 		}
 		goto label$335;
 		label$336:;
-		if( TMP$179$2 == 9ll ) goto label$340;
+		if( TMP$178$2 == 9ll) goto label$340;
 		label$341:;
-		if( TMP$179$2 != 10ll ) goto label$339;
+		if( TMP$178$2 != 10ll) goto label$339;
 		label$340:;
 		{
 			struct $9EMIT_NODE* vr$7 = HNEWREL( 76ll, RVREG$1, LABEL$1, DVREG$1, SVREG$1, OPTIONS$1 );
@@ -2556,18 +2556,18 @@ struct $9EMIT_NODE* EMITNE( struct $6IRVREG* RVREG$1, struct $8FBSYMBOL* LABEL$1
 	__builtin_memset( &fb$result$1, 0, 8ll );
 	label$344:;
 	{
+		int64 TMP$179$2;
 		int64 TMP$180$2;
-		int64 TMP$181$2;
-		if( (*(int64*)((uint8*)DVREG$1 + 8ll) & 480ll) == 0ll ) goto label$346;
-		TMP$180$2 = 24ll;
+		if( (*(int64*)((uint8*)DVREG$1 + 8ll) & 480ll) == 0ll) goto label$346;
+		TMP$179$2 = 24ll;
 		goto label$355;
 		label$346:;
-		TMP$180$2 = *(int64*)((uint8*)DVREG$1 + 8ll) & 31ll;
+		TMP$179$2 = *(int64*)((uint8*)DVREG$1 + 8ll) & 31ll;
 		label$355:;
-		TMP$181$2 = *(int64*)(((int64)(struct $13SYMB_DATATYPE*)SYMB_DTYPETB$ + (TMP$180$2 * 56ll)) + 40ll);
-		if( TMP$181$2 == 7ll ) goto label$349;
+		TMP$180$2 = *(int64*)(((int64)(struct $13SYMB_DATATYPE*)SYMB_DTYPETB$ + (TMP$179$2 * 56ll)) + 40ll);
+		if( TMP$180$2 == 7ll) goto label$349;
 		label$350:;
-		if( TMP$181$2 != 8ll ) goto label$348;
+		if( TMP$180$2 != 8ll) goto label$348;
 		label$349:;
 		{
 			struct $9EMIT_NODE* vr$6 = HNEWREL( 80ll, RVREG$1, LABEL$1, DVREG$1, SVREG$1, OPTIONS$1 );
@@ -2575,9 +2575,9 @@ struct $9EMIT_NODE* EMITNE( struct $6IRVREG* RVREG$1, struct $8FBSYMBOL* LABEL$1
 		}
 		goto label$347;
 		label$348:;
-		if( TMP$181$2 == 9ll ) goto label$352;
+		if( TMP$180$2 == 9ll) goto label$352;
 		label$353:;
-		if( TMP$181$2 != 10ll ) goto label$351;
+		if( TMP$180$2 != 10ll) goto label$351;
 		label$352:;
 		{
 			struct $9EMIT_NODE* vr$7 = HNEWREL( 79ll, RVREG$1, LABEL$1, DVREG$1, SVREG$1, OPTIONS$1 );
@@ -2602,18 +2602,18 @@ struct $9EMIT_NODE* EMITGE( struct $6IRVREG* RVREG$1, struct $8FBSYMBOL* LABEL$1
 	__builtin_memset( &fb$result$1, 0, 8ll );
 	label$356:;
 	{
+		int64 TMP$181$2;
 		int64 TMP$182$2;
-		int64 TMP$183$2;
-		if( (*(int64*)((uint8*)DVREG$1 + 8ll) & 480ll) == 0ll ) goto label$358;
-		TMP$182$2 = 24ll;
+		if( (*(int64*)((uint8*)DVREG$1 + 8ll) & 480ll) == 0ll) goto label$358;
+		TMP$181$2 = 24ll;
 		goto label$367;
 		label$358:;
-		TMP$182$2 = *(int64*)((uint8*)DVREG$1 + 8ll) & 31ll;
+		TMP$181$2 = *(int64*)((uint8*)DVREG$1 + 8ll) & 31ll;
 		label$367:;
-		TMP$183$2 = *(int64*)(((int64)(struct $13SYMB_DATATYPE*)SYMB_DTYPETB$ + (TMP$182$2 * 56ll)) + 40ll);
-		if( TMP$183$2 == 7ll ) goto label$361;
+		TMP$182$2 = *(int64*)(((int64)(struct $13SYMB_DATATYPE*)SYMB_DTYPETB$ + (TMP$181$2 * 56ll)) + 40ll);
+		if( TMP$182$2 == 7ll) goto label$361;
 		label$362:;
-		if( TMP$183$2 != 8ll ) goto label$360;
+		if( TMP$182$2 != 8ll) goto label$360;
 		label$361:;
 		{
 			struct $9EMIT_NODE* vr$6 = HNEWREL( 83ll, RVREG$1, LABEL$1, DVREG$1, SVREG$1, OPTIONS$1 );
@@ -2621,9 +2621,9 @@ struct $9EMIT_NODE* EMITGE( struct $6IRVREG* RVREG$1, struct $8FBSYMBOL* LABEL$1
 		}
 		goto label$359;
 		label$360:;
-		if( TMP$183$2 == 9ll ) goto label$364;
+		if( TMP$182$2 == 9ll) goto label$364;
 		label$365:;
-		if( TMP$183$2 != 10ll ) goto label$363;
+		if( TMP$182$2 != 10ll) goto label$363;
 		label$364:;
 		{
 			struct $9EMIT_NODE* vr$7 = HNEWREL( 82ll, RVREG$1, LABEL$1, DVREG$1, SVREG$1, OPTIONS$1 );
@@ -2648,18 +2648,18 @@ struct $9EMIT_NODE* EMITLE( struct $6IRVREG* RVREG$1, struct $8FBSYMBOL* LABEL$1
 	__builtin_memset( &fb$result$1, 0, 8ll );
 	label$368:;
 	{
+		int64 TMP$183$2;
 		int64 TMP$184$2;
-		int64 TMP$185$2;
-		if( (*(int64*)((uint8*)DVREG$1 + 8ll) & 480ll) == 0ll ) goto label$370;
-		TMP$184$2 = 24ll;
+		if( (*(int64*)((uint8*)DVREG$1 + 8ll) & 480ll) == 0ll) goto label$370;
+		TMP$183$2 = 24ll;
 		goto label$379;
 		label$370:;
-		TMP$184$2 = *(int64*)((uint8*)DVREG$1 + 8ll) & 31ll;
+		TMP$183$2 = *(int64*)((uint8*)DVREG$1 + 8ll) & 31ll;
 		label$379:;
-		TMP$185$2 = *(int64*)(((int64)(struct $13SYMB_DATATYPE*)SYMB_DTYPETB$ + (TMP$184$2 * 56ll)) + 40ll);
-		if( TMP$185$2 == 7ll ) goto label$373;
+		TMP$184$2 = *(int64*)(((int64)(struct $13SYMB_DATATYPE*)SYMB_DTYPETB$ + (TMP$183$2 * 56ll)) + 40ll);
+		if( TMP$184$2 == 7ll) goto label$373;
 		label$374:;
-		if( TMP$185$2 != 8ll ) goto label$372;
+		if( TMP$184$2 != 8ll) goto label$372;
 		label$373:;
 		{
 			struct $9EMIT_NODE* vr$6 = HNEWREL( 86ll, RVREG$1, LABEL$1, DVREG$1, SVREG$1, OPTIONS$1 );
@@ -2667,9 +2667,9 @@ struct $9EMIT_NODE* EMITLE( struct $6IRVREG* RVREG$1, struct $8FBSYMBOL* LABEL$1
 		}
 		goto label$371;
 		label$372:;
-		if( TMP$185$2 == 9ll ) goto label$376;
+		if( TMP$184$2 == 9ll) goto label$376;
 		label$377:;
-		if( TMP$185$2 != 10ll ) goto label$375;
+		if( TMP$184$2 != 10ll) goto label$375;
 		label$376:;
 		{
 			struct $9EMIT_NODE* vr$7 = HNEWREL( 85ll, RVREG$1, LABEL$1, DVREG$1, SVREG$1, OPTIONS$1 );
@@ -2694,18 +2694,18 @@ struct $9EMIT_NODE* EMITNEG( struct $6IRVREG* DVREG$1 )
 	__builtin_memset( &fb$result$1, 0, 8ll );
 	label$380:;
 	{
+		int64 TMP$185$2;
 		int64 TMP$186$2;
-		int64 TMP$187$2;
-		if( (*(int64*)((uint8*)DVREG$1 + 8ll) & 480ll) == 0ll ) goto label$382;
-		TMP$186$2 = 24ll;
+		if( (*(int64*)((uint8*)DVREG$1 + 8ll) & 480ll) == 0ll) goto label$382;
+		TMP$185$2 = 24ll;
 		goto label$391;
 		label$382:;
-		TMP$186$2 = *(int64*)((uint8*)DVREG$1 + 8ll) & 31ll;
+		TMP$185$2 = *(int64*)((uint8*)DVREG$1 + 8ll) & 31ll;
 		label$391:;
-		TMP$187$2 = *(int64*)(((int64)(struct $13SYMB_DATATYPE*)SYMB_DTYPETB$ + (TMP$186$2 * 56ll)) + 40ll);
-		if( TMP$187$2 == 7ll ) goto label$385;
+		TMP$186$2 = *(int64*)(((int64)(struct $13SYMB_DATATYPE*)SYMB_DTYPETB$ + (TMP$185$2 * 56ll)) + 40ll);
+		if( TMP$186$2 == 7ll) goto label$385;
 		label$386:;
-		if( TMP$187$2 != 8ll ) goto label$384;
+		if( TMP$186$2 != 8ll) goto label$384;
 		label$385:;
 		{
 			struct $9EMIT_NODE* vr$6 = HNEWUOP( 89ll, DVREG$1 );
@@ -2713,9 +2713,9 @@ struct $9EMIT_NODE* EMITNEG( struct $6IRVREG* DVREG$1 )
 		}
 		goto label$383;
 		label$384:;
-		if( TMP$187$2 == 9ll ) goto label$388;
+		if( TMP$186$2 == 9ll) goto label$388;
 		label$389:;
-		if( TMP$187$2 != 10ll ) goto label$387;
+		if( TMP$186$2 != 10ll) goto label$387;
 		label$388:;
 		{
 			struct $9EMIT_NODE* vr$7 = HNEWUOP( 88ll, DVREG$1 );
@@ -2740,18 +2740,18 @@ struct $9EMIT_NODE* EMITNOT( struct $6IRVREG* DVREG$1 )
 	__builtin_memset( &fb$result$1, 0, 8ll );
 	label$392:;
 	{
+		int64 TMP$187$2;
 		int64 TMP$188$2;
-		int64 TMP$189$2;
-		if( (*(int64*)((uint8*)DVREG$1 + 8ll) & 480ll) == 0ll ) goto label$394;
-		TMP$188$2 = 24ll;
+		if( (*(int64*)((uint8*)DVREG$1 + 8ll) & 480ll) == 0ll) goto label$394;
+		TMP$187$2 = 24ll;
 		goto label$400;
 		label$394:;
-		TMP$188$2 = *(int64*)((uint8*)DVREG$1 + 8ll) & 31ll;
+		TMP$187$2 = *(int64*)((uint8*)DVREG$1 + 8ll) & 31ll;
 		label$400:;
-		TMP$189$2 = *(int64*)(((int64)(struct $13SYMB_DATATYPE*)SYMB_DTYPETB$ + (TMP$188$2 * 56ll)) + 40ll);
-		if( TMP$189$2 == 7ll ) goto label$397;
+		TMP$188$2 = *(int64*)(((int64)(struct $13SYMB_DATATYPE*)SYMB_DTYPETB$ + (TMP$187$2 * 56ll)) + 40ll);
+		if( TMP$188$2 == 7ll) goto label$397;
 		label$398:;
-		if( TMP$189$2 != 8ll ) goto label$396;
+		if( TMP$188$2 != 8ll) goto label$396;
 		label$397:;
 		{
 			struct $9EMIT_NODE* vr$6 = HNEWUOP( 91ll, DVREG$1 );
@@ -2776,18 +2776,18 @@ struct $9EMIT_NODE* EMITHADD( struct $6IRVREG* DVREG$1 )
 	__builtin_memset( &fb$result$1, 0, 8ll );
 	label$401:;
 	{
+		int64 TMP$189$2;
 		int64 TMP$190$2;
-		int64 TMP$191$2;
-		if( (*(int64*)((uint8*)DVREG$1 + 8ll) & 480ll) == 0ll ) goto label$403;
-		TMP$190$2 = 24ll;
+		if( (*(int64*)((uint8*)DVREG$1 + 8ll) & 480ll) == 0ll) goto label$403;
+		TMP$189$2 = 24ll;
 		goto label$409;
 		label$403:;
-		TMP$190$2 = *(int64*)((uint8*)DVREG$1 + 8ll) & 31ll;
+		TMP$189$2 = *(int64*)((uint8*)DVREG$1 + 8ll) & 31ll;
 		label$409:;
-		TMP$191$2 = *(int64*)(((int64)(struct $13SYMB_DATATYPE*)SYMB_DTYPETB$ + (TMP$190$2 * 56ll)) + 40ll);
-		if( TMP$191$2 == 9ll ) goto label$406;
+		TMP$190$2 = *(int64*)(((int64)(struct $13SYMB_DATATYPE*)SYMB_DTYPETB$ + (TMP$189$2 * 56ll)) + 40ll);
+		if( TMP$190$2 == 9ll) goto label$406;
 		label$407:;
-		if( TMP$191$2 != 10ll ) goto label$405;
+		if( TMP$190$2 != 10ll) goto label$405;
 		label$406:;
 		{
 			struct $9EMIT_NODE* vr$6 = HNEWUOP( 92ll, DVREG$1 );
@@ -2810,18 +2810,18 @@ struct $9EMIT_NODE* EMITABS( struct $6IRVREG* DVREG$1 )
 	__builtin_memset( &fb$result$1, 0, 8ll );
 	label$410:;
 	{
+		int64 TMP$191$2;
 		int64 TMP$192$2;
-		int64 TMP$193$2;
-		if( (*(int64*)((uint8*)DVREG$1 + 8ll) & 480ll) == 0ll ) goto label$412;
-		TMP$192$2 = 24ll;
+		if( (*(int64*)((uint8*)DVREG$1 + 8ll) & 480ll) == 0ll) goto label$412;
+		TMP$191$2 = 24ll;
 		goto label$421;
 		label$412:;
-		TMP$192$2 = *(int64*)((uint8*)DVREG$1 + 8ll) & 31ll;
+		TMP$191$2 = *(int64*)((uint8*)DVREG$1 + 8ll) & 31ll;
 		label$421:;
-		TMP$193$2 = *(int64*)(((int64)(struct $13SYMB_DATATYPE*)SYMB_DTYPETB$ + (TMP$192$2 * 56ll)) + 40ll);
-		if( TMP$193$2 == 7ll ) goto label$415;
+		TMP$192$2 = *(int64*)(((int64)(struct $13SYMB_DATATYPE*)SYMB_DTYPETB$ + (TMP$191$2 * 56ll)) + 40ll);
+		if( TMP$192$2 == 7ll) goto label$415;
 		label$416:;
-		if( TMP$193$2 != 8ll ) goto label$414;
+		if( TMP$192$2 != 8ll) goto label$414;
 		label$415:;
 		{
 			struct $9EMIT_NODE* vr$6 = HNEWUOP( 95ll, DVREG$1 );
@@ -2829,9 +2829,9 @@ struct $9EMIT_NODE* EMITABS( struct $6IRVREG* DVREG$1 )
 		}
 		goto label$413;
 		label$414:;
-		if( TMP$193$2 == 9ll ) goto label$418;
+		if( TMP$192$2 == 9ll) goto label$418;
 		label$419:;
-		if( TMP$193$2 != 10ll ) goto label$417;
+		if( TMP$192$2 != 10ll) goto label$417;
 		label$418:;
 		{
 			struct $9EMIT_NODE* vr$7 = HNEWUOP( 94ll, DVREG$1 );
@@ -2856,18 +2856,18 @@ struct $9EMIT_NODE* EMITSGN( struct $6IRVREG* DVREG$1 )
 	__builtin_memset( &fb$result$1, 0, 8ll );
 	label$422:;
 	{
+		int64 TMP$193$2;
 		int64 TMP$194$2;
-		int64 TMP$195$2;
-		if( (*(int64*)((uint8*)DVREG$1 + 8ll) & 480ll) == 0ll ) goto label$424;
-		TMP$194$2 = 24ll;
+		if( (*(int64*)((uint8*)DVREG$1 + 8ll) & 480ll) == 0ll) goto label$424;
+		TMP$193$2 = 24ll;
 		goto label$433;
 		label$424:;
-		TMP$194$2 = *(int64*)((uint8*)DVREG$1 + 8ll) & 31ll;
+		TMP$193$2 = *(int64*)((uint8*)DVREG$1 + 8ll) & 31ll;
 		label$433:;
-		TMP$195$2 = *(int64*)(((int64)(struct $13SYMB_DATATYPE*)SYMB_DTYPETB$ + (TMP$194$2 * 56ll)) + 40ll);
-		if( TMP$195$2 == 7ll ) goto label$427;
+		TMP$194$2 = *(int64*)(((int64)(struct $13SYMB_DATATYPE*)SYMB_DTYPETB$ + (TMP$193$2 * 56ll)) + 40ll);
+		if( TMP$194$2 == 7ll) goto label$427;
 		label$428:;
-		if( TMP$195$2 != 8ll ) goto label$426;
+		if( TMP$194$2 != 8ll) goto label$426;
 		label$427:;
 		{
 			struct $9EMIT_NODE* vr$6 = HNEWUOP( 98ll, DVREG$1 );
@@ -2875,9 +2875,9 @@ struct $9EMIT_NODE* EMITSGN( struct $6IRVREG* DVREG$1 )
 		}
 		goto label$425;
 		label$426:;
-		if( TMP$195$2 == 9ll ) goto label$430;
+		if( TMP$194$2 == 9ll) goto label$430;
 		label$431:;
-		if( TMP$195$2 != 10ll ) goto label$429;
+		if( TMP$194$2 != 10ll) goto label$429;
 		label$430:;
 		{
 			struct $9EMIT_NODE* vr$7 = HNEWUOP( 97ll, DVREG$1 );
@@ -3104,15 +3104,15 @@ struct $9EMIT_NODE* EMITPUSH( struct $6IRVREG* SVREG$1 )
 	__builtin_memset( &fb$result$1, 0, 8ll );
 	label$470:;
 	{
-		int64 TMP$196$2;
-		uint64 TMP$197$2;
-		if( (*(int64*)((uint8*)SVREG$1 + 8ll) & 480ll) == 0ll ) goto label$472;
-		TMP$196$2 = 24ll;
+		int64 TMP$195$2;
+		uint64 TMP$196$2;
+		if( (*(int64*)((uint8*)SVREG$1 + 8ll) & 480ll) == 0ll) goto label$472;
+		TMP$195$2 = 24ll;
 		goto label$478;
 		label$472:;
-		TMP$196$2 = *(int64*)((uint8*)SVREG$1 + 8ll) & 31ll;
+		TMP$195$2 = *(int64*)((uint8*)SVREG$1 + 8ll) & 31ll;
 		label$478:;
-		TMP$197$2 = *(uint64*)(((int64)(struct $13SYMB_DATATYPE*)SYMB_DTYPETB$ + (TMP$196$2 * 56ll)) + 40ll);
+		TMP$196$2 = *(uint64*)(((int64)(struct $13SYMB_DATATYPE*)SYMB_DTYPETB$ + (TMP$195$2 * 56ll)) + 40ll);
 		goto label$474;
 		label$475:;
 		{
@@ -3133,14 +3133,14 @@ struct $9EMIT_NODE* EMITPUSH( struct $6IRVREG* SVREG$1 )
 		}
 		goto label$473;
 		label$474:;
-		static const void* tmp$198[4ll] = {
+		static const void* tmp$197[4ll] = {
 			&&label$475,
 			&&label$475,
 			&&label$476,
 			&&label$476,
 		};
-		if( (TMP$197$2 - 7ull) > 3ull ) goto label$477;
-		goto *tmp$198[TMP$197$2 - 7ull];
+		if( (TMP$196$2 - 7ull) > 3ull ) goto label$477;
+		goto *tmp$197[TMP$196$2 - 7ull];
 		label$473:;
 	}
 	label$471:;
@@ -3153,15 +3153,15 @@ struct $9EMIT_NODE* EMITPOP( struct $6IRVREG* DVREG$1 )
 	__builtin_memset( &fb$result$1, 0, 8ll );
 	label$479:;
 	{
-		int64 TMP$199$2;
-		uint64 TMP$200$2;
-		if( (*(int64*)((uint8*)DVREG$1 + 8ll) & 480ll) == 0ll ) goto label$481;
-		TMP$199$2 = 24ll;
+		int64 TMP$198$2;
+		uint64 TMP$199$2;
+		if( (*(int64*)((uint8*)DVREG$1 + 8ll) & 480ll) == 0ll) goto label$481;
+		TMP$198$2 = 24ll;
 		goto label$487;
 		label$481:;
-		TMP$199$2 = *(int64*)((uint8*)DVREG$1 + 8ll) & 31ll;
+		TMP$198$2 = *(int64*)((uint8*)DVREG$1 + 8ll) & 31ll;
 		label$487:;
-		TMP$200$2 = *(uint64*)(((int64)(struct $13SYMB_DATATYPE*)SYMB_DTYPETB$ + (TMP$199$2 * 56ll)) + 40ll);
+		TMP$199$2 = *(uint64*)(((int64)(struct $13SYMB_DATATYPE*)SYMB_DTYPETB$ + (TMP$198$2 * 56ll)) + 40ll);
 		goto label$483;
 		label$484:;
 		{
@@ -3182,14 +3182,14 @@ struct $9EMIT_NODE* EMITPOP( struct $6IRVREG* DVREG$1 )
 		}
 		goto label$482;
 		label$483:;
-		static const void* tmp$201[4ll] = {
+		static const void* tmp$200[4ll] = {
 			&&label$484,
 			&&label$484,
 			&&label$485,
 			&&label$485,
 		};
-		if( (TMP$200$2 - 7ull) > 3ull ) goto label$486;
-		goto *tmp$201[TMP$200$2 - 7ull];
+		if( (TMP$199$2 - 7ull) > 3ull ) goto label$486;
+		goto *tmp$200[TMP$199$2 - 7ull];
 		label$482:;
 	}
 	label$480:;
@@ -3220,15 +3220,15 @@ struct $9EMIT_NODE* EMITPOPST0( void )
 
 void EMITCOMMENT( char* TEXT$1 )
 {
+	FBSTRING TMP$202$1;
 	FBSTRING TMP$203$1;
-	FBSTRING TMP$204$1;
 	label$492:;
-	__builtin_memset( &TMP$204$1, 0, 24ll );
 	__builtin_memset( &TMP$203$1, 0, 24ll );
-	FBSTRING* vr$3 = fb_StrConcat( &TMP$203$1, (void*)"##", 3ll, (void*)TEXT$1, 0ll );
-	fb_StrAssign( (void*)&TMP$204$1, -1ll, (void*)vr$3, -1ll, 0 );
-	HNEWLIT( (char*)*(char**)&TMP$204$1, 0ll );
-	fb_StrDelete( (FBSTRING*)&TMP$204$1 );
+	__builtin_memset( &TMP$202$1, 0, 24ll );
+	FBSTRING* vr$3 = fb_StrConcat( &TMP$202$1, (void*)"##", 3ll, (void*)TEXT$1, 0ll );
+	fb_StrAssign( (void*)&TMP$203$1, -1ll, (void*)vr$3, -1ll, 0 );
+	HNEWLIT( (char*)*(char**)&TMP$203$1, 0ll );
+	fb_StrDelete( (FBSTRING*)&TMP$203$1 );
 	label$493:;
 }
 
@@ -3246,7 +3246,7 @@ void EMITASM( char* TEXT$1 )
 		label$497:;
 		C$2 = C$2 + 1ll;
 		label$496:;
-		if( C$2 <= 1ll ) goto label$499;
+		if( C$2 <= 1ll) goto label$499;
 		label$498:;
 	}
 	label$495:;
@@ -3267,8 +3267,8 @@ struct $9EMIT_NODE* EMITJMPTB( struct $8FBSYMBOL* TBSYM$1, uint64* VALUES1$1, st
 	{
 		int64 I$2;
 		I$2 = 0ll;
-		int64 TMP$205$2;
-		TMP$205$2 = LABELCOUNT$1 + -1ll;
+		int64 TMP$204$2;
+		TMP$204$2 = LABELCOUNT$1 + -1ll;
 		goto label$502;
 		label$505:;
 		{
@@ -3278,7 +3278,7 @@ struct $9EMIT_NODE* EMITJMPTB( struct $8FBSYMBOL* TBSYM$1, uint64* VALUES1$1, st
 		label$503:;
 		I$2 = I$2 + 1ll;
 		label$502:;
-		if( I$2 <= TMP$205$2 ) goto label$505;
+		if( I$2 <= TMP$204$2) goto label$505;
 		label$504:;
 	}
 	struct $9EMIT_NODE* vr$15 = HNEWNODE( 7ll, 0ll );
@@ -3496,24 +3496,24 @@ static struct $9EMIT_NODE* HOPTSYMOP( struct $9EMIT_NODE* P$1, struct $9EMIT_NOD
 	__builtin_memset( &fb$result$1, 0, 8ll );
 	label$30:;
 	{
-		int64 TMP$112$2;
-		TMP$112$2 = *(int64*)((uint8*)N$1 + 16ll);
-		if( TMP$112$2 != 131ll ) goto label$33;
+		int64 TMP$111$2;
+		TMP$111$2 = *(int64*)((uint8*)N$1 + 16ll);
+		if( TMP$111$2 != 131ll) goto label$33;
 		label$34:;
 		{
-			if( P$1 == (struct $9EMIT_NODE*)0ull ) goto label$36;
+			if( P$1 == (struct $9EMIT_NODE*)0ull) goto label$36;
 			{
-				if( *(int64*)P$1 != 5ll ) goto label$38;
+				if( *(int64*)P$1 != 5ll) goto label$38;
 				{
 					{
-						int64 TMP$113$6;
-						TMP$113$6 = *(int64*)((uint8*)P$1 + 16ll);
-						if( TMP$113$6 == 127ll ) goto label$41;
+						int64 TMP$112$6;
+						TMP$112$6 = *(int64*)((uint8*)P$1 + 16ll);
+						if( TMP$112$6 == 127ll) goto label$41;
 						label$42:;
-						if( TMP$113$6 != 128ll ) goto label$40;
+						if( TMP$112$6 != 128ll) goto label$40;
 						label$41:;
 						{
-							if( *(struct $8FBSYMBOL**)((uint8*)P$1 + 32ll) != *(struct $8FBSYMBOL**)((uint8*)N$1 + 24ll) ) goto label$44;
+							if( *(struct $8FBSYMBOL**)((uint8*)P$1 + 32ll) != *(struct $8FBSYMBOL**)((uint8*)N$1 + 24ll)) goto label$44;
 							{
 								*($19EMIT_NODECLASS_ENUM*)P$1 = 0ll;
 							}
@@ -3549,11 +3549,11 @@ static void HPEEPHOLEOPT( void )
 	void* vr$1 = FLISTGETHEAD( (struct $6TFLIST*)((uint8*)&EMIT$ + 32ll) );
 	N$1 = (struct $9EMIT_NODE*)vr$1;
 	label$47:;
-	if( N$1 == (struct $9EMIT_NODE*)0ull ) goto label$48;
+	if( N$1 == (struct $9EMIT_NODE*)0ull) goto label$48;
 	{
 		{
-			uint64 TMP$114$3;
-			TMP$114$3 = *(uint64*)N$1;
+			uint64 TMP$113$3;
+			TMP$113$3 = *(uint64*)N$1;
 			goto label$50;
 			label$51:;
 			{
@@ -3567,7 +3567,7 @@ static void HPEEPHOLEOPT( void )
 			goto label$49;
 			label$53:;
 			{
-				if( *(int64*)((uint8*)N$1 + 16ll) == 0ll ) goto label$55;
+				if( *(int64*)((uint8*)N$1 + 16ll) == 0ll) goto label$55;
 				{
 					P$1 = N$1;
 				}
@@ -3581,15 +3581,15 @@ static void HPEEPHOLEOPT( void )
 			}
 			goto label$49;
 			label$50:;
-			static const void* tmp$206[5ll] = {
+			static const void* tmp$205[5ll] = {
 				&&label$53,
 				&&label$56,
 				&&label$51,
 				&&label$56,
 				&&label$52,
 			};
-			if( (TMP$114$3 - 6ull) > 4ull ) goto label$56;
-			goto *tmp$206[TMP$114$3 - 6ull];
+			if( (TMP$113$3 - 6ull) > 4ull ) goto label$56;
+			goto *tmp$205[TMP$113$3 - 6ull];
 			label$49:;
 		}
 		void* vr$5 = FLISTGETNEXT( (void*)N$1 );
@@ -3607,7 +3607,7 @@ static struct $6IRVREG* HNEWVR( struct $6IRVREG* V$1 )
 	label$78:;
 	struct $6IRVREG* N$1;
 	int64 DCLASS$1;
-	if( V$1 != (struct $6IRVREG*)0ull ) goto label$81;
+	if( V$1 != (struct $6IRVREG*)0ull) goto label$81;
 	{
 		fb$result$1 = (struct $6IRVREG*)0ull;
 		goto label$79;
@@ -3624,17 +3624,17 @@ static struct $6IRVREG* HNEWVR( struct $6IRVREG* V$1 )
 	__builtin_memcpy( (union $7FBVALUE*)((uint8*)N$1 + 48ll), (union $7FBVALUE*)((uint8*)V$1 + 48ll), 8 );
 	*($12IR_REGFAMILY*)((uint8*)N$1 + 32ll) = *($12IR_REGFAMILY*)((uint8*)V$1 + 32ll);
 	*(int64*)((uint8*)N$1 + 40ll) = *(int64*)((uint8*)V$1 + 40ll);
-	if( *(int64*)V$1 != 4ll ) goto label$83;
+	if( *(int64*)V$1 != 4ll) goto label$83;
 	{
-		int64 TMP$117$2;
-		if( (*(int64*)((uint8*)V$1 + 8ll) & 480ll) == 0ll ) goto label$84;
-		TMP$117$2 = 24ll;
+		int64 TMP$116$2;
+		if( (*(int64*)((uint8*)V$1 + 8ll) & 480ll) == 0ll) goto label$84;
+		TMP$116$2 = 24ll;
 		goto label$538;
 		label$84:;
-		TMP$117$2 = *(int64*)((uint8*)V$1 + 8ll) & 31ll;
+		TMP$116$2 = *(int64*)((uint8*)V$1 + 8ll) & 31ll;
 		label$538:;
-		DCLASS$1 = *(int64*)((int64)(struct $13SYMB_DATATYPE*)SYMB_DTYPETB$ + (TMP$117$2 * 56ll));
-		int64 vr$30 = (*(tmp$89*)((uint8*)*(struct $8REGCLASS**)((uint8*)((uint8*)&EMIT$ + (DCLASS$1 << (3ll & 63ll))) + 16ll) + 80ll))( *(struct $8REGCLASS**)((uint8*)((uint8*)&EMIT$ + (DCLASS$1 << (3ll & 63ll))) + 16ll), *(int64*)((uint8*)V$1 + 24ll) );
+		DCLASS$1 = *(int64*)((int64)(struct $13SYMB_DATATYPE*)SYMB_DTYPETB$ + (TMP$116$2 * 56ll));
+		int64 vr$30 = (*(tmp$88*)((uint8*)*(struct $8REGCLASS**)((uint8*)((uint8*)&EMIT$ + (DCLASS$1 << (3ll & 63ll))) + 16ll) + 80ll))( *(struct $8REGCLASS**)((uint8*)((uint8*)&EMIT$ + (DCLASS$1 << (3ll & 63ll))) + 16ll), *(int64*)((uint8*)V$1 + 24ll) );
 		*(int64*)((uint8*)N$1 + 24ll) = vr$30;
 		*(int64*)((uint8*)((uint8*)&EMIT$ + (DCLASS$1 << (3ll & 63ll))) + 264ll) = *(int64*)((uint8*)((uint8*)&EMIT$ + (DCLASS$1 << (3ll & 63ll))) + 264ll) | (1ll << (*(int64*)((uint8*)N$1 + 24ll) & 63ll));
 	}
@@ -3668,10 +3668,10 @@ static struct $9EMIT_NODE* HNEWNODE( $19EMIT_NODECLASS_ENUM CLASS_$1, int64 UPDA
 		label$88:;
 		I$1 = I$1 + 1ll;
 		label$87:;
-		if( I$1 <= 1ll ) goto label$90;
+		if( I$1 <= 1ll) goto label$90;
 		label$89:;
 	}
-	if( UPDATEPOS$1 == 0ll ) goto label$92;
+	if( UPDATEPOS$1 == 0ll) goto label$92;
 	{
 		*(int64*)((uint8*)&EMIT$ + 8ll) = *(int64*)((uint8*)&EMIT$ + 8ll) + 1ll;
 	}

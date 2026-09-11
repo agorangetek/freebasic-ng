@@ -24,11 +24,21 @@ if(MSVC)
 endif()
 
 # Options
-option(FB_STANDALONE "Build as self-contained installation" ON)
+option(FB_STANDALONE "Build as self-contained installation" OFF)
 option(FB_BUILD_GFXLIB "Build the graphics library" ON)
 option(FB_BUILD_COMPILER "Build the fbc compiler" ON)
 option(FB_BUILD_TESTS "Build tests" OFF)
 option(FB_USE_SYSTEM_FBC "Use an existing fbc instead of the bundled bootstrap sources" OFF)
+
+# The Developer Preview archives use the ordinary Unix-style layout.  A
+# standalone compiler additionally needs its C toolchain below the prefix, but
+# that toolchain is intentionally not shipped in M1.  Refuse the combination
+# explicitly instead of producing an installation which cannot compile.
+if(FB_STANDALONE)
+    message(FATAL_ERROR
+        "FB_STANDALONE is not available in the Developer Preview. "
+        "Build with -DFB_STANDALONE=OFF; the installed compiler uses the platform C toolchain.")
+endif()
 
 # Platform detection (sets FB_TARGET_OS, FB_TARGET_ARCH, FB_TARGET_ID)
 include(cmake/DetectPlatform.cmake)

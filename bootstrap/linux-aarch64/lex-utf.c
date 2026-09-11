@@ -382,9 +382,9 @@ struct $8FBS_ENUM {
 __FB_STATIC_ASSERT( sizeof( struct $8FBS_ENUM ) == 96 );
 typedef int64 $11FB_FUNCMODE;
 typedef int64 $21FB_PROC_RETURN_METHOD;
-typedef int64 (*tmp$35)( struct $8FBSYMBOL* );
+typedef int64 (*tmp$34)( struct $8FBSYMBOL* );
 struct $10FB_PROCRTL {
-	tmp$35 CALLBACK;
+	tmp$34 CALLBACK;
 };
 __FB_STATIC_ASSERT( sizeof( struct $10FB_PROCRTL ) == 8 );
 struct $10FB_PROCOVL {
@@ -514,7 +514,7 @@ struct $9FB_DEFTOK {
 };
 __FB_STATIC_ASSERT( sizeof( struct $9FB_DEFTOK ) == 32 );
 typedef int64 $15FB_DEFINE_FLAGS;
-typedef FBSTRING* (*tmp$29)( void );
+typedef FBSTRING* (*tmp$28)( void );
 struct $8DZSTRING {
 	char* DATA;
 	int64 LEN;
@@ -539,8 +539,8 @@ struct $11LEXPP_ARGTB {
 	int64 COUNT;
 };
 __FB_STATIC_ASSERT( sizeof( struct $11LEXPP_ARGTB ) == 776 );
-typedef FBSTRING* (*tmp$30)( struct $11LEXPP_ARGTB*, int64* );
-typedef uint32* (*tmp$31)( struct $11LEXPP_ARGTB*, int64* );
+typedef FBSTRING* (*tmp$29)( struct $11LEXPP_ARGTB*, int64* );
+typedef uint32* (*tmp$30)( struct $11LEXPP_ARGTB*, int64* );
 struct $10FBS_DEFINE {
 	int64 PARAMS;
 	struct $11FB_DEFPARAM* PARAMHEAD;
@@ -552,11 +552,11 @@ struct $10FBS_DEFINE {
 	int64 ISARGLESS;
 	$15FB_DEFINE_FLAGS FLAGS;
 	union {
-		tmp$29 DPROCZ;
-		tmp$30 MPROCZ;
+		tmp$28 DPROCZ;
+		tmp$29 MPROCZ;
 	};
 	union {
-		tmp$31 MPROCW;
+		tmp$30 MPROCW;
 	};
 };
 __FB_STATIC_ASSERT( sizeof( struct $10FBS_DEFINE ) == 56 );
@@ -788,7 +788,7 @@ struct $8FBARRAY1I10AST_OPINFOE {
 	struct $16__FB_ARRAYDIMTB$ DIMTB[1];
 };
 __FB_STATIC_ASSERT( sizeof( struct $8FBARRAY1I10AST_OPINFOE ) == 72 );
-static struct $8FBARRAY1I10AST_OPINFOE tmp$83$;
+static struct $8FBARRAY1I10AST_OPINFOE tmp$82$;
 typedef int64 $12FB_DATACLASS;
 struct $13SYMB_DATATYPE {
 	$12FB_DATACLASS CLASS;
@@ -810,7 +810,7 @@ struct $8FBARRAY1I13SYMB_DATATYPEE {
 	struct $16__FB_ARRAYDIMTB$ DIMTB[1];
 };
 __FB_STATIC_ASSERT( sizeof( struct $8FBARRAY1I13SYMB_DATATYPEE ) == 72 );
-static struct $8FBARRAY1I13SYMB_DATATYPEE tmp$84$;
+static struct $8FBARRAY1I13SYMB_DATATYPEE tmp$83$;
 struct $8FBARRAY2IlE {
 	int64* DATA;
 	int64* PTR;
@@ -821,7 +821,7 @@ struct $8FBARRAY2IlE {
 	struct $16__FB_ARRAYDIMTB$ DIMTB[2];
 };
 __FB_STATIC_ASSERT( sizeof( struct $8FBARRAY2IlE ) == 96 );
-static struct $8FBARRAY2IlE tmp$85$;
+static struct $8FBARRAY2IlE tmp$84$;
 typedef int64 $10FB_OUTTYPE;
 typedef int64 $10FB_BACKEND;
 typedef int64 $13FB_COMPTARGET;
@@ -1143,7 +1143,7 @@ static int64 HUTF8TOCHAR( void )
 	__builtin_memset( &fb$result$1, 0, 8ll );
 	label$10:;
 	static uint8 SRC$1[7];
-	static struct $8FBARRAY1IhE tmp$97$1 = { (uint8*)SRC$1, (uint8*)SRC$1, 7ll, 1ll, 1ll, 49ll, { { 7ll, 0ll, 6ll } } };
+	static struct $8FBARRAY1IhE tmp$96$1 = { (uint8*)SRC$1, (uint8*)SRC$1, 7ll, 1ll, 1ll, 49ll, { { 7ll, 0ll, 6ll } } };
 	static uint8* P$1;
 	static uint64 C$1;
 	static uint8* DST$1;
@@ -1153,17 +1153,17 @@ static int64 HUTF8TOCHAR( void )
 	DST$1 = (uint8*)((uint8*)*(struct $9LEX_TKCTX**)((uint8*)&LEX$ + 844696ll) + 16856ll);
 	CHARS$1 = 0ll;
 	label$12:;
-	if( CHARS$1 >= 8192ll ) goto label$13;
+	if( CHARS$1 >= 8192ll) goto label$13;
 	{
 		int32 vr$4 = fb_FileEof( (int32)*(int64*)((uint8*)&ENV$ + 624ll) );
-		if( (int64)vr$4 == 0ll ) goto label$15;
+		if( (int64)vr$4 == 0ll) goto label$15;
 		{
 			goto label$13;
 		}
 		label$15:;
 		label$14:;
 		int32 vr$7 = fb_FileGetLarge( (int32)*(int64*)((uint8*)&ENV$ + 624ll), 0ll, (void*)SRC$1, 1ull );
-		if( (int64)vr$7 == 0ll ) goto label$17;
+		if( (int64)vr$7 == 0ll) goto label$17;
 		{
 			goto label$13;
 		}
@@ -1172,10 +1172,10 @@ static int64 HUTF8TOCHAR( void )
 		EXTBYTES$1 = (int64)*(uint8*)((int64)(uint8*)UTF8_TRAILINGTB$ + (int64)*(uint8*)SRC$1);
 		C$1 = 0ull;
 		P$1 = (uint8*)SRC$1;
-		if( EXTBYTES$1 <= 0ll ) goto label$19;
+		if( EXTBYTES$1 <= 0ll) goto label$19;
 		{
 			int32 vr$12 = fb_FileGetLarge( (int32)*(int64*)((uint8*)&ENV$ + 624ll), 0ll, (void*)((uint8*)SRC$1 + 1ll), (uint64)EXTBYTES$1 );
-			if( (int64)vr$12 == 0ll ) goto label$21;
+			if( (int64)vr$12 == 0ll) goto label$21;
 			{
 				goto label$13;
 			}
@@ -1190,14 +1190,14 @@ static int64 HUTF8TOCHAR( void )
 				I$1 = I$1 + -1ll;
 			}
 			label$24:;
-			if( I$1 > 0ll ) goto label$22;
+			if( I$1 > 0ll) goto label$22;
 			label$23:;
 		}
 		label$19:;
 		label$18:;
 		C$1 = C$1 + (uint64)(int64)*P$1;
 		C$1 = C$1 - *(uint64*)((int64)(uint64*)UTF8_OFFSETSTB$ + (EXTBYTES$1 << (3ll & 63ll)));
-		if( C$1 <= 255ull ) goto label$26;
+		if( C$1 <= 255ull) goto label$26;
 		{
 			C$1 = 63ull;
 		}
@@ -1220,7 +1220,7 @@ static int64 HUTF8TOUTF16LE( void )
 	__builtin_memset( &fb$result$1, 0, 8ll );
 	label$27:;
 	static uint8 SRC$1[7];
-	static struct $8FBARRAY1IhE tmp$99$1 = { (uint8*)SRC$1, (uint8*)SRC$1, 7ll, 1ll, 1ll, 49ll, { { 7ll, 0ll, 6ll } } };
+	static struct $8FBARRAY1IhE tmp$98$1 = { (uint8*)SRC$1, (uint8*)SRC$1, 7ll, 1ll, 1ll, 49ll, { { 7ll, 0ll, 6ll } } };
 	static uint8* P$1;
 	static uint64 C$1;
 	static uint16* DST$1;
@@ -1230,17 +1230,17 @@ static int64 HUTF8TOUTF16LE( void )
 	DST$1 = (uint16*)((uint8*)*(struct $9LEX_TKCTX**)((uint8*)&LEX$ + 844696ll) + 16856ll);
 	CHARS$1 = 0ll;
 	label$29:;
-	if( CHARS$1 >= 8192ll ) goto label$30;
+	if( CHARS$1 >= 8192ll) goto label$30;
 	{
 		int32 vr$4 = fb_FileEof( (int32)*(int64*)((uint8*)&ENV$ + 624ll) );
-		if( (int64)vr$4 == 0ll ) goto label$32;
+		if( (int64)vr$4 == 0ll) goto label$32;
 		{
 			goto label$30;
 		}
 		label$32:;
 		label$31:;
 		int32 vr$7 = fb_FileGetLarge( (int32)*(int64*)((uint8*)&ENV$ + 624ll), 0ll, (void*)SRC$1, 1ull );
-		if( (int64)vr$7 == 0ll ) goto label$34;
+		if( (int64)vr$7 == 0ll) goto label$34;
 		{
 			goto label$30;
 		}
@@ -1249,10 +1249,10 @@ static int64 HUTF8TOUTF16LE( void )
 		EXTBYTES$1 = (int64)*(uint8*)((int64)(uint8*)UTF8_TRAILINGTB$ + (int64)*(uint8*)SRC$1);
 		C$1 = 0ull;
 		P$1 = (uint8*)SRC$1;
-		if( EXTBYTES$1 <= 0ll ) goto label$36;
+		if( EXTBYTES$1 <= 0ll) goto label$36;
 		{
 			int32 vr$12 = fb_FileGetLarge( (int32)*(int64*)((uint8*)&ENV$ + 624ll), 0ll, (void*)((uint8*)SRC$1 + 1ll), (uint64)EXTBYTES$1 );
-			if( (int64)vr$12 == 0ll ) goto label$38;
+			if( (int64)vr$12 == 0ll) goto label$38;
 			{
 				goto label$30;
 			}
@@ -1267,16 +1267,16 @@ static int64 HUTF8TOUTF16LE( void )
 				I$1 = I$1 + -1ll;
 			}
 			label$41:;
-			if( I$1 > 0ll ) goto label$39;
+			if( I$1 > 0ll) goto label$39;
 			label$40:;
 		}
 		label$36:;
 		label$35:;
 		C$1 = C$1 + (uint64)(int64)*P$1;
 		C$1 = C$1 - *(uint64*)((int64)(uint64*)UTF8_OFFSETSTB$ + (EXTBYTES$1 << (3ll & 63ll)));
-		if( C$1 <= 65535ull ) goto label$43;
+		if( C$1 <= 65535ull) goto label$43;
 		{
-			if( CHARS$1 >= 8191ll ) goto label$45;
+			if( CHARS$1 >= 8191ll) goto label$45;
 			{
 				*DST$1 = (uint16)(((C$1 + 18446744073709486080ull) >> (10ll & 63ll)) + 55296ull);
 				DST$1 = (uint16*)((uint8*)DST$1 + 2ll);
@@ -1305,7 +1305,7 @@ static int64 HUTF8TOUTF32LE( void )
 	__builtin_memset( &fb$result$1, 0, 8ll );
 	label$46:;
 	static uint8 SRC$1[7];
-	static struct $8FBARRAY1IhE tmp$100$1 = { (uint8*)SRC$1, (uint8*)SRC$1, 7ll, 1ll, 1ll, 49ll, { { 7ll, 0ll, 6ll } } };
+	static struct $8FBARRAY1IhE tmp$99$1 = { (uint8*)SRC$1, (uint8*)SRC$1, 7ll, 1ll, 1ll, 49ll, { { 7ll, 0ll, 6ll } } };
 	static uint8* P$1;
 	static uint64 C$1;
 	static uint32* DST$1;
@@ -1315,17 +1315,17 @@ static int64 HUTF8TOUTF32LE( void )
 	DST$1 = (uint32*)((uint8*)*(struct $9LEX_TKCTX**)((uint8*)&LEX$ + 844696ll) + 16856ll);
 	CHARS$1 = 0ll;
 	label$48:;
-	if( CHARS$1 >= 8192ll ) goto label$49;
+	if( CHARS$1 >= 8192ll) goto label$49;
 	{
 		int32 vr$4 = fb_FileEof( (int32)*(int64*)((uint8*)&ENV$ + 624ll) );
-		if( (int64)vr$4 == 0ll ) goto label$51;
+		if( (int64)vr$4 == 0ll) goto label$51;
 		{
 			goto label$49;
 		}
 		label$51:;
 		label$50:;
 		int32 vr$7 = fb_FileGetLarge( (int32)*(int64*)((uint8*)&ENV$ + 624ll), 0ll, (void*)SRC$1, 1ull );
-		if( (int64)vr$7 == 0ll ) goto label$53;
+		if( (int64)vr$7 == 0ll) goto label$53;
 		{
 			goto label$49;
 		}
@@ -1334,10 +1334,10 @@ static int64 HUTF8TOUTF32LE( void )
 		EXTBYTES$1 = (int64)*(uint8*)((int64)(uint8*)UTF8_TRAILINGTB$ + (int64)*(uint8*)SRC$1);
 		C$1 = 0ull;
 		P$1 = (uint8*)SRC$1;
-		if( EXTBYTES$1 <= 0ll ) goto label$55;
+		if( EXTBYTES$1 <= 0ll) goto label$55;
 		{
 			int32 vr$12 = fb_FileGetLarge( (int32)*(int64*)((uint8*)&ENV$ + 624ll), 0ll, (void*)((uint8*)SRC$1 + 1ll), (uint64)EXTBYTES$1 );
-			if( (int64)vr$12 == 0ll ) goto label$57;
+			if( (int64)vr$12 == 0ll) goto label$57;
 			{
 				goto label$49;
 			}
@@ -1352,7 +1352,7 @@ static int64 HUTF8TOUTF32LE( void )
 				I$1 = I$1 + -1ll;
 			}
 			label$60:;
-			if( I$1 > 0ll ) goto label$58;
+			if( I$1 > 0ll) goto label$58;
 			label$59:;
 		}
 		label$55:;
@@ -1381,30 +1381,30 @@ static int64 HUTF16LETOCHAR( void )
 	DST$1 = (uint8*)((uint8*)*(struct $9LEX_TKCTX**)((uint8*)&LEX$ + 844696ll) + 16856ll);
 	CHARS$1 = 0ll;
 	label$74:;
-	if( CHARS$1 >= 8192ll ) goto label$75;
+	if( CHARS$1 >= 8192ll) goto label$75;
 	{
 		int32 vr$4 = fb_FileEof( (int32)*(int64*)((uint8*)&ENV$ + 624ll) );
-		if( (int64)vr$4 == 0ll ) goto label$77;
+		if( (int64)vr$4 == 0ll) goto label$77;
 		{
 			goto label$75;
 		}
 		label$77:;
 		label$76:;
 		int32 vr$7 = fb_FileGetLarge( (int32)*(int64*)((uint8*)&ENV$ + 624ll), 0ll, (void*)&C$1, 2ull );
-		if( (int64)vr$7 == 0ll ) goto label$79;
+		if( (int64)vr$7 == 0ll) goto label$79;
 		{
 			goto label$75;
 		}
 		label$79:;
 		label$78:;
-		if( (int64)C$1 <= 255ll ) goto label$81;
+		if( (int64)C$1 <= 255ll) goto label$81;
 		{
-			if( (int64)C$1 < 55296ll ) goto label$83;
+			if( (int64)C$1 < 55296ll) goto label$83;
 			{
-				if( (int64)C$1 > 56319ll ) goto label$85;
+				if( (int64)C$1 > 56319ll) goto label$85;
 				{
 					int32 vr$13 = fb_FileGetLarge( (int32)*(int64*)((uint8*)&ENV$ + 624ll), 0ll, (void*)&C$1, 2ull );
-					if( (int64)vr$13 == 0ll ) goto label$87;
+					if( (int64)vr$13 == 0ll) goto label$87;
 					{
 						goto label$75;
 					}
@@ -1437,7 +1437,7 @@ static int64 HUTF16LETOUTF16LE( void )
 	__builtin_memset( &fb$result$1, 0, 8ll );
 	label$88:;
 	int32 vr$4 = fb_FileGetWstrLarge( (int32)*(int64*)((uint8*)&ENV$ + 624ll), 0ll, (uint32*)((uint8*)*(struct $9LEX_TKCTX**)((uint8*)&LEX$ + 844696ll) + 16856ll), 8193ll );
-	if( (int64)vr$4 != 0ll ) goto label$91;
+	if( (int64)vr$4 != 0ll) goto label$91;
 	{
 		int64 vr$7 = fb_FileTell( (int32)*(int64*)((uint8*)&ENV$ + 624ll) );
 		*(int64*)((uint8*)*(struct $9LEX_TKCTX**)((uint8*)&LEX$ + 844696ll) + 49648ll) = vr$7;
@@ -1465,29 +1465,29 @@ static int64 HUTF16LETOUTF32LE( void )
 	DST$1 = (uint32*)((uint8*)*(struct $9LEX_TKCTX**)((uint8*)&LEX$ + 844696ll) + 16856ll);
 	CHARS$1 = 0ll;
 	label$94:;
-	if( CHARS$1 >= 8192ll ) goto label$95;
+	if( CHARS$1 >= 8192ll) goto label$95;
 	{
 		int32 vr$4 = fb_FileEof( (int32)*(int64*)((uint8*)&ENV$ + 624ll) );
-		if( (int64)vr$4 == 0ll ) goto label$97;
+		if( (int64)vr$4 == 0ll) goto label$97;
 		{
 			goto label$95;
 		}
 		label$97:;
 		label$96:;
 		int32 vr$7 = fb_FileGetLarge( (int32)*(int64*)((uint8*)&ENV$ + 624ll), 0ll, (void*)&C$1, 2ull );
-		if( (int64)vr$7 == 0ll ) goto label$99;
+		if( (int64)vr$7 == 0ll) goto label$99;
 		{
 			goto label$95;
 		}
 		label$99:;
 		label$98:;
 		WC$1 = (uint64)C$1;
-		if( WC$1 < 55296ull ) goto label$101;
+		if( WC$1 < 55296ull) goto label$101;
 		{
-			if( WC$1 > 56319ull ) goto label$103;
+			if( WC$1 > 56319ull) goto label$103;
 			{
 				int32 vr$11 = fb_FileGetLarge( (int32)*(int64*)((uint8*)&ENV$ + 624ll), 0ll, (void*)&C$1, 2ull );
-				if( (int64)vr$11 == 0ll ) goto label$105;
+				if( (int64)vr$11 == 0ll) goto label$105;
 				{
 					goto label$95;
 				}
@@ -1522,31 +1522,31 @@ static int64 HUTF16BETOCHAR( void )
 	DST$1 = (uint8*)((uint8*)*(struct $9LEX_TKCTX**)((uint8*)&LEX$ + 844696ll) + 16856ll);
 	CHARS$1 = 0ll;
 	label$119:;
-	if( CHARS$1 >= 8192ll ) goto label$120;
+	if( CHARS$1 >= 8192ll) goto label$120;
 	{
 		int32 vr$4 = fb_FileEof( (int32)*(int64*)((uint8*)&ENV$ + 624ll) );
-		if( (int64)vr$4 == 0ll ) goto label$122;
+		if( (int64)vr$4 == 0ll) goto label$122;
 		{
 			goto label$120;
 		}
 		label$122:;
 		label$121:;
 		int32 vr$7 = fb_FileGetLarge( (int32)*(int64*)((uint8*)&ENV$ + 624ll), 0ll, (void*)&C$1, 2ull );
-		if( (int64)vr$7 == 0ll ) goto label$124;
+		if( (int64)vr$7 == 0ll) goto label$124;
 		{
 			goto label$120;
 		}
 		label$124:;
 		label$123:;
 		C$1 = (uint16)(((int64)C$1 >> (8ll & 63ll)) | (((int64)C$1 << (8ll & 63ll)) & 65280ll));
-		if( (int64)C$1 <= 255ll ) goto label$126;
+		if( (int64)C$1 <= 255ll) goto label$126;
 		{
-			if( (int64)C$1 < 55296ll ) goto label$128;
+			if( (int64)C$1 < 55296ll) goto label$128;
 			{
-				if( (int64)C$1 > 56319ll ) goto label$130;
+				if( (int64)C$1 > 56319ll) goto label$130;
 				{
 					int32 vr$20 = fb_FileGetLarge( (int32)*(int64*)((uint8*)&ENV$ + 624ll), 0ll, (void*)&C$1, 2ull );
-					if( (int64)vr$20 == 0ll ) goto label$132;
+					if( (int64)vr$20 == 0ll) goto label$132;
 					{
 						goto label$120;
 					}
@@ -1587,8 +1587,8 @@ static int64 HUTF16BETOUTF16LE( void )
 	DST$1 = (uint16*)((uint8*)*(struct $9LEX_TKCTX**)((uint8*)&LEX$ + 844696ll) + 16856ll);
 	{
 		I$1 = 1ll;
-		int64 TMP$103$2;
-		TMP$103$2 = CHARS$1;
+		int64 TMP$102$2;
+		TMP$102$2 = CHARS$1;
 		goto label$135;
 		label$138:;
 		{
@@ -1599,7 +1599,7 @@ static int64 HUTF16BETOUTF16LE( void )
 		label$136:;
 		I$1 = I$1 + 1ll;
 		label$135:;
-		if( I$1 <= TMP$103$2 ) goto label$138;
+		if( I$1 <= TMP$102$2) goto label$138;
 		label$137:;
 	}
 	fb$result$1 = CHARS$1;
@@ -1619,29 +1619,29 @@ static int64 HUTF16BETOUTF32LE( void )
 	DST$1 = (uint32*)((uint8*)*(struct $9LEX_TKCTX**)((uint8*)&LEX$ + 844696ll) + 16856ll);
 	CHARS$1 = 0ll;
 	label$141:;
-	if( CHARS$1 >= 8192ll ) goto label$142;
+	if( CHARS$1 >= 8192ll) goto label$142;
 	{
 		int32 vr$4 = fb_FileEof( (int32)*(int64*)((uint8*)&ENV$ + 624ll) );
-		if( (int64)vr$4 == 0ll ) goto label$144;
+		if( (int64)vr$4 == 0ll) goto label$144;
 		{
 			goto label$142;
 		}
 		label$144:;
 		label$143:;
 		int32 vr$7 = fb_FileGetLarge( (int32)*(int64*)((uint8*)&ENV$ + 624ll), 0ll, (void*)&C$1, 2ull );
-		if( (int64)vr$7 == 0ll ) goto label$146;
+		if( (int64)vr$7 == 0ll) goto label$146;
 		{
 			goto label$142;
 		}
 		label$146:;
 		label$145:;
 		WC$1 = (uint64)(((int64)C$1 >> (8ll & 63ll)) | (((int64)C$1 << (8ll & 63ll)) & 65280ll));
-		if( WC$1 < 55296ull ) goto label$148;
+		if( WC$1 < 55296ull) goto label$148;
 		{
-			if( WC$1 > 56319ull ) goto label$150;
+			if( WC$1 > 56319ull) goto label$150;
 			{
 				int32 vr$16 = fb_FileGetLarge( (int32)*(int64*)((uint8*)&ENV$ + 624ll), 0ll, (void*)&C$1, 2ull );
-				if( (int64)vr$16 == 0ll ) goto label$152;
+				if( (int64)vr$16 == 0ll) goto label$152;
 				{
 					goto label$142;
 				}
@@ -1676,23 +1676,23 @@ static int64 HUTF32LETOCHAR( void )
 	DST$1 = (uint8*)((uint8*)*(struct $9LEX_TKCTX**)((uint8*)&LEX$ + 844696ll) + 16856ll);
 	CHARS$1 = 0ll;
 	label$162:;
-	if( CHARS$1 >= 8192ll ) goto label$163;
+	if( CHARS$1 >= 8192ll) goto label$163;
 	{
 		int32 vr$4 = fb_FileEof( (int32)*(int64*)((uint8*)&ENV$ + 624ll) );
-		if( (int64)vr$4 == 0ll ) goto label$165;
+		if( (int64)vr$4 == 0ll) goto label$165;
 		{
 			goto label$163;
 		}
 		label$165:;
 		label$164:;
 		int32 vr$7 = fb_FileGetLarge( (int32)*(int64*)((uint8*)&ENV$ + 624ll), 0ll, (void*)&C$1, 8ull );
-		if( (int64)vr$7 == 0ll ) goto label$167;
+		if( (int64)vr$7 == 0ll) goto label$167;
 		{
 			goto label$163;
 		}
 		label$167:;
 		label$166:;
-		if( C$1 <= 255ull ) goto label$169;
+		if( C$1 <= 255ull) goto label$169;
 		{
 			C$1 = 63ull;
 		}
@@ -1720,25 +1720,25 @@ static int64 HUTF32LETOUTF16LE( void )
 	DST$1 = (uint16*)((uint8*)*(struct $9LEX_TKCTX**)((uint8*)&LEX$ + 844696ll) + 16856ll);
 	CHARS$1 = 0ll;
 	label$172:;
-	if( CHARS$1 >= 8192ll ) goto label$173;
+	if( CHARS$1 >= 8192ll) goto label$173;
 	{
 		int32 vr$4 = fb_FileEof( (int32)*(int64*)((uint8*)&ENV$ + 624ll) );
-		if( (int64)vr$4 == 0ll ) goto label$175;
+		if( (int64)vr$4 == 0ll) goto label$175;
 		{
 			goto label$173;
 		}
 		label$175:;
 		label$174:;
 		int32 vr$7 = fb_FileGetLarge( (int32)*(int64*)((uint8*)&ENV$ + 624ll), 0ll, (void*)&C$1, 8ull );
-		if( (int64)vr$7 == 0ll ) goto label$177;
+		if( (int64)vr$7 == 0ll) goto label$177;
 		{
 			goto label$173;
 		}
 		label$177:;
 		label$176:;
-		if( C$1 <= 65535ull ) goto label$179;
+		if( C$1 <= 65535ull) goto label$179;
 		{
-			if( CHARS$1 >= 8191ll ) goto label$181;
+			if( CHARS$1 >= 8191ll) goto label$181;
 			{
 				*DST$1 = (uint16)(((C$1 + 18446744073709486080ull) >> (10ll & 63ll)) + 55296ull);
 				DST$1 = (uint16*)((uint8*)DST$1 + 2ll);
@@ -1767,7 +1767,7 @@ static int64 HUTF32LETOUTF32LE( void )
 	__builtin_memset( &fb$result$1, 0, 8ll );
 	label$182:;
 	int32 vr$4 = fb_FileGetWstrLarge( (int32)*(int64*)((uint8*)&ENV$ + 624ll), 0ll, (uint32*)((uint8*)*(struct $9LEX_TKCTX**)((uint8*)&LEX$ + 844696ll) + 16856ll), 8193ll );
-	if( (int64)vr$4 != 0ll ) goto label$185;
+	if( (int64)vr$4 != 0ll) goto label$185;
 	{
 		int64 vr$7 = fb_FileTell( (int32)*(int64*)((uint8*)&ENV$ + 624ll) );
 		*(int64*)((uint8*)*(struct $9LEX_TKCTX**)((uint8*)&LEX$ + 844696ll) + 49648ll) = vr$7;
@@ -1794,24 +1794,24 @@ static int64 HUTF32BETOCHAR( void )
 	DST$1 = (uint8*)((uint8*)*(struct $9LEX_TKCTX**)((uint8*)&LEX$ + 844696ll) + 16856ll);
 	CHARS$1 = 0ll;
 	label$199:;
-	if( CHARS$1 >= 8192ll ) goto label$200;
+	if( CHARS$1 >= 8192ll) goto label$200;
 	{
 		int32 vr$4 = fb_FileEof( (int32)*(int64*)((uint8*)&ENV$ + 624ll) );
-		if( (int64)vr$4 == 0ll ) goto label$202;
+		if( (int64)vr$4 == 0ll) goto label$202;
 		{
 			goto label$200;
 		}
 		label$202:;
 		label$201:;
 		int32 vr$7 = fb_FileGetLarge( (int32)*(int64*)((uint8*)&ENV$ + 624ll), 0ll, (void*)&C$1, 8ull );
-		if( (int64)vr$7 == 0ll ) goto label$204;
+		if( (int64)vr$7 == 0ll) goto label$204;
 		{
 			goto label$200;
 		}
 		label$204:;
 		label$203:;
 		C$1 = (((C$1 >> (24ll & 63ll)) | ((C$1 << (8ll & 63ll)) & 16711680ull)) | ((C$1 >> (8ll & 63ll)) & 65280ull)) | (C$1 << (24ll & 63ll));
-		if( C$1 <= 255ull ) goto label$206;
+		if( C$1 <= 255ull) goto label$206;
 		{
 			C$1 = 63ull;
 		}
@@ -1839,26 +1839,26 @@ static int64 HUTF32BETOUTF16LE( void )
 	DST$1 = (uint16*)((uint8*)*(struct $9LEX_TKCTX**)((uint8*)&LEX$ + 844696ll) + 16856ll);
 	CHARS$1 = 0ll;
 	label$209:;
-	if( CHARS$1 >= 8192ll ) goto label$210;
+	if( CHARS$1 >= 8192ll) goto label$210;
 	{
 		int32 vr$4 = fb_FileEof( (int32)*(int64*)((uint8*)&ENV$ + 624ll) );
-		if( (int64)vr$4 == 0ll ) goto label$212;
+		if( (int64)vr$4 == 0ll) goto label$212;
 		{
 			goto label$210;
 		}
 		label$212:;
 		label$211:;
 		int32 vr$7 = fb_FileGetLarge( (int32)*(int64*)((uint8*)&ENV$ + 624ll), 0ll, (void*)&C$1, 8ull );
-		if( (int64)vr$7 == 0ll ) goto label$214;
+		if( (int64)vr$7 == 0ll) goto label$214;
 		{
 			goto label$210;
 		}
 		label$214:;
 		label$213:;
 		C$1 = (((C$1 >> (24ll & 63ll)) | ((C$1 << (8ll & 63ll)) & 16711680ull)) | ((C$1 >> (8ll & 63ll)) & 65280ull)) | (C$1 << (24ll & 63ll));
-		if( C$1 <= 65535ull ) goto label$216;
+		if( C$1 <= 65535ull) goto label$216;
 		{
-			if( CHARS$1 >= 8191ll ) goto label$218;
+			if( CHARS$1 >= 8191ll) goto label$218;
 			{
 				*DST$1 = (uint16)(((C$1 + 18446744073709486080ull) >> (10ll & 63ll)) + 55296ull);
 				DST$1 = (uint16*)((uint8*)DST$1 + 2ll);
@@ -1895,8 +1895,8 @@ static int64 HUTF32BETOUTF32LE( void )
 	DST$1 = (uint32*)((uint8*)*(struct $9LEX_TKCTX**)((uint8*)&LEX$ + 844696ll) + 16856ll);
 	{
 		I$1 = 1ll;
-		int64 TMP$105$2;
-		TMP$105$2 = CHARS$1;
+		int64 TMP$104$2;
+		TMP$104$2 = CHARS$1;
 		goto label$221;
 		label$224:;
 		{
@@ -1907,7 +1907,7 @@ static int64 HUTF32BETOUTF32LE( void )
 		label$222:;
 		I$1 = I$1 + 1ll;
 		label$221:;
-		if( I$1 <= TMP$105$2 ) goto label$224;
+		if( I$1 <= TMP$104$2) goto label$224;
 		label$223:;
 	}
 	fb$result$1 = CHARS$1;

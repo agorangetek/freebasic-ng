@@ -182,9 +182,9 @@ struct $8FBS_ENUM {
 __FB_STATIC_ASSERT( sizeof( struct $8FBS_ENUM ) == 96 );
 typedef int64 $11FB_FUNCMODE;
 typedef int64 $21FB_PROC_RETURN_METHOD;
-typedef int64 (*tmp$35)( struct $8FBSYMBOL* );
+typedef int64 (*tmp$34)( struct $8FBSYMBOL* );
 struct $10FB_PROCRTL {
-	tmp$35 CALLBACK;
+	tmp$34 CALLBACK;
 };
 __FB_STATIC_ASSERT( sizeof( struct $10FB_PROCRTL ) == 8 );
 struct $10FB_PROCOVL {
@@ -314,7 +314,7 @@ struct $9FB_DEFTOK {
 };
 __FB_STATIC_ASSERT( sizeof( struct $9FB_DEFTOK ) == 32 );
 typedef int64 $15FB_DEFINE_FLAGS;
-typedef FBSTRING* (*tmp$29)( void );
+typedef FBSTRING* (*tmp$28)( void );
 struct $8DZSTRING {
 	char* DATA;
 	int64 LEN;
@@ -339,8 +339,8 @@ struct $11LEXPP_ARGTB {
 	int64 COUNT;
 };
 __FB_STATIC_ASSERT( sizeof( struct $11LEXPP_ARGTB ) == 776 );
-typedef FBSTRING* (*tmp$30)( struct $11LEXPP_ARGTB*, int64* );
-typedef uint32* (*tmp$31)( struct $11LEXPP_ARGTB*, int64* );
+typedef FBSTRING* (*tmp$29)( struct $11LEXPP_ARGTB*, int64* );
+typedef uint32* (*tmp$30)( struct $11LEXPP_ARGTB*, int64* );
 struct $10FBS_DEFINE {
 	int64 PARAMS;
 	struct $11FB_DEFPARAM* PARAMHEAD;
@@ -352,11 +352,11 @@ struct $10FBS_DEFINE {
 	int64 ISARGLESS;
 	$15FB_DEFINE_FLAGS FLAGS;
 	union {
-		tmp$29 DPROCZ;
-		tmp$30 MPROCZ;
+		tmp$28 DPROCZ;
+		tmp$29 MPROCZ;
 	};
 	union {
-		tmp$31 MPROCW;
+		tmp$30 MPROCW;
 	};
 };
 __FB_STATIC_ASSERT( sizeof( struct $10FBS_DEFINE ) == 56 );
@@ -745,7 +745,7 @@ struct $8FBARRAY1I10AST_OPINFOE {
 	struct $16__FB_ARRAYDIMTB$ DIMTB[1];
 };
 __FB_STATIC_ASSERT( sizeof( struct $8FBARRAY1I10AST_OPINFOE ) == 72 );
-static struct $8FBARRAY1I10AST_OPINFOE tmp$83$;
+static struct $8FBARRAY1I10AST_OPINFOE tmp$82$;
 typedef int64 $12FB_DATACLASS;
 struct $13SYMB_DATATYPE {
 	$12FB_DATACLASS CLASS;
@@ -767,7 +767,7 @@ struct $8FBARRAY1I13SYMB_DATATYPEE {
 	struct $16__FB_ARRAYDIMTB$ DIMTB[1];
 };
 __FB_STATIC_ASSERT( sizeof( struct $8FBARRAY1I13SYMB_DATATYPEE ) == 72 );
-static struct $8FBARRAY1I13SYMB_DATATYPEE tmp$84$;
+static struct $8FBARRAY1I13SYMB_DATATYPEE tmp$83$;
 struct $8FBARRAY2IlE {
 	int64* DATA;
 	int64* PTR;
@@ -778,7 +778,7 @@ struct $8FBARRAY2IlE {
 	struct $16__FB_ARRAYDIMTB$ DIMTB[2];
 };
 __FB_STATIC_ASSERT( sizeof( struct $8FBARRAY2IlE ) == 96 );
-static struct $8FBARRAY2IlE tmp$85$;
+static struct $8FBARRAY2IlE tmp$84$;
 typedef int64 $10FB_OUTTYPE;
 typedef int64 $10FB_BACKEND;
 typedef int64 $13FB_COMPTARGET;
@@ -1106,9 +1106,9 @@ int64 CONSTMT( void )
 	fb$result$1 = 0ll;
 	LEXSKIPTOKEN( 2048ll );
 	int64 vr$1 = HMATCH( 500ll, 2048ll );
-	if( vr$1 == 0ll ) goto label$43;
+	if( vr$1 == 0ll) goto label$43;
 	{
-		if( *(struct $8FBSYMBOL**)((uint8*)&PARSER$ + 216ll) != *(struct $8FBSYMBOL**)((uint8*)&ENV$ + 1432ll) ) goto label$45;
+		if( *(struct $8FBSYMBOL**)((uint8*)&PARSER$ + 216ll) != *(struct $8FBSYMBOL**)((uint8*)&ENV$ + 1432ll)) goto label$45;
 		{
 			ERRREPORT( 17ll, -1ll, (char*)0ull );
 			goto label$41;
@@ -1125,7 +1125,7 @@ int64 CONSTMT( void )
 	label$42:;
 	EXPR$1 = (struct $7ASTNODE*)0ull;
 	int64 vr$2 = LEXGETTOKEN( 0ll );
-	if( vr$2 != 499ll ) goto label$47;
+	if( vr$2 != 499ll) goto label$47;
 	{
 		LEXSKIPTOKEN( 2048ll );
 	}
@@ -1134,7 +1134,7 @@ int64 CONSTMT( void )
 	{
 		struct $7ASTNODE* vr$3 = HMATCHEXPR( 8ll );
 		EXPR$1 = vr$3;
-		if( EXPR$1 != (struct $7ASTNODE*)0ull ) goto label$49;
+		if( EXPR$1 != (struct $7ASTNODE*)0ull) goto label$49;
 		{
 			goto label$41;
 		}
@@ -1143,20 +1143,20 @@ int64 CONSTMT( void )
 	}
 	label$46:;
 	{
-		int64 TMP$102$2;
+		int64 TMP$101$2;
 		int64 vr$4 = LEXGETTOKEN( 0ll );
-		TMP$102$2 = vr$4;
-		if( TMP$102$2 != 393ll ) goto label$51;
+		TMP$101$2 = vr$4;
+		if( TMP$101$2 != 393ll) goto label$51;
 		label$52:;
 		{
 			ISGOTO$1 = -1ll;
 		}
 		goto label$50;
 		label$51:;
-		if( TMP$102$2 != 394ll ) goto label$53;
+		if( TMP$101$2 != 394ll) goto label$53;
 		label$54:;
 		{
-			if( EXPR$1 != (struct $7ASTNODE*)0ull ) goto label$56;
+			if( EXPR$1 != (struct $7ASTNODE*)0ull) goto label$56;
 			{
 				ERRREPORT( 17ll, 0ll, (char*)0ull );
 				struct $7ASTNODE* vr$5 = ASTNEWCONSTI( 0ll, 8ll, (struct $8FBSYMBOL*)0ull );
@@ -1164,7 +1164,7 @@ int64 CONSTMT( void )
 			}
 			label$56:;
 			label$55:;
-			if( (*(int64*)((uint8*)&ENV$ + 1448ll) & 65536ll) != 0ll ) goto label$58;
+			if( (*(int64*)((uint8*)&ENV$ + 1448ll) & 65536ll) != 0ll) goto label$58;
 			{
 				ERRREPORTNOTALLOWED( 65536ll, 146ll, (char*)0ull );
 				HSKIPUNTIL( -1ll, 0ll, 0ll, 0ll );
@@ -1173,7 +1173,7 @@ int64 CONSTMT( void )
 			}
 			label$58:;
 			label$57:;
-			if( *(int64*)((uint8*)&ENV$ + 1576ll) != 0ll ) goto label$60;
+			if( *(int64*)((uint8*)&ENV$ + 1576ll) != 0ll) goto label$60;
 			{
 				ERRREPORT( 17ll, 0ll, (char*)0ull );
 				HSKIPUNTIL( -1ll, 0ll, 0ll, 0ll );
@@ -1195,16 +1195,16 @@ int64 CONSTMT( void )
 		label$61:;
 		label$50:;
 	}
-	if( EXPR$1 != (struct $7ASTNODE*)0ull ) goto label$63;
+	if( EXPR$1 != (struct $7ASTNODE*)0ull) goto label$63;
 	{
 		LEXSKIPTOKEN( 2048ll );
 		ISRESTORE$1 = 0ll;
 		int64 vr$7 = LEXGETCLASS( 0ll );
-		if( vr$7 != 3ll ) goto label$65;
+		if( vr$7 != 3ll) goto label$65;
 		{
 			char* vr$8 = LEXGETTEXT(  );
 			int32 vr$9 = fb_StrCompare( (void*)vr$8, 0ll, (void*)"0", 2ll );
-			if( (int64)vr$9 != 0ll ) goto label$67;
+			if( (int64)vr$9 != 0ll) goto label$67;
 			{
 				LEXSKIPTOKEN( 0ll );
 				ISRESTORE$1 = -1ll;
@@ -1214,13 +1214,13 @@ int64 CONSTMT( void )
 		}
 		label$65:;
 		label$64:;
-		if( ISRESTORE$1 != 0ll ) goto label$69;
+		if( ISRESTORE$1 != 0ll) goto label$69;
 		{
 			struct $10FBSYMCHAIN* vr$12 = CIDENTIFIER( &BASE_PARENT$1, 34ll );
 			CHAIN_$1 = vr$12;
 			struct $8FBSYMBOL* vr$13 = SYMBFINDBYCLASS( CHAIN_$1, 7ll );
 			LABEL$1 = vr$13;
-			if( LABEL$1 != (struct $8FBSYMBOL*)0ull ) goto label$71;
+			if( LABEL$1 != (struct $8FBSYMBOL*)0ull) goto label$71;
 			{
 				char* vr$14 = LEXGETTEXT(  );
 				struct $8FBSYMBOL* vr$15 = SYMBADDLABEL( vr$14, 64ll );
@@ -1265,7 +1265,7 @@ static void _ZN11TSTRSETITEMaSERKS_( struct $11TSTRSETITEM* THIS$1, struct $11TS
 
 static int64 CGOTBSTMT( struct $7ASTNODE* EXPR$1, int64 ISGOTO$1 )
 {
-	int64 TMP$101$1;
+	int64 TMP$100$1;
 	int64 fb$result$1;
 	__builtin_memset( &fb$result$1, 0, 8ll );
 	label$10:;
@@ -1273,9 +1273,20 @@ static int64 CGOTBSTMT( struct $7ASTNODE* EXPR$1, int64 ISGOTO$1 )
 	struct $8FBSYMBOL* SYM$1;
 	struct $8FBSYMBOL* EXITLABEL$1;
 	uint64 VALUES$1[64];
-	struct $8FBARRAY1IyE tmp$97$1;
-	*(uint64**)&tmp$97$1 = (uint64*)VALUES$1;
-	*(uint64**)((uint8*)&tmp$97$1 + 8ll) = (uint64*)VALUES$1;
+	struct $8FBARRAY1IyE tmp$96$1;
+	*(uint64**)&tmp$96$1 = (uint64*)VALUES$1;
+	*(uint64**)((uint8*)&tmp$96$1 + 8ll) = (uint64*)VALUES$1;
+	*(int64*)((uint8*)&tmp$96$1 + 16ll) = 512ll;
+	*(int64*)((uint8*)&tmp$96$1 + 24ll) = 8ll;
+	*(int64*)((uint8*)&tmp$96$1 + 32ll) = 1ll;
+	*(int64*)((uint8*)&tmp$96$1 + 40ll) = 49ll;
+	*(int64*)((uint8*)&tmp$96$1 + 48ll) = 64ll;
+	*(int64*)((uint8*)&tmp$96$1 + 56ll) = 0ll;
+	*(int64*)((uint8*)&tmp$96$1 + 64ll) = 63ll;
+	struct $8FBSYMBOL* LABELS$1[64];
+	struct $8FBARRAY1IP8FBSYMBOLE tmp$97$1;
+	*(struct $8FBSYMBOL***)&tmp$97$1 = (struct $8FBSYMBOL**)LABELS$1;
+	*(struct $8FBSYMBOL***)((uint8*)&tmp$97$1 + 8ll) = (struct $8FBSYMBOL**)LABELS$1;
 	*(int64*)((uint8*)&tmp$97$1 + 16ll) = 512ll;
 	*(int64*)((uint8*)&tmp$97$1 + 24ll) = 8ll;
 	*(int64*)((uint8*)&tmp$97$1 + 32ll) = 1ll;
@@ -1283,25 +1294,14 @@ static int64 CGOTBSTMT( struct $7ASTNODE* EXPR$1, int64 ISGOTO$1 )
 	*(int64*)((uint8*)&tmp$97$1 + 48ll) = 64ll;
 	*(int64*)((uint8*)&tmp$97$1 + 56ll) = 0ll;
 	*(int64*)((uint8*)&tmp$97$1 + 64ll) = 63ll;
-	struct $8FBSYMBOL* LABELS$1[64];
-	struct $8FBARRAY1IP8FBSYMBOLE tmp$98$1;
-	*(struct $8FBSYMBOL***)&tmp$98$1 = (struct $8FBSYMBOL**)LABELS$1;
-	*(struct $8FBSYMBOL***)((uint8*)&tmp$98$1 + 8ll) = (struct $8FBSYMBOL**)LABELS$1;
-	*(int64*)((uint8*)&tmp$98$1 + 16ll) = 512ll;
-	*(int64*)((uint8*)&tmp$98$1 + 24ll) = 8ll;
-	*(int64*)((uint8*)&tmp$98$1 + 32ll) = 1ll;
-	*(int64*)((uint8*)&tmp$98$1 + 40ll) = 49ll;
-	*(int64*)((uint8*)&tmp$98$1 + 48ll) = 64ll;
-	*(int64*)((uint8*)&tmp$98$1 + 56ll) = 0ll;
-	*(int64*)((uint8*)&tmp$98$1 + 64ll) = 63ll;
 	struct $10FBSYMCHAIN* CHAIN_$1;
 	struct $8FBSYMBOL* BASE_PARENT$1;
 	fb$result$1 = 0ll;
-	if( (*(int64*)((uint8*)EXPR$1 + 8ll) & 511ll) == 9ll ) goto label$13;
+	if( (*(int64*)((uint8*)EXPR$1 + 8ll) & 511ll) == 9ll) goto label$13;
 	{
 		struct $7ASTNODE* vr$7 = ASTNEWCONV( 9ll, (struct $8FBSYMBOL*)0ull, EXPR$1, 0ll, (int64*)0ull );
 		EXPR$1 = vr$7;
-		if( EXPR$1 != (struct $7ASTNODE*)0ull ) goto label$15;
+		if( EXPR$1 != (struct $7ASTNODE*)0ull) goto label$15;
 		{
 			ERRREPORT( 20ll, -1ll, (char*)0ull );
 			HSKIPUNTIL( -1ll, 0ll, 0ll, 0ll );
@@ -1322,21 +1322,21 @@ static int64 CGOTBSTMT( struct $7ASTNODE* EXPR$1, int64 ISGOTO$1 )
 	label$16:;
 	{
 		{
-			int64 TMP$99$3;
+			int64 TMP$98$3;
 			int64 vr$11 = LEXGETCLASS( 0ll );
-			TMP$99$3 = vr$11;
-			if( TMP$99$3 == 3ll ) goto label$21;
+			TMP$98$3 = vr$11;
+			if( TMP$98$3 == 3ll) goto label$21;
 			label$22:;
-			if( TMP$99$3 != 0ll ) goto label$20;
+			if( TMP$98$3 != 0ll) goto label$20;
 			label$21:;
 			{
 				struct $10FBSYMCHAIN* vr$13 = CIDENTIFIER( &BASE_PARENT$1, 34ll );
 				CHAIN_$1 = vr$13;
-				if( L$1 >= 64ll ) goto label$24;
+				if( L$1 >= 64ll) goto label$24;
 				{
 					struct $8FBSYMBOL* vr$14 = SYMBFINDBYCLASS( CHAIN_$1, 7ll );
 					*(struct $8FBSYMBOL**)((int64)(struct $8FBSYMBOL**)LABELS$1 + (L$1 << (3ll & 63ll))) = vr$14;
-					if( *(struct $8FBSYMBOL**)((int64)(struct $8FBSYMBOL**)LABELS$1 + (L$1 << (3ll & 63ll))) != (struct $8FBSYMBOL*)0ull ) goto label$26;
+					if( *(struct $8FBSYMBOL**)((int64)(struct $8FBSYMBOL**)LABELS$1 + (L$1 << (3ll & 63ll))) != (struct $8FBSYMBOL*)0ull) goto label$26;
 					{
 						char* vr$17 = LEXGETTEXT(  );
 						struct $8FBSYMBOL* vr$18 = SYMBADDLABEL( vr$17, 64ll );
@@ -1347,7 +1347,7 @@ static int64 CGOTBSTMT( struct $7ASTNODE* EXPR$1, int64 ISGOTO$1 )
 				}
 				goto label$23;
 				label$24:;
-				if( L$1 != 64ll ) goto label$27;
+				if( L$1 != 64ll) goto label$27;
 				{
 					ERRREPORT( 287ll, 0ll, (char*)0ull );
 				}
@@ -1359,7 +1359,7 @@ static int64 CGOTBSTMT( struct $7ASTNODE* EXPR$1, int64 ISGOTO$1 )
 			label$20:;
 			{
 				ERRREPORT( 14ll, 0ll, (char*)0ull );
-				if( L$1 >= 64ll ) goto label$30;
+				if( L$1 >= 64ll) goto label$30;
 				{
 					char* vr$20 = SYMBUNIQUELABEL(  );
 					struct $8FBSYMBOL* vr$21 = SYMBADDLABEL( vr$20, 0ll );
@@ -1375,9 +1375,9 @@ static int64 CGOTBSTMT( struct $7ASTNODE* EXPR$1, int64 ISGOTO$1 )
 	}
 	label$18:;
 	int64 vr$24 = HMATCH( 44ll, 0ll );
-	if( vr$24 != 0ll ) goto label$16;
+	if( vr$24 != 0ll) goto label$16;
 	label$17:;
-	if( L$1 < 64ll ) goto label$32;
+	if( L$1 < 64ll) goto label$32;
 	{
 		L$1 = 63ll;
 	}
@@ -1388,8 +1388,8 @@ static int64 CGOTBSTMT( struct $7ASTNODE* EXPR$1, int64 ISGOTO$1 )
 	{
 		int64 I$2;
 		I$2 = 0ll;
-		int64 TMP$100$2;
-		TMP$100$2 = L$1 + -1ll;
+		int64 TMP$99$2;
+		TMP$99$2 = L$1 + -1ll;
 		goto label$33;
 		label$36:;
 		{
@@ -1398,18 +1398,18 @@ static int64 CGOTBSTMT( struct $7ASTNODE* EXPR$1, int64 ISGOTO$1 )
 		label$34:;
 		I$2 = I$2 + 1ll;
 		label$33:;
-		if( I$2 <= TMP$100$2 ) goto label$36;
+		if( I$2 <= TMP$99$2) goto label$36;
 		label$35:;
 	}
-	if( L$1 == 0ll ) goto label$37;
-	TMP$101$1 = L$1 + -1ll;
+	if( L$1 == 0ll) goto label$37;
+	TMP$100$1 = L$1 + -1ll;
 	goto label$72;
 	label$37:;
-	TMP$101$1 = 0ll;
+	TMP$100$1 = 0ll;
 	label$72:;
-	struct $7ASTNODE* vr$32 = ASTBUILDJMPTB( SYM$1, (uint64*)VALUES$1, (struct $8FBSYMBOL**)LABELS$1, L$1, EXITLABEL$1, 1ull, (uint64)TMP$101$1 );
+	struct $7ASTNODE* vr$32 = ASTBUILDJMPTB( SYM$1, (uint64*)VALUES$1, (struct $8FBSYMBOL**)LABELS$1, L$1, EXITLABEL$1, 1ull, (uint64)TMP$100$1 );
 	EXPR$1 = vr$32;
-	if( ISGOTO$1 == 0ll ) goto label$39;
+	if( ISGOTO$1 == 0ll) goto label$39;
 	{
 		ASTADD( EXPR$1 );
 	}

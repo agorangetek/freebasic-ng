@@ -391,9 +391,9 @@ struct $8FBS_ENUM {
 };
 __FB_STATIC_ASSERT( sizeof( struct $8FBS_ENUM ) == 96 );
 typedef int64 $21FB_PROC_RETURN_METHOD;
-typedef int64 (*tmp$35)( struct $8FBSYMBOL* );
+typedef int64 (*tmp$34)( struct $8FBSYMBOL* );
 struct $10FB_PROCRTL {
-	tmp$35 CALLBACK;
+	tmp$34 CALLBACK;
 };
 __FB_STATIC_ASSERT( sizeof( struct $10FB_PROCRTL ) == 8 );
 struct $10FB_PROCOVL {
@@ -523,7 +523,7 @@ struct $9FB_DEFTOK {
 };
 __FB_STATIC_ASSERT( sizeof( struct $9FB_DEFTOK ) == 32 );
 typedef int64 $15FB_DEFINE_FLAGS;
-typedef FBSTRING* (*tmp$29)( void );
+typedef FBSTRING* (*tmp$28)( void );
 struct $8DZSTRING {
 	char* DATA;
 	int64 LEN;
@@ -548,8 +548,8 @@ struct $11LEXPP_ARGTB {
 	int64 COUNT;
 };
 __FB_STATIC_ASSERT( sizeof( struct $11LEXPP_ARGTB ) == 776 );
-typedef FBSTRING* (*tmp$30)( struct $11LEXPP_ARGTB*, int64* );
-typedef uint32* (*tmp$31)( struct $11LEXPP_ARGTB*, int64* );
+typedef FBSTRING* (*tmp$29)( struct $11LEXPP_ARGTB*, int64* );
+typedef uint32* (*tmp$30)( struct $11LEXPP_ARGTB*, int64* );
 struct $10FBS_DEFINE {
 	int64 PARAMS;
 	struct $11FB_DEFPARAM* PARAMHEAD;
@@ -561,11 +561,11 @@ struct $10FBS_DEFINE {
 	int64 ISARGLESS;
 	$15FB_DEFINE_FLAGS FLAGS;
 	union {
-		tmp$29 DPROCZ;
-		tmp$30 MPROCZ;
+		tmp$28 DPROCZ;
+		tmp$29 MPROCZ;
 	};
 	union {
-		tmp$31 MPROCW;
+		tmp$30 MPROCW;
 	};
 };
 __FB_STATIC_ASSERT( sizeof( struct $10FBS_DEFINE ) == 56 );
@@ -673,7 +673,7 @@ struct $14FB_RTL_PROCDEF {
 	char* ALIAS;
 	$11FB_DATATYPE DTYPE;
 	$11FB_FUNCMODE CALLCONV;
-	tmp$35 CALLBACK;
+	tmp$34 CALLBACK;
 	$10FB_RTL_OPT OPTIONS;
 	int64 PARAMS;
 	struct $15FB_RTL_PARAMDEF PARAMTB[16];
@@ -742,7 +742,7 @@ struct $8FBARRAY1I10AST_OPINFOE {
 	struct $16__FB_ARRAYDIMTB$ DIMTB[1];
 };
 __FB_STATIC_ASSERT( sizeof( struct $8FBARRAY1I10AST_OPINFOE ) == 72 );
-static struct $8FBARRAY1I10AST_OPINFOE tmp$83$;
+static struct $8FBARRAY1I10AST_OPINFOE tmp$82$;
 extern struct $13SYMB_DATATYPE SYMB_DTYPETB$[26];
 struct $8FBARRAY1I13SYMB_DATATYPEE {
 	struct $13SYMB_DATATYPE* DATA;
@@ -754,7 +754,7 @@ struct $8FBARRAY1I13SYMB_DATATYPEE {
 	struct $16__FB_ARRAYDIMTB$ DIMTB[1];
 };
 __FB_STATIC_ASSERT( sizeof( struct $8FBARRAY1I13SYMB_DATATYPEE ) == 72 );
-static struct $8FBARRAY1I13SYMB_DATATYPEE tmp$84$;
+static struct $8FBARRAY1I13SYMB_DATATYPEE tmp$83$;
 struct $8FBARRAY2IlE {
 	int64* DATA;
 	int64* PTR;
@@ -765,7 +765,7 @@ struct $8FBARRAY2IlE {
 	struct $16__FB_ARRAYDIMTB$ DIMTB[2];
 };
 __FB_STATIC_ASSERT( sizeof( struct $8FBARRAY2IlE ) == 96 );
-static struct $8FBARRAY2IlE tmp$85$;
+static struct $8FBARRAY2IlE tmp$84$;
 typedef int64 $10FB_OUTTYPE;
 typedef int64 $10FB_BACKEND;
 typedef int64 $10FB_CPUTYPE;
@@ -912,7 +912,7 @@ struct $5FBENV {
 };
 __FB_STATIC_ASSERT( sizeof( struct $5FBENV ) == 1824 );
 extern struct $5FBENV ENV$;
-static struct $14FB_RTL_PROCDEF FUNCDATA$[71] = { { (char*)"fb_GfxPset", (char*)0ull, 0ll, -1ll, (tmp$35)&HGFXLIB_CB, 0ll, 6ll, { { 32ll, 1ll, -1ll, 0ll }, { 527ll, 1ll, 0ll }, { 527ll, 1ll, 0ll }, { 524ll, 1ll, 0ll }, { 523ll, 1ll, 0ll }, { 523ll, 1ll, 0ll } } }, { (char*)"fb_GfxPoint", (char*)0ull, 12ll, -1ll, (tmp$35)&HGFXLIB_CB, 0ll, 3ll, { { 32ll, 1ll, -1ll, 0ll }, { 527ll, 1ll, 0ll }, { 527ll, 1ll, 0ll } } }, { (char*)"fb_GfxLine", (char*)0ull, 0ll, -1ll, (tmp$35)&HGFXLIB_CB, 0ll, 9ll, { { 32ll, 1ll, -1ll, 0ll }, { 527ll, 1ll, 0ll }, { 527ll, 1ll, 0ll }, { 527ll, 1ll, 0ll }, { 527ll, 1ll, 0ll }, { 524ll, 1ll, 0ll }, { 523ll, 1ll, 0ll }, { 524ll, 1ll, -1ll, 65535ll }, { 523ll, 1ll, 0ll } } }, { (char*)"fb_GfxEllipse", (char*)0ull, 0ll, -1ll, (tmp$35)&HGFXLIB_CB, 0ll, 10ll, { { 32ll, 1ll, -1ll, 0ll }, { 527ll, 1ll, 0ll }, { 527ll, 1ll, 0ll }, { 527ll, 1ll, 0ll }, { 524ll, 1ll, 0ll }, { 527ll, 1ll, 0ll }, { 527ll, 1ll, 0ll }, { 527ll, 1ll, 0ll }, { 523ll, 1ll, 0ll }, { 523ll, 1ll, 0ll } } }, { (char*)"fb_GfxPaint", (char*)0ull, 0ll, -1ll, (tmp$35)&HGFXLIB_CB, 0ll, 8ll, { { 32ll, 1ll, -1ll, 0ll }, { 527ll, 1ll, 0ll }, { 527ll, 1ll, 0ll }, { 524ll, 1ll, 0ll }, { 524ll, 1ll, 0ll }, { 529ll, 2ll, 0ll }, { 523ll, 1ll, 0ll }, { 523ll, 1ll, 0ll } } }, { (char*)"fb_GfxDraw", (char*)0ull, 0ll, -1ll, (tmp$35)&HGFXLIB_CB, 0ll, 2ll, { { 32ll, 1ll, -1ll, 0ll }, { 529ll, 2ll, 0ll } } }, { (char*)"fb_GfxDrawString", (char*)0ull, 8ll, -1ll, (tmp$35)&HGFXLIB_CB, 2ll, 11ll, { { 32ll, 1ll, -1ll, 0ll }, { 527ll, 1ll, 0ll }, { 527ll, 1ll, 0ll }, { 523ll, 1ll, 0ll }, { 529ll, 2ll, 0ll }, { 524ll, 1ll, 0ll }, { 1056ll, 1ll, -1ll, 0ll }, { 523ll, 1ll, 0ll }, { 32ll, 1ll, 0ll }, { 32ll, 1ll, -1ll, 0ll }, { 32ll, 1ll, 0ll } } }, { (char*)"fb_GfxView", (char*)0ull, 0ll, -1ll, (tmp$35)&HGFXLIB_CB, 0ll, 7ll, { { 523ll, 1ll, -1ll, -32768ll }, { 523ll, 1ll, -1ll, -32768ll }, { 523ll, 1ll, -1ll, -32768ll }, { 523ll, 1ll, -1ll, -32768ll }, { 524ll, 1ll, -1ll, 0ll }, { 524ll, 1ll, -1ll, 0ll }, { 523ll, 1ll, 0ll } } }, { (char*)"fb_GfxWindow", (char*)0ull, 0ll, -1ll, (tmp$35)&HGFXLIB_CB, 0ll, 5ll, { { 527ll, 1ll, -1ll, 0ll }, { 527ll, 1ll, -1ll, 0ll }, { 527ll, 1ll, -1ll, 0ll }, { 527ll, 1ll, -1ll, 0ll }, { 523ll, 1ll, -1ll, 0ll } } }, { (char*)"fb_GfxPalette", (char*)0ull, 0ll, -1ll, (tmp$35)&HGFXLIB_CB, 0ll, 4ll, { { 523ll, 1ll, -1ll, -1ll }, { 523ll, 1ll, -1ll, -1ll }, { 523ll, 1ll, -1ll, -1ll }, { 523ll, 1ll, -1ll, -1ll } } }, { (char*)"fb_GfxPaletteUsing", (char*)0ull, 0ll, -1ll, (tmp$35)&HGFXLIB_CB, 0ll, 1ll, { { 1067ll, 1ll, 0ll } } }, { (char*)"fb_GfxPaletteUsing64", (char*)0ull, 0ll, -1ll, (tmp$35)&HGFXLIB_CB, 0ll, 1ll, { { 1069ll, 1ll, 0ll } } }, { (char*)"fb_GfxPaletteGet", (char*)0ull, 0ll, -1ll, (tmp$35)&HGFXLIB_CB, 0ll, 4ll, { { 523ll, 1ll, -1ll, -1ll }, { 11ll, 2ll, 0ll }, { 11ll, 2ll, 0ll }, { 11ll, 2ll, 0ll } } }, { (char*)"fb_GfxPaletteGet64", (char*)0ull, 0ll, -1ll, (tmp$35)&HGFXLIB_CB, 0ll, 4ll, { { 523ll, 1ll, -1ll, -1ll }, { 13ll, 2ll, 0ll }, { 13ll, 2ll, 0ll }, { 13ll, 2ll, 0ll } } }, { (char*)"fb_GfxPaletteGetUsing", (char*)0ull, 0ll, -1ll, (tmp$35)&HGFXLIB_CB, 0ll, 1ll, { { 43ll, 1ll, 0ll } } }, { (char*)"fb_GfxPaletteGetUsing64", (char*)0ull, 0ll, -1ll, (tmp$35)&HGFXLIB_CB, 0ll, 1ll, { { 45ll, 1ll, 0ll } } }, { (char*)"fb_GfxPut", (char*)0ull, 11ll, -1ll, (tmp$35)&HGFXLIB_CB, 2ll, 14ll, { { 32ll, 1ll, -1ll, 0ll }, { 527ll, 1ll, 0ll }, { 527ll, 1ll, 0ll }, { 1056ll, 1ll, 0ll }, { 523ll, 1ll, -1ll, 4294901760ll }, { 523ll, 1ll, -1ll, 4294901760ll }, { 523ll, 1ll, -1ll, 4294901760ll }, { 523ll, 1ll, -1ll, 4294901760ll }, { 523ll, 1ll, 0ll }, { 523ll, 1ll, 0ll }, { 32ll, 1ll, 0ll }, { 523ll, 1ll, -1ll, -1ll }, { 32ll, 1ll, -1ll, 0ll }, { 32ll, 1ll, -1ll, 0ll } } }, { (char*)"fb_GfxGet", (char*)0ull, 11ll, -1ll, (tmp$35)&HGFXLIB_CB, 1026ll, 8ll, { { 1056ll, 1ll, -1ll, 0ll }, { 527ll, 1ll, 0ll }, { 527ll, 1ll, 0ll }, { 527ll, 1ll, 0ll }, { 527ll, 1ll, 0ll }, { 32ll, 1ll, 0ll }, { 523ll, 1ll, 0ll }, { 512ll, 3ll, 0ll } } }, { (char*)"fb_GfxGetQB", (char*)0ull, 11ll, -1ll, (tmp$35)&HGFXLIB_CB, 514ll, 8ll, { { 1056ll, 1ll, -1ll, 0ll }, { 527ll, 1ll, 0ll }, { 527ll, 1ll, 0ll }, { 527ll, 1ll, 0ll }, { 527ll, 1ll, 0ll }, { 32ll, 1ll, 0ll }, { 523ll, 1ll, 0ll }, { 0ll, 3ll, 0ll } } }, { (char*)"fb_GfxScreen", (char*)0ull, 11ll, -1ll, (tmp$35)&HGFXLIB_CB, 0ll, 5ll, { { 523ll, 1ll, 0ll }, { 523ll, 1ll, -1ll, 8ll }, { 523ll, 1ll, -1ll, 0ll }, { 523ll, 1ll, -1ll, 0ll }, { 523ll, 1ll, -1ll, 0ll } } }, { (char*)"fb_GfxScreenQB", (char*)0ull, 11ll, -1ll, (tmp$35)&HGFXLIB_CB, 0ll, 3ll, { { 523ll, 1ll, 0ll }, { 523ll, 1ll, -1ll, -1ll }, { 523ll, 1ll, -1ll, -1ll } } }, { (char*)"screenres", (char*)"fb_GfxScreenRes", 11ll, -1ll, (tmp$35)&HGFXLIB_CB, 130ll, 6ll, { { 523ll, 1ll, 0ll }, { 523ll, 1ll, 0ll }, { 523ll, 1ll, -1ll, 8ll }, { 523ll, 1ll, -1ll, 1ll }, { 523ll, 1ll, -1ll, 0ll }, { 523ll, 1ll, -1ll, 0ll } } }, { (char*)"bload", (char*)"fb_GfxBload", 11ll, -1ll, (tmp$35)&HGFXLIB_CB, 1026ll, 3ll, { { 529ll, 2ll, 0ll }, { 32ll, 1ll, -1ll, 0ll }, { 32ll, 1ll, -1ll, 0ll } } }, { (char*)"bload", (char*)"fb_GfxBloadQB", 11ll, -1ll, (tmp$35)&HGFXLIB_CB, 514ll, 3ll, { { 529ll, 2ll, 0ll }, { 32ll, 1ll, -1ll, 0ll }, { 32ll, 1ll, -1ll, 0ll } } }, { (char*)"bsave", (char*)"fb_GfxBsave", 11ll, -1ll, (tmp$35)&HGFXLIB_CB, 3ll, 4ll, { { 529ll, 2ll, 0ll }, { 1056ll, 1ll, 0ll }, { 524ll, 1ll, -1ll, 0ll }, { 1056ll, 1ll, -1ll, 0ll } } }, { (char*)"bsave", (char*)"fb_GfxBsaveEx", 11ll, -1ll, (tmp$35)&HGFXLIB_CB, 3ll, 5ll, { { 529ll, 2ll, 0ll }, { 1056ll, 1ll, 0ll }, { 524ll, 1ll, -1ll, 0ll }, { 1056ll, 1ll, 0ll }, { 523ll, 1ll, 0ll } } }, { (char*)"flip", (char*)"fb_GfxFlip", 11ll, -1ll, (tmp$35)&HGFXLIB_CB, 128ll, 2ll, { { 523ll, 1ll, -1ll, -1ll }, { 523ll, 1ll, -1ll, -1ll } } }, { (char*)"screencopy", (char*)"fb_GfxFlip", 11ll, -1ll, (tmp$35)&HGFXLIB_CB, 128ll, 2ll, { { 523ll, 1ll, -1ll, -1ll }, { 523ll, 1ll, -1ll, -1ll } } }, { (char*)"pointcoord", (char*)"fb_GfxCursor", 15ll, -1ll, (tmp$35)&HGFXLIB_CB, 128ll, 1ll, { { 523ll, 1ll, 0ll } } }, { (char*)"pmap", (char*)"fb_GfxPMap", 15ll, -1ll, (tmp$35)&HGFXLIB_CB, 0ll, 2ll, { { 527ll, 1ll, 0ll }, { 523ll, 1ll, 0ll } } }, { (char*)"out", (char*)"fb_Out", 11ll, -1ll, (tmp$35)&HPORTS_CB, 2ll, 2ll, { { 518ll, 1ll, 0ll }, { 515ll, 1ll, 0ll } } }, { (char*)"inp", (char*)"fb_In", 11ll, -1ll, (tmp$35)&HPORTS_CB, 0ll, 1ll, { { 518ll, 1ll, 0ll } } }, { (char*)"wait", (char*)"fb_Wait", 11ll, -1ll, (tmp$35)&HPORTS_CB, 2ll, 3ll, { { 518ll, 1ll, 0ll }, { 523ll, 1ll, 0ll }, { 523ll, 1ll, -1ll, 0ll } } }, { (char*)"screensync", (char*)"fb_GfxWaitVSync", 11ll, -1ll, (tmp$35)&HGFXLIB_CB, 128ll, 0ll }, { (char*)"screenset", (char*)"fb_GfxPageSet", 11ll, 3ll, (tmp$35)&HGFXLIB_CB, 128ll, 2ll, { { 523ll, 1ll, -1ll, -1ll }, { 523ll, 1ll, -1ll, -1ll } } }, { (char*)"screenlock", (char*)"fb_GfxLock", 0ll, -1ll, (tmp$35)&HGFXLIB_CB, 128ll, 0ll }, { (char*)"screenunlock", (char*)"fb_GfxUnlock", 0ll, -1ll, (tmp$35)&HGFXLIB_CB, 128ll, 2ll, { { 523ll, 1ll, -1ll, -1ll }, { 523ll, 1ll, -1ll, -1ll } } }, { (char*)"screenptr", (char*)"fb_GfxScreenPtr", 32ll, -1ll, (tmp$35)&HGFXLIB_CB, 128ll, 0ll }, { (char*)"windowtitle", (char*)"fb_GfxSetWindowTitle", 0ll, -1ll, (tmp$35)&HGFXLIB_CB, 128ll, 1ll, { { 529ll, 2ll, 0ll } } }, { (char*)"multikey", (char*)"fb_Multikey", 11ll, -1ll, (tmp$35)0ull, 128ll, 1ll, { { 523ll, 1ll, 0ll } } }, { (char*)"getmouse", (char*)"fb_GetMouse", 11ll, -1ll, (tmp$35)0ull, 129ll, 5ll, { { 11ll, 2ll, 0ll, 0ll }, { 11ll, 2ll, 0ll, 0ll }, { 11ll, 2ll, -1ll, 0ll }, { 11ll, 2ll, -1ll, 0ll }, { 11ll, 2ll, -1ll, 0ll } } }, { (char*)"getmouse", (char*)"fb_GetMouse64", 11ll, -1ll, (tmp$35)0ull, 129ll, 5ll, { { 13ll, 2ll, 0ll, 0ll }, { 13ll, 2ll, 0ll, 0ll }, { 13ll, 2ll, -1ll, 0ll }, { 13ll, 2ll, -1ll, 0ll }, { 13ll, 2ll, -1ll, 0ll } } }, { (char*)"setmouse", (char*)"fb_SetMouse", 11ll, -1ll, (tmp$35)0ull, 128ll, 4ll, { { 523ll, 1ll, -1ll, 2147483648ll }, { 523ll, 1ll, -1ll, 2147483648ll }, { 523ll, 1ll, -1ll, -1ll }, { 523ll, 1ll, -1ll, -1ll } } }, { (char*)"getjoystick", (char*)"fb_GfxGetJoystick", 11ll, -1ll, (tmp$35)&HGFXLIB_CB, 128ll, 10ll, { { 523ll, 1ll, 0ll, 0ll }, { 8ll, 2ll, -1ll, 0ll }, { 15ll, 2ll, -1ll, 0ll }, { 15ll, 2ll, -1ll, 0ll }, { 15ll, 2ll, -1ll, 0ll }, { 15ll, 2ll, -1ll, 0ll }, { 15ll, 2ll, -1ll, 0ll }, { 15ll, 2ll, -1ll, 0ll }, { 15ll, 2ll, -1ll, 0ll }, { 15ll, 2ll, -1ll, 0ll } } }, { (char*)"stick", (char*)"fb_GfxStickQB", 11ll, -1ll, (tmp$35)&HGFXLIB_CB, 256ll, 1ll, { { 523ll, 1ll, 0ll } } }, { (char*)"strig", (char*)"fb_GfxStrigQB", 11ll, -1ll, (tmp$35)&HGFXLIB_CB, 256ll, 1ll, { { 523ll, 1ll, 0ll } } }, { (char*)"screeninfo", (char*)"fb_GfxScreenInfo32", 0ll, -1ll, (tmp$35)&HGFXLIB_CB, 129ll, 7ll, { { 11ll, 2ll, -1ll, 0ll }, { 11ll, 2ll, -1ll, 0ll }, { 11ll, 2ll, -1ll, 0ll }, { 11ll, 2ll, -1ll, 0ll }, { 11ll, 2ll, -1ll, 0ll }, { 11ll, 2ll, -1ll, 0ll }, { 17ll, 2ll, -1ll, 0ll } } }, { (char*)"screeninfo", (char*)"fb_GfxScreenInfo64", 0ll, -1ll, (tmp$35)&HGFXLIB_CB, 129ll, 7ll, { { 13ll, 2ll, 0ll }, { 13ll, 2ll, 0ll }, { 13ll, 2ll, -1ll, 0ll }, { 13ll, 2ll, -1ll, 0ll }, { 13ll, 2ll, -1ll, 0ll }, { 13ll, 2ll, -1ll, 0ll }, { 17ll, 2ll, -1ll, 0ll } } }, { (char*)"screenlist", (char*)"fb_GfxScreenList", 11ll, -1ll, (tmp$35)&HGFXLIB_CB, 128ll, 1ll, { { 523ll, 1ll, -1ll, 0ll } } }, { (char*)"fb_GfxImageCreate", (char*)0ull, 32ll, -1ll, (tmp$35)&HGFXLIB_CB, 1024ll, 5ll, { { 523ll, 1ll, 0ll }, { 523ll, 1ll, 0ll }, { 524ll, 1ll, -1ll, 0ll }, { 523ll, 1ll, -1ll, 0ll }, { 523ll, 1ll, -1ll, 0ll } } }, { (char*)"fb_GfxImageCreateQB", (char*)0ull, 32ll, -1ll, (tmp$35)&HGFXLIB_CB, 128ll, 5ll, { { 523ll, 1ll, 0ll }, { 523ll, 1ll, 0ll }, { 524ll, 1ll, -1ll, 0ll }, { 523ll, 1ll, -1ll, 0ll }, { 523ll, 1ll, -1ll, 0ll } } }, { (char*)"imagedestroy", (char*)"fb_GfxImageDestroy", 0ll, -1ll, (tmp$35)&HGFXLIB_CB, 128ll, 1ll, { { 1056ll, 1ll, 0ll } } }, { (char*)"imageinfo", (char*)"fb_GfxImageInfo32", 11ll, -1ll, (tmp$35)&HGFXLIB_CB, 129ll, 7ll, { { 1056ll, 1ll, 0ll }, { 11ll, 2ll, -1ll, 0ll }, { 11ll, 2ll, -1ll, 0ll }, { 11ll, 2ll, -1ll, 0ll }, { 11ll, 2ll, -1ll, 0ll }, { 32ll, 2ll, -1ll, 0ll }, { 11ll, 2ll, -1ll, 0ll } } }, { (char*)"imageinfo", (char*)"fb_GfxImageInfo64", 11ll, -1ll, (tmp$35)&HGFXLIB_CB, 129ll, 7ll, { { 1056ll, 1ll, 0ll }, { 13ll, 2ll, 0ll }, { 13ll, 2ll, 0ll }, { 13ll, 2ll, -1ll, 0ll }, { 13ll, 2ll, -1ll, 0ll }, { 32ll, 2ll, -1ll, 0ll }, { 13ll, 2ll, -1ll, 0ll } } }, { (char*)"imageconvertrow", (char*)"fb_GfxImageConvertRow", 0ll, -1ll, (tmp$35)&HGFXLIB_CB, 128ll, 6ll, { { 1056ll, 1ll, 0ll }, { 523ll, 1ll, 0ll }, { 32ll, 1ll, 0ll }, { 523ll, 1ll, 0ll }, { 523ll, 1ll, 0ll }, { 523ll, 1ll, -1ll, 1ll } } }, { (char*)"screenevent", (char*)"fb_GfxEvent", 11ll, -1ll, (tmp$35)&HGFXLIB_CB, 128ll, 1ll, { { 32ll, 1ll, -1ll, 0ll } } }, { (char*)"screencontrol", (char*)"fb_GfxControl_s", 0ll, -1ll, (tmp$35)&HGFXLIB_CB, 129ll, 2ll, { { 523ll, 1ll, 0ll }, { 17ll, 2ll } } }, { (char*)"screencontrol", (char*)"fb_GfxControl_i32", 0ll, -1ll, (tmp$35)&HGFXLIB_CB, 129ll, 5ll, { { 523ll, 1ll, 0ll }, { 11ll, 2ll, -1ll, 2147483648ll }, { 11ll, 2ll, -1ll, 2147483648ll }, { 11ll, 2ll, -1ll, 2147483648ll }, { 11ll, 2ll, -1ll, 2147483648ll } } }, { (char*)"screencontrol", (char*)"fb_GfxControl_i64", 0ll, -1ll, (tmp$35)&HGFXLIB_CB, 129ll, 5ll, { { 523ll, 1ll, 0ll }, { 13ll, 2ll, 0ll }, { 13ll, 2ll, -1ll, 2147483648ll }, { 13ll, 2ll, -1ll, 2147483648ll }, { 13ll, 2ll, -1ll, 2147483648ll } } }, { (char*)"screenglproc", (char*)"fb_GfxGetGLProcAddress", 32ll, -1ll, (tmp$35)&HGFXLIB_CB, 129ll, 1ll, { { 1060ll, 1ll, 0ll } } }, { (char*)"fb_hPutTrans", (char*)0ull, 0ll, 3ll, (tmp$35)&HGFXLIB_CB, 0ll, 9ll, { { 1059ll, 1ll, 0ll }, { 35ll, 1ll, 0ll }, { 523ll, 1ll, 0ll }, { 523ll, 1ll, 0ll }, { 523ll, 1ll, 0ll }, { 523ll, 1ll, 0ll }, { 523ll, 1ll, 0ll }, { 32ll, 1ll, 0ll }, { 32ll, 1ll, 0ll } } }, { (char*)"fb_hPutPSet", (char*)0ull, 0ll, 3ll, (tmp$35)&HGFXLIB_CB, 0ll, 9ll, { { 1059ll, 1ll, 0ll }, { 35ll, 1ll, 0ll }, { 523ll, 1ll, 0ll }, { 523ll, 1ll, 0ll }, { 523ll, 1ll, 0ll }, { 523ll, 1ll, 0ll }, { 523ll, 1ll, 0ll }, { 32ll, 1ll, 0ll }, { 32ll, 1ll, 0ll } } }, { (char*)"fb_hPutPReset", (char*)0ull, 0ll, 3ll, (tmp$35)&HGFXLIB_CB, 0ll, 9ll, { { 1059ll, 1ll, 0ll }, { 35ll, 1ll, 0ll }, { 523ll, 1ll, 0ll }, { 523ll, 1ll, 0ll }, { 523ll, 1ll, 0ll }, { 523ll, 1ll, 0ll }, { 523ll, 1ll, 0ll }, { 32ll, 1ll, 0ll }, { 32ll, 1ll, 0ll } } }, { (char*)"fb_hPutAnd", (char*)0ull, 0ll, 3ll, (tmp$35)&HGFXLIB_CB, 0ll, 9ll, { { 1059ll, 1ll, 0ll }, { 35ll, 1ll, 0ll }, { 523ll, 1ll, 0ll }, { 523ll, 1ll, 0ll }, { 523ll, 1ll, 0ll }, { 523ll, 1ll, 0ll }, { 523ll, 1ll, 0ll }, { 32ll, 1ll, 0ll }, { 32ll, 1ll, 0ll } } }, { (char*)"fb_hPutOr", (char*)0ull, 0ll, 3ll, (tmp$35)&HGFXLIB_CB, 0ll, 9ll, { { 1059ll, 1ll, 0ll }, { 35ll, 1ll, 0ll }, { 523ll, 1ll, 0ll }, { 523ll, 1ll, 0ll }, { 523ll, 1ll, 0ll }, { 523ll, 1ll, 0ll }, { 523ll, 1ll, 0ll }, { 32ll, 1ll, 0ll }, { 32ll, 1ll, 0ll } } }, { (char*)"fb_hPutXor", (char*)0ull, 0ll, 3ll, (tmp$35)&HGFXLIB_CB, 0ll, 9ll, { { 1059ll, 1ll, 0ll }, { 35ll, 1ll, 0ll }, { 523ll, 1ll, 0ll }, { 523ll, 1ll, 0ll }, { 523ll, 1ll, 0ll }, { 523ll, 1ll, 0ll }, { 523ll, 1ll, 0ll }, { 32ll, 1ll, 0ll }, { 32ll, 1ll, 0ll } } }, { (char*)"fb_hPutAlpha", (char*)0ull, 0ll, 3ll, (tmp$35)&HGFXLIB_CB, 0ll, 9ll, { { 1059ll, 1ll, 0ll }, { 35ll, 1ll, 0ll }, { 523ll, 1ll, 0ll }, { 523ll, 1ll, 0ll }, { 523ll, 1ll, 0ll }, { 523ll, 1ll, 0ll }, { 523ll, 1ll, 0ll }, { 32ll, 1ll, 0ll }, { 32ll, 1ll, 0ll } } }, { (char*)"fb_hPutBlend", (char*)0ull, 0ll, 3ll, (tmp$35)&HGFXLIB_CB, 0ll, 9ll, { { 1059ll, 1ll, 0ll }, { 35ll, 1ll, 0ll }, { 523ll, 1ll, 0ll }, { 523ll, 1ll, 0ll }, { 523ll, 1ll, 0ll }, { 523ll, 1ll, 0ll }, { 523ll, 1ll, 0ll }, { 32ll, 1ll, 0ll }, { 32ll, 1ll, 0ll } } }, { (char*)"fb_hPutAdd", (char*)0ull, 0ll, 3ll, (tmp$35)&HGFXLIB_CB, 0ll, 9ll, { { 1059ll, 1ll, 0ll }, { 35ll, 1ll, 0ll }, { 523ll, 1ll, 0ll }, { 523ll, 1ll, 0ll }, { 523ll, 1ll, 0ll }, { 523ll, 1ll, 0ll }, { 523ll, 1ll, 0ll }, { 32ll, 1ll, 0ll }, { 32ll, 1ll, 0ll } } }, { (char*)"fb_hPutCustom", (char*)0ull, 0ll, 3ll, (tmp$35)&HGFXLIB_CB, 0ll, 9ll, { { 1059ll, 1ll, 0ll }, { 35ll, 1ll, 0ll }, { 523ll, 1ll, 0ll }, { 523ll, 1ll, 0ll }, { 523ll, 1ll, 0ll }, { 523ll, 1ll, 0ll }, { 523ll, 1ll, 0ll }, { 32ll, 1ll, 0ll }, { 32ll, 1ll, 0ll } } }, { (char*)0ull } };
+static struct $14FB_RTL_PROCDEF FUNCDATA$[71] = { { (char*)"fb_GfxPset", (char*)0ull, 0ll, -1ll, (tmp$34)&HGFXLIB_CB, 0ll, 6ll, { { 32ll, 1ll, -1ll, 0ll }, { 527ll, 1ll, 0ll }, { 527ll, 1ll, 0ll }, { 524ll, 1ll, 0ll }, { 523ll, 1ll, 0ll }, { 523ll, 1ll, 0ll } } }, { (char*)"fb_GfxPoint", (char*)0ull, 12ll, -1ll, (tmp$34)&HGFXLIB_CB, 0ll, 3ll, { { 32ll, 1ll, -1ll, 0ll }, { 527ll, 1ll, 0ll }, { 527ll, 1ll, 0ll } } }, { (char*)"fb_GfxLine", (char*)0ull, 0ll, -1ll, (tmp$34)&HGFXLIB_CB, 0ll, 9ll, { { 32ll, 1ll, -1ll, 0ll }, { 527ll, 1ll, 0ll }, { 527ll, 1ll, 0ll }, { 527ll, 1ll, 0ll }, { 527ll, 1ll, 0ll }, { 524ll, 1ll, 0ll }, { 523ll, 1ll, 0ll }, { 524ll, 1ll, -1ll, 65535ll }, { 523ll, 1ll, 0ll } } }, { (char*)"fb_GfxEllipse", (char*)0ull, 0ll, -1ll, (tmp$34)&HGFXLIB_CB, 0ll, 10ll, { { 32ll, 1ll, -1ll, 0ll }, { 527ll, 1ll, 0ll }, { 527ll, 1ll, 0ll }, { 527ll, 1ll, 0ll }, { 524ll, 1ll, 0ll }, { 527ll, 1ll, 0ll }, { 527ll, 1ll, 0ll }, { 527ll, 1ll, 0ll }, { 523ll, 1ll, 0ll }, { 523ll, 1ll, 0ll } } }, { (char*)"fb_GfxPaint", (char*)0ull, 0ll, -1ll, (tmp$34)&HGFXLIB_CB, 0ll, 8ll, { { 32ll, 1ll, -1ll, 0ll }, { 527ll, 1ll, 0ll }, { 527ll, 1ll, 0ll }, { 524ll, 1ll, 0ll }, { 524ll, 1ll, 0ll }, { 529ll, 2ll, 0ll }, { 523ll, 1ll, 0ll }, { 523ll, 1ll, 0ll } } }, { (char*)"fb_GfxDraw", (char*)0ull, 0ll, -1ll, (tmp$34)&HGFXLIB_CB, 0ll, 2ll, { { 32ll, 1ll, -1ll, 0ll }, { 529ll, 2ll, 0ll } } }, { (char*)"fb_GfxDrawString", (char*)0ull, 8ll, -1ll, (tmp$34)&HGFXLIB_CB, 2ll, 11ll, { { 32ll, 1ll, -1ll, 0ll }, { 527ll, 1ll, 0ll }, { 527ll, 1ll, 0ll }, { 523ll, 1ll, 0ll }, { 529ll, 2ll, 0ll }, { 524ll, 1ll, 0ll }, { 1056ll, 1ll, -1ll, 0ll }, { 523ll, 1ll, 0ll }, { 32ll, 1ll, 0ll }, { 32ll, 1ll, -1ll, 0ll }, { 32ll, 1ll, 0ll } } }, { (char*)"fb_GfxView", (char*)0ull, 0ll, -1ll, (tmp$34)&HGFXLIB_CB, 0ll, 7ll, { { 523ll, 1ll, -1ll, -32768ll }, { 523ll, 1ll, -1ll, -32768ll }, { 523ll, 1ll, -1ll, -32768ll }, { 523ll, 1ll, -1ll, -32768ll }, { 524ll, 1ll, -1ll, 0ll }, { 524ll, 1ll, -1ll, 0ll }, { 523ll, 1ll, 0ll } } }, { (char*)"fb_GfxWindow", (char*)0ull, 0ll, -1ll, (tmp$34)&HGFXLIB_CB, 0ll, 5ll, { { 527ll, 1ll, -1ll, 0ll }, { 527ll, 1ll, -1ll, 0ll }, { 527ll, 1ll, -1ll, 0ll }, { 527ll, 1ll, -1ll, 0ll }, { 523ll, 1ll, -1ll, 0ll } } }, { (char*)"fb_GfxPalette", (char*)0ull, 0ll, -1ll, (tmp$34)&HGFXLIB_CB, 0ll, 4ll, { { 523ll, 1ll, -1ll, -1ll }, { 523ll, 1ll, -1ll, -1ll }, { 523ll, 1ll, -1ll, -1ll }, { 523ll, 1ll, -1ll, -1ll } } }, { (char*)"fb_GfxPaletteUsing", (char*)0ull, 0ll, -1ll, (tmp$34)&HGFXLIB_CB, 0ll, 1ll, { { 1067ll, 1ll, 0ll } } }, { (char*)"fb_GfxPaletteUsing64", (char*)0ull, 0ll, -1ll, (tmp$34)&HGFXLIB_CB, 0ll, 1ll, { { 1069ll, 1ll, 0ll } } }, { (char*)"fb_GfxPaletteGet", (char*)0ull, 0ll, -1ll, (tmp$34)&HGFXLIB_CB, 0ll, 4ll, { { 523ll, 1ll, -1ll, -1ll }, { 11ll, 2ll, 0ll }, { 11ll, 2ll, 0ll }, { 11ll, 2ll, 0ll } } }, { (char*)"fb_GfxPaletteGet64", (char*)0ull, 0ll, -1ll, (tmp$34)&HGFXLIB_CB, 0ll, 4ll, { { 523ll, 1ll, -1ll, -1ll }, { 13ll, 2ll, 0ll }, { 13ll, 2ll, 0ll }, { 13ll, 2ll, 0ll } } }, { (char*)"fb_GfxPaletteGetUsing", (char*)0ull, 0ll, -1ll, (tmp$34)&HGFXLIB_CB, 0ll, 1ll, { { 43ll, 1ll, 0ll } } }, { (char*)"fb_GfxPaletteGetUsing64", (char*)0ull, 0ll, -1ll, (tmp$34)&HGFXLIB_CB, 0ll, 1ll, { { 45ll, 1ll, 0ll } } }, { (char*)"fb_GfxPut", (char*)0ull, 11ll, -1ll, (tmp$34)&HGFXLIB_CB, 2ll, 14ll, { { 32ll, 1ll, -1ll, 0ll }, { 527ll, 1ll, 0ll }, { 527ll, 1ll, 0ll }, { 1056ll, 1ll, 0ll }, { 523ll, 1ll, -1ll, 4294901760ll }, { 523ll, 1ll, -1ll, 4294901760ll }, { 523ll, 1ll, -1ll, 4294901760ll }, { 523ll, 1ll, -1ll, 4294901760ll }, { 523ll, 1ll, 0ll }, { 523ll, 1ll, 0ll }, { 32ll, 1ll, 0ll }, { 523ll, 1ll, -1ll, -1ll }, { 32ll, 1ll, -1ll, 0ll }, { 32ll, 1ll, -1ll, 0ll } } }, { (char*)"fb_GfxGet", (char*)0ull, 11ll, -1ll, (tmp$34)&HGFXLIB_CB, 1026ll, 8ll, { { 1056ll, 1ll, -1ll, 0ll }, { 527ll, 1ll, 0ll }, { 527ll, 1ll, 0ll }, { 527ll, 1ll, 0ll }, { 527ll, 1ll, 0ll }, { 32ll, 1ll, 0ll }, { 523ll, 1ll, 0ll }, { 512ll, 3ll, 0ll } } }, { (char*)"fb_GfxGetQB", (char*)0ull, 11ll, -1ll, (tmp$34)&HGFXLIB_CB, 514ll, 8ll, { { 1056ll, 1ll, -1ll, 0ll }, { 527ll, 1ll, 0ll }, { 527ll, 1ll, 0ll }, { 527ll, 1ll, 0ll }, { 527ll, 1ll, 0ll }, { 32ll, 1ll, 0ll }, { 523ll, 1ll, 0ll }, { 0ll, 3ll, 0ll } } }, { (char*)"fb_GfxScreen", (char*)0ull, 11ll, -1ll, (tmp$34)&HGFXLIB_CB, 0ll, 5ll, { { 523ll, 1ll, 0ll }, { 523ll, 1ll, -1ll, 8ll }, { 523ll, 1ll, -1ll, 0ll }, { 523ll, 1ll, -1ll, 0ll }, { 523ll, 1ll, -1ll, 0ll } } }, { (char*)"fb_GfxScreenQB", (char*)0ull, 11ll, -1ll, (tmp$34)&HGFXLIB_CB, 0ll, 3ll, { { 523ll, 1ll, 0ll }, { 523ll, 1ll, -1ll, -1ll }, { 523ll, 1ll, -1ll, -1ll } } }, { (char*)"screenres", (char*)"fb_GfxScreenRes", 11ll, -1ll, (tmp$34)&HGFXLIB_CB, 130ll, 6ll, { { 523ll, 1ll, 0ll }, { 523ll, 1ll, 0ll }, { 523ll, 1ll, -1ll, 8ll }, { 523ll, 1ll, -1ll, 1ll }, { 523ll, 1ll, -1ll, 0ll }, { 523ll, 1ll, -1ll, 0ll } } }, { (char*)"bload", (char*)"fb_GfxBload", 11ll, -1ll, (tmp$34)&HGFXLIB_CB, 1026ll, 3ll, { { 529ll, 2ll, 0ll }, { 32ll, 1ll, -1ll, 0ll }, { 32ll, 1ll, -1ll, 0ll } } }, { (char*)"bload", (char*)"fb_GfxBloadQB", 11ll, -1ll, (tmp$34)&HGFXLIB_CB, 514ll, 3ll, { { 529ll, 2ll, 0ll }, { 32ll, 1ll, -1ll, 0ll }, { 32ll, 1ll, -1ll, 0ll } } }, { (char*)"bsave", (char*)"fb_GfxBsave", 11ll, -1ll, (tmp$34)&HGFXLIB_CB, 3ll, 4ll, { { 529ll, 2ll, 0ll }, { 1056ll, 1ll, 0ll }, { 524ll, 1ll, -1ll, 0ll }, { 1056ll, 1ll, -1ll, 0ll } } }, { (char*)"bsave", (char*)"fb_GfxBsaveEx", 11ll, -1ll, (tmp$34)&HGFXLIB_CB, 3ll, 5ll, { { 529ll, 2ll, 0ll }, { 1056ll, 1ll, 0ll }, { 524ll, 1ll, -1ll, 0ll }, { 1056ll, 1ll, 0ll }, { 523ll, 1ll, 0ll } } }, { (char*)"flip", (char*)"fb_GfxFlip", 11ll, -1ll, (tmp$34)&HGFXLIB_CB, 128ll, 2ll, { { 523ll, 1ll, -1ll, -1ll }, { 523ll, 1ll, -1ll, -1ll } } }, { (char*)"screencopy", (char*)"fb_GfxFlip", 11ll, -1ll, (tmp$34)&HGFXLIB_CB, 128ll, 2ll, { { 523ll, 1ll, -1ll, -1ll }, { 523ll, 1ll, -1ll, -1ll } } }, { (char*)"pointcoord", (char*)"fb_GfxCursor", 15ll, -1ll, (tmp$34)&HGFXLIB_CB, 128ll, 1ll, { { 523ll, 1ll, 0ll } } }, { (char*)"pmap", (char*)"fb_GfxPMap", 15ll, -1ll, (tmp$34)&HGFXLIB_CB, 0ll, 2ll, { { 527ll, 1ll, 0ll }, { 523ll, 1ll, 0ll } } }, { (char*)"out", (char*)"fb_Out", 11ll, -1ll, (tmp$34)&HPORTS_CB, 2ll, 2ll, { { 518ll, 1ll, 0ll }, { 515ll, 1ll, 0ll } } }, { (char*)"inp", (char*)"fb_In", 11ll, -1ll, (tmp$34)&HPORTS_CB, 0ll, 1ll, { { 518ll, 1ll, 0ll } } }, { (char*)"wait", (char*)"fb_Wait", 11ll, -1ll, (tmp$34)&HPORTS_CB, 2ll, 3ll, { { 518ll, 1ll, 0ll }, { 523ll, 1ll, 0ll }, { 523ll, 1ll, -1ll, 0ll } } }, { (char*)"screensync", (char*)"fb_GfxWaitVSync", 11ll, -1ll, (tmp$34)&HGFXLIB_CB, 128ll, 0ll }, { (char*)"screenset", (char*)"fb_GfxPageSet", 11ll, 3ll, (tmp$34)&HGFXLIB_CB, 128ll, 2ll, { { 523ll, 1ll, -1ll, -1ll }, { 523ll, 1ll, -1ll, -1ll } } }, { (char*)"screenlock", (char*)"fb_GfxLock", 0ll, -1ll, (tmp$34)&HGFXLIB_CB, 128ll, 0ll }, { (char*)"screenunlock", (char*)"fb_GfxUnlock", 0ll, -1ll, (tmp$34)&HGFXLIB_CB, 128ll, 2ll, { { 523ll, 1ll, -1ll, -1ll }, { 523ll, 1ll, -1ll, -1ll } } }, { (char*)"screenptr", (char*)"fb_GfxScreenPtr", 32ll, -1ll, (tmp$34)&HGFXLIB_CB, 128ll, 0ll }, { (char*)"windowtitle", (char*)"fb_GfxSetWindowTitle", 0ll, -1ll, (tmp$34)&HGFXLIB_CB, 128ll, 1ll, { { 529ll, 2ll, 0ll } } }, { (char*)"multikey", (char*)"fb_Multikey", 11ll, -1ll, (tmp$34)0ull, 128ll, 1ll, { { 523ll, 1ll, 0ll } } }, { (char*)"getmouse", (char*)"fb_GetMouse", 11ll, -1ll, (tmp$34)0ull, 129ll, 5ll, { { 11ll, 2ll, 0ll, 0ll }, { 11ll, 2ll, 0ll, 0ll }, { 11ll, 2ll, -1ll, 0ll }, { 11ll, 2ll, -1ll, 0ll }, { 11ll, 2ll, -1ll, 0ll } } }, { (char*)"getmouse", (char*)"fb_GetMouse64", 11ll, -1ll, (tmp$34)0ull, 129ll, 5ll, { { 13ll, 2ll, 0ll, 0ll }, { 13ll, 2ll, 0ll, 0ll }, { 13ll, 2ll, -1ll, 0ll }, { 13ll, 2ll, -1ll, 0ll }, { 13ll, 2ll, -1ll, 0ll } } }, { (char*)"setmouse", (char*)"fb_SetMouse", 11ll, -1ll, (tmp$34)0ull, 128ll, 4ll, { { 523ll, 1ll, -1ll, 2147483648ll }, { 523ll, 1ll, -1ll, 2147483648ll }, { 523ll, 1ll, -1ll, -1ll }, { 523ll, 1ll, -1ll, -1ll } } }, { (char*)"getjoystick", (char*)"fb_GfxGetJoystick", 11ll, -1ll, (tmp$34)&HGFXLIB_CB, 128ll, 10ll, { { 523ll, 1ll, 0ll, 0ll }, { 8ll, 2ll, -1ll, 0ll }, { 15ll, 2ll, -1ll, 0ll }, { 15ll, 2ll, -1ll, 0ll }, { 15ll, 2ll, -1ll, 0ll }, { 15ll, 2ll, -1ll, 0ll }, { 15ll, 2ll, -1ll, 0ll }, { 15ll, 2ll, -1ll, 0ll }, { 15ll, 2ll, -1ll, 0ll }, { 15ll, 2ll, -1ll, 0ll } } }, { (char*)"stick", (char*)"fb_GfxStickQB", 11ll, -1ll, (tmp$34)&HGFXLIB_CB, 256ll, 1ll, { { 523ll, 1ll, 0ll } } }, { (char*)"strig", (char*)"fb_GfxStrigQB", 11ll, -1ll, (tmp$34)&HGFXLIB_CB, 256ll, 1ll, { { 523ll, 1ll, 0ll } } }, { (char*)"screeninfo", (char*)"fb_GfxScreenInfo32", 0ll, -1ll, (tmp$34)&HGFXLIB_CB, 129ll, 7ll, { { 11ll, 2ll, -1ll, 0ll }, { 11ll, 2ll, -1ll, 0ll }, { 11ll, 2ll, -1ll, 0ll }, { 11ll, 2ll, -1ll, 0ll }, { 11ll, 2ll, -1ll, 0ll }, { 11ll, 2ll, -1ll, 0ll }, { 17ll, 2ll, -1ll, 0ll } } }, { (char*)"screeninfo", (char*)"fb_GfxScreenInfo64", 0ll, -1ll, (tmp$34)&HGFXLIB_CB, 129ll, 7ll, { { 13ll, 2ll, 0ll }, { 13ll, 2ll, 0ll }, { 13ll, 2ll, -1ll, 0ll }, { 13ll, 2ll, -1ll, 0ll }, { 13ll, 2ll, -1ll, 0ll }, { 13ll, 2ll, -1ll, 0ll }, { 17ll, 2ll, -1ll, 0ll } } }, { (char*)"screenlist", (char*)"fb_GfxScreenList", 11ll, -1ll, (tmp$34)&HGFXLIB_CB, 128ll, 1ll, { { 523ll, 1ll, -1ll, 0ll } } }, { (char*)"fb_GfxImageCreate", (char*)0ull, 32ll, -1ll, (tmp$34)&HGFXLIB_CB, 1024ll, 5ll, { { 523ll, 1ll, 0ll }, { 523ll, 1ll, 0ll }, { 524ll, 1ll, -1ll, 0ll }, { 523ll, 1ll, -1ll, 0ll }, { 523ll, 1ll, -1ll, 0ll } } }, { (char*)"fb_GfxImageCreateQB", (char*)0ull, 32ll, -1ll, (tmp$34)&HGFXLIB_CB, 128ll, 5ll, { { 523ll, 1ll, 0ll }, { 523ll, 1ll, 0ll }, { 524ll, 1ll, -1ll, 0ll }, { 523ll, 1ll, -1ll, 0ll }, { 523ll, 1ll, -1ll, 0ll } } }, { (char*)"imagedestroy", (char*)"fb_GfxImageDestroy", 0ll, -1ll, (tmp$34)&HGFXLIB_CB, 128ll, 1ll, { { 1056ll, 1ll, 0ll } } }, { (char*)"imageinfo", (char*)"fb_GfxImageInfo32", 11ll, -1ll, (tmp$34)&HGFXLIB_CB, 129ll, 7ll, { { 1056ll, 1ll, 0ll }, { 11ll, 2ll, -1ll, 0ll }, { 11ll, 2ll, -1ll, 0ll }, { 11ll, 2ll, -1ll, 0ll }, { 11ll, 2ll, -1ll, 0ll }, { 32ll, 2ll, -1ll, 0ll }, { 11ll, 2ll, -1ll, 0ll } } }, { (char*)"imageinfo", (char*)"fb_GfxImageInfo64", 11ll, -1ll, (tmp$34)&HGFXLIB_CB, 129ll, 7ll, { { 1056ll, 1ll, 0ll }, { 13ll, 2ll, 0ll }, { 13ll, 2ll, 0ll }, { 13ll, 2ll, -1ll, 0ll }, { 13ll, 2ll, -1ll, 0ll }, { 32ll, 2ll, -1ll, 0ll }, { 13ll, 2ll, -1ll, 0ll } } }, { (char*)"imageconvertrow", (char*)"fb_GfxImageConvertRow", 0ll, -1ll, (tmp$34)&HGFXLIB_CB, 128ll, 6ll, { { 1056ll, 1ll, 0ll }, { 523ll, 1ll, 0ll }, { 32ll, 1ll, 0ll }, { 523ll, 1ll, 0ll }, { 523ll, 1ll, 0ll }, { 523ll, 1ll, -1ll, 1ll } } }, { (char*)"screenevent", (char*)"fb_GfxEvent", 11ll, -1ll, (tmp$34)&HGFXLIB_CB, 128ll, 1ll, { { 32ll, 1ll, -1ll, 0ll } } }, { (char*)"screencontrol", (char*)"fb_GfxControl_s", 0ll, -1ll, (tmp$34)&HGFXLIB_CB, 129ll, 2ll, { { 523ll, 1ll, 0ll }, { 17ll, 2ll } } }, { (char*)"screencontrol", (char*)"fb_GfxControl_i32", 0ll, -1ll, (tmp$34)&HGFXLIB_CB, 129ll, 5ll, { { 523ll, 1ll, 0ll }, { 11ll, 2ll, -1ll, 2147483648ll }, { 11ll, 2ll, -1ll, 2147483648ll }, { 11ll, 2ll, -1ll, 2147483648ll }, { 11ll, 2ll, -1ll, 2147483648ll } } }, { (char*)"screencontrol", (char*)"fb_GfxControl_i64", 0ll, -1ll, (tmp$34)&HGFXLIB_CB, 129ll, 5ll, { { 523ll, 1ll, 0ll }, { 13ll, 2ll, 0ll }, { 13ll, 2ll, -1ll, 2147483648ll }, { 13ll, 2ll, -1ll, 2147483648ll }, { 13ll, 2ll, -1ll, 2147483648ll } } }, { (char*)"screenglproc", (char*)"fb_GfxGetGLProcAddress", 32ll, -1ll, (tmp$34)&HGFXLIB_CB, 129ll, 1ll, { { 1060ll, 1ll, 0ll } } }, { (char*)"fb_hPutTrans", (char*)0ull, 0ll, 3ll, (tmp$34)&HGFXLIB_CB, 0ll, 9ll, { { 1059ll, 1ll, 0ll }, { 35ll, 1ll, 0ll }, { 523ll, 1ll, 0ll }, { 523ll, 1ll, 0ll }, { 523ll, 1ll, 0ll }, { 523ll, 1ll, 0ll }, { 523ll, 1ll, 0ll }, { 32ll, 1ll, 0ll }, { 32ll, 1ll, 0ll } } }, { (char*)"fb_hPutPSet", (char*)0ull, 0ll, 3ll, (tmp$34)&HGFXLIB_CB, 0ll, 9ll, { { 1059ll, 1ll, 0ll }, { 35ll, 1ll, 0ll }, { 523ll, 1ll, 0ll }, { 523ll, 1ll, 0ll }, { 523ll, 1ll, 0ll }, { 523ll, 1ll, 0ll }, { 523ll, 1ll, 0ll }, { 32ll, 1ll, 0ll }, { 32ll, 1ll, 0ll } } }, { (char*)"fb_hPutPReset", (char*)0ull, 0ll, 3ll, (tmp$34)&HGFXLIB_CB, 0ll, 9ll, { { 1059ll, 1ll, 0ll }, { 35ll, 1ll, 0ll }, { 523ll, 1ll, 0ll }, { 523ll, 1ll, 0ll }, { 523ll, 1ll, 0ll }, { 523ll, 1ll, 0ll }, { 523ll, 1ll, 0ll }, { 32ll, 1ll, 0ll }, { 32ll, 1ll, 0ll } } }, { (char*)"fb_hPutAnd", (char*)0ull, 0ll, 3ll, (tmp$34)&HGFXLIB_CB, 0ll, 9ll, { { 1059ll, 1ll, 0ll }, { 35ll, 1ll, 0ll }, { 523ll, 1ll, 0ll }, { 523ll, 1ll, 0ll }, { 523ll, 1ll, 0ll }, { 523ll, 1ll, 0ll }, { 523ll, 1ll, 0ll }, { 32ll, 1ll, 0ll }, { 32ll, 1ll, 0ll } } }, { (char*)"fb_hPutOr", (char*)0ull, 0ll, 3ll, (tmp$34)&HGFXLIB_CB, 0ll, 9ll, { { 1059ll, 1ll, 0ll }, { 35ll, 1ll, 0ll }, { 523ll, 1ll, 0ll }, { 523ll, 1ll, 0ll }, { 523ll, 1ll, 0ll }, { 523ll, 1ll, 0ll }, { 523ll, 1ll, 0ll }, { 32ll, 1ll, 0ll }, { 32ll, 1ll, 0ll } } }, { (char*)"fb_hPutXor", (char*)0ull, 0ll, 3ll, (tmp$34)&HGFXLIB_CB, 0ll, 9ll, { { 1059ll, 1ll, 0ll }, { 35ll, 1ll, 0ll }, { 523ll, 1ll, 0ll }, { 523ll, 1ll, 0ll }, { 523ll, 1ll, 0ll }, { 523ll, 1ll, 0ll }, { 523ll, 1ll, 0ll }, { 32ll, 1ll, 0ll }, { 32ll, 1ll, 0ll } } }, { (char*)"fb_hPutAlpha", (char*)0ull, 0ll, 3ll, (tmp$34)&HGFXLIB_CB, 0ll, 9ll, { { 1059ll, 1ll, 0ll }, { 35ll, 1ll, 0ll }, { 523ll, 1ll, 0ll }, { 523ll, 1ll, 0ll }, { 523ll, 1ll, 0ll }, { 523ll, 1ll, 0ll }, { 523ll, 1ll, 0ll }, { 32ll, 1ll, 0ll }, { 32ll, 1ll, 0ll } } }, { (char*)"fb_hPutBlend", (char*)0ull, 0ll, 3ll, (tmp$34)&HGFXLIB_CB, 0ll, 9ll, { { 1059ll, 1ll, 0ll }, { 35ll, 1ll, 0ll }, { 523ll, 1ll, 0ll }, { 523ll, 1ll, 0ll }, { 523ll, 1ll, 0ll }, { 523ll, 1ll, 0ll }, { 523ll, 1ll, 0ll }, { 32ll, 1ll, 0ll }, { 32ll, 1ll, 0ll } } }, { (char*)"fb_hPutAdd", (char*)0ull, 0ll, 3ll, (tmp$34)&HGFXLIB_CB, 0ll, 9ll, { { 1059ll, 1ll, 0ll }, { 35ll, 1ll, 0ll }, { 523ll, 1ll, 0ll }, { 523ll, 1ll, 0ll }, { 523ll, 1ll, 0ll }, { 523ll, 1ll, 0ll }, { 523ll, 1ll, 0ll }, { 32ll, 1ll, 0ll }, { 32ll, 1ll, 0ll } } }, { (char*)"fb_hPutCustom", (char*)0ull, 0ll, 3ll, (tmp$34)&HGFXLIB_CB, 0ll, 9ll, { { 1059ll, 1ll, 0ll }, { 35ll, 1ll, 0ll }, { 523ll, 1ll, 0ll }, { 523ll, 1ll, 0ll }, { 523ll, 1ll, 0ll }, { 523ll, 1ll, 0ll }, { 523ll, 1ll, 0ll }, { 32ll, 1ll, 0ll }, { 32ll, 1ll, 0ll } } }, { (char*)0ull } };
 
 void RTLGFXMODINIT( void )
 {
@@ -938,28 +938,28 @@ int64 RTLGFXPSET( struct $7ASTNODE* TARGET$1, struct $7ASTNODE* XEXPR$1, struct 
 	struct $7ASTNODE* vr$2 = ASTNEWCALL( vr$1, (struct $7ASTNODE*)0ull, -1ll );
 	PROC$1 = vr$2;
 	struct $7ASTNODE* vr$3 = ASTNEWARG( PROC$1, TARGET$1, 2147483648ll, -1ll );
-	if( vr$3 != (struct $7ASTNODE*)0ull ) goto label$43;
+	if( vr$3 != (struct $7ASTNODE*)0ull) goto label$43;
 	{
 		goto label$41;
 	}
 	label$43:;
 	label$42:;
 	struct $7ASTNODE* vr$4 = ASTNEWARG( PROC$1, XEXPR$1, 2147483648ll, -1ll );
-	if( vr$4 != (struct $7ASTNODE*)0ull ) goto label$45;
+	if( vr$4 != (struct $7ASTNODE*)0ull) goto label$45;
 	{
 		goto label$41;
 	}
 	label$45:;
 	label$44:;
 	struct $7ASTNODE* vr$5 = ASTNEWARG( PROC$1, YEXPR$1, 2147483648ll, -1ll );
-	if( vr$5 != (struct $7ASTNODE*)0ull ) goto label$47;
+	if( vr$5 != (struct $7ASTNODE*)0ull) goto label$47;
 	{
 		goto label$41;
 	}
 	label$47:;
 	label$46:;
 	struct $7ASTNODE* vr$6 = ASTNEWARG( PROC$1, CEXPR$1, 2147483648ll, -1ll );
-	if( vr$6 != (struct $7ASTNODE*)0ull ) goto label$49;
+	if( vr$6 != (struct $7ASTNODE*)0ull) goto label$49;
 	{
 		goto label$41;
 	}
@@ -967,7 +967,7 @@ int64 RTLGFXPSET( struct $7ASTNODE* TARGET$1, struct $7ASTNODE* XEXPR$1, struct 
 	label$48:;
 	struct $7ASTNODE* vr$7 = ASTNEWCONSTI( COORDTYPE$1, 8ll, (struct $8FBSYMBOL*)0ull );
 	struct $7ASTNODE* vr$8 = ASTNEWARG( PROC$1, vr$7, 2147483648ll, -1ll );
-	if( vr$8 != (struct $7ASTNODE*)0ull ) goto label$51;
+	if( vr$8 != (struct $7ASTNODE*)0ull) goto label$51;
 	{
 		goto label$41;
 	}
@@ -975,7 +975,7 @@ int64 RTLGFXPSET( struct $7ASTNODE* TARGET$1, struct $7ASTNODE* XEXPR$1, struct 
 	label$50:;
 	struct $7ASTNODE* vr$9 = ASTNEWCONSTI( ISPRESET$1, 8ll, (struct $8FBSYMBOL*)0ull );
 	struct $7ASTNODE* vr$10 = ASTNEWARG( PROC$1, vr$9, 2147483648ll, -1ll );
-	if( vr$10 != (struct $7ASTNODE*)0ull ) goto label$53;
+	if( vr$10 != (struct $7ASTNODE*)0ull) goto label$53;
 	{
 		goto label$41;
 	}
@@ -998,20 +998,20 @@ struct $7ASTNODE* RTLGFXPOINT( struct $7ASTNODE* TARGET$1, struct $7ASTNODE* XEX
 	struct $7ASTNODE* vr$2 = ASTNEWCALL( vr$1, (struct $7ASTNODE*)0ull, -1ll );
 	PROC$1 = vr$2;
 	struct $7ASTNODE* vr$3 = ASTNEWARG( PROC$1, TARGET$1, 2147483648ll, -1ll );
-	if( vr$3 != (struct $7ASTNODE*)0ull ) goto label$57;
+	if( vr$3 != (struct $7ASTNODE*)0ull) goto label$57;
 	{
 		goto label$55;
 	}
 	label$57:;
 	label$56:;
 	struct $7ASTNODE* vr$4 = ASTNEWARG( PROC$1, XEXPR$1, 2147483648ll, -1ll );
-	if( vr$4 != (struct $7ASTNODE*)0ull ) goto label$59;
+	if( vr$4 != (struct $7ASTNODE*)0ull) goto label$59;
 	{
 		goto label$55;
 	}
 	label$59:;
 	label$58:;
-	if( YEXPR$1 != (struct $7ASTNODE*)0ull ) goto label$61;
+	if( YEXPR$1 != (struct $7ASTNODE*)0ull) goto label$61;
 	{
 		struct $7ASTNODE* vr$5 = ASTNEWCONSTF( -0x1.FFFFFCp+22, 15ll );
 		YEXPR$1 = vr$5;
@@ -1019,7 +1019,7 @@ struct $7ASTNODE* RTLGFXPOINT( struct $7ASTNODE* TARGET$1, struct $7ASTNODE* XEX
 	label$61:;
 	label$60:;
 	struct $7ASTNODE* vr$6 = ASTNEWARG( PROC$1, YEXPR$1, 2147483648ll, -1ll );
-	if( vr$6 != (struct $7ASTNODE*)0ull ) goto label$63;
+	if( vr$6 != (struct $7ASTNODE*)0ull) goto label$63;
 	{
 		goto label$55;
 	}
@@ -1041,42 +1041,42 @@ int64 RTLGFXLINE( struct $7ASTNODE* TARGET$1, struct $7ASTNODE* X1EXPR$1, struct
 	struct $7ASTNODE* vr$2 = ASTNEWCALL( vr$1, (struct $7ASTNODE*)0ull, -1ll );
 	PROC$1 = vr$2;
 	struct $7ASTNODE* vr$3 = ASTNEWARG( PROC$1, TARGET$1, 2147483648ll, -1ll );
-	if( vr$3 != (struct $7ASTNODE*)0ull ) goto label$67;
+	if( vr$3 != (struct $7ASTNODE*)0ull) goto label$67;
 	{
 		goto label$65;
 	}
 	label$67:;
 	label$66:;
 	struct $7ASTNODE* vr$4 = ASTNEWARG( PROC$1, X1EXPR$1, 2147483648ll, -1ll );
-	if( vr$4 != (struct $7ASTNODE*)0ull ) goto label$69;
+	if( vr$4 != (struct $7ASTNODE*)0ull) goto label$69;
 	{
 		goto label$65;
 	}
 	label$69:;
 	label$68:;
 	struct $7ASTNODE* vr$5 = ASTNEWARG( PROC$1, Y1EXPR$1, 2147483648ll, -1ll );
-	if( vr$5 != (struct $7ASTNODE*)0ull ) goto label$71;
+	if( vr$5 != (struct $7ASTNODE*)0ull) goto label$71;
 	{
 		goto label$65;
 	}
 	label$71:;
 	label$70:;
 	struct $7ASTNODE* vr$6 = ASTNEWARG( PROC$1, X2EXPR$1, 2147483648ll, -1ll );
-	if( vr$6 != (struct $7ASTNODE*)0ull ) goto label$73;
+	if( vr$6 != (struct $7ASTNODE*)0ull) goto label$73;
 	{
 		goto label$65;
 	}
 	label$73:;
 	label$72:;
 	struct $7ASTNODE* vr$7 = ASTNEWARG( PROC$1, Y2EXPR$1, 2147483648ll, -1ll );
-	if( vr$7 != (struct $7ASTNODE*)0ull ) goto label$75;
+	if( vr$7 != (struct $7ASTNODE*)0ull) goto label$75;
 	{
 		goto label$65;
 	}
 	label$75:;
 	label$74:;
 	struct $7ASTNODE* vr$8 = ASTNEWARG( PROC$1, CEXPR$1, 2147483648ll, -1ll );
-	if( vr$8 != (struct $7ASTNODE*)0ull ) goto label$77;
+	if( vr$8 != (struct $7ASTNODE*)0ull) goto label$77;
 	{
 		goto label$65;
 	}
@@ -1084,14 +1084,14 @@ int64 RTLGFXLINE( struct $7ASTNODE* TARGET$1, struct $7ASTNODE* X1EXPR$1, struct
 	label$76:;
 	struct $7ASTNODE* vr$9 = ASTNEWCONSTI( LINETYPE$1, 8ll, (struct $8FBSYMBOL*)0ull );
 	struct $7ASTNODE* vr$10 = ASTNEWARG( PROC$1, vr$9, 2147483648ll, -1ll );
-	if( vr$10 != (struct $7ASTNODE*)0ull ) goto label$79;
+	if( vr$10 != (struct $7ASTNODE*)0ull) goto label$79;
 	{
 		goto label$65;
 	}
 	label$79:;
 	label$78:;
 	struct $7ASTNODE* vr$11 = ASTNEWARG( PROC$1, STYLEEXPR$1, 2147483648ll, -1ll );
-	if( vr$11 != (struct $7ASTNODE*)0ull ) goto label$81;
+	if( vr$11 != (struct $7ASTNODE*)0ull) goto label$81;
 	{
 		goto label$65;
 	}
@@ -1099,7 +1099,7 @@ int64 RTLGFXLINE( struct $7ASTNODE* TARGET$1, struct $7ASTNODE* X1EXPR$1, struct
 	label$80:;
 	struct $7ASTNODE* vr$12 = ASTNEWCONSTI( COORDTYPE$1, 8ll, (struct $8FBSYMBOL*)0ull );
 	struct $7ASTNODE* vr$13 = ASTNEWARG( PROC$1, vr$12, 2147483648ll, -1ll );
-	if( vr$13 != (struct $7ASTNODE*)0ull ) goto label$83;
+	if( vr$13 != (struct $7ASTNODE*)0ull) goto label$83;
 	{
 		goto label$65;
 	}
@@ -1122,41 +1122,41 @@ int64 RTLGFXCIRCLE( struct $7ASTNODE* TARGET$1, struct $7ASTNODE* XEXPR$1, struc
 	struct $7ASTNODE* vr$2 = ASTNEWCALL( vr$1, (struct $7ASTNODE*)0ull, -1ll );
 	PROC$1 = vr$2;
 	struct $7ASTNODE* vr$3 = ASTNEWARG( PROC$1, TARGET$1, 2147483648ll, -1ll );
-	if( vr$3 != (struct $7ASTNODE*)0ull ) goto label$87;
+	if( vr$3 != (struct $7ASTNODE*)0ull) goto label$87;
 	{
 		goto label$85;
 	}
 	label$87:;
 	label$86:;
 	struct $7ASTNODE* vr$4 = ASTNEWARG( PROC$1, XEXPR$1, 2147483648ll, -1ll );
-	if( vr$4 != (struct $7ASTNODE*)0ull ) goto label$89;
+	if( vr$4 != (struct $7ASTNODE*)0ull) goto label$89;
 	{
 		goto label$85;
 	}
 	label$89:;
 	label$88:;
 	struct $7ASTNODE* vr$5 = ASTNEWARG( PROC$1, YEXPR$1, 2147483648ll, -1ll );
-	if( vr$5 != (struct $7ASTNODE*)0ull ) goto label$91;
+	if( vr$5 != (struct $7ASTNODE*)0ull) goto label$91;
 	{
 		goto label$85;
 	}
 	label$91:;
 	label$90:;
 	struct $7ASTNODE* vr$6 = ASTNEWARG( PROC$1, RADEXPR$1, 2147483648ll, -1ll );
-	if( vr$6 != (struct $7ASTNODE*)0ull ) goto label$93;
+	if( vr$6 != (struct $7ASTNODE*)0ull) goto label$93;
 	{
 		goto label$85;
 	}
 	label$93:;
 	label$92:;
 	struct $7ASTNODE* vr$7 = ASTNEWARG( PROC$1, CEXPR$1, 2147483648ll, -1ll );
-	if( vr$7 != (struct $7ASTNODE*)0ull ) goto label$95;
+	if( vr$7 != (struct $7ASTNODE*)0ull) goto label$95;
 	{
 		goto label$85;
 	}
 	label$95:;
 	label$94:;
-	if( ASPEXPR$1 != (struct $7ASTNODE*)0ull ) goto label$97;
+	if( ASPEXPR$1 != (struct $7ASTNODE*)0ull) goto label$97;
 	{
 		struct $7ASTNODE* vr$8 = ASTNEWCONSTF( 0x0p+0, 15ll );
 		ASPEXPR$1 = vr$8;
@@ -1164,13 +1164,13 @@ int64 RTLGFXCIRCLE( struct $7ASTNODE* TARGET$1, struct $7ASTNODE* XEXPR$1, struc
 	label$97:;
 	label$96:;
 	struct $7ASTNODE* vr$9 = ASTNEWARG( PROC$1, ASPEXPR$1, 2147483648ll, -1ll );
-	if( vr$9 != (struct $7ASTNODE*)0ull ) goto label$99;
+	if( vr$9 != (struct $7ASTNODE*)0ull) goto label$99;
 	{
 		goto label$85;
 	}
 	label$99:;
 	label$98:;
-	if( INIEXPR$1 != (struct $7ASTNODE*)0ull ) goto label$101;
+	if( INIEXPR$1 != (struct $7ASTNODE*)0ull) goto label$101;
 	{
 		struct $7ASTNODE* vr$10 = ASTNEWCONSTF( 0x0p+0, 15ll );
 		INIEXPR$1 = vr$10;
@@ -1178,13 +1178,13 @@ int64 RTLGFXCIRCLE( struct $7ASTNODE* TARGET$1, struct $7ASTNODE* XEXPR$1, struc
 	label$101:;
 	label$100:;
 	struct $7ASTNODE* vr$11 = ASTNEWARG( PROC$1, INIEXPR$1, 2147483648ll, -1ll );
-	if( vr$11 != (struct $7ASTNODE*)0ull ) goto label$103;
+	if( vr$11 != (struct $7ASTNODE*)0ull) goto label$103;
 	{
 		goto label$85;
 	}
 	label$103:;
 	label$102:;
-	if( ENDEXPR$1 != (struct $7ASTNODE*)0ull ) goto label$105;
+	if( ENDEXPR$1 != (struct $7ASTNODE*)0ull) goto label$105;
 	{
 		struct $7ASTNODE* vr$12 = ASTNEWCONSTF( 0x1.921FB82C2BD7Fp+2, 15ll );
 		ENDEXPR$1 = vr$12;
@@ -1192,7 +1192,7 @@ int64 RTLGFXCIRCLE( struct $7ASTNODE* TARGET$1, struct $7ASTNODE* XEXPR$1, struc
 	label$105:;
 	label$104:;
 	struct $7ASTNODE* vr$13 = ASTNEWARG( PROC$1, ENDEXPR$1, 2147483648ll, -1ll );
-	if( vr$13 != (struct $7ASTNODE*)0ull ) goto label$107;
+	if( vr$13 != (struct $7ASTNODE*)0ull) goto label$107;
 	{
 		goto label$85;
 	}
@@ -1200,7 +1200,7 @@ int64 RTLGFXCIRCLE( struct $7ASTNODE* TARGET$1, struct $7ASTNODE* XEXPR$1, struc
 	label$106:;
 	struct $7ASTNODE* vr$14 = ASTNEWCONSTI( FILLFLAG$1, 8ll, (struct $8FBSYMBOL*)0ull );
 	struct $7ASTNODE* vr$15 = ASTNEWARG( PROC$1, vr$14, 2147483648ll, -1ll );
-	if( vr$15 != (struct $7ASTNODE*)0ull ) goto label$109;
+	if( vr$15 != (struct $7ASTNODE*)0ull) goto label$109;
 	{
 		goto label$85;
 	}
@@ -1208,7 +1208,7 @@ int64 RTLGFXCIRCLE( struct $7ASTNODE* TARGET$1, struct $7ASTNODE* XEXPR$1, struc
 	label$108:;
 	struct $7ASTNODE* vr$16 = ASTNEWCONSTI( COORDTYPE$1, 8ll, (struct $8FBSYMBOL*)0ull );
 	struct $7ASTNODE* vr$17 = ASTNEWARG( PROC$1, vr$16, 2147483648ll, -1ll );
-	if( vr$17 != (struct $7ASTNODE*)0ull ) goto label$111;
+	if( vr$17 != (struct $7ASTNODE*)0ull) goto label$111;
 	{
 		goto label$85;
 	}
@@ -1222,7 +1222,7 @@ int64 RTLGFXCIRCLE( struct $7ASTNODE* TARGET$1, struct $7ASTNODE* XEXPR$1, struc
 
 int64 RTLGFXPAINT( struct $7ASTNODE* TARGET$1, struct $7ASTNODE* XEXPR$1, struct $7ASTNODE* YEXPR$1, struct $7ASTNODE* PEXPR$1, struct $7ASTNODE* BEXPR$1, int64 COORD_TYPE$1 )
 {
-	int64 TMP$199$1;
+	int64 TMP$198$1;
 	int64 fb$result$1;
 	__builtin_memset( &fb$result$1, 0, 8ll );
 	label$112:;
@@ -1233,33 +1233,33 @@ int64 RTLGFXPAINT( struct $7ASTNODE* TARGET$1, struct $7ASTNODE* XEXPR$1, struct
 	struct $7ASTNODE* vr$2 = ASTNEWCALL( vr$1, (struct $7ASTNODE*)0ull, -1ll );
 	PROC$1 = vr$2;
 	struct $7ASTNODE* vr$3 = ASTNEWARG( PROC$1, TARGET$1, 2147483648ll, -1ll );
-	if( vr$3 != (struct $7ASTNODE*)0ull ) goto label$115;
+	if( vr$3 != (struct $7ASTNODE*)0ull) goto label$115;
 	{
 		goto label$113;
 	}
 	label$115:;
 	label$114:;
 	struct $7ASTNODE* vr$4 = ASTNEWARG( PROC$1, XEXPR$1, 2147483648ll, -1ll );
-	if( vr$4 != (struct $7ASTNODE*)0ull ) goto label$117;
+	if( vr$4 != (struct $7ASTNODE*)0ull) goto label$117;
 	{
 		goto label$113;
 	}
 	label$117:;
 	label$116:;
 	struct $7ASTNODE* vr$5 = ASTNEWARG( PROC$1, YEXPR$1, 2147483648ll, -1ll );
-	if( vr$5 != (struct $7ASTNODE*)0ull ) goto label$119;
+	if( vr$5 != (struct $7ASTNODE*)0ull) goto label$119;
 	{
 		goto label$113;
 	}
 	label$119:;
 	label$118:;
 	int64 vr$8 = SYMBISSTRING( *(int64*)((uint8*)PEXPR$1 + 8ll) & 511ll );
-	if( vr$8 == 0ll ) goto label$121;
+	if( vr$8 == 0ll) goto label$121;
 	{
 		PATTERN$1 = -1ll;
 		struct $7ASTNODE* vr$9 = ASTNEWCONSTI( 4294901760ll, 8ll, (struct $8FBSYMBOL*)0ull );
 		struct $7ASTNODE* vr$10 = ASTNEWARG( PROC$1, vr$9, 2147483648ll, -1ll );
-		if( vr$10 != (struct $7ASTNODE*)0ull ) goto label$123;
+		if( vr$10 != (struct $7ASTNODE*)0ull) goto label$123;
 		{
 			goto label$113;
 		}
@@ -1271,7 +1271,7 @@ int64 RTLGFXPAINT( struct $7ASTNODE* TARGET$1, struct $7ASTNODE* XEXPR$1, struct
 	{
 		PATTERN$1 = 0ll;
 		struct $7ASTNODE* vr$11 = ASTNEWARG( PROC$1, PEXPR$1, 2147483648ll, -1ll );
-		if( vr$11 != (struct $7ASTNODE*)0ull ) goto label$125;
+		if( vr$11 != (struct $7ASTNODE*)0ull) goto label$125;
 		{
 			goto label$113;
 		}
@@ -1280,16 +1280,16 @@ int64 RTLGFXPAINT( struct $7ASTNODE* TARGET$1, struct $7ASTNODE* XEXPR$1, struct
 	}
 	label$120:;
 	struct $7ASTNODE* vr$12 = ASTNEWARG( PROC$1, BEXPR$1, 2147483648ll, -1ll );
-	if( vr$12 != (struct $7ASTNODE*)0ull ) goto label$127;
+	if( vr$12 != (struct $7ASTNODE*)0ull) goto label$127;
 	{
 		goto label$113;
 	}
 	label$127:;
 	label$126:;
-	if( PATTERN$1 == 0ll ) goto label$129;
+	if( PATTERN$1 == 0ll) goto label$129;
 	{
 		struct $7ASTNODE* vr$13 = ASTNEWARG( PROC$1, PEXPR$1, 2147483648ll, -1ll );
-		if( vr$13 != (struct $7ASTNODE*)0ull ) goto label$131;
+		if( vr$13 != (struct $7ASTNODE*)0ull) goto label$131;
 		{
 			goto label$113;
 		}
@@ -1302,7 +1302,7 @@ int64 RTLGFXPAINT( struct $7ASTNODE* TARGET$1, struct $7ASTNODE* XEXPR$1, struct
 		struct $8FBSYMBOL* vr$14 = SYMBALLOCSTRCONST( (char*)"", 0ll );
 		struct $7ASTNODE* vr$15 = ASTNEWVAR( vr$14, 0ll, 2147483648ll, (struct $8FBSYMBOL*)0ull );
 		struct $7ASTNODE* vr$16 = ASTNEWARG( PROC$1, vr$15, 2147483648ll, -1ll );
-		if( vr$16 != (struct $7ASTNODE*)0ull ) goto label$133;
+		if( vr$16 != (struct $7ASTNODE*)0ull) goto label$133;
 		{
 			goto label$113;
 		}
@@ -1310,15 +1310,15 @@ int64 RTLGFXPAINT( struct $7ASTNODE* TARGET$1, struct $7ASTNODE* XEXPR$1, struct
 		label$132:;
 	}
 	label$128:;
-	if( PATTERN$1 == 0ll ) goto label$134;
-	TMP$199$1 = 1ll;
+	if( PATTERN$1 == 0ll) goto label$134;
+	TMP$198$1 = 1ll;
 	goto label$139;
 	label$134:;
-	TMP$199$1 = 0ll;
+	TMP$198$1 = 0ll;
 	label$139:;
-	struct $7ASTNODE* vr$17 = ASTNEWCONSTI( TMP$199$1, 8ll, (struct $8FBSYMBOL*)0ull );
+	struct $7ASTNODE* vr$17 = ASTNEWCONSTI( TMP$198$1, 8ll, (struct $8FBSYMBOL*)0ull );
 	struct $7ASTNODE* vr$18 = ASTNEWARG( PROC$1, vr$17, 2147483648ll, -1ll );
-	if( vr$18 != (struct $7ASTNODE*)0ull ) goto label$136;
+	if( vr$18 != (struct $7ASTNODE*)0ull) goto label$136;
 	{
 		goto label$113;
 	}
@@ -1326,7 +1326,7 @@ int64 RTLGFXPAINT( struct $7ASTNODE* TARGET$1, struct $7ASTNODE* XEXPR$1, struct
 	label$135:;
 	struct $7ASTNODE* vr$19 = ASTNEWCONSTI( COORD_TYPE$1, 8ll, (struct $8FBSYMBOL*)0ull );
 	struct $7ASTNODE* vr$20 = ASTNEWARG( PROC$1, vr$19, 2147483648ll, -1ll );
-	if( vr$20 != (struct $7ASTNODE*)0ull ) goto label$138;
+	if( vr$20 != (struct $7ASTNODE*)0ull) goto label$138;
 	{
 		goto label$113;
 	}
@@ -1349,14 +1349,14 @@ int64 RTLGFXDRAW( struct $7ASTNODE* TARGET$1, struct $7ASTNODE* CEXPR$1 )
 	struct $7ASTNODE* vr$2 = ASTNEWCALL( vr$1, (struct $7ASTNODE*)0ull, -1ll );
 	PROC$1 = vr$2;
 	struct $7ASTNODE* vr$3 = ASTNEWARG( PROC$1, TARGET$1, 2147483648ll, -1ll );
-	if( vr$3 != (struct $7ASTNODE*)0ull ) goto label$143;
+	if( vr$3 != (struct $7ASTNODE*)0ull) goto label$143;
 	{
 		goto label$141;
 	}
 	label$143:;
 	label$142:;
 	struct $7ASTNODE* vr$4 = ASTNEWARG( PROC$1, CEXPR$1, 2147483648ll, -1ll );
-	if( vr$4 != (struct $7ASTNODE*)0ull ) goto label$145;
+	if( vr$4 != (struct $7ASTNODE*)0ull) goto label$145;
 	{
 		goto label$141;
 	}
@@ -1370,7 +1370,7 @@ int64 RTLGFXDRAW( struct $7ASTNODE* TARGET$1, struct $7ASTNODE* CEXPR$1 )
 
 int64 RTLGFXDRAWSTRING( struct $7ASTNODE* TARGET$1, struct $7ASTNODE* XEXPR$1, struct $7ASTNODE* YEXPR$1, struct $7ASTNODE* SEXPR$1, struct $7ASTNODE* CEXPR$1, struct $7ASTNODE* FEXPR$1, int64 COORD_TYPE$1, int64 MODE$1, struct $7ASTNODE* ALPHAEXPR$1, struct $7ASTNODE* FUNCEXPR$1, struct $7ASTNODE* PARAMEXPR$1 )
 {
-	struct $7ASTNODE* TMP$200$1;
+	struct $7ASTNODE* TMP$199$1;
 	int64 fb$result$1;
 	__builtin_memset( &fb$result$1, 0, 8ll );
 	label$146:;
@@ -1381,21 +1381,21 @@ int64 RTLGFXDRAWSTRING( struct $7ASTNODE* TARGET$1, struct $7ASTNODE* XEXPR$1, s
 	struct $7ASTNODE* vr$2 = ASTNEWCALL( vr$1, (struct $7ASTNODE*)0ull, -1ll );
 	PROC$1 = vr$2;
 	struct $7ASTNODE* vr$3 = ASTNEWARG( PROC$1, TARGET$1, 2147483648ll, -1ll );
-	if( vr$3 != (struct $7ASTNODE*)0ull ) goto label$149;
+	if( vr$3 != (struct $7ASTNODE*)0ull) goto label$149;
 	{
 		goto label$147;
 	}
 	label$149:;
 	label$148:;
 	struct $7ASTNODE* vr$4 = ASTNEWARG( PROC$1, XEXPR$1, 2147483648ll, -1ll );
-	if( vr$4 != (struct $7ASTNODE*)0ull ) goto label$151;
+	if( vr$4 != (struct $7ASTNODE*)0ull) goto label$151;
 	{
 		goto label$147;
 	}
 	label$151:;
 	label$150:;
 	struct $7ASTNODE* vr$5 = ASTNEWARG( PROC$1, YEXPR$1, 2147483648ll, -1ll );
-	if( vr$5 != (struct $7ASTNODE*)0ull ) goto label$153;
+	if( vr$5 != (struct $7ASTNODE*)0ull) goto label$153;
 	{
 		goto label$147;
 	}
@@ -1403,34 +1403,34 @@ int64 RTLGFXDRAWSTRING( struct $7ASTNODE* TARGET$1, struct $7ASTNODE* XEXPR$1, s
 	label$152:;
 	struct $7ASTNODE* vr$6 = ASTNEWCONSTI( COORD_TYPE$1, 8ll, (struct $8FBSYMBOL*)0ull );
 	struct $7ASTNODE* vr$7 = ASTNEWARG( PROC$1, vr$6, 2147483648ll, -1ll );
-	if( vr$7 != (struct $7ASTNODE*)0ull ) goto label$155;
+	if( vr$7 != (struct $7ASTNODE*)0ull) goto label$155;
 	{
 		goto label$147;
 	}
 	label$155:;
 	label$154:;
 	struct $7ASTNODE* vr$8 = ASTNEWARG( PROC$1, SEXPR$1, 2147483648ll, -1ll );
-	if( vr$8 != (struct $7ASTNODE*)0ull ) goto label$157;
+	if( vr$8 != (struct $7ASTNODE*)0ull) goto label$157;
 	{
 		goto label$147;
 	}
 	label$157:;
 	label$156:;
-	if( ALPHAEXPR$1 == (struct $7ASTNODE*)0ull ) goto label$159;
+	if( ALPHAEXPR$1 == (struct $7ASTNODE*)0ull) goto label$159;
 	{
 		CEXPR$1 = ALPHAEXPR$1;
 	}
 	label$159:;
 	label$158:;
 	struct $7ASTNODE* vr$9 = ASTNEWARG( PROC$1, CEXPR$1, 2147483648ll, -1ll );
-	if( vr$9 != (struct $7ASTNODE*)0ull ) goto label$161;
+	if( vr$9 != (struct $7ASTNODE*)0ull) goto label$161;
 	{
 		goto label$147;
 	}
 	label$161:;
 	label$160:;
 	struct $7ASTNODE* vr$10 = ASTNEWARG( PROC$1, FEXPR$1, 2147483648ll, -1ll );
-	if( vr$10 != (struct $7ASTNODE*)0ull ) goto label$163;
+	if( vr$10 != (struct $7ASTNODE*)0ull) goto label$163;
 	{
 		goto label$147;
 	}
@@ -1438,35 +1438,35 @@ int64 RTLGFXDRAWSTRING( struct $7ASTNODE* TARGET$1, struct $7ASTNODE* XEXPR$1, s
 	label$162:;
 	struct $7ASTNODE* vr$11 = ASTNEWCONSTI( MODE$1, 8ll, (struct $8FBSYMBOL*)0ull );
 	struct $7ASTNODE* vr$12 = ASTNEWARG( PROC$1, vr$11, 2147483648ll, -1ll );
-	if( vr$12 != (struct $7ASTNODE*)0ull ) goto label$165;
+	if( vr$12 != (struct $7ASTNODE*)0ull) goto label$165;
 	{
 		goto label$147;
 	}
 	label$165:;
 	label$164:;
-	if( FEXPR$1 == (struct $7ASTNODE*)0ull ) goto label$166;
+	if( FEXPR$1 == (struct $7ASTNODE*)0ull) goto label$166;
 	struct $7ASTNODE* vr$13 = HGETPUTTER( MODE$1 );
-	TMP$200$1 = vr$13;
+	TMP$199$1 = vr$13;
 	goto label$175;
 	label$166:;
 	struct $7ASTNODE* vr$14 = ASTNEWCONSTI( 0ll, 8ll, (struct $8FBSYMBOL*)0ull );
-	TMP$200$1 = vr$14;
+	TMP$199$1 = vr$14;
 	label$175:;
-	struct $7ASTNODE* vr$15 = ASTNEWARG( PROC$1, TMP$200$1, 2147483648ll, -1ll );
-	if( vr$15 != (struct $7ASTNODE*)0ull ) goto label$168;
+	struct $7ASTNODE* vr$15 = ASTNEWARG( PROC$1, TMP$199$1, 2147483648ll, -1ll );
+	if( vr$15 != (struct $7ASTNODE*)0ull) goto label$168;
 	{
 		goto label$147;
 	}
 	label$168:;
 	label$167:;
 	struct $7ASTNODE* vr$16 = ASTNEWARG( PROC$1, FUNCEXPR$1, 2147483648ll, -1ll );
-	if( vr$16 != (struct $7ASTNODE*)0ull ) goto label$170;
+	if( vr$16 != (struct $7ASTNODE*)0ull) goto label$170;
 	{
 		goto label$147;
 	}
 	label$170:;
 	label$169:;
-	if( PARAMEXPR$1 != (struct $7ASTNODE*)0ull ) goto label$172;
+	if( PARAMEXPR$1 != (struct $7ASTNODE*)0ull) goto label$172;
 	{
 		struct $7ASTNODE* vr$17 = ASTNEWCONSTI( 0ll, 8ll, (struct $8FBSYMBOL*)0ull );
 		PARAMEXPR$1 = vr$17;
@@ -1474,7 +1474,7 @@ int64 RTLGFXDRAWSTRING( struct $7ASTNODE* TARGET$1, struct $7ASTNODE* XEXPR$1, s
 	label$172:;
 	label$171:;
 	struct $7ASTNODE* vr$18 = ASTNEWARG( PROC$1, PARAMEXPR$1, 2147483648ll, -1ll );
-	if( vr$18 != (struct $7ASTNODE*)0ull ) goto label$174;
+	if( vr$18 != (struct $7ASTNODE*)0ull) goto label$174;
 	{
 		goto label$147;
 	}
@@ -1498,42 +1498,42 @@ int64 RTLGFXVIEW( struct $7ASTNODE* X1EXPR$1, struct $7ASTNODE* Y1EXPR$1, struct
 	struct $7ASTNODE* vr$2 = ASTNEWCALL( vr$1, (struct $7ASTNODE*)0ull, -1ll );
 	PROC$1 = vr$2;
 	struct $7ASTNODE* vr$3 = ASTNEWARG( PROC$1, X1EXPR$1, 2147483648ll, -1ll );
-	if( vr$3 != (struct $7ASTNODE*)0ull ) goto label$179;
+	if( vr$3 != (struct $7ASTNODE*)0ull) goto label$179;
 	{
 		goto label$177;
 	}
 	label$179:;
 	label$178:;
 	struct $7ASTNODE* vr$4 = ASTNEWARG( PROC$1, Y1EXPR$1, 2147483648ll, -1ll );
-	if( vr$4 != (struct $7ASTNODE*)0ull ) goto label$181;
+	if( vr$4 != (struct $7ASTNODE*)0ull) goto label$181;
 	{
 		goto label$177;
 	}
 	label$181:;
 	label$180:;
 	struct $7ASTNODE* vr$5 = ASTNEWARG( PROC$1, X2EXPR$1, 2147483648ll, -1ll );
-	if( vr$5 != (struct $7ASTNODE*)0ull ) goto label$183;
+	if( vr$5 != (struct $7ASTNODE*)0ull) goto label$183;
 	{
 		goto label$177;
 	}
 	label$183:;
 	label$182:;
 	struct $7ASTNODE* vr$6 = ASTNEWARG( PROC$1, Y2EXPR$1, 2147483648ll, -1ll );
-	if( vr$6 != (struct $7ASTNODE*)0ull ) goto label$185;
+	if( vr$6 != (struct $7ASTNODE*)0ull) goto label$185;
 	{
 		goto label$177;
 	}
 	label$185:;
 	label$184:;
 	struct $7ASTNODE* vr$7 = ASTNEWARG( PROC$1, FILLEXPR$1, 2147483648ll, -1ll );
-	if( vr$7 != (struct $7ASTNODE*)0ull ) goto label$187;
+	if( vr$7 != (struct $7ASTNODE*)0ull) goto label$187;
 	{
 		goto label$177;
 	}
 	label$187:;
 	label$186:;
 	struct $7ASTNODE* vr$8 = ASTNEWARG( PROC$1, BORDEXPR$1, 2147483648ll, -1ll );
-	if( vr$8 != (struct $7ASTNODE*)0ull ) goto label$189;
+	if( vr$8 != (struct $7ASTNODE*)0ull) goto label$189;
 	{
 		goto label$177;
 	}
@@ -1541,7 +1541,7 @@ int64 RTLGFXVIEW( struct $7ASTNODE* X1EXPR$1, struct $7ASTNODE* Y1EXPR$1, struct
 	label$188:;
 	struct $7ASTNODE* vr$9 = ASTNEWCONSTI( SCREENFLAG$1, 8ll, (struct $8FBSYMBOL*)0ull );
 	struct $7ASTNODE* vr$10 = ASTNEWARG( PROC$1, vr$9, 2147483648ll, -1ll );
-	if( vr$10 != (struct $7ASTNODE*)0ull ) goto label$191;
+	if( vr$10 != (struct $7ASTNODE*)0ull) goto label$191;
 	{
 		goto label$177;
 	}
@@ -1563,7 +1563,7 @@ int64 RTLGFXWINDOW( struct $7ASTNODE* X1EXPR$1, struct $7ASTNODE* Y1EXPR$1, stru
 	struct $8FBSYMBOL* vr$1 = RTLPROCLOOKUP( (char*)"fb_GfxWindow", 316ll );
 	struct $7ASTNODE* vr$2 = ASTNEWCALL( vr$1, (struct $7ASTNODE*)0ull, -1ll );
 	PROC$1 = vr$2;
-	if( X1EXPR$1 != (struct $7ASTNODE*)0ull ) goto label$195;
+	if( X1EXPR$1 != (struct $7ASTNODE*)0ull) goto label$195;
 	{
 		struct $7ASTNODE* vr$3 = ASTNEWCONSTF( 0x0p+0, 15ll );
 		X1EXPR$1 = vr$3;
@@ -1571,13 +1571,13 @@ int64 RTLGFXWINDOW( struct $7ASTNODE* X1EXPR$1, struct $7ASTNODE* Y1EXPR$1, stru
 	label$195:;
 	label$194:;
 	struct $7ASTNODE* vr$4 = ASTNEWARG( PROC$1, X1EXPR$1, 2147483648ll, -1ll );
-	if( vr$4 != (struct $7ASTNODE*)0ull ) goto label$197;
+	if( vr$4 != (struct $7ASTNODE*)0ull) goto label$197;
 	{
 		goto label$193;
 	}
 	label$197:;
 	label$196:;
-	if( Y1EXPR$1 != (struct $7ASTNODE*)0ull ) goto label$199;
+	if( Y1EXPR$1 != (struct $7ASTNODE*)0ull) goto label$199;
 	{
 		struct $7ASTNODE* vr$5 = ASTNEWCONSTF( 0x0p+0, 15ll );
 		Y1EXPR$1 = vr$5;
@@ -1585,13 +1585,13 @@ int64 RTLGFXWINDOW( struct $7ASTNODE* X1EXPR$1, struct $7ASTNODE* Y1EXPR$1, stru
 	label$199:;
 	label$198:;
 	struct $7ASTNODE* vr$6 = ASTNEWARG( PROC$1, Y1EXPR$1, 2147483648ll, -1ll );
-	if( vr$6 != (struct $7ASTNODE*)0ull ) goto label$201;
+	if( vr$6 != (struct $7ASTNODE*)0ull) goto label$201;
 	{
 		goto label$193;
 	}
 	label$201:;
 	label$200:;
-	if( X2EXPR$1 != (struct $7ASTNODE*)0ull ) goto label$203;
+	if( X2EXPR$1 != (struct $7ASTNODE*)0ull) goto label$203;
 	{
 		struct $7ASTNODE* vr$7 = ASTNEWCONSTF( 0x0p+0, 15ll );
 		X2EXPR$1 = vr$7;
@@ -1599,13 +1599,13 @@ int64 RTLGFXWINDOW( struct $7ASTNODE* X1EXPR$1, struct $7ASTNODE* Y1EXPR$1, stru
 	label$203:;
 	label$202:;
 	struct $7ASTNODE* vr$8 = ASTNEWARG( PROC$1, X2EXPR$1, 2147483648ll, -1ll );
-	if( vr$8 != (struct $7ASTNODE*)0ull ) goto label$205;
+	if( vr$8 != (struct $7ASTNODE*)0ull) goto label$205;
 	{
 		goto label$193;
 	}
 	label$205:;
 	label$204:;
-	if( Y2EXPR$1 != (struct $7ASTNODE*)0ull ) goto label$207;
+	if( Y2EXPR$1 != (struct $7ASTNODE*)0ull) goto label$207;
 	{
 		struct $7ASTNODE* vr$9 = ASTNEWCONSTF( 0x0p+0, 15ll );
 		Y2EXPR$1 = vr$9;
@@ -1613,7 +1613,7 @@ int64 RTLGFXWINDOW( struct $7ASTNODE* X1EXPR$1, struct $7ASTNODE* Y1EXPR$1, stru
 	label$207:;
 	label$206:;
 	struct $7ASTNODE* vr$10 = ASTNEWARG( PROC$1, Y2EXPR$1, 2147483648ll, -1ll );
-	if( vr$10 != (struct $7ASTNODE*)0ull ) goto label$209;
+	if( vr$10 != (struct $7ASTNODE*)0ull) goto label$209;
 	{
 		goto label$193;
 	}
@@ -1621,7 +1621,7 @@ int64 RTLGFXWINDOW( struct $7ASTNODE* X1EXPR$1, struct $7ASTNODE* Y1EXPR$1, stru
 	label$208:;
 	struct $7ASTNODE* vr$11 = ASTNEWCONSTI( SCREENFLAG$1, 8ll, (struct $8FBSYMBOL*)0ull );
 	struct $7ASTNODE* vr$12 = ASTNEWARG( PROC$1, vr$11, 2147483648ll, -1ll );
-	if( vr$12 != (struct $7ASTNODE*)0ull ) goto label$211;
+	if( vr$12 != (struct $7ASTNODE*)0ull) goto label$211;
 	{
 		goto label$193;
 	}
@@ -1643,16 +1643,16 @@ int64 RTLGFXPALETTE( struct $7ASTNODE* ATTEXPR$1, struct $7ASTNODE* REXPR$1, str
 	int64 GBDEFVAL$1;
 	int64 GBMODE$1;
 	fb$result$1 = 0ll;
-	if( ISGET$1 == 0ll ) goto label$215;
+	if( ISGET$1 == 0ll) goto label$215;
 	{
-		int64 TMP$201$2;
-		if( ((*(int64*)((uint8*)REXPR$1 + 8ll) & 511ll) & 480ll) == 0ll ) goto label$216;
-		TMP$201$2 = 24ll;
+		int64 TMP$200$2;
+		if( ((*(int64*)((uint8*)REXPR$1 + 8ll) & 511ll) & 480ll) == 0ll) goto label$216;
+		TMP$200$2 = 24ll;
 		goto label$233;
 		label$216:;
-		TMP$201$2 = (*(int64*)((uint8*)REXPR$1 + 8ll) & 511ll) & 31ll;
+		TMP$200$2 = (*(int64*)((uint8*)REXPR$1 + 8ll) & 511ll) & 31ll;
 		label$233:;
-		if( *(int64*)(((int64)(struct $13SYMB_DATATYPE*)SYMB_DTYPETB$ + (TMP$201$2 * 56ll)) + 8ll) != 8ll ) goto label$218;
+		if( *(int64*)(((int64)(struct $13SYMB_DATATYPE*)SYMB_DTYPETB$ + (TMP$200$2 * 56ll)) + 8ll) != 8ll) goto label$218;
 		{
 			struct $8FBSYMBOL* vr$8 = RTLPROCLOOKUP( (char*)"fb_GfxPaletteGet64", 321ll );
 			F$1 = vr$8;
@@ -1675,13 +1675,13 @@ int64 RTLGFXPALETTE( struct $7ASTNODE* ATTEXPR$1, struct $7ASTNODE* REXPR$1, str
 	struct $7ASTNODE* vr$11 = ASTNEWCALL( F$1, (struct $7ASTNODE*)0ull, -1ll );
 	PROC$1 = vr$11;
 	struct $7ASTNODE* vr$12 = ASTNEWARG( PROC$1, ATTEXPR$1, 2147483648ll, -1ll );
-	if( vr$12 != (struct $7ASTNODE*)0ull ) goto label$220;
+	if( vr$12 != (struct $7ASTNODE*)0ull) goto label$220;
 	{
 		goto label$213;
 	}
 	label$220:;
 	label$219:;
-	if( REXPR$1 != (struct $7ASTNODE*)0ull ) goto label$222;
+	if( REXPR$1 != (struct $7ASTNODE*)0ull) goto label$222;
 	{
 		struct $7ASTNODE* vr$13 = ASTNEWCONSTI( -1ll, 8ll, (struct $8FBSYMBOL*)0ull );
 		REXPR$1 = vr$13;
@@ -1689,20 +1689,20 @@ int64 RTLGFXPALETTE( struct $7ASTNODE* ATTEXPR$1, struct $7ASTNODE* REXPR$1, str
 	label$222:;
 	label$221:;
 	struct $7ASTNODE* vr$14 = ASTNEWARG( PROC$1, REXPR$1, 2147483648ll, -1ll );
-	if( vr$14 != (struct $7ASTNODE*)0ull ) goto label$224;
+	if( vr$14 != (struct $7ASTNODE*)0ull) goto label$224;
 	{
 		goto label$213;
 	}
 	label$224:;
 	label$223:;
-	if( GEXPR$1 == (struct $7ASTNODE*)0ull ) goto label$226;
+	if( GEXPR$1 == (struct $7ASTNODE*)0ull) goto label$226;
 	{
 		GBMODE$1 = -1ll;
 	}
 	goto label$225;
 	label$226:;
 	{
-		if( ISGET$1 == 0ll ) goto label$228;
+		if( ISGET$1 == 0ll) goto label$228;
 		{
 			GBDEFVAL$1 = 0ll;
 		}
@@ -1720,14 +1720,14 @@ int64 RTLGFXPALETTE( struct $7ASTNODE* ATTEXPR$1, struct $7ASTNODE* REXPR$1, str
 	}
 	label$225:;
 	struct $7ASTNODE* vr$17 = ASTNEWARG( PROC$1, GEXPR$1, 2147483648ll, GBMODE$1 );
-	if( vr$17 != (struct $7ASTNODE*)0ull ) goto label$230;
+	if( vr$17 != (struct $7ASTNODE*)0ull) goto label$230;
 	{
 		goto label$213;
 	}
 	label$230:;
 	label$229:;
 	struct $7ASTNODE* vr$18 = ASTNEWARG( PROC$1, BEXPR$1, 2147483648ll, GBMODE$1 );
-	if( vr$18 != (struct $7ASTNODE*)0ull ) goto label$232;
+	if( vr$18 != (struct $7ASTNODE*)0ull) goto label$232;
 	{
 		goto label$213;
 	}
@@ -1747,9 +1747,9 @@ int64 RTLGFXPALETTEUSING( struct $7ASTNODE* ARRAYEXPR$1, int64 ISGET$1, int64 IS
 	struct $7ASTNODE* PROC$1;
 	struct $8FBSYMBOL* F$1;
 	fb$result$1 = 0ll;
-	if( IS64BIT$1 == 0ll ) goto label$237;
+	if( IS64BIT$1 == 0ll) goto label$237;
 	{
-		if( ISGET$1 == 0ll ) goto label$239;
+		if( ISGET$1 == 0ll) goto label$239;
 		{
 			struct $8FBSYMBOL* vr$1 = RTLPROCLOOKUP( (char*)"fb_GfxPaletteGetUsing64", 323ll );
 			F$1 = vr$1;
@@ -1765,7 +1765,7 @@ int64 RTLGFXPALETTEUSING( struct $7ASTNODE* ARRAYEXPR$1, int64 ISGET$1, int64 IS
 	goto label$236;
 	label$237:;
 	{
-		if( ISGET$1 == 0ll ) goto label$241;
+		if( ISGET$1 == 0ll) goto label$241;
 		{
 			struct $8FBSYMBOL* vr$3 = RTLPROCLOOKUP( (char*)"fb_GfxPaletteGetUsing", 322ll );
 			F$1 = vr$3;
@@ -1782,7 +1782,7 @@ int64 RTLGFXPALETTEUSING( struct $7ASTNODE* ARRAYEXPR$1, int64 ISGET$1, int64 IS
 	struct $7ASTNODE* vr$5 = ASTNEWCALL( F$1, (struct $7ASTNODE*)0ull, -1ll );
 	PROC$1 = vr$5;
 	struct $7ASTNODE* vr$6 = ASTNEWARG( PROC$1, ARRAYEXPR$1, 2147483648ll, -1ll );
-	if( vr$6 != (struct $7ASTNODE*)0ull ) goto label$243;
+	if( vr$6 != (struct $7ASTNODE*)0ull) goto label$243;
 	{
 		goto label$235;
 	}
@@ -1805,56 +1805,56 @@ int64 RTLGFXPUT( struct $7ASTNODE* TARGET$1, struct $7ASTNODE* XEXPR$1, struct $
 	struct $7ASTNODE* vr$2 = ASTNEWCALL( vr$1, (struct $7ASTNODE*)0ull, -1ll );
 	PROC$1 = vr$2;
 	struct $7ASTNODE* vr$3 = ASTNEWARG( PROC$1, TARGET$1, 2147483648ll, -1ll );
-	if( vr$3 != (struct $7ASTNODE*)0ull ) goto label$247;
+	if( vr$3 != (struct $7ASTNODE*)0ull) goto label$247;
 	{
 		goto label$245;
 	}
 	label$247:;
 	label$246:;
 	struct $7ASTNODE* vr$4 = ASTNEWARG( PROC$1, XEXPR$1, 2147483648ll, -1ll );
-	if( vr$4 != (struct $7ASTNODE*)0ull ) goto label$249;
+	if( vr$4 != (struct $7ASTNODE*)0ull) goto label$249;
 	{
 		goto label$245;
 	}
 	label$249:;
 	label$248:;
 	struct $7ASTNODE* vr$5 = ASTNEWARG( PROC$1, YEXPR$1, 2147483648ll, -1ll );
-	if( vr$5 != (struct $7ASTNODE*)0ull ) goto label$251;
+	if( vr$5 != (struct $7ASTNODE*)0ull) goto label$251;
 	{
 		goto label$245;
 	}
 	label$251:;
 	label$250:;
 	struct $7ASTNODE* vr$6 = ASTNEWARG( PROC$1, ARRAYEXPR$1, 2147483648ll, -1ll );
-	if( vr$6 != (struct $7ASTNODE*)0ull ) goto label$253;
+	if( vr$6 != (struct $7ASTNODE*)0ull) goto label$253;
 	{
 		goto label$245;
 	}
 	label$253:;
 	label$252:;
 	struct $7ASTNODE* vr$7 = ASTNEWARG( PROC$1, X1EXPR$1, 2147483648ll, -1ll );
-	if( vr$7 != (struct $7ASTNODE*)0ull ) goto label$255;
+	if( vr$7 != (struct $7ASTNODE*)0ull) goto label$255;
 	{
 		goto label$245;
 	}
 	label$255:;
 	label$254:;
 	struct $7ASTNODE* vr$8 = ASTNEWARG( PROC$1, X2EXPR$1, 2147483648ll, -1ll );
-	if( vr$8 != (struct $7ASTNODE*)0ull ) goto label$257;
+	if( vr$8 != (struct $7ASTNODE*)0ull) goto label$257;
 	{
 		goto label$245;
 	}
 	label$257:;
 	label$256:;
 	struct $7ASTNODE* vr$9 = ASTNEWARG( PROC$1, Y1EXPR$1, 2147483648ll, -1ll );
-	if( vr$9 != (struct $7ASTNODE*)0ull ) goto label$259;
+	if( vr$9 != (struct $7ASTNODE*)0ull) goto label$259;
 	{
 		goto label$245;
 	}
 	label$259:;
 	label$258:;
 	struct $7ASTNODE* vr$10 = ASTNEWARG( PROC$1, Y2EXPR$1, 2147483648ll, -1ll );
-	if( vr$10 != (struct $7ASTNODE*)0ull ) goto label$261;
+	if( vr$10 != (struct $7ASTNODE*)0ull) goto label$261;
 	{
 		goto label$245;
 	}
@@ -1862,7 +1862,7 @@ int64 RTLGFXPUT( struct $7ASTNODE* TARGET$1, struct $7ASTNODE* XEXPR$1, struct $
 	label$260:;
 	struct $7ASTNODE* vr$11 = ASTNEWCONSTI( COORDTYPE$1, 8ll, (struct $8FBSYMBOL*)0ull );
 	struct $7ASTNODE* vr$12 = ASTNEWARG( PROC$1, vr$11, 2147483648ll, -1ll );
-	if( vr$12 != (struct $7ASTNODE*)0ull ) goto label$263;
+	if( vr$12 != (struct $7ASTNODE*)0ull) goto label$263;
 	{
 		goto label$245;
 	}
@@ -1870,7 +1870,7 @@ int64 RTLGFXPUT( struct $7ASTNODE* TARGET$1, struct $7ASTNODE* XEXPR$1, struct $
 	label$262:;
 	struct $7ASTNODE* vr$13 = ASTNEWCONSTI( MODE$1, 8ll, (struct $8FBSYMBOL*)0ull );
 	struct $7ASTNODE* vr$14 = ASTNEWARG( PROC$1, vr$13, 2147483648ll, -1ll );
-	if( vr$14 != (struct $7ASTNODE*)0ull ) goto label$265;
+	if( vr$14 != (struct $7ASTNODE*)0ull) goto label$265;
 	{
 		goto label$245;
 	}
@@ -1878,28 +1878,28 @@ int64 RTLGFXPUT( struct $7ASTNODE* TARGET$1, struct $7ASTNODE* XEXPR$1, struct $
 	label$264:;
 	struct $7ASTNODE* vr$15 = HGETPUTTER( MODE$1 );
 	struct $7ASTNODE* vr$16 = ASTNEWARG( PROC$1, vr$15, 2147483648ll, -1ll );
-	if( vr$16 != (struct $7ASTNODE*)0ull ) goto label$267;
+	if( vr$16 != (struct $7ASTNODE*)0ull) goto label$267;
 	{
 		goto label$245;
 	}
 	label$267:;
 	label$266:;
 	struct $7ASTNODE* vr$17 = ASTNEWARG( PROC$1, ALPHAEXPR$1, 2147483648ll, -1ll );
-	if( vr$17 != (struct $7ASTNODE*)0ull ) goto label$269;
+	if( vr$17 != (struct $7ASTNODE*)0ull) goto label$269;
 	{
 		goto label$245;
 	}
 	label$269:;
 	label$268:;
 	struct $7ASTNODE* vr$18 = ASTNEWARG( PROC$1, FUNCEXPR$1, 2147483648ll, -1ll );
-	if( vr$18 != (struct $7ASTNODE*)0ull ) goto label$271;
+	if( vr$18 != (struct $7ASTNODE*)0ull) goto label$271;
 	{
 		goto label$245;
 	}
 	label$271:;
 	label$270:;
 	struct $7ASTNODE* vr$19 = ASTNEWARG( PROC$1, PARAMEXPR$1, 2147483648ll, -1ll );
-	if( vr$19 != (struct $7ASTNODE*)0ull ) goto label$273;
+	if( vr$19 != (struct $7ASTNODE*)0ull) goto label$273;
 	{
 		goto label$245;
 	}
@@ -1914,59 +1914,59 @@ int64 RTLGFXPUT( struct $7ASTNODE* TARGET$1, struct $7ASTNODE* XEXPR$1, struct $
 
 int64 RTLGFXGET( struct $7ASTNODE* TARGET$1, struct $7ASTNODE* X1EXPR$1, struct $7ASTNODE* Y1EXPR$1, struct $7ASTNODE* X2EXPR$1, struct $7ASTNODE* Y2EXPR$1, struct $7ASTNODE* ARRAYEXPR$1, int64 COORDTYPE$1, struct $7ASTNODE* DESCEXPR$1 )
 {
-	struct $8FBSYMBOL* TMP$202$1;
+	struct $8FBSYMBOL* TMP$201$1;
 	int64 fb$result$1;
 	__builtin_memset( &fb$result$1, 0, 8ll );
 	label$274:;
 	struct $7ASTNODE* PROC$1;
 	fb$result$1 = 0ll;
-	if( *(int64*)((uint8*)&ENV$ + 272ll) != 0ll ) goto label$276;
+	if( *(int64*)((uint8*)&ENV$ + 272ll) != 0ll) goto label$276;
 	struct $8FBSYMBOL* vr$1 = RTLPROCLOOKUP( (char*)"fb_GfxGet", 335ll );
-	TMP$202$1 = vr$1;
+	TMP$201$1 = vr$1;
 	goto label$297;
 	label$276:;
 	struct $8FBSYMBOL* vr$2 = RTLPROCLOOKUP( (char*)"fb_GfxGetQB", 336ll );
-	TMP$202$1 = vr$2;
+	TMP$201$1 = vr$2;
 	label$297:;
-	struct $7ASTNODE* vr$3 = ASTNEWCALL( TMP$202$1, (struct $7ASTNODE*)0ull, -1ll );
+	struct $7ASTNODE* vr$3 = ASTNEWCALL( TMP$201$1, (struct $7ASTNODE*)0ull, -1ll );
 	PROC$1 = vr$3;
 	struct $7ASTNODE* vr$4 = ASTNEWARG( PROC$1, TARGET$1, 2147483648ll, -1ll );
-	if( vr$4 != (struct $7ASTNODE*)0ull ) goto label$278;
+	if( vr$4 != (struct $7ASTNODE*)0ull) goto label$278;
 	{
 		goto label$275;
 	}
 	label$278:;
 	label$277:;
 	struct $7ASTNODE* vr$5 = ASTNEWARG( PROC$1, X1EXPR$1, 2147483648ll, -1ll );
-	if( vr$5 != (struct $7ASTNODE*)0ull ) goto label$280;
+	if( vr$5 != (struct $7ASTNODE*)0ull) goto label$280;
 	{
 		goto label$275;
 	}
 	label$280:;
 	label$279:;
 	struct $7ASTNODE* vr$6 = ASTNEWARG( PROC$1, Y1EXPR$1, 2147483648ll, -1ll );
-	if( vr$6 != (struct $7ASTNODE*)0ull ) goto label$282;
+	if( vr$6 != (struct $7ASTNODE*)0ull) goto label$282;
 	{
 		goto label$275;
 	}
 	label$282:;
 	label$281:;
 	struct $7ASTNODE* vr$7 = ASTNEWARG( PROC$1, X2EXPR$1, 2147483648ll, -1ll );
-	if( vr$7 != (struct $7ASTNODE*)0ull ) goto label$284;
+	if( vr$7 != (struct $7ASTNODE*)0ull) goto label$284;
 	{
 		goto label$275;
 	}
 	label$284:;
 	label$283:;
 	struct $7ASTNODE* vr$8 = ASTNEWARG( PROC$1, Y2EXPR$1, 2147483648ll, -1ll );
-	if( vr$8 != (struct $7ASTNODE*)0ull ) goto label$286;
+	if( vr$8 != (struct $7ASTNODE*)0ull) goto label$286;
 	{
 		goto label$275;
 	}
 	label$286:;
 	label$285:;
 	struct $7ASTNODE* vr$9 = ASTNEWARG( PROC$1, ARRAYEXPR$1, 2147483648ll, -1ll );
-	if( vr$9 != (struct $7ASTNODE*)0ull ) goto label$288;
+	if( vr$9 != (struct $7ASTNODE*)0ull) goto label$288;
 	{
 		goto label$275;
 	}
@@ -1974,16 +1974,16 @@ int64 RTLGFXGET( struct $7ASTNODE* TARGET$1, struct $7ASTNODE* X1EXPR$1, struct 
 	label$287:;
 	struct $7ASTNODE* vr$10 = ASTNEWCONSTI( COORDTYPE$1, 8ll, (struct $8FBSYMBOL*)0ull );
 	struct $7ASTNODE* vr$11 = ASTNEWARG( PROC$1, vr$10, 2147483648ll, -1ll );
-	if( vr$11 != (struct $7ASTNODE*)0ull ) goto label$290;
+	if( vr$11 != (struct $7ASTNODE*)0ull) goto label$290;
 	{
 		goto label$275;
 	}
 	label$290:;
 	label$289:;
-	if( DESCEXPR$1 == (struct $7ASTNODE*)0ull ) goto label$292;
+	if( DESCEXPR$1 == (struct $7ASTNODE*)0ull) goto label$292;
 	{
 		struct $7ASTNODE* vr$12 = ASTNEWARG( PROC$1, DESCEXPR$1, 2147483648ll, -1ll );
-		if( vr$12 != (struct $7ASTNODE*)0ull ) goto label$294;
+		if( vr$12 != (struct $7ASTNODE*)0ull) goto label$294;
 		{
 			goto label$275;
 		}
@@ -1995,7 +1995,7 @@ int64 RTLGFXGET( struct $7ASTNODE* TARGET$1, struct $7ASTNODE* X1EXPR$1, struct 
 	{
 		struct $7ASTNODE* vr$13 = ASTNEWCONSTI( 0ll, 8ll, (struct $8FBSYMBOL*)0ull );
 		struct $7ASTNODE* vr$14 = ASTNEWARG( PROC$1, vr$13, 2147483648ll, 1ll );
-		if( vr$14 != (struct $7ASTNODE*)0ull ) goto label$296;
+		if( vr$14 != (struct $7ASTNODE*)0ull) goto label$296;
 		{
 			goto label$275;
 		}
@@ -2021,35 +2021,35 @@ int64 RTLGFXSCREENSET( struct $7ASTNODE* MEXPR$1, struct $7ASTNODE* DEXPR$1, str
 	struct $7ASTNODE* vr$2 = ASTNEWCALL( vr$1, (struct $7ASTNODE*)0ull, -1ll );
 	PROC$1 = vr$2;
 	struct $7ASTNODE* vr$3 = ASTNEWARG( PROC$1, MEXPR$1, 2147483648ll, -1ll );
-	if( vr$3 != (struct $7ASTNODE*)0ull ) goto label$301;
+	if( vr$3 != (struct $7ASTNODE*)0ull) goto label$301;
 	{
 		goto label$299;
 	}
 	label$301:;
 	label$300:;
 	struct $7ASTNODE* vr$4 = ASTNEWARG( PROC$1, DEXPR$1, 2147483648ll, -1ll );
-	if( vr$4 != (struct $7ASTNODE*)0ull ) goto label$303;
+	if( vr$4 != (struct $7ASTNODE*)0ull) goto label$303;
 	{
 		goto label$299;
 	}
 	label$303:;
 	label$302:;
 	struct $7ASTNODE* vr$5 = ASTNEWARG( PROC$1, PEXPR$1, 2147483648ll, -1ll );
-	if( vr$5 != (struct $7ASTNODE*)0ull ) goto label$305;
+	if( vr$5 != (struct $7ASTNODE*)0ull) goto label$305;
 	{
 		goto label$299;
 	}
 	label$305:;
 	label$304:;
 	struct $7ASTNODE* vr$6 = ASTNEWARG( PROC$1, FEXPR$1, 2147483648ll, -1ll );
-	if( vr$6 != (struct $7ASTNODE*)0ull ) goto label$307;
+	if( vr$6 != (struct $7ASTNODE*)0ull) goto label$307;
 	{
 		goto label$299;
 	}
 	label$307:;
 	label$306:;
 	struct $7ASTNODE* vr$7 = ASTNEWARG( PROC$1, REXPR$1, 2147483648ll, -1ll );
-	if( vr$7 != (struct $7ASTNODE*)0ull ) goto label$309;
+	if( vr$7 != (struct $7ASTNODE*)0ull) goto label$309;
 	{
 		goto label$299;
 	}
@@ -2073,21 +2073,21 @@ int64 RTLGFXSCREENSETQB( struct $7ASTNODE* MODE$1, struct $7ASTNODE* ACTIVE$1, s
 	struct $7ASTNODE* vr$2 = ASTNEWCALL( vr$1, (struct $7ASTNODE*)0ull, -1ll );
 	PROC$1 = vr$2;
 	struct $7ASTNODE* vr$3 = ASTNEWARG( PROC$1, MODE$1, 2147483648ll, -1ll );
-	if( vr$3 != (struct $7ASTNODE*)0ull ) goto label$313;
+	if( vr$3 != (struct $7ASTNODE*)0ull) goto label$313;
 	{
 		goto label$311;
 	}
 	label$313:;
 	label$312:;
 	struct $7ASTNODE* vr$4 = ASTNEWARG( PROC$1, ACTIVE$1, 2147483648ll, -1ll );
-	if( vr$4 != (struct $7ASTNODE*)0ull ) goto label$315;
+	if( vr$4 != (struct $7ASTNODE*)0ull) goto label$315;
 	{
 		goto label$311;
 	}
 	label$315:;
 	label$314:;
 	struct $7ASTNODE* vr$5 = ASTNEWARG( PROC$1, VISIBLE$1, 2147483648ll, -1ll );
-	if( vr$5 != (struct $7ASTNODE*)0ull ) goto label$317;
+	if( vr$5 != (struct $7ASTNODE*)0ull) goto label$317;
 	{
 		goto label$311;
 	}
@@ -2102,45 +2102,45 @@ int64 RTLGFXSCREENSETQB( struct $7ASTNODE* MODE$1, struct $7ASTNODE* ACTIVE$1, s
 
 struct $7ASTNODE* RTLGFXIMAGECREATE( struct $7ASTNODE* WEXPR$1, struct $7ASTNODE* HEXPR$1, struct $7ASTNODE* CEXPR$1, struct $7ASTNODE* DEXPR$1, int64 FLAGS$1 )
 {
-	struct $8FBSYMBOL* TMP$203$1;
+	struct $8FBSYMBOL* TMP$202$1;
 	struct $7ASTNODE* fb$result$1;
 	__builtin_memset( &fb$result$1, 0, 8ll );
 	label$318:;
 	struct $7ASTNODE* PROC$1;
 	fb$result$1 = (struct $7ASTNODE*)0ull;
-	if( *(int64*)((uint8*)&ENV$ + 272ll) != 0ll ) goto label$320;
+	if( *(int64*)((uint8*)&ENV$ + 272ll) != 0ll) goto label$320;
 	struct $8FBSYMBOL* vr$1 = RTLPROCLOOKUP( (char*)"fb_GfxImageCreate", 339ll );
-	TMP$203$1 = vr$1;
+	TMP$202$1 = vr$1;
 	goto label$331;
 	label$320:;
 	struct $8FBSYMBOL* vr$2 = RTLPROCLOOKUP( (char*)"fb_GfxImageCreateQB", 340ll );
-	TMP$203$1 = vr$2;
+	TMP$202$1 = vr$2;
 	label$331:;
-	struct $7ASTNODE* vr$3 = ASTNEWCALL( TMP$203$1, (struct $7ASTNODE*)0ull, -1ll );
+	struct $7ASTNODE* vr$3 = ASTNEWCALL( TMP$202$1, (struct $7ASTNODE*)0ull, -1ll );
 	PROC$1 = vr$3;
 	struct $7ASTNODE* vr$4 = ASTNEWARG( PROC$1, WEXPR$1, 2147483648ll, -1ll );
-	if( vr$4 != (struct $7ASTNODE*)0ull ) goto label$322;
+	if( vr$4 != (struct $7ASTNODE*)0ull) goto label$322;
 	{
 		goto label$319;
 	}
 	label$322:;
 	label$321:;
 	struct $7ASTNODE* vr$5 = ASTNEWARG( PROC$1, HEXPR$1, 2147483648ll, -1ll );
-	if( vr$5 != (struct $7ASTNODE*)0ull ) goto label$324;
+	if( vr$5 != (struct $7ASTNODE*)0ull) goto label$324;
 	{
 		goto label$319;
 	}
 	label$324:;
 	label$323:;
 	struct $7ASTNODE* vr$6 = ASTNEWARG( PROC$1, CEXPR$1, 2147483648ll, -1ll );
-	if( vr$6 != (struct $7ASTNODE*)0ull ) goto label$326;
+	if( vr$6 != (struct $7ASTNODE*)0ull) goto label$326;
 	{
 		goto label$319;
 	}
 	label$326:;
 	label$325:;
 	struct $7ASTNODE* vr$7 = ASTNEWARG( PROC$1, DEXPR$1, 2147483648ll, -1ll );
-	if( vr$7 != (struct $7ASTNODE*)0ull ) goto label$328;
+	if( vr$7 != (struct $7ASTNODE*)0ull) goto label$328;
 	{
 		goto label$319;
 	}
@@ -2148,7 +2148,7 @@ struct $7ASTNODE* RTLGFXIMAGECREATE( struct $7ASTNODE* WEXPR$1, struct $7ASTNODE
 	label$327:;
 	struct $7ASTNODE* vr$8 = ASTNEWCONSTI( FLAGS$1, 8ll, (struct $8FBSYMBOL*)0ull );
 	struct $7ASTNODE* vr$9 = ASTNEWARG( PROC$1, vr$8, 2147483648ll, -1ll );
-	if( vr$9 != (struct $7ASTNODE*)0ull ) goto label$330;
+	if( vr$9 != (struct $7ASTNODE*)0ull) goto label$330;
 	{
 		goto label$319;
 	}
@@ -2182,7 +2182,7 @@ static int64 HPORTS_CB( struct $8FBSYMBOL* SYM$1 )
 	static int64 RESTART_COUNT$1;
 	static int64 LIBSADDED$1 = 0ll;
 	int64 vr$1 = FBRESTARTGETCOUNT(  );
-	if( RESTART_COUNT$1 == vr$1 ) goto label$17;
+	if( RESTART_COUNT$1 == vr$1) goto label$17;
 	{
 		int64 vr$2 = FBRESTARTGETCOUNT(  );
 		RESTART_COUNT$1 = vr$2;
@@ -2190,15 +2190,15 @@ static int64 HPORTS_CB( struct $8FBSYMBOL* SYM$1 )
 	}
 	label$17:;
 	label$16:;
-	if( LIBSADDED$1 != 0ll ) goto label$19;
+	if( LIBSADDED$1 != 0ll) goto label$19;
 	{
 		LIBSADDED$1 = -1ll;
 		{
-			$13FB_COMPTARGET TMP$196$3;
-			TMP$196$3 = *($13FB_COMPTARGET*)((uint8*)&ENV$ + 216ll);
-			if( TMP$196$3 == 0ll ) goto label$22;
+			$13FB_COMPTARGET TMP$195$3;
+			TMP$195$3 = *($13FB_COMPTARGET*)((uint8*)&ENV$ + 216ll);
+			if( TMP$195$3 == 0ll) goto label$22;
 			label$23:;
-			if( TMP$196$3 != 1ll ) goto label$21;
+			if( TMP$195$3 != 1ll) goto label$21;
 			label$22:;
 			{
 				FBADDLIB( (char*)"advapi32" );
@@ -2232,8 +2232,8 @@ static struct $7ASTNODE* HGETPUTTER( int64 MODE$1 )
 	label$26:;
 	struct $8FBSYMBOL* PROC$1;
 	{
-		uint64 TMP$198$2;
-		TMP$198$2 = (uint64)MODE$1;
+		uint64 TMP$197$2;
+		TMP$197$2 = (uint64)MODE$1;
 		goto label$29;
 		label$30:;
 		{
@@ -2296,7 +2296,7 @@ static struct $7ASTNODE* HGETPUTTER( int64 MODE$1 )
 		}
 		goto label$28;
 		label$29:;
-		static const void* tmp$204[10ll] = {
+		static const void* tmp$203[10ll] = {
 			&&label$30,
 			&&label$31,
 			&&label$32,
@@ -2308,8 +2308,8 @@ static struct $7ASTNODE* HGETPUTTER( int64 MODE$1 )
 			&&label$39,
 			&&label$37,
 		};
-		if( TMP$198$2 > 9ull ) goto label$39;
-		goto *tmp$204[TMP$198$2 - 0ull];
+		if( TMP$197$2 > 9ull ) goto label$39;
+		goto *tmp$203[TMP$197$2 - 0ull];
 		label$28:;
 	}
 	struct $7ASTNODE* vr$11 = ASTBUILDPROCADDROF( PROC$1 );

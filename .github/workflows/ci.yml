@@ -16,23 +16,56 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - os: ubuntu-24.04
-            name: linux-x86_64
-          - os: macos-14
-            name: darwin-aarch64
-          - os: windows-latest
-            name: win64
+          - name: linux-x86_64
+            runner: ubuntu-24.04
+            family: unix
+            expected_host: linux-x86_64
+          - name: linux-aarch64
+            runner: ubuntu-24.04-arm
+            family: unix
+            expected_host: linux-aarch64
+          - name: darwin-x86_64
+            runner: macos-15-intel
+            family: unix
+            expected_host: darwin-x86_64
+          - name: darwin-aarch64
+            runner: macos-15
+            family: unix
+            expected_host: darwin-aarch64
+          - name: win64
+            runner: windows-2025
+            family: windows
+            expected_host: win64
+            msystem: MINGW64
+            packages: >-
+              mingw-w64-x86_64-cmake
+              mingw-w64-x86_64-ninja
+              mingw-w64-x86_64-gcc
+              python
+          - name: win32-aarch64
+            runner: windows-11-arm
+            family: windows
+            expected_host: win32-aarch64
+            msystem: CLANGARM64
+            packages: >-
+              mingw-w64-clang-aarch64-cmake
+              mingw-w64-clang-aarch64-ninja
+              mingw-w64-clang-aarch64-gcc
+              python
 
     name: Build ${{ matrix.name }}
-    runs-on: ${{ matrix.os }}
+    runs-on: ${{ matrix.runner }}
 
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
         with:
           persist-credentials: false
 
-      - name: Verify version metadata
-        run: python3 scripts/check-version.py
+      - name: Verify version and bootstrap metadata (Unix)
+        if: matrix.family == 'unix'
+        run: |
+          python3 scripts/check-version.py
+          python3 scripts/check-bootstrap-provenance.py --target "${{ matrix.expected_host }}"
 
       - name: Install dependencies (Linux)
         if: runner.os == 'Linux'
@@ -43,61 +76,86 @@ jobs:
         run: brew install cmake ninja
 
       - name: Setup MSYS2 (Windows)
-        if: runner.os == 'Windows'
+        if: matrix.family == 'windows'
         uses: msys2/setup-msys2@66cd2cce69caa17b53920067426061ca1de3a884 # v2.32.0
         with:
-          msystem: MINGW64
-          install: mingw-w64-x86_64-cmake mingw-w64-x86_64-ninja mingw-w64-x86_64-gcc
+          msystem: ${{ matrix.msystem }}
+          update: true
+          install: ${{ matrix.packages }}
 
-      - name: Configure & Build (Unix)
-        if: runner.os != 'Windows'
-        run: |
-          cmake -B build -G Ninja -DCMAKE_BUILD_TYPE=Release -DFB_STANDALONE=ON -DFB_BUILD_GFXLIB=OFF
-          cmake --build build
-
-      - name: Configure & Build (Windows)
-        if: runner.os == 'Windows'
+      - name: Verify version and bootstrap metadata (Windows)
+        if: matrix.family == 'windows'
         shell: msys2 {0}
         run: |
-          cmake -B build -G Ninja -DCMAKE_BUILD_TYPE=Release -DFB_STANDALONE=ON -DFB_BUILD_GFXLIB=OFF
+          python scripts/check-version.py
+          python scripts/check-bootstrap-provenance.py --target "${{ matrix.expected_host }}"
+
+      - name: Configure and build (Unix)
+        if: matrix.family == 'unix'
+        run: |
+          cmake -B build -G Ninja -DCMAKE_BUILD_TYPE=Release -DFB_BUILD_GFXLIB=OFF
           cmake --build build
 
-      - name: Test fbc
-        if: runner.os != 'Windows'
-        run: ./build/src/compiler/fbc --version
-
-      - name: Test fbc (Windows)
-        if: runner.os == 'Windows'
+      - name: Configure and build (Windows)
+        if: matrix.family == 'windows'
         shell: msys2 {0}
-        run: ./build/src/compiler/fbc.exe --version
+        run: |
+          cmake -B build -G Ninja -DCMAKE_BUILD_TYPE=Release -DFB_BUILD_GFXLIB=OFF
+          cmake --build build
 
-  amiga-test:
-    name: AmigaOS targets (C generation)
+      - name: Test staged installation (Unix)
+        if: matrix.family == 'unix'
+        run: |
+          cmake --install build --prefix stage
+          python3 scripts/verify-installed-fbc.py --prefix stage --expected-host "${{ matrix.expected_host }}"
+
+      - name: Test staged installation (Windows)
+        if: matrix.family == 'windows'
+        shell: msys2 {0}
+        run: |
+          cmake --install build --prefix stage
+          python scripts/verify-installed-fbc.py --prefix stage --expected-host "${{ matrix.expected_host }}"
+
+  target-generation:
+    name: Target generation (C output only)
     runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
         with:
           persist-credentials: false
 
-      - name: Verify version metadata
-        run: python3 scripts/check-version.py
+      - name: Verify version and bootstrap metadata
+        run: |
+          python3 scripts/check-version.py
+          python3 scripts/check-bootstrap-provenance.py --target linux-x86_64
 
-      - name: Build fbc
+      - name: Build native producer
         run: |
           sudo apt-get update && sudo apt-get install -y cmake ninja-build libncurses-dev libx11-dev libgpm-dev
-          cmake -B build -G Ninja -DCMAKE_BUILD_TYPE=Release -DFB_STANDALONE=ON -DFB_BUILD_GFXLIB=OFF
+          cmake -B build -G Ninja -DCMAKE_BUILD_TYPE=Release -DFB_BUILD_GFXLIB=OFF
           cmake --build build
 
-      - name: Test all Amiga targets
+      - name: Generate C for declared targets
         run: |
-          echo 'Print "Hello Amiga!"' > /tmp/hello.bas
+          printf 'Print "FreeBASIC-NG target smoke"\n' > /tmp/hello.bas
+          generate() {
+            target_name="$1"
+            target_os="$2"
+            target_arch="$3"
+            output="/tmp/${target_name}.c"
+            ./build/src/compiler/fbc -gen gcc -r -m hello -target "$target_os" -arch "$target_arch" /tmp/hello.bas
+            mv /tmp/hello.c "$output"
+            grep -q "fb_PrintString" "$output"
+            echo "generated C only for ${target_name}; no target ABI, linker or runtime assertion"
+          }
+          generate linux-x86_64 linux x86_64
+          generate linux-aarch64 linux aarch64
+          generate darwin-x86_64 darwin x86_64
+          generate darwin-aarch64 darwin aarch64
+          generate win64 win32 x86_64
+          generate win32-aarch64 win32 aarch64
           for target in amiga aros-x86_64 aros-aarch64 morphos amigaos4; do
-            ./build/src/compiler/fbc -gen gcc -r -m hello -target $target /tmp/hello.bas
-            if grep -q "fb_PrintString" /tmp/hello.c; then
-              echo "validated generated C for $target"
-            else
-              echo "missing generated runtime call for $target"
-              exit 1
-            fi
+            ./build/src/compiler/fbc -gen gcc -r -m hello -target "$target" /tmp/hello.bas
+            grep -q "fb_PrintString" /tmp/hello.c
+            echo "generated C only for ${target}; no target ABI, linker or runtime assertion"
           done
-          echo "All Amiga targets generate valid C!"

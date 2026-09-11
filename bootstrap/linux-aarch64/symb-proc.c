@@ -391,9 +391,9 @@ struct $8FBS_ENUM {
 __FB_STATIC_ASSERT( sizeof( struct $8FBS_ENUM ) == 96 );
 typedef int64 $11FB_FUNCMODE;
 typedef int64 $21FB_PROC_RETURN_METHOD;
-typedef int64 (*tmp$35)( struct $8FBSYMBOL* );
+typedef int64 (*tmp$34)( struct $8FBSYMBOL* );
 struct $10FB_PROCRTL {
-	tmp$35 CALLBACK;
+	tmp$34 CALLBACK;
 };
 __FB_STATIC_ASSERT( sizeof( struct $10FB_PROCRTL ) == 8 );
 struct $10FB_PROCOVL {
@@ -523,7 +523,7 @@ struct $9FB_DEFTOK {
 };
 __FB_STATIC_ASSERT( sizeof( struct $9FB_DEFTOK ) == 32 );
 typedef int64 $15FB_DEFINE_FLAGS;
-typedef FBSTRING* (*tmp$29)( void );
+typedef FBSTRING* (*tmp$28)( void );
 struct $8DZSTRING {
 	char* DATA;
 	int64 LEN;
@@ -548,8 +548,8 @@ struct $11LEXPP_ARGTB {
 	int64 COUNT;
 };
 __FB_STATIC_ASSERT( sizeof( struct $11LEXPP_ARGTB ) == 776 );
-typedef FBSTRING* (*tmp$30)( struct $11LEXPP_ARGTB*, int64* );
-typedef uint32* (*tmp$31)( struct $11LEXPP_ARGTB*, int64* );
+typedef FBSTRING* (*tmp$29)( struct $11LEXPP_ARGTB*, int64* );
+typedef uint32* (*tmp$30)( struct $11LEXPP_ARGTB*, int64* );
 struct $10FBS_DEFINE {
 	int64 PARAMS;
 	struct $11FB_DEFPARAM* PARAMHEAD;
@@ -561,11 +561,11 @@ struct $10FBS_DEFINE {
 	int64 ISARGLESS;
 	$15FB_DEFINE_FLAGS FLAGS;
 	union {
-		tmp$29 DPROCZ;
-		tmp$30 MPROCZ;
+		tmp$28 DPROCZ;
+		tmp$29 MPROCZ;
 	};
 	union {
-		tmp$31 MPROCW;
+		tmp$30 MPROCW;
 	};
 };
 __FB_STATIC_ASSERT( sizeof( struct $10FBS_DEFINE ) == 56 );
@@ -854,7 +854,7 @@ struct $8FBARRAY1I10AST_OPINFOE {
 	struct $16__FB_ARRAYDIMTB$ DIMTB[1];
 };
 __FB_STATIC_ASSERT( sizeof( struct $8FBARRAY1I10AST_OPINFOE ) == 72 );
-static struct $8FBARRAY1I10AST_OPINFOE tmp$83$;
+static struct $8FBARRAY1I10AST_OPINFOE tmp$82$;
 struct $12FBHASHTBLIST {
 	struct $8FBHASHTB* HEAD;
 	struct $8FBHASHTB* TAIL;
@@ -959,7 +959,7 @@ struct $8FBARRAY1I13SYMB_DATATYPEE {
 	struct $16__FB_ARRAYDIMTB$ DIMTB[1];
 };
 __FB_STATIC_ASSERT( sizeof( struct $8FBARRAY1I13SYMB_DATATYPEE ) == 72 );
-static struct $8FBARRAY1I13SYMB_DATATYPEE tmp$84$;
+static struct $8FBARRAY1I13SYMB_DATATYPEE tmp$83$;
 extern int64 SYMB_DTYPEMATCHTB$[16][16];
 struct $8FBARRAY2IlE {
 	int64* DATA;
@@ -971,7 +971,7 @@ struct $8FBARRAY2IlE {
 	struct $16__FB_ARRAYDIMTB$ DIMTB[2];
 };
 __FB_STATIC_ASSERT( sizeof( struct $8FBARRAY2IlE ) == 96 );
-static struct $8FBARRAY2IlE tmp$85$;
+static struct $8FBARRAY2IlE tmp$84$;
 typedef int64 $10FB_OUTTYPE;
 typedef int64 $10FB_BACKEND;
 typedef int64 $13FB_COMPTARGET;
@@ -1286,7 +1286,7 @@ void SYMBPROCEND( void )
 void SYMBPROCALLOCEXT( struct $8FBSYMBOL* PROC$1 )
 {
 	label$14:;
-	if( *(struct $10FB_PROCEXT**)((uint8*)PROC$1 + 208ll) != (struct $10FB_PROCEXT*)0ull ) goto label$17;
+	if( *(struct $10FB_PROCEXT**)((uint8*)PROC$1 + 208ll) != (struct $10FB_PROCEXT*)0ull) goto label$17;
 	{
 		void* vr$1 = XCALLOCATE( 152 );
 		*(struct $10FB_PROCEXT**)((uint8*)PROC$1 + 208ll) = (struct $10FB_PROCEXT*)vr$1;
@@ -1299,7 +1299,7 @@ void SYMBPROCALLOCEXT( struct $8FBSYMBOL* PROC$1 )
 void SYMBPROCFREEEXT( struct $8FBSYMBOL* PROC$1 )
 {
 	label$18:;
-	if( *(struct $10FB_PROCEXT**)((uint8*)PROC$1 + 208ll) == (struct $10FB_PROCEXT*)0ull ) goto label$21;
+	if( *(struct $10FB_PROCEXT**)((uint8*)PROC$1 + 208ll) == (struct $10FB_PROCEXT*)0ull) goto label$21;
 	{
 		free( *(void**)((uint8*)PROC$1 + 208ll) );
 		*(struct $10FB_PROCEXT**)((uint8*)PROC$1 + 208ll) = (struct $10FB_PROCEXT*)0ull;
@@ -1314,22 +1314,22 @@ int64 SYMBPROCRETURNSONSTACK( struct $8FBSYMBOL* PROC$1 )
 	int64 fb$result$1;
 	__builtin_memset( &fb$result$1, 0, 8ll );
 	label$22:;
-	if( (*(int64*)((uint8*)PROC$1 + 16ll) & 2048ll) == 0ll ) goto label$25;
+	if( (*(int64*)((uint8*)PROC$1 + 16ll) & 2048ll) == 0ll) goto label$25;
 	{
 		goto label$23;
 	}
 	label$25:;
 	label$24:;
-	if( (*(int64*)((uint8*)PROC$1 + 56ll) & 511ll) != 20ll ) goto label$27;
+	if( (*(int64*)((uint8*)PROC$1 + 56ll) & 511ll) != 20ll) goto label$27;
 	{
-		int64 TMP$96$2;
-		if( *(struct $8FBSYMBOL**)((uint8*)PROC$1 + 64ll) == (struct $8FBSYMBOL*)0ull ) goto label$28;
-		TMP$96$2 = (int64)-(*(int64*)((uint8*)*(struct $8FBSYMBOL**)((uint8*)PROC$1 + 64ll) + 224ll) != 0ll);
+		int64 TMP$95$2;
+		if( *(struct $8FBSYMBOL**)((uint8*)PROC$1 + 64ll) == (struct $8FBSYMBOL*)0ull) goto label$28;
+		TMP$95$2 = (int64)-(*(int64*)((uint8*)*(struct $8FBSYMBOL**)((uint8*)PROC$1 + 64ll) + 224ll) != 0ll);
 		goto label$31;
 		label$28:;
-		TMP$96$2 = 0ll;
+		TMP$95$2 = 0ll;
 		label$31:;
-		if( TMP$96$2 == 0ll ) goto label$30;
+		if( TMP$95$2 == 0ll) goto label$30;
 		{
 			goto label$23;
 		}
@@ -1349,9 +1349,9 @@ int64 SYMBCALCARGLEN( int64 DTYPE$1, struct $8FBSYMBOL* SUBTYPE$1, int64 MODE$1 
 	__builtin_memset( &fb$result$1, 0, 8ll );
 	label$34:;
 	{
-		if( MODE$1 == 2ll ) goto label$38;
+		if( MODE$1 == 2ll) goto label$38;
 		label$39:;
-		if( MODE$1 != 3ll ) goto label$37;
+		if( MODE$1 != 3ll) goto label$37;
 		label$38:;
 		{
 			fb$result$1 = *(int64*)((uint8*)&ENV$ + 616ll);
@@ -1361,7 +1361,7 @@ int64 SYMBCALCARGLEN( int64 DTYPE$1, struct $8FBSYMBOL* SUBTYPE$1, int64 MODE$1 
 		label$36:;
 	}
 	int64 vr$1 = TYPEISTRIVIAL( DTYPE$1, SUBTYPE$1 );
-	if( vr$1 != 0ll ) goto label$41;
+	if( vr$1 != 0ll) goto label$41;
 	{
 		fb$result$1 = *(int64*)((uint8*)&ENV$ + 616ll);
 		goto label$35;
@@ -1380,7 +1380,7 @@ int64 SYMBCALCPARAMLEN( int64 DTYPE$1, struct $8FBSYMBOL* SUBTYPE$1, $12FB_PARAM
 	int64 fb$result$1;
 	__builtin_memset( &fb$result$1, 0, 8ll );
 	label$42:;
-	if( MODE$1 != 4ll ) goto label$45;
+	if( MODE$1 != 4ll) goto label$45;
 	{
 		fb$result$1 = 0ll;
 	}
@@ -1405,10 +1405,10 @@ int64 SYMBPROCCALCSTDCALLSUFFIXN( struct $8FBSYMBOL* PROC$1 )
 	struct $8FBSYMBOL* PARAM$1;
 	PARAM$1 = *(struct $8FBSYMBOL**)((uint8*)PROC$1 + 136ll);
 	label$48:;
-	if( PARAM$1 == (struct $8FBSYMBOL*)0ull ) goto label$49;
+	if( PARAM$1 == (struct $8FBSYMBOL*)0ull) goto label$49;
 	{
 		int64 vr$6 = TYPEISTRIVIAL( *(int64*)((uint8*)PARAM$1 + 56ll), *(struct $8FBSYMBOL**)((uint8*)PARAM$1 + 64ll) );
-		if( ((int64)-(*(int64*)((uint8*)PARAM$1 + 96ll) == 1ll) & ~vr$6) == 0ll ) goto label$51;
+		if( ((int64)-(*(int64*)((uint8*)PARAM$1 + 96ll) == 1ll) & ~vr$6) == 0ll) goto label$51;
 		{
 			int64 vr$11 = SYMBCALCLEN( *(int64*)((uint8*)PARAM$1 + 56ll), *(struct $8FBSYMBOL**)((uint8*)PARAM$1 + 64ll) );
 			LENGTH$1 = LENGTH$1 + vr$11;
@@ -1438,17 +1438,17 @@ int64 SYMBPROCCALCBYTESTOPOP( struct $8FBSYMBOL* PROC$1 )
 	int64 CALLEE_CLEANUP$1;
 	CALLEE_CLEANUP$1 = 0ll;
 	{
-		$11FB_FUNCMODE TMP$97$2;
-		TMP$97$2 = *($11FB_FUNCMODE*)((uint8*)PROC$1 + 152ll);
-		if( TMP$97$2 == 5ll ) goto label$56;
+		$11FB_FUNCMODE TMP$96$2;
+		TMP$96$2 = *($11FB_FUNCMODE*)((uint8*)PROC$1 + 152ll);
+		if( TMP$96$2 == 5ll) goto label$56;
 		label$57:;
-		if( TMP$97$2 != 6ll ) goto label$55;
+		if( TMP$96$2 != 6ll) goto label$55;
 		label$56:;
 		{
 			int64 vr$2 = FBIS64BIT(  );
-			if( vr$2 != 0ll ) goto label$59;
+			if( vr$2 != 0ll) goto label$59;
 			{
-				if( *(int64*)((uint8*)&ENV$ + 216ll) != 0ll ) goto label$61;
+				if( *(int64*)((uint8*)&ENV$ + 216ll) != 0ll) goto label$61;
 				{
 					CALLEE_CLEANUP$1 = -1ll;
 				}
@@ -1466,14 +1466,14 @@ int64 SYMBPROCCALCBYTESTOPOP( struct $8FBSYMBOL* PROC$1 )
 		label$62:;
 		label$54:;
 	}
-	if( CALLEE_CLEANUP$1 == 0ll ) goto label$64;
+	if( CALLEE_CLEANUP$1 == 0ll) goto label$64;
 	{
 		struct $8FBSYMBOL* PARAM$2;
 		PARAM$2 = *(struct $8FBSYMBOL**)((uint8*)PROC$1 + 136ll);
 		label$65:;
-		if( PARAM$2 == (struct $8FBSYMBOL*)0ull ) goto label$66;
+		if( PARAM$2 == (struct $8FBSYMBOL*)0ull) goto label$66;
 		{
-			if( *(int64*)((uint8*)PARAM$2 + 136ll) != 0ll ) goto label$68;
+			if( *(int64*)((uint8*)PARAM$2 + 136ll) != 0ll) goto label$68;
 			{
 				BYTESTOPOP$1 = BYTESTOPOP$1 + *(int64*)((uint8*)PARAM$2 + 80ll);
 			}
@@ -1487,9 +1487,9 @@ int64 SYMBPROCCALCBYTESTOPOP( struct $8FBSYMBOL* PROC$1 )
 	label$64:;
 	label$63:;
 	int64 vr$10 = SYMBPROCRETURNSONSTACK( PROC$1 );
-	if( vr$10 == 0ll ) goto label$70;
+	if( vr$10 == 0ll) goto label$70;
 	{
-		if( (CALLEE_CLEANUP$1 | (int64)-((*(int64*)((uint8*)&ENV$ + 592ll) & 8ll) != 0ll)) == 0ll ) goto label$72;
+		if( (CALLEE_CLEANUP$1 | (int64)-((*(int64*)((uint8*)&ENV$ + 592ll) & 8ll) != 0ll)) == 0ll) goto label$72;
 		{
 			BYTESTOPOP$1 = BYTESTOPOP$1 + *(int64*)((uint8*)&ENV$ + 616ll);
 		}
@@ -1505,7 +1505,7 @@ int64 SYMBPROCCALCBYTESTOPOP( struct $8FBSYMBOL* PROC$1 )
 
 struct $8FBSYMBOL* SYMBADDPROCPARAM( struct $8FBSYMBOL* PROC$1, char* ID$1, int64 DTYPE$1, struct $8FBSYMBOL* SUBTYPE$1, int64 DIMENSIONS$1, int64 MODE$1, $13FB_SYMBATTRIB ATTRIB$1, $13FB_PROCATTRIB PATTRIB$1 )
 {
-	int64 TMP$98$1;
+	int64 TMP$97$1;
 	struct $8FBSYMBOL* fb$result$1;
 	__builtin_memset( &fb$result$1, 0, 8ll );
 	label$73:;
@@ -1513,7 +1513,7 @@ struct $8FBSYMBOL* SYMBADDPROCPARAM( struct $8FBSYMBOL* PROC$1, char* ID$1, int6
 	fb$result$1 = (struct $8FBSYMBOL*)0ull;
 	struct $8FBSYMBOL* vr$3 = SYMBNEWSYMBOL( 1ll, (struct $8FBSYMBOL*)0ull, (struct $10FBSYMBOLTB*)((uint8*)PROC$1 + 128ll), (struct $8FBHASHTB*)0ull, 4ll, (char*)ID$1, (char*)0ull, DTYPE$1, SUBTYPE$1, ATTRIB$1, 0ll );
 	PARAM$1 = vr$3;
-	if( PARAM$1 != (struct $8FBSYMBOL*)0ull ) goto label$76;
+	if( PARAM$1 != (struct $8FBSYMBOL*)0ull) goto label$76;
 	{
 		goto label$74;
 	}
@@ -1526,7 +1526,7 @@ struct $8FBSYMBOL* SYMBADDPROCPARAM( struct $8FBSYMBOL* PROC$1, char* ID$1, int6
 	*($12FB_PARAMMODE*)((uint8*)PARAM$1 + 96ll) = MODE$1;
 	*(struct $7ASTNODE**)((uint8*)PARAM$1 + 112ll) = (struct $7ASTNODE*)0ull;
 	*(int64*)((uint8*)PARAM$1 + 120ll) = DIMENSIONS$1;
-	if( MODE$1 != 3ll ) goto label$78;
+	if( MODE$1 != 3ll) goto label$78;
 	{
 		struct $8FBSYMBOL* vr$15 = SYMBADDARRAYDESCRIPTORTYPE( DIMENSIONS$1, DTYPE$1, SUBTYPE$1 );
 		*(struct $8FBSYMBOL**)((uint8*)PARAM$1 + 128ll) = vr$15;
@@ -1537,18 +1537,18 @@ struct $8FBSYMBOL* SYMBADDPROCPARAM( struct $8FBSYMBOL* PROC$1, char* ID$1, int6
 		*(struct $8FBSYMBOL**)((uint8*)PARAM$1 + 128ll) = (struct $8FBSYMBOL*)0ull;
 	}
 	label$77:;
-	if( (DTYPE$1 & 480ll) == 0ll ) goto label$79;
-	TMP$98$1 = 24ll;
+	if( (DTYPE$1 & 480ll) == 0ll) goto label$79;
+	TMP$97$1 = 24ll;
 	goto label$86;
 	label$79:;
-	TMP$98$1 = DTYPE$1 & 31ll;
+	TMP$97$1 = DTYPE$1 & 31ll;
 	label$86:;
-	if( TMP$98$1 != 20ll ) goto label$81;
+	if( TMP$97$1 != 20ll) goto label$81;
 	{
-		if( MODE$1 != 1ll ) goto label$83;
+		if( MODE$1 != 1ll) goto label$83;
 		{
 			int64 vr$20 = SYMBISPARENTNAMESPACE( DTYPE$1, SUBTYPE$1, (struct $8FBSYMBOL*)0ull );
-			if( vr$20 == 0ll ) goto label$85;
+			if( vr$20 == 0ll) goto label$85;
 			{
 				*(int32*)((uint8*)SUBTYPE$1 + 208ll) = (int32)((int64)*(int32*)((uint8*)SUBTYPE$1 + 208ll) | 32ll);
 			}
@@ -1568,7 +1568,7 @@ struct $8FBSYMBOL* SYMBADDPROCPARAM( struct $8FBSYMBOL* PROC$1, char* ID$1, int6
 void SYMBMAKEPARAMOPTIONAL( struct $8FBSYMBOL* PROC$1, struct $8FBSYMBOL* PARAM$1, struct $7ASTNODE* OPTEXPR$1 )
 {
 	label$87:;
-	if( OPTEXPR$1 != (struct $7ASTNODE*)0ull ) goto label$90;
+	if( OPTEXPR$1 != (struct $7ASTNODE*)0ull) goto label$90;
 	{
 		goto label$88;
 	}
@@ -1585,21 +1585,21 @@ int64 SYMBISPROCOVERLOADOF( struct $8FBSYMBOL* PROC$1, struct $8FBSYMBOL* HEAD_P
 	__builtin_memset( &fb$result$1, 0, 8ll );
 	label$91:;
 	struct $8FBSYMBOL* F$1;
-	if( HEAD_PROC$1 != (struct $8FBSYMBOL*)0ull ) goto label$94;
+	if( HEAD_PROC$1 != (struct $8FBSYMBOL*)0ull) goto label$94;
 	{
 		fb$result$1 = 0ll;
 		goto label$92;
 	}
 	label$94:;
 	label$93:;
-	if( PROC$1 != HEAD_PROC$1 ) goto label$96;
+	if( PROC$1 != HEAD_PROC$1) goto label$96;
 	{
 		fb$result$1 = -1ll;
 		goto label$92;
 	}
 	label$96:;
 	label$95:;
-	if( (*(int64*)((uint8*)HEAD_PROC$1 + 16ll) & 1ll) != 0ll ) goto label$98;
+	if( (*(int64*)((uint8*)HEAD_PROC$1 + 16ll) & 1ll) != 0ll) goto label$98;
 	{
 		fb$result$1 = 0ll;
 		goto label$92;
@@ -1608,9 +1608,9 @@ int64 SYMBISPROCOVERLOADOF( struct $8FBSYMBOL* PROC$1, struct $8FBSYMBOL* HEAD_P
 	label$97:;
 	F$1 = *(struct $8FBSYMBOL**)((uint8*)HEAD_PROC$1 + 200ll);
 	label$99:;
-	if( F$1 == (struct $8FBSYMBOL*)0ull ) goto label$100;
+	if( F$1 == (struct $8FBSYMBOL*)0ull) goto label$100;
 	{
-		if( PROC$1 != F$1 ) goto label$102;
+		if( PROC$1 != F$1) goto label$102;
 		{
 			fb$result$1 = -1ll;
 			goto label$92;
@@ -1634,29 +1634,29 @@ void SYMBPROCRECALCREALTYPE( struct $8FBSYMBOL* PROC$1 )
 	struct $8FBSYMBOL* SUBTYPE$1;
 	DTYPE$1 = *(int64*)((uint8*)PROC$1 + 56ll);
 	SUBTYPE$1 = *(struct $8FBSYMBOL**)((uint8*)PROC$1 + 64ll);
-	if( (*(int64*)((uint8*)PROC$1 + 16ll) & 2048ll) == 0ll ) goto label$106;
+	if( (*(int64*)((uint8*)PROC$1 + 16ll) & 2048ll) == 0ll) goto label$106;
 	{
 		DTYPE$1 = (((DTYPE$1 & 31ll) | ((DTYPE$1 & 480ll) + 32ll)) | ((DTYPE$1 & 261632ll) << (1ll & 63ll))) | (DTYPE$1 & 32505856ll);
 	}
 	label$106:;
 	label$105:;
 	{
-		int64 TMP$99$2;
-		TMP$99$2 = DTYPE$1 & 511ll;
-		if( TMP$99$2 == 17ll ) goto label$109;
+		int64 TMP$98$2;
+		TMP$98$2 = DTYPE$1 & 511ll;
+		if( TMP$98$2 == 17ll) goto label$109;
 		label$110:;
-		if( TMP$99$2 != 7ll ) goto label$108;
+		if( TMP$98$2 != 7ll) goto label$108;
 		label$109:;
 		{
 			DTYPE$1 = (((DTYPE$1 & 31ll) | ((DTYPE$1 & 480ll) + 32ll)) | ((DTYPE$1 & 261632ll) << (1ll & 63ll))) | (DTYPE$1 & 32505856ll);
 		}
 		goto label$107;
 		label$108:;
-		if( TMP$99$2 != 20ll ) goto label$111;
+		if( TMP$98$2 != 20ll) goto label$111;
 		label$112:;
 		{
 			int64 vr$23 = SYMBISPARENTNAMESPACE( DTYPE$1, SUBTYPE$1, (struct $8FBSYMBOL*)0ull );
-			if( vr$23 == 0ll ) goto label$114;
+			if( vr$23 == 0ll) goto label$114;
 			{
 				*(int32*)((uint8*)SUBTYPE$1 + 208ll) = (int32)((int64)*(int32*)((uint8*)SUBTYPE$1 + 208ll) | 64ll);
 			}
@@ -1664,7 +1664,7 @@ void SYMBPROCRECALCREALTYPE( struct $8FBSYMBOL* PROC$1 )
 			label$114:;
 			{
 				DTYPE$1 = *(int64*)((uint8*)SUBTYPE$1 + 216ll);
-				if( (DTYPE$1 & 31ll) == 20ll ) goto label$116;
+				if( (DTYPE$1 & 31ll) == 20ll) goto label$116;
 				{
 					SUBTYPE$1 = (struct $8FBSYMBOL*)0ull;
 				}
@@ -1709,7 +1709,7 @@ struct $8FBSYMBOL* SYMBADDOPERATOR( struct $8FBSYMBOL* PROC$1, $6AST_OP OP$1, ch
 	*($6AST_OP*)((uint8*)*(struct $10FB_PROCEXT**)((uint8*)PROC$1 + 208ll) + 80ll) = OP$1;
 	struct $8FBSYMBOL* vr$3 = SYMBADDPROC( PROC$1, (char*)0ull, (char*)ID_ALIAS$1, DTYPE$1, SUBTYPE$1, ATTRIB$1, PATTRIB$1, MODE$1, OPTIONS$1 );
 	SYM$1 = vr$3;
-	if( SYM$1 != (struct $8FBSYMBOL*)0ull ) goto label$324;
+	if( SYM$1 != (struct $8FBSYMBOL*)0ull) goto label$324;
 	{
 		SYMBPROCFREEEXT( PROC$1 );
 		goto label$322;
@@ -1738,7 +1738,7 @@ struct $8FBSYMBOL* SYMBLOOKUPINTERNALLYMANGLEDSUBTYPE( char* ID$1, struct $8FBSY
 	__builtin_memset( &fb$result$1, 0, 8ll );
 	label$327:;
 	struct $10FBSYMCHAIN* CHAIN_$1;
-	if( ((int64)-(*(uint64*)((uint8*)&PARSER$ + 200ll) == 0ull) | (int64)-(*(struct $8FBSYMBOL**)((uint8*)&SYMB$ + 197024ll) == (struct $8FBSYMBOL*)((uint8*)&SYMB$ + 196704ll))) == 0ll ) goto label$330;
+	if( ((int64)-(*(uint64*)((uint8*)&PARSER$ + 200ll) == 0ull) | (int64)-(*(struct $8FBSYMBOL**)((uint8*)&SYMB$ + 197024ll) == (struct $8FBSYMBOL*)((uint8*)&SYMB$ + 196704ll))) == 0ll) goto label$330;
 	{
 		*PARENT$1 = (struct $8FBSYMBOL*)((uint8*)&SYMB$ + 196704ll);
 		*SYMTB$1 = (struct $10FBSYMBOLTB*)((uint8*)*PARENT$1 + 96ll);
@@ -1756,9 +1756,9 @@ struct $8FBSYMBOL* SYMBLOOKUPINTERNALLYMANGLEDSUBTYPE( char* ID$1, struct $8FBSY
 	label$329:;
 	struct $10FBSYMCHAIN* vr$28 = SYMBLOOKUPAT( *PARENT$1, (char*)ID$1, -1ll, 0ll );
 	CHAIN_$1 = vr$28;
-	if( CHAIN_$1 == (struct $10FBSYMCHAIN*)0ull ) goto label$332;
+	if( CHAIN_$1 == (struct $10FBSYMCHAIN*)0ull) goto label$332;
 	{
-		if( PROC$1 != (struct $8FBSYMBOL*)0ull ) goto label$334;
+		if( PROC$1 != (struct $8FBSYMBOL*)0ull) goto label$334;
 		{
 			fb$result$1 = *(struct $8FBSYMBOL**)CHAIN_$1;
 			goto label$328;
@@ -1776,10 +1776,10 @@ struct $8FBSYMBOL* SYMBLOOKUPINTERNALLYMANGLEDSUBTYPE( char* ID$1, struct $8FBSY
 				LOOKUP_PARAM$3 = *(struct $8FBSYMBOL**)((uint8*)SYM$3 + 136ll);
 				PROC_PARAM$3 = *(struct $8FBSYMBOL**)((uint8*)PROC$1 + 136ll);
 				label$341:;
-				if( ((int64)-(LOOKUP_PARAM$3 != (struct $8FBSYMBOL*)0ull) & (int64)-(PROC_PARAM$3 != (struct $8FBSYMBOL*)0ull)) == 0ll ) goto label$342;
+				if( ((int64)-(LOOKUP_PARAM$3 != (struct $8FBSYMBOL*)0ull) & (int64)-(PROC_PARAM$3 != (struct $8FBSYMBOL*)0ull)) == 0ll) goto label$342;
 				{
 					int64 vr$38 = ASTISEQUALPARAMINIT( *(struct $7ASTNODE**)((uint8*)LOOKUP_PARAM$3 + 112ll), *(struct $7ASTNODE**)((uint8*)PROC_PARAM$3 + 112ll) );
-					if( vr$38 != 0ll ) goto label$344;
+					if( vr$38 != 0ll) goto label$344;
 					{
 						goto label$342;
 					}
@@ -1790,7 +1790,7 @@ struct $8FBSYMBOL* SYMBLOOKUPINTERNALLYMANGLEDSUBTYPE( char* ID$1, struct $8FBSY
 				}
 				goto label$341;
 				label$342:;
-				if( ((int64)-(LOOKUP_PARAM$3 == (struct $8FBSYMBOL*)0ull) & (int64)-(PROC_PARAM$3 == (struct $8FBSYMBOL*)0ull)) == 0ll ) goto label$346;
+				if( ((int64)-(LOOKUP_PARAM$3 == (struct $8FBSYMBOL*)0ull) & (int64)-(PROC_PARAM$3 == (struct $8FBSYMBOL*)0ull)) == 0ll) goto label$346;
 				{
 					fb$result$1 = SYM$3;
 					goto label$328;
@@ -1800,12 +1800,12 @@ struct $8FBSYMBOL* SYMBLOOKUPINTERNALLYMANGLEDSUBTYPE( char* ID$1, struct $8FBSY
 				SYM$3 = *(struct $8FBSYMBOL**)((uint8*)SYM$3 + 280ll);
 			}
 			label$340:;
-			if( SYM$3 != (struct $8FBSYMBOL*)0ull ) goto label$338;
+			if( SYM$3 != (struct $8FBSYMBOL*)0ull) goto label$338;
 			label$339:;
 			CHAIN_$1 = *(struct $10FBSYMCHAIN**)((uint8*)CHAIN_$1 + 8ll);
 		}
 		label$337:;
-		if( CHAIN_$1 != (struct $10FBSYMCHAIN*)0ull ) goto label$335;
+		if( CHAIN_$1 != (struct $10FBSYMCHAIN*)0ull) goto label$335;
 		label$336:;
 	}
 	label$332:;
@@ -1839,7 +1839,7 @@ struct $8FBSYMBOL* SYMBADDPROCPTR( struct $8FBSYMBOL* PROC$1, int64 DTYPE$1, str
 	fb_StrConcatAssign( (void*)&ID$1, -1ll, (void*)vr$13, -1ll, 0 );
 	struct $8FBSYMBOL* vr$20 = SYMBLOOKUPINTERNALLYMANGLEDSUBTYPE( (char*)*(char**)&ID$1, PROC$1, &ATTRIB$1, &PATTRIB$1, &PARENT$1, &SYMTB$1, &HASHTB$1 );
 	SYM$1 = vr$20;
-	if( SYM$1 == (struct $8FBSYMBOL*)0ull ) goto label$350;
+	if( SYM$1 == (struct $8FBSYMBOL*)0ull) goto label$350;
 	{
 		fb$result$1 = SYM$1;
 		fb_StrDelete( (FBSTRING*)&ID$1 );
@@ -1850,7 +1850,7 @@ struct $8FBSYMBOL* SYMBADDPROCPTR( struct $8FBSYMBOL* PROC$1, int64 DTYPE$1, str
 	char* vr$22 = SYMBUNIQUEID( (boolean)0ll );
 	struct $8FBSYMBOL* vr$23 = HSETUPPROC( PROC$1, PARENT$1, SYMTB$1, HASHTB$1, (char*)*(char**)&ID$1, (char*)vr$22, DTYPE$1, SUBTYPE$1, ATTRIB$1, PATTRIB$1, MODE$1, 133ll );
 	SYM$1 = vr$23;
-	if( SYM$1 == (struct $8FBSYMBOL*)0ull ) goto label$352;
+	if( SYM$1 == (struct $8FBSYMBOL*)0ull) goto label$352;
 	{
 		*($12FB_SYMBSTATS*)((uint8*)SYM$1 + 24ll) = *(int64*)((uint8*)SYM$1 + 24ll) | 16384ll;
 	}
@@ -1874,12 +1874,12 @@ struct $8FBSYMBOL* SYMBADDPROCPTRFROMFUNCTION( struct $8FBSYMBOL* BASE_PROC$1 )
 	struct $8FBSYMBOL* PARAM$1;
 	PARAM$1 = *(struct $8FBSYMBOL**)((uint8*)BASE_PROC$1 + 136ll);
 	label$355:;
-	if( PARAM$1 == (struct $8FBSYMBOL*)0ull ) goto label$356;
+	if( PARAM$1 == (struct $8FBSYMBOL*)0ull) goto label$356;
 	{
 		struct $8FBSYMBOL* P$2;
 		struct $8FBSYMBOL* vr$11 = SYMBADDPROCPARAM( PROC$1, (char*)0ull, *(int64*)((uint8*)PARAM$1 + 56ll), *(struct $8FBSYMBOL**)((uint8*)PARAM$1 + 64ll), *(int64*)((uint8*)PARAM$1 + 120ll), *(int64*)((uint8*)PARAM$1 + 96ll), *($13FB_SYMBATTRIB*)((uint8*)PARAM$1 + 8ll), *($13FB_PROCATTRIB*)((uint8*)PARAM$1 + 16ll) );
 		P$2 = vr$11;
-		if( (*(int64*)((uint8*)PARAM$1 + 24ll) & 2048ll) == 0ll ) goto label$358;
+		if( (*(int64*)((uint8*)PARAM$1 + 24ll) & 2048ll) == 0ll) goto label$358;
 		{
 			*($12FB_SYMBSTATS*)((uint8*)P$2 + 24ll) = *(int64*)((uint8*)P$2 + 24ll) | 2048ll;
 		}
@@ -1931,7 +1931,7 @@ struct $8FBSYMBOL* SYMBPREADDPROC( char* SYMBOL$1 )
 	*($11FB_DATATYPE*)((uint8*)PROC$1 + 160ll) = 2147483648ll;
 	*(struct $8FBSYMBOL**)((uint8*)PROC$1 + 168ll) = (struct $8FBSYMBOL*)0ull;
 	*($21FB_PROC_RETURN_METHOD*)((uint8*)PROC$1 + 176ll) = 0ll;
-	*(tmp$35*)((uint8*)PROC$1 + 184ll) = (tmp$35)0ull;
+	*(tmp$34*)((uint8*)PROC$1 + 184ll) = (tmp$34)0ull;
 	*(int16*)((uint8*)PROC$1 + 192ll) = (int16)0;
 	*(int16*)((uint8*)PROC$1 + 194ll) = (int16)0;
 	*(struct $8FBSYMBOL**)((uint8*)PROC$1 + 200ll) = (struct $8FBSYMBOL*)0ull;
@@ -1954,11 +1954,11 @@ void _Z21SYMBGETREALPARAMDTYPElP8FBSYMBOLRlRS0_( int64 PARAMMODE$1, struct $8FBS
 {
 	label$361:;
 	{
-		if( PARAMMODE$1 != 1ll ) goto label$364;
+		if( PARAMMODE$1 != 1ll) goto label$364;
 		label$365:;
 		{
 			int64 vr$2 = TYPEISTRIVIAL( *DTYPE$1, *SUBTYPE$1 );
-			if( vr$2 != 0ll ) goto label$367;
+			if( vr$2 != 0ll) goto label$367;
 			{
 				*DTYPE$1 = (((*DTYPE$1 & 31ll) | ((*DTYPE$1 & 480ll) + 32ll)) | ((*DTYPE$1 & 261632ll) << (1ll & 63ll))) | (*DTYPE$1 & 32505856ll);
 			}
@@ -1967,14 +1967,14 @@ void _Z21SYMBGETREALPARAMDTYPElP8FBSYMBOLRlRS0_( int64 PARAMMODE$1, struct $8FBS
 		}
 		goto label$363;
 		label$364:;
-		if( PARAMMODE$1 != 2ll ) goto label$368;
+		if( PARAMMODE$1 != 2ll) goto label$368;
 		label$369:;
 		{
 			*DTYPE$1 = (((*DTYPE$1 & 31ll) | ((*DTYPE$1 & 480ll) + 32ll)) | ((*DTYPE$1 & 261632ll) << (1ll & 63ll))) | (*DTYPE$1 & 32505856ll);
 		}
 		goto label$363;
 		label$368:;
-		if( PARAMMODE$1 != 3ll ) goto label$370;
+		if( PARAMMODE$1 != 3ll) goto label$370;
 		label$371:;
 		{
 			*DTYPE$1 = 52ll;
@@ -2001,16 +2001,16 @@ struct $8FBSYMBOL* SYMBADDVARFORPARAM( struct $8FBSYMBOL* PARAM$1 )
 	__builtin_memset( &fb$result$1, 0, 8ll );
 	label$374:;
 	struct $10FBARRAYDIM DTB$1[1];
-	struct $8FBARRAY1I10FBARRAYDIME tmp$105$1;
-	*(struct $10FBARRAYDIM**)&tmp$105$1 = (struct $10FBARRAYDIM*)DTB$1;
-	*(struct $10FBARRAYDIM**)((uint8*)&tmp$105$1 + 8ll) = (struct $10FBARRAYDIM*)DTB$1;
-	*(int64*)((uint8*)&tmp$105$1 + 16ll) = 16ll;
-	*(int64*)((uint8*)&tmp$105$1 + 24ll) = 16ll;
-	*(int64*)((uint8*)&tmp$105$1 + 32ll) = 1ll;
-	*(int64*)((uint8*)&tmp$105$1 + 40ll) = 49ll;
-	*(int64*)((uint8*)&tmp$105$1 + 48ll) = 1ll;
-	*(int64*)((uint8*)&tmp$105$1 + 56ll) = 0ll;
-	*(int64*)((uint8*)&tmp$105$1 + 64ll) = 0ll;
+	struct $8FBARRAY1I10FBARRAYDIME tmp$104$1;
+	*(struct $10FBARRAYDIM**)&tmp$104$1 = (struct $10FBARRAYDIM*)DTB$1;
+	*(struct $10FBARRAYDIM**)((uint8*)&tmp$104$1 + 8ll) = (struct $10FBARRAYDIM*)DTB$1;
+	*(int64*)((uint8*)&tmp$104$1 + 16ll) = 16ll;
+	*(int64*)((uint8*)&tmp$104$1 + 24ll) = 16ll;
+	*(int64*)((uint8*)&tmp$104$1 + 32ll) = 1ll;
+	*(int64*)((uint8*)&tmp$104$1 + 40ll) = 49ll;
+	*(int64*)((uint8*)&tmp$104$1 + 48ll) = 1ll;
+	*(int64*)((uint8*)&tmp$104$1 + 56ll) = 0ll;
+	*(int64*)((uint8*)&tmp$104$1 + 64ll) = 0ll;
 	struct $8FBSYMBOL* S$1;
 	int64 ATTRIB$1;
 	int64 DTYPE$1;
@@ -2018,14 +2018,14 @@ struct $8FBSYMBOL* SYMBADDVARFORPARAM( struct $8FBSYMBOL* PARAM$1 )
 	fb$result$1 = (struct $8FBSYMBOL*)0ull;
 	DTYPE$1 = *(int64*)((uint8*)PARAM$1 + 56ll);
 	{
-		uint64 TMP$106$2;
-		TMP$106$2 = *(uint64*)((uint8*)PARAM$1 + 96ll);
+		uint64 TMP$105$2;
+		TMP$105$2 = *(uint64*)((uint8*)PARAM$1 + 96ll);
 		goto label$377;
 		label$378:;
 		{
 			ATTRIB$1 = 32768ll;
 			int64 vr$6 = TYPEISTRIVIAL( DTYPE$1, *(struct $8FBSYMBOL**)((uint8*)PARAM$1 + 64ll) );
-			if( vr$6 != 0ll ) goto label$380;
+			if( vr$6 != 0ll) goto label$380;
 			{
 				ATTRIB$1 = 65536ll;
 			}
@@ -2049,24 +2049,24 @@ struct $8FBSYMBOL* SYMBADDVARFORPARAM( struct $8FBSYMBOL* PARAM$1 )
 		}
 		goto label$376;
 		label$377:;
-		static const void* tmp$107[3ll] = {
+		static const void* tmp$106[3ll] = {
 			&&label$378,
 			&&label$381,
 			&&label$382,
 		};
-		if( (TMP$106$2 - 1ull) > 2ull ) goto label$383;
-		goto *tmp$107[TMP$106$2 - 1ull];
+		if( (TMP$105$2 - 1ull) > 2ull ) goto label$383;
+		goto *tmp$106[TMP$105$2 - 1ull];
 		label$376:;
 	}
-	if( (*(int64*)((uint8*)PARAM$1 + 8ll) & 1048576ll) == 0ll ) goto label$385;
+	if( (*(int64*)((uint8*)PARAM$1 + 8ll) & 1048576ll) == 0ll) goto label$385;
 	{
 		ATTRIB$1 = ATTRIB$1 | 1048576ll;
 	}
 	label$385:;
 	label$384:;
-	struct $8FBSYMBOL* vr$14 = SYMBADDVAR( (char*)*(char**)((uint8*)PARAM$1 + 32ll), (char*)0ull, DTYPE$1, *(struct $8FBSYMBOL**)((uint8*)PARAM$1 + 64ll), 0ll, *(int64*)((uint8*)PARAM$1 + 120ll), (struct $7FBARRAYI10FBARRAYDIME*)&tmp$105$1, ATTRIB$1, 0ll );
+	struct $8FBSYMBOL* vr$14 = SYMBADDVAR( (char*)*(char**)((uint8*)PARAM$1 + 32ll), (char*)0ull, DTYPE$1, *(struct $8FBSYMBOL**)((uint8*)PARAM$1 + 64ll), 0ll, *(int64*)((uint8*)PARAM$1 + 120ll), (struct $7FBARRAYI10FBARRAYDIME*)&tmp$104$1, ATTRIB$1, 0ll );
 	S$1 = vr$14;
-	if( S$1 != (struct $8FBSYMBOL*)0ull ) goto label$387;
+	if( S$1 != (struct $8FBSYMBOL*)0ull) goto label$387;
 	{
 		goto label$375;
 	}
@@ -2074,13 +2074,13 @@ struct $8FBSYMBOL* SYMBADDVARFORPARAM( struct $8FBSYMBOL* PARAM$1 )
 	label$386:;
 	*(struct $8FBSYMBOL**)((uint8*)S$1 + 144ll) = *(struct $8FBSYMBOL**)((uint8*)PARAM$1 + 128ll);
 	*($12FB_SYMBSTATS*)((uint8*)S$1 + 24ll) = *(int64*)((uint8*)S$1 + 24ll) | 8ll;
-	if( (*(int64*)((uint8*)PARAM$1 + 24ll) & 2048ll) == 0ll ) goto label$389;
+	if( (*(int64*)((uint8*)PARAM$1 + 24ll) & 2048ll) == 0ll) goto label$389;
 	{
 		*($12FB_SYMBSTATS*)((uint8*)S$1 + 24ll) = *(int64*)((uint8*)S$1 + 24ll) | 2048ll;
 	}
 	label$389:;
 	label$388:;
-	if( (*(int64*)((uint8*)PARAM$1 + 24ll) & 524288ll) == 0ll ) goto label$391;
+	if( (*(int64*)((uint8*)PARAM$1 + 24ll) & 524288ll) == 0ll) goto label$391;
 	{
 		*($12FB_SYMBSTATS*)((uint8*)S$1 + 24ll) = *(int64*)((uint8*)S$1 + 24ll) | 524288ll;
 	}
@@ -2097,19 +2097,19 @@ struct $8FBSYMBOL* SYMBADDVARFORPROCRESULTPARAM( struct $8FBSYMBOL* PROC$1 )
 	__builtin_memset( &fb$result$1, 0, 8ll );
 	label$392:;
 	struct $10FBARRAYDIM DTB$1[1];
-	struct $8FBARRAY1I10FBARRAYDIME tmp$108$1;
-	*(struct $10FBARRAYDIM**)&tmp$108$1 = (struct $10FBARRAYDIM*)DTB$1;
-	*(struct $10FBARRAYDIM**)((uint8*)&tmp$108$1 + 8ll) = (struct $10FBARRAYDIM*)DTB$1;
-	*(int64*)((uint8*)&tmp$108$1 + 16ll) = 16ll;
-	*(int64*)((uint8*)&tmp$108$1 + 24ll) = 16ll;
-	*(int64*)((uint8*)&tmp$108$1 + 32ll) = 1ll;
-	*(int64*)((uint8*)&tmp$108$1 + 40ll) = 49ll;
-	*(int64*)((uint8*)&tmp$108$1 + 48ll) = 1ll;
-	*(int64*)((uint8*)&tmp$108$1 + 56ll) = 0ll;
-	*(int64*)((uint8*)&tmp$108$1 + 64ll) = 0ll;
+	struct $8FBARRAY1I10FBARRAYDIME tmp$107$1;
+	*(struct $10FBARRAYDIM**)&tmp$107$1 = (struct $10FBARRAYDIM*)DTB$1;
+	*(struct $10FBARRAYDIM**)((uint8*)&tmp$107$1 + 8ll) = (struct $10FBARRAYDIM*)DTB$1;
+	*(int64*)((uint8*)&tmp$107$1 + 16ll) = 16ll;
+	*(int64*)((uint8*)&tmp$107$1 + 24ll) = 16ll;
+	*(int64*)((uint8*)&tmp$107$1 + 32ll) = 1ll;
+	*(int64*)((uint8*)&tmp$107$1 + 40ll) = 49ll;
+	*(int64*)((uint8*)&tmp$107$1 + 48ll) = 1ll;
+	*(int64*)((uint8*)&tmp$107$1 + 56ll) = 0ll;
+	*(int64*)((uint8*)&tmp$107$1 + 64ll) = 0ll;
 	struct $8FBSYMBOL* S$1;
 	int64 vr$3 = SYMBPROCRETURNSONSTACK( PROC$1 );
-	if( vr$3 != 0ll ) goto label$395;
+	if( vr$3 != 0ll) goto label$395;
 	{
 		fb$result$1 = (struct $8FBSYMBOL*)0ull;
 		goto label$393;
@@ -2117,7 +2117,7 @@ struct $8FBSYMBOL* SYMBADDVARFORPROCRESULTPARAM( struct $8FBSYMBOL* PROC$1 )
 	label$395:;
 	label$394:;
 	char* vr$6 = SYMBUNIQUEID( (boolean)0ll );
-	struct $8FBSYMBOL* vr$7 = SYMBADDVAR( (char*)vr$6, (char*)0ull, 20ll, *(struct $8FBSYMBOL**)((uint8*)PROC$1 + 64ll), 0ll, 0ll, (struct $7FBARRAYI10FBARRAYDIME*)&tmp$108$1, 65536ll, 1ll );
+	struct $8FBSYMBOL* vr$7 = SYMBADDVAR( (char*)vr$6, (char*)0ull, 20ll, *(struct $8FBSYMBOL**)((uint8*)PROC$1 + 64ll), 0ll, 0ll, (struct $7FBARRAYI10FBARRAYDIME*)&tmp$107$1, 65536ll, 1ll );
 	S$1 = vr$7;
 	SYMBPROCALLOCEXT( PROC$1 );
 	*(struct $8FBSYMBOL**)*(struct $10FB_PROCEXT**)((uint8*)PROC$1 + 208ll) = S$1;
@@ -2134,21 +2134,21 @@ struct $8FBSYMBOL* SYMBADDPROCRESULTVAR( struct $8FBSYMBOL* PROC$1 )
 	__builtin_memset( &fb$result$1, 0, 8ll );
 	label$396:;
 	struct $10FBARRAYDIM DTB$1[1];
-	struct $8FBARRAY1I10FBARRAYDIME tmp$109$1;
-	*(struct $10FBARRAYDIM**)&tmp$109$1 = (struct $10FBARRAYDIM*)DTB$1;
-	*(struct $10FBARRAYDIM**)((uint8*)&tmp$109$1 + 8ll) = (struct $10FBARRAYDIM*)DTB$1;
-	*(int64*)((uint8*)&tmp$109$1 + 16ll) = 16ll;
-	*(int64*)((uint8*)&tmp$109$1 + 24ll) = 16ll;
-	*(int64*)((uint8*)&tmp$109$1 + 32ll) = 1ll;
-	*(int64*)((uint8*)&tmp$109$1 + 40ll) = 49ll;
-	*(int64*)((uint8*)&tmp$109$1 + 48ll) = 1ll;
-	*(int64*)((uint8*)&tmp$109$1 + 56ll) = 0ll;
-	*(int64*)((uint8*)&tmp$109$1 + 64ll) = 0ll;
+	struct $8FBARRAY1I10FBARRAYDIME tmp$108$1;
+	*(struct $10FBARRAYDIM**)&tmp$108$1 = (struct $10FBARRAYDIM*)DTB$1;
+	*(struct $10FBARRAYDIM**)((uint8*)&tmp$108$1 + 8ll) = (struct $10FBARRAYDIM*)DTB$1;
+	*(int64*)((uint8*)&tmp$108$1 + 16ll) = 16ll;
+	*(int64*)((uint8*)&tmp$108$1 + 24ll) = 16ll;
+	*(int64*)((uint8*)&tmp$108$1 + 32ll) = 1ll;
+	*(int64*)((uint8*)&tmp$108$1 + 40ll) = 49ll;
+	*(int64*)((uint8*)&tmp$108$1 + 48ll) = 1ll;
+	*(int64*)((uint8*)&tmp$108$1 + 56ll) = 0ll;
+	*(int64*)((uint8*)&tmp$108$1 + 64ll) = 0ll;
 	struct $8FBSYMBOL* RES$1;
 	int64 DTYPE$1;
 	char* ID$1;
 	int64 vr$3 = SYMBPROCRETURNSONSTACK( PROC$1 );
-	if( vr$3 == 0ll ) goto label$399;
+	if( vr$3 == 0ll) goto label$399;
 	{
 		struct $8FBSYMBOL* vr$4 = SYMBGETPROCRESULT( PROC$1 );
 		fb$result$1 = vr$4;
@@ -2157,13 +2157,13 @@ struct $8FBSYMBOL* SYMBADDPROCRESULTVAR( struct $8FBSYMBOL* PROC$1 )
 	label$399:;
 	label$398:;
 	DTYPE$1 = *(int64*)((uint8*)PROC$1 + 56ll);
-	if( (*(int64*)((uint8*)PROC$1 + 16ll) & 2048ll) == 0ll ) goto label$401;
+	if( (*(int64*)((uint8*)PROC$1 + 16ll) & 2048ll) == 0ll) goto label$401;
 	{
 		DTYPE$1 = (((DTYPE$1 & 31ll) | ((DTYPE$1 & 480ll) + 32ll)) | ((DTYPE$1 & 261632ll) << (1ll & 63ll))) | (DTYPE$1 & 32505856ll);
 	}
 	label$401:;
 	label$400:;
-	struct $8FBSYMBOL* vr$19 = SYMBADDVAR( (char*)"fb$result", (char*)0ull, DTYPE$1, *(struct $8FBSYMBOL**)((uint8*)PROC$1 + 64ll), 0ll, 0ll, (struct $7FBARRAYI10FBARRAYDIME*)&tmp$109$1, 131072ll, 1ll );
+	struct $8FBSYMBOL* vr$19 = SYMBADDVAR( (char*)"fb$result", (char*)0ull, DTYPE$1, *(struct $8FBSYMBOL**)((uint8*)PROC$1 + 64ll), 0ll, 0ll, (struct $7FBARRAYI10FBARRAYDIME*)&tmp$108$1, 131072ll, 1ll );
 	RES$1 = vr$19;
 	SYMBPROCALLOCEXT( PROC$1 );
 	*(struct $8FBSYMBOL**)*(struct $10FB_PROCEXT**)((uint8*)PROC$1 + 208ll) = RES$1;
@@ -2181,23 +2181,23 @@ void SYMBADDPROCINSTANCEPARAM( struct $8FBSYMBOL* PARENT$1, struct $8FBSYMBOL* P
 	label$402:;
 	int64 DTYPE$1;
 	{
-		$12FB_SYMBCLASS TMP$111$2;
-		TMP$111$2 = *($12FB_SYMBCLASS*)PARENT$1;
-		if( TMP$111$2 != 10ll ) goto label$405;
+		$12FB_SYMBCLASS TMP$110$2;
+		TMP$110$2 = *($12FB_SYMBCLASS*)PARENT$1;
+		if( TMP$110$2 != 10ll) goto label$405;
 		label$406:;
 		{
 			DTYPE$1 = 20ll;
 		}
 		goto label$404;
 		label$405:;
-		if( TMP$111$2 != 11ll ) goto label$407;
+		if( TMP$110$2 != 11ll) goto label$407;
 		label$408:;
 		{
 		}
 		label$407:;
 		label$404:;
 	}
-	if( (*(int64*)((uint8*)PROC$1 + 8ll) & 2048ll) == 0ll ) goto label$410;
+	if( (*(int64*)((uint8*)PROC$1 + 8ll) & 2048ll) == 0ll) goto label$410;
 	{
 		DTYPE$1 = DTYPE$1 | 512ll;
 	}
@@ -2220,14 +2220,14 @@ struct $8FBSYMBOL* SYMBFINDOVERLOADPROC( struct $8FBSYMBOL* OVL_HEAD_PROC$1, str
 	int64 OVL_PARAMS$1;
 	int64 PARAMS$1;
 	int64 I$1;
-	if( ((int64)-(OVL_HEAD_PROC$1 == (struct $8FBSYMBOL*)0ull) | (int64)-(PROC$1 == (struct $8FBSYMBOL*)0ull)) == 0ll ) goto label$414;
+	if( ((int64)-(OVL_HEAD_PROC$1 == (struct $8FBSYMBOL*)0ull) | (int64)-(PROC$1 == (struct $8FBSYMBOL*)0ull)) == 0ll) goto label$414;
 	{
 		fb$result$1 = (struct $8FBSYMBOL*)0ull;
 		goto label$412;
 	}
 	label$414:;
 	label$413:;
-	if( ((int64)-(*(int64*)OVL_HEAD_PROC$1 != 3ll) | (int64)-(*(int64*)PROC$1 != 3ll)) == 0ll ) goto label$416;
+	if( ((int64)-(*(int64*)OVL_HEAD_PROC$1 != 3ll) | (int64)-(*(int64*)PROC$1 != 3ll)) == 0ll) goto label$416;
 	{
 		fb$result$1 = (struct $8FBSYMBOL*)0ull;
 		goto label$412;
@@ -2235,7 +2235,7 @@ struct $8FBSYMBOL* SYMBFINDOVERLOADPROC( struct $8FBSYMBOL* OVL_HEAD_PROC$1, str
 	label$416:;
 	label$415:;
 	PARAMS$1 = (int64)*(int16*)((uint8*)PROC$1 + 120ll);
-	if( (*(int64*)((uint8*)PROC$1 + 16ll) & 2ll) == 0ll ) goto label$418;
+	if( (*(int64*)((uint8*)PROC$1 + 16ll) & 2ll) == 0ll) goto label$418;
 	{
 		PARAMS$1 = PARAMS$1 + -1ll;
 	}
@@ -2247,17 +2247,17 @@ struct $8FBSYMBOL* SYMBFINDOVERLOADPROC( struct $8FBSYMBOL* OVL_HEAD_PROC$1, str
 	label$419:;
 	{
 		OVL_PARAMS$1 = (int64)*(int16*)((uint8*)OVL$1 + 120ll);
-		if( (*(int64*)((uint8*)OVL$1 + 16ll) & 2ll) == 0ll ) goto label$423;
+		if( (*(int64*)((uint8*)OVL$1 + 16ll) & 2ll) == 0ll) goto label$423;
 		{
 			OVL_PARAMS$1 = OVL_PARAMS$1 + -1ll;
 		}
 		label$423:;
 		label$422:;
-		if( IS_PROPERTY$1 == 0ll ) goto label$425;
+		if( IS_PROPERTY$1 == 0ll) goto label$425;
 		{
-			if( (OPTIONS$1 & 1ll) == 0ll ) goto label$427;
+			if( (OPTIONS$1 & 1ll) == 0ll) goto label$427;
 			{
-				if( (*(int64*)((uint8*)OVL$1 + 56ll) & 511ll) != 0ll ) goto label$429;
+				if( (*(int64*)((uint8*)OVL$1 + 56ll) & 511ll) != 0ll) goto label$429;
 				{
 					OVL_PARAMS$1 = -1ll;
 				}
@@ -2267,7 +2267,7 @@ struct $8FBSYMBOL* SYMBFINDOVERLOADPROC( struct $8FBSYMBOL* OVL_HEAD_PROC$1, str
 			goto label$426;
 			label$427:;
 			{
-				if( (*(int64*)((uint8*)OVL$1 + 56ll) & 511ll) == 0ll ) goto label$431;
+				if( (*(int64*)((uint8*)OVL$1 + 56ll) & 511ll) == 0ll) goto label$431;
 				{
 					OVL_PARAMS$1 = -1ll;
 				}
@@ -2278,9 +2278,9 @@ struct $8FBSYMBOL* SYMBFINDOVERLOADPROC( struct $8FBSYMBOL* OVL_HEAD_PROC$1, str
 		}
 		label$425:;
 		label$424:;
-		if( PARAMS$1 != OVL_PARAMS$1 ) goto label$433;
+		if( PARAMS$1 != OVL_PARAMS$1) goto label$433;
 		{
-			if( PARAMS$1 != 0ll ) goto label$435;
+			if( PARAMS$1 != 0ll) goto label$435;
 			{
 				fb$result$1 = OVL$1;
 				goto label$412;
@@ -2292,19 +2292,19 @@ struct $8FBSYMBOL* SYMBFINDOVERLOADPROC( struct $8FBSYMBOL* OVL_HEAD_PROC$1, str
 			label$436:;
 			{
 				int64 vr$29 = HCANOVERLOADBYDESC( PARAM$1, OVL_PARAM$1 );
-				if( vr$29 == 0ll ) goto label$440;
+				if( vr$29 == 0ll) goto label$440;
 				{
 					goto label$437;
 				}
 				label$440:;
 				label$439:;
-				if( *(int64*)((uint8*)PARAM$1 + 56ll) == *(int64*)((uint8*)OVL_PARAM$1 + 56ll) ) goto label$442;
+				if( *(int64*)((uint8*)PARAM$1 + 56ll) == *(int64*)((uint8*)OVL_PARAM$1 + 56ll)) goto label$442;
 				{
 					goto label$437;
 				}
 				label$442:;
 				label$441:;
-				if( *(struct $8FBSYMBOL**)((uint8*)PARAM$1 + 64ll) == *(struct $8FBSYMBOL**)((uint8*)OVL_PARAM$1 + 64ll) ) goto label$444;
+				if( *(struct $8FBSYMBOL**)((uint8*)PARAM$1 + 64ll) == *(struct $8FBSYMBOL**)((uint8*)OVL_PARAM$1 + 64ll)) goto label$444;
 				{
 					goto label$437;
 				}
@@ -2315,9 +2315,9 @@ struct $8FBSYMBOL* SYMBFINDOVERLOADPROC( struct $8FBSYMBOL* OVL_HEAD_PROC$1, str
 				OVL_PARAMS$1 = OVL_PARAMS$1 + -1ll;
 			}
 			label$438:;
-			if( OVL_PARAMS$1 > 0ll ) goto label$436;
+			if( OVL_PARAMS$1 > 0ll) goto label$436;
 			label$437:;
-			if( OVL_PARAMS$1 != 0ll ) goto label$446;
+			if( OVL_PARAMS$1 != 0ll) goto label$446;
 			{
 				fb$result$1 = OVL$1;
 				goto label$412;
@@ -2330,7 +2330,7 @@ struct $8FBSYMBOL* SYMBFINDOVERLOADPROC( struct $8FBSYMBOL* OVL_HEAD_PROC$1, str
 		OVL$1 = *(struct $8FBSYMBOL**)((uint8*)OVL$1 + 200ll);
 	}
 	label$421:;
-	if( OVL$1 != (struct $8FBSYMBOL*)0ull ) goto label$419;
+	if( OVL$1 != (struct $8FBSYMBOL*)0ull) goto label$419;
 	label$420:;
 	fb$result$1 = (struct $8FBSYMBOL*)0ull;
 	label$412:;
@@ -2343,7 +2343,7 @@ struct $8FBSYMBOL* SYMBFINDOPOVLPROC( $6AST_OP OP$1, struct $8FBSYMBOL* OVL_HEAD
 	__builtin_memset( &fb$result$1, 0, 8ll );
 	label$447:;
 	struct $8FBSYMBOL* OVL$1;
-	if( OP$1 == 27ll ) goto label$450;
+	if( OP$1 == 27ll) goto label$450;
 	{
 		struct $8FBSYMBOL* vr$1 = SYMBFINDOVERLOADPROC( OVL_HEAD_PROC$1, PROC$1, 0ll );
 		fb$result$1 = vr$1;
@@ -2353,11 +2353,11 @@ struct $8FBSYMBOL* SYMBFINDOPOVLPROC( $6AST_OP OP$1, struct $8FBSYMBOL* OVL_HEAD
 	label$449:;
 	OVL$1 = OVL_HEAD_PROC$1;
 	label$451:;
-	if( OVL$1 == (struct $8FBSYMBOL*)0ull ) goto label$452;
+	if( OVL$1 == (struct $8FBSYMBOL*)0ull) goto label$452;
 	{
-		if( *(int64*)((uint8*)PROC$1 + 56ll) != *(int64*)((uint8*)OVL$1 + 56ll) ) goto label$454;
+		if( *(int64*)((uint8*)PROC$1 + 56ll) != *(int64*)((uint8*)OVL$1 + 56ll)) goto label$454;
 		{
-			if( *(struct $8FBSYMBOL**)((uint8*)PROC$1 + 64ll) != *(struct $8FBSYMBOL**)((uint8*)OVL$1 + 64ll) ) goto label$456;
+			if( *(struct $8FBSYMBOL**)((uint8*)PROC$1 + 64ll) != *(struct $8FBSYMBOL**)((uint8*)OVL$1 + 64ll)) goto label$456;
 			{
 				fb$result$1 = OVL$1;
 				goto label$448;
@@ -2381,7 +2381,7 @@ struct $8FBSYMBOL* SYMBFINDCTORPROC( struct $8FBSYMBOL* OVL_HEAD_PROC$1, struct 
 	struct $8FBSYMBOL* fb$result$1;
 	__builtin_memset( &fb$result$1, 0, 8ll );
 	label$457:;
-	if( ((int64)-((*(int64*)((uint8*)OVL_HEAD_PROC$1 + 16ll) & 8ll) != 0ll) | (int64)-((*(int64*)((uint8*)OVL_HEAD_PROC$1 + 16ll) & 4096ll) != 0ll)) == 0ll ) goto label$460;
+	if( ((int64)-((*(int64*)((uint8*)OVL_HEAD_PROC$1 + 16ll) & 8ll) != 0ll) | (int64)-((*(int64*)((uint8*)OVL_HEAD_PROC$1 + 16ll) & 4096ll) != 0ll)) == 0ll) goto label$460;
 	{
 		fb$result$1 = OVL_HEAD_PROC$1;
 		goto label$458;
@@ -2411,7 +2411,7 @@ struct $8FBSYMBOL* SYMBFINDCLOSESTOVLPROC( struct $8FBSYMBOL* OVL_HEAD_PROC$1, i
 	int64 MATCHCOUNT$1;
 	int64 IS_MATCH$1;
 	*ERR_NUM$1 = 0ll;
-	if( OVL_HEAD_PROC$1 != (struct $8FBSYMBOL*)0ull ) goto label$670;
+	if( OVL_HEAD_PROC$1 != (struct $8FBSYMBOL*)0ull) goto label$670;
 	{
 		fb$result$1 = (struct $8FBSYMBOL*)0ull;
 		goto label$668;
@@ -2427,19 +2427,19 @@ struct $8FBSYMBOL* SYMBFINDCLOSESTOVLPROC( struct $8FBSYMBOL* OVL_HEAD_PROC$1, i
 	{
 		int64 vr$5 = HCHECKOVLPROC( OVL_HEAD_PROC$1, ARGS$1, ARG_HEAD$1, ERR_NUM$1, OPTIONS$1 | 8ll, OVL$1, &EXACT_MATCHES$1, &IS_MATCH$1 );
 		MATCHSCORE$1 = vr$5;
-		if( IS_MATCH$1 == 0ll ) goto label$675;
+		if( IS_MATCH$1 == 0ll) goto label$675;
 		{
-			if( ((int64)-(MATCHCOUNT$1 == 0ll) | (int64)-(MATCHSCORE$1 > MAX_MATCHSCORE$1)) == 0ll ) goto label$677;
+			if( ((int64)-(MATCHCOUNT$1 == 0ll) | (int64)-(MATCHSCORE$1 > MAX_MATCHSCORE$1)) == 0ll) goto label$677;
 			{
 				int64 ELIGIBLE$4;
 				ELIGIBLE$4 = -1ll;
-				if( (OPTIONS$1 & 2ll) == 0ll ) goto label$679;
+				if( (OPTIONS$1 & 2ll) == 0ll) goto label$679;
 				{
 					ELIGIBLE$4 = (int64)-(EXACT_MATCHES$1 >= 1ll);
 				}
 				label$679:;
 				label$678:;
-				if( ELIGIBLE$4 == 0ll ) goto label$681;
+				if( ELIGIBLE$4 == 0ll) goto label$681;
 				{
 					CLOSEST_PROC$1 = OVL$1;
 					MAX_MATCHSCORE$1 = MATCHSCORE$1;
@@ -2450,7 +2450,7 @@ struct $8FBSYMBOL* SYMBFINDCLOSESTOVLPROC( struct $8FBSYMBOL* OVL_HEAD_PROC$1, i
 			}
 			goto label$676;
 			label$677:;
-			if( MATCHSCORE$1 != MAX_MATCHSCORE$1 ) goto label$682;
+			if( MATCHSCORE$1 != MAX_MATCHSCORE$1) goto label$682;
 			{
 				MATCHCOUNT$1 = MATCHCOUNT$1 + 1ll;
 			}
@@ -2462,9 +2462,9 @@ struct $8FBSYMBOL* SYMBFINDCLOSESTOVLPROC( struct $8FBSYMBOL* OVL_HEAD_PROC$1, i
 		OVL$1 = *(struct $8FBSYMBOL**)((uint8*)OVL$1 + 200ll);
 	}
 	label$673:;
-	if( OVL$1 != (struct $8FBSYMBOL*)0ull ) goto label$671;
+	if( OVL$1 != (struct $8FBSYMBOL*)0ull) goto label$671;
 	label$672:;
-	if( MATCHCOUNT$1 <= 1ll ) goto label$684;
+	if( MATCHCOUNT$1 <= 1ll) goto label$684;
 	{
 		*ERR_NUM$1 = 98ll;
 		fb$result$1 = (struct $8FBSYMBOL*)0ull;
@@ -2472,11 +2472,11 @@ struct $8FBSYMBOL* SYMBFINDCLOSESTOVLPROC( struct $8FBSYMBOL* OVL_HEAD_PROC$1, i
 	goto label$683;
 	label$684:;
 	{
-		if( CLOSEST_PROC$1 == (struct $8FBSYMBOL*)0ull ) goto label$686;
+		if( CLOSEST_PROC$1 == (struct $8FBSYMBOL*)0ull) goto label$686;
 		{
 			int64 vr$16 = HCHECKOVLPROC( OVL_HEAD_PROC$1, ARGS$1, ARG_HEAD$1, ERR_NUM$1, OPTIONS$1, CLOSEST_PROC$1, &EXACT_MATCHES$1, &IS_MATCH$1 );
 			MATCHSCORE$1 = vr$16;
-			if( IS_MATCH$1 != 0ll ) goto label$688;
+			if( IS_MATCH$1 != 0ll) goto label$688;
 			{
 				fb$result$1 = (struct $8FBSYMBOL*)0ull;
 			}
@@ -2509,11 +2509,11 @@ struct $8FBSYMBOL* SYMBFINDBOPOVLPROC( $6AST_OP OP$1, struct $7ASTNODE* L$1, str
 	struct $8FBSYMBOL* PROC$1;
 	*ERR_NUM$1 = 0ll;
 	{
-		int64 TMP$132$2;
-		TMP$132$2 = *(int64*)((uint8*)L$1 + 8ll) & 511ll;
-		if( TMP$132$2 == 20ll ) goto label$693;
+		int64 TMP$131$2;
+		TMP$131$2 = *(int64*)((uint8*)L$1 + 8ll) & 511ll;
+		if( TMP$131$2 == 20ll) goto label$693;
 		label$694:;
-		if( TMP$132$2 != 10ll ) goto label$692;
+		if( TMP$131$2 != 10ll) goto label$692;
 		label$693:;
 		{
 		}
@@ -2521,11 +2521,11 @@ struct $8FBSYMBOL* SYMBFINDBOPOVLPROC( $6AST_OP OP$1, struct $7ASTNODE* L$1, str
 		label$692:;
 		{
 			{
-				int64 TMP$133$4;
-				TMP$133$4 = *(int64*)((uint8*)R$1 + 8ll) & 511ll;
-				if( TMP$133$4 == 20ll ) goto label$698;
+				int64 TMP$132$4;
+				TMP$132$4 = *(int64*)((uint8*)R$1 + 8ll) & 511ll;
+				if( TMP$132$4 == 20ll) goto label$698;
 				label$699:;
-				if( TMP$133$4 != 10ll ) goto label$697;
+				if( TMP$132$4 != 10ll) goto label$697;
 				label$698:;
 				{
 				}
@@ -2550,9 +2550,9 @@ struct $8FBSYMBOL* SYMBFINDBOPOVLPROC( $6AST_OP OP$1, struct $7ASTNODE* L$1, str
 	*(struct $11FB_CALL_ARG**)((uint8*)&ARG2$1 + 16ll) = (struct $11FB_CALL_ARG*)0ull;
 	struct $8FBSYMBOL* vr$10 = SYMBFINDCLOSESTOVLPROC( *(struct $8FBSYMBOL**)((uint8*)((uint8*)&SYMB$ + (OP$1 << (3ll & 63ll))) + 198208ll), 2ll, &ARG1$1, ERR_NUM$1, 2ll );
 	PROC$1 = vr$10;
-	if( PROC$1 != (struct $8FBSYMBOL*)0ull ) goto label$702;
+	if( PROC$1 != (struct $8FBSYMBOL*)0ull) goto label$702;
 	{
-		if( *(int64*)ERR_NUM$1 == 0ll ) goto label$704;
+		if( *(int64*)ERR_NUM$1 == 0ll) goto label$704;
 		{
 			ERRREPORT( *(int64*)ERR_NUM$1, -1ll, (char*)0ull );
 		}
@@ -2576,14 +2576,14 @@ struct $8FBSYMBOL* SYMBFINDSELFBOPOVLPROC( $6AST_OP OP$1, struct $7ASTNODE* L$1,
 	struct $8FBSYMBOL* HEAD_PROC$1;
 	*ERR_NUM$1 = 0ll;
 	{
-		int64 TMP$134$2;
-		TMP$134$2 = *(int64*)((uint8*)L$1 + 8ll) & 511ll;
-		if( TMP$134$2 != 20ll ) goto label$708;
+		int64 TMP$133$2;
+		TMP$133$2 = *(int64*)((uint8*)L$1 + 8ll) & 511ll;
+		if( TMP$133$2 != 20ll) goto label$708;
 		label$709:;
 		{
 			struct $8FBSYMBOL* SUBTYPE$3;
 			SUBTYPE$3 = *(struct $8FBSYMBOL**)((uint8*)L$1 + 16ll);
-			if( *(struct $12FB_STRUCTEXT**)((uint8*)SUBTYPE$3 + 240ll) != (struct $12FB_STRUCTEXT*)0ull ) goto label$711;
+			if( *(struct $12FB_STRUCTEXT**)((uint8*)SUBTYPE$3 + 240ll) != (struct $12FB_STRUCTEXT*)0ull) goto label$711;
 			{
 				fb$result$1 = (struct $8FBSYMBOL*)0ull;
 				goto label$706;
@@ -2601,7 +2601,7 @@ struct $8FBSYMBOL* SYMBFINDSELFBOPOVLPROC( $6AST_OP OP$1, struct $7ASTNODE* L$1,
 		label$712:;
 		label$707:;
 	}
-	if( HEAD_PROC$1 != (struct $8FBSYMBOL*)0ull ) goto label$714;
+	if( HEAD_PROC$1 != (struct $8FBSYMBOL*)0ull) goto label$714;
 	{
 		fb$result$1 = (struct $8FBSYMBOL*)0ull;
 		goto label$706;
@@ -2614,9 +2614,9 @@ struct $8FBSYMBOL* SYMBFINDSELFBOPOVLPROC( $6AST_OP OP$1, struct $7ASTNODE* L$1,
 	*(struct $11FB_CALL_ARG**)((uint8*)&ARG1$1 + 16ll) = (struct $11FB_CALL_ARG*)0ull;
 	struct $8FBSYMBOL* vr$11 = SYMBFINDCLOSESTOVLPROC( HEAD_PROC$1, 1ll, &ARG1$1, ERR_NUM$1, 0ll );
 	PROC$1 = vr$11;
-	if( PROC$1 != (struct $8FBSYMBOL*)0ull ) goto label$716;
+	if( PROC$1 != (struct $8FBSYMBOL*)0ull) goto label$716;
 	{
-		if( *(int64*)ERR_NUM$1 == 0ll ) goto label$718;
+		if( *(int64*)ERR_NUM$1 == 0ll) goto label$718;
 		{
 			ERRREPORT( *(int64*)ERR_NUM$1, -1ll, (char*)0ull );
 		}
@@ -2627,7 +2627,7 @@ struct $8FBSYMBOL* SYMBFINDSELFBOPOVLPROC( $6AST_OP OP$1, struct $7ASTNODE* L$1,
 	label$716:;
 	{
 		int64 vr$14 = SYMBCHECKACCESS( PROC$1 );
-		if( vr$14 != 0ll ) goto label$720;
+		if( vr$14 != 0ll) goto label$720;
 		{
 			*ERR_NUM$1 = 202ll;
 			char* vr$16 = SYMBGETFULLPROCNAME( PROC$1 );
@@ -2652,11 +2652,11 @@ struct $8FBSYMBOL* SYMBFINDUOPOVLPROC( $6AST_OP OP$1, struct $7ASTNODE* L$1, $9F
 	struct $8FBSYMBOL* PROC$1;
 	*ERR_NUM$1 = 0ll;
 	{
-		int64 TMP$135$2;
-		TMP$135$2 = *(int64*)((uint8*)L$1 + 8ll) & 511ll;
-		if( TMP$135$2 == 20ll ) goto label$725;
+		int64 TMP$134$2;
+		TMP$134$2 = *(int64*)((uint8*)L$1 + 8ll) & 511ll;
+		if( TMP$134$2 == 20ll) goto label$725;
 		label$726:;
-		if( TMP$135$2 != 10ll ) goto label$724;
+		if( TMP$134$2 != 10ll) goto label$724;
 		label$725:;
 		{
 		}
@@ -2674,9 +2674,9 @@ struct $8FBSYMBOL* SYMBFINDUOPOVLPROC( $6AST_OP OP$1, struct $7ASTNODE* L$1, $9F
 	*(struct $11FB_CALL_ARG**)((uint8*)&ARG1$1 + 16ll) = (struct $11FB_CALL_ARG*)0ull;
 	struct $8FBSYMBOL* vr$7 = SYMBFINDCLOSESTOVLPROC( *(struct $8FBSYMBOL**)((uint8*)((uint8*)&SYMB$ + (OP$1 << (3ll & 63ll))) + 198208ll), 1ll, &ARG1$1, ERR_NUM$1, 0ll );
 	PROC$1 = vr$7;
-	if( PROC$1 != (struct $8FBSYMBOL*)0ull ) goto label$729;
+	if( PROC$1 != (struct $8FBSYMBOL*)0ull) goto label$729;
 	{
-		if( *(int64*)ERR_NUM$1 == 0ll ) goto label$731;
+		if( *(int64*)ERR_NUM$1 == 0ll) goto label$731;
 		{
 			ERRREPORT( *(int64*)ERR_NUM$1, -1ll, (char*)0ull );
 		}
@@ -2699,14 +2699,14 @@ struct $8FBSYMBOL* SYMBFINDSELFUOPOVLPROC( $6AST_OP OP$1, struct $7ASTNODE* L$1,
 	struct $8FBSYMBOL* HEAD_PROC$1;
 	*ERR_NUM$1 = 0ll;
 	{
-		int64 TMP$136$2;
-		TMP$136$2 = *(int64*)((uint8*)L$1 + 8ll) & 511ll;
-		if( TMP$136$2 != 20ll ) goto label$735;
+		int64 TMP$135$2;
+		TMP$135$2 = *(int64*)((uint8*)L$1 + 8ll) & 511ll;
+		if( TMP$135$2 != 20ll) goto label$735;
 		label$736:;
 		{
 			struct $8FBSYMBOL* SUBTYPE$3;
 			SUBTYPE$3 = *(struct $8FBSYMBOL**)((uint8*)L$1 + 16ll);
-			if( *(struct $12FB_STRUCTEXT**)((uint8*)SUBTYPE$3 + 240ll) != (struct $12FB_STRUCTEXT*)0ull ) goto label$738;
+			if( *(struct $12FB_STRUCTEXT**)((uint8*)SUBTYPE$3 + 240ll) != (struct $12FB_STRUCTEXT*)0ull) goto label$738;
 			{
 				fb$result$1 = (struct $8FBSYMBOL*)0ull;
 				goto label$733;
@@ -2724,7 +2724,7 @@ struct $8FBSYMBOL* SYMBFINDSELFUOPOVLPROC( $6AST_OP OP$1, struct $7ASTNODE* L$1,
 		label$739:;
 		label$734:;
 	}
-	if( HEAD_PROC$1 != (struct $8FBSYMBOL*)0ull ) goto label$741;
+	if( HEAD_PROC$1 != (struct $8FBSYMBOL*)0ull) goto label$741;
 	{
 		fb$result$1 = (struct $8FBSYMBOL*)0ull;
 		goto label$733;
@@ -2733,9 +2733,9 @@ struct $8FBSYMBOL* SYMBFINDSELFUOPOVLPROC( $6AST_OP OP$1, struct $7ASTNODE* L$1,
 	label$740:;
 	struct $8FBSYMBOL* vr$9 = SYMBFINDCLOSESTOVLPROC( HEAD_PROC$1, 0ll, (struct $11FB_CALL_ARG*)0ull, ERR_NUM$1, 0ll );
 	PROC$1 = vr$9;
-	if( PROC$1 != (struct $8FBSYMBOL*)0ull ) goto label$743;
+	if( PROC$1 != (struct $8FBSYMBOL*)0ull) goto label$743;
 	{
-		if( *(int64*)ERR_NUM$1 == 0ll ) goto label$745;
+		if( *(int64*)ERR_NUM$1 == 0ll) goto label$745;
 		{
 			ERRREPORT( *(int64*)ERR_NUM$1, -1ll, (char*)0ull );
 		}
@@ -2746,7 +2746,7 @@ struct $8FBSYMBOL* SYMBFINDSELFUOPOVLPROC( $6AST_OP OP$1, struct $7ASTNODE* L$1,
 	label$743:;
 	{
 		int64 vr$12 = SYMBCHECKACCESS( PROC$1 );
-		if( vr$12 != 0ll ) goto label$747;
+		if( vr$12 != 0ll) goto label$747;
 		{
 			*ERR_NUM$1 = 202ll;
 			char* vr$14 = SYMBGETFULLPROCNAME( PROC$1 );
@@ -2764,28 +2764,28 @@ struct $8FBSYMBOL* SYMBFINDSELFUOPOVLPROC( $6AST_OP OP$1, struct $7ASTNODE* L$1,
 
 struct $8FBSYMBOL* SYMBFINDCASTOVLPROC( int64 TO_DTYPE$1, struct $8FBSYMBOL* TO_SUBTYPE$1, struct $7ASTNODE* L$1, $9FB_ERRMSG* ERR_NUM$1, $14FB_SYMBFINDOPT OPTIONS$1 )
 {
-	int64 TMP$142$1;
+	int64 TMP$141$1;
 	struct $8FBSYMBOL* fb$result$1;
 	__builtin_memset( &fb$result$1, 0, 8ll );
 	label$770:;
 	struct $8FBSYMBOL* PROC_HEAD$1;
 	*ERR_NUM$1 = 0ll;
 	{
-		int64 TMP$141$2;
-		TMP$141$2 = *(int64*)((uint8*)L$1 + 8ll) & 511ll;
-		if( TMP$141$2 != 20ll ) goto label$773;
+		int64 TMP$140$2;
+		TMP$140$2 = *(int64*)((uint8*)L$1 + 8ll) & 511ll;
+		if( TMP$140$2 != 20ll) goto label$773;
 		label$774:;
 		{
 			struct $8FBSYMBOL* SUBTYPE$3;
 			SUBTYPE$3 = *(struct $8FBSYMBOL**)((uint8*)L$1 + 16ll);
-			if( SUBTYPE$3 != (struct $8FBSYMBOL*)0ull ) goto label$776;
+			if( SUBTYPE$3 != (struct $8FBSYMBOL*)0ull) goto label$776;
 			{
 				fb$result$1 = (struct $8FBSYMBOL*)0ull;
 				goto label$771;
 			}
 			label$776:;
 			label$775:;
-			if( *(struct $12FB_STRUCTEXT**)((uint8*)SUBTYPE$3 + 240ll) != (struct $12FB_STRUCTEXT*)0ull ) goto label$778;
+			if( *(struct $12FB_STRUCTEXT**)((uint8*)SUBTYPE$3 + 240ll) != (struct $12FB_STRUCTEXT*)0ull) goto label$778;
 			{
 				fb$result$1 = (struct $8FBSYMBOL*)0ull;
 				goto label$771;
@@ -2803,7 +2803,7 @@ struct $8FBSYMBOL* SYMBFINDCASTOVLPROC( int64 TO_DTYPE$1, struct $8FBSYMBOL* TO_
 		label$779:;
 		label$772:;
 	}
-	if( PROC_HEAD$1 != (struct $8FBSYMBOL*)0ull ) goto label$781;
+	if( PROC_HEAD$1 != (struct $8FBSYMBOL*)0ull) goto label$781;
 	{
 		fb$result$1 = (struct $8FBSYMBOL*)0ull;
 		goto label$771;
@@ -2819,21 +2819,21 @@ struct $8FBSYMBOL* SYMBFINDCASTOVLPROC( int64 TO_DTYPE$1, struct $8FBSYMBOL* TO_
 	CLOSEST_PROC$1 = (struct $8FBSYMBOL*)0ull;
 	MAX_MATCHSCORE$1 = 0ll;
 	MATCHCOUNT$1 = 0ll;
-	if( (TO_DTYPE$1 & 480ll) == 0ll ) goto label$782;
-	TMP$142$1 = 24ll;
+	if( (TO_DTYPE$1 & 480ll) == 0ll) goto label$782;
+	TMP$141$1 = 24ll;
 	goto label$810;
 	label$782:;
-	TMP$142$1 = TO_DTYPE$1 & 31ll;
+	TMP$141$1 = TO_DTYPE$1 & 31ll;
 	label$810:;
-	if( TMP$142$1 == 0ll ) goto label$784;
+	if( TMP$141$1 == 0ll) goto label$784;
 	{
 		PROC$1 = PROC_HEAD$1;
 		label$785:;
-		if( PROC$1 == (struct $8FBSYMBOL*)0ull ) goto label$786;
+		if( PROC$1 == (struct $8FBSYMBOL*)0ull) goto label$786;
 		{
 			$22FB_OVLPROC_MATCH_SCORE vr$10 = HCHECKCASTOVL( PROC$1, TO_DTYPE$1, TO_SUBTYPE$1, OPTIONS$1 );
 			MATCHSCORE$1 = vr$10;
-			if( MATCHSCORE$1 <= MAX_MATCHSCORE$1 ) goto label$788;
+			if( MATCHSCORE$1 <= MAX_MATCHSCORE$1) goto label$788;
 			{
 				CLOSEST_PROC$1 = PROC$1;
 				MAX_MATCHSCORE$1 = MATCHSCORE$1;
@@ -2841,9 +2841,9 @@ struct $8FBSYMBOL* SYMBFINDCASTOVLPROC( int64 TO_DTYPE$1, struct $8FBSYMBOL* TO_
 			}
 			goto label$787;
 			label$788:;
-			if( MATCHSCORE$1 != MAX_MATCHSCORE$1 ) goto label$789;
+			if( MATCHSCORE$1 != MAX_MATCHSCORE$1) goto label$789;
 			{
-				if( MAX_MATCHSCORE$1 <= 0ll ) goto label$791;
+				if( MAX_MATCHSCORE$1 <= 0ll) goto label$791;
 				{
 					MATCHCOUNT$1 = MATCHCOUNT$1 + 1ll;
 				}
@@ -2862,13 +2862,13 @@ struct $8FBSYMBOL* SYMBFINDCASTOVLPROC( int64 TO_DTYPE$1, struct $8FBSYMBOL* TO_
 	{
 		PROC$1 = PROC_HEAD$1;
 		label$792:;
-		if( PROC$1 == (struct $8FBSYMBOL*)0ull ) goto label$793;
+		if( PROC$1 == (struct $8FBSYMBOL*)0ull) goto label$793;
 		{
-			if( *(struct $8FBSYMBOL**)((uint8*)PROC$1 + 64ll) != (struct $8FBSYMBOL*)0ull ) goto label$795;
+			if( *(struct $8FBSYMBOL**)((uint8*)PROC$1 + 64ll) != (struct $8FBSYMBOL*)0ull) goto label$795;
 			{
-				if( (*(int64*)((uint8*)PROC$1 + 56ll) & 511ll) > 16ll ) goto label$797;
+				if( (*(int64*)((uint8*)PROC$1 + 56ll) & 511ll) > 16ll) goto label$797;
 				{
-					if( (*(int64*)((uint8*)PROC$1 + 56ll) & 511ll) <= TO_DTYPE$1 ) goto label$799;
+					if( (*(int64*)((uint8*)PROC$1 + 56ll) & 511ll) <= TO_DTYPE$1) goto label$799;
 					{
 						CLOSEST_PROC$1 = PROC$1;
 						TO_DTYPE$1 = *(int64*)((uint8*)PROC$1 + 56ll) & 511ll;
@@ -2887,10 +2887,10 @@ struct $8FBSYMBOL* SYMBFINDCASTOVLPROC( int64 TO_DTYPE$1, struct $8FBSYMBOL* TO_
 		label$793:;
 	}
 	label$783:;
-	if( MATCHCOUNT$1 <= 1ll ) goto label$801;
+	if( MATCHCOUNT$1 <= 1ll) goto label$801;
 	{
 		*ERR_NUM$1 = 98ll;
-		if( (OPTIONS$1 & 8ll) != 0ll ) goto label$803;
+		if( (OPTIONS$1 & 8ll) != 0ll) goto label$803;
 		{
 			ERRREPORTPARAM( PROC_HEAD$1, 0ll, (char*)0ull, 98ll );
 		}
@@ -2901,13 +2901,13 @@ struct $8FBSYMBOL* SYMBFINDCASTOVLPROC( int64 TO_DTYPE$1, struct $8FBSYMBOL* TO_
 	goto label$800;
 	label$801:;
 	{
-		if( CLOSEST_PROC$1 == (struct $8FBSYMBOL*)0ull ) goto label$805;
+		if( CLOSEST_PROC$1 == (struct $8FBSYMBOL*)0ull) goto label$805;
 		{
 			int64 vr$23 = SYMBCHECKACCESS( CLOSEST_PROC$1 );
-			if( vr$23 != 0ll ) goto label$807;
+			if( vr$23 != 0ll) goto label$807;
 			{
 				*ERR_NUM$1 = 202ll;
-				if( (OPTIONS$1 & 8ll) != 0ll ) goto label$809;
+				if( (OPTIONS$1 & 8ll) != 0ll) goto label$809;
 				{
 					char* vr$26 = SYMBGETFULLPROCNAME( CLOSEST_PROC$1 );
 					ERRREPORTEX( 202ll, (char*)vr$26, 0ll, 1ll, (char*)0ull );
@@ -2947,7 +2947,7 @@ struct $8FBSYMBOL* SYMBFINDCTOROVLPROC( struct $8FBSYMBOL* SYM$1, struct $7ASTNO
 void SYMBDELPROTOTYPE( struct $8FBSYMBOL* S$1 )
 {
 	label$817:;
-	if( (int64)*(int16*)((uint8*)S$1 + 120ll) <= 0ll ) goto label$820;
+	if( (int64)*(int16*)((uint8*)S$1 + 120ll) <= 0ll) goto label$820;
 	{
 		HDELPARAMS( S$1 );
 	}
@@ -2984,20 +2984,20 @@ struct $20FB_GLOBCTORLIST_ITEM* SYMBADDGLOBALDTOR( struct $8FBSYMBOL* PROC$1 )
 
 $22FB_OVLPROC_MATCH_SCORE SYMBCALCPROCMATCH( struct $8FBSYMBOL* L$1, struct $8FBSYMBOL* R$1, int64* ERRMSG$1 )
 {
-	$12FB_PARAMMODE TMP$143$1;
+	$12FB_PARAMMODE TMP$142$1;
 	$22FB_OVLPROC_MATCH_SCORE fb$result$1;
 	__builtin_memset( &fb$result$1, 0, 8ll );
 	label$839:;
 	$22FB_OVLPROC_MATCH_SCORE MATCH$1;
-	if( (*(int64*)((uint8*)L$1 + 16ll) & 2048ll) == 0ll ) goto label$841;
-	TMP$143$1 = 2ll;
+	if( (*(int64*)((uint8*)L$1 + 16ll) & 2048ll) == 0ll) goto label$841;
+	TMP$142$1 = 2ll;
 	goto label$866;
 	label$841:;
-	TMP$143$1 = 1ll;
+	TMP$142$1 = 1ll;
 	label$866:;
-	$22FB_OVLPROC_MATCH_SCORE vr$7 = TYPECALCMATCH( *(int64*)((uint8*)L$1 + 56ll), *(struct $8FBSYMBOL**)((uint8*)L$1 + 64ll), TMP$143$1, *(int64*)((uint8*)R$1 + 56ll), *(struct $8FBSYMBOL**)((uint8*)R$1 + 64ll) );
+	$22FB_OVLPROC_MATCH_SCORE vr$7 = TYPECALCMATCH( *(int64*)((uint8*)L$1 + 56ll), *(struct $8FBSYMBOL**)((uint8*)L$1 + 64ll), TMP$142$1, *(int64*)((uint8*)R$1 + 56ll), *(struct $8FBSYMBOL**)((uint8*)R$1 + 64ll) );
 	MATCH$1 = vr$7;
-	if( MATCH$1 != 0ll ) goto label$843;
+	if( MATCH$1 != 0ll) goto label$843;
 	{
 		*ERRMSG$1 = 225ll;
 		fb$result$1 = 0ll;
@@ -3005,7 +3005,7 @@ $22FB_OVLPROC_MATCH_SCORE SYMBCALCPROCMATCH( struct $8FBSYMBOL* L$1, struct $8FB
 	}
 	label$843:;
 	label$842:;
-	if( (int64)-((*(int64*)((uint8*)L$1 + 16ll) & 2048ll) != 0ll) == (int64)-((*(int64*)((uint8*)R$1 + 16ll) & 2048ll) != 0ll) ) goto label$845;
+	if( (int64)-((*(int64*)((uint8*)L$1 + 16ll) & 2048ll) != 0ll) == (int64)-((*(int64*)((uint8*)R$1 + 16ll) & 2048ll) != 0ll)) goto label$845;
 	{
 		*ERRMSG$1 = 225ll;
 		fb$result$1 = 0ll;
@@ -3014,7 +3014,7 @@ $22FB_OVLPROC_MATCH_SCORE SYMBCALCPROCMATCH( struct $8FBSYMBOL* L$1, struct $8FB
 	label$845:;
 	label$844:;
 	int64 vr$16 = SYMBAREPROCMODESEQUAL( L$1, R$1 );
-	if( vr$16 != 0ll ) goto label$847;
+	if( vr$16 != 0ll) goto label$847;
 	{
 		*ERRMSG$1 = 226ll;
 		fb$result$1 = 0ll;
@@ -3022,9 +3022,9 @@ $22FB_OVLPROC_MATCH_SCORE SYMBCALCPROCMATCH( struct $8FBSYMBOL* L$1, struct $8FB
 	}
 	label$847:;
 	label$846:;
-	if( (int64)-((*(int64*)((uint8*)L$1 + 8ll) & 2048ll) != 0ll) == (int64)-((*(int64*)((uint8*)R$1 + 8ll) & 2048ll) != 0ll) ) goto label$849;
+	if( (int64)-((*(int64*)((uint8*)L$1 + 8ll) & 2048ll) != 0ll) == (int64)-((*(int64*)((uint8*)R$1 + 8ll) & 2048ll) != 0ll)) goto label$849;
 	{
-		if( (*(int64*)((uint8*)L$1 + 8ll) & 2048ll) == 0ll ) goto label$851;
+		if( (*(int64*)((uint8*)L$1 + 8ll) & 2048ll) == 0ll) goto label$851;
 		{
 			*ERRMSG$1 = 229ll;
 		}
@@ -3039,7 +3039,7 @@ $22FB_OVLPROC_MATCH_SCORE SYMBCALCPROCMATCH( struct $8FBSYMBOL* L$1, struct $8FB
 	}
 	label$849:;
 	label$848:;
-	if( (int64)*(int16*)((uint8*)L$1 + 120ll) == (int64)*(int16*)((uint8*)R$1 + 120ll) ) goto label$853;
+	if( (int64)*(int16*)((uint8*)L$1 + 120ll) == (int64)*(int16*)((uint8*)R$1 + 120ll)) goto label$853;
 	{
 		*ERRMSG$1 = 231ll;
 		fb$result$1 = 0ll;
@@ -3051,11 +3051,11 @@ $22FB_OVLPROC_MATCH_SCORE SYMBCALCPROCMATCH( struct $8FBSYMBOL* L$1, struct $8FB
 	LPARAM$1 = *(struct $8FBSYMBOL**)((uint8*)L$1 + 136ll);
 	struct $8FBSYMBOL* RPARAM$1;
 	RPARAM$1 = *(struct $8FBSYMBOL**)((uint8*)R$1 + 136ll);
-	if( (((int64)-((*(int64*)((uint8*)L$1 + 16ll) & 256ll) != 0ll) & (int64)-((*(int64*)((uint8*)L$1 + 16ll) & 2ll) != 0ll)) & (int64)-((*(int64*)((uint8*)R$1 + 16ll) & 2ll) != 0ll)) == 0ll ) goto label$855;
+	if( (((int64)-((*(int64*)((uint8*)L$1 + 16ll) & 256ll) != 0ll) & (int64)-((*(int64*)((uint8*)L$1 + 16ll) & 2ll) != 0ll)) & (int64)-((*(int64*)((uint8*)R$1 + 16ll) & 2ll) != 0ll)) == 0ll) goto label$855;
 	{
-		if( ((int64)-(LPARAM$1 != (struct $8FBSYMBOL*)0ull) & (int64)-(RPARAM$1 != (struct $8FBSYMBOL*)0ull)) == 0ll ) goto label$857;
+		if( ((int64)-(LPARAM$1 != (struct $8FBSYMBOL*)0ull) & (int64)-(RPARAM$1 != (struct $8FBSYMBOL*)0ull)) == 0ll) goto label$857;
 		{
-			if( ((int64)-((*(int64*)((uint8*)LPARAM$1 + 8ll) & 524288ll) != 0ll) & (int64)-((*(int64*)((uint8*)RPARAM$1 + 8ll) & 524288ll) != 0ll)) == 0ll ) goto label$859;
+			if( ((int64)-((*(int64*)((uint8*)LPARAM$1 + 8ll) & 524288ll) != 0ll) & (int64)-((*(int64*)((uint8*)RPARAM$1 + 8ll) & 524288ll) != 0ll)) == 0ll) goto label$859;
 			{
 				LPARAM$1 = *(struct $8FBSYMBOL**)((uint8*)LPARAM$1 + 312ll);
 				RPARAM$1 = *(struct $8FBSYMBOL**)((uint8*)RPARAM$1 + 312ll);
@@ -3069,12 +3069,12 @@ $22FB_OVLPROC_MATCH_SCORE SYMBCALCPROCMATCH( struct $8FBSYMBOL* L$1, struct $8FB
 	label$855:;
 	label$854:;
 	label$860:;
-	if( LPARAM$1 == (struct $8FBSYMBOL*)0ull ) goto label$861;
+	if( LPARAM$1 == (struct $8FBSYMBOL*)0ull) goto label$861;
 	{
 		$22FB_OVLPROC_MATCH_SCORE PARAMMATCH$2;
 		$22FB_OVLPROC_MATCH_SCORE vr$58 = SYMBCALCPARAMMATCH( RPARAM$1, LPARAM$1 );
 		PARAMMATCH$2 = vr$58;
-		if( PARAMMATCH$2 != 0ll ) goto label$863;
+		if( PARAMMATCH$2 != 0ll) goto label$863;
 		{
 			*ERRMSG$1 = 231ll;
 			fb$result$1 = 0ll;
@@ -3082,7 +3082,7 @@ $22FB_OVLPROC_MATCH_SCORE SYMBCALCPROCMATCH( struct $8FBSYMBOL* L$1, struct $8FB
 		}
 		label$863:;
 		label$862:;
-		if( MATCH$1 <= PARAMMATCH$2 ) goto label$865;
+		if( MATCH$1 <= PARAMMATCH$2) goto label$865;
 		{
 			MATCH$1 = PARAMMATCH$2;
 		}
@@ -3104,16 +3104,16 @@ void SYMBPROCCHECKOVERRIDDEN( struct $8FBSYMBOL* PROC$1, int64 IS_IMPLICIT$1 )
 	struct $8FBSYMBOL* OVERRIDDEN$1;
 	struct $8FBSYMBOL* vr$0 = SYMBPROCGETOVERRIDDEN( PROC$1 );
 	OVERRIDDEN$1 = vr$0;
-	if( OVERRIDDEN$1 == (struct $8FBSYMBOL*)0ull ) goto label$870;
+	if( OVERRIDDEN$1 == (struct $8FBSYMBOL*)0ull) goto label$870;
 	{
 		int64 ERRMSG$2;
 		__builtin_memset( &ERRMSG$2, 0, 8ll );
 		$22FB_OVLPROC_MATCH_SCORE vr$3 = SYMBCALCPROCMATCH( OVERRIDDEN$1, PROC$1, &ERRMSG$2 );
-		if( vr$3 != 0ll ) goto label$872;
+		if( vr$3 != 0ll) goto label$872;
 		{
-			if( (IS_IMPLICIT$1 & (int64)-(ERRMSG$2 == 226ll)) == 0ll ) goto label$874;
+			if( (IS_IMPLICIT$1 & (int64)-(ERRMSG$2 == 226ll)) == 0ll) goto label$874;
 			{
-				if( (*(int64*)((uint8*)PROC$1 + 16ll) & 8ll) == 0ll ) goto label$876;
+				if( (*(int64*)((uint8*)PROC$1 + 16ll) & 8ll) == 0ll) goto label$876;
 				{
 					ERRMSG$2 = 227ll;
 				}
@@ -3149,7 +3149,7 @@ int64 SYMBPROCGETVTABLEINDEX( struct $8FBSYMBOL* PROC$1 )
 	int64 fb$result$1;
 	__builtin_memset( &fb$result$1, 0, 8ll );
 	label$879:;
-	if( *(struct $10FB_PROCEXT**)((uint8*)PROC$1 + 208ll) == (struct $10FB_PROCEXT*)0ull ) goto label$882;
+	if( *(struct $10FB_PROCEXT**)((uint8*)PROC$1 + 208ll) == (struct $10FB_PROCEXT*)0ull) goto label$882;
 	{
 		fb$result$1 = *(int64*)((uint8*)*(struct $10FB_PROCEXT**)((uint8*)PROC$1 + 208ll) + 136ll);
 	}
@@ -3164,7 +3164,7 @@ struct $8FBSYMBOL* SYMBPROCGETOVERRIDDEN( struct $8FBSYMBOL* PROC$1 )
 	struct $8FBSYMBOL* fb$result$1;
 	__builtin_memset( &fb$result$1, 0, 8ll );
 	label$883:;
-	if( *(struct $10FB_PROCEXT**)((uint8*)PROC$1 + 208ll) == (struct $10FB_PROCEXT*)0ull ) goto label$886;
+	if( *(struct $10FB_PROCEXT**)((uint8*)PROC$1 + 208ll) == (struct $10FB_PROCEXT*)0ull) goto label$886;
 	{
 		fb$result$1 = *(struct $8FBSYMBOL**)((uint8*)*(struct $10FB_PROCEXT**)((uint8*)PROC$1 + 208ll) + 144ll);
 	}
@@ -3179,7 +3179,7 @@ struct $8FBSYMBOL* SYMBGETPROCRESULT( struct $8FBSYMBOL* PROC$1 )
 	struct $8FBSYMBOL* fb$result$1;
 	__builtin_memset( &fb$result$1, 0, 8ll );
 	label$887:;
-	if( *(struct $10FB_PROCEXT**)((uint8*)PROC$1 + 208ll) == (struct $10FB_PROCEXT*)0ull ) goto label$890;
+	if( *(struct $10FB_PROCEXT**)((uint8*)PROC$1 + 208ll) == (struct $10FB_PROCEXT*)0ull) goto label$890;
 	{
 		fb$result$1 = *(struct $8FBSYMBOL**)*(struct $10FB_PROCEXT**)((uint8*)PROC$1 + 208ll);
 	}
@@ -3196,7 +3196,7 @@ int64 SYMBPROCHASFWDREFINSIGNATURE( struct $8FBSYMBOL* PROC$1 )
 	label$891:;
 	struct $8FBSYMBOL* PARAM$1;
 	int64 vr$3 = TYPEHASFWDREFINSIGNATURE( *(int64*)((uint8*)PROC$1 + 56ll), *(struct $8FBSYMBOL**)((uint8*)PROC$1 + 64ll) );
-	if( vr$3 == 0ll ) goto label$894;
+	if( vr$3 == 0ll) goto label$894;
 	{
 		fb$result$1 = -1ll;
 		goto label$892;
@@ -3205,10 +3205,10 @@ int64 SYMBPROCHASFWDREFINSIGNATURE( struct $8FBSYMBOL* PROC$1 )
 	label$893:;
 	PARAM$1 = *(struct $8FBSYMBOL**)((uint8*)PROC$1 + 136ll);
 	label$895:;
-	if( PARAM$1 == (struct $8FBSYMBOL*)0ull ) goto label$896;
+	if( PARAM$1 == (struct $8FBSYMBOL*)0ull) goto label$896;
 	{
 		int64 vr$7 = TYPEHASFWDREFINSIGNATURE( *(int64*)((uint8*)PARAM$1 + 56ll), *(struct $8FBSYMBOL**)((uint8*)PARAM$1 + 64ll) );
-		if( vr$7 == 0ll ) goto label$898;
+		if( vr$7 == 0ll) goto label$898;
 		{
 			fb$result$1 = -1ll;
 			goto label$892;
@@ -3235,12 +3235,12 @@ FBSTRING* HDUMPDYNAMICARRAYDIMENSIONS( int64 DIMENSIONS$1 )
 	{
 		int64 I$2;
 		I$2 = 1ll;
-		int64 TMP$155$2;
-		TMP$155$2 = DIMENSIONS$1;
+		int64 TMP$154$2;
+		TMP$154$2 = DIMENSIONS$1;
 		goto label$940;
 		label$943:;
 		{
-			if( I$2 <= 1ll ) goto label$945;
+			if( I$2 <= 1ll) goto label$945;
 			{
 				fb_StrConcatAssign( (void*)&S$1, -1ll, (void*)", ", 3ll, 0 );
 			}
@@ -3251,7 +3251,7 @@ FBSTRING* HDUMPDYNAMICARRAYDIMENSIONS( int64 DIMENSIONS$1 )
 		label$941:;
 		I$2 = I$2 + 1ll;
 		label$940:;
-		if( I$2 <= TMP$155$2 ) goto label$943;
+		if( I$2 <= TMP$154$2) goto label$943;
 		label$942:;
 	}
 	fb_StrConcatAssign( (void*)&S$1, -1ll, (void*)") ", 3ll, 0 );
@@ -3290,45 +3290,45 @@ char* SYMBGETFULLPROCNAME( struct $8FBSYMBOL* PROC$1 )
 	struct $8FBSYMBOL* NS$1;
 	NS$1 = *(struct $8FBSYMBOL**)*(struct $8FBHASHTB**)((uint8*)PROC$1 + 248ll);
 	label$981:;
-	if( NS$1 == (struct $8FBSYMBOL*)((uint8*)&SYMB$ + 196704ll) ) goto label$982;
+	if( NS$1 == (struct $8FBSYMBOL*)((uint8*)&SYMB$ + 196704ll)) goto label$982;
 	{
+		FBSTRING TMP$170$2;
 		FBSTRING TMP$171$2;
-		FBSTRING TMP$172$2;
+		__builtin_memset( &TMP$170$2, 0, 24ll );
+		FBSTRING* vr$7 = fb_StrConcat( &TMP$170$2, *(void**)((uint8*)NS$1 + 32ll), 0ll, (void*)".", 2ll );
 		__builtin_memset( &TMP$171$2, 0, 24ll );
-		FBSTRING* vr$7 = fb_StrConcat( &TMP$171$2, *(void**)((uint8*)NS$1 + 32ll), 0ll, (void*)".", 2ll );
-		__builtin_memset( &TMP$172$2, 0, 24ll );
-		FBSTRING* vr$10 = fb_StrConcat( &TMP$172$2, (void*)vr$7, -1ll, (void*)&RES$1, -1ll );
+		FBSTRING* vr$10 = fb_StrConcat( &TMP$171$2, (void*)vr$7, -1ll, (void*)&RES$1, -1ll );
 		fb_StrAssign( (void*)&RES$1, -1ll, (void*)vr$10, -1ll, 0 );
 		NS$1 = *(struct $8FBSYMBOL**)*(struct $8FBHASHTB**)((uint8*)NS$1 + 248ll);
 	}
 	goto label$981;
 	label$982:;
-	if( (*(int64*)((uint8*)PROC$1 + 16ll) & 4ll) == 0ll ) goto label$984;
+	if( (*(int64*)((uint8*)PROC$1 + 16ll) & 4ll) == 0ll) goto label$984;
 	{
 		fb_StrConcatAssign( (void*)&RES$1, -1ll, (void*)"constructor", 12ll, 0 );
 	}
 	goto label$983;
 	label$984:;
-	if( (*(int64*)((uint8*)PROC$1 + 16ll) & 8ll) == 0ll ) goto label$985;
+	if( (*(int64*)((uint8*)PROC$1 + 16ll) & 8ll) == 0ll) goto label$985;
 	{
 		fb_StrConcatAssign( (void*)&RES$1, -1ll, (void*)"destructor", 11ll, 0 );
 	}
 	goto label$983;
 	label$985:;
-	if( (*(int64*)((uint8*)PROC$1 + 16ll) & 4096ll) == 0ll ) goto label$986;
+	if( (*(int64*)((uint8*)PROC$1 + 16ll) & 4096ll) == 0ll) goto label$986;
 	{
 		fb_StrConcatAssign( (void*)&RES$1, -1ll, (void*)"destructor", 11ll, 0 );
 	}
 	goto label$983;
 	label$986:;
-	if( (*(int64*)((uint8*)PROC$1 + 16ll) & 16ll) == 0ll ) goto label$987;
+	if( (*(int64*)((uint8*)PROC$1 + 16ll) & 16ll) == 0ll) goto label$987;
 	{
 		fb_StrConcatAssign( (void*)&RES$1, -1ll, (void*)"operator.", 10ll, 0 );
-		if( *(struct $10FB_PROCEXT**)((uint8*)PROC$1 + 208ll) == (struct $10FB_PROCEXT*)0ull ) goto label$989;
+		if( *(struct $10FB_PROCEXT**)((uint8*)PROC$1 + 208ll) == (struct $10FB_PROCEXT*)0ull) goto label$989;
 		{
-			FBSTRING TMP$176$3;
-			__builtin_memset( &TMP$176$3, 0, 24ll );
-			FBSTRING* vr$27 = fb_StrConcat( &TMP$176$3, (void*)&RES$1, -1ll, *(void**)(((int64)(struct $10AST_OPINFO*)AST_OPTB$ + (*(int64*)((uint8*)*(struct $10FB_PROCEXT**)((uint8*)PROC$1 + 208ll) + 80ll) << (5ll & 63ll))) + 16ll), 0ll );
+			FBSTRING TMP$175$3;
+			__builtin_memset( &TMP$175$3, 0, 24ll );
+			FBSTRING* vr$27 = fb_StrConcat( &TMP$175$3, (void*)&RES$1, -1ll, *(void**)(((int64)(struct $10AST_OPINFO*)AST_OPTB$ + (*(int64*)((uint8*)*(struct $10FB_PROCEXT**)((uint8*)PROC$1 + 208ll) + 80ll) << (5ll & 63ll))) + 16ll), 0ll );
 			fb_StrAssign( (void*)&RES$1, -1ll, (void*)vr$27, -1ll, 0 );
 		}
 		label$989:;
@@ -3336,14 +3336,14 @@ char* SYMBGETFULLPROCNAME( struct $8FBSYMBOL* PROC$1 )
 	}
 	goto label$983;
 	label$987:;
-	if( (*(int64*)((uint8*)PROC$1 + 16ll) & 32ll) == 0ll ) goto label$990;
+	if( (*(int64*)((uint8*)PROC$1 + 16ll) & 32ll) == 0ll) goto label$990;
 	{
-		FBSTRING TMP$177$2;
-		__builtin_memset( &TMP$177$2, 0, 24ll );
-		FBSTRING* vr$33 = fb_StrConcat( &TMP$177$2, (void*)&RES$1, -1ll, *(void**)((uint8*)PROC$1 + 32ll), 0ll );
+		FBSTRING TMP$176$2;
+		__builtin_memset( &TMP$176$2, 0, 24ll );
+		FBSTRING* vr$33 = fb_StrConcat( &TMP$176$2, (void*)&RES$1, -1ll, *(void**)((uint8*)PROC$1 + 32ll), 0ll );
 		fb_StrAssign( (void*)&RES$1, -1ll, (void*)vr$33, -1ll, 0 );
 		fb_StrConcatAssign( (void*)&RES$1, -1ll, (void*)".property.", 11ll, 0 );
-		if( (*(int64*)((uint8*)PROC$1 + 56ll) & 511ll) == 0ll ) goto label$992;
+		if( (*(int64*)((uint8*)PROC$1 + 56ll) & 511ll) == 0ll) goto label$992;
 		{
 			fb_StrConcatAssign( (void*)&RES$1, -1ll, (void*)"get", 4ll, 0 );
 		}
@@ -3357,9 +3357,9 @@ char* SYMBGETFULLPROCNAME( struct $8FBSYMBOL* PROC$1 )
 	goto label$983;
 	label$990:;
 	{
-		FBSTRING TMP$181$2;
-		__builtin_memset( &TMP$181$2, 0, 24ll );
-		FBSTRING* vr$39 = fb_StrConcat( &TMP$181$2, (void*)&RES$1, -1ll, *(void**)((uint8*)PROC$1 + 32ll), 0ll );
+		FBSTRING TMP$180$2;
+		__builtin_memset( &TMP$180$2, 0, 24ll );
+		FBSTRING* vr$39 = fb_StrConcat( &TMP$180$2, (void*)&RES$1, -1ll, *(void**)((uint8*)PROC$1 + 32ll), 0ll );
 		fb_StrAssign( (void*)&RES$1, -1ll, (void*)vr$39, -1ll, 0 );
 	}
 	label$983:;
@@ -3392,8 +3392,8 @@ int64 SYMBGETDEFAULTPARAMMODE( int64 DTYPE$1, struct $8FBSYMBOL* SUBTYPE$1 )
 	__builtin_memset( &fb$result$1, 0, 8ll );
 	label$995:;
 	{
-		uint64 TMP$182$2;
-		TMP$182$2 = (uint64)(DTYPE$1 & 511ll);
+		uint64 TMP$181$2;
+		TMP$181$2 = (uint64)(DTYPE$1 & 511ll);
 		goto label$998;
 		label$999:;
 		{
@@ -3408,7 +3408,7 @@ int64 SYMBGETDEFAULTPARAMMODE( int64 DTYPE$1, struct $8FBSYMBOL* SUBTYPE$1 )
 		}
 		goto label$997;
 		label$998:;
-		static const void* tmp$183[20ll] = {
+		static const void* tmp$182[20ll] = {
 			&&label$999,
 			&&label$1000,
 			&&label$1000,
@@ -3430,8 +3430,8 @@ int64 SYMBGETDEFAULTPARAMMODE( int64 DTYPE$1, struct $8FBSYMBOL* SUBTYPE$1 )
 			&&label$1000,
 			&&label$999,
 		};
-		if( (TMP$182$2 - 4ull) > 19ull ) goto label$1000;
-		goto *tmp$183[TMP$182$2 - 4ull];
+		if( (TMP$181$2 - 4ull) > 19ull ) goto label$1000;
+		goto *tmp$182[TMP$181$2 - 4ull];
 		label$997:;
 	}
 	label$996:;
@@ -3448,15 +3448,15 @@ int64 SYMBAREPROCMODESEQUAL( struct $8FBSYMBOL* PROCA$1, struct $8FBSYMBOL* PROC
 	A$1 = *(int64*)((uint8*)PROCA$1 + 152ll);
 	B$1 = *(int64*)((uint8*)PROCB$1 + 152ll);
 	{
-		if( A$1 == 1ll ) goto label$1005;
+		if( A$1 == 1ll) goto label$1005;
 		label$1006:;
-		if( A$1 != 2ll ) goto label$1004;
+		if( A$1 != 2ll) goto label$1004;
 		label$1005:;
 		{
 			{
-				if( B$1 == 1ll ) goto label$1009;
+				if( B$1 == 1ll) goto label$1009;
 				label$1010:;
-				if( B$1 != 2ll ) goto label$1008;
+				if( B$1 != 2ll) goto label$1008;
 				label$1009:;
 				{
 					fb$result$1 = -1ll;
@@ -3482,9 +3482,9 @@ struct $11FB_CALL_ARG* SYMBALLOCOVLCALLARG( struct $5TLIST* LIST$1, struct $16FB
 	struct $11FB_CALL_ARG* ARG$1;
 	void* vr$1 = LISTNEWNODE( LIST$1 );
 	ARG$1 = (struct $11FB_CALL_ARG*)vr$1;
-	if( TO_HEAD$1 != 0ll ) goto label$1014;
+	if( TO_HEAD$1 != 0ll) goto label$1014;
 	{
-		if( *(struct $11FB_CALL_ARG**)((uint8*)ARG_LIST$1 + 8ll) != (struct $11FB_CALL_ARG*)0ull ) goto label$1016;
+		if( *(struct $11FB_CALL_ARG**)((uint8*)ARG_LIST$1 + 8ll) != (struct $11FB_CALL_ARG*)0ull) goto label$1016;
 		{
 			*(struct $11FB_CALL_ARG**)((uint8*)ARG_LIST$1 + 8ll) = ARG$1;
 		}
@@ -3500,7 +3500,7 @@ struct $11FB_CALL_ARG* SYMBALLOCOVLCALLARG( struct $5TLIST* LIST$1, struct $16FB
 	goto label$1013;
 	label$1014:;
 	{
-		if( *(struct $11FB_CALL_ARG**)((uint8*)ARG_LIST$1 + 16ll) != (struct $11FB_CALL_ARG*)0ull ) goto label$1018;
+		if( *(struct $11FB_CALL_ARG**)((uint8*)ARG_LIST$1 + 16ll) != (struct $11FB_CALL_ARG*)0ull) goto label$1018;
 		{
 			*(struct $11FB_CALL_ARG**)((uint8*)ARG_LIST$1 + 16ll) = ARG$1;
 		}
@@ -3525,7 +3525,7 @@ void SYMBFREEOVLCALLARGS( struct $5TLIST* LIST$1, struct $16FB_CALL_ARG_LIST* AR
 	__builtin_memset( &NXT$1, 0, 8ll );
 	ARG$1 = *(struct $11FB_CALL_ARG**)((uint8*)ARG_LIST$1 + 8ll);
 	label$1021:;
-	if( ARG$1 == (struct $11FB_CALL_ARG*)0ull ) goto label$1022;
+	if( ARG$1 == (struct $11FB_CALL_ARG*)0ull) goto label$1022;
 	{
 		NXT$1 = *(struct $11FB_CALL_ARG**)((uint8*)ARG$1 + 16ll);
 		LISTDELNODE( LIST$1, (void*)ARG$1 );
@@ -3561,7 +3561,7 @@ static int64 HCANOVERLOAD( struct $8FBSYMBOL* PROC$1 )
 	__builtin_memset( &fb$result$1, 0, 8ll );
 	label$117:;
 	struct $8FBSYMBOL* PPARAM$1;
-	if( (int64)*(int16*)((uint8*)PROC$1 + 120ll) != 0ll ) goto label$120;
+	if( (int64)*(int16*)((uint8*)PROC$1 + 120ll) != 0ll) goto label$120;
 	{
 		fb$result$1 = -1ll;
 		goto label$118;
@@ -3569,7 +3569,7 @@ static int64 HCANOVERLOAD( struct $8FBSYMBOL* PROC$1 )
 	label$120:;
 	label$119:;
 	PPARAM$1 = *(struct $8FBSYMBOL**)((uint8*)PROC$1 + 144ll);
-	if( *(int64*)((uint8*)PPARAM$1 + 96ll) != 4ll ) goto label$122;
+	if( *(int64*)((uint8*)PPARAM$1 + 96ll) != 4ll) goto label$122;
 	{
 		fb$result$1 = 0ll;
 		goto label$118;
@@ -3577,9 +3577,9 @@ static int64 HCANOVERLOAD( struct $8FBSYMBOL* PROC$1 )
 	label$122:;
 	label$121:;
 	label$123:;
-	if( PPARAM$1 == (struct $8FBSYMBOL*)0ull ) goto label$124;
+	if( PPARAM$1 == (struct $8FBSYMBOL*)0ull) goto label$124;
 	{
-		if( *(int64*)((uint8*)PPARAM$1 + 56ll) != 0ll ) goto label$126;
+		if( *(int64*)((uint8*)PPARAM$1 + 56ll) != 0ll) goto label$126;
 		{
 			fb$result$1 = 0ll;
 			goto label$118;
@@ -3601,11 +3601,11 @@ static int64 HCANOVERLOADBYDESC( struct $8FBSYMBOL* A$1, struct $8FBSYMBOL* B$1 
 	__builtin_memset( &fb$result$1, 0, 8ll );
 	label$127:;
 	fb$result$1 = 0ll;
-	if( ((int64)-(*(int64*)((uint8*)A$1 + 96ll) == 3ll) | (int64)-(*(int64*)((uint8*)B$1 + 96ll) == 3ll)) == 0ll ) goto label$130;
+	if( ((int64)-(*(int64*)((uint8*)A$1 + 96ll) == 3ll) | (int64)-(*(int64*)((uint8*)B$1 + 96ll) == 3ll)) == 0ll) goto label$130;
 	{
-		if( ((int64)-(*(int64*)((uint8*)A$1 + 96ll) == 3ll) & (int64)-(*(int64*)((uint8*)B$1 + 96ll) == 3ll)) == 0ll ) goto label$132;
+		if( ((int64)-(*(int64*)((uint8*)A$1 + 96ll) == 3ll) & (int64)-(*(int64*)((uint8*)B$1 + 96ll) == 3ll)) == 0ll) goto label$132;
 		{
-			if( ((int64)-(*(int64*)((uint8*)A$1 + 120ll) > 0ll) & (int64)-(*(int64*)((uint8*)B$1 + 120ll) > 0ll)) == 0ll ) goto label$134;
+			if( ((int64)-(*(int64*)((uint8*)A$1 + 120ll) > 0ll) & (int64)-(*(int64*)((uint8*)B$1 + 120ll) > 0ll)) == 0ll) goto label$134;
 			{
 				fb$result$1 = (int64)-(*(int64*)((uint8*)A$1 + 120ll) != *(int64*)((uint8*)B$1 + 120ll));
 			}
@@ -3627,7 +3627,7 @@ static int64 HCANOVERLOADBYDESC( struct $8FBSYMBOL* A$1, struct $8FBSYMBOL* B$1 
 
 static struct $8FBSYMBOL* HADDOVLPROC( struct $8FBSYMBOL* PROC$1, struct $8FBSYMBOL* OVL_HEAD_PROC$1, struct $10FBSYMBOLTB* SYMTB$1, struct $8FBHASHTB* HASHTB$1, char* ID$1, char* ID_ALIAS$1, int64 DTYPE$1, struct $8FBSYMBOL* SUBTYPE$1, $13FB_SYMBATTRIB ATTRIB$1, $13FB_PROCATTRIB PATTRIB$1, int64 PRESERVECASE$1 )
 {
-	$10FB_SYMBOPT TMP$100$1;
+	$10FB_SYMBOPT TMP$99$1;
 	struct $8FBSYMBOL* fb$result$1;
 	__builtin_memset( &fb$result$1, 0, 8ll );
 	label$135:;
@@ -3637,38 +3637,38 @@ static struct $8FBSYMBOL* HADDOVLPROC( struct $8FBSYMBOL* PROC$1, struct $8FBSYM
 	int64 OVL_PARAMS$1;
 	int64 PARAMS$1;
 	fb$result$1 = (struct $8FBSYMBOL*)0ull;
-	if( OVL_HEAD_PROC$1 != (struct $8FBSYMBOL*)0ull ) goto label$138;
+	if( OVL_HEAD_PROC$1 != (struct $8FBSYMBOL*)0ull) goto label$138;
 	{
 		goto label$136;
 	}
 	label$138:;
 	label$137:;
-	if( (int64)-((PATTRIB$1 & 32ll) != 0ll) == (int64)-((*(int64*)((uint8*)OVL_HEAD_PROC$1 + 16ll) & 32ll) != 0ll) ) goto label$140;
+	if( (int64)-((PATTRIB$1 & 32ll) != 0ll) == (int64)-((*(int64*)((uint8*)OVL_HEAD_PROC$1 + 16ll) & 32ll) != 0ll)) goto label$140;
 	{
 		goto label$136;
 	}
 	label$140:;
 	label$139:;
 	PARAMS$1 = (int64)*(int16*)((uint8*)PROC$1 + 120ll);
-	if( (PATTRIB$1 & 2ll) == 0ll ) goto label$142;
+	if( (PATTRIB$1 & 2ll) == 0ll) goto label$142;
 	{
 		PARAMS$1 = PARAMS$1 + -1ll;
 	}
 	label$142:;
 	label$141:;
-	if( PARAMS$1 <= 0ll ) goto label$144;
+	if( PARAMS$1 <= 0ll) goto label$144;
 	{
 		PARAM$1 = *(struct $8FBSYMBOL**)((uint8*)PROC$1 + 144ll);
-		if( *(int64*)((uint8*)PARAM$1 + 96ll) != 4ll ) goto label$146;
+		if( *(int64*)((uint8*)PARAM$1 + 96ll) != 4ll) goto label$146;
 		{
 			goto label$136;
 		}
 		label$146:;
 		label$145:;
 		label$147:;
-		if( PARAM$1 == (struct $8FBSYMBOL*)0ull ) goto label$148;
+		if( PARAM$1 == (struct $8FBSYMBOL*)0ull) goto label$148;
 		{
-			if( *(int64*)((uint8*)PARAM$1 + 56ll) != 0ll ) goto label$150;
+			if( *(int64*)((uint8*)PARAM$1 + 56ll) != 0ll) goto label$150;
 			{
 				goto label$136;
 			}
@@ -3685,17 +3685,17 @@ static struct $8FBSYMBOL* HADDOVLPROC( struct $8FBSYMBOL* PROC$1, struct $8FBSYM
 	label$151:;
 	{
 		OVL_PARAMS$1 = (int64)*(int16*)((uint8*)OVL$1 + 120ll);
-		if( (*(int64*)((uint8*)OVL$1 + 16ll) & 2ll) == 0ll ) goto label$155;
+		if( (*(int64*)((uint8*)OVL$1 + 16ll) & 2ll) == 0ll) goto label$155;
 		{
 			OVL_PARAMS$1 = OVL_PARAMS$1 + -1ll;
 		}
 		label$155:;
 		label$154:;
-		if( (PATTRIB$1 & 32ll) == 0ll ) goto label$157;
+		if( (PATTRIB$1 & 32ll) == 0ll) goto label$157;
 		{
-			if( DTYPE$1 == 0ll ) goto label$159;
+			if( DTYPE$1 == 0ll) goto label$159;
 			{
-				if( (*(int64*)((uint8*)OVL$1 + 56ll) & 511ll) != 0ll ) goto label$161;
+				if( (*(int64*)((uint8*)OVL$1 + 56ll) & 511ll) != 0ll) goto label$161;
 				{
 					OVL_PARAMS$1 = -1ll;
 				}
@@ -3705,7 +3705,7 @@ static struct $8FBSYMBOL* HADDOVLPROC( struct $8FBSYMBOL* PROC$1, struct $8FBSYM
 			goto label$158;
 			label$159:;
 			{
-				if( (*(int64*)((uint8*)OVL$1 + 56ll) & 511ll) == 0ll ) goto label$163;
+				if( (*(int64*)((uint8*)OVL$1 + 56ll) & 511ll) == 0ll) goto label$163;
 				{
 					OVL_PARAMS$1 = -1ll;
 				}
@@ -3716,9 +3716,9 @@ static struct $8FBSYMBOL* HADDOVLPROC( struct $8FBSYMBOL* PROC$1, struct $8FBSYM
 		}
 		label$157:;
 		label$156:;
-		if( OVL_PARAMS$1 != PARAMS$1 ) goto label$165;
+		if( OVL_PARAMS$1 != PARAMS$1) goto label$165;
 		{
-			if( PARAMS$1 != 0ll ) goto label$167;
+			if( PARAMS$1 != 0ll) goto label$167;
 			{
 				goto label$136;
 			}
@@ -3729,7 +3729,7 @@ static struct $8FBSYMBOL* HADDOVLPROC( struct $8FBSYMBOL* PROC$1, struct $8FBSYM
 			label$168:;
 			{
 				int64 vr$26 = HCANOVERLOADBYDESC( PARAM$1, OVL_PARAM$1 );
-				if( vr$26 == 0ll ) goto label$172;
+				if( vr$26 == 0ll) goto label$172;
 				{
 					goto label$169;
 				}
@@ -3739,11 +3739,11 @@ static struct $8FBSYMBOL* HADDOVLPROC( struct $8FBSYMBOL* PROC$1, struct $8FBSYM
 				PDTYPE$4 = *(int64*)((uint8*)PARAM$1 + 56ll);
 				int64 ODTYPE$4;
 				ODTYPE$4 = *(int64*)((uint8*)OVL_PARAM$1 + 56ll);
-				if( ((PDTYPE$4 & 261632ll) | (ODTYPE$4 & 261632ll)) == 0ll ) goto label$174;
+				if( ((PDTYPE$4 & 261632ll) | (ODTYPE$4 & 261632ll)) == 0ll) goto label$174;
 				{
-					if( ((int64)-(*(int64*)((uint8*)PARAM$1 + 96ll) == 2ll) & (int64)-(*(int64*)((uint8*)OVL_PARAM$1 + 96ll) == 2ll)) == 0ll ) goto label$176;
+					if( ((int64)-(*(int64*)((uint8*)PARAM$1 + 96ll) == 2ll) & (int64)-(*(int64*)((uint8*)OVL_PARAM$1 + 96ll) == 2ll)) == 0ll) goto label$176;
 					{
-						if( (PDTYPE$4 & 261632ll) == (ODTYPE$4 & 261632ll) ) goto label$178;
+						if( (PDTYPE$4 & 261632ll) == (ODTYPE$4 & 261632ll)) goto label$178;
 						{
 							goto label$169;
 						}
@@ -3752,7 +3752,7 @@ static struct $8FBSYMBOL* HADDOVLPROC( struct $8FBSYMBOL* PROC$1, struct $8FBSYM
 					}
 					label$176:;
 					label$175:;
-					if( ((PDTYPE$4 & 261632ll) & -513ll) == ((ODTYPE$4 & 261632ll) & -513ll) ) goto label$180;
+					if( ((PDTYPE$4 & 261632ll) & -513ll) == ((ODTYPE$4 & 261632ll) & -513ll)) goto label$180;
 					{
 						goto label$169;
 					}
@@ -3763,13 +3763,13 @@ static struct $8FBSYMBOL* HADDOVLPROC( struct $8FBSYMBOL* PROC$1, struct $8FBSYM
 				}
 				label$174:;
 				label$173:;
-				if( PDTYPE$4 == ODTYPE$4 ) goto label$182;
+				if( PDTYPE$4 == ODTYPE$4) goto label$182;
 				{
 					goto label$169;
 				}
 				label$182:;
 				label$181:;
-				if( *(struct $8FBSYMBOL**)((uint8*)PARAM$1 + 64ll) == *(struct $8FBSYMBOL**)((uint8*)OVL_PARAM$1 + 64ll) ) goto label$184;
+				if( *(struct $8FBSYMBOL**)((uint8*)PARAM$1 + 64ll) == *(struct $8FBSYMBOL**)((uint8*)OVL_PARAM$1 + 64ll)) goto label$184;
 				{
 					goto label$169;
 				}
@@ -3780,9 +3780,9 @@ static struct $8FBSYMBOL* HADDOVLPROC( struct $8FBSYMBOL* PROC$1, struct $8FBSYM
 				OVL_PARAMS$1 = OVL_PARAMS$1 + -1ll;
 			}
 			label$170:;
-			if( OVL_PARAMS$1 > 0ll ) goto label$168;
+			if( OVL_PARAMS$1 > 0ll) goto label$168;
 			label$169:;
-			if( OVL_PARAMS$1 != 0ll ) goto label$186;
+			if( OVL_PARAMS$1 != 0ll) goto label$186;
 			{
 				goto label$136;
 			}
@@ -3794,23 +3794,23 @@ static struct $8FBSYMBOL* HADDOVLPROC( struct $8FBSYMBOL* PROC$1, struct $8FBSYM
 		OVL$1 = *(struct $8FBSYMBOL**)((uint8*)OVL$1 + 200ll);
 	}
 	label$153:;
-	if( OVL$1 != (struct $8FBSYMBOL*)0ull ) goto label$151;
+	if( OVL$1 != (struct $8FBSYMBOL*)0ull) goto label$151;
 	label$152:;
-	if( PRESERVECASE$1 == 0ll ) goto label$187;
-	TMP$100$1 = 1ll;
+	if( PRESERVECASE$1 == 0ll) goto label$187;
+	TMP$99$1 = 1ll;
 	goto label$1023;
 	label$187:;
-	TMP$100$1 = 0ll;
+	TMP$99$1 = 0ll;
 	label$1023:;
-	struct $8FBSYMBOL* vr$51 = SYMBNEWSYMBOL( TMP$100$1, PROC$1, SYMTB$1, HASHTB$1, 3ll, ID$1, ID_ALIAS$1, DTYPE$1, SUBTYPE$1, ATTRIB$1, PATTRIB$1 );
+	struct $8FBSYMBOL* vr$51 = SYMBNEWSYMBOL( TMP$99$1, PROC$1, SYMTB$1, HASHTB$1, 3ll, ID$1, ID_ALIAS$1, DTYPE$1, SUBTYPE$1, ATTRIB$1, PATTRIB$1 );
 	PROC$1 = vr$51;
-	if( PROC$1 != (struct $8FBSYMBOL*)0ull ) goto label$189;
+	if( PROC$1 != (struct $8FBSYMBOL*)0ull) goto label$189;
 	{
 		goto label$136;
 	}
 	label$189:;
 	label$188:;
-	if( ID$1 == (char*)0ull ) goto label$191;
+	if( ID$1 == (char*)0ull) goto label$191;
 	{
 		struct $8FBSYMBOL* NXT$2;
 		*(uint64*)((uint8*)PROC$1 + 264ll) = *(uint64*)((uint8*)OVL_HEAD_PROC$1 + 264ll);
@@ -3819,7 +3819,7 @@ static struct $8FBSYMBOL* HADDOVLPROC( struct $8FBSYMBOL* PROC$1, struct $8FBSYM
 		*(struct $8FBSYMBOL**)((uint8*)OVL_HEAD_PROC$1 + 280ll) = PROC$1;
 		*(struct $8FBSYMBOL**)((uint8*)PROC$1 + 272ll) = OVL_HEAD_PROC$1;
 		*(struct $8FBSYMBOL**)((uint8*)PROC$1 + 280ll) = NXT$2;
-		if( NXT$2 == (struct $8FBSYMBOL*)0ull ) goto label$193;
+		if( NXT$2 == (struct $8FBSYMBOL*)0ull) goto label$193;
 		{
 			*(struct $8FBSYMBOL**)((uint8*)NXT$2 + 272ll) = PROC$1;
 		}
@@ -3839,7 +3839,7 @@ static struct $8FBSYMBOL* HADDOPOVLPROC( struct $8FBSYMBOL* PROC$1, struct $8FBS
 	__builtin_memset( &fb$result$1, 0, 8ll );
 	label$194:;
 	struct $8FBSYMBOL* OVL$1;
-	if( OP$1 == 27ll ) goto label$197;
+	if( OP$1 == 27ll) goto label$197;
 	{
 		struct $8FBSYMBOL* vr$1 = HADDOVLPROC( PROC$1, OVL_HEAD_PROC$1, SYMTB$1, HASHTB$1, (char*)0ull, ID_ALIAS$1, DTYPE$1, SUBTYPE$1, ATTRIB$1, PATTRIB$1, 0ll );
 		fb$result$1 = vr$1;
@@ -3849,11 +3849,11 @@ static struct $8FBSYMBOL* HADDOPOVLPROC( struct $8FBSYMBOL* PROC$1, struct $8FBS
 	label$196:;
 	OVL$1 = OVL_HEAD_PROC$1;
 	label$198:;
-	if( OVL$1 == (struct $8FBSYMBOL*)0ull ) goto label$199;
+	if( OVL$1 == (struct $8FBSYMBOL*)0ull) goto label$199;
 	{
-		if( *(int64*)((uint8*)PROC$1 + 56ll) != *(int64*)((uint8*)OVL$1 + 56ll) ) goto label$201;
+		if( *(int64*)((uint8*)PROC$1 + 56ll) != *(int64*)((uint8*)OVL$1 + 56ll)) goto label$201;
 		{
-			if( *(struct $8FBSYMBOL**)((uint8*)PROC$1 + 64ll) != *(struct $8FBSYMBOL**)((uint8*)OVL$1 + 64ll) ) goto label$203;
+			if( *(struct $8FBSYMBOL**)((uint8*)PROC$1 + 64ll) != *(struct $8FBSYMBOL**)((uint8*)OVL$1 + 64ll)) goto label$203;
 			{
 				fb$result$1 = (struct $8FBSYMBOL*)0ull;
 				goto label$195;
@@ -3882,16 +3882,16 @@ static void HSETUPPROCREGISTERPARAMETERS( struct $8FBSYMBOL* PROC$1 )
 	int64 MAXREGNUM$1;
 	MAXREGNUM$1 = 0ll;
 	{
-		$11FB_FUNCMODE TMP$101$2;
-		TMP$101$2 = *($11FB_FUNCMODE*)((uint8*)PROC$1 + 152ll);
-		if( TMP$101$2 != 5ll ) goto label$207;
+		$11FB_FUNCMODE TMP$100$2;
+		TMP$100$2 = *($11FB_FUNCMODE*)((uint8*)PROC$1 + 152ll);
+		if( TMP$100$2 != 5ll) goto label$207;
 		label$208:;
 		{
 			MAXREGNUM$1 = 1ll;
 		}
 		goto label$206;
 		label$207:;
-		if( TMP$101$2 != 6ll ) goto label$209;
+		if( TMP$100$2 != 6ll) goto label$209;
 		label$210:;
 		{
 			MAXREGNUM$1 = 2ll;
@@ -3899,11 +3899,11 @@ static void HSETUPPROCREGISTERPARAMETERS( struct $8FBSYMBOL* PROC$1 )
 		label$209:;
 		label$206:;
 	}
-	if( MAXREGNUM$1 <= 0ll ) goto label$212;
+	if( MAXREGNUM$1 <= 0ll) goto label$212;
 	{
 		struct $8FBSYMBOL* PARAM$2;
 		PARAM$2 = *(struct $8FBSYMBOL**)((uint8*)PROC$1 + 136ll);
-		if( (*(int64*)((uint8*)PARAM$2 + 8ll) & 524288ll) == 0ll ) goto label$214;
+		if( (*(int64*)((uint8*)PARAM$2 + 8ll) & 524288ll) == 0ll) goto label$214;
 		{
 			*(int64*)((uint8*)PARAM$2 + 136ll) = REGNUM$1;
 			REGNUM$1 = REGNUM$1 + 1ll;
@@ -3912,25 +3912,25 @@ static void HSETUPPROCREGISTERPARAMETERS( struct $8FBSYMBOL* PROC$1 )
 		label$214:;
 		label$213:;
 		label$215:;
-		if( ((int64)-(PARAM$2 != (struct $8FBSYMBOL*)0ull) & (int64)-(REGNUM$1 <= MAXREGNUM$1)) == 0ll ) goto label$216;
+		if( ((int64)-(PARAM$2 != (struct $8FBSYMBOL*)0ull) & (int64)-(REGNUM$1 <= MAXREGNUM$1)) == 0ll) goto label$216;
 		{
-			int64 TMP$102$3;
-			if( *(int64*)((uint8*)PARAM$2 + 96ll) != 2ll ) goto label$218;
+			int64 TMP$101$3;
+			if( *(int64*)((uint8*)PARAM$2 + 96ll) != 2ll) goto label$218;
 			{
 				*(int64*)((uint8*)PARAM$2 + 136ll) = REGNUM$1;
 				REGNUM$1 = REGNUM$1 + 1ll;
 			}
 			goto label$217;
 			label$218:;
-			if( ((*(int64*)((uint8*)PARAM$2 + 56ll) & 511ll) & 480ll) == 0ll ) goto label$220;
-			TMP$102$3 = 24ll;
+			if( ((*(int64*)((uint8*)PARAM$2 + 56ll) & 511ll) & 480ll) == 0ll) goto label$220;
+			TMP$101$3 = 24ll;
 			goto label$1024;
 			label$220:;
-			TMP$102$3 = (*(int64*)((uint8*)PARAM$2 + 56ll) & 511ll) & 31ll;
+			TMP$101$3 = (*(int64*)((uint8*)PARAM$2 + 56ll) & 511ll) & 31ll;
 			label$1024:;
-			if( *(int64*)((int64)(struct $13SYMB_DATATYPE*)SYMB_DTYPETB$ + (TMP$102$3 * 56ll)) != 0ll ) goto label$219;
+			if( *(int64*)((int64)(struct $13SYMB_DATATYPE*)SYMB_DTYPETB$ + (TMP$101$3 * 56ll)) != 0ll) goto label$219;
 			{
-				if( *(int64*)((uint8*)PARAM$2 + 80ll) > *(int64*)((uint8*)&ENV$ + 616ll) ) goto label$222;
+				if( *(int64*)((uint8*)PARAM$2 + 80ll) > *(int64*)((uint8*)&ENV$ + 616ll)) goto label$222;
 				{
 					*(int64*)((uint8*)PARAM$2 + 136ll) = REGNUM$1;
 					REGNUM$1 = REGNUM$1 + 1ll;
@@ -3962,7 +3962,7 @@ static struct $8FBSYMBOL* HSETUPPROC( struct $8FBSYMBOL* SYM$1, struct $8FBSYMBO
 	struct $8FBSYMBOL* HEAD_PROC$1;
 	struct $8FBSYMBOL* OVERRIDDEN$1;
 	fb$result$1 = (struct $8FBSYMBOL*)0ull;
-	if( DTYPE$1 != 2147483648ll ) goto label$226;
+	if( DTYPE$1 != 2147483648ll) goto label$226;
 	{
 		int64 vr$1 = SYMBGETDEFTYPE( ID$1 );
 		DTYPE$1 = vr$1;
@@ -3970,9 +3970,9 @@ static struct $8FBSYMBOL* HSETUPPROC( struct $8FBSYMBOL* SYM$1, struct $8FBSYMBO
 	}
 	label$226:;
 	label$225:;
-	if( ID_ALIAS$1 != (char*)0ull ) goto label$228;
+	if( ID_ALIAS$1 != (char*)0ull) goto label$228;
 	{
-		if( *(int64*)((uint8*)&PARSER$ + 208ll) == 0ll ) goto label$230;
+		if( *(int64*)((uint8*)&PARSER$ + 208ll) == 0ll) goto label$230;
 		{
 			ID_ALIAS$1 = ID$1;
 		}
@@ -3987,17 +3987,17 @@ static struct $8FBSYMBOL* HSETUPPROC( struct $8FBSYMBOL* SYM$1, struct $8FBSYMBO
 	}
 	label$227:;
 	HEAD_PROC$1 = (struct $8FBSYMBOL*)0ull;
-	if( (PATTRIB$1 & 4108ll) == 0ll ) goto label$232;
+	if( (PATTRIB$1 & 4108ll) == 0ll) goto label$232;
 	{
 		PATTRIB$1 = PATTRIB$1 | 1024ll;
-		if( (PATTRIB$1 & 4ll) == 0ll ) goto label$234;
+		if( (PATTRIB$1 & 4ll) == 0ll) goto label$234;
 		{
 			struct $8FBSYMBOL* vr$5 = SYMBGETCOMPCTORHEAD( PARENT$1 );
 			HEAD_PROC$1 = vr$5;
 		}
 		goto label$233;
 		label$234:;
-		if( (PATTRIB$1 & 8ll) == 0ll ) goto label$235;
+		if( (PATTRIB$1 & 8ll) == 0ll) goto label$235;
 		{
 			struct $8FBSYMBOL* vr$7 = SYMBGETCOMPDTOR1( PARENT$1 );
 			HEAD_PROC$1 = vr$7;
@@ -4009,17 +4009,17 @@ static struct $8FBSYMBOL* HSETUPPROC( struct $8FBSYMBOL* SYM$1, struct $8FBSYMBO
 			HEAD_PROC$1 = vr$8;
 		}
 		label$233:;
-		if( HEAD_PROC$1 != (struct $8FBSYMBOL*)0ull ) goto label$237;
+		if( HEAD_PROC$1 != (struct $8FBSYMBOL*)0ull) goto label$237;
 		{
 			struct $8FBSYMBOL* vr$9 = SYMBNEWSYMBOL( 0ll, SYM$1, SYMTB$1, HASHTB$1, 3ll, (char*)0ull, ID_ALIAS$1, 0ll, (struct $8FBSYMBOL*)0ull, ATTRIB$1, PATTRIB$1 );
 			PROC$1 = vr$9;
-			if( (PATTRIB$1 & 4ll) == 0ll ) goto label$239;
+			if( (PATTRIB$1 & 4ll) == 0ll) goto label$239;
 			{
 				SYMBSETCOMPCTORHEAD( PARENT$1, PROC$1 );
 			}
 			goto label$238;
 			label$239:;
-			if( (PATTRIB$1 & 8ll) == 0ll ) goto label$240;
+			if( (PATTRIB$1 & 8ll) == 0ll) goto label$240;
 			{
 				SYMBSETCOMPDTOR1( PARENT$1, PROC$1 );
 			}
@@ -4033,7 +4033,7 @@ static struct $8FBSYMBOL* HSETUPPROC( struct $8FBSYMBOL* SYM$1, struct $8FBSYMBO
 		goto label$236;
 		label$237:;
 		{
-			if( (PATTRIB$1 & 4104ll) == 0ll ) goto label$242;
+			if( (PATTRIB$1 & 4104ll) == 0ll) goto label$242;
 			{
 				fb$result$1 = (struct $8FBSYMBOL*)0ull;
 				goto label$224;
@@ -4042,7 +4042,7 @@ static struct $8FBSYMBOL* HSETUPPROC( struct $8FBSYMBOL* SYM$1, struct $8FBSYMBO
 			label$241:;
 			struct $8FBSYMBOL* vr$13 = HADDOVLPROC( SYM$1, HEAD_PROC$1, SYMTB$1, HASHTB$1, (char*)0ull, ID_ALIAS$1, 0ll, (struct $8FBSYMBOL*)0ull, ATTRIB$1, PATTRIB$1, 0ll );
 			PROC$1 = vr$13;
-			if( PROC$1 != (struct $8FBSYMBOL*)0ull ) goto label$244;
+			if( PROC$1 != (struct $8FBSYMBOL*)0ull) goto label$244;
 			{
 				goto label$224;
 			}
@@ -4050,7 +4050,7 @@ static struct $8FBSYMBOL* HSETUPPROC( struct $8FBSYMBOL* SYM$1, struct $8FBSYMBO
 			label$243:;
 		}
 		label$236:;
-		if( (PATTRIB$1 & 4ll) == 0ll ) goto label$246;
+		if( (PATTRIB$1 & 4ll) == 0ll) goto label$246;
 		{
 			SYMBCHECKCOMPCTOR( PARENT$1, PROC$1 );
 		}
@@ -4059,9 +4059,9 @@ static struct $8FBSYMBOL* HSETUPPROC( struct $8FBSYMBOL* SYM$1, struct $8FBSYMBO
 	}
 	goto label$231;
 	label$232:;
-	if( (PATTRIB$1 & 16ll) == 0ll ) goto label$247;
+	if( (PATTRIB$1 & 16ll) == 0ll) goto label$247;
 	{
-		if( *(struct $10FB_PROCEXT**)((uint8*)SYM$1 + 208ll) != (struct $10FB_PROCEXT*)0ull ) goto label$249;
+		if( *(struct $10FB_PROCEXT**)((uint8*)SYM$1 + 208ll) != (struct $10FB_PROCEXT*)0ull) goto label$249;
 		{
 			goto label$250;
 		}
@@ -4072,7 +4072,7 @@ static struct $8FBSYMBOL* HSETUPPROC( struct $8FBSYMBOL* SYM$1, struct $8FBSYMBO
 		OP$2 = *($6AST_OP*)((uint8*)*(struct $10FB_PROCEXT**)((uint8*)SYM$1 + 208ll) + 80ll);
 		struct $8FBSYMBOL* vr$20 = SYMBGETCOMPOPOVLHEAD( PARENT$1, OP$2 );
 		HEAD_PROC$1 = vr$20;
-		if( HEAD_PROC$1 != (struct $8FBSYMBOL*)0ull ) goto label$252;
+		if( HEAD_PROC$1 != (struct $8FBSYMBOL*)0ull) goto label$252;
 		{
 			struct $8FBSYMBOL* vr$21 = SYMBNEWSYMBOL( 0ll, SYM$1, SYMTB$1, HASHTB$1, 3ll, (char*)0ull, ID_ALIAS$1, DTYPE$1, SUBTYPE$1, ATTRIB$1, PATTRIB$1 );
 			PROC$1 = vr$21;
@@ -4083,13 +4083,13 @@ static struct $8FBSYMBOL* HSETUPPROC( struct $8FBSYMBOL* SYM$1, struct $8FBSYMBO
 		{
 			struct $8FBSYMBOL* vr$22 = HADDOPOVLPROC( SYM$1, HEAD_PROC$1, SYMTB$1, HASHTB$1, OP$2, ID_ALIAS$1, DTYPE$1, SUBTYPE$1, ATTRIB$1, PATTRIB$1 );
 			PROC$1 = vr$22;
-			if( PROC$1 != (struct $8FBSYMBOL*)0ull ) goto label$254;
+			if( PROC$1 != (struct $8FBSYMBOL*)0ull) goto label$254;
 			{
 				goto label$224;
 			}
 			label$254:;
 			label$253:;
-			if( OP$2 != 0ll ) goto label$256;
+			if( OP$2 != 0ll) goto label$256;
 			{
 				SYMBCHECKCOMPLETOP( PARENT$1, PROC$1 );
 			}
@@ -4105,19 +4105,19 @@ static struct $8FBSYMBOL* HSETUPPROC( struct $8FBSYMBOL* SYM$1, struct $8FBSYMBO
 		PRESERVE_CASE$1 = (int64)-((OPTIONS$1 & 1ll) != 0ll);
 		struct $8FBSYMBOL* vr$26 = SYMBNEWSYMBOL( OPTIONS$1 | 32ll, SYM$1, SYMTB$1, HASHTB$1, 3ll, ID$1, ID_ALIAS$1, DTYPE$1, SUBTYPE$1, ATTRIB$1, PATTRIB$1 );
 		PROC$1 = vr$26;
-		if( PROC$1 != (struct $8FBSYMBOL*)0ull ) goto label$258;
+		if( PROC$1 != (struct $8FBSYMBOL*)0ull) goto label$258;
 		{
 			struct $8FBSYMBOL* vr$27 = SYMBLOOKUPBYNAMEANDCLASS( PARENT$1, ID$1, 3ll, PRESERVE_CASE$1, 0ll );
 			HEAD_PROC$1 = vr$27;
-			if( HEAD_PROC$1 != (struct $8FBSYMBOL*)0ull ) goto label$260;
+			if( HEAD_PROC$1 != (struct $8FBSYMBOL*)0ull) goto label$260;
 			{
 				goto label$224;
 			}
 			label$260:;
 			label$259:;
-			if( (*(int64*)((uint8*)HEAD_PROC$1 + 16ll) & 1ll) != 0ll ) goto label$262;
+			if( (*(int64*)((uint8*)HEAD_PROC$1 + 16ll) & 1ll) != 0ll) goto label$262;
 			{
-				if( (*(int64*)((uint8*)&ENV$ + 1448ll) & 1024ll) != 0ll ) goto label$264;
+				if( (*(int64*)((uint8*)&ENV$ + 1448ll) & 1024ll) != 0ll) goto label$264;
 				{
 					goto label$224;
 				}
@@ -4128,7 +4128,7 @@ static struct $8FBSYMBOL* HSETUPPROC( struct $8FBSYMBOL* SYM$1, struct $8FBSYMBO
 			label$261:;
 			struct $8FBSYMBOL* vr$31 = HADDOVLPROC( SYM$1, HEAD_PROC$1, SYMTB$1, HASHTB$1, ID$1, ID_ALIAS$1, DTYPE$1, SUBTYPE$1, ATTRIB$1, PATTRIB$1, PRESERVE_CASE$1 );
 			PROC$1 = vr$31;
-			if( PROC$1 != (struct $8FBSYMBOL*)0ull ) goto label$266;
+			if( PROC$1 != (struct $8FBSYMBOL*)0ull) goto label$266;
 			{
 				goto label$224;
 			}
@@ -4139,12 +4139,12 @@ static struct $8FBSYMBOL* HSETUPPROC( struct $8FBSYMBOL* SYM$1, struct $8FBSYMBO
 		goto label$257;
 		label$258:;
 		{
-			if( (OPTIONS$1 & 16ll) != 0ll ) goto label$268;
+			if( (OPTIONS$1 & 16ll) != 0ll) goto label$268;
 			{
-				if( (PATTRIB$1 & 1ll) == 0ll ) goto label$270;
+				if( (PATTRIB$1 & 1ll) == 0ll) goto label$270;
 				{
 					int64 vr$37 = HCANOVERLOAD( SYM$1 );
-					if( vr$37 != 0ll ) goto label$272;
+					if( vr$37 != 0ll) goto label$272;
 					{
 						goto label$224;
 					}
@@ -4153,10 +4153,10 @@ static struct $8FBSYMBOL* HSETUPPROC( struct $8FBSYMBOL* SYM$1, struct $8FBSYMBO
 				}
 				goto label$269;
 				label$270:;
-				if( (*(int64*)((uint8*)&ENV$ + 1448ll) & 1024ll) == 0ll ) goto label$273;
+				if( (*(int64*)((uint8*)&ENV$ + 1448ll) & 1024ll) == 0ll) goto label$273;
 				{
 					int64 vr$39 = HCANOVERLOAD( SYM$1 );
-					if( vr$39 == 0ll ) goto label$275;
+					if( vr$39 == 0ll) goto label$275;
 					{
 						*($13FB_PROCATTRIB*)((uint8*)PROC$1 + 16ll) = *(int64*)((uint8*)PROC$1 + 16ll) | 1ll;
 					}
@@ -4172,16 +4172,16 @@ static struct $8FBSYMBOL* HSETUPPROC( struct $8FBSYMBOL* SYM$1, struct $8FBSYMBO
 		label$257:;
 	}
 	label$231:;
-	if( (OPTIONS$1 & 16ll) == 0ll ) goto label$277;
+	if( (OPTIONS$1 & 16ll) == 0ll) goto label$277;
 	{
 		STATS$1 = STATS$1 | 32ll;
 	}
 	label$277:;
 	label$276:;
 	*($11FB_FUNCMODE*)((uint8*)PROC$1 + 152ll) = MODE$1;
-	if( *(int64*)((uint8*)&PARSER$ + 48ll) != 306ll ) goto label$279;
+	if( *(int64*)((uint8*)&PARSER$ + 48ll) != 306ll) goto label$279;
 	{
-		if( ((int64)-(*(int64*)((uint8*)&PARSER$ + 208ll) != 4ll) & (int64)-(*(int64*)((uint8*)&PARSER$ + 208ll) != 6ll)) == 0ll ) goto label$281;
+		if( ((int64)-(*(int64*)((uint8*)&PARSER$ + 208ll) != 4ll) & (int64)-(*(int64*)((uint8*)&PARSER$ + 208ll) != 6ll)) == 0ll) goto label$281;
 		{
 			STATS$1 = STATS$1 | 2048ll;
 		}
@@ -4191,34 +4191,34 @@ static struct $8FBSYMBOL* HSETUPPROC( struct $8FBSYMBOL* SYM$1, struct $8FBSYMBO
 	label$279:;
 	label$278:;
 	SYMBPROCRECALCREALTYPE( PROC$1 );
-	if( (OPTIONS$1 & 4ll) == 0ll ) goto label$283;
+	if( (OPTIONS$1 & 4ll) == 0ll) goto label$283;
 	{
 		STATS$1 = STATS$1 | 8ll;
 	}
 	label$283:;
 	label$282:;
-	*(tmp$35*)((uint8*)PROC$1 + 184ll) = (tmp$35)0ull;
-	if( (*(int64*)((uint8*)PROC$1 + 16ll) & 1ll) == 0ll ) goto label$285;
+	*(tmp$34*)((uint8*)PROC$1 + 184ll) = (tmp$34)0ull;
+	if( (*(int64*)((uint8*)PROC$1 + 16ll) & 1ll) == 0ll) goto label$285;
 	{
 		int64 PARAMS$2;
 		PARAMS$2 = (int64)*(int16*)((uint8*)PROC$1 + 120ll);
-		if( (*(int64*)((uint8*)PROC$1 + 16ll) & 2ll) == 0ll ) goto label$287;
+		if( (*(int64*)((uint8*)PROC$1 + 16ll) & 2ll) == 0ll) goto label$287;
 		{
 			PARAMS$2 = PARAMS$2 + -1ll;
 		}
 		label$287:;
 		label$286:;
-		if( HEAD_PROC$1 == (struct $8FBSYMBOL*)0ull ) goto label$289;
+		if( HEAD_PROC$1 == (struct $8FBSYMBOL*)0ull) goto label$289;
 		{
 			*(struct $8FBSYMBOL**)((uint8*)PROC$1 + 200ll) = *(struct $8FBSYMBOL**)((uint8*)HEAD_PROC$1 + 200ll);
 			*(struct $8FBSYMBOL**)((uint8*)HEAD_PROC$1 + 200ll) = PROC$1;
-			if( PARAMS$2 >= (int64)*(int16*)((uint8*)HEAD_PROC$1 + 192ll) ) goto label$291;
+			if( PARAMS$2 >= (int64)*(int16*)((uint8*)HEAD_PROC$1 + 192ll)) goto label$291;
 			{
 				*(int16*)((uint8*)HEAD_PROC$1 + 192ll) = (int16)PARAMS$2;
 			}
 			label$291:;
 			label$290:;
-			if( PARAMS$2 <= (int64)*(int16*)((uint8*)HEAD_PROC$1 + 194ll) ) goto label$293;
+			if( PARAMS$2 <= (int64)*(int16*)((uint8*)HEAD_PROC$1 + 194ll)) goto label$293;
 			{
 				*(int16*)((uint8*)HEAD_PROC$1 + 194ll) = (int16)PARAMS$2;
 			}
@@ -4237,32 +4237,32 @@ static struct $8FBSYMBOL* HSETUPPROC( struct $8FBSYMBOL* SYM$1, struct $8FBSYMBO
 	label$285:;
 	label$284:;
 	*($12FB_SYMBSTATS*)((uint8*)PROC$1 + 24ll) = *(int64*)((uint8*)PROC$1 + 24ll) | STATS$1;
-	if( (*(int64*)((uint8*)PROC$1 + 16ll) & 2ll) == 0ll ) goto label$295;
+	if( (*(int64*)((uint8*)PROC$1 + 16ll) & 2ll) == 0ll) goto label$295;
 	{
-		if( (*(int64*)((uint8*)PROC$1 + 16ll) & 512ll) == 0ll ) goto label$297;
+		if( (*(int64*)((uint8*)PROC$1 + 16ll) & 512ll) == 0ll) goto label$297;
 		{
 			*(int64*)((uint8*)*(struct $12FB_STRUCTEXT**)((uint8*)PARENT$1 + 240ll) + 312ll) = *(int64*)((uint8*)*(struct $12FB_STRUCTEXT**)((uint8*)PARENT$1 + 240ll) + 312ll) + 1ll;
 		}
 		label$297:;
 		label$296:;
 		OVERRIDDEN$1 = (struct $8FBSYMBOL*)0ull;
-		if( *(struct $8FBSYMBOL**)((uint8*)PARENT$1 + 176ll) == (struct $8FBSYMBOL*)0ull ) goto label$299;
+		if( *(struct $8FBSYMBOL**)((uint8*)PARENT$1 + 176ll) == (struct $8FBSYMBOL*)0ull) goto label$299;
 		{
-			if( (*(int64*)((uint8*)PROC$1 + 16ll) & 8ll) == 0ll ) goto label$301;
+			if( (*(int64*)((uint8*)PROC$1 + 16ll) & 8ll) == 0ll) goto label$301;
 			{
 				struct $8FBSYMBOL* vr$93 = SYMBGETCOMPDTOR1( *(struct $8FBSYMBOL**)((uint8*)*(struct $8FBSYMBOL**)((uint8*)PARENT$1 + 176ll) + 64ll) );
 				OVERRIDDEN$1 = vr$93;
 			}
 			goto label$300;
 			label$301:;
-			if( (*(int64*)((uint8*)PROC$1 + 16ll) & 4096ll) == 0ll ) goto label$302;
+			if( (*(int64*)((uint8*)PROC$1 + 16ll) & 4096ll) == 0ll) goto label$302;
 			{
 				struct $8FBSYMBOL* vr$98 = SYMBGETCOMPDTOR0( *(struct $8FBSYMBOL**)((uint8*)*(struct $8FBSYMBOL**)((uint8*)PARENT$1 + 176ll) + 64ll) );
 				OVERRIDDEN$1 = vr$98;
 			}
 			goto label$300;
 			label$302:;
-			if( (*(int64*)((uint8*)PROC$1 + 16ll) & 16ll) == 0ll ) goto label$303;
+			if( (*(int64*)((uint8*)PROC$1 + 16ll) & 16ll) == 0ll) goto label$303;
 			{
 				struct $8FBSYMBOL* vr$105 = SYMBGETCOMPOPOVLHEAD( *(struct $8FBSYMBOL**)((uint8*)*(struct $8FBSYMBOL**)((uint8*)PARENT$1 + 176ll) + 64ll), *($6AST_OP*)((uint8*)*(struct $10FB_PROCEXT**)((uint8*)PROC$1 + 208ll) + 80ll) );
 				OVERRIDDEN$1 = vr$105;
@@ -4271,14 +4271,14 @@ static struct $8FBSYMBOL* HSETUPPROC( struct $8FBSYMBOL* SYM$1, struct $8FBSYMBO
 			}
 			goto label$300;
 			label$303:;
-			if( ID$1 == (char*)0ull ) goto label$304;
+			if( ID$1 == (char*)0ull) goto label$304;
 			{
 				struct $8FBSYMBOL* vr$113 = SYMBLOOKUPBYNAMEANDCLASS( *(struct $8FBSYMBOL**)((uint8*)*(struct $8FBSYMBOL**)((uint8*)PARENT$1 + 176ll) + 64ll), ID$1, 3ll, (int64)-((OPTIONS$1 & 1ll) != 0ll), -1ll );
 				OVERRIDDEN$1 = vr$113;
 				LOOKUPOPTIONS$1 = 0ll;
-				if( (*(int64*)((uint8*)PROC$1 + 16ll) & 32ll) == 0ll ) goto label$306;
+				if( (*(int64*)((uint8*)PROC$1 + 16ll) & 32ll) == 0ll) goto label$306;
 				{
-					if( (*(int64*)((uint8*)PROC$1 + 56ll) & 511ll) == 0ll ) goto label$308;
+					if( (*(int64*)((uint8*)PROC$1 + 56ll) & 511ll) == 0ll) goto label$308;
 					{
 						LOOKUPOPTIONS$1 = 1ll;
 					}
@@ -4292,9 +4292,9 @@ static struct $8FBSYMBOL* HSETUPPROC( struct $8FBSYMBOL* SYM$1, struct $8FBSYMBO
 			}
 			label$304:;
 			label$300:;
-			if( OVERRIDDEN$1 == (struct $8FBSYMBOL*)0ull ) goto label$310;
+			if( OVERRIDDEN$1 == (struct $8FBSYMBOL*)0ull) goto label$310;
 			{
-				if( (*(int64*)((uint8*)OVERRIDDEN$1 + 16ll) & 256ll) != 0ll ) goto label$312;
+				if( (*(int64*)((uint8*)OVERRIDDEN$1 + 16ll) & 256ll) != 0ll) goto label$312;
 				{
 					OVERRIDDEN$1 = (struct $8FBSYMBOL*)0ull;
 				}
@@ -4306,9 +4306,9 @@ static struct $8FBSYMBOL* HSETUPPROC( struct $8FBSYMBOL* SYM$1, struct $8FBSYMBO
 		}
 		label$299:;
 		label$298:;
-		if( OVERRIDDEN$1 == (struct $8FBSYMBOL*)0ull ) goto label$314;
+		if( OVERRIDDEN$1 == (struct $8FBSYMBOL*)0ull) goto label$314;
 		{
-			if( (*(int64*)((uint8*)OVERRIDDEN$1 + 16ll) & 512ll) == 0ll ) goto label$316;
+			if( (*(int64*)((uint8*)OVERRIDDEN$1 + 16ll) & 512ll) == 0ll) goto label$316;
 			{
 				*(int64*)((uint8*)*(struct $12FB_STRUCTEXT**)((uint8*)PARENT$1 + 240ll) + 312ll) = *(int64*)((uint8*)*(struct $12FB_STRUCTEXT**)((uint8*)PARENT$1 + 240ll) + 312ll) + -1ll;
 			}
@@ -4321,7 +4321,7 @@ static struct $8FBSYMBOL* HSETUPPROC( struct $8FBSYMBOL* SYM$1, struct $8FBSYMBO
 		goto label$313;
 		label$314:;
 		{
-			if( (*(int64*)((uint8*)PROC$1 + 16ll) & 256ll) == 0ll ) goto label$318;
+			if( (*(int64*)((uint8*)PROC$1 + 16ll) & 256ll) == 0ll) goto label$318;
 			{
 				int64 vr$133 = SYMBCOMPADDVIRTUAL( PARENT$1 );
 				SYMBPROCSETVTABLEINDEX( PROC$1, vr$133 );
@@ -4341,7 +4341,7 @@ static struct $8FBSYMBOL* HSETUPPROC( struct $8FBSYMBOL* SYM$1, struct $8FBSYMBO
 
 static $22FB_OVLPROC_MATCH_SCORE HCALCTYPESDIFF( int64 PARAM_DTYPE_IN$1, struct $8FBSYMBOL* PARAM_SUBTYPE$1, int64 PARAM_PTRCNT$1, int64 ARG_DTYPE_IN$1, struct $8FBSYMBOL* ARG_SUBTYPE$1, struct $7ASTNODE* ARG_EXPR$1, $12FB_PARAMMODE MODE$1 )
 {
-	int64 TMP$112$1;
+	int64 TMP$111$1;
 	$22FB_OVLPROC_MATCH_SCORE fb$result$1;
 	__builtin_memset( &fb$result$1, 0, 8ll );
 	label$461:;
@@ -4355,40 +4355,40 @@ static $22FB_OVLPROC_MATCH_SCORE HCALCTYPESDIFF( int64 PARAM_DTYPE_IN$1, struct 
 	fb$result$1 = 0ll;
 	PARAM_DTYPE$1 = PARAM_DTYPE_IN$1 & 511ll;
 	ARG_DTYPE$1 = ARG_DTYPE_IN$1 & 511ll;
-	if( (ARG_DTYPE$1 & 480ll) == 0ll ) goto label$463;
-	TMP$112$1 = 24ll;
+	if( (ARG_DTYPE$1 & 480ll) == 0ll) goto label$463;
+	TMP$111$1 = 24ll;
 	goto label$1025;
 	label$463:;
-	TMP$112$1 = ARG_DTYPE$1 & 31ll;
+	TMP$111$1 = ARG_DTYPE$1 & 31ll;
 	label$1025:;
-	ARG_DCLASS$1 = *(int64*)((int64)(struct $13SYMB_DATATYPE*)SYMB_DTYPETB$ + (TMP$112$1 * 56ll));
+	ARG_DCLASS$1 = *(int64*)((int64)(struct $13SYMB_DATATYPE*)SYMB_DTYPETB$ + (TMP$111$1 * 56ll));
 	{
-		int64 TMP$113$2;
-		uint64 TMP$114$2;
-		if( (PARAM_DTYPE$1 & 480ll) == 0ll ) goto label$464;
-		TMP$113$2 = 24ll;
+		int64 TMP$112$2;
+		uint64 TMP$113$2;
+		if( (PARAM_DTYPE$1 & 480ll) == 0ll) goto label$464;
+		TMP$112$2 = 24ll;
 		goto label$1026;
 		label$464:;
-		TMP$113$2 = PARAM_DTYPE$1 & 31ll;
+		TMP$112$2 = PARAM_DTYPE$1 & 31ll;
 		label$1026:;
-		TMP$114$2 = *(uint64*)((int64)(struct $13SYMB_DATATYPE*)SYMB_DTYPETB$ + (TMP$113$2 * 56ll));
+		TMP$113$2 = *(uint64*)((int64)(struct $13SYMB_DATATYPE*)SYMB_DTYPETB$ + (TMP$112$2 * 56ll));
 		goto label$466;
 		label$467:;
 		{
 			{
-				uint64 TMP$115$4;
-				TMP$115$4 = (uint64)ARG_DCLASS$1;
+				uint64 TMP$114$4;
+				TMP$114$4 = (uint64)ARG_DCLASS$1;
 				goto label$469;
 				label$470:;
 				{
+					int64 TMP$115$5;
 					int64 TMP$116$5;
-					int64 TMP$117$5;
 					{
-						if( PARAM_DTYPE$1 != 4ll ) goto label$472;
+						if( PARAM_DTYPE$1 != 4ll) goto label$472;
 						label$473:;
 						{
 							{
-								if( ARG_DTYPE$1 != 4ll ) goto label$475;
+								if( ARG_DTYPE$1 != 4ll) goto label$475;
 								label$476:;
 								{
 									fb$result$1 = 1300ll;
@@ -4396,7 +4396,7 @@ static $22FB_OVLPROC_MATCH_SCORE HCALCTYPESDIFF( int64 PARAM_DTYPE_IN$1, struct 
 								}
 								goto label$474;
 								label$475:;
-								if( ARG_DTYPE$1 != 7ll ) goto label$477;
+								if( ARG_DTYPE$1 != 7ll) goto label$477;
 								label$478:;
 								{
 									fb$result$1 = 777ll;
@@ -4410,11 +4410,11 @@ static $22FB_OVLPROC_MATCH_SCORE HCALCTYPESDIFF( int64 PARAM_DTYPE_IN$1, struct 
 						}
 						goto label$471;
 						label$472:;
-						if( PARAM_DTYPE$1 != 7ll ) goto label$479;
+						if( PARAM_DTYPE$1 != 7ll) goto label$479;
 						label$480:;
 						{
 							{
-								if( ARG_DTYPE$1 != 4ll ) goto label$482;
+								if( ARG_DTYPE$1 != 4ll) goto label$482;
 								label$483:;
 								{
 									fb$result$1 = 777ll;
@@ -4422,7 +4422,7 @@ static $22FB_OVLPROC_MATCH_SCORE HCALCTYPESDIFF( int64 PARAM_DTYPE_IN$1, struct 
 								}
 								goto label$481;
 								label$482:;
-								if( ARG_DTYPE$1 != 7ll ) goto label$484;
+								if( ARG_DTYPE$1 != 7ll) goto label$484;
 								label$485:;
 								{
 									fb$result$1 = 1300ll;
@@ -4436,11 +4436,11 @@ static $22FB_OVLPROC_MATCH_SCORE HCALCTYPESDIFF( int64 PARAM_DTYPE_IN$1, struct 
 						}
 						goto label$471;
 						label$479:;
-						if( PARAM_DTYPE$1 != 36ll ) goto label$486;
+						if( PARAM_DTYPE$1 != 36ll) goto label$486;
 						label$487:;
 						{
 							{
-								if( ARG_DTYPE$1 != 4ll ) goto label$489;
+								if( ARG_DTYPE$1 != 4ll) goto label$489;
 								label$490:;
 								{
 									fb$result$1 = 1299ll;
@@ -4448,7 +4448,7 @@ static $22FB_OVLPROC_MATCH_SCORE HCALCTYPESDIFF( int64 PARAM_DTYPE_IN$1, struct 
 								}
 								goto label$488;
 								label$489:;
-								if( ARG_DTYPE$1 != 7ll ) goto label$491;
+								if( ARG_DTYPE$1 != 7ll) goto label$491;
 								label$492:;
 								{
 									fb$result$1 = 776ll;
@@ -4460,11 +4460,11 @@ static $22FB_OVLPROC_MATCH_SCORE HCALCTYPESDIFF( int64 PARAM_DTYPE_IN$1, struct 
 						}
 						goto label$471;
 						label$486:;
-						if( PARAM_DTYPE$1 != 39ll ) goto label$493;
+						if( PARAM_DTYPE$1 != 39ll) goto label$493;
 						label$494:;
 						{
 							{
-								if( ARG_DTYPE$1 != 4ll ) goto label$496;
+								if( ARG_DTYPE$1 != 4ll) goto label$496;
 								label$497:;
 								{
 									fb$result$1 = 776ll;
@@ -4472,7 +4472,7 @@ static $22FB_OVLPROC_MATCH_SCORE HCALCTYPESDIFF( int64 PARAM_DTYPE_IN$1, struct 
 								}
 								goto label$495;
 								label$496:;
-								if( ARG_DTYPE$1 != 7ll ) goto label$498;
+								if( ARG_DTYPE$1 != 7ll) goto label$498;
 								label$499:;
 								{
 									fb$result$1 = 1299ll;
@@ -4486,19 +4486,19 @@ static $22FB_OVLPROC_MATCH_SCORE HCALCTYPESDIFF( int64 PARAM_DTYPE_IN$1, struct 
 						label$493:;
 						{
 							{
-								if( ARG_DTYPE$1 == 4ll ) goto label$503;
+								if( ARG_DTYPE$1 == 4ll) goto label$503;
 								label$504:;
-								if( ARG_DTYPE$1 != 7ll ) goto label$502;
+								if( ARG_DTYPE$1 != 7ll) goto label$502;
 								label$503:;
 								{
-									if( ARG_EXPR$1 != (struct $7ASTNODE*)0ull ) goto label$506;
+									if( ARG_EXPR$1 != (struct $7ASTNODE*)0ull) goto label$506;
 									{
 										fb$result$1 = 0ll;
 										goto label$462;
 									}
 									label$506:;
 									label$505:;
-									if( *(int64*)ARG_EXPR$1 == 20ll ) goto label$508;
+									if( *(int64*)ARG_EXPR$1 == 20ll) goto label$508;
 									{
 										fb$result$1 = 0ll;
 										goto label$462;
@@ -4513,17 +4513,17 @@ static $22FB_OVLPROC_MATCH_SCORE HCALCTYPESDIFF( int64 PARAM_DTYPE_IN$1, struct 
 						label$500:;
 						label$471:;
 					}
-					if( ARG_DTYPE$1 != 10ll ) goto label$510;
+					if( ARG_DTYPE$1 != 10ll) goto label$510;
 					{
 						ARG_DTYPE$1 = (ARG_DTYPE$1 & -512ll) | (*(int64*)(((int64)(struct $13SYMB_DATATYPE*)SYMB_DTYPETB$ + (ARG_DTYPE$1 * 56ll)) + 32ll) & 511ll);
 					}
 					label$510:;
 					label$509:;
-					if( (PARAM_DTYPE$1 & 480ll) == 0ll ) goto label$512;
+					if( (PARAM_DTYPE$1 & 480ll) == 0ll) goto label$512;
 					{
-						if( (ARG_DTYPE$1 & 480ll) != 0ll ) goto label$514;
+						if( (ARG_DTYPE$1 & 480ll) != 0ll) goto label$514;
 						{
-							if( ARG_EXPR$1 != (struct $7ASTNODE*)0ull ) goto label$516;
+							if( ARG_EXPR$1 != (struct $7ASTNODE*)0ull) goto label$516;
 							{
 								fb$result$1 = 0ll;
 								goto label$462;
@@ -4531,7 +4531,7 @@ static $22FB_OVLPROC_MATCH_SCORE HCALCTYPESDIFF( int64 PARAM_DTYPE_IN$1, struct 
 							label$516:;
 							label$515:;
 							int64 vr$18 = ASTCHECKCONVNONPTRTOPTR( PARAM_DTYPE$1, ARG_DTYPE$1, ARG_EXPR$1, 0ll );
-							if( vr$18 == 0ll ) goto label$518;
+							if( vr$18 == 0ll) goto label$518;
 							{
 								fb$result$1 = 0ll;
 								goto label$462;
@@ -4543,7 +4543,7 @@ static $22FB_OVLPROC_MATCH_SCORE HCALCTYPESDIFF( int64 PARAM_DTYPE_IN$1, struct 
 						}
 						label$514:;
 						label$513:;
-						if( ((int64)-(PARAM_DTYPE$1 == 32ll) | (int64)-(ARG_DTYPE$1 == 32ll)) == 0ll ) goto label$520;
+						if( ((int64)-(PARAM_DTYPE$1 == 32ll) | (int64)-(ARG_DTYPE$1 == 32ll)) == 0ll) goto label$520;
 						{
 							fb$result$1 = 780ll;
 							goto label$462;
@@ -4556,60 +4556,60 @@ static $22FB_OVLPROC_MATCH_SCORE HCALCTYPESDIFF( int64 PARAM_DTYPE_IN$1, struct 
 					}
 					goto label$511;
 					label$512:;
-					if( (ARG_DTYPE$1 & 480ll) == 0ll ) goto label$521;
+					if( (ARG_DTYPE$1 & 480ll) == 0ll) goto label$521;
 					{
 						fb$result$1 = 0ll;
 						goto label$462;
 					}
 					label$521:;
 					label$511:;
-					if( (ARG_DTYPE$1 & 480ll) == 0ll ) goto label$522;
-					TMP$116$5 = 24ll;
+					if( (ARG_DTYPE$1 & 480ll) == 0ll) goto label$522;
+					TMP$115$5 = 24ll;
 					goto label$1027;
 					label$522:;
-					TMP$116$5 = ARG_DTYPE$1 & 31ll;
+					TMP$115$5 = ARG_DTYPE$1 & 31ll;
 					label$1027:;
-					if( (PARAM_DTYPE$1 & 480ll) == 0ll ) goto label$523;
-					TMP$117$5 = 24ll;
+					if( (PARAM_DTYPE$1 & 480ll) == 0ll) goto label$523;
+					TMP$116$5 = 24ll;
 					goto label$1028;
 					label$523:;
-					TMP$117$5 = PARAM_DTYPE$1 & 31ll;
+					TMP$116$5 = PARAM_DTYPE$1 & 31ll;
 					label$1028:;
-					fb$result$1 = -(*(int64*)(((int64)(int64*)SYMB_DTYPEMATCHTB$ + (((TMP$116$5 << (4ll & 63ll)) + TMP$117$5) << (3ll & 63ll))) + -136ll)) + 780ll;
+					fb$result$1 = -(*(int64*)(((int64)(int64*)SYMB_DTYPEMATCHTB$ + (((TMP$115$5 << (4ll & 63ll)) + TMP$116$5) << (3ll & 63ll))) + -136ll)) + 780ll;
 					goto label$462;
 				}
 				goto label$468;
 				label$524:;
 				{
+					int64 TMP$117$5;
 					int64 TMP$118$5;
-					int64 TMP$119$5;
-					if( (PARAM_DTYPE$1 & 480ll) == 0ll ) goto label$526;
+					if( (PARAM_DTYPE$1 & 480ll) == 0ll) goto label$526;
 					{
 						fb$result$1 = 0ll;
 						goto label$462;
 					}
 					label$526:;
 					label$525:;
-					if( (ARG_DTYPE$1 & 480ll) == 0ll ) goto label$527;
-					TMP$118$5 = 24ll;
+					if( (ARG_DTYPE$1 & 480ll) == 0ll) goto label$527;
+					TMP$117$5 = 24ll;
 					goto label$1029;
 					label$527:;
-					TMP$118$5 = ARG_DTYPE$1 & 31ll;
+					TMP$117$5 = ARG_DTYPE$1 & 31ll;
 					label$1029:;
-					if( (PARAM_DTYPE$1 & 480ll) == 0ll ) goto label$528;
-					TMP$119$5 = 24ll;
+					if( (PARAM_DTYPE$1 & 480ll) == 0ll) goto label$528;
+					TMP$118$5 = 24ll;
 					goto label$1030;
 					label$528:;
-					TMP$119$5 = PARAM_DTYPE$1 & 31ll;
+					TMP$118$5 = PARAM_DTYPE$1 & 31ll;
 					label$1030:;
-					fb$result$1 = -(*(int64*)(((int64)(int64*)SYMB_DTYPEMATCHTB$ + (((TMP$118$5 << (4ll & 63ll)) + TMP$119$5) << (3ll & 63ll))) + -136ll)) + 780ll;
+					fb$result$1 = -(*(int64*)(((int64)(int64*)SYMB_DTYPEMATCHTB$ + (((TMP$117$5 << (4ll & 63ll)) + TMP$118$5) << (3ll & 63ll))) + -136ll)) + 780ll;
 					goto label$462;
 				}
 				goto label$468;
 				label$529:;
 				{
 					{
-						if( PARAM_DTYPE$1 != 4ll ) goto label$531;
+						if( PARAM_DTYPE$1 != 4ll) goto label$531;
 						label$532:;
 						{
 							fb$result$1 = 1299ll;
@@ -4617,7 +4617,7 @@ static $22FB_OVLPROC_MATCH_SCORE HCALCTYPESDIFF( int64 PARAM_DTYPE_IN$1, struct 
 						}
 						goto label$530;
 						label$531:;
-						if( PARAM_DTYPE$1 != 36ll ) goto label$533;
+						if( PARAM_DTYPE$1 != 36ll) goto label$533;
 						label$534:;
 						{
 							fb$result$1 = 1298ll;
@@ -4625,7 +4625,7 @@ static $22FB_OVLPROC_MATCH_SCORE HCALCTYPESDIFF( int64 PARAM_DTYPE_IN$1, struct 
 						}
 						goto label$530;
 						label$533:;
-						if( PARAM_DTYPE$1 != 7ll ) goto label$535;
+						if( PARAM_DTYPE$1 != 7ll) goto label$535;
 						label$536:;
 						{
 							fb$result$1 = 777ll;
@@ -4633,7 +4633,7 @@ static $22FB_OVLPROC_MATCH_SCORE HCALCTYPESDIFF( int64 PARAM_DTYPE_IN$1, struct 
 						}
 						goto label$530;
 						label$535:;
-						if( PARAM_DTYPE$1 != 39ll ) goto label$537;
+						if( PARAM_DTYPE$1 != 39ll) goto label$537;
 						label$538:;
 						{
 							fb$result$1 = 776ll;
@@ -4645,13 +4645,13 @@ static $22FB_OVLPROC_MATCH_SCORE HCALCTYPESDIFF( int64 PARAM_DTYPE_IN$1, struct 
 				}
 				goto label$468;
 				label$469:;
-				static const void* tmp$184[3ll] = {
+				static const void* tmp$183[3ll] = {
 					&&label$470,
 					&&label$524,
 					&&label$529,
 				};
-				if( TMP$115$4 > 2ull ) goto label$468;
-				goto *tmp$184[TMP$115$4 - 0ull];
+				if( TMP$114$4 > 2ull ) goto label$468;
+				goto *tmp$183[TMP$114$4 - 0ull];
 				label$468:;
 			}
 		}
@@ -4659,69 +4659,69 @@ static $22FB_OVLPROC_MATCH_SCORE HCALCTYPESDIFF( int64 PARAM_DTYPE_IN$1, struct 
 		label$539:;
 		{
 			{
-				uint64 TMP$120$4;
-				TMP$120$4 = (uint64)ARG_DCLASS$1;
+				uint64 TMP$119$4;
+				TMP$119$4 = (uint64)ARG_DCLASS$1;
 				goto label$541;
 				label$542:;
 				{
+					int64 TMP$120$5;
 					int64 TMP$121$5;
-					int64 TMP$122$5;
-					if( (ARG_DTYPE$1 & 480ll) == 0ll ) goto label$544;
+					if( (ARG_DTYPE$1 & 480ll) == 0ll) goto label$544;
 					{
 						fb$result$1 = 0ll;
 						goto label$462;
 					}
 					label$544:;
 					label$543:;
-					if( ARG_DTYPE$1 != 10ll ) goto label$546;
+					if( ARG_DTYPE$1 != 10ll) goto label$546;
 					{
 						ARG_DTYPE$1 = (ARG_DTYPE$1 & -512ll) | (*(int64*)(((int64)(struct $13SYMB_DATATYPE*)SYMB_DTYPETB$ + (ARG_DTYPE$1 * 56ll)) + 32ll) & 511ll);
 					}
 					label$546:;
 					label$545:;
-					if( (ARG_DTYPE$1 & 480ll) == 0ll ) goto label$547;
-					TMP$121$5 = 24ll;
+					if( (ARG_DTYPE$1 & 480ll) == 0ll) goto label$547;
+					TMP$120$5 = 24ll;
 					goto label$1031;
 					label$547:;
-					TMP$121$5 = ARG_DTYPE$1 & 31ll;
+					TMP$120$5 = ARG_DTYPE$1 & 31ll;
 					label$1031:;
-					if( (PARAM_DTYPE$1 & 480ll) == 0ll ) goto label$548;
-					TMP$122$5 = 24ll;
+					if( (PARAM_DTYPE$1 & 480ll) == 0ll) goto label$548;
+					TMP$121$5 = 24ll;
 					goto label$1032;
 					label$548:;
-					TMP$122$5 = PARAM_DTYPE$1 & 31ll;
+					TMP$121$5 = PARAM_DTYPE$1 & 31ll;
 					label$1032:;
-					fb$result$1 = -(*(int64*)(((int64)(int64*)SYMB_DTYPEMATCHTB$ + (((TMP$121$5 << (4ll & 63ll)) + TMP$122$5) << (3ll & 63ll))) + -136ll)) + 780ll;
+					fb$result$1 = -(*(int64*)(((int64)(int64*)SYMB_DTYPEMATCHTB$ + (((TMP$120$5 << (4ll & 63ll)) + TMP$121$5) << (3ll & 63ll))) + -136ll)) + 780ll;
 					goto label$462;
 				}
 				goto label$540;
 				label$549:;
 				{
+					int64 TMP$122$5;
 					int64 TMP$123$5;
-					int64 TMP$124$5;
-					if( (ARG_DTYPE$1 & 480ll) == 0ll ) goto label$550;
-					TMP$123$5 = 24ll;
+					if( (ARG_DTYPE$1 & 480ll) == 0ll) goto label$550;
+					TMP$122$5 = 24ll;
 					goto label$1033;
 					label$550:;
-					TMP$123$5 = ARG_DTYPE$1 & 31ll;
+					TMP$122$5 = ARG_DTYPE$1 & 31ll;
 					label$1033:;
-					if( (PARAM_DTYPE$1 & 480ll) == 0ll ) goto label$551;
-					TMP$124$5 = 24ll;
+					if( (PARAM_DTYPE$1 & 480ll) == 0ll) goto label$551;
+					TMP$123$5 = 24ll;
 					goto label$1034;
 					label$551:;
-					TMP$124$5 = PARAM_DTYPE$1 & 31ll;
+					TMP$123$5 = PARAM_DTYPE$1 & 31ll;
 					label$1034:;
-					fb$result$1 = -(*(int64*)(((int64)(int64*)SYMB_DTYPEMATCHTB$ + (((TMP$123$5 << (4ll & 63ll)) + TMP$124$5) << (3ll & 63ll))) + -136ll)) + 780ll;
+					fb$result$1 = -(*(int64*)(((int64)(int64*)SYMB_DTYPEMATCHTB$ + (((TMP$122$5 << (4ll & 63ll)) + TMP$123$5) << (3ll & 63ll))) + -136ll)) + 780ll;
 					goto label$462;
 				}
 				goto label$540;
 				label$541:;
-				static const void* tmp$185[2ll] = {
+				static const void* tmp$184[2ll] = {
 					&&label$542,
 					&&label$549,
 				};
-				if( TMP$120$4 > 1ull ) goto label$540;
-				goto *tmp$185[TMP$120$4 - 0ull];
+				if( TMP$119$4 > 1ull ) goto label$540;
+				goto *tmp$184[TMP$119$4 - 0ull];
 				label$540:;
 			}
 		}
@@ -4729,25 +4729,25 @@ static $22FB_OVLPROC_MATCH_SCORE HCALCTYPESDIFF( int64 PARAM_DTYPE_IN$1, struct 
 		label$552:;
 		{
 			{
-				if( ARG_DCLASS$1 != 2ll ) goto label$554;
+				if( ARG_DCLASS$1 != 2ll) goto label$554;
 				label$555:;
 				{
 					fb$result$1 = 1300ll;
 				}
 				goto label$553;
 				label$554:;
-				if( ARG_DCLASS$1 != 0ll ) goto label$556;
+				if( ARG_DCLASS$1 != 0ll) goto label$556;
 				label$557:;
 				{
 					{
-						if( ARG_DTYPE$1 != 4ll ) goto label$559;
+						if( ARG_DTYPE$1 != 4ll) goto label$559;
 						label$560:;
 						{
 							fb$result$1 = 1298ll;
 						}
 						goto label$558;
 						label$559:;
-						if( ARG_DTYPE$1 != 7ll ) goto label$561;
+						if( ARG_DTYPE$1 != 7ll) goto label$561;
 						label$562:;
 						{
 							fb$result$1 = 778ll;
@@ -4762,13 +4762,13 @@ static $22FB_OVLPROC_MATCH_SCORE HCALCTYPESDIFF( int64 PARAM_DTYPE_IN$1, struct 
 		}
 		goto label$465;
 		label$466:;
-		static const void* tmp$186[3ll] = {
+		static const void* tmp$185[3ll] = {
 			&&label$467,
 			&&label$539,
 			&&label$552,
 		};
-		if( TMP$114$2 > 2ull ) goto label$465;
-		goto *tmp$186[TMP$114$2 - 0ull];
+		if( TMP$113$2 > 2ull ) goto label$465;
+		goto *tmp$185[TMP$113$2 - 0ull];
 		label$465:;
 	}
 	label$462:;
@@ -4788,9 +4788,9 @@ static $22FB_OVLPROC_MATCH_SCORE HCHECKOVLPARAM( struct $8FBSYMBOL* PARENT$1, st
 	struct $8FBSYMBOL* ARG_SUBTYPE$1;
 	struct $8FBSYMBOL* ARRAY$1;
 	$12FB_PARAMMODE PARAM_MODE$1;
-	if( ARG_EXPR$1 != (struct $7ASTNODE*)0ull ) goto label$566;
+	if( ARG_EXPR$1 != (struct $7ASTNODE*)0ull) goto label$566;
 	{
-		if( *(struct $7ASTNODE**)((uint8*)PARAM$1 + 112ll) == (struct $7ASTNODE*)0ull ) goto label$568;
+		if( *(struct $7ASTNODE**)((uint8*)PARAM$1 + 112ll) == (struct $7ASTNODE*)0ull) goto label$568;
 		{
 			fb$result$1 = 1300ll;
 			goto label$564;
@@ -4812,10 +4812,10 @@ static $22FB_OVLPROC_MATCH_SCORE HCHECKOVLPARAM( struct $8FBSYMBOL* PARENT$1, st
 	ARG_DTYPE$1 = *(int64*)((uint8*)ARG_EXPR$1 + 8ll);
 	ARG_SUBTYPE$1 = *(struct $8FBSYMBOL**)((uint8*)ARG_EXPR$1 + 16ll);
 	{
-		if( PARAM_MODE$1 != 3ll ) goto label$570;
+		if( PARAM_MODE$1 != 3ll) goto label$570;
 		label$571:;
 		{
-			if( ARG_MODE$1 == 3ll ) goto label$573;
+			if( ARG_MODE$1 == 3ll) goto label$573;
 			{
 				fb$result$1 = 0ll;
 				goto label$564;
@@ -4825,7 +4825,7 @@ static $22FB_OVLPROC_MATCH_SCORE HCHECKOVLPARAM( struct $8FBSYMBOL* PARENT$1, st
 			$22FB_OVLPROC_MATCH_SCORE MATCH$3;
 			$22FB_OVLPROC_MATCH_SCORE vr$11 = TYPECALCMATCH( PARAM_DTYPE$1, PARAM_SUBTYPE$1, PARAM_MODE$1, ARG_DTYPE$1, ARG_SUBTYPE$1 );
 			MATCH$3 = vr$11;
-			if( MATCH$3 >= 1040ll ) goto label$575;
+			if( MATCH$3 >= 1040ll) goto label$575;
 			{
 				fb$result$1 = 0ll;
 				goto label$564;
@@ -4833,9 +4833,9 @@ static $22FB_OVLPROC_MATCH_SCORE HCHECKOVLPARAM( struct $8FBSYMBOL* PARENT$1, st
 			label$575:;
 			label$574:;
 			ARRAY$1 = *(struct $8FBSYMBOL**)((uint8*)ARG_EXPR$1 + 24ll);
-			if( *(int64*)((uint8*)PARAM$1 + 120ll) <= 0ll ) goto label$577;
+			if( *(int64*)((uint8*)PARAM$1 + 120ll) <= 0ll) goto label$577;
 			{
-				if( ((int64)-(*(int64*)((uint8*)PARAM$1 + 120ll) != *(int64*)((uint8*)ARRAY$1 + 104ll)) & (int64)-(*(int64*)((uint8*)ARRAY$1 + 104ll) > 0ll)) == 0ll ) goto label$579;
+				if( ((int64)-(*(int64*)((uint8*)PARAM$1 + 120ll) != *(int64*)((uint8*)ARRAY$1 + 104ll)) & (int64)-(*(int64*)((uint8*)ARRAY$1 + 104ll) > 0ll)) == 0ll) goto label$579;
 				{
 					fb$result$1 = 0ll;
 					goto label$564;
@@ -4850,33 +4850,33 @@ static $22FB_OVLPROC_MATCH_SCORE HCHECKOVLPARAM( struct $8FBSYMBOL* PARENT$1, st
 		}
 		goto label$569;
 		label$570:;
-		if( PARAM_MODE$1 != 2ll ) goto label$580;
+		if( PARAM_MODE$1 != 2ll) goto label$580;
 		label$581:;
 		{
-			int64 TMP$125$3;
-			if( (ARG_DTYPE$1 & 480ll) == 0ll ) goto label$582;
-			TMP$125$3 = 24ll;
+			int64 TMP$124$3;
+			if( (ARG_DTYPE$1 & 480ll) == 0ll) goto label$582;
+			TMP$124$3 = 24ll;
 			goto label$1035;
 			label$582:;
-			TMP$125$3 = ARG_DTYPE$1 & 31ll;
+			TMP$124$3 = ARG_DTYPE$1 & 31ll;
 			label$1035:;
-			if( ((int64)-(ARG_MODE$1 == 1ll) & (int64)-(*(int64*)((int64)(struct $13SYMB_DATATYPE*)SYMB_DTYPETB$ + (TMP$125$3 * 56ll)) != 3ll)) == 0ll ) goto label$584;
+			if( ((int64)-(ARG_MODE$1 == 1ll) & (int64)-(*(int64*)((int64)(struct $13SYMB_DATATYPE*)SYMB_DTYPETB$ + (TMP$124$3 * 56ll)) != 3ll)) == 0ll) goto label$584;
 			{
+				int64 TMP$125$4;
 				int64 TMP$126$4;
-				int64 TMP$127$4;
-				if( (ARG_DTYPE$1 & 480ll) == 0ll ) goto label$585;
-				TMP$126$4 = 24ll;
+				if( (ARG_DTYPE$1 & 480ll) == 0ll) goto label$585;
+				TMP$125$4 = 24ll;
 				goto label$1036;
 				label$585:;
-				TMP$126$4 = ARG_DTYPE$1 & 31ll;
+				TMP$125$4 = ARG_DTYPE$1 & 31ll;
 				label$1036:;
-				if( (ARG_DTYPE$1 & 480ll) == 0ll ) goto label$586;
-				TMP$127$4 = 24ll;
+				if( (ARG_DTYPE$1 & 480ll) == 0ll) goto label$586;
+				TMP$126$4 = 24ll;
 				goto label$1037;
 				label$586:;
-				TMP$127$4 = ARG_DTYPE$1 & 31ll;
+				TMP$126$4 = ARG_DTYPE$1 & 31ll;
 				label$1037:;
-				if( ((int64)-(*(int64*)((int64)(struct $13SYMB_DATATYPE*)SYMB_DTYPETB$ + (TMP$126$4 * 56ll)) != 0ll) | (int64)-(*(int64*)(((int64)(struct $13SYMB_DATATYPE*)SYMB_DTYPETB$ + (TMP$127$4 * 56ll)) + 8ll) != *(int64*)((uint8*)&ENV$ + 616ll))) == 0ll ) goto label$588;
+				if( ((int64)-(*(int64*)((int64)(struct $13SYMB_DATATYPE*)SYMB_DTYPETB$ + (TMP$125$4 * 56ll)) != 0ll) | (int64)-(*(int64*)(((int64)(struct $13SYMB_DATATYPE*)SYMB_DTYPETB$ + (TMP$126$4 * 56ll)) + 8ll) != *(int64*)((uint8*)&ENV$ + 616ll))) == 0ll) goto label$588;
 				{
 					fb$result$1 = 0ll;
 					goto label$564;
@@ -4892,20 +4892,20 @@ static $22FB_OVLPROC_MATCH_SCORE HCHECKOVLPARAM( struct $8FBSYMBOL* PARENT$1, st
 		label$580:;
 		label$569:;
 	}
-	if( ARG_MODE$1 != 3ll ) goto label$590;
+	if( ARG_MODE$1 != 3ll) goto label$590;
 	{
 		fb$result$1 = 0ll;
 		goto label$564;
 	}
 	label$590:;
 	label$589:;
-	if( (PARAM_DTYPE$1 & 511ll) != (ARG_DTYPE$1 & 511ll) ) goto label$592;
+	if( (PARAM_DTYPE$1 & 511ll) != (ARG_DTYPE$1 & 511ll)) goto label$592;
 	{
 		int64 BASELEVEL$2;
 		BASELEVEL$2 = 0ll;
 		$22FB_OVLPROC_MATCH_SCORE MATCH$2;
 		MATCH$2 = 0ll;
-		if( PARAM_SUBTYPE$1 != ARG_SUBTYPE$1 ) goto label$594;
+		if( PARAM_SUBTYPE$1 != ARG_SUBTYPE$1) goto label$594;
 		{
 			MATCH$2 = 1300ll;
 		}
@@ -4913,15 +4913,15 @@ static $22FB_OVLPROC_MATCH_SCORE HCHECKOVLPARAM( struct $8FBSYMBOL* PARENT$1, st
 		label$594:;
 		{
 			{
-				int64 TMP$128$4;
-				TMP$128$4 = PARAM_DTYPE$1 & 31ll;
-				if( TMP$128$4 != 20ll ) goto label$596;
+				int64 TMP$127$4;
+				TMP$127$4 = PARAM_DTYPE$1 & 31ll;
+				if( TMP$127$4 != 20ll) goto label$596;
 				label$597:;
 				{
 					int64 BASELEVEL$5;
 					int64 vr$48 = SYMBGETUDTBASELEVEL( ARG_SUBTYPE$1, PARAM_SUBTYPE$1 );
 					BASELEVEL$5 = vr$48;
-					if( BASELEVEL$5 <= 0ll ) goto label$599;
+					if( BASELEVEL$5 <= 0ll) goto label$599;
 					{
 						MATCH$2 = -(BASELEVEL$5 * 10ll) + 1300ll;
 					}
@@ -4930,12 +4930,12 @@ static $22FB_OVLPROC_MATCH_SCORE HCHECKOVLPARAM( struct $8FBSYMBOL* PARENT$1, st
 				}
 				goto label$595;
 				label$596:;
-				if( TMP$128$4 != 22ll ) goto label$600;
+				if( TMP$127$4 != 22ll) goto label$600;
 				label$601:;
 				{
-					int64 TMP$129$5;
-					TMP$129$5 = 0ll;
-					$22FB_OVLPROC_MATCH_SCORE vr$53 = SYMBCALCPROCMATCH( PARAM_SUBTYPE$1, ARG_SUBTYPE$1, &TMP$129$5 );
+					int64 TMP$128$5;
+					TMP$128$5 = 0ll;
+					$22FB_OVLPROC_MATCH_SCORE vr$53 = SYMBCALCPROCMATCH( PARAM_SUBTYPE$1, ARG_SUBTYPE$1, &TMP$128$5 );
 					MATCH$2 = vr$53;
 				}
 				label$600:;
@@ -4943,9 +4943,9 @@ static $22FB_OVLPROC_MATCH_SCORE HCHECKOVLPARAM( struct $8FBSYMBOL* PARENT$1, st
 			}
 		}
 		label$593:;
-		if( MATCH$2 <= 0ll ) goto label$603;
+		if( MATCH$2 <= 0ll) goto label$603;
 		{
-			if( (PARAM_DTYPE$1 & 261632ll) != (ARG_DTYPE$1 & 261632ll) ) goto label$605;
+			if( (PARAM_DTYPE$1 & 261632ll) != (ARG_DTYPE$1 & 261632ll)) goto label$605;
 			{
 				fb$result$1 = MATCH$2;
 				goto label$564;
@@ -4953,9 +4953,9 @@ static $22FB_OVLPROC_MATCH_SCORE HCHECKOVLPARAM( struct $8FBSYMBOL* PARENT$1, st
 			label$605:;
 			label$604:;
 			int64 vr$57 = SYMBCHECKCONSTASSIGNTOPLEVEL( PARAM_DTYPE$1, ARG_DTYPE$1, PARAM_SUBTYPE$1, ARG_SUBTYPE$1, PARAM_MODE$1, &CONST_MATCHES$1 );
-			if( vr$57 == 0ll ) goto label$607;
+			if( vr$57 == 0ll) goto label$607;
 			{
-				if( MATCH$2 <= 1040ll ) goto label$609;
+				if( MATCH$2 <= 1040ll) goto label$609;
 				{
 					MATCH$2 = MATCH$2 + -260ll;
 				}
@@ -4976,16 +4976,16 @@ static $22FB_OVLPROC_MATCH_SCORE HCHECKOVLPARAM( struct $8FBSYMBOL* PARENT$1, st
 	label$592:;
 	label$591:;
 	{
-		if( PARAM_DTYPE$1 != 20ll ) goto label$611;
+		if( PARAM_DTYPE$1 != 20ll) goto label$611;
 		label$612:;
 		{
-			if( (OPTIONS$1 & 16ll) != 0ll ) goto label$614;
+			if( (OPTIONS$1 & 16ll) != 0ll) goto label$614;
 			{
 				int64 ERR_NUM$4;
 				struct $8FBSYMBOL* PROC$4;
 				struct $8FBSYMBOL* vr$63 = SYMBFINDCTOROVLPROC( PARAM_SUBTYPE$1, ARG_EXPR$1, ARG_MODE$1, ($9FB_ERRMSG*)&ERR_NUM$4, 16ll );
 				PROC$4 = vr$63;
-				if( PROC$4 == (struct $8FBSYMBOL*)0ull ) goto label$616;
+				if( PROC$4 == (struct $8FBSYMBOL*)0ull) goto label$616;
 				{
 					fb$result$1 = 580ll;
 					goto label$564;
@@ -4995,24 +4995,24 @@ static $22FB_OVLPROC_MATCH_SCORE HCHECKOVLPARAM( struct $8FBSYMBOL* PARENT$1, st
 			}
 			label$614:;
 			label$613:;
-			if( (OPTIONS$1 & 32ll) != 0ll ) goto label$618;
+			if( (OPTIONS$1 & 32ll) != 0ll) goto label$618;
 			{
 				int64 ERR_NUM$4;
 				struct $8FBSYMBOL* PROC$4;
 				struct $8FBSYMBOL* vr$67 = SYMBFINDCASTOVLPROC( PARAM_DTYPE$1, PARAM_SUBTYPE$1, ARG_EXPR$1, ($9FB_ERRMSG*)&ERR_NUM$4, OPTIONS$1 | 32ll );
 				PROC$4 = vr$67;
-				if( PROC$4 == (struct $8FBSYMBOL*)0ull ) goto label$620;
+				if( PROC$4 == (struct $8FBSYMBOL*)0ull) goto label$620;
 				{
 					$22FB_OVLPROC_MATCH_SCORE MATCH$5;
 					$22FB_OVLPROC_MATCH_SCORE vr$74 = HCALCTYPESDIFF( PARAM_DTYPE$1, PARAM_SUBTYPE$1, ((*(int64*)((uint8*)PROC$4 + 56ll) & 511ll) & 480ll) >> (5ll & 63ll), *(int64*)((uint8*)PROC$4 + 56ll), *(struct $8FBSYMBOL**)((uint8*)PROC$4 + 64ll), (struct $7ASTNODE*)0ull, PARAM_MODE$1 );
 					MATCH$5 = vr$74;
-					if( MATCH$5 < 1040ll ) goto label$622;
+					if( MATCH$5 < 1040ll) goto label$622;
 					{
 						MATCH$5 = MATCH$5 + -520ll;
 					}
 					goto label$621;
 					label$622:;
-					if( MATCH$5 < 780ll ) goto label$623;
+					if( MATCH$5 < 780ll) goto label$623;
 					{
 						MATCH$5 = MATCH$5 + -780ll;
 					}
@@ -5035,7 +5035,7 @@ static $22FB_OVLPROC_MATCH_SCORE HCHECKOVLPARAM( struct $8FBSYMBOL* PARENT$1, st
 		}
 		goto label$610;
 		label$611:;
-		if( PARAM_DTYPE$1 != 10ll ) goto label$624;
+		if( PARAM_DTYPE$1 != 10ll) goto label$624;
 		label$625:;
 		{
 			fb$result$1 = 0ll;
@@ -5045,27 +5045,27 @@ static $22FB_OVLPROC_MATCH_SCORE HCHECKOVLPARAM( struct $8FBSYMBOL* PARENT$1, st
 		label$624:;
 		{
 			{
-				if( ARG_DTYPE$1 != 20ll ) goto label$628;
+				if( ARG_DTYPE$1 != 20ll) goto label$628;
 				label$629:;
 				{
-					if( (OPTIONS$1 & 32ll) != 0ll ) goto label$631;
+					if( (OPTIONS$1 & 32ll) != 0ll) goto label$631;
 					{
 						int64 ERR_NUM$6;
 						struct $8FBSYMBOL* PROC$6;
 						struct $8FBSYMBOL* vr$80 = SYMBFINDCASTOVLPROC( PARAM_DTYPE$1, PARAM_SUBTYPE$1, ARG_EXPR$1, ($9FB_ERRMSG*)&ERR_NUM$6, OPTIONS$1 | 32ll );
 						PROC$6 = vr$80;
-						if( PROC$6 == (struct $8FBSYMBOL*)0ull ) goto label$633;
+						if( PROC$6 == (struct $8FBSYMBOL*)0ull) goto label$633;
 						{
 							$22FB_OVLPROC_MATCH_SCORE MATCH$7;
 							$22FB_OVLPROC_MATCH_SCORE vr$87 = HCALCTYPESDIFF( PARAM_DTYPE$1, PARAM_SUBTYPE$1, ((*(int64*)((uint8*)PROC$6 + 56ll) & 511ll) & 480ll) >> (5ll & 63ll), *(int64*)((uint8*)PROC$6 + 56ll), *(struct $8FBSYMBOL**)((uint8*)PROC$6 + 64ll), (struct $7ASTNODE*)0ull, PARAM_MODE$1 );
 							MATCH$7 = vr$87;
-							if( MATCH$7 < 1040ll ) goto label$635;
+							if( MATCH$7 < 1040ll) goto label$635;
 							{
 								MATCH$7 = MATCH$7 + -520ll;
 							}
 							goto label$634;
 							label$635:;
-							if( MATCH$7 < 780ll ) goto label$636;
+							if( MATCH$7 < 780ll) goto label$636;
 							{
 								MATCH$7 = MATCH$7 + -780ll;
 							}
@@ -5115,17 +5115,17 @@ static int64 HCHECKOVLPROC( struct $8FBSYMBOL* OVL_HEAD_PROC$1, int64 ARGS$1, st
 	*IS_MATCH$1 = 0ll;
 	int64 PARAMS$1;
 	PARAMS$1 = (int64)*(int16*)((uint8*)OVL$1 + 120ll);
-	if( (*(int64*)((uint8*)OVL$1 + 16ll) & 2ll) == 0ll ) goto label$640;
+	if( (*(int64*)((uint8*)OVL$1 + 16ll) & 2ll) == 0ll) goto label$640;
 	{
 		PARAMS$1 = PARAMS$1 + -1ll;
 	}
 	label$640:;
 	label$639:;
-	if( IS_PROPERTY$1 == 0ll ) goto label$642;
+	if( IS_PROPERTY$1 == 0ll) goto label$642;
 	{
-		if( (OPTIONS$1 & 1ll) == 0ll ) goto label$644;
+		if( (OPTIONS$1 & 1ll) == 0ll) goto label$644;
 		{
-			if( (*(int64*)((uint8*)OVL$1 + 56ll) & 511ll) != 0ll ) goto label$646;
+			if( (*(int64*)((uint8*)OVL$1 + 56ll) & 511ll) != 0ll) goto label$646;
 			{
 				PARAMS$1 = -1ll;
 			}
@@ -5135,7 +5135,7 @@ static int64 HCHECKOVLPROC( struct $8FBSYMBOL* OVL_HEAD_PROC$1, int64 ARGS$1, st
 		goto label$643;
 		label$644:;
 		{
-			if( (*(int64*)((uint8*)OVL$1 + 56ll) & 511ll) == 0ll ) goto label$648;
+			if( (*(int64*)((uint8*)OVL$1 + 56ll) & 511ll) == 0ll) goto label$648;
 			{
 				PARAMS$1 = -1ll;
 			}
@@ -5146,10 +5146,10 @@ static int64 HCHECKOVLPROC( struct $8FBSYMBOL* OVL_HEAD_PROC$1, int64 ARGS$1, st
 	}
 	label$642:;
 	label$641:;
-	if( ARGS$1 > PARAMS$1 ) goto label$650;
+	if( ARGS$1 > PARAMS$1) goto label$650;
 	{
 		PARAM$1 = *(struct $8FBSYMBOL**)((uint8*)OVL$1 + 136ll);
-		if( (*(int64*)((uint8*)OVL$1 + 16ll) & 2ll) == 0ll ) goto label$652;
+		if( (*(int64*)((uint8*)OVL$1 + 16ll) & 2ll) == 0ll) goto label$652;
 		{
 			PARAM$1 = *(struct $8FBSYMBOL**)((uint8*)PARAM$1 + 312ll);
 		}
@@ -5160,21 +5160,21 @@ static int64 HCHECKOVLPROC( struct $8FBSYMBOL* OVL_HEAD_PROC$1, int64 ARGS$1, st
 		{
 			int64 I$3;
 			I$3 = 0ll;
-			int64 TMP$130$3;
-			TMP$130$3 = ARGS$1 + -1ll;
+			int64 TMP$129$3;
+			TMP$129$3 = ARGS$1 + -1ll;
 			goto label$653;
 			label$656:;
 			{
 				$22FB_OVLPROC_MATCH_SCORE vr$23 = HCHECKOVLPARAM( OVL$1, PARAM$1, *(struct $7ASTNODE**)ARG$1, *(int64*)((uint8*)ARG$1 + 8ll), ERR_NUM$1, OPTIONS$1 );
 				ARG_MATCHSCORE$1 = vr$23;
-				if( ARG_MATCHSCORE$1 != 0ll ) goto label$658;
+				if( ARG_MATCHSCORE$1 != 0ll) goto label$658;
 				{
 					MATCHSCORE$1 = 0ll;
 					goto label$655;
 				}
 				label$658:;
 				label$657:;
-				if( ARG_MATCHSCORE$1 < 1040ll ) goto label$660;
+				if( ARG_MATCHSCORE$1 < 1040ll) goto label$660;
 				{
 					*EXACT_MATCHES$1 = *EXACT_MATCHES$1 + 1ll;
 				}
@@ -5187,19 +5187,19 @@ static int64 HCHECKOVLPROC( struct $8FBSYMBOL* OVL_HEAD_PROC$1, int64 ARGS$1, st
 			label$654:;
 			I$3 = I$3 + 1ll;
 			label$653:;
-			if( I$3 <= TMP$130$3 ) goto label$656;
+			if( I$3 <= TMP$129$3) goto label$656;
 			label$655:;
 		}
 		*IS_MATCH$1 = (int64)-(ARGS$1 == 0ll) | (int64)-(MATCHSCORE$1 > 0ll);
 		{
 			int64 I$3;
 			I$3 = ARGS$1;
-			int64 TMP$131$3;
-			TMP$131$3 = PARAMS$1 + -1ll;
+			int64 TMP$130$3;
+			TMP$130$3 = PARAMS$1 + -1ll;
 			goto label$661;
 			label$664:;
 			{
-				if( *(struct $7ASTNODE**)((uint8*)PARAM$1 + 112ll) != (struct $7ASTNODE*)0ull ) goto label$666;
+				if( *(struct $7ASTNODE**)((uint8*)PARAM$1 + 112ll) != (struct $7ASTNODE*)0ull) goto label$666;
 				{
 					*IS_MATCH$1 = 0ll;
 					goto label$663;
@@ -5211,7 +5211,7 @@ static int64 HCHECKOVLPROC( struct $8FBSYMBOL* OVL_HEAD_PROC$1, int64 ARGS$1, st
 			label$662:;
 			I$3 = I$3 + 1ll;
 			label$661:;
-			if( I$3 <= TMP$131$3 ) goto label$664;
+			if( I$3 <= TMP$130$3) goto label$664;
 			label$663:;
 		}
 	}
@@ -5232,11 +5232,11 @@ static $22FB_OVLPROC_MATCH_SCORE HCHECKCASTOVL( struct $8FBSYMBOL* PROC$1, int64
 	struct $8FBSYMBOL* PROC_SUBTYPE$1;
 	PROC_DTYPE$1 = *(int64*)((uint8*)PROC$1 + 56ll);
 	PROC_SUBTYPE$1 = *(struct $8FBSYMBOL**)((uint8*)PROC$1 + 64ll);
-	if( (PROC_DTYPE$1 & 511ll) != (TO_DTYPE$1 & 511ll) ) goto label$751;
+	if( (PROC_DTYPE$1 & 511ll) != (TO_DTYPE$1 & 511ll)) goto label$751;
 	{
-		if( PROC_SUBTYPE$1 != TO_SUBTYPE$1 ) goto label$753;
+		if( PROC_SUBTYPE$1 != TO_SUBTYPE$1) goto label$753;
 		{
-			if( PROC_DTYPE$1 != TO_DTYPE$1 ) goto label$755;
+			if( PROC_DTYPE$1 != TO_DTYPE$1) goto label$755;
 			{
 				fb$result$1 = 1300ll;
 				goto label$749;
@@ -5248,7 +5248,7 @@ static $22FB_OVLPROC_MATCH_SCORE HCHECKCASTOVL( struct $8FBSYMBOL* PROC$1, int64
 		}
 		label$753:;
 		label$752:;
-		if( (PROC_DTYPE$1 & 480ll) == 0ll ) goto label$757;
+		if( (PROC_DTYPE$1 & 480ll) == 0ll) goto label$757;
 		{
 			fb$result$1 = 0ll;
 			goto label$749;
@@ -5258,7 +5258,7 @@ static $22FB_OVLPROC_MATCH_SCORE HCHECKCASTOVL( struct $8FBSYMBOL* PROC$1, int64
 	}
 	label$751:;
 	label$750:;
-	if( (OPTIONS$1 & 4ll) == 0ll ) goto label$759;
+	if( (OPTIONS$1 & 4ll) == 0ll) goto label$759;
 	{
 		fb$result$1 = 0ll;
 		goto label$749;
@@ -5266,18 +5266,18 @@ static $22FB_OVLPROC_MATCH_SCORE HCHECKCASTOVL( struct $8FBSYMBOL* PROC$1, int64
 	label$759:;
 	label$758:;
 	{
+		int64 TMP$136$2;
 		int64 TMP$137$2;
-		int64 TMP$138$2;
-		if( (PROC_DTYPE$1 & 480ll) == 0ll ) goto label$760;
-		TMP$137$2 = 24ll;
+		if( (PROC_DTYPE$1 & 480ll) == 0ll) goto label$760;
+		TMP$136$2 = 24ll;
 		goto label$1038;
 		label$760:;
-		TMP$137$2 = PROC_DTYPE$1 & 31ll;
+		TMP$136$2 = PROC_DTYPE$1 & 31ll;
 		label$1038:;
-		TMP$138$2 = TMP$137$2;
-		if( TMP$138$2 == 20ll ) goto label$763;
+		TMP$137$2 = TMP$136$2;
+		if( TMP$137$2 == 20ll) goto label$763;
 		label$764:;
-		if( TMP$138$2 != 10ll ) goto label$762;
+		if( TMP$137$2 != 10ll) goto label$762;
 		label$763:;
 		{
 			fb$result$1 = 0ll;
@@ -5287,16 +5287,16 @@ static $22FB_OVLPROC_MATCH_SCORE HCHECKCASTOVL( struct $8FBSYMBOL* PROC$1, int64
 		label$762:;
 		{
 			{
+				int64 TMP$138$4;
 				int64 TMP$139$4;
-				int64 TMP$140$4;
-				if( (TO_DTYPE$1 & 480ll) == 0ll ) goto label$766;
-				TMP$139$4 = 24ll;
+				if( (TO_DTYPE$1 & 480ll) == 0ll) goto label$766;
+				TMP$138$4 = 24ll;
 				goto label$1039;
 				label$766:;
-				TMP$139$4 = TO_DTYPE$1 & 31ll;
+				TMP$138$4 = TO_DTYPE$1 & 31ll;
 				label$1039:;
-				TMP$140$4 = TMP$139$4;
-				if( TMP$140$4 != 20ll ) goto label$768;
+				TMP$139$4 = TMP$138$4;
+				if( TMP$139$4 != 20ll) goto label$768;
 				label$769:;
 				{
 					fb$result$1 = 0ll;
@@ -5322,7 +5322,7 @@ static void HDELPARAMS( struct $8FBSYMBOL* PROC$1 )
 	struct $8FBSYMBOL* NXT$1;
 	PARAM$1 = *(struct $8FBSYMBOL**)((uint8*)PROC$1 + 136ll);
 	label$815:;
-	if( PARAM$1 == (struct $8FBSYMBOL*)0ull ) goto label$816;
+	if( PARAM$1 == (struct $8FBSYMBOL*)0ull) goto label$816;
 	{
 		NXT$1 = *(struct $8FBSYMBOL**)((uint8*)PARAM$1 + 312ll);
 		SYMBFREESYMBOL( PARAM$1 );
@@ -5341,7 +5341,7 @@ static struct $20FB_GLOBCTORLIST_ITEM* HADDTOGLOBCTORLIST( struct $15FB_GLOBCTOR
 	struct $20FB_GLOBCTORLIST_ITEM* N$1;
 	void* vr$3 = LISTNEWNODE( (struct $5TLIST*)((uint8*)LIST$1 + 16ll) );
 	N$1 = (struct $20FB_GLOBCTORLIST_ITEM*)vr$3;
-	if( *(struct $20FB_GLOBCTORLIST_ITEM**)((uint8*)LIST$1 + 8ll) == (struct $20FB_GLOBCTORLIST_ITEM*)0ull ) goto label$824;
+	if( *(struct $20FB_GLOBCTORLIST_ITEM**)((uint8*)LIST$1 + 8ll) == (struct $20FB_GLOBCTORLIST_ITEM*)0ull) goto label$824;
 	{
 		*(struct $20FB_GLOBCTORLIST_ITEM**)((uint8*)*(struct $20FB_GLOBCTORLIST_ITEM**)((uint8*)LIST$1 + 8ll) + 8ll) = N$1;
 	}
@@ -5367,23 +5367,23 @@ static $22FB_OVLPROC_MATCH_SCORE SYMBCALCPARAMMATCH( struct $8FBSYMBOL* L$1, str
 	$22FB_OVLPROC_MATCH_SCORE MATCH$1;
 	$22FB_OVLPROC_MATCH_SCORE vr$6 = TYPECALCMATCH( *(int64*)((uint8*)L$1 + 56ll), *(struct $8FBSYMBOL**)((uint8*)L$1 + 64ll), *(int64*)((uint8*)L$1 + 96ll), *(int64*)((uint8*)R$1 + 56ll), *(struct $8FBSYMBOL**)((uint8*)R$1 + 64ll) );
 	MATCH$1 = vr$6;
-	if( MATCH$1 != 0ll ) goto label$832;
+	if( MATCH$1 != 0ll) goto label$832;
 	{
 		fb$result$1 = 0ll;
 		goto label$830;
 	}
 	label$832:;
 	label$831:;
-	if( *(int64*)((uint8*)L$1 + 96ll) == *(int64*)((uint8*)R$1 + 96ll) ) goto label$834;
+	if( *(int64*)((uint8*)L$1 + 96ll) == *(int64*)((uint8*)R$1 + 96ll)) goto label$834;
 	{
 		fb$result$1 = 0ll;
 		goto label$830;
 	}
 	label$834:;
 	label$833:;
-	if( *(int64*)((uint8*)L$1 + 96ll) != 3ll ) goto label$836;
+	if( *(int64*)((uint8*)L$1 + 96ll) != 3ll) goto label$836;
 	{
-		if( *(int64*)((uint8*)L$1 + 120ll) == *(int64*)((uint8*)R$1 + 120ll) ) goto label$838;
+		if( *(int64*)((uint8*)L$1 + 120ll) == *(int64*)((uint8*)R$1 + 120ll)) goto label$838;
 		{
 			fb$result$1 = 0ll;
 			goto label$830;
@@ -5401,7 +5401,7 @@ static $22FB_OVLPROC_MATCH_SCORE SYMBCALCPARAMMATCH( struct $8FBSYMBOL* L$1, str
 static void HSUBORFUNCTOSTR( FBSTRING* S$1, struct $8FBSYMBOL* PROC$1 )
 {
 	label$899:;
-	if( (*(int64*)((uint8*)PROC$1 + 56ll) & 511ll) != 0ll ) goto label$902;
+	if( (*(int64*)((uint8*)PROC$1 + 56ll) & 511ll) != 0ll) goto label$902;
 	{
 		fb_StrConcatByref( (void*)S$1, -1ll, (void*)"sub", 4ll, 0 );
 	}
@@ -5417,35 +5417,35 @@ static void HSUBORFUNCTOSTR( FBSTRING* S$1, struct $8FBSYMBOL* PROC$1 )
 static void HPROCMODETOSTR( FBSTRING* S$1, struct $8FBSYMBOL* PROC$1 )
 {
 	label$903:;
-	if( (((int64)-((*(int64*)((uint8*)PROC$1 + 16ll) & 4ll) != 0ll) | (int64)-((*(int64*)((uint8*)PROC$1 + 16ll) & 8ll) != 0ll)) | (int64)-((*(int64*)((uint8*)PROC$1 + 16ll) & 4096ll) != 0ll)) == 0ll ) goto label$906;
+	if( (((int64)-((*(int64*)((uint8*)PROC$1 + 16ll) & 4ll) != 0ll) | (int64)-((*(int64*)((uint8*)PROC$1 + 16ll) & 8ll) != 0ll)) | (int64)-((*(int64*)((uint8*)PROC$1 + 16ll) & 4096ll) != 0ll)) == 0ll) goto label$906;
 	{
 		{
-			$11FB_FUNCMODE TMP$146$3;
-			TMP$146$3 = *($11FB_FUNCMODE*)((uint8*)PROC$1 + 152ll);
-			if( TMP$146$3 == 1ll ) goto label$909;
+			$11FB_FUNCMODE TMP$145$3;
+			TMP$145$3 = *($11FB_FUNCMODE*)((uint8*)PROC$1 + 152ll);
+			if( TMP$145$3 == 1ll) goto label$909;
 			label$910:;
-			if( TMP$146$3 != 2ll ) goto label$908;
+			if( TMP$145$3 != 2ll) goto label$908;
 			label$909:;
 			{
 				fb_StrConcatByref( (void*)S$1, -1ll, (void*)" stdcall", 9ll, 0 );
 			}
 			goto label$907;
 			label$908:;
-			if( TMP$146$3 != 5ll ) goto label$911;
+			if( TMP$145$3 != 5ll) goto label$911;
 			label$912:;
 			{
 				fb_StrConcatByref( (void*)S$1, -1ll, (void*)" thiscall", 10ll, 0 );
 			}
 			goto label$907;
 			label$911:;
-			if( TMP$146$3 != 6ll ) goto label$913;
+			if( TMP$145$3 != 6ll) goto label$913;
 			label$914:;
 			{
 				fb_StrConcatByref( (void*)S$1, -1ll, (void*)" fastcall", 10ll, 0 );
 			}
 			goto label$907;
 			label$913:;
-			if( TMP$146$3 != 4ll ) goto label$915;
+			if( TMP$145$3 != 4ll) goto label$915;
 			label$916:;
 			{
 				fb_StrConcatByref( (void*)S$1, -1ll, (void*)" pascal", 8ll, 0 );
@@ -5458,19 +5458,19 @@ static void HPROCMODETOSTR( FBSTRING* S$1, struct $8FBSYMBOL* PROC$1 )
 	label$906:;
 	{
 		{
-			$11FB_FUNCMODE TMP$151$3;
-			TMP$151$3 = *($11FB_FUNCMODE*)((uint8*)PROC$1 + 152ll);
-			if( TMP$151$3 == 1ll ) goto label$919;
+			$11FB_FUNCMODE TMP$150$3;
+			TMP$150$3 = *($11FB_FUNCMODE*)((uint8*)PROC$1 + 152ll);
+			if( TMP$150$3 == 1ll) goto label$919;
 			label$920:;
-			if( TMP$151$3 != 2ll ) goto label$918;
+			if( TMP$150$3 != 2ll) goto label$918;
 			label$919:;
 			{
 				{
-					$11FB_FUNCMODE TMP$152$5;
-					TMP$152$5 = *($11FB_FUNCMODE*)((uint8*)&ENV$ + 576ll);
-					if( TMP$152$5 == 1ll ) goto label$923;
+					$11FB_FUNCMODE TMP$151$5;
+					TMP$151$5 = *($11FB_FUNCMODE*)((uint8*)&ENV$ + 576ll);
+					if( TMP$151$5 == 1ll) goto label$923;
 					label$924:;
-					if( TMP$152$5 != 2ll ) goto label$922;
+					if( TMP$151$5 != 2ll) goto label$922;
 					label$923:;
 					{
 					}
@@ -5485,24 +5485,24 @@ static void HPROCMODETOSTR( FBSTRING* S$1, struct $8FBSYMBOL* PROC$1 )
 			}
 			goto label$917;
 			label$918:;
-			if( TMP$151$3 != 5ll ) goto label$926;
+			if( TMP$150$3 != 5ll) goto label$926;
 			label$927:;
 			{
 				fb_StrConcatByref( (void*)S$1, -1ll, (void*)" thiscall", 10ll, 0 );
 			}
 			goto label$917;
 			label$926:;
-			if( TMP$151$3 != 6ll ) goto label$928;
+			if( TMP$150$3 != 6ll) goto label$928;
 			label$929:;
 			{
 				fb_StrConcatByref( (void*)S$1, -1ll, (void*)" fastcall", 10ll, 0 );
 			}
 			goto label$917;
 			label$928:;
-			if( TMP$151$3 != 4ll ) goto label$930;
+			if( TMP$150$3 != 4ll) goto label$930;
 			label$931:;
 			{
-				if( *(int64*)((uint8*)&ENV$ + 576ll) == 4ll ) goto label$933;
+				if( *(int64*)((uint8*)&ENV$ + 576ll) == 4ll) goto label$933;
 				{
 					fb_StrConcatByref( (void*)S$1, -1ll, (void*)" pascal", 8ll, 0 );
 				}
@@ -5511,10 +5511,10 @@ static void HPROCMODETOSTR( FBSTRING* S$1, struct $8FBSYMBOL* PROC$1 )
 			}
 			goto label$917;
 			label$930:;
-			if( TMP$151$3 != 3ll ) goto label$934;
+			if( TMP$150$3 != 3ll) goto label$934;
 			label$935:;
 			{
-				if( *(int64*)((uint8*)&ENV$ + 576ll) == 3ll ) goto label$937;
+				if( *(int64*)((uint8*)&ENV$ + 576ll) == 3ll) goto label$937;
 				{
 					fb_StrConcatByref( (void*)S$1, -1ll, (void*)" cdecl", 7ll, 0 );
 				}
@@ -5535,37 +5535,37 @@ static void HPARAMSTOSTR( FBSTRING* S$1, struct $8FBSYMBOL* PROC$1 )
 	fb_StrConcatByref( (void*)S$1, -1ll, (void*)"(", 2ll, 0 );
 	struct $8FBSYMBOL* PARAM$1;
 	PARAM$1 = *(struct $8FBSYMBOL**)((uint8*)PROC$1 + 136ll);
-	if( ((int64)-(PARAM$1 != (struct $8FBSYMBOL*)0ull) & (int64)-((*(int64*)((uint8*)PROC$1 + 16ll) & 2ll) != 0ll)) == 0ll ) goto label$949;
+	if( ((int64)-(PARAM$1 != (struct $8FBSYMBOL*)0ull) & (int64)-((*(int64*)((uint8*)PROC$1 + 16ll) & 2ll) != 0ll)) == 0ll) goto label$949;
 	{
 		PARAM$1 = *(struct $8FBSYMBOL**)((uint8*)PARAM$1 + 312ll);
 	}
 	label$949:;
 	label$948:;
 	label$950:;
-	if( PARAM$1 == (struct $8FBSYMBOL*)0ull ) goto label$951;
+	if( PARAM$1 == (struct $8FBSYMBOL*)0ull) goto label$951;
 	{
 		$12FB_PARAMMODE PARAMMODE$2;
 		PARAMMODE$2 = *($12FB_PARAMMODE*)((uint8*)PARAM$1 + 96ll);
 		{
-			if( PARAMMODE$2 == 1ll ) goto label$954;
+			if( PARAMMODE$2 == 1ll) goto label$954;
 			label$955:;
-			if( PARAMMODE$2 == 2ll ) goto label$954;
+			if( PARAMMODE$2 == 2ll) goto label$954;
 			label$956:;
-			if( PARAMMODE$2 != 3ll ) goto label$953;
+			if( PARAMMODE$2 != 3ll) goto label$953;
 			label$954:;
 			{
+				FBSTRING TMP$162$4;
 				FBSTRING TMP$163$4;
-				FBSTRING TMP$164$4;
 				{
-					if( PARAMMODE$2 == 1ll ) goto label$959;
+					if( PARAMMODE$2 == 1ll) goto label$959;
 					label$960:;
-					if( PARAMMODE$2 != 2ll ) goto label$958;
+					if( PARAMMODE$2 != 2ll) goto label$958;
 					label$959:;
 					{
 						int64 vr$11 = SYMBGETDEFAULTPARAMMODE( *(int64*)((uint8*)PARAM$1 + 56ll), *(struct $8FBSYMBOL**)((uint8*)PARAM$1 + 64ll) );
-						if( ((int64)-(*(int64*)((uint8*)&ENV$ + 272ll) == 0ll) & (int64)-(vr$11 != PARAMMODE$2)) == 0ll ) goto label$962;
+						if( ((int64)-(*(int64*)((uint8*)&ENV$ + 272ll) == 0ll) & (int64)-(vr$11 != PARAMMODE$2)) == 0ll) goto label$962;
 						{
-							if( PARAMMODE$2 != 1ll ) goto label$964;
+							if( PARAMMODE$2 != 1ll) goto label$964;
 							{
 								fb_StrConcatByref( (void*)S$1, -1ll, (void*)"byval ", 7ll, 0 );
 							}
@@ -5581,28 +5581,28 @@ static void HPARAMSTOSTR( FBSTRING* S$1, struct $8FBSYMBOL* PROC$1 )
 					}
 					goto label$957;
 					label$958:;
-					if( PARAMMODE$2 != 3ll ) goto label$965;
+					if( PARAMMODE$2 != 3ll) goto label$965;
 					label$966:;
 					{
-						FBSTRING TMP$161$6;
+						FBSTRING TMP$160$6;
 						FBSTRING* vr$15 = HDUMPDYNAMICARRAYDIMENSIONS( *(int64*)((uint8*)PARAM$1 + 120ll) );
-						__builtin_memset( &TMP$161$6, 0, 24ll );
-						FBSTRING* vr$18 = fb_StrConcat( &TMP$161$6, (void*)S$1, -1ll, (void*)vr$15, -1ll );
+						__builtin_memset( &TMP$160$6, 0, 24ll );
+						FBSTRING* vr$18 = fb_StrConcat( &TMP$160$6, (void*)S$1, -1ll, (void*)vr$15, -1ll );
 						fb_StrAssign( (void*)S$1, -1ll, (void*)vr$18, -1ll, 0 );
 					}
 					label$965:;
 					label$957:;
 				}
 				FBSTRING* vr$21 = SYMBTYPETOSTR( *(int64*)((uint8*)PARAM$1 + 56ll), *(struct $8FBSYMBOL**)((uint8*)PARAM$1 + 64ll), 0ll, 0ll );
+				__builtin_memset( &TMP$162$4, 0, 24ll );
+				FBSTRING* vr$24 = fb_StrConcat( &TMP$162$4, (void*)"as ", 4ll, (void*)vr$21, -1ll );
 				__builtin_memset( &TMP$163$4, 0, 24ll );
-				FBSTRING* vr$24 = fb_StrConcat( &TMP$163$4, (void*)"as ", 4ll, (void*)vr$21, -1ll );
-				__builtin_memset( &TMP$164$4, 0, 24ll );
-				FBSTRING* vr$27 = fb_StrConcat( &TMP$164$4, (void*)S$1, -1ll, (void*)vr$24, -1ll );
+				FBSTRING* vr$27 = fb_StrConcat( &TMP$163$4, (void*)S$1, -1ll, (void*)vr$24, -1ll );
 				fb_StrAssign( (void*)S$1, -1ll, (void*)vr$27, -1ll, 0 );
 			}
 			goto label$952;
 			label$953:;
-			if( PARAMMODE$2 != 4ll ) goto label$967;
+			if( PARAMMODE$2 != 4ll) goto label$967;
 			label$968:;
 			{
 				fb_StrConcatByref( (void*)S$1, -1ll, (void*)"...", 4ll, 0 );
@@ -5611,7 +5611,7 @@ static void HPARAMSTOSTR( FBSTRING* S$1, struct $8FBSYMBOL* PROC$1 )
 			label$952:;
 		}
 		PARAM$1 = *(struct $8FBSYMBOL**)((uint8*)PARAM$1 + 312ll);
-		if( PARAM$1 == (struct $8FBSYMBOL*)0ull ) goto label$970;
+		if( PARAM$1 == (struct $8FBSYMBOL*)0ull) goto label$970;
 		{
 			fb_StrConcatByref( (void*)S$1, -1ll, (void*)", ", 3ll, 0 );
 		}
@@ -5627,21 +5627,21 @@ static void HPARAMSTOSTR( FBSTRING* S$1, struct $8FBSYMBOL* PROC$1 )
 static void HRESULTTOSTR( FBSTRING* S$1, struct $8FBSYMBOL* PROC$1 )
 {
 	label$971:;
-	if( (*(int64*)((uint8*)PROC$1 + 56ll) & 511ll) == 0ll ) goto label$974;
+	if( (*(int64*)((uint8*)PROC$1 + 56ll) & 511ll) == 0ll) goto label$974;
 	{
+		FBSTRING TMP$168$2;
 		FBSTRING TMP$169$2;
-		FBSTRING TMP$170$2;
-		if( (*(int64*)((uint8*)PROC$1 + 16ll) & 2048ll) == 0ll ) goto label$976;
+		if( (*(int64*)((uint8*)PROC$1 + 16ll) & 2048ll) == 0ll) goto label$976;
 		{
 			fb_StrConcatByref( (void*)S$1, -1ll, (void*)" byref", 7ll, 0 );
 		}
 		label$976:;
 		label$975:;
 		FBSTRING* vr$6 = SYMBTYPETOSTR( *(int64*)((uint8*)PROC$1 + 56ll), *(struct $8FBSYMBOL**)((uint8*)PROC$1 + 64ll), 0ll, 0ll );
+		__builtin_memset( &TMP$168$2, 0, 24ll );
+		FBSTRING* vr$9 = fb_StrConcat( &TMP$168$2, (void*)" as ", 5ll, (void*)vr$6, -1ll );
 		__builtin_memset( &TMP$169$2, 0, 24ll );
-		FBSTRING* vr$9 = fb_StrConcat( &TMP$169$2, (void*)" as ", 5ll, (void*)vr$6, -1ll );
-		__builtin_memset( &TMP$170$2, 0, 24ll );
-		FBSTRING* vr$12 = fb_StrConcat( &TMP$170$2, (void*)S$1, -1ll, (void*)vr$9, -1ll );
+		FBSTRING* vr$12 = fb_StrConcat( &TMP$169$2, (void*)S$1, -1ll, (void*)vr$9, -1ll );
 		fb_StrAssign( (void*)S$1, -1ll, (void*)vr$12, -1ll, 0 );
 	}
 	label$974:;

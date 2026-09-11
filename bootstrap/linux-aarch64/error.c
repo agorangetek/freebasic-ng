@@ -416,9 +416,9 @@ struct $8FBS_ENUM {
 __FB_STATIC_ASSERT( sizeof( struct $8FBS_ENUM ) == 96 );
 typedef int64 $11FB_FUNCMODE;
 typedef int64 $21FB_PROC_RETURN_METHOD;
-typedef int64 (*tmp$35)( struct $8FBSYMBOL* );
+typedef int64 (*tmp$34)( struct $8FBSYMBOL* );
 struct $10FB_PROCRTL {
-	tmp$35 CALLBACK;
+	tmp$34 CALLBACK;
 };
 __FB_STATIC_ASSERT( sizeof( struct $10FB_PROCRTL ) == 8 );
 struct $10FB_PROCOVL {
@@ -523,7 +523,7 @@ struct $9FB_DEFTOK {
 };
 __FB_STATIC_ASSERT( sizeof( struct $9FB_DEFTOK ) == 32 );
 typedef int64 $15FB_DEFINE_FLAGS;
-typedef FBSTRING* (*tmp$29)( void );
+typedef FBSTRING* (*tmp$28)( void );
 struct $8DZSTRING {
 	char* DATA;
 	int64 LEN;
@@ -548,8 +548,8 @@ struct $11LEXPP_ARGTB {
 	int64 COUNT;
 };
 __FB_STATIC_ASSERT( sizeof( struct $11LEXPP_ARGTB ) == 776 );
-typedef FBSTRING* (*tmp$30)( struct $11LEXPP_ARGTB*, int64* );
-typedef uint32* (*tmp$31)( struct $11LEXPP_ARGTB*, int64* );
+typedef FBSTRING* (*tmp$29)( struct $11LEXPP_ARGTB*, int64* );
+typedef uint32* (*tmp$30)( struct $11LEXPP_ARGTB*, int64* );
 struct $10FBS_DEFINE {
 	int64 PARAMS;
 	struct $11FB_DEFPARAM* PARAMHEAD;
@@ -561,11 +561,11 @@ struct $10FBS_DEFINE {
 	int64 ISARGLESS;
 	$15FB_DEFINE_FLAGS FLAGS;
 	union {
-		tmp$29 DPROCZ;
-		tmp$30 MPROCZ;
+		tmp$28 DPROCZ;
+		tmp$29 MPROCZ;
 	};
 	union {
-		tmp$31 MPROCW;
+		tmp$30 MPROCW;
 	};
 };
 __FB_STATIC_ASSERT( sizeof( struct $10FBS_DEFINE ) == 56 );
@@ -818,7 +818,7 @@ struct $8FBARRAY1I10AST_OPINFOE {
 	struct $16__FB_ARRAYDIMTB$ DIMTB[1];
 };
 __FB_STATIC_ASSERT( sizeof( struct $8FBARRAY1I10AST_OPINFOE ) == 72 );
-static struct $8FBARRAY1I10AST_OPINFOE tmp$83$;
+static struct $8FBARRAY1I10AST_OPINFOE tmp$82$;
 typedef int64 $12FB_DATACLASS;
 struct $13SYMB_DATATYPE {
 	$12FB_DATACLASS CLASS;
@@ -840,7 +840,7 @@ struct $8FBARRAY1I13SYMB_DATATYPEE {
 	struct $16__FB_ARRAYDIMTB$ DIMTB[1];
 };
 __FB_STATIC_ASSERT( sizeof( struct $8FBARRAY1I13SYMB_DATATYPEE ) == 72 );
-static struct $8FBARRAY1I13SYMB_DATATYPEE tmp$84$;
+static struct $8FBARRAY1I13SYMB_DATATYPEE tmp$83$;
 struct $8FBARRAY2IlE {
 	int64* DATA;
 	int64* PTR;
@@ -851,7 +851,7 @@ struct $8FBARRAY2IlE {
 	struct $16__FB_ARRAYDIMTB$ DIMTB[2];
 };
 __FB_STATIC_ASSERT( sizeof( struct $8FBARRAY2IlE ) == 96 );
-static struct $8FBARRAY2IlE tmp$85$;
+static struct $8FBARRAY2IlE tmp$84$;
 typedef int64 $10FB_OUTTYPE;
 typedef int64 $10FB_BACKEND;
 typedef int64 $13FB_COMPTARGET;
@@ -1234,11 +1234,11 @@ void ERRPUSHPARAMLOCATION( struct $8FBSYMBOL* PROC$1, int64 TK$1, int64 PARAMNUM
 {
 	label$20:;
 	struct $16ERRPARAMLOCATION* L$1;
-	if( PROC$1 == (struct $8FBSYMBOL*)0ull ) goto label$23;
+	if( PROC$1 == (struct $8FBSYMBOL*)0ull) goto label$23;
 	{
-		if( (*(int64*)((uint8*)PROC$1 + 16ll) & 2ll) == 0ll ) goto label$25;
+		if( (*(int64*)((uint8*)PROC$1 + 16ll) & 2ll) == 0ll) goto label$25;
 		{
-			if( PARAMNUM$1 <= 1ll ) goto label$27;
+			if( PARAMNUM$1 <= 1ll) goto label$27;
 			{
 				PARAMNUM$1 = PARAMNUM$1 + -1ll;
 			}
@@ -1270,28 +1270,28 @@ void ERRPOPPARAMLOCATION( void )
 void ERRREPORTEX( int64 ERRNUM$1, char* MSGEX$1, int64 LINENUM$1, $12FB_ERRMSGOPT OPTIONS$1, char* CUSTOMTEXT$1 )
 {
 	label$63:;
-	if( *(int64*)((uint8*)&ERRCTX$ + 16ll) == 0ll ) goto label$66;
+	if( *(int64*)((uint8*)&ERRCTX$ + 16ll) == 0ll) goto label$66;
 	{
 		goto label$64;
 	}
 	label$66:;
 	label$65:;
-	if( *(int64*)&ERRCTX$ <= 0ll ) goto label$68;
+	if( *(int64*)&ERRCTX$ <= 0ll) goto label$68;
 	{
 		char* vr$0 = HMAKEPARAMDESC( MSGEX$1 );
 		MSGEX$1 = vr$0;
 	}
 	label$68:;
 	label$67:;
-	if( LINENUM$1 != 0ll ) goto label$70;
+	if( LINENUM$1 != 0ll) goto label$70;
 	{
-		if( *(int64*)((uint8*)&PARSER$ + 56ll) != *(int64*)((uint8*)&ERRCTX$ + 32ll) ) goto label$72;
+		if( *(int64*)((uint8*)&PARSER$ + 56ll) != *(int64*)((uint8*)&ERRCTX$ + 32ll)) goto label$72;
 		{
 			goto label$64;
 		}
 		label$72:;
 		label$71:;
-		if( *(struct $9LEX_TKCTX**)((uint8*)&LEX$ + 844696ll) == (struct $9LEX_TKCTX*)0ull ) goto label$74;
+		if( *(struct $9LEX_TKCTX**)((uint8*)&LEX$ + 844696ll) == (struct $9LEX_TKCTX*)0ull) goto label$74;
 		{
 			LINENUM$1 = *(int64*)((uint8*)*(struct $9LEX_TKCTX**)((uint8*)&LEX$ + 844696ll) + 16752ll);
 		}
@@ -1304,7 +1304,7 @@ void ERRREPORTEX( int64 ERRNUM$1, char* MSGEX$1, int64 LINENUM$1, $12FB_ERRMSGOP
 	label$69:;
 	HPRINTERRMSG( ERRNUM$1, MSGEX$1, OPTIONS$1, LINENUM$1, *(int64*)((uint8*)&ENV$ + 392ll), CUSTOMTEXT$1 );
 	*(int64*)((uint8*)&ERRCTX$ + 8ll) = *(int64*)((uint8*)&ERRCTX$ + 8ll) + 1ll;
-	if( *(int64*)((uint8*)&ERRCTX$ + 8ll) < *(int64*)((uint8*)&ENV$ + 400ll) ) goto label$76;
+	if( *(int64*)((uint8*)&ERRCTX$ + 8ll) < *(int64*)((uint8*)&ENV$ + 400ll)) goto label$76;
 	{
 		HPRINTERRMSG( 133ll, (char*)0ull, 0ll, LINENUM$1, 0ll, (char*)0ull );
 		ERRHIDEFURTHERERRORS(  );
@@ -1319,7 +1319,7 @@ void ERRREPORT( int64 ERRNUM$1, int64 ISBEFORE$1, char* CUSTOMTEXT$1 )
 	label$93:;
 	char* MSGEX$1;
 	int64 vr$0 = ERRHAVEPARAMLOCATION(  );
-	if( vr$0 == 0ll ) goto label$96;
+	if( vr$0 == 0ll) goto label$96;
 	{
 		MSGEX$1 = (char*)0ull;
 	}
@@ -1336,36 +1336,36 @@ void ERRREPORT( int64 ERRNUM$1, int64 ISBEFORE$1, char* CUSTOMTEXT$1 )
 
 void ERRREPORTWARNEX( int64 MSGNUM$1, char* MSGEX$1, int64 LINENUM$1, $12FB_ERRMSGOPT OPTIONS$1, char* CUSTOMTEXT$1 )
 {
+	FBSTRING TMP$509$1;
 	FBSTRING TMP$510$1;
 	FBSTRING TMP$511$1;
 	FBSTRING TMP$512$1;
-	FBSTRING TMP$513$1;
 	label$97:;
-	if( ((int64)-(MSGNUM$1 < 1ll) | (int64)-(MSGNUM$1 >= 54ll)) == 0ll ) goto label$100;
+	if( ((int64)-(MSGNUM$1 < 1ll) | (int64)-(MSGNUM$1 >= 54ll)) == 0ll) goto label$100;
 	{
 		goto label$98;
 	}
 	label$100:;
 	label$99:;
-	if( *(int64*)(((int64)(struct $9FBWARNING*)WARNINGMSGS$ + (MSGNUM$1 << (4ll & 63ll))) + -16ll) >= *(int64*)((uint8*)&ENV$ + 384ll) ) goto label$102;
+	if( *(int64*)(((int64)(struct $9FBWARNING*)WARNINGMSGS$ + (MSGNUM$1 << (4ll & 63ll))) + -16ll) >= *(int64*)((uint8*)&ENV$ + 384ll)) goto label$102;
 	{
 		goto label$98;
 	}
 	label$102:;
 	label$101:;
-	if( *(int64*)((uint8*)&ERRCTX$ + 16ll) == 0ll ) goto label$104;
+	if( *(int64*)((uint8*)&ERRCTX$ + 16ll) == 0ll) goto label$104;
 	{
 		goto label$98;
 	}
 	label$104:;
 	label$103:;
-	if( (*(int64*)((uint8*)&ENV$ + 408ll) & 512ll) == 0ll ) goto label$106;
+	if( (*(int64*)((uint8*)&ENV$ + 408ll) & 512ll) == 0ll) goto label$106;
 	{
 		*(int64*)((uint8*)&ERRCTX$ + 8ll) = *(int64*)((uint8*)&ERRCTX$ + 8ll) + 1ll;
 	}
 	label$106:;
 	label$105:;
-	if( *(int64*)&ERRCTX$ <= 0ll ) goto label$108;
+	if( *(int64*)&ERRCTX$ <= 0ll) goto label$108;
 	{
 		char* vr$6 = HMAKEPARAMDESC( MSGEX$1 );
 		MSGEX$1 = vr$6;
@@ -1373,7 +1373,7 @@ void ERRREPORTWARNEX( int64 MSGNUM$1, char* MSGEX$1, int64 LINENUM$1, $12FB_ERRM
 	label$108:;
 	label$107:;
 	int64 vr$8 = fb_StrLen( (void*)((uint8*)&ENV$ + 632ll), 261ll );
-	if( vr$8 <= 0ll ) goto label$110;
+	if( vr$8 <= 0ll) goto label$110;
 	{
 		FBSTRING* vr$10 = fb_StrAllocTempDescZ( (char*)((uint8*)&ENV$ + 632ll) );
 		fb_PrintString( 0, (FBSTRING*)vr$10, 0 );
@@ -1381,7 +1381,7 @@ void ERRREPORTWARNEX( int64 MSGNUM$1, char* MSGEX$1, int64 LINENUM$1, $12FB_ERRM
 	goto label$109;
 	label$110:;
 	{
-		if( MSGEX$1 == (char*)0ull ) goto label$112;
+		if( MSGEX$1 == (char*)0ull) goto label$112;
 		{
 			FBSTRING* vr$11 = fb_StrAllocTempDescZ( MSGEX$1 );
 			fb_PrintString( 0, (FBSTRING*)vr$11, 0 );
@@ -1391,15 +1391,15 @@ void ERRREPORTWARNEX( int64 MSGNUM$1, char* MSGEX$1, int64 LINENUM$1, $12FB_ERRM
 		label$111:;
 	}
 	label$109:;
-	if( LINENUM$1 <= 0ll ) goto label$114;
+	if( LINENUM$1 <= 0ll) goto label$114;
 	{
+		FBSTRING TMP$503$2;
 		FBSTRING TMP$504$2;
-		FBSTRING TMP$505$2;
 		FBSTRING* vr$12 = fb_LongintToStr( LINENUM$1 );
+		__builtin_memset( &TMP$503$2, 0, 24ll );
+		FBSTRING* vr$15 = fb_StrConcat( &TMP$503$2, (void*)"(", 2ll, (void*)vr$12, -1ll );
 		__builtin_memset( &TMP$504$2, 0, 24ll );
-		FBSTRING* vr$15 = fb_StrConcat( &TMP$504$2, (void*)"(", 2ll, (void*)vr$12, -1ll );
-		__builtin_memset( &TMP$505$2, 0, 24ll );
-		FBSTRING* vr$18 = fb_StrConcat( &TMP$505$2, (void*)vr$15, -1ll, (void*)")", 2ll );
+		FBSTRING* vr$18 = fb_StrConcat( &TMP$504$2, (void*)vr$15, -1ll, (void*)")", 2ll );
 		fb_PrintString( 0, (FBSTRING*)vr$18, 0 );
 	}
 	goto label$113;
@@ -1409,7 +1409,7 @@ void ERRREPORTWARNEX( int64 MSGNUM$1, char* MSGEX$1, int64 LINENUM$1, $12FB_ERRM
 		fb_PrintString( 0, (FBSTRING*)vr$19, 0 );
 	}
 	label$113:;
-	if( (*(int64*)((uint8*)&ENV$ + 408ll) & 512ll) == 0ll ) goto label$116;
+	if( (*(int64*)((uint8*)&ENV$ + 408ll) & 512ll) == 0ll) goto label$116;
 	{
 		FBSTRING* vr$21 = fb_StrAllocTempDescZEx( (char*)" error", 6ll );
 		fb_PrintString( 0, (FBSTRING*)vr$21, 0 );
@@ -1418,34 +1418,34 @@ void ERRREPORTWARNEX( int64 MSGNUM$1, char* MSGEX$1, int64 LINENUM$1, $12FB_ERRM
 	label$115:;
 	FBSTRING* vr$23 = fb_LongintToStr( *(int64*)(((int64)(struct $9FBWARNING*)WARNINGMSGS$ + (MSGNUM$1 << (4ll & 63ll))) + -16ll) );
 	FBSTRING* vr$24 = fb_LongintToStr( MSGNUM$1 );
+	__builtin_memset( &TMP$509$1, 0, 24ll );
+	FBSTRING* vr$27 = fb_StrConcat( &TMP$509$1, (void*)" warning ", 10ll, (void*)vr$24, -1ll );
 	__builtin_memset( &TMP$510$1, 0, 24ll );
-	FBSTRING* vr$27 = fb_StrConcat( &TMP$510$1, (void*)" warning ", 10ll, (void*)vr$24, -1ll );
+	FBSTRING* vr$30 = fb_StrConcat( &TMP$510$1, (void*)vr$27, -1ll, (void*)"(", 2ll );
 	__builtin_memset( &TMP$511$1, 0, 24ll );
-	FBSTRING* vr$30 = fb_StrConcat( &TMP$511$1, (void*)vr$27, -1ll, (void*)"(", 2ll );
+	FBSTRING* vr$33 = fb_StrConcat( &TMP$511$1, (void*)vr$30, -1ll, (void*)vr$23, -1ll );
 	__builtin_memset( &TMP$512$1, 0, 24ll );
-	FBSTRING* vr$33 = fb_StrConcat( &TMP$512$1, (void*)vr$30, -1ll, (void*)vr$23, -1ll );
-	__builtin_memset( &TMP$513$1, 0, 24ll );
-	FBSTRING* vr$36 = fb_StrConcat( &TMP$513$1, (void*)vr$33, -1ll, (void*)"): ", 4ll );
+	FBSTRING* vr$36 = fb_StrConcat( &TMP$512$1, (void*)vr$33, -1ll, (void*)"): ", 4ll );
 	fb_PrintString( 0, (FBSTRING*)vr$36, 0 );
 	FBSTRING* vr$38 = fb_StrAllocTempDescZ( *(char**)(((int64)(struct $9FBWARNING*)WARNINGMSGS$ + (MSGNUM$1 << (4ll & 63ll))) + -8ll) );
 	fb_PrintString( 0, (FBSTRING*)vr$38, 0 );
-	if( CUSTOMTEXT$1 == (char*)0ull ) goto label$118;
+	if( CUSTOMTEXT$1 == (char*)0ull) goto label$118;
 	{
 		FBSTRING* vr$39 = fb_StrAllocTempDescZ( CUSTOMTEXT$1 );
 		fb_PrintString( 0, (FBSTRING*)vr$39, 0 );
 	}
 	label$118:;
 	label$117:;
-	if( MSGEX$1 == (char*)0ull ) goto label$120;
+	if( MSGEX$1 == (char*)0ull) goto label$120;
 	{
-		if( (OPTIONS$1 & 1ll) == 0ll ) goto label$122;
+		if( (OPTIONS$1 & 1ll) == 0ll) goto label$122;
 		{
 			FBSTRING* vr$41 = fb_StrAllocTempDescZEx( (char*)", ", 2ll );
 			fb_PrintString( 0, (FBSTRING*)vr$41, 0 );
 		}
 		goto label$121;
 		label$122:;
-		if( (OPTIONS$1 & 2ll) == 0ll ) goto label$123;
+		if( (OPTIONS$1 & 2ll) == 0ll) goto label$123;
 		{
 			FBSTRING* vr$43 = fb_StrAllocTempDescZEx( (char*)": ", 2ll );
 			fb_PrintString( 0, (FBSTRING*)vr$43, 0 );
@@ -1457,7 +1457,7 @@ void ERRREPORTWARNEX( int64 MSGNUM$1, char* MSGEX$1, int64 LINENUM$1, $12FB_ERRM
 			fb_PrintString( 0, (FBSTRING*)vr$44, 0 );
 		}
 		label$121:;
-		if( (OPTIONS$1 & 4ll) == 0ll ) goto label$125;
+		if( (OPTIONS$1 & 4ll) == 0ll) goto label$125;
 		{
 			FBSTRING* vr$46 = fb_StrAllocTempDescZEx( (char*)"\x22", 1ll );
 			fb_PrintString( 0, (FBSTRING*)vr$46, 0 );
@@ -1466,7 +1466,7 @@ void ERRREPORTWARNEX( int64 MSGNUM$1, char* MSGEX$1, int64 LINENUM$1, $12FB_ERRM
 		label$124:;
 		FBSTRING* vr$47 = fb_StrAllocTempDescZ( MSGEX$1 );
 		fb_PrintString( 0, (FBSTRING*)vr$47, 0 );
-		if( (OPTIONS$1 & 4ll) == 0ll ) goto label$127;
+		if( (OPTIONS$1 & 4ll) == 0ll) goto label$127;
 		{
 			FBSTRING* vr$49 = fb_StrAllocTempDescZEx( (char*)"\x22", 1ll );
 			fb_PrintString( 0, (FBSTRING*)vr$49, 0 );
@@ -1526,7 +1526,7 @@ void ERRREPORTUNDEF( int64 ERRNUM$1, char* ID$1 )
 	uint64 vr$2 = HASHHASH( (char*)ID$1 );
 	HASH$1 = vr$2;
 	void* vr$4 = HASHLOOKUPEX( (struct $5THASH*)((uint8*)&ERRCTX$ + 40ll), (char*)ID$1, HASH$1 );
-	if( vr$4 == (void*)0ull ) goto label$199;
+	if( vr$4 == (void*)0ull) goto label$199;
 	{
 		goto label$197;
 	}
@@ -1570,7 +1570,7 @@ static void HPRINTERRMSG( int64 ERRNUM$1, char* MSGEX$1, $12FB_ERRMSGOPT OPTIONS
 	label$32:;
 	static char* MSG$1;
 	static FBSTRING TOKEN_POS$1;
-	if( ((int64)-(ERRNUM$1 < 1ll) | (int64)-(ERRNUM$1 >= 333ll)) == 0ll ) goto label$35;
+	if( ((int64)-(ERRNUM$1 < 1ll) | (int64)-(ERRNUM$1 >= 333ll)) == 0ll) goto label$35;
 	{
 		MSG$1 = (char*)0ull;
 	}
@@ -1580,20 +1580,20 @@ static void HPRINTERRMSG( int64 ERRNUM$1, char* MSGEX$1, $12FB_ERRMSGOPT OPTIONS
 		MSG$1 = *(char**)(((int64)(char**)ERRORMSGS$ + (ERRNUM$1 << (3ll & 63ll))) + -8ll);
 	}
 	label$34:;
-	if( MSGEX$1 != (char*)0ull ) goto label$37;
+	if( MSGEX$1 != (char*)0ull) goto label$37;
 	{
 		MSGEX$1 = (char*)"";
 	}
 	label$37:;
 	label$36:;
 	int64 vr$5 = fb_StrLen( (void*)((uint8*)&ENV$ + 632ll), 261ll );
-	if( vr$5 <= 0ll ) goto label$39;
+	if( vr$5 <= 0ll) goto label$39;
 	{
 		FBSTRING* vr$7 = fb_StrAllocTempDescZ( (char*)((uint8*)&ENV$ + 632ll) );
 		fb_PrintString( 0, (FBSTRING*)vr$7, 0 );
 		FBSTRING* vr$8 = fb_StrAllocTempDescZEx( (char*)"(", 1ll );
 		fb_PrintString( 0, (FBSTRING*)vr$8, 0 );
-		if( LINENUM$1 <= 0ll ) goto label$41;
+		if( LINENUM$1 <= 0ll) goto label$41;
 		{
 			FBSTRING* vr$9 = fb_LongintToStr( LINENUM$1 );
 			fb_PrintString( 0, (FBSTRING*)vr$9, 0 );
@@ -1607,43 +1607,43 @@ static void HPRINTERRMSG( int64 ERRNUM$1, char* MSGEX$1, $12FB_ERRMSGOPT OPTIONS
 	label$38:;
 	FBSTRING* vr$11 = fb_StrAllocTempDescZEx( (char*)"error", 5ll );
 	fb_PrintString( 0, (FBSTRING*)vr$11, 0 );
-	if( ERRNUM$1 < 0ll ) goto label$43;
+	if( ERRNUM$1 < 0ll) goto label$43;
 	{
+		FBSTRING TMP$490$2;
 		FBSTRING TMP$491$2;
 		FBSTRING TMP$492$2;
-		FBSTRING TMP$493$2;
 		FBSTRING* vr$12 = fb_LongintToStr( ERRNUM$1 );
+		__builtin_memset( &TMP$490$2, 0, 24ll );
+		FBSTRING* vr$15 = fb_StrConcat( &TMP$490$2, (void*)" ", 2ll, (void*)vr$12, -1ll );
 		__builtin_memset( &TMP$491$2, 0, 24ll );
-		FBSTRING* vr$15 = fb_StrConcat( &TMP$491$2, (void*)" ", 2ll, (void*)vr$12, -1ll );
+		FBSTRING* vr$18 = fb_StrConcat( &TMP$491$2, (void*)vr$15, -1ll, (void*)": ", 3ll );
 		__builtin_memset( &TMP$492$2, 0, 24ll );
-		FBSTRING* vr$18 = fb_StrConcat( &TMP$492$2, (void*)vr$15, -1ll, (void*)": ", 3ll );
-		__builtin_memset( &TMP$493$2, 0, 24ll );
-		FBSTRING* vr$21 = fb_StrConcat( &TMP$493$2, (void*)vr$18, -1ll, (void*)MSG$1, 0ll );
+		FBSTRING* vr$21 = fb_StrConcat( &TMP$492$2, (void*)vr$18, -1ll, (void*)MSG$1, 0ll );
 		fb_PrintString( 0, (FBSTRING*)vr$21, 0 );
-		if( CUSTOMTEXT$1 == (char*)0ull ) goto label$45;
+		if( CUSTOMTEXT$1 == (char*)0ull) goto label$45;
 		{
 			FBSTRING* vr$22 = fb_StrAllocTempDescZ( CUSTOMTEXT$1 );
 			fb_PrintString( 0, (FBSTRING*)vr$22, 0 );
 		}
 		label$45:;
 		label$44:;
-		if( SHOWERROR$1 == 0ll ) goto label$47;
+		if( SHOWERROR$1 == 0ll) goto label$47;
 		{
 			SHOWERROR$1 = (int64)-(LINENUM$1 > 0ll);
 		}
 		label$47:;
 		label$46:;
 		int64 vr$24 = fb_StrLen( (void*)MSGEX$1, 0ll );
-		if( vr$24 <= 0ll ) goto label$49;
+		if( vr$24 <= 0ll) goto label$49;
 		{
-			if( (OPTIONS$1 & 1ll) == 0ll ) goto label$51;
+			if( (OPTIONS$1 & 1ll) == 0ll) goto label$51;
 			{
 				FBSTRING* vr$26 = fb_StrAllocTempDescZEx( (char*)", ", 2ll );
 				fb_PrintString( 0, (FBSTRING*)vr$26, 0 );
 			}
 			goto label$50;
 			label$51:;
-			if( (OPTIONS$1 & 2ll) == 0ll ) goto label$52;
+			if( (OPTIONS$1 & 2ll) == 0ll) goto label$52;
 			{
 				FBSTRING* vr$28 = fb_StrAllocTempDescZEx( (char*)": ", 2ll );
 				fb_PrintString( 0, (FBSTRING*)vr$28, 0 );
@@ -1655,7 +1655,7 @@ static void HPRINTERRMSG( int64 ERRNUM$1, char* MSGEX$1, $12FB_ERRMSGOPT OPTIONS
 				fb_PrintString( 0, (FBSTRING*)vr$29, 0 );
 			}
 			label$50:;
-			if( (OPTIONS$1 & 4ll) == 0ll ) goto label$54;
+			if( (OPTIONS$1 & 4ll) == 0ll) goto label$54;
 			{
 				FBSTRING* vr$31 = fb_StrAllocTempDescZEx( (char*)"\x22", 1ll );
 				fb_PrintString( 0, (FBSTRING*)vr$31, 0 );
@@ -1664,7 +1664,7 @@ static void HPRINTERRMSG( int64 ERRNUM$1, char* MSGEX$1, $12FB_ERRMSGOPT OPTIONS
 			label$53:;
 			FBSTRING* vr$32 = fb_StrAllocTempDescZ( MSGEX$1 );
 			fb_PrintString( 0, (FBSTRING*)vr$32, 0 );
-			if( (OPTIONS$1 & 4ll) == 0ll ) goto label$56;
+			if( (OPTIONS$1 & 4ll) == 0ll) goto label$56;
 			{
 				FBSTRING* vr$34 = fb_StrAllocTempDescZEx( (char*)"\x22", 1ll );
 				fb_PrintString( 0, (FBSTRING*)vr$34, 0 );
@@ -1674,22 +1674,22 @@ static void HPRINTERRMSG( int64 ERRNUM$1, char* MSGEX$1, $12FB_ERRMSGOPT OPTIONS
 		}
 		label$49:;
 		label$48:;
-		if( SHOWERROR$1 == 0ll ) goto label$58;
+		if( SHOWERROR$1 == 0ll) goto label$58;
 		{
 			static FBSTRING LN$3;
 			FBSTRING* vr$37 = LEXPEEKCURRENTLINE( &TOKEN_POS$1, (int64)-((*(int64*)((uint8*)&ENV$ + 1448ll) & 256ll) != 0ll) );
 			fb_StrAssign( (void*)&LN$3, -1ll, (void*)vr$37, -1ll, 0 );
 			int64 vr$38 = fb_StrLen( (void*)&LN$3, -1ll );
-			if( vr$38 <= 0ll ) goto label$60;
+			if( vr$38 <= 0ll) goto label$60;
 			{
-				if( (*(int64*)((uint8*)&ENV$ + 1448ll) & 256ll) == 0ll ) goto label$62;
+				if( (*(int64*)((uint8*)&ENV$ + 1448ll) & 256ll) == 0ll) goto label$62;
 				{
+					FBSTRING TMP$497$5;
 					FBSTRING TMP$498$5;
-					FBSTRING TMP$499$5;
+					__builtin_memset( &TMP$497$5, 0, 24ll );
+					FBSTRING* vr$42 = fb_StrConcat( &TMP$497$5, (void*)" in '", 6ll, (void*)&LN$3, -1ll );
 					__builtin_memset( &TMP$498$5, 0, 24ll );
-					FBSTRING* vr$42 = fb_StrConcat( &TMP$498$5, (void*)" in '", 6ll, (void*)&LN$3, -1ll );
-					__builtin_memset( &TMP$499$5, 0, 24ll );
-					FBSTRING* vr$45 = fb_StrConcat( &TMP$499$5, (void*)vr$42, -1ll, (void*)"'", 2ll );
+					FBSTRING* vr$45 = fb_StrConcat( &TMP$498$5, (void*)vr$42, -1ll, (void*)"'", 2ll );
 					fb_PrintString( 0, (FBSTRING*)vr$45, 1 );
 				}
 				goto label$61;
@@ -1736,7 +1736,7 @@ static char* HADDTOKEN( int64 ISBEFORE$1, int64 ADDCOMMA$1, char* MSGEX$1 )
 	static FBSTRING RES$1;
 	static FBSTRING TOKEN$1;
 	fb_StrAssign( (void*)&RES$1, -1ll, (void*)"", 1ll, 0 );
-	if( MSGEX$1 != (char*)0ull ) goto label$80;
+	if( MSGEX$1 != (char*)0ull) goto label$80;
 	{
 		char* vr$1 = LEXGETTEXT(  );
 		fb_StrAssign( (void*)&TOKEN$1, -1ll, (void*)vr$1, 0ll, 0 );
@@ -1748,30 +1748,30 @@ static char* HADDTOKEN( int64 ISBEFORE$1, int64 ADDCOMMA$1, char* MSGEX$1 )
 	}
 	label$79:;
 	int64 vr$2 = fb_StrLen( (void*)&TOKEN$1, -1ll );
-	if( vr$2 <= 0ll ) goto label$82;
+	if( vr$2 <= 0ll) goto label$82;
 	{
 		{
-			int64 TMP$500$3;
+			int64 TMP$499$3;
 			int64 vr$3 = LEXGETTOKEN( 0ll );
-			TMP$500$3 = vr$3;
-			if( TMP$500$3 <= 32ll ) goto label$85;
+			TMP$499$3 = vr$3;
+			if( TMP$499$3 <= 32ll) goto label$85;
 			label$86:;
-			if( TMP$500$3 == 257ll ) goto label$85;
+			if( TMP$499$3 == 257ll) goto label$85;
 			label$87:;
-			if( TMP$500$3 != 256ll ) goto label$84;
+			if( TMP$499$3 != 256ll) goto label$84;
 			label$85:;
 			{
 			}
 			goto label$83;
 			label$84:;
 			{
-				if( ADDCOMMA$1 == 0ll ) goto label$90;
+				if( ADDCOMMA$1 == 0ll) goto label$90;
 				{
 					fb_StrConcatAssign( (void*)&RES$1, -1ll, (void*)", ", 3ll, 0 );
 				}
 				label$90:;
 				label$89:;
-				if( ISBEFORE$1 == 0ll ) goto label$92;
+				if( ISBEFORE$1 == 0ll) goto label$92;
 				{
 					fb_StrConcatAssign( (void*)&RES$1, -1ll, (void*)"before '", 9ll, 0 );
 				}
@@ -1797,7 +1797,7 @@ static char* HADDTOKEN( int64 ISBEFORE$1, int64 ADDCOMMA$1, char* MSGEX$1 )
 
 static FBSTRING* GETNOTALLOWEDMSG( $11FB_LANG_OPT OPT$1, char* MSGEX$1 )
 {
-	FBSTRING TMP$515$1;
+	FBSTRING TMP$514$1;
 	FBSTRING fb$result$1;
 	__builtin_memset( &fb$result$1, 0, 24ll );
 	label$130:;
@@ -1813,9 +1813,9 @@ static FBSTRING* GETNOTALLOWEDMSG( $11FB_LANG_OPT OPT$1, char* MSGEX$1 )
 		label$135:;
 		{
 			$11FB_LANG_OPT vr$4 = FBGETLANGOPTIONS( I$1 );
-			if( (vr$4 & OPT$1) == 0ll ) goto label$137;
+			if( (vr$4 & OPT$1) == 0ll) goto label$137;
 			{
-				if( LANGS$1 <= 0ll ) goto label$139;
+				if( LANGS$1 <= 0ll) goto label$139;
 				{
 					fb_StrConcatAssign( (void*)&MSG$1, -1ll, (void*)" or ", 5ll, 0 );
 				}
@@ -1831,12 +1831,12 @@ static FBSTRING* GETNOTALLOWEDMSG( $11FB_LANG_OPT OPT$1, char* MSGEX$1 )
 		label$133:;
 		I$1 = I$1 + 1ll;
 		label$132:;
-		if( I$1 <= 3ll ) goto label$135;
+		if( I$1 <= 3ll) goto label$135;
 		label$134:;
 	}
 	char* vr$12 = HADDTOKEN( 0ll, (int64)-(LANGS$1 > 0ll), MSGEX$1 );
-	__builtin_memset( &TMP$515$1, 0, 24ll );
-	FBSTRING* vr$16 = fb_StrConcat( &TMP$515$1, (void*)&MSG$1, -1ll, (void*)vr$12, 0ll );
+	__builtin_memset( &TMP$514$1, 0, 24ll );
+	FBSTRING* vr$16 = fb_StrConcat( &TMP$514$1, (void*)&MSG$1, -1ll, (void*)vr$12, 0ll );
 	fb_StrAssign( (void*)&MSG$1, -1ll, (void*)vr$16, -1ll, 0 );
 	fb_StrInit( (void*)&fb$result$1, -1ll, (void*)&MSG$1, -1ll, 0 );
 	fb_StrDelete( (FBSTRING*)&MSG$1 );
@@ -1861,7 +1861,7 @@ static char* HMAKEPARAMDESC( char* MSGEX$1 )
 	int64 ADDPRNTS$1;
 	void* vr$2 = LISTGETTAIL( (struct $5TLIST*)((uint8*)&ERRCTX$ + 64ll) );
 	PARAMLOC$1 = (struct $16ERRPARAMLOCATION*)vr$2;
-	if( PARAMLOC$1 != (struct $16ERRPARAMLOCATION*)0ull ) goto label$145;
+	if( PARAMLOC$1 != (struct $16ERRPARAMLOCATION*)0ull) goto label$145;
 	{
 		fb$result$1 = MSGEX$1;
 		goto label$143;
@@ -1872,39 +1872,39 @@ static char* HMAKEPARAMDESC( char* MSGEX$1 )
 	PNUM$1 = *(int64*)((uint8*)PARAMLOC$1 + 16ll);
 	PID$1 = *(char**)((uint8*)PARAMLOC$1 + 24ll);
 	fb_StrAssign( (void*)&DESC$1, -1ll, (void*)"", 1ll, 0 );
-	if( MSGEX$1 == (char*)0ull ) goto label$147;
+	if( MSGEX$1 == (char*)0ull) goto label$147;
 	{
-		FBSTRING TMP$516$2;
-		__builtin_memset( &TMP$516$2, 0, 24ll );
-		FBSTRING* vr$8 = fb_StrConcat( &TMP$516$2, (void*)MSGEX$1, 0ll, (void*)" ", 2ll );
+		FBSTRING TMP$515$2;
+		__builtin_memset( &TMP$515$2, 0, 24ll );
+		FBSTRING* vr$8 = fb_StrConcat( &TMP$515$2, (void*)MSGEX$1, 0ll, (void*)" ", 2ll );
 		fb_StrAssign( (void*)&DESC$1, -1ll, (void*)vr$8, -1ll, 0 );
 	}
 	label$147:;
 	label$146:;
-	if( PNUM$1 <= 0ll ) goto label$149;
+	if( PNUM$1 <= 0ll) goto label$149;
 	{
 		fb_StrConcatAssign( (void*)&DESC$1, -1ll, (void*)"at parameter ", 14ll, 0 );
 		FBSTRING* vr$9 = fb_LongintToStr( PNUM$1 );
 		fb_StrConcatAssign( (void*)&DESC$1, -1ll, (void*)vr$9, -1ll, 0 );
-		if( PID$1 != (char*)0ull ) goto label$151;
+		if( PID$1 != (char*)0ull) goto label$151;
 		{
-			if( PROC$1 == (struct $8FBSYMBOL*)0ull ) goto label$153;
+			if( PROC$1 == (struct $8FBSYMBOL*)0ull) goto label$153;
 			{
-				int64 TMP$518$4;
+				int64 TMP$517$4;
 				struct $8FBSYMBOL* PARAM$4;
 				PARAM$4 = *(struct $8FBSYMBOL**)((uint8*)PROC$1 + 136ll);
 				int64 CNT$4;
-				if( (*(int64*)((uint8*)PROC$1 + 16ll) & 2ll) == 0ll ) goto label$154;
-				TMP$518$4 = 0ll;
+				if( (*(int64*)((uint8*)PROC$1 + 16ll) & 2ll) == 0ll) goto label$154;
+				TMP$517$4 = 0ll;
 				goto label$200;
 				label$154:;
-				TMP$518$4 = 1ll;
+				TMP$517$4 = 1ll;
 				label$200:;
-				CNT$4 = TMP$518$4;
+				CNT$4 = TMP$517$4;
 				label$155:;
-				if( PARAM$4 == (struct $8FBSYMBOL*)0ull ) goto label$156;
+				if( PARAM$4 == (struct $8FBSYMBOL*)0ull) goto label$156;
 				{
-					if( CNT$4 != PNUM$1 ) goto label$158;
+					if( CNT$4 != PNUM$1) goto label$158;
 					{
 						goto label$156;
 					}
@@ -1915,7 +1915,7 @@ static char* HMAKEPARAMDESC( char* MSGEX$1 )
 				}
 				goto label$155;
 				label$156:;
-				if( PARAM$4 == (struct $8FBSYMBOL*)0ull ) goto label$160;
+				if( PARAM$4 == (struct $8FBSYMBOL*)0ull) goto label$160;
 				{
 					PID$1 = *(char**)((uint8*)PARAM$4 + 32ll);
 				}
@@ -1927,15 +1927,15 @@ static char* HMAKEPARAMDESC( char* MSGEX$1 )
 		}
 		label$151:;
 		label$150:;
-		if( PID$1 == (char*)0ull ) goto label$162;
+		if( PID$1 == (char*)0ull) goto label$162;
 		{
 			int64 vr$16 = fb_StrLen( (void*)PID$1, 0ll );
-			if( vr$16 <= 0ll ) goto label$164;
+			if( vr$16 <= 0ll) goto label$164;
 			{
-				FBSTRING TMP$520$4;
+				FBSTRING TMP$519$4;
 				fb_StrConcatAssign( (void*)&DESC$1, -1ll, (void*)" (", 3ll, 0 );
-				__builtin_memset( &TMP$520$4, 0, 24ll );
-				FBSTRING* vr$19 = fb_StrConcat( &TMP$520$4, (void*)&DESC$1, -1ll, (void*)PID$1, 0ll );
+				__builtin_memset( &TMP$519$4, 0, 24ll );
+				FBSTRING* vr$19 = fb_StrConcat( &TMP$519$4, (void*)&DESC$1, -1ll, (void*)PID$1, 0ll );
 				fb_StrAssign( (void*)&DESC$1, -1ll, (void*)vr$19, -1ll, 0 );
 				fb_StrConcatAssign( (void*)&DESC$1, -1ll, (void*)")", 2ll, 0 );
 			}
@@ -1947,19 +1947,19 @@ static char* HMAKEPARAMDESC( char* MSGEX$1 )
 	}
 	label$149:;
 	label$148:;
-	if( PROC$1 == (struct $8FBSYMBOL*)0ull ) goto label$166;
+	if( PROC$1 == (struct $8FBSYMBOL*)0ull) goto label$166;
 	{
 		int64 SHOWNAME$2;
 		SHOWNAME$2 = -1ll;
 		PNAME$1 = (char*)0ull;
-		if( (*(int64*)((uint8*)PROC$1 + 24ll) & 32ll) == 0ll ) goto label$168;
+		if( (*(int64*)((uint8*)PROC$1 + 24ll) & 32ll) == 0ll) goto label$168;
 		{
-			if( *(char**)((uint8*)PROC$1 + 32ll) == (char*)0ull ) goto label$170;
+			if( *(char**)((uint8*)PROC$1 + 32ll) == (char*)0ull) goto label$170;
 			{
 				FBSTRING* vr$24 = fb_StrAllocTempDescZ( (char*)*(char**)((uint8*)PROC$1 + 32ll) );
 				FBSTRING* vr$25 = fb_LEFT( (FBSTRING*)vr$24, 3ll );
 				int32 vr$26 = fb_StrCompare( (void*)vr$25, -1ll, (void*)"FB_", 4ll );
-				if( (int64)vr$26 != 0ll ) goto label$172;
+				if( (int64)vr$26 != 0ll) goto label$172;
 				{
 					SHOWNAME$2 = 0ll;
 				}
@@ -1977,7 +1977,7 @@ static char* HMAKEPARAMDESC( char* MSGEX$1 )
 		label$168:;
 		{
 			static FBSTRING S$3;
-			if( (*(int64*)((uint8*)PROC$1 + 24ll) & 16384ll) == 0ll ) goto label$174;
+			if( (*(int64*)((uint8*)PROC$1 + 24ll) & 16384ll) == 0ll) goto label$174;
 			{
 				FBSTRING* vr$30 = SYMBPROCPTRTOSTR( PROC$1 );
 				fb_StrAssign( (void*)&S$3, -1ll, (void*)vr$30, -1ll, 0 );
@@ -1985,7 +1985,7 @@ static char* HMAKEPARAMDESC( char* MSGEX$1 )
 			}
 			goto label$173;
 			label$174:;
-			if( (*(int64*)((uint8*)PROC$1 + 16ll) & 4124ll) == 0ll ) goto label$175;
+			if( (*(int64*)((uint8*)PROC$1 + 16ll) & 4124ll) == 0ll) goto label$175;
 			{
 				FBSTRING* vr$33 = SYMBMETHODTOSTR( PROC$1 );
 				fb_StrAssign( (void*)&S$3, -1ll, (void*)vr$33, -1ll, 0 );
@@ -1995,16 +1995,16 @@ static char* HMAKEPARAMDESC( char* MSGEX$1 )
 			label$173:;
 		}
 		label$167:;
-		if( SHOWNAME$2 == 0ll ) goto label$177;
+		if( SHOWNAME$2 == 0ll) goto label$177;
 		{
-			if( PNAME$1 != (char*)0ull ) goto label$179;
+			if( PNAME$1 != (char*)0ull) goto label$179;
 			{
 				ADDPRNTS$1 = -1ll;
 				PNAME$1 = *(char**)((uint8*)PROC$1 + 32ll);
-				if( PNAME$1 == (char*)0ull ) goto label$181;
+				if( PNAME$1 == (char*)0ull) goto label$181;
 				{
 					int64 vr$35 = fb_StrLen( (void*)PNAME$1, 0ll );
-					if( vr$35 != 0ll ) goto label$183;
+					if( vr$35 != 0ll) goto label$183;
 					{
 						char* vr$36 = SYMBGETMANGLEDNAME( PROC$1 );
 						PNAME$1 = vr$36;
@@ -2021,19 +2021,19 @@ static char* HMAKEPARAMDESC( char* MSGEX$1 )
 				ADDPRNTS$1 = 0ll;
 			}
 			label$178:;
-			if( PNAME$1 == (char*)0ull ) goto label$185;
+			if( PNAME$1 == (char*)0ull) goto label$185;
 			{
-				FBSTRING TMP$523$4;
-				if( PNUM$1 <= 0ll ) goto label$187;
+				FBSTRING TMP$522$4;
+				if( PNUM$1 <= 0ll) goto label$187;
 				{
 					fb_StrConcatAssign( (void*)&DESC$1, -1ll, (void*)" of ", 5ll, 0 );
 				}
 				label$187:;
 				label$186:;
-				__builtin_memset( &TMP$523$4, 0, 24ll );
-				FBSTRING* vr$39 = fb_StrConcat( &TMP$523$4, (void*)&DESC$1, -1ll, (void*)PNAME$1, 0ll );
+				__builtin_memset( &TMP$522$4, 0, 24ll );
+				FBSTRING* vr$39 = fb_StrConcat( &TMP$522$4, (void*)&DESC$1, -1ll, (void*)PNAME$1, 0ll );
 				fb_StrAssign( (void*)&DESC$1, -1ll, (void*)vr$39, -1ll, 0 );
-				if( ADDPRNTS$1 == 0ll ) goto label$189;
+				if( ADDPRNTS$1 == 0ll) goto label$189;
 				{
 					fb_StrConcatAssign( (void*)&DESC$1, -1ll, (void*)"()", 3ll, 0 );
 				}
@@ -2049,16 +2049,16 @@ static char* HMAKEPARAMDESC( char* MSGEX$1 )
 	goto label$165;
 	label$166:;
 	{
-		FBSTRING TMP$524$2;
-		if( PNUM$1 <= 0ll ) goto label$191;
+		FBSTRING TMP$523$2;
+		if( PNUM$1 <= 0ll) goto label$191;
 		{
 			fb_StrConcatAssign( (void*)&DESC$1, -1ll, (void*)" of ", 5ll, 0 );
 		}
 		label$191:;
 		label$190:;
 		char* vr$41 = SYMBKEYWORDGETTEXT( *(int64*)((uint8*)PARAMLOC$1 + 8ll) );
-		__builtin_memset( &TMP$524$2, 0, 24ll );
-		FBSTRING* vr$44 = fb_StrConcat( &TMP$524$2, (void*)&DESC$1, -1ll, (void*)vr$41, 0ll );
+		__builtin_memset( &TMP$523$2, 0, 24ll );
+		FBSTRING* vr$44 = fb_StrConcat( &TMP$523$2, (void*)&DESC$1, -1ll, (void*)vr$41, 0ll );
 		fb_StrAssign( (void*)&DESC$1, -1ll, (void*)vr$44, -1ll, 0 );
 	}
 	label$165:;

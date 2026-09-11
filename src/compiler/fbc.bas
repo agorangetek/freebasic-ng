@@ -765,11 +765,22 @@ private function fbcIsUsingGoldLinker( ) as integer
 end function
 
 private function hLinkFiles( ) as integer
-	dim as string ldcline, dllname, deffile
+	dim as string ldcline, dllname, deffile, coff_runtime
+	dim as integer coff_linker = _
+		(fbGetOption( FB_COMPOPT_TARGET ) = FB_COMPTARGET_WIN32) and _
+		(fbGetCpuFamily( ) = FB_CPUFAMILY_AARCH64)
 
 	function = FALSE
 
 	hSetOutName( )
+
+	if( coff_linker ) then
+		coff_runtime = fbcQueryCC( " -print-libgcc-file-name" )
+		if( (len( coff_runtime ) = 0) or (hFileExists( coff_runtime ) = FALSE) ) then
+			errReportEx( FB_ERRMSG_FILENOTFOUND, "compiler runtime", -1 )
+			exit function
+		end if
+	end if
 
 	select case( fbGetOption( FB_COMPOPT_TARGET ) )
 	case FB_COMPTARGET_WIN32
@@ -837,6 +848,8 @@ private function hLinkFiles( ) as integer
 			ldcline += "-arch i386 "
 		case FB_CPUFAMILY_X86_64
 			ldcline += "-arch x86_64 "
+		case FB_CPUFAMILY_AARCH64
+			ldcline += "-arch arm64 "
 		case FB_CPUFAMILY_ARM
 			'' fixme: this is clearly too specific
 			ldcline += "-arch armv6 "
@@ -1047,6 +1060,7 @@ private function hLinkFiles( ) as integer
 			(fbGetOption( FB_COMPOPT_TARGET ) <> FB_COMPTARGET_DARWIN) and _
 			(fbGetOption( FB_COMPOPT_TARGET ) <> FB_COMPTARGET_SOLARIS) and _
 			( fbGetOption( FB_COMPOPT_TARGET ) <> FB_COMPTARGET_JS ) and _
+			(not coff_linker) and _
 			(not fbcIsUsingGoldLinker( )) ) then
 			ldcline += " -T """ + fbc.libpath + (FB_HOST_PATHDIV + "fbextra.x""")
 		end if
@@ -1167,9 +1181,9 @@ private function hLinkFiles( ) as integer
 			ldcline += hFindLib( "crt0.o" )
 		end if
 
-	case FB_COMPTARGET_LINUX, FB_COMPTARGET_DARWIN, _
-		FB_COMPTARGET_FREEBSD, FB_COMPTARGET_OPENBSD, _
-		FB_COMPTARGET_NETBSD, FB_COMPTARGET_DRAGONFLY, FB_COMPTARGET_SOLARIS
+	case FB_COMPTARGET_LINUX, _
+	     FB_COMPTARGET_FREEBSD, FB_COMPTARGET_OPENBSD, _
+	     FB_COMPTARGET_NETBSD, FB_COMPTARGET_DRAGONFLY, FB_COMPTARGET_SOLARIS
 
 		if( fbGetOption( FB_COMPOPT_OUTTYPE ) = FB_OUTTYPE_EXECUTABLE) then
 			if( fbGetOption( FB_COMPOPT_PROFILE ) ) then
@@ -1201,6 +1215,10 @@ private function hLinkFiles( ) as integer
 				ldcline += hFindLib( "crtbegin.o" )
 			end if
 		end if
+
+	case FB_COMPTARGET_DARWIN
+		'' The compiler driver supplies macOS CRT objects and system libraries.
+		'' Passing historical crt1.o/ld-only flags directly breaks current Xcode.
 
 	case FB_COMPTARGET_ANDROID
 		if( fbGetOption( FB_COMPOPT_OUTTYPE ) = FB_OUTTYPE_EXECUTABLE) then
@@ -1261,7 +1279,8 @@ private function hLinkFiles( ) as integer
 	'' All libraries are passed inside -( -) so we don't need to worry as
 	'' much about their order and/or listing them repeatedly. (Not supported by Darwin ld)
 	if ( fbGetOption( FB_COMPOPT_TARGET ) <> FB_COMPTARGET_DARWIN ) then
-		if( fbGetOption( FB_COMPOPT_TARGET ) <> FB_COMPTARGET_JS ) then
+		if( (fbGetOption( FB_COMPOPT_TARGET ) <> FB_COMPTARGET_JS) and _
+			(not coff_linker) ) then
 			ldcline += " ""-("""
 		end if
 	end if
@@ -1285,7 +1304,11 @@ private function hLinkFiles( ) as integer
 			'' or .so's against themselves (ld will fail to read in
 			'' its output file...)
 			if ((checkdllname = FALSE) orelse (i->s <> dllname)) then
-				ldcline += " -l" + i->s
+				if( coff_linker and (i->s = "gcc") ) then
+					ldcline += " """ + coff_runtime + """"
+				else
+					ldcline += " -l" + i->s
+				end if
 			end if
 			i = listGetNext(i)
 		wend
@@ -1293,8 +1316,10 @@ private function hLinkFiles( ) as integer
 
 	if (fbGetOption( FB_COMPOPT_TARGET ) <> FB_COMPTARGET_DARWIN) then
 		if( fbGetOption( FB_COMPOPT_TARGET ) <> FB_COMPTARGET_JS ) then
-			'' End of lib group
-			ldcline += " ""-)"""
+			if( not coff_linker ) then
+				'' End of lib group
+				ldcline += " ""-)"""
+			end if
 		else
 			ldcline += " -lfb"
 		end if
@@ -1328,7 +1353,7 @@ private function hLinkFiles( ) as integer
 	end select
 
 	if( fbGetOption( FB_COMPOPT_TARGET ) = FB_COMPTARGET_DARWIN ) then
-		ldcline += " -macosx_version_min 10.4"
+		ldcline += " -mmacosx-version-min=11.0"
 	end if
 
 	'' This is required for 64-bit modules on *nix-y platforms
@@ -1337,8 +1362,7 @@ private function hLinkFiles( ) as integer
 	select case as const fbGetOption( FB_COMPOPT_TARGET )
 	case FB_COMPTARGET_LINUX, FB_COMPTARGET_FREEBSD, _
 		FB_COMPTARGET_OPENBSD, FB_COMPTARGET_NETBSD, _
-		FB_COMPTARGET_DRAGONFLY, FB_COMPTARGET_SOLARIS, _
-		FB_COMPTARGET_DARWIN
+	     FB_COMPTARGET_DRAGONFLY, FB_COMPTARGET_SOLARIS
 		dim as long outtype = fbGetOption( FB_COMPOPT_OUTTYPE )
 		if outtype = FB_OUTTYPE_EXECUTABLE OrElse outtype = FB_OUTTYPE_DYNAMICLIB Then
 			dim as long cpufamily = fbGetCpuFamily( )
@@ -1409,10 +1433,14 @@ private function hLinkFiles( ) as integer
 		end if
 	#endif
 
-	'' invoke ld
+	'' macOS must link through the compiler driver so that it supplies the SDK,
+	'' CRT objects and current platform linker flags. Other targets keep the
+	'' historical direct-linker path.
 	var ld = FBCTOOL_LD
 	if( fbGetOption( FB_COMPOPT_TARGET ) = FB_COMPTARGET_JS ) then
 		ld = FBCTOOL_EMLD
+	elseif( fbGetOption( FB_COMPOPT_TARGET ) = FB_COMPTARGET_DARWIN ) then
+		ld = FBCTOOL_GCC
 	end if
 
 	if( fbcRunBin( "linking", ld, ldcline ) = FALSE ) then
@@ -3946,6 +3974,13 @@ private function hAssembleModule( byval module as FBCIOFILE ptr ) as integer
 
 	dim as FBCTOOL assembler = FBCTOOL_NONE
 
+	'' The CLANGARM64 MSYS toolchain exposes as.exe as a Clang driver. It
+	'' needs -c, whereas a standalone GNU as does not accept that option.
+	if( (fbGetOption( FB_COMPOPT_TARGET ) = FB_COMPTARGET_WIN32) and _
+	    (fbGetCpuFamily( ) = FB_CPUFAMILY_AARCH64) ) then
+		assembler = FBCTOOL_GCC
+	end if
+
 #ifdef ENABLE_STANDALONE
 	if( assembler = FBCTOOL_NONE ) then
 		if( fbGetOption( FB_COMPOPT_BACKEND ) = FB_BACKEND_CLANG ) then
@@ -3974,7 +4009,7 @@ private function hAssembleModule( byval module as FBCIOFILE ptr ) as integer
 	end if
 
 	select case assembler
-	case FBCTOOL_CLANG
+	case FBCTOOL_CLANG, FBCTOOL_GCC
 		ln += "-c "
 	case else
 		select case( fbGetCpuFamily( ) )
@@ -3993,11 +4028,16 @@ private function hAssembleModule( byval module as FBCIOFILE ptr ) as integer
 		end select
 
 		if( fbGetOption( FB_COMPOPT_DEBUGINFO ) = FALSE ) then
-			if (fbGetOption( FB_COMPOPT_TARGET ) <> FB_COMPTARGET_DARWIN) then
-				if( fbGetOption( FB_COMPOPT_TARGET ) <> FB_COMPTARGET_JS ) then
-					ln += "--strip-local-absolute "
-				end if
-			endif
+			'' This is a GNU x86 assembler option. The CLANGARM64 toolchain
+			'' provides LLVM's assembler, which rejects it for AArch64.
+			if( (fbGetCpuFamily( ) = FB_CPUFAMILY_X86) orelse _
+			    (fbGetCpuFamily( ) = FB_CPUFAMILY_X86_64) ) then
+				if (fbGetOption( FB_COMPOPT_TARGET ) <> FB_COMPTARGET_DARWIN) then
+					if( fbGetOption( FB_COMPOPT_TARGET ) <> FB_COMPTARGET_JS ) then
+						ln += "--strip-local-absolute "
+					end if
+				endif
+			end if
 		end if
 	end select
 
@@ -4322,7 +4362,8 @@ private sub hAddDefaultLibs( )
 		end if
 
 	case FB_COMPTARGET_DARWIN
-		fbcAddDefLib( "gcc" )
+		'' Modern macOS uses the compiler runtime selected by the Clang driver;
+		'' Apple no longer ships a linkable libgcc.
 		fbcAddDefLib( "System" )
 		fbcAddDefLib( "pthread" )
 		fbcAddDefLib( "ncurses" )

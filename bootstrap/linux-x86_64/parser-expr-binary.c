@@ -182,9 +182,9 @@ struct $8FBS_ENUM {
 __FB_STATIC_ASSERT( sizeof( struct $8FBS_ENUM ) == 96 );
 typedef int64 $11FB_FUNCMODE;
 typedef int64 $21FB_PROC_RETURN_METHOD;
-typedef int64 (*tmp$35)( struct $8FBSYMBOL* );
+typedef int64 (*tmp$34)( struct $8FBSYMBOL* );
 struct $10FB_PROCRTL {
-	tmp$35 CALLBACK;
+	tmp$34 CALLBACK;
 };
 __FB_STATIC_ASSERT( sizeof( struct $10FB_PROCRTL ) == 8 );
 struct $10FB_PROCOVL {
@@ -314,7 +314,7 @@ struct $9FB_DEFTOK {
 };
 __FB_STATIC_ASSERT( sizeof( struct $9FB_DEFTOK ) == 32 );
 typedef int64 $15FB_DEFINE_FLAGS;
-typedef FBSTRING* (*tmp$29)( void );
+typedef FBSTRING* (*tmp$28)( void );
 struct $8DZSTRING {
 	char* DATA;
 	int64 LEN;
@@ -339,8 +339,8 @@ struct $11LEXPP_ARGTB {
 	int64 COUNT;
 };
 __FB_STATIC_ASSERT( sizeof( struct $11LEXPP_ARGTB ) == 776 );
-typedef FBSTRING* (*tmp$30)( struct $11LEXPP_ARGTB*, int64* );
-typedef uint32* (*tmp$31)( struct $11LEXPP_ARGTB*, int64* );
+typedef FBSTRING* (*tmp$29)( struct $11LEXPP_ARGTB*, int64* );
+typedef uint32* (*tmp$30)( struct $11LEXPP_ARGTB*, int64* );
 struct $10FBS_DEFINE {
 	int64 PARAMS;
 	struct $11FB_DEFPARAM* PARAMHEAD;
@@ -352,11 +352,11 @@ struct $10FBS_DEFINE {
 	int64 ISARGLESS;
 	$15FB_DEFINE_FLAGS FLAGS;
 	union {
-		tmp$29 DPROCZ;
-		tmp$30 MPROCZ;
+		tmp$28 DPROCZ;
+		tmp$29 MPROCZ;
 	};
 	union {
-		tmp$31 MPROCW;
+		tmp$30 MPROCW;
 	};
 };
 __FB_STATIC_ASSERT( sizeof( struct $10FBS_DEFINE ) == 56 );
@@ -726,7 +726,7 @@ struct $8FBARRAY1I10AST_OPINFOE {
 	struct $16__FB_ARRAYDIMTB$ DIMTB[1];
 };
 __FB_STATIC_ASSERT( sizeof( struct $8FBARRAY1I10AST_OPINFOE ) == 72 );
-static struct $8FBARRAY1I10AST_OPINFOE tmp$83$;
+static struct $8FBARRAY1I10AST_OPINFOE tmp$82$;
 typedef int64 $12FB_DATACLASS;
 struct $13SYMB_DATATYPE {
 	$12FB_DATACLASS CLASS;
@@ -748,7 +748,7 @@ struct $8FBARRAY1I13SYMB_DATATYPEE {
 	struct $16__FB_ARRAYDIMTB$ DIMTB[1];
 };
 __FB_STATIC_ASSERT( sizeof( struct $8FBARRAY1I13SYMB_DATATYPEE ) == 72 );
-static struct $8FBARRAY1I13SYMB_DATATYPEE tmp$84$;
+static struct $8FBARRAY1I13SYMB_DATATYPEE tmp$83$;
 struct $8FBARRAY2IlE {
 	int64* DATA;
 	int64* PTR;
@@ -759,7 +759,7 @@ struct $8FBARRAY2IlE {
 	struct $16__FB_ARRAYDIMTB$ DIMTB[2];
 };
 __FB_STATIC_ASSERT( sizeof( struct $8FBARRAY2IlE ) == 96 );
-static struct $8FBARRAY2IlE tmp$85$;
+static struct $8FBARRAY2IlE tmp$84$;
 struct $8TSTACKTB;
 struct $10TSTACKNODE;
 struct $10TSTACKNODE {
@@ -943,7 +943,7 @@ struct $7ASTNODE* CEXPRESSION( void )
 	label$12:;
 	struct $7ASTNODE* vr$5 = CBOOLEXPRESSION(  );
 	fb$result$1 = vr$5;
-	if( LAST_ISEXPR$1 == 0ll ) goto label$15;
+	if( LAST_ISEXPR$1 == 0ll) goto label$15;
 	{
 		*($12FB_PARSEROPT*)((uint8*)&PARSER$ + 304ll) = *(int64*)((uint8*)&PARSER$ + 304ll) | 4ll;
 	}
@@ -964,7 +964,7 @@ struct $7ASTNODE* CEXPRESSIONWITHNIDXARRAY( int64 ALLOW_NIDXARRAY$1 )
 	label$16:;
 	int64 PREVIOUS_CHECK_ARRAY$1;
 	PREVIOUS_CHECK_ARRAY$1 = (int64)-((*(int64*)((uint8*)&PARSER$ + 304ll) & 2ll) != 0ll);
-	if( ~ALLOW_NIDXARRAY$1 == 0ll ) goto label$19;
+	if( ~ALLOW_NIDXARRAY$1 == 0ll) goto label$19;
 	{
 		*($12FB_PARSEROPT*)((uint8*)&PARSER$ + 304ll) = *(int64*)((uint8*)&PARSER$ + 304ll) | 2ll;
 	}
@@ -976,7 +976,7 @@ struct $7ASTNODE* CEXPRESSIONWITHNIDXARRAY( int64 ALLOW_NIDXARRAY$1 )
 	label$18:;
 	struct $7ASTNODE* vr$6 = CEXPRESSION(  );
 	fb$result$1 = vr$6;
-	if( PREVIOUS_CHECK_ARRAY$1 == 0ll ) goto label$21;
+	if( PREVIOUS_CHECK_ARRAY$1 == 0ll) goto label$21;
 	{
 		*($12FB_PARSEROPT*)((uint8*)&PARSER$ + 304ll) = *(int64*)((uint8*)&PARSER$ + 304ll) | 2ll;
 	}
@@ -1001,7 +1001,7 @@ struct $7ASTNODE* CBOOLEXPRESSION( void )
 	struct $7ASTNODE* LOGEXPR$1;
 	struct $7ASTNODE* vr$1 = CLOGEXPRESSION(  );
 	LOGEXPR$1 = vr$1;
-	if( LOGEXPR$1 != (struct $7ASTNODE*)0ull ) goto label$25;
+	if( LOGEXPR$1 != (struct $7ASTNODE*)0ull) goto label$25;
 	{
 		fb$result$1 = (struct $7ASTNODE*)0ull;
 		goto label$23;
@@ -1011,9 +1011,9 @@ struct $7ASTNODE* CBOOLEXPRESSION( void )
 	label$26:;
 	{
 		{
-			uint64 TMP$97$3;
+			uint64 TMP$96$3;
 			int64 vr$2 = LEXGETTOKEN( 0ll );
-			TMP$97$3 = (uint64)vr$2;
+			TMP$96$3 = (uint64)vr$2;
 			goto label$30;
 			label$31:;
 			{
@@ -1031,17 +1031,17 @@ struct $7ASTNODE* CBOOLEXPRESSION( void )
 			}
 			goto label$29;
 			label$30:;
-			static const void* tmp$98[2ll] = {
+			static const void* tmp$97[2ll] = {
 				&&label$31,
 				&&label$32,
 			};
-			if( (TMP$97$3 - 290ull) > 1ull ) goto label$33;
-			goto *tmp$98[TMP$97$3 - 290ull];
+			if( (TMP$96$3 - 290ull) > 1ull ) goto label$33;
+			goto *tmp$97[TMP$96$3 - 290ull];
 			label$29:;
 		}
 		int64 vr$3 = LEXGETLOOKAHEAD( 1ll, 0ll );
 		int64 vr$4 = HISASSIGNTOKEN( vr$3 );
-		if( vr$4 == 0ll ) goto label$35;
+		if( vr$4 == 0ll) goto label$35;
 		{
 			goto label$27;
 		}
@@ -1053,7 +1053,7 @@ struct $7ASTNODE* CBOOLEXPRESSION( void )
 		EXPR$1 = vr$5;
 		int64 vr$6 = ASTDTORLISTSCOPEEND(  );
 		DTORLISTCOOKIE$1 = vr$6;
-		if( EXPR$1 != (struct $7ASTNODE*)0ull ) goto label$37;
+		if( EXPR$1 != (struct $7ASTNODE*)0ull) goto label$37;
 		{
 			ERRREPORT( 9ll, 0ll, (char*)0ull );
 			goto label$27;
@@ -1062,7 +1062,7 @@ struct $7ASTNODE* CBOOLEXPRESSION( void )
 		label$36:;
 		struct $7ASTNODE* vr$7 = ASTNEWBOP( OP$1, LOGEXPR$1, EXPR$1, (struct $8FBSYMBOL*)DTORLISTCOOKIE$1, 1ll );
 		LOGEXPR$1 = vr$7;
-		if( LOGEXPR$1 != (struct $7ASTNODE*)0ull ) goto label$39;
+		if( LOGEXPR$1 != (struct $7ASTNODE*)0ull) goto label$39;
 		{
 			ERRREPORT( 20ll, 0ll, (char*)0ull );
 			struct $7ASTNODE* vr$8 = ASTNEWCONSTI( 0ll, 8ll, (struct $8FBSYMBOL*)0ull );
@@ -1089,7 +1089,7 @@ struct $7ASTNODE* CLOGEXPRESSION( void )
 	struct $7ASTNODE* LOGEXPR$1;
 	struct $7ASTNODE* vr$1 = CLOGOREXPRESSION(  );
 	LOGEXPR$1 = vr$1;
-	if( LOGEXPR$1 != (struct $7ASTNODE*)0ull ) goto label$43;
+	if( LOGEXPR$1 != (struct $7ASTNODE*)0ull) goto label$43;
 	{
 		fb$result$1 = (struct $7ASTNODE*)0ull;
 		goto label$41;
@@ -1099,9 +1099,9 @@ struct $7ASTNODE* CLOGEXPRESSION( void )
 	label$44:;
 	{
 		{
-			uint64 TMP$99$3;
+			uint64 TMP$98$3;
 			int64 vr$2 = LEXGETTOKEN( 0ll );
-			TMP$99$3 = (uint64)vr$2;
+			TMP$98$3 = (uint64)vr$2;
 			goto label$48;
 			label$49:;
 			{
@@ -1124,18 +1124,18 @@ struct $7ASTNODE* CLOGEXPRESSION( void )
 			}
 			goto label$47;
 			label$48:;
-			static const void* tmp$100[3ll] = {
+			static const void* tmp$99[3ll] = {
 				&&label$49,
 				&&label$50,
 				&&label$51,
 			};
-			if( (TMP$99$3 - 292ull) > 2ull ) goto label$52;
-			goto *tmp$100[TMP$99$3 - 292ull];
+			if( (TMP$98$3 - 292ull) > 2ull ) goto label$52;
+			goto *tmp$99[TMP$98$3 - 292ull];
 			label$47:;
 		}
 		int64 vr$3 = LEXGETLOOKAHEAD( 1ll, 0ll );
 		int64 vr$4 = HISASSIGNTOKEN( vr$3 );
-		if( vr$4 == 0ll ) goto label$54;
+		if( vr$4 == 0ll) goto label$54;
 		{
 			goto label$45;
 		}
@@ -1144,7 +1144,7 @@ struct $7ASTNODE* CLOGEXPRESSION( void )
 		LEXSKIPTOKEN( 2048ll );
 		struct $7ASTNODE* vr$5 = CLOGOREXPRESSION(  );
 		EXPR$1 = vr$5;
-		if( EXPR$1 != (struct $7ASTNODE*)0ull ) goto label$56;
+		if( EXPR$1 != (struct $7ASTNODE*)0ull) goto label$56;
 		{
 			ERRREPORT( 9ll, 0ll, (char*)0ull );
 			goto label$45;
@@ -1153,7 +1153,7 @@ struct $7ASTNODE* CLOGEXPRESSION( void )
 		label$55:;
 		struct $7ASTNODE* vr$6 = ASTNEWBOP( OP$1, LOGEXPR$1, EXPR$1, (struct $8FBSYMBOL*)0ull, 1ll );
 		LOGEXPR$1 = vr$6;
-		if( LOGEXPR$1 != (struct $7ASTNODE*)0ull ) goto label$58;
+		if( LOGEXPR$1 != (struct $7ASTNODE*)0ull) goto label$58;
 		{
 			ERRREPORT( 20ll, 0ll, (char*)0ull );
 			struct $7ASTNODE* vr$7 = ASTNEWCONSTI( 0ll, 8ll, (struct $8FBSYMBOL*)0ull );
@@ -1179,7 +1179,7 @@ struct $7ASTNODE* CLOGOREXPRESSION( void )
 	struct $7ASTNODE* LOGEXPR$1;
 	struct $7ASTNODE* vr$1 = CLOGANDEXPRESSION(  );
 	LOGEXPR$1 = vr$1;
-	if( LOGEXPR$1 != (struct $7ASTNODE*)0ull ) goto label$62;
+	if( LOGEXPR$1 != (struct $7ASTNODE*)0ull) goto label$62;
 	{
 		fb$result$1 = (struct $7ASTNODE*)0ull;
 		goto label$60;
@@ -1189,7 +1189,7 @@ struct $7ASTNODE* CLOGOREXPRESSION( void )
 	label$63:;
 	{
 		int64 vr$2 = LEXGETTOKEN( 0ll );
-		if( vr$2 == 289ll ) goto label$67;
+		if( vr$2 == 289ll) goto label$67;
 		{
 			goto label$64;
 		}
@@ -1197,7 +1197,7 @@ struct $7ASTNODE* CLOGOREXPRESSION( void )
 		label$66:;
 		int64 vr$3 = LEXGETLOOKAHEAD( 1ll, 0ll );
 		int64 vr$4 = HISASSIGNTOKEN( vr$3 );
-		if( vr$4 == 0ll ) goto label$69;
+		if( vr$4 == 0ll) goto label$69;
 		{
 			goto label$64;
 		}
@@ -1206,7 +1206,7 @@ struct $7ASTNODE* CLOGOREXPRESSION( void )
 		LEXSKIPTOKEN( 2048ll );
 		struct $7ASTNODE* vr$5 = CLOGANDEXPRESSION(  );
 		EXPR$1 = vr$5;
-		if( EXPR$1 != (struct $7ASTNODE*)0ull ) goto label$71;
+		if( EXPR$1 != (struct $7ASTNODE*)0ull) goto label$71;
 		{
 			ERRREPORT( 9ll, 0ll, (char*)0ull );
 			goto label$64;
@@ -1215,7 +1215,7 @@ struct $7ASTNODE* CLOGOREXPRESSION( void )
 		label$70:;
 		struct $7ASTNODE* vr$6 = ASTNEWBOP( 35ll, LOGEXPR$1, EXPR$1, (struct $8FBSYMBOL*)0ull, 1ll );
 		LOGEXPR$1 = vr$6;
-		if( LOGEXPR$1 != (struct $7ASTNODE*)0ull ) goto label$73;
+		if( LOGEXPR$1 != (struct $7ASTNODE*)0ull) goto label$73;
 		{
 			ERRREPORT( 20ll, 0ll, (char*)0ull );
 			struct $7ASTNODE* vr$7 = ASTNEWCONSTI( 0ll, 8ll, (struct $8FBSYMBOL*)0ull );
@@ -1241,7 +1241,7 @@ struct $7ASTNODE* CLOGANDEXPRESSION( void )
 	struct $7ASTNODE* LOGEXPR$1;
 	struct $7ASTNODE* vr$1 = CRELEXPRESSION(  );
 	LOGEXPR$1 = vr$1;
-	if( LOGEXPR$1 != (struct $7ASTNODE*)0ull ) goto label$77;
+	if( LOGEXPR$1 != (struct $7ASTNODE*)0ull) goto label$77;
 	{
 		fb$result$1 = (struct $7ASTNODE*)0ull;
 		goto label$75;
@@ -1251,7 +1251,7 @@ struct $7ASTNODE* CLOGANDEXPRESSION( void )
 	label$78:;
 	{
 		int64 vr$2 = LEXGETTOKEN( 0ll );
-		if( vr$2 == 288ll ) goto label$82;
+		if( vr$2 == 288ll) goto label$82;
 		{
 			goto label$79;
 		}
@@ -1259,7 +1259,7 @@ struct $7ASTNODE* CLOGANDEXPRESSION( void )
 		label$81:;
 		int64 vr$3 = LEXGETLOOKAHEAD( 1ll, 0ll );
 		int64 vr$4 = HISASSIGNTOKEN( vr$3 );
-		if( vr$4 == 0ll ) goto label$84;
+		if( vr$4 == 0ll) goto label$84;
 		{
 			goto label$79;
 		}
@@ -1268,7 +1268,7 @@ struct $7ASTNODE* CLOGANDEXPRESSION( void )
 		LEXSKIPTOKEN( 2048ll );
 		struct $7ASTNODE* vr$5 = CRELEXPRESSION(  );
 		EXPR$1 = vr$5;
-		if( EXPR$1 != (struct $7ASTNODE*)0ull ) goto label$86;
+		if( EXPR$1 != (struct $7ASTNODE*)0ull) goto label$86;
 		{
 			ERRREPORT( 9ll, 0ll, (char*)0ull );
 			goto label$79;
@@ -1277,7 +1277,7 @@ struct $7ASTNODE* CLOGANDEXPRESSION( void )
 		label$85:;
 		struct $7ASTNODE* vr$6 = ASTNEWBOP( 34ll, LOGEXPR$1, EXPR$1, (struct $8FBSYMBOL*)0ull, 1ll );
 		LOGEXPR$1 = vr$6;
-		if( LOGEXPR$1 != (struct $7ASTNODE*)0ull ) goto label$88;
+		if( LOGEXPR$1 != (struct $7ASTNODE*)0ull) goto label$88;
 		{
 			ERRREPORT( 20ll, 0ll, (char*)0ull );
 			struct $7ASTNODE* vr$7 = ASTNEWCONSTI( 0ll, 8ll, (struct $8FBSYMBOL*)0ull );
@@ -1304,7 +1304,7 @@ struct $7ASTNODE* CRELEXPRESSION( void )
 	struct $7ASTNODE* RELEXPR$1;
 	struct $7ASTNODE* vr$1 = CISEXPRESSION(  );
 	RELEXPR$1 = vr$1;
-	if( RELEXPR$1 != (struct $7ASTNODE*)0ull ) goto label$92;
+	if( RELEXPR$1 != (struct $7ASTNODE*)0ull) goto label$92;
 	{
 		fb$result$1 = (struct $7ASTNODE*)0ull;
 		goto label$90;
@@ -1314,14 +1314,14 @@ struct $7ASTNODE* CRELEXPRESSION( void )
 	label$93:;
 	{
 		{
-			uint64 TMP$101$3;
+			uint64 TMP$100$3;
 			int64 vr$2 = LEXGETTOKEN( 0ll );
-			TMP$101$3 = (uint64)vr$2;
+			TMP$100$3 = (uint64)vr$2;
 			goto label$97;
 			label$98:;
 			{
 				*(int64*)((uint8*)&PARSER$ + 328ll) = (int64)-(*(int64*)((uint8*)&PARSER$ + 296ll) == 0ll);
-				if( (*(int64*)((uint8*)&PARSER$ + 304ll) & 256ll) == 0ll ) goto label$100;
+				if( (*(int64*)((uint8*)&PARSER$ + 304ll) & 256ll) == 0ll) goto label$100;
 				{
 					goto label$94;
 				}
@@ -1332,7 +1332,7 @@ struct $7ASTNODE* CRELEXPRESSION( void )
 			goto label$96;
 			label$101:;
 			{
-				if( (*(int64*)((uint8*)&PARSER$ + 304ll) & 512ll) == 0ll ) goto label$103;
+				if( (*(int64*)((uint8*)&PARSER$ + 304ll) & 512ll) == 0ll) goto label$103;
 				{
 					goto label$94;
 				}
@@ -1367,7 +1367,7 @@ struct $7ASTNODE* CRELEXPRESSION( void )
 			}
 			goto label$96;
 			label$97:;
-			static const void* tmp$102[6ll] = {
+			static const void* tmp$101[6ll] = {
 				&&label$98,
 				&&label$101,
 				&&label$104,
@@ -1375,14 +1375,14 @@ struct $7ASTNODE* CRELEXPRESSION( void )
 				&&label$106,
 				&&label$107,
 			};
-			if( (TMP$101$3 - 299ull) > 5ull ) goto label$108;
-			goto *tmp$102[TMP$101$3 - 299ull];
+			if( (TMP$100$3 - 299ull) > 5ull ) goto label$108;
+			goto *tmp$101[TMP$100$3 - 299ull];
 			label$96:;
 		}
 		LEXSKIPTOKEN( 0ll );
 		struct $7ASTNODE* vr$6 = CISEXPRESSION(  );
 		EXPR$1 = vr$6;
-		if( EXPR$1 != (struct $7ASTNODE*)0ull ) goto label$110;
+		if( EXPR$1 != (struct $7ASTNODE*)0ull) goto label$110;
 		{
 			ERRREPORT( 9ll, 0ll, (char*)0ull );
 			goto label$94;
@@ -1391,7 +1391,7 @@ struct $7ASTNODE* CRELEXPRESSION( void )
 		label$109:;
 		struct $7ASTNODE* vr$7 = ASTNEWBOP( OP$1, RELEXPR$1, EXPR$1, (struct $8FBSYMBOL*)0ull, 1ll );
 		RELEXPR$1 = vr$7;
-		if( RELEXPR$1 != (struct $7ASTNODE*)0ull ) goto label$112;
+		if( RELEXPR$1 != (struct $7ASTNODE*)0ull) goto label$112;
 		{
 			ERRREPORT( 20ll, 0ll, (char*)0ull );
 			struct $7ASTNODE* vr$8 = ASTNEWCONSTI( 0ll, 8ll, (struct $8FBSYMBOL*)0ull );
@@ -1410,15 +1410,15 @@ struct $7ASTNODE* CRELEXPRESSION( void )
 
 struct $7ASTNODE* CISEXPRESSION( void )
 {
+	int64 TMP$102$1;
 	int64 TMP$103$1;
-	int64 TMP$104$1;
 	struct $7ASTNODE* fb$result$1;
 	__builtin_memset( &fb$result$1, 0, 8ll );
 	label$113:;
 	struct $7ASTNODE* ISEXPR$1;
 	struct $7ASTNODE* vr$1 = CCATEXPRESSION(  );
 	ISEXPR$1 = vr$1;
-	if( ISEXPR$1 != (struct $7ASTNODE*)0ull ) goto label$116;
+	if( ISEXPR$1 != (struct $7ASTNODE*)0ull) goto label$116;
 	{
 		fb$result$1 = (struct $7ASTNODE*)0ull;
 		goto label$114;
@@ -1426,16 +1426,16 @@ struct $7ASTNODE* CISEXPRESSION( void )
 	label$116:;
 	label$115:;
 	int64 vr$2 = LEXGETTOKEN( 0ll );
-	if( vr$2 == 272ll ) goto label$118;
+	if( vr$2 == 272ll) goto label$118;
 	{
 		fb$result$1 = ISEXPR$1;
 		goto label$114;
 	}
 	label$118:;
 	label$117:;
-	if( (*(int64*)((uint8*)ISEXPR$1 + 8ll) & 511ll) != 20ll ) goto label$120;
+	if( (*(int64*)((uint8*)ISEXPR$1 + 8ll) & 511ll) != 20ll) goto label$120;
 	{
-		if( (*(int64*)((uint8*)*(struct $8FBSYMBOL**)((uint8*)ISEXPR$1 + 16ll) + 24ll) & 4194304ll) != 0ll ) goto label$122;
+		if( (*(int64*)((uint8*)*(struct $8FBSYMBOL**)((uint8*)ISEXPR$1 + 16ll) + 24ll) & 4194304ll) != 0ll) goto label$122;
 		{
 			ERRREPORT( 297ll, 0ll, (char*)0ull );
 			struct $7ASTNODE* vr$8 = ASTNEWCONSTI( 0ll, 8ll, (struct $8FBSYMBOL*)0ull );
@@ -1455,19 +1455,19 @@ struct $7ASTNODE* CISEXPRESSION( void )
 	LEXSKIPTOKEN( 2048ll );
 	int64 DTYPE$1;
 	struct $8FBSYMBOL* SUBTYPE$1;
-	TMP$104$1 = 0ll;
 	TMP$103$1 = 0ll;
-	int64 vr$14 = CSYMBOLTYPE( &DTYPE$1, &SUBTYPE$1, &TMP$103$1, &TMP$104$1, 1ll );
-	if( vr$14 != 0ll ) goto label$124;
+	TMP$102$1 = 0ll;
+	int64 vr$14 = CSYMBOLTYPE( &DTYPE$1, &SUBTYPE$1, &TMP$102$1, &TMP$103$1, 1ll );
+	if( vr$14 != 0ll) goto label$124;
 	{
 		fb$result$1 = (struct $7ASTNODE*)0ull;
 		goto label$114;
 	}
 	label$124:;
 	label$123:;
-	if( (DTYPE$1 & 511ll) != 20ll ) goto label$126;
+	if( (DTYPE$1 & 511ll) != 20ll) goto label$126;
 	{
-		if( (*(int64*)((uint8*)SUBTYPE$1 + 24ll) & 4194304ll) != 0ll ) goto label$128;
+		if( (*(int64*)((uint8*)SUBTYPE$1 + 24ll) & 4194304ll) != 0ll) goto label$128;
 		{
 			ERRREPORT( 297ll, 0ll, (char*)0ull );
 			struct $7ASTNODE* vr$18 = ASTNEWCONSTI( 0ll, 8ll, (struct $8FBSYMBOL*)0ull );
@@ -1477,7 +1477,7 @@ struct $7ASTNODE* CISEXPRESSION( void )
 		goto label$127;
 		label$128:;
 		int64 vr$20 = SYMBGETUDTBASELEVEL( SUBTYPE$1, *(struct $8FBSYMBOL**)((uint8*)ISEXPR$1 + 16ll) );
-		if( vr$20 != 0ll ) goto label$129;
+		if( vr$20 != 0ll) goto label$129;
 		{
 			ERRREPORT( 298ll, 0ll, (char*)0ull );
 			struct $7ASTNODE* vr$21 = ASTNEWCONSTI( 0ll, 8ll, (struct $8FBSYMBOL*)0ull );
@@ -1501,7 +1501,7 @@ struct $7ASTNODE* CISEXPRESSION( void )
 	EXPR$1 = vr$25;
 	struct $7ASTNODE* vr$26 = ASTNEWBOP( 51ll, ISEXPR$1, EXPR$1, (struct $8FBSYMBOL*)0ull, 1ll );
 	ISEXPR$1 = vr$26;
-	if( ISEXPR$1 != (struct $7ASTNODE*)0ull ) goto label$131;
+	if( ISEXPR$1 != (struct $7ASTNODE*)0ull) goto label$131;
 	{
 		ERRREPORT( 20ll, 0ll, (char*)0ull );
 		struct $7ASTNODE* vr$27 = ASTNEWCONSTI( 0ll, 8ll, (struct $8FBSYMBOL*)0ull );
@@ -1523,7 +1523,7 @@ struct $7ASTNODE* CCATEXPRESSION( void )
 	struct $7ASTNODE* CATEXPR$1;
 	struct $7ASTNODE* vr$1 = CADDEXPRESSION(  );
 	CATEXPR$1 = vr$1;
-	if( CATEXPR$1 != (struct $7ASTNODE*)0ull ) goto label$135;
+	if( CATEXPR$1 != (struct $7ASTNODE*)0ull) goto label$135;
 	{
 		fb$result$1 = (struct $7ASTNODE*)0ull;
 		goto label$133;
@@ -1533,7 +1533,7 @@ struct $7ASTNODE* CCATEXPRESSION( void )
 	label$136:;
 	{
 		int64 vr$2 = LEXGETTOKEN( 0ll );
-		if( vr$2 == 38ll ) goto label$140;
+		if( vr$2 == 38ll) goto label$140;
 		{
 			goto label$137;
 		}
@@ -1541,7 +1541,7 @@ struct $7ASTNODE* CCATEXPRESSION( void )
 		label$139:;
 		int64 vr$3 = LEXGETLOOKAHEAD( 1ll, 0ll );
 		int64 vr$4 = HISASSIGNTOKEN( vr$3 );
-		if( vr$4 == 0ll ) goto label$142;
+		if( vr$4 == 0ll) goto label$142;
 		{
 			goto label$137;
 		}
@@ -1550,7 +1550,7 @@ struct $7ASTNODE* CCATEXPRESSION( void )
 		LEXSKIPTOKEN( 0ll );
 		struct $7ASTNODE* vr$5 = CADDEXPRESSION(  );
 		EXPR$1 = vr$5;
-		if( EXPR$1 != (struct $7ASTNODE*)0ull ) goto label$144;
+		if( EXPR$1 != (struct $7ASTNODE*)0ull) goto label$144;
 		{
 			ERRREPORT( 9ll, 0ll, (char*)0ull );
 			goto label$137;
@@ -1559,7 +1559,7 @@ struct $7ASTNODE* CCATEXPRESSION( void )
 		label$143:;
 		struct $7ASTNODE* vr$6 = ASTNEWBOP( 44ll, CATEXPR$1, EXPR$1, (struct $8FBSYMBOL*)0ull, 1ll );
 		CATEXPR$1 = vr$6;
-		if( CATEXPR$1 != (struct $7ASTNODE*)0ull ) goto label$146;
+		if( CATEXPR$1 != (struct $7ASTNODE*)0ull) goto label$146;
 		{
 			ERRREPORT( 20ll, 0ll, (char*)0ull );
 			struct $7ASTNODE* vr$7 = ASTNEWCONSTSTR( (char*)0ull );
@@ -1586,7 +1586,7 @@ struct $7ASTNODE* CADDEXPRESSION( void )
 	struct $7ASTNODE* ADDEXPR$1;
 	struct $7ASTNODE* vr$1 = CSHIFTEXPRESSION(  );
 	ADDEXPR$1 = vr$1;
-	if( ADDEXPR$1 != (struct $7ASTNODE*)0ull ) goto label$150;
+	if( ADDEXPR$1 != (struct $7ASTNODE*)0ull) goto label$150;
 	{
 		fb$result$1 = (struct $7ASTNODE*)0ull;
 		goto label$148;
@@ -1596,17 +1596,17 @@ struct $7ASTNODE* CADDEXPRESSION( void )
 	label$151:;
 	{
 		{
-			int64 TMP$105$3;
+			int64 TMP$104$3;
 			int64 vr$2 = LEXGETTOKEN( 0ll );
-			TMP$105$3 = vr$2;
-			if( TMP$105$3 != 43ll ) goto label$155;
+			TMP$104$3 = vr$2;
+			if( TMP$104$3 != 43ll) goto label$155;
 			label$156:;
 			{
 				OP$1 = 28ll;
 			}
 			goto label$154;
 			label$155:;
-			if( TMP$105$3 != 45ll ) goto label$157;
+			if( TMP$104$3 != 45ll) goto label$157;
 			label$158:;
 			{
 				OP$1 = 29ll;
@@ -1621,7 +1621,7 @@ struct $7ASTNODE* CADDEXPRESSION( void )
 		}
 		int64 vr$3 = LEXGETLOOKAHEAD( 1ll, 0ll );
 		int64 vr$4 = HISASSIGNTOKEN( vr$3 );
-		if( vr$4 == 0ll ) goto label$161;
+		if( vr$4 == 0ll) goto label$161;
 		{
 			goto label$152;
 		}
@@ -1630,7 +1630,7 @@ struct $7ASTNODE* CADDEXPRESSION( void )
 		LEXSKIPTOKEN( 0ll );
 		struct $7ASTNODE* vr$5 = CSHIFTEXPRESSION(  );
 		EXPR$1 = vr$5;
-		if( EXPR$1 != (struct $7ASTNODE*)0ull ) goto label$163;
+		if( EXPR$1 != (struct $7ASTNODE*)0ull) goto label$163;
 		{
 			ERRREPORT( 9ll, 0ll, (char*)0ull );
 			goto label$152;
@@ -1639,7 +1639,7 @@ struct $7ASTNODE* CADDEXPRESSION( void )
 		label$162:;
 		struct $7ASTNODE* vr$6 = ASTNEWBOP( OP$1, ADDEXPR$1, EXPR$1, (struct $8FBSYMBOL*)0ull, 7ll );
 		ADDEXPR$1 = vr$6;
-		if( ADDEXPR$1 != (struct $7ASTNODE*)0ull ) goto label$165;
+		if( ADDEXPR$1 != (struct $7ASTNODE*)0ull) goto label$165;
 		{
 			ERRREPORT( 20ll, 0ll, (char*)0ull );
 			struct $7ASTNODE* vr$7 = ASTNEWCONSTI( 0ll, 8ll, (struct $8FBSYMBOL*)0ull );
@@ -1666,7 +1666,7 @@ struct $7ASTNODE* CSHIFTEXPRESSION( void )
 	struct $7ASTNODE* SHIFTEXPR$1;
 	struct $7ASTNODE* vr$1 = CMODEXPRESSION(  );
 	SHIFTEXPR$1 = vr$1;
-	if( SHIFTEXPR$1 != (struct $7ASTNODE*)0ull ) goto label$169;
+	if( SHIFTEXPR$1 != (struct $7ASTNODE*)0ull) goto label$169;
 	{
 		fb$result$1 = (struct $7ASTNODE*)0ull;
 		goto label$167;
@@ -1676,17 +1676,17 @@ struct $7ASTNODE* CSHIFTEXPRESSION( void )
 	label$170:;
 	{
 		{
-			int64 TMP$106$3;
+			int64 TMP$105$3;
 			int64 vr$2 = LEXGETTOKEN( 0ll );
-			TMP$106$3 = vr$2;
-			if( TMP$106$3 != 297ll ) goto label$174;
+			TMP$105$3 = vr$2;
+			if( TMP$105$3 != 297ll) goto label$174;
 			label$175:;
 			{
 				OP$1 = 41ll;
 			}
 			goto label$173;
 			label$174:;
-			if( TMP$106$3 != 298ll ) goto label$176;
+			if( TMP$105$3 != 298ll) goto label$176;
 			label$177:;
 			{
 				OP$1 = 42ll;
@@ -1701,7 +1701,7 @@ struct $7ASTNODE* CSHIFTEXPRESSION( void )
 		}
 		int64 vr$3 = LEXGETLOOKAHEAD( 1ll, 0ll );
 		int64 vr$4 = HISASSIGNTOKEN( vr$3 );
-		if( vr$4 == 0ll ) goto label$180;
+		if( vr$4 == 0ll) goto label$180;
 		{
 			goto label$171;
 		}
@@ -1710,7 +1710,7 @@ struct $7ASTNODE* CSHIFTEXPRESSION( void )
 		LEXSKIPTOKEN( 2048ll );
 		struct $7ASTNODE* vr$5 = CMODEXPRESSION(  );
 		EXPR$1 = vr$5;
-		if( EXPR$1 != (struct $7ASTNODE*)0ull ) goto label$182;
+		if( EXPR$1 != (struct $7ASTNODE*)0ull) goto label$182;
 		{
 			ERRREPORT( 9ll, 0ll, (char*)0ull );
 			goto label$171;
@@ -1719,7 +1719,7 @@ struct $7ASTNODE* CSHIFTEXPRESSION( void )
 		label$181:;
 		struct $7ASTNODE* vr$6 = ASTNEWBOP( OP$1, SHIFTEXPR$1, EXPR$1, (struct $8FBSYMBOL*)0ull, 1ll );
 		SHIFTEXPR$1 = vr$6;
-		if( SHIFTEXPR$1 != (struct $7ASTNODE*)0ull ) goto label$184;
+		if( SHIFTEXPR$1 != (struct $7ASTNODE*)0ull) goto label$184;
 		{
 			ERRREPORT( 20ll, 0ll, (char*)0ull );
 			struct $7ASTNODE* vr$7 = ASTNEWCONSTI( 0ll, 8ll, (struct $8FBSYMBOL*)0ull );
@@ -1745,7 +1745,7 @@ struct $7ASTNODE* CMODEXPRESSION( void )
 	struct $7ASTNODE* MODEXPR$1;
 	struct $7ASTNODE* vr$1 = CINTDIVEXPRESSION(  );
 	MODEXPR$1 = vr$1;
-	if( MODEXPR$1 != (struct $7ASTNODE*)0ull ) goto label$188;
+	if( MODEXPR$1 != (struct $7ASTNODE*)0ull) goto label$188;
 	{
 		fb$result$1 = (struct $7ASTNODE*)0ull;
 		goto label$186;
@@ -1755,7 +1755,7 @@ struct $7ASTNODE* CMODEXPRESSION( void )
 	label$189:;
 	{
 		int64 vr$2 = LEXGETTOKEN( 0ll );
-		if( vr$2 == 296ll ) goto label$193;
+		if( vr$2 == 296ll) goto label$193;
 		{
 			goto label$190;
 		}
@@ -1763,7 +1763,7 @@ struct $7ASTNODE* CMODEXPRESSION( void )
 		label$192:;
 		int64 vr$3 = LEXGETLOOKAHEAD( 1ll, 0ll );
 		int64 vr$4 = HISASSIGNTOKEN( vr$3 );
-		if( vr$4 == 0ll ) goto label$195;
+		if( vr$4 == 0ll) goto label$195;
 		{
 			goto label$190;
 		}
@@ -1772,7 +1772,7 @@ struct $7ASTNODE* CMODEXPRESSION( void )
 		LEXSKIPTOKEN( 2048ll );
 		struct $7ASTNODE* vr$5 = CINTDIVEXPRESSION(  );
 		EXPR$1 = vr$5;
-		if( EXPR$1 != (struct $7ASTNODE*)0ull ) goto label$197;
+		if( EXPR$1 != (struct $7ASTNODE*)0ull) goto label$197;
 		{
 			ERRREPORT( 9ll, 0ll, (char*)0ull );
 			goto label$190;
@@ -1781,7 +1781,7 @@ struct $7ASTNODE* CMODEXPRESSION( void )
 		label$196:;
 		struct $7ASTNODE* vr$6 = ASTNEWBOP( 33ll, MODEXPR$1, EXPR$1, (struct $8FBSYMBOL*)0ull, 1ll );
 		MODEXPR$1 = vr$6;
-		if( MODEXPR$1 != (struct $7ASTNODE*)0ull ) goto label$199;
+		if( MODEXPR$1 != (struct $7ASTNODE*)0ull) goto label$199;
 		{
 			ERRREPORT( 20ll, 0ll, (char*)0ull );
 			struct $7ASTNODE* vr$7 = ASTNEWCONSTI( 0ll, 8ll, (struct $8FBSYMBOL*)0ull );
@@ -1807,7 +1807,7 @@ struct $7ASTNODE* CINTDIVEXPRESSION( void )
 	struct $7ASTNODE* IDIVEXPR$1;
 	struct $7ASTNODE* vr$1 = CMULTEXPRESSION(  );
 	IDIVEXPR$1 = vr$1;
-	if( IDIVEXPR$1 != (struct $7ASTNODE*)0ull ) goto label$203;
+	if( IDIVEXPR$1 != (struct $7ASTNODE*)0ull) goto label$203;
 	{
 		fb$result$1 = (struct $7ASTNODE*)0ull;
 		goto label$201;
@@ -1817,7 +1817,7 @@ struct $7ASTNODE* CINTDIVEXPRESSION( void )
 	label$204:;
 	{
 		int64 vr$2 = LEXGETTOKEN( 0ll );
-		if( vr$2 == 92ll ) goto label$208;
+		if( vr$2 == 92ll) goto label$208;
 		{
 			goto label$205;
 		}
@@ -1825,7 +1825,7 @@ struct $7ASTNODE* CINTDIVEXPRESSION( void )
 		label$207:;
 		int64 vr$3 = LEXGETLOOKAHEAD( 1ll, 0ll );
 		int64 vr$4 = HISASSIGNTOKEN( vr$3 );
-		if( vr$4 == 0ll ) goto label$210;
+		if( vr$4 == 0ll) goto label$210;
 		{
 			goto label$205;
 		}
@@ -1834,7 +1834,7 @@ struct $7ASTNODE* CINTDIVEXPRESSION( void )
 		LEXSKIPTOKEN( 0ll );
 		struct $7ASTNODE* vr$5 = CMULTEXPRESSION(  );
 		EXPR$1 = vr$5;
-		if( EXPR$1 != (struct $7ASTNODE*)0ull ) goto label$212;
+		if( EXPR$1 != (struct $7ASTNODE*)0ull) goto label$212;
 		{
 			ERRREPORT( 9ll, 0ll, (char*)0ull );
 			goto label$205;
@@ -1843,7 +1843,7 @@ struct $7ASTNODE* CINTDIVEXPRESSION( void )
 		label$211:;
 		struct $7ASTNODE* vr$6 = ASTNEWBOP( 32ll, IDIVEXPR$1, EXPR$1, (struct $8FBSYMBOL*)0ull, 1ll );
 		IDIVEXPR$1 = vr$6;
-		if( IDIVEXPR$1 != (struct $7ASTNODE*)0ull ) goto label$214;
+		if( IDIVEXPR$1 != (struct $7ASTNODE*)0ull) goto label$214;
 		{
 			ERRREPORT( 20ll, 0ll, (char*)0ull );
 			struct $7ASTNODE* vr$7 = ASTNEWCONSTI( 0ll, 8ll, (struct $8FBSYMBOL*)0ull );
@@ -1870,7 +1870,7 @@ struct $7ASTNODE* CMULTEXPRESSION( void )
 	struct $7ASTNODE* MULEXPR$1;
 	struct $7ASTNODE* vr$1 = CEXPEXPRESSION(  );
 	MULEXPR$1 = vr$1;
-	if( MULEXPR$1 != (struct $7ASTNODE*)0ull ) goto label$218;
+	if( MULEXPR$1 != (struct $7ASTNODE*)0ull) goto label$218;
 	{
 		fb$result$1 = (struct $7ASTNODE*)0ull;
 		goto label$216;
@@ -1880,17 +1880,17 @@ struct $7ASTNODE* CMULTEXPRESSION( void )
 	label$219:;
 	{
 		{
-			int64 TMP$107$3;
+			int64 TMP$106$3;
 			int64 vr$2 = LEXGETTOKEN( 0ll );
-			TMP$107$3 = vr$2;
-			if( TMP$107$3 != 42ll ) goto label$223;
+			TMP$106$3 = vr$2;
+			if( TMP$106$3 != 42ll) goto label$223;
 			label$224:;
 			{
 				OP$1 = 30ll;
 			}
 			goto label$222;
 			label$223:;
-			if( TMP$107$3 != 47ll ) goto label$225;
+			if( TMP$106$3 != 47ll) goto label$225;
 			label$226:;
 			{
 				OP$1 = 31ll;
@@ -1905,7 +1905,7 @@ struct $7ASTNODE* CMULTEXPRESSION( void )
 		}
 		int64 vr$3 = LEXGETLOOKAHEAD( 1ll, 0ll );
 		int64 vr$4 = HISASSIGNTOKEN( vr$3 );
-		if( vr$4 == 0ll ) goto label$229;
+		if( vr$4 == 0ll) goto label$229;
 		{
 			goto label$220;
 		}
@@ -1914,7 +1914,7 @@ struct $7ASTNODE* CMULTEXPRESSION( void )
 		LEXSKIPTOKEN( 0ll );
 		struct $7ASTNODE* vr$5 = CEXPEXPRESSION(  );
 		EXPR$1 = vr$5;
-		if( EXPR$1 != (struct $7ASTNODE*)0ull ) goto label$231;
+		if( EXPR$1 != (struct $7ASTNODE*)0ull) goto label$231;
 		{
 			ERRREPORT( 9ll, 0ll, (char*)0ull );
 			goto label$220;
@@ -1923,7 +1923,7 @@ struct $7ASTNODE* CMULTEXPRESSION( void )
 		label$230:;
 		struct $7ASTNODE* vr$6 = ASTNEWBOP( OP$1, MULEXPR$1, EXPR$1, (struct $8FBSYMBOL*)0ull, 1ll );
 		MULEXPR$1 = vr$6;
-		if( MULEXPR$1 != (struct $7ASTNODE*)0ull ) goto label$233;
+		if( MULEXPR$1 != (struct $7ASTNODE*)0ull) goto label$233;
 		{
 			ERRREPORT( 20ll, 0ll, (char*)0ull );
 			struct $7ASTNODE* vr$7 = ASTNEWCONSTI( 0ll, 8ll, (struct $8FBSYMBOL*)0ull );
@@ -1949,7 +1949,7 @@ struct $7ASTNODE* CEXPEXPRESSION( void )
 	struct $7ASTNODE* EXPEXPR$1;
 	struct $7ASTNODE* vr$1 = CNEGNOTEXPRESSION(  );
 	EXPEXPR$1 = vr$1;
-	if( EXPEXPR$1 != (struct $7ASTNODE*)0ull ) goto label$237;
+	if( EXPEXPR$1 != (struct $7ASTNODE*)0ull) goto label$237;
 	{
 		fb$result$1 = (struct $7ASTNODE*)0ull;
 		goto label$235;
@@ -1959,7 +1959,7 @@ struct $7ASTNODE* CEXPEXPRESSION( void )
 	label$238:;
 	{
 		int64 vr$2 = LEXGETTOKEN( 0ll );
-		if( vr$2 == 94ll ) goto label$242;
+		if( vr$2 == 94ll) goto label$242;
 		{
 			goto label$239;
 		}
@@ -1967,7 +1967,7 @@ struct $7ASTNODE* CEXPEXPRESSION( void )
 		label$241:;
 		int64 vr$3 = LEXGETLOOKAHEAD( 1ll, 0ll );
 		int64 vr$4 = HISASSIGNTOKEN( vr$3 );
-		if( vr$4 == 0ll ) goto label$244;
+		if( vr$4 == 0ll) goto label$244;
 		{
 			goto label$239;
 		}
@@ -1976,7 +1976,7 @@ struct $7ASTNODE* CEXPEXPRESSION( void )
 		LEXSKIPTOKEN( 0ll );
 		struct $7ASTNODE* vr$5 = CNEGNOTEXPRESSION(  );
 		EXPR$1 = vr$5;
-		if( EXPR$1 != (struct $7ASTNODE*)0ull ) goto label$246;
+		if( EXPR$1 != (struct $7ASTNODE*)0ull) goto label$246;
 		{
 			ERRREPORT( 9ll, 0ll, (char*)0ull );
 			goto label$239;
@@ -1985,7 +1985,7 @@ struct $7ASTNODE* CEXPEXPRESSION( void )
 		label$245:;
 		struct $7ASTNODE* vr$6 = ASTNEWBOP( 43ll, EXPEXPR$1, EXPR$1, (struct $8FBSYMBOL*)0ull, 1ll );
 		EXPEXPR$1 = vr$6;
-		if( EXPEXPR$1 != (struct $7ASTNODE*)0ull ) goto label$248;
+		if( EXPEXPR$1 != (struct $7ASTNODE*)0ull) goto label$248;
 		{
 			ERRREPORT( 20ll, 0ll, (char*)0ull );
 			struct $7ASTNODE* vr$7 = ASTNEWCONSTF( 0x0p+0, 16ll );

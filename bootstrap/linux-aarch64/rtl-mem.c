@@ -391,9 +391,9 @@ struct $8FBS_ENUM {
 };
 __FB_STATIC_ASSERT( sizeof( struct $8FBS_ENUM ) == 96 );
 typedef int64 $21FB_PROC_RETURN_METHOD;
-typedef int64 (*tmp$35)( struct $8FBSYMBOL* );
+typedef int64 (*tmp$34)( struct $8FBSYMBOL* );
 struct $10FB_PROCRTL {
-	tmp$35 CALLBACK;
+	tmp$34 CALLBACK;
 };
 __FB_STATIC_ASSERT( sizeof( struct $10FB_PROCRTL ) == 8 );
 struct $10FB_PROCOVL {
@@ -523,9 +523,9 @@ struct $9FB_DEFTOK {
 };
 __FB_STATIC_ASSERT( sizeof( struct $9FB_DEFTOK ) == 32 );
 typedef int64 $15FB_DEFINE_FLAGS;
-typedef FBSTRING* (*tmp$29)( void );
-typedef FBSTRING* (*tmp$30)( void*, int64* );
-typedef uint32* (*tmp$31)( void*, int64* );
+typedef FBSTRING* (*tmp$28)( void );
+typedef FBSTRING* (*tmp$29)( void*, int64* );
+typedef uint32* (*tmp$30)( void*, int64* );
 struct $10FBS_DEFINE {
 	int64 PARAMS;
 	struct $11FB_DEFPARAM* PARAMHEAD;
@@ -537,11 +537,11 @@ struct $10FBS_DEFINE {
 	int64 ISARGLESS;
 	$15FB_DEFINE_FLAGS FLAGS;
 	union {
-		tmp$29 DPROCZ;
-		tmp$30 MPROCZ;
+		tmp$28 DPROCZ;
+		tmp$29 MPROCZ;
 	};
 	union {
-		tmp$31 MPROCW;
+		tmp$30 MPROCW;
 	};
 };
 __FB_STATIC_ASSERT( sizeof( struct $10FBS_DEFINE ) == 56 );
@@ -649,7 +649,7 @@ struct $14FB_RTL_PROCDEF {
 	char* ALIAS;
 	$11FB_DATATYPE DTYPE;
 	$11FB_FUNCMODE CALLCONV;
-	tmp$35 CALLBACK;
+	tmp$34 CALLBACK;
 	$10FB_RTL_OPT OPTIONS;
 	int64 PARAMS;
 	struct $15FB_RTL_PARAMDEF PARAMTB[16];
@@ -703,7 +703,7 @@ struct $8FBARRAY1I10AST_OPINFOE {
 	struct $16__FB_ARRAYDIMTB$ DIMTB[1];
 };
 __FB_STATIC_ASSERT( sizeof( struct $8FBARRAY1I10AST_OPINFOE ) == 72 );
-static struct $8FBARRAY1I10AST_OPINFOE tmp$83$;
+static struct $8FBARRAY1I10AST_OPINFOE tmp$82$;
 typedef int64 $12FB_DATACLASS;
 struct $13SYMB_DATATYPE {
 	$12FB_DATACLASS CLASS;
@@ -725,7 +725,7 @@ struct $8FBARRAY1I13SYMB_DATATYPEE {
 	struct $16__FB_ARRAYDIMTB$ DIMTB[1];
 };
 __FB_STATIC_ASSERT( sizeof( struct $8FBARRAY1I13SYMB_DATATYPEE ) == 72 );
-static struct $8FBARRAY1I13SYMB_DATATYPEE tmp$84$;
+static struct $8FBARRAY1I13SYMB_DATATYPEE tmp$83$;
 struct $8FBARRAY2IlE {
 	int64* DATA;
 	int64* PTR;
@@ -736,8 +736,8 @@ struct $8FBARRAY2IlE {
 	struct $16__FB_ARRAYDIMTB$ DIMTB[2];
 };
 __FB_STATIC_ASSERT( sizeof( struct $8FBARRAY2IlE ) == 96 );
-static struct $8FBARRAY2IlE tmp$85$;
-static struct $14FB_RTL_PROCDEF FUNCDATA$[12] = { { (char*)"fb_NullPtrChk", (char*)0ull, 32ll, -1ll, (tmp$35)0ull, 2048ll, 3ll, { { 1056ll, 1ll, 0ll }, { 523ll, 1ll, 0ll }, { 1060ll, 1ll, 0ll } } }, { (char*)"fb_MemSwap", (char*)0ull, 0ll, -1ll, (tmp$35)0ull, 0ll, 3ll, { { 0ll, 2ll, 0ll, 0ll }, { 0ll, 2ll, 0ll, 0ll }, { 520ll, 1ll, 0ll } } }, { (char*)"fb_MemCopyClear", (char*)0ull, 0ll, -1ll, (tmp$35)0ull, 0ll, 4ll, { { 0ll, 2ll, 0ll, 0ll }, { 521ll, 1ll, 0ll }, { 512ll, 2ll, 0ll, 0ll }, { 521ll, 1ll, 0ll } } }, { (char*)"fre", (char*)"fb_GetMemAvail", 9ll, -1ll, (tmp$35)0ull, 0ll, 1ll, { { 523ll, 1ll, -1ll, 0ll } } }, { (char*)"allocate", (char*)"malloc", 32ll, 3ll, (tmp$35)0ull, 128ll, 1ll, { { 521ll, 1ll, 0ll } } }, { (char*)"callocate", (char*)"calloc", 32ll, 3ll, (tmp$35)0ull, 128ll, 2ll, { { 521ll, 1ll, 0ll }, { 521ll, 1ll, -1ll, 1ll } } }, { (char*)"reallocate", (char*)"realloc", 32ll, 3ll, (tmp$35)0ull, 128ll, 2ll, { { 1056ll, 1ll, 0ll, 0ll }, { 521ll, 1ll, 0ll } } }, { (char*)"deallocate", (char*)"free", 0ll, 3ll, (tmp$35)0ull, 128ll, 1ll, { { 1056ll, 1ll, 0ll, 0ll } } }, { (char*)"clear", (char*)"memset", 32ll, 3ll, (tmp$35)0ull, 0ll, 3ll, { { 0ll, 2ll, 0ll, 0ll }, { 523ll, 1ll, -1ll, 0ll }, { 521ll, 1ll, 0ll } } }, { (char*)"fb_MemMove", (char*)"memmove", 32ll, 3ll, (tmp$35)0ull, 0ll, 3ll, { { 0ll, 2ll, 0ll, 0ll }, { 512ll, 2ll, 0ll }, { 521ll, 1ll, 0ll } } }, { (char*)"fb_MemCopy", (char*)"memcpy", 32ll, 3ll, (tmp$35)0ull, 0ll, 3ll, { { 0ll, 2ll, 0ll, 0ll }, { 512ll, 2ll, 0ll }, { 521ll, 1ll, 0ll } } }, { (char*)0ull } };
+static struct $8FBARRAY2IlE tmp$84$;
+static struct $14FB_RTL_PROCDEF FUNCDATA$[12] = { { (char*)"fb_NullPtrChk", (char*)0ull, 32ll, -1ll, (tmp$34)0ull, 2048ll, 3ll, { { 1056ll, 1ll, 0ll }, { 523ll, 1ll, 0ll }, { 1060ll, 1ll, 0ll } } }, { (char*)"fb_MemSwap", (char*)0ull, 0ll, -1ll, (tmp$34)0ull, 0ll, 3ll, { { 0ll, 2ll, 0ll, 0ll }, { 0ll, 2ll, 0ll, 0ll }, { 520ll, 1ll, 0ll } } }, { (char*)"fb_MemCopyClear", (char*)0ull, 0ll, -1ll, (tmp$34)0ull, 0ll, 4ll, { { 0ll, 2ll, 0ll, 0ll }, { 521ll, 1ll, 0ll }, { 512ll, 2ll, 0ll, 0ll }, { 521ll, 1ll, 0ll } } }, { (char*)"fre", (char*)"fb_GetMemAvail", 9ll, -1ll, (tmp$34)0ull, 0ll, 1ll, { { 523ll, 1ll, -1ll, 0ll } } }, { (char*)"allocate", (char*)"malloc", 32ll, 3ll, (tmp$34)0ull, 128ll, 1ll, { { 521ll, 1ll, 0ll } } }, { (char*)"callocate", (char*)"calloc", 32ll, 3ll, (tmp$34)0ull, 128ll, 2ll, { { 521ll, 1ll, 0ll }, { 521ll, 1ll, -1ll, 1ll } } }, { (char*)"reallocate", (char*)"realloc", 32ll, 3ll, (tmp$34)0ull, 128ll, 2ll, { { 1056ll, 1ll, 0ll, 0ll }, { 521ll, 1ll, 0ll } } }, { (char*)"deallocate", (char*)"free", 0ll, 3ll, (tmp$34)0ull, 128ll, 1ll, { { 1056ll, 1ll, 0ll, 0ll } } }, { (char*)"clear", (char*)"memset", 32ll, 3ll, (tmp$34)0ull, 0ll, 3ll, { { 0ll, 2ll, 0ll, 0ll }, { 523ll, 1ll, -1ll, 0ll }, { 521ll, 1ll, 0ll } } }, { (char*)"fb_MemMove", (char*)"memmove", 32ll, 3ll, (tmp$34)0ull, 0ll, 3ll, { { 0ll, 2ll, 0ll, 0ll }, { 512ll, 2ll, 0ll }, { 521ll, 1ll, 0ll } } }, { (char*)"fb_MemCopy", (char*)"memcpy", 32ll, 3ll, (tmp$34)0ull, 0ll, 3ll, { { 0ll, 2ll, 0ll, 0ll }, { 512ll, 2ll, 0ll }, { 521ll, 1ll, 0ll } } }, { (char*)0ull } };
 
 void RTLMEMMODINIT( void )
 {
@@ -764,7 +764,7 @@ struct $7ASTNODE* RTLNULLPTRCHECK( struct $7ASTNODE* P$1, int64 LINENUM$1, char*
 	PROC$1 = vr$2;
 	struct $7ASTNODE* vr$3 = ASTNEWCONV( 32ll, (struct $8FBSYMBOL*)0ull, P$1, 16ll, (int64*)0ull );
 	struct $7ASTNODE* vr$4 = ASTNEWARG( PROC$1, vr$3, 32ll, -1ll );
-	if( vr$4 != (struct $7ASTNODE*)0ull ) goto label$17;
+	if( vr$4 != (struct $7ASTNODE*)0ull) goto label$17;
 	{
 		goto label$15;
 	}
@@ -772,7 +772,7 @@ struct $7ASTNODE* RTLNULLPTRCHECK( struct $7ASTNODE* P$1, int64 LINENUM$1, char*
 	label$16:;
 	struct $7ASTNODE* vr$5 = ASTNEWCONSTI( LINENUM$1, 8ll, (struct $8FBSYMBOL*)0ull );
 	struct $7ASTNODE* vr$6 = ASTNEWARG( PROC$1, vr$5, 2147483648ll, -1ll );
-	if( vr$6 != (struct $7ASTNODE*)0ull ) goto label$19;
+	if( vr$6 != (struct $7ASTNODE*)0ull) goto label$19;
 	{
 		goto label$15;
 	}
@@ -780,7 +780,7 @@ struct $7ASTNODE* RTLNULLPTRCHECK( struct $7ASTNODE* P$1, int64 LINENUM$1, char*
 	label$18:;
 	struct $7ASTNODE* vr$7 = ASTNEWCONSTSTR( MODULE$1 );
 	struct $7ASTNODE* vr$8 = ASTNEWARG( PROC$1, vr$7, 2147483648ll, -1ll );
-	if( vr$8 != (struct $7ASTNODE*)0ull ) goto label$21;
+	if( vr$8 != (struct $7ASTNODE*)0ull) goto label$21;
 	{
 		goto label$15;
 	}
@@ -805,14 +805,14 @@ int64 RTLMEMSWAP( struct $7ASTNODE* DST$1, struct $7ASTNODE* SRC$1 )
 	int64 vr$3 = RTLCALCEXPRLEN( DST$1 );
 	BYTES$1 = vr$3;
 	struct $7ASTNODE* vr$4 = ASTNEWARG( PROC$1, DST$1, 2147483648ll, -1ll );
-	if( vr$4 != (struct $7ASTNODE*)0ull ) goto label$25;
+	if( vr$4 != (struct $7ASTNODE*)0ull) goto label$25;
 	{
 		goto label$23;
 	}
 	label$25:;
 	label$24:;
 	struct $7ASTNODE* vr$5 = ASTNEWARG( PROC$1, SRC$1, 2147483648ll, -1ll );
-	if( vr$5 != (struct $7ASTNODE*)0ull ) goto label$27;
+	if( vr$5 != (struct $7ASTNODE*)0ull) goto label$27;
 	{
 		goto label$23;
 	}
@@ -820,7 +820,7 @@ int64 RTLMEMSWAP( struct $7ASTNODE* DST$1, struct $7ASTNODE* SRC$1 )
 	label$26:;
 	struct $7ASTNODE* vr$6 = ASTNEWCONSTI( BYTES$1, 8ll, (struct $8FBSYMBOL*)0ull );
 	struct $7ASTNODE* vr$7 = ASTNEWARG( PROC$1, vr$6, 2147483648ll, -1ll );
-	if( vr$7 != (struct $7ASTNODE*)0ull ) goto label$29;
+	if( vr$7 != (struct $7ASTNODE*)0ull) goto label$29;
 	{
 		goto label$23;
 	}
@@ -843,7 +843,7 @@ int64 RTLMEMCOPYCLEAR( struct $7ASTNODE* DSTEXPR$1, int64 DSTLEN$1, struct $7AST
 	struct $7ASTNODE* vr$2 = ASTNEWCALL( vr$1, (struct $7ASTNODE*)0ull, -1ll );
 	PROC$1 = vr$2;
 	struct $7ASTNODE* vr$3 = ASTNEWARG( PROC$1, DSTEXPR$1, 2147483648ll, -1ll );
-	if( vr$3 != (struct $7ASTNODE*)0ull ) goto label$33;
+	if( vr$3 != (struct $7ASTNODE*)0ull) goto label$33;
 	{
 		goto label$31;
 	}
@@ -851,14 +851,14 @@ int64 RTLMEMCOPYCLEAR( struct $7ASTNODE* DSTEXPR$1, int64 DSTLEN$1, struct $7AST
 	label$32:;
 	struct $7ASTNODE* vr$4 = ASTNEWCONSTI( DSTLEN$1, 8ll, (struct $8FBSYMBOL*)0ull );
 	struct $7ASTNODE* vr$5 = ASTNEWARG( PROC$1, vr$4, 2147483648ll, -1ll );
-	if( vr$5 != (struct $7ASTNODE*)0ull ) goto label$35;
+	if( vr$5 != (struct $7ASTNODE*)0ull) goto label$35;
 	{
 		goto label$31;
 	}
 	label$35:;
 	label$34:;
 	struct $7ASTNODE* vr$6 = ASTNEWARG( PROC$1, SRCEXPR$1, 2147483648ll, -1ll );
-	if( vr$6 != (struct $7ASTNODE*)0ull ) goto label$37;
+	if( vr$6 != (struct $7ASTNODE*)0ull) goto label$37;
 	{
 		goto label$31;
 	}
@@ -866,7 +866,7 @@ int64 RTLMEMCOPYCLEAR( struct $7ASTNODE* DSTEXPR$1, int64 DSTLEN$1, struct $7AST
 	label$36:;
 	struct $7ASTNODE* vr$7 = ASTNEWCONSTI( SRCLEN$1, 8ll, (struct $8FBSYMBOL*)0ull );
 	struct $7ASTNODE* vr$8 = ASTNEWARG( PROC$1, vr$7, 2147483648ll, -1ll );
-	if( vr$8 != (struct $7ASTNODE*)0ull ) goto label$39;
+	if( vr$8 != (struct $7ASTNODE*)0ull) goto label$39;
 	{
 		goto label$31;
 	}
@@ -880,7 +880,7 @@ int64 RTLMEMCOPYCLEAR( struct $7ASTNODE* DSTEXPR$1, int64 DSTLEN$1, struct $7AST
 
 struct $7ASTNODE* RTLMEMNEWOP( int64 OP$1, struct $7ASTNODE* LEN_EXPR$1, int64 DTYPE$1, struct $8FBSYMBOL* SUBTYPE$1, int64 DO_CLEAR$1 )
 {
-	int64 TMP$107$1;
+	int64 TMP$106$1;
 	struct $7ASTNODE* fb$result$1;
 	__builtin_memset( &fb$result$1, 0, 8ll );
 	label$40:;
@@ -888,20 +888,20 @@ struct $7ASTNODE* RTLMEMNEWOP( int64 OP$1, struct $7ASTNODE* LEN_EXPR$1, int64 D
 	struct $8FBSYMBOL* SYM$1;
 	boolean DO_CALLOC$1;
 	DO_CALLOC$1 = (boolean)0ll;
-	if( (DTYPE$1 & 480ll) == 0ll ) goto label$42;
-	TMP$107$1 = 24ll;
+	if( (DTYPE$1 & 480ll) == 0ll) goto label$42;
+	TMP$106$1 = 24ll;
 	goto label$59;
 	label$42:;
-	TMP$107$1 = DTYPE$1 & 31ll;
+	TMP$106$1 = DTYPE$1 & 31ll;
 	label$59:;
-	if( TMP$107$1 != 20ll ) goto label$44;
+	if( TMP$106$1 != 20ll) goto label$44;
 	{
 		struct $8FBSYMBOL* vr$4 = SYMBGETCOMPOPOVLHEAD( SUBTYPE$1, *($6AST_OP*)(((int64)(struct $10AST_OPINFO*)AST_OPTB$ + (OP$1 << (5ll & 63ll))) + 24ll) );
 		SYM$1 = vr$4;
-		if( SYM$1 == (struct $8FBSYMBOL*)0ull ) goto label$46;
+		if( SYM$1 == (struct $8FBSYMBOL*)0ull) goto label$46;
 		{
 			int64 vr$5 = SYMBCHECKACCESS( SYM$1 );
-			if( vr$5 != 0ll ) goto label$48;
+			if( vr$5 != 0ll) goto label$48;
 			{
 				ERRREPORT( 202ll, 0ll, (char*)0ull );
 			}
@@ -917,9 +917,9 @@ struct $7ASTNODE* RTLMEMNEWOP( int64 OP$1, struct $7ASTNODE* LEN_EXPR$1, int64 D
 		SYM$1 = (struct $8FBSYMBOL*)0ull;
 	}
 	label$43:;
-	if( SYM$1 != (struct $8FBSYMBOL*)0ull ) goto label$50;
+	if( SYM$1 != (struct $8FBSYMBOL*)0ull) goto label$50;
 	{
-		if( DO_CLEAR$1 == 0ll ) goto label$52;
+		if( DO_CLEAR$1 == 0ll) goto label$52;
 		{
 			DO_CALLOC$1 = (boolean)1ll;
 			struct $8FBSYMBOL* vr$6 = RTLPROCLOOKUP( (char*)"callocate", 229ll );
@@ -932,7 +932,7 @@ struct $7ASTNODE* RTLMEMNEWOP( int64 OP$1, struct $7ASTNODE* LEN_EXPR$1, int64 D
 			SYM$1 = vr$7;
 		}
 		label$51:;
-		if( SYM$1 != (struct $8FBSYMBOL*)0ull ) goto label$54;
+		if( SYM$1 != (struct $8FBSYMBOL*)0ull) goto label$54;
 		{
 			fb$result$1 = (struct $7ASTNODE*)0ull;
 			goto label$41;
@@ -945,13 +945,13 @@ struct $7ASTNODE* RTLMEMNEWOP( int64 OP$1, struct $7ASTNODE* LEN_EXPR$1, int64 D
 	struct $7ASTNODE* vr$8 = ASTNEWCALL( SYM$1, (struct $7ASTNODE*)0ull, -1ll );
 	PROC$1 = vr$8;
 	struct $7ASTNODE* vr$9 = ASTNEWARG( PROC$1, LEN_EXPR$1, 2147483648ll, -1ll );
-	if( vr$9 != (struct $7ASTNODE*)0ull ) goto label$56;
+	if( vr$9 != (struct $7ASTNODE*)0ull) goto label$56;
 	{
 		goto label$41;
 	}
 	label$56:;
 	label$55:;
-	if( DO_CALLOC$1 == (boolean)0ll ) goto label$58;
+	if( DO_CALLOC$1 == (boolean)0ll) goto label$58;
 	{
 		struct $7ASTNODE* vr$10 = ASTNEWCONSTI( 1ll, 9ll, (struct $8FBSYMBOL*)0ull );
 		ASTNEWARG( PROC$1, vr$10, 2147483648ll, -1ll );
@@ -965,26 +965,26 @@ struct $7ASTNODE* RTLMEMNEWOP( int64 OP$1, struct $7ASTNODE* LEN_EXPR$1, int64 D
 
 struct $7ASTNODE* RTLMEMDELETEOP( int64 OP$1, struct $7ASTNODE* PTR_EXPR$1, int64 DTYPE$1, struct $8FBSYMBOL* SUBTYPE$1 )
 {
-	int64 TMP$108$1;
+	int64 TMP$107$1;
 	struct $7ASTNODE* fb$result$1;
 	__builtin_memset( &fb$result$1, 0, 8ll );
 	label$60:;
 	struct $7ASTNODE* PROC$1;
 	struct $8FBSYMBOL* SYM$1;
-	if( (DTYPE$1 & 480ll) == 0ll ) goto label$62;
-	TMP$108$1 = 24ll;
+	if( (DTYPE$1 & 480ll) == 0ll) goto label$62;
+	TMP$107$1 = 24ll;
 	goto label$75;
 	label$62:;
-	TMP$108$1 = DTYPE$1 & 31ll;
+	TMP$107$1 = DTYPE$1 & 31ll;
 	label$75:;
-	if( TMP$108$1 != 20ll ) goto label$64;
+	if( TMP$107$1 != 20ll) goto label$64;
 	{
 		struct $8FBSYMBOL* vr$4 = SYMBGETCOMPOPOVLHEAD( SUBTYPE$1, *($6AST_OP*)(((int64)(struct $10AST_OPINFO*)AST_OPTB$ + (OP$1 << (5ll & 63ll))) + 24ll) );
 		SYM$1 = vr$4;
-		if( SYM$1 == (struct $8FBSYMBOL*)0ull ) goto label$66;
+		if( SYM$1 == (struct $8FBSYMBOL*)0ull) goto label$66;
 		{
 			int64 vr$5 = SYMBCHECKACCESS( SYM$1 );
-			if( vr$5 != 0ll ) goto label$68;
+			if( vr$5 != 0ll) goto label$68;
 			{
 				ERRREPORT( 202ll, 0ll, (char*)0ull );
 			}
@@ -1000,11 +1000,11 @@ struct $7ASTNODE* RTLMEMDELETEOP( int64 OP$1, struct $7ASTNODE* PTR_EXPR$1, int6
 		SYM$1 = (struct $8FBSYMBOL*)0ull;
 	}
 	label$63:;
-	if( SYM$1 != (struct $8FBSYMBOL*)0ull ) goto label$70;
+	if( SYM$1 != (struct $8FBSYMBOL*)0ull) goto label$70;
 	{
 		struct $8FBSYMBOL* vr$6 = RTLPROCLOOKUP( (char*)"deallocate", 230ll );
 		SYM$1 = vr$6;
-		if( SYM$1 != (struct $8FBSYMBOL*)0ull ) goto label$72;
+		if( SYM$1 != (struct $8FBSYMBOL*)0ull) goto label$72;
 		{
 			fb$result$1 = (struct $7ASTNODE*)0ull;
 			goto label$61;
@@ -1017,7 +1017,7 @@ struct $7ASTNODE* RTLMEMDELETEOP( int64 OP$1, struct $7ASTNODE* PTR_EXPR$1, int6
 	struct $7ASTNODE* vr$7 = ASTNEWCALL( SYM$1, (struct $7ASTNODE*)0ull, -1ll );
 	PROC$1 = vr$7;
 	struct $7ASTNODE* vr$8 = ASTNEWARG( PROC$1, PTR_EXPR$1, 2147483648ll, -1ll );
-	if( vr$8 != (struct $7ASTNODE*)0ull ) goto label$74;
+	if( vr$8 != (struct $7ASTNODE*)0ull) goto label$74;
 	{
 		goto label$61;
 	}

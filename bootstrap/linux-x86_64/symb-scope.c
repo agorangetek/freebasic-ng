@@ -391,9 +391,9 @@ struct $8FBS_ENUM {
 __FB_STATIC_ASSERT( sizeof( struct $8FBS_ENUM ) == 96 );
 typedef int64 $11FB_FUNCMODE;
 typedef int64 $21FB_PROC_RETURN_METHOD;
-typedef int64 (*tmp$35)( struct $8FBSYMBOL* );
+typedef int64 (*tmp$34)( struct $8FBSYMBOL* );
 struct $10FB_PROCRTL {
-	tmp$35 CALLBACK;
+	tmp$34 CALLBACK;
 };
 __FB_STATIC_ASSERT( sizeof( struct $10FB_PROCRTL ) == 8 );
 struct $10FB_PROCOVL {
@@ -523,7 +523,7 @@ struct $9FB_DEFTOK {
 };
 __FB_STATIC_ASSERT( sizeof( struct $9FB_DEFTOK ) == 32 );
 typedef int64 $15FB_DEFINE_FLAGS;
-typedef FBSTRING* (*tmp$29)( void );
+typedef FBSTRING* (*tmp$28)( void );
 struct $8DZSTRING {
 	char* DATA;
 	int64 LEN;
@@ -548,8 +548,8 @@ struct $11LEXPP_ARGTB {
 	int64 COUNT;
 };
 __FB_STATIC_ASSERT( sizeof( struct $11LEXPP_ARGTB ) == 776 );
-typedef FBSTRING* (*tmp$30)( struct $11LEXPP_ARGTB*, int64* );
-typedef uint32* (*tmp$31)( struct $11LEXPP_ARGTB*, int64* );
+typedef FBSTRING* (*tmp$29)( struct $11LEXPP_ARGTB*, int64* );
+typedef uint32* (*tmp$30)( struct $11LEXPP_ARGTB*, int64* );
 struct $10FBS_DEFINE {
 	int64 PARAMS;
 	struct $11FB_DEFPARAM* PARAMHEAD;
@@ -561,11 +561,11 @@ struct $10FBS_DEFINE {
 	int64 ISARGLESS;
 	$15FB_DEFINE_FLAGS FLAGS;
 	union {
-		tmp$29 DPROCZ;
-		tmp$30 MPROCZ;
+		tmp$28 DPROCZ;
+		tmp$29 MPROCZ;
 	};
 	union {
-		tmp$31 MPROCW;
+		tmp$30 MPROCW;
 	};
 };
 __FB_STATIC_ASSERT( sizeof( struct $10FBS_DEFINE ) == 56 );
@@ -700,7 +700,7 @@ struct $8FBARRAY1I10AST_OPINFOE {
 	struct $16__FB_ARRAYDIMTB$ DIMTB[1];
 };
 __FB_STATIC_ASSERT( sizeof( struct $8FBARRAY1I10AST_OPINFOE ) == 72 );
-static struct $8FBARRAY1I10AST_OPINFOE tmp$83$;
+static struct $8FBARRAY1I10AST_OPINFOE tmp$82$;
 struct $12FBHASHTBLIST {
 	struct $8FBHASHTB* HEAD;
 	struct $8FBHASHTB* TAIL;
@@ -827,7 +827,7 @@ struct $8FBARRAY1I13SYMB_DATATYPEE {
 	struct $16__FB_ARRAYDIMTB$ DIMTB[1];
 };
 __FB_STATIC_ASSERT( sizeof( struct $8FBARRAY1I13SYMB_DATATYPEE ) == 72 );
-static struct $8FBARRAY1I13SYMB_DATATYPEE tmp$84$;
+static struct $8FBARRAY1I13SYMB_DATATYPEE tmp$83$;
 struct $8FBARRAY2IlE {
 	int64* DATA;
 	int64* PTR;
@@ -838,7 +838,7 @@ struct $8FBARRAY2IlE {
 	struct $16__FB_ARRAYDIMTB$ DIMTB[2];
 };
 __FB_STATIC_ASSERT( sizeof( struct $8FBARRAY2IlE ) == 96 );
-static struct $8FBARRAY2IlE tmp$85$;
+static struct $8FBARRAY2IlE tmp$84$;
 
 struct $8FBSYMBOL* SYMBADDSCOPE( struct $7ASTNODE* BACKNODE$1 )
 {
@@ -861,7 +861,7 @@ struct $8FBSYMBOL* SYMBADDSCOPE( struct $7ASTNODE* BACKNODE$1 )
 void SYMBDELSCOPE( struct $8FBSYMBOL* SCP$1 )
 {
 	label$12:;
-	if( SCP$1 != (struct $8FBSYMBOL*)0ull ) goto label$15;
+	if( SCP$1 != (struct $8FBSYMBOL*)0ull) goto label$15;
 	{
 		goto label$13;
 	}
@@ -871,7 +871,7 @@ void SYMBDELSCOPE( struct $8FBSYMBOL* SCP$1 )
 	{
 		struct $8FBSYMBOL* S$2;
 		S$2 = *(struct $8FBSYMBOL**)((uint8*)SCP$1 + 120ll);
-		if( S$2 != (struct $8FBSYMBOL*)0ull ) goto label$20;
+		if( S$2 != (struct $8FBSYMBOL*)0ull) goto label$20;
 		{
 			goto label$17;
 		}
@@ -892,9 +892,9 @@ void SYMBDELSCOPETB( struct $8FBSYMBOL* SCP$1 )
 	struct $8FBSYMBOL* S$1;
 	S$1 = *(struct $8FBSYMBOL**)((uint8*)SCP$1 + 120ll);
 	label$23:;
-	if( S$1 == (struct $8FBSYMBOL*)0ull ) goto label$24;
+	if( S$1 == (struct $8FBSYMBOL*)0ull) goto label$24;
 	{
-		if( *(int64*)S$1 == 17ll ) goto label$26;
+		if( *(int64*)S$1 == 17ll) goto label$26;
 		{
 			SYMBDELFROMHASH( S$1 );
 		}

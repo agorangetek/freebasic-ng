@@ -84,10 +84,10 @@ void* FLISTNEWITEM( struct $6TFLIST* FLIST$1 )
 	__builtin_memset( &fb$result$1, 0, 8ll );
 	label$6:;
 	static struct $10TFLISTITEM* ITEM$1;
-	if( *(int64*)((uint8*)FLIST$1 + 8ll) > 0ll ) goto label$9;
+	if( *(int64*)((uint8*)FLIST$1 + 8ll) > 0ll) goto label$9;
 	{
 		*(struct $7TLISTTB**)((uint8*)FLIST$1 + 104ll) = *(struct $7TLISTTB**)*(struct $7TLISTTB**)((uint8*)FLIST$1 + 104ll);
-		if( *(struct $7TLISTTB**)((uint8*)FLIST$1 + 104ll) != (struct $7TLISTTB*)0ull ) goto label$11;
+		if( *(struct $7TLISTTB**)((uint8*)FLIST$1 + 104ll) != (struct $7TLISTTB*)0ull) goto label$11;
 		{
 			*(int64*)((uint8*)FLIST$1 + 8ll) = (int64)(*(uint64*)FLIST$1 >> (1ull & 63ll));
 			*(int64*)FLIST$1 = *(int64*)FLIST$1 + *(int64*)((uint8*)FLIST$1 + 8ll);
@@ -108,7 +108,7 @@ void* FLISTNEWITEM( struct $6TFLIST* FLIST$1 )
 	ITEM$1 = (struct $10TFLISTITEM*)((uint8*)*(int8**)((uint8*)FLIST$1 + 16ll) + (*(int64*)((uint8*)FLIST$1 + 24ll) * *(int64*)((uint8*)FLIST$1 + 64ll)));
 	*(int64*)((uint8*)FLIST$1 + 24ll) = *(int64*)((uint8*)FLIST$1 + 24ll) + 1ll;
 	*(int64*)((uint8*)FLIST$1 + 8ll) = *(int64*)((uint8*)FLIST$1 + 8ll) + -1ll;
-	if( *(struct $10TFLISTITEM**)((uint8*)FLIST$1 + 32ll) == (struct $10TFLISTITEM*)0ull ) goto label$13;
+	if( *(struct $10TFLISTITEM**)((uint8*)FLIST$1 + 32ll) == (struct $10TFLISTITEM*)0ull) goto label$13;
 	{
 		*(struct $10TFLISTITEM**)*(struct $10TFLISTITEM**)((uint8*)FLIST$1 + 32ll) = ITEM$1;
 	}
@@ -139,7 +139,7 @@ void* FLISTGETHEAD( struct $6TFLIST* FLIST$1 )
 	label$16:;
 	static struct $10TFLISTITEM* ITEM$1;
 	ITEM$1 = *(struct $10TFLISTITEM**)((uint8*)*(struct $7TLISTTB**)((uint8*)FLIST$1 + 40ll) + 8ll);
-	if( ITEM$1 != (struct $10TFLISTITEM*)0ull ) goto label$19;
+	if( ITEM$1 != (struct $10TFLISTITEM*)0ull) goto label$19;
 	{
 		fb$result$1 = (void*)0ull;
 	}
@@ -160,7 +160,7 @@ void* FLISTGETNEXT( void* NODE$1 )
 	label$20:;
 	static struct $10TFLISTITEM* NXT$1;
 	NXT$1 = *(struct $10TFLISTITEM**)((uint8*)NODE$1 + -8ll);
-	if( NXT$1 != (struct $10TFLISTITEM*)0ull ) goto label$23;
+	if( NXT$1 != (struct $10TFLISTITEM*)0ull) goto label$23;
 	{
 		fb$result$1 = (void*)0ull;
 	}

@@ -382,9 +382,9 @@ struct $8FBS_ENUM {
 __FB_STATIC_ASSERT( sizeof( struct $8FBS_ENUM ) == 96 );
 typedef int64 $11FB_FUNCMODE;
 typedef int64 $21FB_PROC_RETURN_METHOD;
-typedef int64 (*tmp$35)( struct $8FBSYMBOL* );
+typedef int64 (*tmp$34)( struct $8FBSYMBOL* );
 struct $10FB_PROCRTL {
-	tmp$35 CALLBACK;
+	tmp$34 CALLBACK;
 };
 __FB_STATIC_ASSERT( sizeof( struct $10FB_PROCRTL ) == 8 );
 struct $10FB_PROCOVL {
@@ -514,7 +514,7 @@ struct $9FB_DEFTOK {
 };
 __FB_STATIC_ASSERT( sizeof( struct $9FB_DEFTOK ) == 32 );
 typedef int64 $15FB_DEFINE_FLAGS;
-typedef FBSTRING* (*tmp$29)( void );
+typedef FBSTRING* (*tmp$28)( void );
 struct $8DZSTRING {
 	char* DATA;
 	int64 LEN;
@@ -539,8 +539,8 @@ struct $11LEXPP_ARGTB {
 	int64 COUNT;
 };
 __FB_STATIC_ASSERT( sizeof( struct $11LEXPP_ARGTB ) == 776 );
-typedef FBSTRING* (*tmp$30)( struct $11LEXPP_ARGTB*, int64* );
-typedef uint32* (*tmp$31)( struct $11LEXPP_ARGTB*, int64* );
+typedef FBSTRING* (*tmp$29)( struct $11LEXPP_ARGTB*, int64* );
+typedef uint32* (*tmp$30)( struct $11LEXPP_ARGTB*, int64* );
 struct $10FBS_DEFINE {
 	int64 PARAMS;
 	struct $11FB_DEFPARAM* PARAMHEAD;
@@ -552,11 +552,11 @@ struct $10FBS_DEFINE {
 	int64 ISARGLESS;
 	$15FB_DEFINE_FLAGS FLAGS;
 	union {
-		tmp$29 DPROCZ;
-		tmp$30 MPROCZ;
+		tmp$28 DPROCZ;
+		tmp$29 MPROCZ;
 	};
 	union {
-		tmp$31 MPROCW;
+		tmp$30 MPROCW;
 	};
 };
 __FB_STATIC_ASSERT( sizeof( struct $10FBS_DEFINE ) == 56 );
@@ -774,7 +774,7 @@ struct $8FBARRAY1I10AST_OPINFOE {
 	struct $16__FB_ARRAYDIMTB$ DIMTB[1];
 };
 __FB_STATIC_ASSERT( sizeof( struct $8FBARRAY1I10AST_OPINFOE ) == 72 );
-static struct $8FBARRAY1I10AST_OPINFOE tmp$83$;
+static struct $8FBARRAY1I10AST_OPINFOE tmp$82$;
 typedef int64 $12FB_DATACLASS;
 struct $13SYMB_DATATYPE {
 	$12FB_DATACLASS CLASS;
@@ -796,7 +796,7 @@ struct $8FBARRAY1I13SYMB_DATATYPEE {
 	struct $16__FB_ARRAYDIMTB$ DIMTB[1];
 };
 __FB_STATIC_ASSERT( sizeof( struct $8FBARRAY1I13SYMB_DATATYPEE ) == 72 );
-static struct $8FBARRAY1I13SYMB_DATATYPEE tmp$84$;
+static struct $8FBARRAY1I13SYMB_DATATYPEE tmp$83$;
 struct $8FBARRAY2IlE {
 	int64* DATA;
 	int64* PTR;
@@ -807,7 +807,7 @@ struct $8FBARRAY2IlE {
 	struct $16__FB_ARRAYDIMTB$ DIMTB[2];
 };
 __FB_STATIC_ASSERT( sizeof( struct $8FBARRAY2IlE ) == 96 );
-static struct $8FBARRAY2IlE tmp$85$;
+static struct $8FBARRAY2IlE tmp$84$;
 typedef int64 $10FB_OUTTYPE;
 typedef int64 $10FB_BACKEND;
 typedef int64 $13FB_COMPTARGET;
@@ -1139,9 +1139,9 @@ int64 CDECLARATION( void )
 	PATTRIB$1 = 0ll;
 	int64 TK$1;
 	fb$result$1 = 0ll;
-	if( *(int64*)((uint8*)&ENV$ + 272ll) != 3ll ) goto label$13;
+	if( *(int64*)((uint8*)&ENV$ + 272ll) != 3ll) goto label$13;
 	{
-		if( *(int64*)((uint8*)*(struct $7FBTOKEN**)((uint8*)*(struct $9LEX_TKCTX**)((uint8*)&LEX$ + 844696ll) + 16712ll) + 16ll) == 2147483648ll ) goto label$15;
+		if( *(int64*)((uint8*)*(struct $7FBTOKEN**)((uint8*)*(struct $9LEX_TKCTX**)((uint8*)&LEX$ + 844696ll) + 16712ll) + 16ll) == 2147483648ll) goto label$15;
 		{
 			fb$result$1 = 0ll;
 			goto label$11;
@@ -1152,14 +1152,14 @@ int64 CDECLARATION( void )
 	label$13:;
 	label$12:;
 	{
-		uint64 TMP$96$2;
+		uint64 TMP$95$2;
 		int64 vr$3 = LEXGETTOKEN( 0ll );
-		TMP$96$2 = (uint64)vr$3;
+		TMP$95$2 = (uint64)vr$3;
 		goto label$17;
 		label$18:;
 		{
 			int64 vr$4 = HCHECKSCOPE(  );
-			if( vr$4 == 0ll ) goto label$20;
+			if( vr$4 == 0ll) goto label$20;
 			{
 				ATTRIB$1 = 32ll;
 			}
@@ -1171,7 +1171,7 @@ int64 CDECLARATION( void )
 		label$21:;
 		{
 			int64 vr$5 = HCHECKSCOPE(  );
-			if( vr$5 == 0ll ) goto label$23;
+			if( vr$5 == 0ll) goto label$23;
 			{
 				ATTRIB$1 = 64ll;
 			}
@@ -1202,7 +1202,7 @@ int64 CDECLARATION( void )
 		}
 		goto label$16;
 		label$17:;
-		static const void* tmp$102[59ll] = {
+		static const void* tmp$101[59ll] = {
 			&&label$25,
 			&&label$25,
 			&&label$25,
@@ -1263,22 +1263,22 @@ int64 CDECLARATION( void )
 			&&label$18,
 			&&label$21,
 		};
-		if( (TMP$96$2 - 321ull) > 58ull ) goto label$16;
-		goto *tmp$102[TMP$96$2 - 321ull];
+		if( (TMP$95$2 - 321ull) > 58ull ) goto label$16;
+		goto *tmp$101[TMP$95$2 - 321ull];
 		label$16:;
 	}
 	int64 vr$6 = LEXGETTOKEN( 0ll );
 	TK$1 = vr$6;
 	{
-		uint64 TMP$97$2;
-		TMP$97$2 = (uint64)TK$1;
+		uint64 TMP$96$2;
+		TMP$96$2 = (uint64)TK$1;
 		goto label$28;
 		label$29:;
 		{
 			{
-				uint64 TMP$98$4;
+				uint64 TMP$97$4;
 				int64 vr$7 = LEXGETLOOKAHEAD( 1ll, 0ll );
-				TMP$98$4 = (uint64)vr$7;
+				TMP$97$4 = (uint64)vr$7;
 				goto label$31;
 				label$32:;
 				{
@@ -1289,7 +1289,7 @@ int64 CDECLARATION( void )
 				label$33:;
 				{
 					{
-						if( TK$1 != 335ll ) goto label$35;
+						if( TK$1 != 335ll) goto label$35;
 						label$36:;
 						{
 							CCONSTDECL( ATTRIB$1 );
@@ -1297,7 +1297,7 @@ int64 CDECLARATION( void )
 						}
 						goto label$34;
 						label$35:;
-						if( TK$1 != 307ll ) goto label$37;
+						if( TK$1 != 307ll) goto label$37;
 						label$38:;
 						{
 							int64 vr$8 = CVARIABLEDECL( ATTRIB$1 );
@@ -1314,7 +1314,7 @@ int64 CDECLARATION( void )
 				}
 				goto label$30;
 				label$31:;
-				static const void* tmp$103[11ll] = {
+				static const void* tmp$102[11ll] = {
 					&&label$32,
 					&&label$32,
 					&&label$32,
@@ -1327,15 +1327,15 @@ int64 CDECLARATION( void )
 					&&label$32,
 					&&label$32,
 				};
-				if( (TMP$98$4 - 345ull) > 10ull ) goto label$33;
-				goto *tmp$103[TMP$98$4 - 345ull];
+				if( (TMP$97$4 - 345ull) > 10ull ) goto label$33;
+				goto *tmp$102[TMP$97$4 - 345ull];
 				label$30:;
 			}
 		}
 		goto label$27;
 		label$40:;
 		{
-			if( ATTRIB$1 == 0ll ) goto label$42;
+			if( ATTRIB$1 == 0ll) goto label$42;
 			{
 				CPROCSTMTBEGIN( ATTRIB$1, PATTRIB$1 );
 				fb$result$1 = -1ll;
@@ -1344,12 +1344,12 @@ int64 CDECLARATION( void )
 			label$42:;
 			{
 				{
-					int64 TMP$99$5;
+					int64 TMP$98$5;
 					int64 vr$9 = LEXGETLOOKAHEAD( 1ll, 0ll );
-					TMP$99$5 = vr$9;
-					if( TMP$99$5 == 299ll ) goto label$45;
+					TMP$98$5 = vr$9;
+					if( TMP$98$5 == 299ll) goto label$45;
 					label$46:;
-					if( TMP$99$5 != 305ll ) goto label$44;
+					if( TMP$98$5 != 305ll) goto label$44;
 					label$45:;
 					{
 					}
@@ -1368,7 +1368,7 @@ int64 CDECLARATION( void )
 		goto label$27;
 		label$48:;
 		{
-			if( ATTRIB$1 == 0ll ) goto label$50;
+			if( ATTRIB$1 == 0ll) goto label$50;
 			{
 				CPROCSTMTBEGIN( ATTRIB$1, PATTRIB$1 );
 				fb$result$1 = -1ll;
@@ -1376,7 +1376,7 @@ int64 CDECLARATION( void )
 			goto label$49;
 			label$50:;
 			{
-				if( *(struct $8FBSYMBOL**)((uint8*)&PARSER$ + 216ll) != *(struct $8FBSYMBOL**)((uint8*)&ENV$ + 1432ll) ) goto label$52;
+				if( *(struct $8FBSYMBOL**)((uint8*)&PARSER$ + 216ll) != *(struct $8FBSYMBOL**)((uint8*)&ENV$ + 1432ll)) goto label$52;
 				{
 					CPROCSTMTBEGIN( 0ll, 0ll );
 					fb$result$1 = -1ll;
@@ -1389,7 +1389,7 @@ int64 CDECLARATION( void )
 		goto label$27;
 		label$53:;
 		{
-			if( ATTRIB$1 == 0ll ) goto label$55;
+			if( ATTRIB$1 == 0ll) goto label$55;
 			{
 				CPROCSTMTBEGIN( ATTRIB$1, PATTRIB$1 );
 				fb$result$1 = -1ll;
@@ -1397,7 +1397,7 @@ int64 CDECLARATION( void )
 			goto label$54;
 			label$55:;
 			{
-				if( *(struct $8FBSYMBOL**)((uint8*)&PARSER$ + 216ll) != *(struct $8FBSYMBOL**)((uint8*)&ENV$ + 1432ll) ) goto label$57;
+				if( *(struct $8FBSYMBOL**)((uint8*)&PARSER$ + 216ll) != *(struct $8FBSYMBOL**)((uint8*)&ENV$ + 1432ll)) goto label$57;
 				{
 					CPROCSTMTBEGIN( 0ll, 0ll );
 					fb$result$1 = -1ll;
@@ -1406,12 +1406,12 @@ int64 CDECLARATION( void )
 				label$57:;
 				{
 					{
-						int64 TMP$100$6;
+						int64 TMP$99$6;
 						int64 vr$10 = LEXGETLOOKAHEAD( 1ll, 0ll );
-						TMP$100$6 = vr$10;
-						if( TMP$100$6 == 299ll ) goto label$60;
+						TMP$99$6 = vr$10;
+						if( TMP$99$6 == 299ll) goto label$60;
 						label$61:;
-						if( TMP$100$6 != 305ll ) goto label$59;
+						if( TMP$99$6 != 305ll) goto label$59;
 						label$60:;
 						{
 						}
@@ -1432,15 +1432,15 @@ int64 CDECLARATION( void )
 		goto label$27;
 		label$63:;
 		{
-			if( ATTRIB$1 != 0ll ) goto label$65;
+			if( ATTRIB$1 != 0ll) goto label$65;
 			{
 				{
-					int64 TMP$101$5;
+					int64 TMP$100$5;
 					int64 vr$11 = LEXGETLOOKAHEAD( 1ll, 0ll );
-					TMP$101$5 = vr$11;
-					if( TMP$101$5 == 301ll ) goto label$68;
+					TMP$100$5 = vr$11;
+					if( TMP$100$5 == 301ll) goto label$68;
 					label$69:;
-					if( TMP$101$5 != 40ll ) goto label$67;
+					if( TMP$100$5 != 40ll) goto label$67;
 					label$68:;
 					{
 						fb$result$1 = 0ll;
@@ -1476,7 +1476,7 @@ int64 CDECLARATION( void )
 		goto label$27;
 		label$73:;
 		{
-			if( ATTRIB$1 == 0ll ) goto label$75;
+			if( ATTRIB$1 == 0ll) goto label$75;
 			{
 				ERRREPORT( 17ll, 0ll, (char*)0ull );
 				HSKIPUNTIL( -1ll, 0ll, 0ll, 0ll );
@@ -1487,7 +1487,7 @@ int64 CDECLARATION( void )
 		}
 		goto label$27;
 		label$28:;
-		static const void* tmp$104[50ll] = {
+		static const void* tmp$103[50ll] = {
 			&&label$72,
 			&&label$29,
 			&&label$72,
@@ -1539,8 +1539,8 @@ int64 CDECLARATION( void )
 			&&label$29,
 			&&label$29,
 		};
-		if( (TMP$97$2 - 306ull) > 49ull ) goto label$73;
-		goto *tmp$104[TMP$97$2 - 306ull];
+		if( (TMP$96$2 - 306ull) > 49ull ) goto label$73;
+		goto *tmp$103[TMP$96$2 - 306ull];
 		label$27:;
 	}
 	label$11:;

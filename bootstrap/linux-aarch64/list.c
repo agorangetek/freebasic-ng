@@ -57,7 +57,7 @@ void* XALLOCATE( int32 SIZE$1 )
 	void* P$1;
 	void* vr$2 = malloc( (uint64)SIZE$1 );
 	P$1 = vr$2;
-	if( P$1 != (void*)0ull ) goto label$9;
+	if( P$1 != (void*)0ull) goto label$9;
 	{
 		FATALOUTOFMEMORY(  );
 	}
@@ -77,7 +77,7 @@ void* XCALLOCATE( int32 SIZE$1 )
 	void* P$1;
 	void* vr$2 = calloc( (uint64)SIZE$1, 1ull );
 	P$1 = vr$2;
-	if( P$1 != (void*)0ull ) goto label$13;
+	if( P$1 != (void*)0ull) goto label$13;
 	{
 		FATALOUTOFMEMORY(  );
 	}
@@ -97,7 +97,7 @@ void* XREALLOCATE( void* OLD$1, int32 SIZE$1 )
 	void* P$1;
 	void* vr$2 = realloc( (void*)OLD$1, (uint64)SIZE$1 );
 	P$1 = vr$2;
-	if( P$1 != (void*)0ull ) goto label$17;
+	if( P$1 != (void*)0ull) goto label$17;
 	{
 		FATALOUTOFMEMORY(  );
 	}
@@ -130,7 +130,7 @@ void LISTEND( struct $5TLIST* LIST$1 )
 	struct $7TLISTTB* NXT$1;
 	TB$1 = *(struct $7TLISTTB**)LIST$1;
 	label$22:;
-	if( TB$1 == (struct $7TLISTTB*)0ull ) goto label$23;
+	if( TB$1 == (struct $7TLISTTB*)0ull) goto label$23;
 	{
 		NXT$1 = *(struct $7TLISTTB**)TB$1;
 		free( (void*)*(void**)((uint8*)TB$1 + 8ll) );
@@ -153,7 +153,7 @@ void LISTALLOCTB( struct $5TLIST* LIST$1, int64 NODES$1 )
 	struct $9TLISTNODE* PRV$1;
 	struct $7TLISTTB* TB$1;
 	int64 I$1;
-	if( (*(int64*)((uint8*)LIST$1 + 56ll) & 1ll) == 0ll ) goto label$27;
+	if( (*(int64*)((uint8*)LIST$1 + 56ll) & 1ll) == 0ll) goto label$27;
 	{
 		void* vr$5 = XCALLOCATE( (int32)(NODES$1 * *(int64*)((uint8*)LIST$1 + 24ll)) );
 		NODETB$1 = (struct $9TLISTNODE*)vr$5;
@@ -167,13 +167,13 @@ void LISTALLOCTB( struct $5TLIST* LIST$1, int64 NODES$1 )
 	label$26:;
 	void* vr$10 = XALLOCATE( 24 );
 	TB$1 = (struct $7TLISTTB*)vr$10;
-	if( *(struct $7TLISTTB**)LIST$1 != (struct $7TLISTTB*)0ull ) goto label$29;
+	if( *(struct $7TLISTTB**)LIST$1 != (struct $7TLISTTB*)0ull) goto label$29;
 	{
 		*(struct $7TLISTTB**)LIST$1 = TB$1;
 	}
 	label$29:;
 	label$28:;
-	if( *(struct $7TLISTTB**)((uint8*)LIST$1 + 8ll) == (struct $7TLISTTB*)0ull ) goto label$31;
+	if( *(struct $7TLISTTB**)((uint8*)LIST$1 + 8ll) == (struct $7TLISTTB*)0ull) goto label$31;
 	{
 		*(struct $7TLISTTB**)*(struct $7TLISTTB**)((uint8*)LIST$1 + 8ll) = TB$1;
 	}
@@ -185,7 +185,7 @@ void LISTALLOCTB( struct $5TLIST* LIST$1, int64 NODES$1 )
 	*(int64*)((uint8*)TB$1 + 16ll) = NODES$1;
 	*(struct $9TLISTNODE**)((uint8*)LIST$1 + 32ll) = NODETB$1;
 	*(int64*)((uint8*)LIST$1 + 16ll) = *(int64*)((uint8*)LIST$1 + 16ll) + NODES$1;
-	if( (*(int64*)((uint8*)LIST$1 + 56ll) & 2ll) == 0ll ) goto label$33;
+	if( (*(int64*)((uint8*)LIST$1 + 56ll) & 2ll) == 0ll) goto label$33;
 	{
 		PRV$1 = (struct $9TLISTNODE*)0ull;
 		NODE$1 = *(struct $9TLISTNODE**)((uint8*)LIST$1 + 32ll);
@@ -204,7 +204,7 @@ void LISTALLOCTB( struct $5TLIST* LIST$1, int64 NODES$1 )
 			label$35:;
 			I$1 = I$1 + 1ll;
 			label$34:;
-			if( I$1 <= TMP$3$3 ) goto label$37;
+			if( I$1 <= TMP$3$3) goto label$37;
 			label$36:;
 		}
 		*(struct $9TLISTNODE**)NODE$1 = PRV$1;
@@ -222,7 +222,7 @@ void* LISTNEWNODE( struct $5TLIST* LIST$1 )
 	label$38:;
 	struct $9TLISTNODE* NODE$1;
 	struct $9TLISTNODE* TAIL$1;
-	if( *(struct $9TLISTNODE**)((uint8*)LIST$1 + 32ll) != (struct $9TLISTNODE*)0ull ) goto label$41;
+	if( *(struct $9TLISTNODE**)((uint8*)LIST$1 + 32ll) != (struct $9TLISTNODE*)0ull) goto label$41;
 	{
 		LISTALLOCTB( LIST$1, (int64)(*(uint64*)((uint8*)LIST$1 + 16ll) >> (2ull & 63ll)) );
 	}
@@ -230,11 +230,11 @@ void* LISTNEWNODE( struct $5TLIST* LIST$1 )
 	label$40:;
 	NODE$1 = *(struct $9TLISTNODE**)((uint8*)LIST$1 + 32ll);
 	*(struct $9TLISTNODE**)((uint8*)LIST$1 + 32ll) = *(struct $9TLISTNODE**)((uint8*)NODE$1 + 8ll);
-	if( (*(int64*)((uint8*)LIST$1 + 56ll) & 4ll) == 0ll ) goto label$43;
+	if( (*(int64*)((uint8*)LIST$1 + 56ll) & 4ll) == 0ll) goto label$43;
 	{
 		TAIL$1 = *(struct $9TLISTNODE**)((uint8*)LIST$1 + 48ll);
 		*(void**)((uint8*)LIST$1 + 48ll) = (void*)NODE$1;
-		if( TAIL$1 == (struct $9TLISTNODE*)0ull ) goto label$45;
+		if( TAIL$1 == (struct $9TLISTNODE*)0ull) goto label$45;
 		{
 			*(struct $9TLISTNODE**)((uint8*)TAIL$1 + 8ll) = NODE$1;
 		}
@@ -264,18 +264,18 @@ void LISTDELNODE( struct $5TLIST* LIST$1, void* NODE_$1 )
 	struct $9TLISTNODE* NODE$1;
 	struct $9TLISTNODE* PRV$1;
 	struct $9TLISTNODE* NXT$1;
-	if( NODE_$1 != (void*)0ull ) goto label$49;
+	if( NODE_$1 != (void*)0ull) goto label$49;
 	{
 		goto label$47;
 	}
 	label$49:;
 	label$48:;
-	if( (*(int64*)((uint8*)LIST$1 + 56ll) & 4ll) == 0ll ) goto label$51;
+	if( (*(int64*)((uint8*)LIST$1 + 56ll) & 4ll) == 0ll) goto label$51;
 	{
 		NODE$1 = (struct $9TLISTNODE*)((uint8*)NODE_$1 + -16ll);
 		PRV$1 = *(struct $9TLISTNODE**)NODE$1;
 		NXT$1 = *(struct $9TLISTNODE**)((uint8*)NODE$1 + 8ll);
-		if( PRV$1 == (struct $9TLISTNODE*)0ull ) goto label$53;
+		if( PRV$1 == (struct $9TLISTNODE*)0ull) goto label$53;
 		{
 			*(struct $9TLISTNODE**)((uint8*)PRV$1 + 8ll) = NXT$1;
 		}
@@ -285,7 +285,7 @@ void LISTDELNODE( struct $5TLIST* LIST$1, void* NODE_$1 )
 			*(void**)((uint8*)LIST$1 + 40ll) = (void*)NXT$1;
 		}
 		label$52:;
-		if( NXT$1 == (struct $9TLISTNODE*)0ull ) goto label$55;
+		if( NXT$1 == (struct $9TLISTNODE*)0ull) goto label$55;
 		{
 			*(struct $9TLISTNODE**)NXT$1 = PRV$1;
 		}
@@ -304,7 +304,7 @@ void LISTDELNODE( struct $5TLIST* LIST$1, void* NODE_$1 )
 	label$50:;
 	*(struct $9TLISTNODE**)((uint8*)NODE$1 + 8ll) = *(struct $9TLISTNODE**)((uint8*)LIST$1 + 32ll);
 	*(struct $9TLISTNODE**)((uint8*)LIST$1 + 32ll) = NODE$1;
-	if( (*(int64*)((uint8*)LIST$1 + 56ll) & 1ll) == 0ll ) goto label$57;
+	if( (*(int64*)((uint8*)LIST$1 + 56ll) & 1ll) == 0ll) goto label$57;
 	{
 		memset( NODE_$1, 0, (uint64)(*(int64*)((uint8*)LIST$1 + 24ll) + -16ll) );
 	}
@@ -318,7 +318,7 @@ void* LISTGETHEAD( struct $5TLIST* LIST$1 )
 	void* fb$result$1;
 	__builtin_memset( &fb$result$1, 0, 8ll );
 	label$58:;
-	if( *(void**)((uint8*)LIST$1 + 40ll) != (void*)0ull ) goto label$61;
+	if( *(void**)((uint8*)LIST$1 + 40ll) != (void*)0ull) goto label$61;
 	{
 		fb$result$1 = (void*)0ull;
 	}
@@ -337,7 +337,7 @@ void* LISTGETTAIL( struct $5TLIST* LIST$1 )
 	void* fb$result$1;
 	__builtin_memset( &fb$result$1, 0, 8ll );
 	label$62:;
-	if( *(void**)((uint8*)LIST$1 + 48ll) != (void*)0ull ) goto label$65;
+	if( *(void**)((uint8*)LIST$1 + 48ll) != (void*)0ull) goto label$65;
 	{
 		fb$result$1 = (void*)0ull;
 	}
@@ -358,7 +358,7 @@ void* LISTGETPREV( void* NODE$1 )
 	label$66:;
 	struct $9TLISTNODE* PREV$1;
 	PREV$1 = *(struct $9TLISTNODE**)((uint8*)NODE$1 + -16ll);
-	if( PREV$1 != (struct $9TLISTNODE*)0ull ) goto label$69;
+	if( PREV$1 != (struct $9TLISTNODE*)0ull) goto label$69;
 	{
 		fb$result$1 = (void*)0ull;
 	}
@@ -379,7 +379,7 @@ void* LISTGETNEXT( void* NODE$1 )
 	label$70:;
 	struct $9TLISTNODE* NXT$1;
 	NXT$1 = *(struct $9TLISTNODE**)((uint8*)((uint8*)NODE$1 + -16ll) + 8ll);
-	if( NXT$1 != (struct $9TLISTNODE*)0ull ) goto label$73;
+	if( NXT$1 != (struct $9TLISTNODE*)0ull) goto label$73;
 	{
 		fb$result$1 = (void*)0ull;
 	}
@@ -414,7 +414,7 @@ static void FATALOUTOFMEMORY( void )
 {
 	label$2:;
 	label$4:;
-	void* vr$0 = fb_ErrorThrowEx( 4, 10, (char*)"src/compiler/list.bas", (void*)0ull, (void*)0ull );
+	void* vr$0 = fb_ErrorThrowEx( 4, 10, (char*)"list.bas", (void*)0ull, (void*)0ull );
 	goto *vr$0;
 	label$5:;
 	label$3:;

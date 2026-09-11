@@ -66,7 +66,7 @@ int64 STACKFREE( struct $6TSTACK* STK$1 )
 	__builtin_memset( &NXT$1, 0, 8ll );
 	TB$1 = *(struct $8TSTACKTB**)STK$1;
 	label$6:;
-	if( TB$1 == (struct $8TSTACKTB*)0ull ) goto label$7;
+	if( TB$1 == (struct $8TSTACKTB*)0ull) goto label$7;
 	{
 		NXT$1 = *(struct $8TSTACKTB**)TB$1;
 		free( *(void**)((uint8*)TB$1 + 8ll) );
@@ -88,14 +88,14 @@ void* STACKPUSH( struct $6TSTACK* STK$1 )
 	void* fb$result$1;
 	__builtin_memset( &fb$result$1, 0, 8ll );
 	label$24:;
-	if( *(struct $10TSTACKNODE**)((uint8*)STK$1 + 32ll) != (struct $10TSTACKNODE*)0ull ) goto label$27;
+	if( *(struct $10TSTACKNODE**)((uint8*)STK$1 + 32ll) != (struct $10TSTACKNODE*)0ull) goto label$27;
 	{
 		*(struct $10TSTACKNODE**)((uint8*)STK$1 + 32ll) = *(struct $10TSTACKNODE**)((uint8*)*(struct $8TSTACKTB**)STK$1 + 8ll);
 	}
 	goto label$26;
 	label$27:;
 	{
-		if( *(struct $10TSTACKNODE**)((uint8*)*(struct $10TSTACKNODE**)((uint8*)STK$1 + 32ll) + 8ll) != (struct $10TSTACKNODE*)0ull ) goto label$29;
+		if( *(struct $10TSTACKNODE**)((uint8*)*(struct $10TSTACKNODE**)((uint8*)STK$1 + 32ll) + 8ll) != (struct $10TSTACKNODE*)0ull) goto label$29;
 		{
 			HALLOCTB( STK$1, (int64)(*(uint64*)((uint8*)STK$1 + 16ll) >> (2ull & 63ll)) );
 		}
@@ -112,7 +112,7 @@ void* STACKPUSH( struct $6TSTACK* STK$1 )
 void STACKPOP( struct $6TSTACK* STK$1 )
 {
 	label$30:;
-	if( *(int64*)((uint8*)STK$1 + 40ll) == 0ll ) goto label$33;
+	if( *(int64*)((uint8*)STK$1 + 40ll) == 0ll) goto label$33;
 	{
 		memset( (void*)((uint8*)*(struct $10TSTACKNODE**)((uint8*)STK$1 + 32ll) + 16ll), 0, (uint64)(*(int64*)((uint8*)STK$1 + 24ll) + -16ll) );
 	}
@@ -127,7 +127,7 @@ void* STACKGETTOS( struct $6TSTACK* STK$1 )
 	void* fb$result$1;
 	__builtin_memset( &fb$result$1, 0, 8ll );
 	label$34:;
-	if( *(struct $10TSTACKNODE**)((uint8*)STK$1 + 32ll) != (struct $10TSTACKNODE*)0ull ) goto label$37;
+	if( *(struct $10TSTACKNODE**)((uint8*)STK$1 + 32ll) != (struct $10TSTACKNODE*)0ull) goto label$37;
 	{
 		fb$result$1 = (void*)0ull;
 		goto label$35;
@@ -154,13 +154,13 @@ static int64 HALLOCTB( struct $6TSTACK* STK$1, int64 NODES$1 )
 	static struct $8TSTACKTB* TB$1;
 	static int64 I$1;
 	fb$result$1 = 0ll;
-	if( NODES$1 > 1ll ) goto label$11;
+	if( NODES$1 > 1ll) goto label$11;
 	{
 		goto label$9;
 	}
 	label$11:;
 	label$10:;
-	if( *(int64*)((uint8*)STK$1 + 40ll) == 0ll ) goto label$13;
+	if( *(int64*)((uint8*)STK$1 + 40ll) == 0ll) goto label$13;
 	{
 		void* vr$5 = XCALLOCATE( (int32)(NODES$1 * *(int64*)((uint8*)STK$1 + 24ll)) );
 		NODETB$1 = (struct $10TSTACKNODE*)vr$5;
@@ -174,13 +174,13 @@ static int64 HALLOCTB( struct $6TSTACK* STK$1, int64 NODES$1 )
 	label$12:;
 	void* vr$10 = XALLOCATE( 24 );
 	TB$1 = (struct $8TSTACKTB*)vr$10;
-	if( *(struct $8TSTACKTB**)STK$1 != (struct $8TSTACKTB*)0ull ) goto label$15;
+	if( *(struct $8TSTACKTB**)STK$1 != (struct $8TSTACKTB*)0ull) goto label$15;
 	{
 		*(struct $8TSTACKTB**)STK$1 = TB$1;
 	}
 	label$15:;
 	label$14:;
-	if( *(struct $8TSTACKTB**)((uint8*)STK$1 + 8ll) == (struct $8TSTACKTB*)0ull ) goto label$17;
+	if( *(struct $8TSTACKTB**)((uint8*)STK$1 + 8ll) == (struct $8TSTACKTB*)0ull) goto label$17;
 	{
 		*(struct $8TSTACKTB**)*(struct $8TSTACKTB**)((uint8*)STK$1 + 8ll) = TB$1;
 	}
@@ -193,7 +193,7 @@ static int64 HALLOCTB( struct $6TSTACK* STK$1, int64 NODES$1 )
 	*(int64*)((uint8*)STK$1 + 16ll) = *(int64*)((uint8*)STK$1 + 16ll) + NODES$1;
 	PREV$1 = *(struct $10TSTACKNODE**)((uint8*)STK$1 + 32ll);
 	NODE$1 = NODETB$1;
-	if( PREV$1 == (struct $10TSTACKNODE*)0ull ) goto label$19;
+	if( PREV$1 == (struct $10TSTACKNODE*)0ull) goto label$19;
 	{
 		*(struct $10TSTACKNODE**)((uint8*)PREV$1 + 8ll) = NODE$1;
 	}
@@ -214,7 +214,7 @@ static int64 HALLOCTB( struct $6TSTACK* STK$1, int64 NODES$1 )
 		label$21:;
 		I$1 = I$1 + 1ll;
 		label$20:;
-		if( I$1 <= TMP$2$2 ) goto label$23;
+		if( I$1 <= TMP$2$2) goto label$23;
 		label$22:;
 	}
 	*(struct $10TSTACKNODE**)NODE$1 = PREV$1;

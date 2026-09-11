@@ -182,9 +182,9 @@ struct $8FBS_ENUM {
 __FB_STATIC_ASSERT( sizeof( struct $8FBS_ENUM ) == 96 );
 typedef int64 $11FB_FUNCMODE;
 typedef int64 $21FB_PROC_RETURN_METHOD;
-typedef int64 (*tmp$35)( struct $8FBSYMBOL* );
+typedef int64 (*tmp$34)( struct $8FBSYMBOL* );
 struct $10FB_PROCRTL {
-	tmp$35 CALLBACK;
+	tmp$34 CALLBACK;
 };
 __FB_STATIC_ASSERT( sizeof( struct $10FB_PROCRTL ) == 8 );
 struct $10FB_PROCOVL {
@@ -314,7 +314,7 @@ struct $9FB_DEFTOK {
 };
 __FB_STATIC_ASSERT( sizeof( struct $9FB_DEFTOK ) == 32 );
 typedef int64 $15FB_DEFINE_FLAGS;
-typedef FBSTRING* (*tmp$29)( void );
+typedef FBSTRING* (*tmp$28)( void );
 struct $8DZSTRING {
 	char* DATA;
 	int64 LEN;
@@ -339,8 +339,8 @@ struct $11LEXPP_ARGTB {
 	int64 COUNT;
 };
 __FB_STATIC_ASSERT( sizeof( struct $11LEXPP_ARGTB ) == 776 );
-typedef FBSTRING* (*tmp$30)( struct $11LEXPP_ARGTB*, int64* );
-typedef uint32* (*tmp$31)( struct $11LEXPP_ARGTB*, int64* );
+typedef FBSTRING* (*tmp$29)( struct $11LEXPP_ARGTB*, int64* );
+typedef uint32* (*tmp$30)( struct $11LEXPP_ARGTB*, int64* );
 struct $10FBS_DEFINE {
 	int64 PARAMS;
 	struct $11FB_DEFPARAM* PARAMHEAD;
@@ -352,11 +352,11 @@ struct $10FBS_DEFINE {
 	int64 ISARGLESS;
 	$15FB_DEFINE_FLAGS FLAGS;
 	union {
-		tmp$29 DPROCZ;
-		tmp$30 MPROCZ;
+		tmp$28 DPROCZ;
+		tmp$29 MPROCZ;
 	};
 	union {
-		tmp$31 MPROCW;
+		tmp$30 MPROCW;
 	};
 };
 __FB_STATIC_ASSERT( sizeof( struct $10FBS_DEFINE ) == 56 );
@@ -671,21 +671,21 @@ struct $13SYMB_DATATYPE {
 	char* NAME;
 };
 __FB_STATIC_ASSERT( sizeof( struct $13SYMB_DATATYPE ) == 56 );
-typedef void (*tmp$44)( struct $8FBSYMBOL* );
-typedef void (*tmp$68)( int64, int64 );
-typedef void (*tmp$69)( struct $8FBSYMBOL*, int64 );
-typedef void (*tmp$40)( void );
+typedef void (*tmp$43)( struct $8FBSYMBOL* );
+typedef void (*tmp$67)( int64, int64 );
+typedef void (*tmp$68)( struct $8FBSYMBOL*, int64 );
+typedef void (*tmp$39)( void );
 struct $11TSTRSETITEM {
 	FBSTRING S;
 	int64 USERDATA;
 	struct $8HASHITEM* HASHITEM;
 };
 __FB_STATIC_ASSERT( sizeof( struct $11TSTRSETITEM ) == 40 );
-typedef void (*tmp$65)( struct $8FBSYMBOL*, struct $8FBSYMBOL*, int64 );
-typedef void (*tmp$64)( struct $8FBSYMBOL*, double );
-typedef void (*tmp$63)( struct $8FBSYMBOL*, int64 );
-typedef void (*tmp$66)( int64, char*, int64, int64 );
-typedef void (*tmp$67)( int64, uint32*, int64 );
+typedef void (*tmp$64)( struct $8FBSYMBOL*, struct $8FBSYMBOL*, int64 );
+typedef void (*tmp$63)( struct $8FBSYMBOL*, double );
+typedef void (*tmp$62)( struct $8FBSYMBOL*, int64 );
+typedef void (*tmp$65)( int64, char*, int64, int64 );
+typedef void (*tmp$66)( int64, uint32*, int64 );
 FBSTRING* fb_StrAssign( void*, int64, void*, int64, int32 );
 void fb_StrDelete( FBSTRING* );
 void fb_WstrDelete( uint32* );
@@ -747,12 +747,12 @@ static int64 HASTCHECKTYPEINIASSIGNMENT( struct $7ASTNODE*, int64, int64 );
 static void HFLUSHEXPRSTATIC( struct $7ASTNODE*, struct $8FBSYMBOL* );
 static int64 HEXPRISCONST( struct $7ASTNODE* );
 static struct $7ASTNODE* HWALK( struct $7ASTNODE*, struct $7ASTNODE* );
-typedef int64 (*tmp$41)( void );
+typedef int64 (*tmp$40)( void );
 typedef int64 $14IR_OPTIONVALUE;
-typedef int64 (*tmp$42)( $14IR_OPTIONVALUE );
-typedef int64 (*tmp$43)( int64, int64 );
-typedef void (*tmp$45)( struct $8FBSYMBOL*, struct $8FBSYMBOL* );
-typedef char* (*tmp$46)( void );
+typedef int64 (*tmp$41)( $14IR_OPTIONVALUE );
+typedef int64 (*tmp$42)( int64, int64 );
+typedef void (*tmp$44)( struct $8FBSYMBOL*, struct $8FBSYMBOL* );
+typedef char* (*tmp$45)( void );
 typedef int64 $15IRVREGTYPE_ENUM;
 typedef int64 $12IR_REGFAMILY;
 struct $6IRVREG;
@@ -798,101 +798,101 @@ struct $6IRVREG {
 	struct $5IRTAC* TACLAST;
 };
 __FB_STATIC_ASSERT( sizeof( struct $6IRVREG ) == 120 );
-typedef void (*tmp$47)( struct $6IRVREG*, struct $6IRVREG* );
-typedef void (*tmp$48)( int64 );
-typedef void (*tmp$49)( struct $8FBSYMBOL*, struct $8FBSYMBOL*, struct $8FBSYMBOL* );
-typedef void (*tmp$50)( struct $8FBSYMBOL*, struct $6IRVREG*, int64, int64, struct $6IRVREG* );
-typedef void (*tmp$51)( struct $9ASTASMTOK* );
-typedef void (*tmp$52)( char* );
+typedef void (*tmp$46)( struct $6IRVREG*, struct $6IRVREG* );
+typedef void (*tmp$47)( int64 );
+typedef void (*tmp$48)( struct $8FBSYMBOL*, struct $8FBSYMBOL*, struct $8FBSYMBOL* );
+typedef void (*tmp$49)( struct $8FBSYMBOL*, struct $6IRVREG*, int64, int64, struct $6IRVREG* );
+typedef void (*tmp$50)( struct $9ASTASMTOK* );
+typedef void (*tmp$51)( char* );
 typedef int64 $10IR_EMITOPT;
-typedef void (*tmp$53)( int64, struct $6IRVREG*, struct $6IRVREG*, struct $6IRVREG*, struct $8FBSYMBOL*, $10IR_EMITOPT );
-typedef void (*tmp$54)( int64, struct $6IRVREG*, struct $6IRVREG* );
-typedef void (*tmp$55)( struct $6IRVREG* );
-typedef void (*tmp$56)( struct $8FBSYMBOL*, int64, struct $6IRVREG*, int64 );
-typedef void (*tmp$57)( struct $8FBSYMBOL*, struct $6IRVREG*, struct $6IRVREG*, int64, int64 );
-typedef void (*tmp$58)( int64, struct $8FBSYMBOL* );
-typedef void (*tmp$59)( struct $6IRVREG*, struct $8FBSYMBOL*, uint64*, struct $8FBSYMBOL**, int64, struct $8FBSYMBOL*, uint64, uint64 );
-typedef void (*tmp$60)( int64, struct $6IRVREG*, struct $6IRVREG*, int64, int64 );
-typedef void (*tmp$61)( int64, struct $6IRVREG*, struct $6IRVREG*, struct $6IRVREG* );
-typedef void (*tmp$62)( int64, struct $8FBSYMBOL*, int64, char* );
-typedef void (*tmp$70)( char* );
-typedef struct $6IRVREG* (*tmp$71)( int64, struct $8FBSYMBOL* );
-typedef struct $6IRVREG* (*tmp$72)( int64, struct $8FBSYMBOL*, int64 );
-typedef struct $6IRVREG* (*tmp$73)( int64, struct $8FBSYMBOL*, double );
-typedef struct $6IRVREG* (*tmp$74)( int64, struct $8FBSYMBOL*, struct $8FBSYMBOL*, int64 );
-typedef struct $6IRVREG* (*tmp$75)( int64, struct $8FBSYMBOL*, struct $8FBSYMBOL*, int64, int64, struct $6IRVREG* );
-typedef struct $6IRVREG* (*tmp$76)( int64, struct $8FBSYMBOL*, int64, struct $6IRVREG* );
-typedef void (*tmp$77)( struct $6IRVREG*, int64, struct $8FBSYMBOL* );
-typedef uint64 (*tmp$78)( struct $6IRVREG* );
+typedef void (*tmp$52)( int64, struct $6IRVREG*, struct $6IRVREG*, struct $6IRVREG*, struct $8FBSYMBOL*, $10IR_EMITOPT );
+typedef void (*tmp$53)( int64, struct $6IRVREG*, struct $6IRVREG* );
+typedef void (*tmp$54)( struct $6IRVREG* );
+typedef void (*tmp$55)( struct $8FBSYMBOL*, int64, struct $6IRVREG*, int64 );
+typedef void (*tmp$56)( struct $8FBSYMBOL*, struct $6IRVREG*, struct $6IRVREG*, int64, int64 );
+typedef void (*tmp$57)( int64, struct $8FBSYMBOL* );
+typedef void (*tmp$58)( struct $6IRVREG*, struct $8FBSYMBOL*, uint64*, struct $8FBSYMBOL**, int64, struct $8FBSYMBOL*, uint64, uint64 );
+typedef void (*tmp$59)( int64, struct $6IRVREG*, struct $6IRVREG*, int64, int64 );
+typedef void (*tmp$60)( int64, struct $6IRVREG*, struct $6IRVREG*, struct $6IRVREG* );
+typedef void (*tmp$61)( int64, struct $8FBSYMBOL*, int64, char* );
+typedef void (*tmp$69)( char* );
+typedef struct $6IRVREG* (*tmp$70)( int64, struct $8FBSYMBOL* );
+typedef struct $6IRVREG* (*tmp$71)( int64, struct $8FBSYMBOL*, int64 );
+typedef struct $6IRVREG* (*tmp$72)( int64, struct $8FBSYMBOL*, double );
+typedef struct $6IRVREG* (*tmp$73)( int64, struct $8FBSYMBOL*, struct $8FBSYMBOL*, int64 );
+typedef struct $6IRVREG* (*tmp$74)( int64, struct $8FBSYMBOL*, struct $8FBSYMBOL*, int64, int64, struct $6IRVREG* );
+typedef struct $6IRVREG* (*tmp$75)( int64, struct $8FBSYMBOL*, int64, struct $6IRVREG* );
+typedef void (*tmp$76)( struct $6IRVREG*, int64, struct $8FBSYMBOL* );
+typedef uint64 (*tmp$77)( struct $6IRVREG* );
 struct $7IR_VTBL {
-	tmp$40 INIT;
-	tmp$40 END;
-	tmp$41 EMITBEGIN;
-	tmp$40 EMITEND;
-	tmp$42 GETOPTIONVALUE;
-	tmp$43 SUPPORTSOP;
-	tmp$44 PROCBEGIN;
-	tmp$44 PROCEND;
-	tmp$45 PROCALLOCARG;
-	tmp$45 PROCALLOCLOCAL;
-	tmp$46 PROCGETFRAMEREGNAME;
-	tmp$44 SCOPEBEGIN;
-	tmp$44 SCOPEEND;
-	tmp$44 PROCALLOCSTATICVARS;
-	tmp$47 EMITCONVERT;
-	tmp$44 EMITLABEL;
-	tmp$44 EMITLABELNF;
-	tmp$48 EMITRETURN;
-	tmp$45 EMITPROCBEGIN;
-	tmp$49 EMITPROCEND;
-	tmp$50 EMITPUSHARG;
-	tmp$51 EMITASMLINE;
-	tmp$52 EMITCOMMENT;
-	tmp$53 EMITBOP;
-	tmp$54 EMITUOP;
-	tmp$47 EMITSTORE;
-	tmp$40 EMITSPILLREGS;
-	tmp$55 EMITLOAD;
-	tmp$47 EMITLOADRES;
-	tmp$54 EMITSTACK;
-	tmp$54 EMITADDR;
-	tmp$56 EMITCALL;
-	tmp$57 EMITCALLPTR;
-	tmp$48 EMITSTACKALIGN;
-	tmp$55 EMITJUMPPTR;
-	tmp$58 EMITBRANCH;
-	tmp$59 EMITJMPTB;
-	tmp$60 EMITMEM;
-	tmp$61 EMITMACRO;
-	tmp$44 EMITSCOPEBEGIN;
-	tmp$44 EMITSCOPEEND;
-	tmp$44 EMITDECL;
-	tmp$62 EMITDBG;
-	tmp$44 EMITVARINIBEGIN;
-	tmp$44 EMITVARINIEND;
-	tmp$63 EMITVARINII;
-	tmp$64 EMITVARINIF;
-	tmp$65 EMITVARINIOFS;
-	tmp$66 EMITVARINISTR;
-	tmp$67 EMITVARINIWSTR;
-	tmp$68 EMITVARINIPAD;
-	tmp$69 EMITVARINISCOPEBEGIN;
-	tmp$40 EMITVARINISCOPEEND;
-	tmp$40 EMITFBCTINFBEGIN;
-	tmp$70 EMITFBCTINFSTRING;
-	tmp$40 EMITFBCTINFEND;
-	tmp$71 ALLOCVREG;
-	tmp$72 ALLOCVRIMM;
-	tmp$73 ALLOCVRIMMF;
-	tmp$74 ALLOCVRVAR;
-	tmp$75 ALLOCVRIDX;
-	tmp$76 ALLOCVRPTR;
-	tmp$74 ALLOCVROFS;
-	tmp$77 SETVREGDATATYPE;
-	tmp$78 GETDISTANCE;
-	tmp$54 LOADVR;
-	tmp$47 STOREVR;
-	tmp$48 XCHGTOS;
+	tmp$39 INIT;
+	tmp$39 END;
+	tmp$40 EMITBEGIN;
+	tmp$39 EMITEND;
+	tmp$41 GETOPTIONVALUE;
+	tmp$42 SUPPORTSOP;
+	tmp$43 PROCBEGIN;
+	tmp$43 PROCEND;
+	tmp$44 PROCALLOCARG;
+	tmp$44 PROCALLOCLOCAL;
+	tmp$45 PROCGETFRAMEREGNAME;
+	tmp$43 SCOPEBEGIN;
+	tmp$43 SCOPEEND;
+	tmp$43 PROCALLOCSTATICVARS;
+	tmp$46 EMITCONVERT;
+	tmp$43 EMITLABEL;
+	tmp$43 EMITLABELNF;
+	tmp$47 EMITRETURN;
+	tmp$44 EMITPROCBEGIN;
+	tmp$48 EMITPROCEND;
+	tmp$49 EMITPUSHARG;
+	tmp$50 EMITASMLINE;
+	tmp$51 EMITCOMMENT;
+	tmp$52 EMITBOP;
+	tmp$53 EMITUOP;
+	tmp$46 EMITSTORE;
+	tmp$39 EMITSPILLREGS;
+	tmp$54 EMITLOAD;
+	tmp$46 EMITLOADRES;
+	tmp$53 EMITSTACK;
+	tmp$53 EMITADDR;
+	tmp$55 EMITCALL;
+	tmp$56 EMITCALLPTR;
+	tmp$47 EMITSTACKALIGN;
+	tmp$54 EMITJUMPPTR;
+	tmp$57 EMITBRANCH;
+	tmp$58 EMITJMPTB;
+	tmp$59 EMITMEM;
+	tmp$60 EMITMACRO;
+	tmp$43 EMITSCOPEBEGIN;
+	tmp$43 EMITSCOPEEND;
+	tmp$43 EMITDECL;
+	tmp$61 EMITDBG;
+	tmp$43 EMITVARINIBEGIN;
+	tmp$43 EMITVARINIEND;
+	tmp$62 EMITVARINII;
+	tmp$63 EMITVARINIF;
+	tmp$64 EMITVARINIOFS;
+	tmp$65 EMITVARINISTR;
+	tmp$66 EMITVARINIWSTR;
+	tmp$67 EMITVARINIPAD;
+	tmp$68 EMITVARINISCOPEBEGIN;
+	tmp$39 EMITVARINISCOPEEND;
+	tmp$39 EMITFBCTINFBEGIN;
+	tmp$69 EMITFBCTINFSTRING;
+	tmp$39 EMITFBCTINFEND;
+	tmp$70 ALLOCVREG;
+	tmp$71 ALLOCVRIMM;
+	tmp$72 ALLOCVRIMMF;
+	tmp$73 ALLOCVRVAR;
+	tmp$74 ALLOCVRIDX;
+	tmp$75 ALLOCVRPTR;
+	tmp$73 ALLOCVROFS;
+	tmp$76 SETVREGDATATYPE;
+	tmp$77 GETDISTANCE;
+	tmp$53 LOADVR;
+	tmp$46 STOREVR;
+	tmp$47 XCHGTOS;
 };
 __FB_STATIC_ASSERT( sizeof( struct $7IR_VTBL ) == 544 );
 typedef int64 $6IR_OPT;
@@ -974,7 +974,7 @@ struct $8FBARRAY1I10AST_OPINFOE {
 	struct $16__FB_ARRAYDIMTB$ DIMTB[1];
 };
 __FB_STATIC_ASSERT( sizeof( struct $8FBARRAY1I10AST_OPINFOE ) == 72 );
-static struct $8FBARRAY1I10AST_OPINFOE tmp$83$;
+static struct $8FBARRAY1I10AST_OPINFOE tmp$82$;
 extern struct $13SYMB_DATATYPE SYMB_DTYPETB$[26];
 struct $8FBARRAY1I13SYMB_DATATYPEE {
 	struct $13SYMB_DATATYPE* DATA;
@@ -986,7 +986,7 @@ struct $8FBARRAY1I13SYMB_DATATYPEE {
 	struct $16__FB_ARRAYDIMTB$ DIMTB[1];
 };
 __FB_STATIC_ASSERT( sizeof( struct $8FBARRAY1I13SYMB_DATATYPEE ) == 72 );
-static struct $8FBARRAY1I13SYMB_DATATYPEE tmp$84$;
+static struct $8FBARRAY1I13SYMB_DATATYPEE tmp$83$;
 struct $8FBARRAY2IlE {
 	int64* DATA;
 	int64* PTR;
@@ -997,7 +997,7 @@ struct $8FBARRAY2IlE {
 	struct $16__FB_ARRAYDIMTB$ DIMTB[2];
 };
 __FB_STATIC_ASSERT( sizeof( struct $8FBARRAY2IlE ) == 96 );
-static struct $8FBARRAY2IlE tmp$85$;
+static struct $8FBARRAY2IlE tmp$84$;
 typedef int64 $10FB_OUTTYPE;
 typedef int64 $10FB_BACKEND;
 typedef int64 $13FB_COMPTARGET;
@@ -1324,9 +1324,9 @@ struct $7ASTNODE* ASTTYPEINIBEGIN( int64 DTYPE$1, struct $8FBSYMBOL* SUBTYPE$1, 
 	*(int64*)((uint8*)N$1 + 48ll) = 0ll;
 	int64 ADD_SCOPE$1;
 	ADD_SCOPE$1 = 0ll;
-	if( IS_LOCAL$1 != 0ll ) goto label$13;
+	if( IS_LOCAL$1 != 0ll) goto label$13;
 	{
-		if( *(int64*)*(struct $8FBSYMBOL**)((uint8*)&PARSER$ + 224ll) != 15ll ) goto label$15;
+		if( *(int64*)*(struct $8FBSYMBOL**)((uint8*)&PARSER$ + 224ll) != 15ll) goto label$15;
 		{
 			ADD_SCOPE$1 = (int64)-(*(int64*)*(struct $7ASTNODE**)((uint8*)*(struct $8FBSYMBOL**)((uint8*)&PARSER$ + 224ll) + 96ll) != 36ll);
 		}
@@ -1339,7 +1339,7 @@ struct $7ASTNODE* ASTTYPEINIBEGIN( int64 DTYPE$1, struct $8FBSYMBOL* SUBTYPE$1, 
 	}
 	label$13:;
 	label$12:;
-	if( ADD_SCOPE$1 == 0ll ) goto label$17;
+	if( ADD_SCOPE$1 == 0ll) goto label$17;
 	{
 		struct $8FBSYMBOL* vr$10 = ASTTEMPSCOPEBEGIN( (struct $8FBSYMBOL**)((uint8*)N$1 + 64ll), N$1 );
 		*(struct $8FBSYMBOL**)((uint8*)N$1 + 56ll) = vr$10;
@@ -1364,7 +1364,7 @@ void ASTTYPEINIEND( struct $7ASTNODE* TREE$1, int64 IS_INITIALIZER$1 )
 	int64 OFS$1;
 	int64 BYTES$1;
 	*(struct $7ASTNODE**)((uint8*)TREE$1 + 120ll) = (struct $7ASTNODE*)0ull;
-	if( IS_INITIALIZER$1 != 0ll ) goto label$41;
+	if( IS_INITIALIZER$1 != 0ll) goto label$41;
 	{
 		*(int64*)((uint8*)&AST$ + 280ll) = *(int64*)((uint8*)&AST$ + 280ll) + 1ll;
 	}
@@ -1373,12 +1373,12 @@ void ASTTYPEINIEND( struct $7ASTNODE* TREE$1, int64 IS_INITIALIZER$1 )
 	P$1 = (struct $7ASTNODE*)0ull;
 	N$1 = *(struct $7ASTNODE**)((uint8*)TREE$1 + 112ll);
 	label$42:;
-	if( N$1 == (struct $7ASTNODE*)0ull ) goto label$43;
+	if( N$1 == (struct $7ASTNODE*)0ull) goto label$43;
 	{
-		if( *(int64*)N$1 != 38ll ) goto label$45;
+		if( *(int64*)N$1 != 38ll) goto label$45;
 		{
 			L$1 = *(struct $7ASTNODE**)((uint8*)N$1 + 112ll);
-			if( *(int64*)L$1 != 36ll ) goto label$47;
+			if( *(int64*)L$1 != 36ll) goto label$47;
 			{
 				*(int64*)((uint8*)&AST$ + 280ll) = *(int64*)((uint8*)&AST$ + 280ll) + -1ll;
 				OFS$1 = *(int64*)((uint8*)N$1 + 40ll);
@@ -1388,7 +1388,7 @@ void ASTTYPEINIEND( struct $7ASTNODE* TREE$1, int64 IS_INITIALIZER$1 )
 				ASTDELNODE( N$1 );
 				N$1 = *(struct $7ASTNODE**)((uint8*)L$1 + 112ll);
 				ASTDELNODE( L$1 );
-				if( P$1 == (struct $7ASTNODE*)0ull ) goto label$49;
+				if( P$1 == (struct $7ASTNODE*)0ull) goto label$49;
 				{
 					*(struct $7ASTNODE**)((uint8*)P$1 + 120ll) = N$1;
 				}
@@ -1399,7 +1399,7 @@ void ASTTYPEINIEND( struct $7ASTNODE* TREE$1, int64 IS_INITIALIZER$1 )
 				}
 				label$48:;
 				label$50:;
-				if( *(struct $7ASTNODE**)((uint8*)N$1 + 120ll) == (struct $7ASTNODE*)0ull ) goto label$51;
+				if( *(struct $7ASTNODE**)((uint8*)N$1 + 120ll) == (struct $7ASTNODE*)0ull) goto label$51;
 				{
 					*(int64*)((uint8*)N$1 + 40ll) = *(int64*)((uint8*)N$1 + 40ll) + OFS$1;
 					*(int64*)((uint8*)N$1 + 48ll) = *(int64*)((uint8*)N$1 + 48ll) + BYTES$1;
@@ -1421,7 +1421,7 @@ void ASTTYPEINIEND( struct $7ASTNODE* TREE$1, int64 IS_INITIALIZER$1 )
 	}
 	goto label$42;
 	label$43:;
-	if( *(struct $8FBSYMBOL**)((uint8*)TREE$1 + 56ll) == (struct $8FBSYMBOL*)0ull ) goto label$53;
+	if( *(struct $8FBSYMBOL**)((uint8*)TREE$1 + 56ll) == (struct $8FBSYMBOL*)0ull) goto label$53;
 	{
 		ASTTEMPSCOPEEND( *(struct $8FBSYMBOL**)((uint8*)TREE$1 + 56ll), *(struct $8FBSYMBOL**)((uint8*)TREE$1 + 64ll) );
 	}
@@ -1438,11 +1438,11 @@ void ASTTYPEINIREMOVELASTNODE( struct $7ASTNODE* TREE$1 )
 	PREV$1 = (struct $7ASTNODE*)0ull;
 	N$1 = *(struct $7ASTNODE**)((uint8*)TREE$1 + 112ll);
 	label$62:;
-	if( N$1 == (struct $7ASTNODE*)0ull ) goto label$63;
+	if( N$1 == (struct $7ASTNODE*)0ull) goto label$63;
 	{
-		if( *(struct $7ASTNODE**)((uint8*)N$1 + 120ll) != (struct $7ASTNODE*)0ull ) goto label$65;
+		if( *(struct $7ASTNODE**)((uint8*)N$1 + 120ll) != (struct $7ASTNODE*)0ull) goto label$65;
 		{
-			if( PREV$1 == (struct $7ASTNODE*)0ull ) goto label$67;
+			if( PREV$1 == (struct $7ASTNODE*)0ull) goto label$67;
 			{
 				*(struct $7ASTNODE**)((uint8*)PREV$1 + 120ll) = (struct $7ASTNODE*)0ull;
 			}
@@ -1494,34 +1494,34 @@ struct $7ASTNODE* ASTTYPEINIADDASSIGN( struct $7ASTNODE* TREE$1, struct $7ASTNOD
 	*(struct $8FBSYMBOL**)((uint8*)N$1 + 24ll) = SYM$1;
 	*(int64*)((uint8*)N$1 + 40ll) = *(int64*)((uint8*)TREE$1 + 40ll);
 	*(int64*)((uint8*)N$1 + 48ll) = 0ll;
-	if( *(int64*)EXPR$1 != 36ll ) goto label$117;
+	if( *(int64*)EXPR$1 != 36ll) goto label$117;
 	{
 		int64 UPCAST$2;
 		UPCAST$2 = 0ll;
-		if( CHECK_UPCAST$1 == 0ll ) goto label$119;
+		if( CHECK_UPCAST$1 == 0ll) goto label$119;
 		{
-			int64 TMP$100$3;
-			if( (DTYPE$1 & 480ll) == 0ll ) goto label$120;
-			TMP$100$3 = 24ll;
+			int64 TMP$99$3;
+			if( (DTYPE$1 & 480ll) == 0ll) goto label$120;
+			TMP$99$3 = 24ll;
 			goto label$136;
 			label$120:;
-			TMP$100$3 = DTYPE$1 & 31ll;
+			TMP$99$3 = DTYPE$1 & 31ll;
 			label$136:;
-			if( TMP$100$3 != 20ll ) goto label$122;
+			if( TMP$99$3 != 20ll) goto label$122;
 			{
-				int64 TMP$101$4;
-				if( ((*(int64*)((uint8*)EXPR$1 + 8ll) & 511ll) & 480ll) == 0ll ) goto label$123;
-				TMP$101$4 = 24ll;
+				int64 TMP$100$4;
+				if( ((*(int64*)((uint8*)EXPR$1 + 8ll) & 511ll) & 480ll) == 0ll) goto label$123;
+				TMP$100$4 = 24ll;
 				goto label$137;
 				label$123:;
-				TMP$101$4 = (*(int64*)((uint8*)EXPR$1 + 8ll) & 511ll) & 31ll;
+				TMP$100$4 = (*(int64*)((uint8*)EXPR$1 + 8ll) & 511ll) & 31ll;
 				label$137:;
-				if( TMP$101$4 != 20ll ) goto label$125;
+				if( TMP$100$4 != 20ll) goto label$125;
 				{
-					if( SUBTYPE$1 == *(struct $8FBSYMBOL**)((uint8*)EXPR$1 + 16ll) ) goto label$127;
+					if( SUBTYPE$1 == *(struct $8FBSYMBOL**)((uint8*)EXPR$1 + 16ll)) goto label$127;
 					{
 						int64 vr$18 = SYMBGETUDTBASELEVEL( *(struct $8FBSYMBOL**)((uint8*)EXPR$1 + 16ll), SUBTYPE$1 );
-						if( vr$18 <= 0ll ) goto label$129;
+						if( vr$18 <= 0ll) goto label$129;
 						{
 							UPCAST$2 = -1ll;
 						}
@@ -1539,7 +1539,7 @@ struct $7ASTNODE* ASTTYPEINIADDASSIGN( struct $7ASTNODE* TREE$1, struct $7ASTNOD
 		}
 		label$119:;
 		label$118:;
-		if( UPCAST$2 == 0ll ) goto label$131;
+		if( UPCAST$2 == 0ll) goto label$131;
 		{
 			HASTTYPEINITREEMERGEUPCAST( TREE$1, N$1, &EXPR$1, SYM$1 );
 		}
@@ -1554,9 +1554,9 @@ struct $7ASTNODE* ASTTYPEINIADDASSIGN( struct $7ASTNODE* TREE$1, struct $7ASTNOD
 	goto label$116;
 	label$117:;
 	{
-		if( SYM$1 == (struct $8FBSYMBOL*)0ull ) goto label$133;
+		if( SYM$1 == (struct $8FBSYMBOL*)0ull) goto label$133;
 		{
-			if( (*(int64*)((uint8*)SYM$1 + 8ll) & 262144ll) == 0ll ) goto label$135;
+			if( (*(int64*)((uint8*)SYM$1 + 8ll) & 262144ll) == 0ll) goto label$135;
 			{
 				*(int64*)((uint8*)N$1 + 48ll) = *(int64*)((uint8*)&ENV$ + 616ll);
 			}
@@ -1656,9 +1656,9 @@ void ASTTYPEINICOPYELEMENTS( struct $7ASTNODE* TREE$1, struct $7ASTNODE* SOURCE$
 	SOURCE$1 = *(struct $7ASTNODE**)((uint8*)SOURCE$1 + 120ll);
 	I$1 = 0ll;
 	label$148:;
-	if( *(int64*)SOURCE$1 != 38ll ) goto label$149;
+	if( *(int64*)SOURCE$1 != 38ll) goto label$149;
 	{
-		if( I$1 < BEGININDEX$1 ) goto label$151;
+		if( I$1 < BEGININDEX$1) goto label$151;
 		{
 			struct $7ASTNODE* vr$5 = ASTCLONETREE( *(struct $7ASTNODE**)((uint8*)SOURCE$1 + 112ll) );
 			ASTTYPEINIADDASSIGN( TREE$1, vr$5, *(struct $8FBSYMBOL**)((uint8*)SOURCE$1 + 24ll), 2147483648ll, (struct $8FBSYMBOL*)0ull, 0ll );
@@ -1681,9 +1681,9 @@ void ASTTYPEINIREPLACEELEMENT( struct $7ASTNODE* TREE$1, int64 ELEMENT$1, struct
 	TREE$1 = *(struct $7ASTNODE**)((uint8*)TREE$1 + 120ll);
 	I$1 = 0ll;
 	label$154:;
-	if( *(int64*)TREE$1 != 38ll ) goto label$155;
+	if( *(int64*)TREE$1 != 38ll) goto label$155;
 	{
-		if( I$1 != ELEMENT$1 ) goto label$157;
+		if( I$1 != ELEMENT$1) goto label$157;
 		{
 			ASTDELTREE( *(struct $7ASTNODE**)((uint8*)TREE$1 + 112ll) );
 			*(struct $7ASTNODE**)((uint8*)TREE$1 + 112ll) = EXPR$1;
@@ -1711,14 +1711,14 @@ struct $7ASTNODE* _Z15ASTTYPEINIFLUSHP7ASTNODES0_ll( struct $7ASTNODE* TARGET$1,
 	int64 MAXSIZE$1;
 	int64 SCOPED$1;
 	SCOPED$1 = 0ll;
-	if( UPDATE_TYPEINICOUNT$1 == 0ll ) goto label$179;
+	if( UPDATE_TYPEINICOUNT$1 == 0ll) goto label$179;
 	{
 		*(int64*)((uint8*)&AST$ + 280ll) = *(int64*)((uint8*)&AST$ + 280ll) + -1ll;
 	}
 	label$179:;
 	label$178:;
 	MAXSIZE$1 = 0ll;
-	if( ((int64)-(*(int64*)TARGET$1 == 17ll) | (int64)-(*(int64*)TARGET$1 == 19ll)) == 0ll ) goto label$181;
+	if( ((int64)-(*(int64*)TARGET$1 == 17ll) | (int64)-(*(int64*)TARGET$1 == 19ll)) == 0ll) goto label$181;
 	{
 		int64 vr$8 = SYMBGETREALSIZE( *(struct $8FBSYMBOL**)((uint8*)TARGET$1 + 24ll) );
 		MAXSIZE$1 = vr$8;
@@ -1727,12 +1727,12 @@ struct $7ASTNODE* _Z15ASTTYPEINIFLUSHP7ASTNODES0_ll( struct $7ASTNODE* TARGET$1,
 	label$180:;
 	T$1 = (struct $7ASTNODE*)0ull;
 	N$1 = *(struct $7ASTNODE**)((uint8*)INITREE$1 + 112ll);
-	if( N$1 == (struct $7ASTNODE*)0ull ) goto label$183;
+	if( N$1 == (struct $7ASTNODE*)0ull) goto label$183;
 	{
-		if( *(struct $7ASTNODE**)((uint8*)N$1 + 120ll) == (struct $7ASTNODE*)0ull ) goto label$185;
+		if( *(struct $7ASTNODE**)((uint8*)N$1 + 120ll) == (struct $7ASTNODE*)0ull) goto label$185;
 		{
 			int64 vr$11 = ASTHASSIDEFX( TARGET$1 );
-			if( vr$11 == 0ll ) goto label$187;
+			if( vr$11 == 0ll) goto label$187;
 			{
 				struct $7ASTNODE* vr$13 = ASTREMSIDEFX( &TARGET$1 );
 				T$1 = vr$13;
@@ -1746,36 +1746,36 @@ struct $7ASTNODE* _Z15ASTTYPEINIFLUSHP7ASTNODES0_ll( struct $7ASTNODE* TARGET$1,
 	label$183:;
 	label$182:;
 	label$188:;
-	if( N$1 == (struct $7ASTNODE*)0ull ) goto label$189;
+	if( N$1 == (struct $7ASTNODE*)0ull) goto label$189;
 	{
 		{
-			$13AST_NODECLASS TMP$103$3;
-			TMP$103$3 = *($13AST_NODECLASS*)N$1;
-			if( TMP$103$3 != 38ll ) goto label$191;
+			$13AST_NODECLASS TMP$102$3;
+			TMP$102$3 = *($13AST_NODECLASS*)N$1;
+			if( TMP$102$3 != 38ll) goto label$191;
 			label$192:;
 			{
 				int64 vr$15 = HASTCHECKTYPEINIASSIGNMENT( N$1, MAXSIZE$1, SCOPED$1 );
-				if( vr$15 == 0ll ) goto label$194;
+				if( vr$15 == 0ll) goto label$194;
 				{
-					if( *(struct $8FBSYMBOL**)((uint8*)N$1 + 24ll) == (struct $8FBSYMBOL*)0ull ) goto label$196;
+					if( *(struct $8FBSYMBOL**)((uint8*)N$1 + 24ll) == (struct $8FBSYMBOL*)0ull) goto label$196;
 					{
-						if( *(int64*)*(struct $8FBSYMBOL**)((uint8*)N$1 + 24ll) != 12ll ) goto label$198;
+						if( *(int64*)*(struct $8FBSYMBOL**)((uint8*)N$1 + 24ll) != 12ll) goto label$198;
 						{
-							if( *(int64*)((uint8*)*(struct $8FBSYMBOL**)((uint8*)N$1 + 24ll) + 192ll) <= 0ll ) goto label$200;
+							if( *(int64*)((uint8*)*(struct $8FBSYMBOL**)((uint8*)N$1 + 24ll) + 192ll) <= 0ll) goto label$200;
 							{
-								if( *(int64*)((uint8*)*(struct $8FBSYMBOL**)((uint8*)N$1 + 24ll) + 184ll) != 0ll ) goto label$202;
+								if( *(int64*)((uint8*)*(struct $8FBSYMBOL**)((uint8*)N$1 + 24ll) + 184ll) != 0ll) goto label$202;
 								{
-									int64 TMP$104$9;
+									int64 TMP$103$9;
 									struct $7ASTNODE* vr$26 = ASTCLONETREE( TARGET$1 );
 									struct $7ASTNODE* vr$27 = _Z19ASTBUILDDEREFADDROFP7ASTNODExlP8FBSYMBOLS2_( vr$26, *(int64*)((uint8*)N$1 + 40ll), *(int64*)((uint8*)N$1 + 8ll), *(struct $8FBSYMBOL**)((uint8*)N$1 + 16ll), (struct $8FBSYMBOL*)0ull );
 									L$1 = vr$27;
-									if( (*(int64*)((uint8*)*(struct $8FBSYMBOL**)((uint8*)N$1 + 24ll) + 56ll) & 480ll) == 0ll ) goto label$203;
-									TMP$104$9 = 24ll;
+									if( (*(int64*)((uint8*)*(struct $8FBSYMBOL**)((uint8*)N$1 + 24ll) + 56ll) & 480ll) == 0ll) goto label$203;
+									TMP$103$9 = 24ll;
 									goto label$219;
 									label$203:;
-									TMP$104$9 = *(int64*)((uint8*)*(struct $8FBSYMBOL**)((uint8*)N$1 + 24ll) + 56ll) & 31ll;
+									TMP$103$9 = *(int64*)((uint8*)*(struct $8FBSYMBOL**)((uint8*)N$1 + 24ll) + 56ll) & 31ll;
 									label$219:;
-									struct $7ASTNODE* vr$35 = ASTNEWCONSTI( *(int64*)(((int64)(struct $13SYMB_DATATYPE*)SYMB_DTYPETB$ + (TMP$104$9 * 56ll)) + 8ll), 8ll, (struct $8FBSYMBOL*)0ull );
+									struct $7ASTNODE* vr$35 = ASTNEWCONSTI( *(int64*)(((int64)(struct $13SYMB_DATATYPE*)SYMB_DTYPETB$ + (TMP$103$9 * 56ll)) + 8ll), 8ll, (struct $8FBSYMBOL*)0ull );
 									struct $7ASTNODE* vr$36 = ASTNEWMEM( 108ll, L$1, vr$35, 0ll, 0ll );
 									L$1 = vr$36;
 									struct $7ASTNODE* vr$37 = ASTNEWLINK( T$1, L$1, 0ll );
@@ -1805,11 +1805,11 @@ struct $7ASTNODE* _Z15ASTTYPEINIFLUSHP7ASTNODES0_ll( struct $7ASTNODE* TARGET$1,
 			}
 			goto label$190;
 			label$191:;
-			if( TMP$103$3 != 37ll ) goto label$204;
+			if( TMP$102$3 != 37ll) goto label$204;
 			label$205:;
 			{
 				int64 vr$48 = HASTCHECKTYPEINIASSIGNMENT( N$1, MAXSIZE$1, SCOPED$1 );
-				if( vr$48 == 0ll ) goto label$207;
+				if( vr$48 == 0ll) goto label$207;
 				{
 					struct $7ASTNODE* vr$52 = ASTCLONETREE( TARGET$1 );
 					struct $7ASTNODE* vr$53 = _Z19ASTBUILDDEREFADDROFP7ASTNODExlP8FBSYMBOLS2_( vr$52, *(int64*)((uint8*)N$1 + 40ll), *(int64*)((uint8*)N$1 + 8ll), *(struct $8FBSYMBOL**)((uint8*)N$1 + 16ll), (struct $8FBSYMBOL*)0ull );
@@ -1825,11 +1825,11 @@ struct $7ASTNODE* _Z15ASTTYPEINIFLUSHP7ASTNODES0_ll( struct $7ASTNODE* TARGET$1,
 			}
 			goto label$190;
 			label$204:;
-			if( TMP$103$3 != 39ll ) goto label$208;
+			if( TMP$102$3 != 39ll) goto label$208;
 			label$209:;
 			{
 				int64 vr$58 = HASTCHECKTYPEINIASSIGNMENT( N$1, MAXSIZE$1, SCOPED$1 );
-				if( vr$58 == 0ll ) goto label$211;
+				if( vr$58 == 0ll) goto label$211;
 				{
 					struct $7ASTNODE* vr$63 = ASTCLONETREE( TARGET$1 );
 					struct $7ASTNODE* vr$64 = _Z19ASTBUILDDEREFADDROFP7ASTNODExlP8FBSYMBOLS2_( vr$63, *(int64*)((uint8*)N$1 + 40ll), *(int64*)((uint8*)N$1 + 8ll), *(struct $8FBSYMBOL**)((uint8*)N$1 + 16ll), *(struct $8FBSYMBOL**)((uint8*)N$1 + 24ll) );
@@ -1844,7 +1844,7 @@ struct $7ASTNODE* _Z15ASTTYPEINIFLUSHP7ASTNODES0_ll( struct $7ASTNODE* TARGET$1,
 			}
 			goto label$190;
 			label$208:;
-			if( TMP$103$3 != 40ll ) goto label$212;
+			if( TMP$102$3 != 40ll) goto label$212;
 			label$213:;
 			{
 				struct $7ASTNODE* vr$68 = HCALLCTORLIST( T$1, N$1, TARGET$1 );
@@ -1852,14 +1852,14 @@ struct $7ASTNODE* _Z15ASTTYPEINIFLUSHP7ASTNODES0_ll( struct $7ASTNODE* TARGET$1,
 			}
 			goto label$190;
 			label$212:;
-			if( TMP$103$3 != 41ll ) goto label$214;
+			if( TMP$102$3 != 41ll) goto label$214;
 			label$215:;
 			{
 				SCOPED$1 = SCOPED$1 + 1ll;
 			}
 			goto label$190;
 			label$214:;
-			if( TMP$103$3 != 42ll ) goto label$216;
+			if( TMP$102$3 != 42ll) goto label$216;
 			label$217:;
 			{
 				SCOPED$1 = SCOPED$1 + -1ll;
@@ -1901,29 +1901,29 @@ void ASTLOADSTATICINITIALIZER( struct $7ASTNODE* TREE$1, struct $8FBSYMBOL* BASE
 	label$253:;
 	struct $7ASTNODE* N$1;
 	struct $7ASTNODE* NXT$1;
-	(*(tmp$44*)((uint8*)&IR$ + 344ll))( BASESYM$1 );
+	(*(tmp$43*)((uint8*)&IR$ + 344ll))( BASESYM$1 );
 	N$1 = *(struct $7ASTNODE**)((uint8*)TREE$1 + 112ll);
 	label$255:;
-	if( N$1 == (struct $7ASTNODE*)0ull ) goto label$256;
+	if( N$1 == (struct $7ASTNODE*)0ull) goto label$256;
 	{
 		NXT$1 = *(struct $7ASTNODE**)((uint8*)N$1 + 120ll);
 		{
-			uint64 TMP$108$3;
-			TMP$108$3 = *(uint64*)N$1;
+			uint64 TMP$107$3;
+			TMP$107$3 = *(uint64*)N$1;
 			goto label$258;
 			label$259:;
 			{
-				(*(tmp$68*)((uint8*)&IR$ + 400ll))( *(int64*)((uint8*)N$1 + 48ll), 0ll );
+				(*(tmp$67*)((uint8*)&IR$ + 400ll))( *(int64*)((uint8*)N$1 + 48ll), 0ll );
 			}
 			goto label$257;
 			label$260:;
 			{
-				(*(tmp$69*)((uint8*)&IR$ + 408ll))( *(struct $8FBSYMBOL**)((uint8*)N$1 + 24ll), *(int64*)((uint8*)N$1 + 40ll) );
+				(*(tmp$68*)((uint8*)&IR$ + 408ll))( *(struct $8FBSYMBOL**)((uint8*)N$1 + 24ll), *(int64*)((uint8*)N$1 + 40ll) );
 			}
 			goto label$257;
 			label$261:;
 			{
-				(*(tmp$40*)((uint8*)&IR$ + 416ll))(  );
+				(*(tmp$39*)((uint8*)&IR$ + 416ll))(  );
 			}
 			goto label$257;
 			label$262:;
@@ -1932,7 +1932,7 @@ void ASTLOADSTATICINITIALIZER( struct $7ASTNODE* TREE$1, struct $8FBSYMBOL* BASE
 			}
 			goto label$257;
 			label$258:;
-			static const void* tmp$109[6ll] = {
+			static const void* tmp$108[6ll] = {
 				&&label$259,
 				&&label$262,
 				&&label$262,
@@ -1940,8 +1940,8 @@ void ASTLOADSTATICINITIALIZER( struct $7ASTNODE* TREE$1, struct $8FBSYMBOL* BASE
 				&&label$260,
 				&&label$261,
 			};
-			if( (TMP$108$3 - 37ull) > 5ull ) goto label$262;
-			goto *tmp$109[TMP$108$3 - 37ull];
+			if( (TMP$107$3 - 37ull) > 5ull ) goto label$262;
+			goto *tmp$108[TMP$107$3 - 37ull];
 			label$257:;
 		}
 		ASTDELNODE( N$1 );
@@ -1949,7 +1949,7 @@ void ASTLOADSTATICINITIALIZER( struct $7ASTNODE* TREE$1, struct $8FBSYMBOL* BASE
 	}
 	goto label$255;
 	label$256:;
-	(*(tmp$44*)((uint8*)&IR$ + 352ll))( BASESYM$1 );
+	(*(tmp$43*)((uint8*)&IR$ + 352ll))( BASESYM$1 );
 	ASTDELNODE( TREE$1 );
 	label$254:;
 }
@@ -1962,16 +1962,16 @@ int64 ASTTYPEINIISCONST( struct $7ASTNODE* TREE$1 )
 	struct $7ASTNODE* N$1;
 	N$1 = *(struct $7ASTNODE**)((uint8*)TREE$1 + 112ll);
 	label$292:;
-	if( N$1 == (struct $7ASTNODE*)0ull ) goto label$293;
+	if( N$1 == (struct $7ASTNODE*)0ull) goto label$293;
 	{
 		{
-			$13AST_NODECLASS TMP$114$3;
-			TMP$114$3 = *($13AST_NODECLASS*)N$1;
-			if( TMP$114$3 != 38ll ) goto label$295;
+			$13AST_NODECLASS TMP$113$3;
+			TMP$113$3 = *($13AST_NODECLASS*)N$1;
+			if( TMP$113$3 != 38ll) goto label$295;
 			label$296:;
 			{
 				int64 vr$3 = HEXPRISCONST( N$1 );
-				if( vr$3 != 0ll ) goto label$298;
+				if( vr$3 != 0ll) goto label$298;
 				{
 					fb$result$1 = 0ll;
 					goto label$291;
@@ -1981,9 +1981,9 @@ int64 ASTTYPEINIISCONST( struct $7ASTNODE* TREE$1 )
 			}
 			goto label$294;
 			label$295:;
-			if( TMP$114$3 == 39ll ) goto label$300;
+			if( TMP$113$3 == 39ll) goto label$300;
 			label$301:;
-			if( TMP$114$3 != 40ll ) goto label$299;
+			if( TMP$113$3 != 40ll) goto label$299;
 			label$300:;
 			{
 				fb$result$1 = 0ll;
@@ -2007,16 +2007,16 @@ int64 ASTTYPEINIUSESLOCALS( struct $7ASTNODE* N$1, int64 IGNOREATTRIB$1 )
 	int64 fb$result$1;
 	__builtin_memset( &fb$result$1, 0, 8ll );
 	label$302:;
-	if( N$1 != (struct $7ASTNODE*)0ull ) goto label$305;
+	if( N$1 != (struct $7ASTNODE*)0ull) goto label$305;
 	{
 		fb$result$1 = 0ll;
 		goto label$303;
 	}
 	label$305:;
 	label$304:;
-	if( *(int64*)N$1 != 17ll ) goto label$307;
+	if( *(int64*)N$1 != 17ll) goto label$307;
 	{
-		if( ((int64)-((*(int64*)((uint8*)*(struct $8FBSYMBOL**)((uint8*)N$1 + 24ll) + 8ll) & 128ll) != 0ll) & (int64)-((*(int64*)((uint8*)*(struct $8FBSYMBOL**)((uint8*)N$1 + 24ll) + 8ll) & IGNOREATTRIB$1) == 0ll)) == 0ll ) goto label$309;
+		if( ((int64)-((*(int64*)((uint8*)*(struct $8FBSYMBOL**)((uint8*)N$1 + 24ll) + 8ll) & 128ll) != 0ll) & (int64)-((*(int64*)((uint8*)*(struct $8FBSYMBOL**)((uint8*)N$1 + 24ll) + 8ll) & IGNOREATTRIB$1) == 0ll)) == 0ll) goto label$309;
 		{
 			fb$result$1 = -1ll;
 			goto label$303;
@@ -2040,7 +2040,7 @@ struct $7ASTNODE* ASTTYPEINIUPDATE( struct $7ASTNODE* TREE$1 )
 	label$318:;
 	struct $7ASTNODE* TEMPVARINITCODE$1;
 	struct $7ASTNODE TREEPARENT$1;
-	if( *(int64*)((uint8*)&AST$ + 280ll) > 0ll ) goto label$321;
+	if( *(int64*)((uint8*)&AST$ + 280ll) > 0ll) goto label$321;
 	{
 		fb$result$1 = TREE$1;
 		goto label$319;
@@ -2071,7 +2071,7 @@ struct $7ASTNODE* ASTTYPEINICLONE( struct $7ASTNODE* TREE$1 )
 	struct $7ASTNODE* CLONETREE$1;
 	struct $7ASTNODE* vr$1 = ASTCLONETREE( TREE$1 );
 	CLONETREE$1 = vr$1;
-	if( *(struct $8FBSYMBOL**)((uint8*)TREE$1 + 56ll) == (struct $8FBSYMBOL*)0ull ) goto label$325;
+	if( *(struct $8FBSYMBOL**)((uint8*)TREE$1 + 56ll) == (struct $8FBSYMBOL*)0ull) goto label$325;
 	{
 		ASTTEMPSCOPECLONE( *(struct $8FBSYMBOL**)((uint8*)TREE$1 + 56ll), CLONETREE$1 );
 	}
@@ -2088,19 +2088,19 @@ struct $7ASTNODE* ASTTYPEINITRYREMOVE( struct $7ASTNODE* TREE$1 )
 	__builtin_memset( &fb$result$1, 0, 8ll );
 	label$326:;
 	fb$result$1 = TREE$1;
-	if( *(struct $7ASTNODE**)((uint8*)*(struct $7ASTNODE**)((uint8*)TREE$1 + 112ll) + 120ll) == (struct $7ASTNODE*)0ull ) goto label$329;
+	if( *(struct $7ASTNODE**)((uint8*)*(struct $7ASTNODE**)((uint8*)TREE$1 + 112ll) + 120ll) == (struct $7ASTNODE*)0ull) goto label$329;
 	{
 		goto label$327;
 	}
 	label$329:;
 	label$328:;
-	if( *(int64*)*(struct $7ASTNODE**)((uint8*)TREE$1 + 112ll) == 38ll ) goto label$331;
+	if( *(int64*)*(struct $7ASTNODE**)((uint8*)TREE$1 + 112ll) == 38ll) goto label$331;
 	{
 		goto label$327;
 	}
 	label$331:;
 	label$330:;
-	if( ((int64)-((*(int64*)((uint8*)TREE$1 + 8ll) & 511ll) != (*(int64*)((uint8*)*(struct $7ASTNODE**)((uint8*)TREE$1 + 112ll) + 8ll) & 511ll)) | (int64)-(*(struct $8FBSYMBOL**)((uint8*)TREE$1 + 16ll) != *(struct $8FBSYMBOL**)((uint8*)*(struct $7ASTNODE**)((uint8*)TREE$1 + 112ll) + 16ll))) == 0ll ) goto label$333;
+	if( ((int64)-((*(int64*)((uint8*)TREE$1 + 8ll) & 511ll) != (*(int64*)((uint8*)*(struct $7ASTNODE**)((uint8*)TREE$1 + 112ll) + 8ll) & 511ll)) | (int64)-(*(struct $8FBSYMBOL**)((uint8*)TREE$1 + 16ll) != *(struct $8FBSYMBOL**)((uint8*)*(struct $7ASTNODE**)((uint8*)TREE$1 + 112ll) + 16ll))) == 0ll) goto label$333;
 	{
 		goto label$327;
 	}
@@ -2117,7 +2117,7 @@ struct $7ASTNODE* ASTTYPEINITRYREMOVE( struct $7ASTNODE* TREE$1 )
 void ASTTYPEINIDELETE( struct $7ASTNODE* TREE$1 )
 {
 	label$334:;
-	if( *(struct $8FBSYMBOL**)((uint8*)TREE$1 + 56ll) == (struct $8FBSYMBOL*)0ull ) goto label$337;
+	if( *(struct $8FBSYMBOL**)((uint8*)TREE$1 + 56ll) == (struct $8FBSYMBOL*)0ull) goto label$337;
 	{
 		ASTTEMPSCOPEDELETE( *(struct $8FBSYMBOL**)((uint8*)TREE$1 + 56ll) );
 		*(struct $8FBSYMBOL**)((uint8*)TREE$1 + 56ll) = (struct $8FBSYMBOL*)0ull;
@@ -2139,33 +2139,33 @@ static void _ZN11TSTRSETITEMaSERKS_( struct $11TSTRSETITEM* THIS$1, struct $11TS
 
 static void HASTTYPEINIMAYBECONVERTUPCAST( struct $7ASTNODE* N$1, struct $7ASTNODE* L$1 )
 {
-	int64 TMP$96$1;
+	int64 TMP$95$1;
 	label$18:;
 	struct $8FBSYMBOL* SYM$1;
 	int64 MAXSIZE$1;
 	SYM$1 = *(struct $8FBSYMBOL**)((uint8*)N$1 + 24ll);
 	MAXSIZE$1 = *(int64*)((uint8*)SYM$1 + 80ll);
-	if( ((*(int64*)((uint8*)N$1 + 8ll) & 511ll) & 480ll) == 0ll ) goto label$20;
-	TMP$96$1 = 24ll;
+	if( ((*(int64*)((uint8*)N$1 + 8ll) & 511ll) & 480ll) == 0ll) goto label$20;
+	TMP$95$1 = 24ll;
 	goto label$338;
 	label$20:;
-	TMP$96$1 = (*(int64*)((uint8*)N$1 + 8ll) & 511ll) & 31ll;
+	TMP$95$1 = (*(int64*)((uint8*)N$1 + 8ll) & 511ll) & 31ll;
 	label$338:;
-	if( TMP$96$1 != 20ll ) goto label$22;
+	if( TMP$95$1 != 20ll) goto label$22;
 	{
-		int64 TMP$97$2;
-		if( ((*(int64*)((uint8*)L$1 + 8ll) & 511ll) & 480ll) == 0ll ) goto label$23;
-		TMP$97$2 = 24ll;
+		int64 TMP$96$2;
+		if( ((*(int64*)((uint8*)L$1 + 8ll) & 511ll) & 480ll) == 0ll) goto label$23;
+		TMP$96$2 = 24ll;
 		goto label$339;
 		label$23:;
-		TMP$97$2 = (*(int64*)((uint8*)L$1 + 8ll) & 511ll) & 31ll;
+		TMP$96$2 = (*(int64*)((uint8*)L$1 + 8ll) & 511ll) & 31ll;
 		label$339:;
-		if( TMP$97$2 != 20ll ) goto label$25;
+		if( TMP$96$2 != 20ll) goto label$25;
 		{
-			if( *(struct $8FBSYMBOL**)((uint8*)N$1 + 16ll) == *(struct $8FBSYMBOL**)((uint8*)L$1 + 16ll) ) goto label$27;
+			if( *(struct $8FBSYMBOL**)((uint8*)N$1 + 16ll) == *(struct $8FBSYMBOL**)((uint8*)L$1 + 16ll)) goto label$27;
 			{
 				int64 vr$18 = SYMBGETUDTBASELEVEL( *(struct $8FBSYMBOL**)((uint8*)L$1 + 16ll), *(struct $8FBSYMBOL**)((uint8*)N$1 + 16ll) );
-				if( vr$18 <= 0ll ) goto label$29;
+				if( vr$18 <= 0ll) goto label$29;
 				{
 					*(struct $8FBSYMBOL**)((uint8*)L$1 + 16ll) = *(struct $8FBSYMBOL**)((uint8*)N$1 + 16ll);
 					*(int64*)((uint8*)L$1 + 48ll) = MAXSIZE$1;
@@ -2173,21 +2173,21 @@ static void HASTTYPEINIMAYBECONVERTUPCAST( struct $7ASTNODE* N$1, struct $7ASTNO
 					*(int64*)((uint8*)*(struct $7ASTNODE**)((uint8*)L$1 + 112ll) + 48ll) = MAXSIZE$1;
 					*(struct $8FBSYMBOL**)((uint8*)*(struct $7ASTNODE**)((uint8*)L$1 + 112ll) + 16ll) = *(struct $8FBSYMBOL**)((uint8*)N$1 + 16ll);
 					{
-						$13AST_NODECLASS TMP$98$6;
-						TMP$98$6 = *($13AST_NODECLASS*)*(struct $7ASTNODE**)((uint8*)L$1 + 112ll);
-						if( TMP$98$6 != 36ll ) goto label$31;
+						$13AST_NODECLASS TMP$97$6;
+						TMP$97$6 = *($13AST_NODECLASS*)*(struct $7ASTNODE**)((uint8*)L$1 + 112ll);
+						if( TMP$97$6 != 36ll) goto label$31;
 						label$32:;
 						{
 						}
 						goto label$30;
 						label$31:;
-						if( TMP$98$6 != 38ll ) goto label$33;
+						if( TMP$97$6 != 38ll) goto label$33;
 						label$34:;
 						{
 						}
 						goto label$30;
 						label$33:;
-						if( TMP$98$6 != 41ll ) goto label$35;
+						if( TMP$97$6 != 41ll) goto label$35;
 						label$36:;
 						{
 						}
@@ -2219,7 +2219,7 @@ static struct $7ASTNODE* HADDNODE( struct $7ASTNODE* TREE$1, int64 CLASS_$1, str
 	__builtin_memset( &fb$result$1, 0, 8ll );
 	label$54:;
 	struct $7ASTNODE* N$1;
-	if( ((int64)-(DTYPE$1 == 2147483648ll) & (int64)-(SYM$1 != (struct $8FBSYMBOL*)0ull)) == 0ll ) goto label$57;
+	if( ((int64)-(DTYPE$1 == 2147483648ll) & (int64)-(SYM$1 != (struct $8FBSYMBOL*)0ull)) == 0ll) goto label$57;
 	{
 		DTYPE$1 = *(int64*)((uint8*)SYM$1 + 56ll);
 		SUBTYPE$1 = *(struct $8FBSYMBOL**)((uint8*)SYM$1 + 64ll);
@@ -2228,7 +2228,7 @@ static struct $7ASTNODE* HADDNODE( struct $7ASTNODE* TREE$1, int64 CLASS_$1, str
 	label$56:;
 	struct $7ASTNODE* vr$6 = ASTNEWNODE( CLASS_$1, DTYPE$1, SUBTYPE$1 );
 	N$1 = vr$6;
-	if( *(struct $7ASTNODE**)((uint8*)TREE$1 + 120ll) == (struct $7ASTNODE*)0ull ) goto label$59;
+	if( *(struct $7ASTNODE**)((uint8*)TREE$1 + 120ll) == (struct $7ASTNODE*)0ull) goto label$59;
 	{
 		*(struct $7ASTNODE**)((uint8*)*(struct $7ASTNODE**)((uint8*)TREE$1 + 120ll) + 120ll) = N$1;
 	}
@@ -2249,7 +2249,7 @@ static int64 HASTINITREEISCONSTANT( struct $7ASTNODE* TREE$1 )
 	int64 fb$result$1;
 	__builtin_memset( &fb$result$1, 0, 8ll );
 	label$70:;
-	if( TREE$1 != (struct $7ASTNODE*)0ull ) goto label$73;
+	if( TREE$1 != (struct $7ASTNODE*)0ull) goto label$73;
 	{
 		fb$result$1 = -1ll;
 		goto label$71;
@@ -2257,27 +2257,27 @@ static int64 HASTINITREEISCONSTANT( struct $7ASTNODE* TREE$1 )
 	label$73:;
 	label$72:;
 	{
-		$13AST_NODECLASS TMP$99$2;
-		TMP$99$2 = *($13AST_NODECLASS*)TREE$1;
-		if( TMP$99$2 != 36ll ) goto label$75;
+		$13AST_NODECLASS TMP$98$2;
+		TMP$98$2 = *($13AST_NODECLASS*)TREE$1;
+		if( TMP$98$2 != 36ll) goto label$75;
 		label$76:;
 		{
 		}
 		goto label$74;
 		label$75:;
-		if( TMP$99$2 != 37ll ) goto label$77;
+		if( TMP$98$2 != 37ll) goto label$77;
 		label$78:;
 		{
 		}
 		goto label$74;
 		label$77:;
-		if( TMP$99$2 != 38ll ) goto label$79;
+		if( TMP$98$2 != 38ll) goto label$79;
 		label$80:;
 		{
 		}
 		goto label$74;
 		label$79:;
-		if( TMP$99$2 != 39ll ) goto label$81;
+		if( TMP$98$2 != 39ll) goto label$81;
 		label$82:;
 		{
 			fb$result$1 = 0ll;
@@ -2285,7 +2285,7 @@ static int64 HASTINITREEISCONSTANT( struct $7ASTNODE* TREE$1 )
 		}
 		goto label$74;
 		label$81:;
-		if( TMP$99$2 != 40ll ) goto label$83;
+		if( TMP$98$2 != 40ll) goto label$83;
 		label$84:;
 		{
 			fb$result$1 = 0ll;
@@ -2293,19 +2293,19 @@ static int64 HASTINITREEISCONSTANT( struct $7ASTNODE* TREE$1 )
 		}
 		goto label$74;
 		label$83:;
-		if( TMP$99$2 != 41ll ) goto label$85;
+		if( TMP$98$2 != 41ll) goto label$85;
 		label$86:;
 		{
 		}
 		goto label$74;
 		label$85:;
-		if( TMP$99$2 != 42ll ) goto label$87;
+		if( TMP$98$2 != 42ll) goto label$87;
 		label$88:;
 		{
 		}
 		goto label$74;
 		label$87:;
-		if( TMP$99$2 != 9ll ) goto label$89;
+		if( TMP$98$2 != 9ll) goto label$89;
 		label$90:;
 		{
 			fb$result$1 = 0ll;
@@ -2313,7 +2313,7 @@ static int64 HASTINITREEISCONSTANT( struct $7ASTNODE* TREE$1 )
 		}
 		goto label$74;
 		label$89:;
-		if( TMP$99$2 != 10ll ) goto label$91;
+		if( TMP$98$2 != 10ll) goto label$91;
 		label$92:;
 		{
 			fb$result$1 = 0ll;
@@ -2321,7 +2321,7 @@ static int64 HASTINITREEISCONSTANT( struct $7ASTNODE* TREE$1 )
 		}
 		goto label$74;
 		label$91:;
-		if( TMP$99$2 != 17ll ) goto label$93;
+		if( TMP$98$2 != 17ll) goto label$93;
 		label$94:;
 		{
 			fb$result$1 = -1ll;
@@ -2329,7 +2329,7 @@ static int64 HASTINITREEISCONSTANT( struct $7ASTNODE* TREE$1 )
 		}
 		goto label$74;
 		label$93:;
-		if( TMP$99$2 != 16ll ) goto label$95;
+		if( TMP$98$2 != 16ll) goto label$95;
 		label$96:;
 		{
 			fb$result$1 = -1ll;
@@ -2344,10 +2344,10 @@ static int64 HASTINITREEISCONSTANT( struct $7ASTNODE* TREE$1 )
 		label$97:;
 		label$74:;
 	}
-	if( *(struct $7ASTNODE**)((uint8*)TREE$1 + 112ll) == (struct $7ASTNODE*)0ull ) goto label$99;
+	if( *(struct $7ASTNODE**)((uint8*)TREE$1 + 112ll) == (struct $7ASTNODE*)0ull) goto label$99;
 	{
 		int64 vr$4 = HASTINITREEISCONSTANT( *(struct $7ASTNODE**)((uint8*)TREE$1 + 112ll) );
-		if( vr$4 != 0ll ) goto label$101;
+		if( vr$4 != 0ll) goto label$101;
 		{
 			fb$result$1 = 0ll;
 			goto label$71;
@@ -2357,10 +2357,10 @@ static int64 HASTINITREEISCONSTANT( struct $7ASTNODE* TREE$1 )
 	}
 	label$99:;
 	label$98:;
-	if( *(struct $7ASTNODE**)((uint8*)TREE$1 + 120ll) == (struct $7ASTNODE*)0ull ) goto label$103;
+	if( *(struct $7ASTNODE**)((uint8*)TREE$1 + 120ll) == (struct $7ASTNODE*)0ull) goto label$103;
 	{
 		int64 vr$7 = HASTINITREEISCONSTANT( *(struct $7ASTNODE**)((uint8*)TREE$1 + 120ll) );
-		if( vr$7 != 0ll ) goto label$105;
+		if( vr$7 != 0ll) goto label$105;
 		{
 			fb$result$1 = 0ll;
 			goto label$71;
@@ -2381,7 +2381,7 @@ static void HASTTYPEINITREEMERGEUPCAST( struct $7ASTNODE* TREE$1, struct $7ASTNO
 	label$106:;
 	int64 MAXSIZE$1;
 	MAXSIZE$1 = *(int64*)((uint8*)SYM$1 + 80ll);
-	if( (*(int64*)((uint8*)TREE$1 + 40ll) + *(int64*)((uint8*)*EXPR$1 + 48ll)) <= MAXSIZE$1 ) goto label$109;
+	if( (*(int64*)((uint8*)TREE$1 + 40ll) + *(int64*)((uint8*)*EXPR$1 + 48ll)) <= MAXSIZE$1) goto label$109;
 	{
 		int64 ISCONST$2;
 		int64 vr$6 = HASTINITREEISCONSTANT( *EXPR$1 );
@@ -2389,12 +2389,12 @@ static void HASTTYPEINITREEMERGEUPCAST( struct $7ASTNODE* TREE$1, struct $7ASTNO
 		int64 HASDTOR$2;
 		struct $8FBSYMBOL* vr$9 = SYMBGETCOMPDTOR1( *(struct $8FBSYMBOL**)((uint8*)TREE$1 + 16ll) );
 		HASDTOR$2 = (int64)-(vr$9 != (struct $8FBSYMBOL*)0ull);
-		if( ((int64)-(ISCONST$2 == 0ll) | (int64)-(HASDTOR$2 == -1ll)) == 0ll ) goto label$111;
+		if( ((int64)-(ISCONST$2 == 0ll) | (int64)-(HASDTOR$2 == -1ll)) == 0ll) goto label$111;
 		{
 			struct $7ASTNODE* L$3;
 			struct $7ASTNODE* vr$18 = ASTNEWCONV( *(int64*)((uint8*)SYM$1 + 56ll) & 511ll, *(struct $8FBSYMBOL**)((uint8*)SYM$1 + 64ll), *EXPR$1, 0ll, (int64*)0ull );
 			L$3 = vr$18;
-			if( L$3 == (struct $7ASTNODE*)0ull ) goto label$113;
+			if( L$3 == (struct $7ASTNODE*)0ull) goto label$113;
 			{
 				*(struct $7ASTNODE**)((uint8*)N$1 + 112ll) = L$3;
 			}
@@ -2425,7 +2425,7 @@ static struct $7ASTNODE* HCALLCTORLIST( struct $7ASTNODE* T$1, struct $7ASTNODE*
 	struct $7ASTNODE* vr$5 = ASTCLONETREE( TARGET$1 );
 	struct $7ASTNODE* vr$6 = _Z19ASTBUILDDEREFADDROFP7ASTNODExlP8FBSYMBOLS2_( vr$5, *(int64*)((uint8*)N$1 + 40ll), *(int64*)((uint8*)N$1 + 8ll), *(struct $8FBSYMBOL**)((uint8*)N$1 + 16ll), *(struct $8FBSYMBOL**)((uint8*)N$1 + 24ll) );
 	FLDEXPR$1 = vr$6;
-	if( *(int64*)((uint8*)N$1 + 48ll) <= 1ll ) goto label$161;
+	if( *(int64*)((uint8*)N$1 + 48ll) <= 1ll) goto label$161;
 	{
 		struct $8FBSYMBOL* CNT$2;
 		__builtin_memset( &CNT$2, 0, 8ll );
@@ -2474,15 +2474,15 @@ static int64 HASTCHECKTYPEINIASSIGNMENT( struct $7ASTNODE* N$1, int64 MAXSIZE$1,
 	int64 fb$result$1;
 	__builtin_memset( &fb$result$1, 0, 8ll );
 	label$162:;
-	if( MAXSIZE$1 <= 0ll ) goto label$165;
+	if( MAXSIZE$1 <= 0ll) goto label$165;
 	{
 		{
-			$13AST_NODECLASS TMP$102$3;
-			TMP$102$3 = *($13AST_NODECLASS*)N$1;
-			if( TMP$102$3 != 37ll ) goto label$167;
+			$13AST_NODECLASS TMP$101$3;
+			TMP$101$3 = *($13AST_NODECLASS*)N$1;
+			if( TMP$101$3 != 37ll) goto label$167;
 			label$168:;
 			{
-				if( (*(int64*)((uint8*)N$1 + 40ll) + *(int64*)((uint8*)N$1 + 48ll)) <= MAXSIZE$1 ) goto label$170;
+				if( (*(int64*)((uint8*)N$1 + 40ll) + *(int64*)((uint8*)N$1 + 48ll)) <= MAXSIZE$1) goto label$170;
 				{
 					fb$result$1 = 0ll;
 					goto label$163;
@@ -2493,9 +2493,9 @@ static int64 HASTCHECKTYPEINIASSIGNMENT( struct $7ASTNODE* N$1, int64 MAXSIZE$1,
 			goto label$166;
 			label$167:;
 			{
-				if( (*(int64*)((uint8*)N$1 + 40ll) + *(int64*)((uint8*)N$1 + 48ll)) <= MAXSIZE$1 ) goto label$173;
+				if( (*(int64*)((uint8*)N$1 + 40ll) + *(int64*)((uint8*)N$1 + 48ll)) <= MAXSIZE$1) goto label$173;
 				{
-					if( (*(int64*)((uint8*)&ENV$ + 408ll) & 1024ll) == 0ll ) goto label$175;
+					if( (*(int64*)((uint8*)&ENV$ + 408ll) & 1024ll) == 0ll) goto label$175;
 					{
 						ERRREPORTWARN( 49ll, (char*)0ull, 1ll, (char*)0ull );
 					}
@@ -2524,7 +2524,7 @@ static void HFLUSHEXPRSTATIC( struct $7ASTNODE* N$1, struct $8FBSYMBOL* BASESYM$
 	label$222:;
 	struct $8FBSYMBOL* SYM$1;
 	SYM$1 = *(struct $8FBSYMBOL**)((uint8*)N$1 + 24ll);
-	if( SYM$1 != (struct $8FBSYMBOL*)0ull ) goto label$225;
+	if( SYM$1 != (struct $8FBSYMBOL*)0ull) goto label$225;
 	{
 		SYM$1 = BASESYM$1;
 	}
@@ -2534,7 +2534,7 @@ static void HFLUSHEXPRSTATIC( struct $7ASTNODE* N$1, struct $8FBSYMBOL* BASESYM$
 	SDTYPE$1 = *(int64*)((uint8*)SYM$1 + 56ll) & 511ll;
 	$11FB_DATATYPE SFULLDTYPE$1;
 	SFULLDTYPE$1 = *($11FB_DATATYPE*)((uint8*)SYM$1 + 56ll);
-	if( (*(int64*)((uint8*)SYM$1 + 8ll) & 262144ll) == 0ll ) goto label$227;
+	if( (*(int64*)((uint8*)SYM$1 + 8ll) & 262144ll) == 0ll) goto label$227;
 	{
 		SDTYPE$1 = (((SDTYPE$1 & 31ll) | ((SDTYPE$1 & 480ll) + 32ll)) | ((SDTYPE$1 & 261632ll) << (1ll & 63ll))) | (SDTYPE$1 & 32505856ll);
 		SFULLDTYPE$1 = (((SFULLDTYPE$1 & 31ll) | ((SFULLDTYPE$1 & 480ll) + 32ll)) | ((SFULLDTYPE$1 & 261632ll) << (1ll & 63ll))) | (SFULLDTYPE$1 & 32505856ll);
@@ -2548,9 +2548,9 @@ static void HFLUSHEXPRSTATIC( struct $7ASTNODE* N$1, struct $8FBSYMBOL* BASESYM$
 	struct $8FBSYMBOL* LITSYM$1;
 	LITSYM$1 = (struct $8FBSYMBOL*)0ull;
 	{
-		if( EDTYPE$1 == 4ll ) goto label$230;
+		if( EDTYPE$1 == 4ll) goto label$230;
 		label$231:;
-		if( EDTYPE$1 != 7ll ) goto label$229;
+		if( EDTYPE$1 != 7ll) goto label$229;
 		label$230:;
 		{
 			struct $8FBSYMBOL* vr$27 = ASTGETSTRLITSYMBOL( EXPR$1 );
@@ -2559,11 +2559,11 @@ static void HFLUSHEXPRSTATIC( struct $7ASTNODE* N$1, struct $8FBSYMBOL* BASESYM$
 		label$229:;
 		label$228:;
 	}
-	if( LITSYM$1 != (struct $8FBSYMBOL*)0ull ) goto label$233;
+	if( LITSYM$1 != (struct $8FBSYMBOL*)0ull) goto label$233;
 	{
-		if( *(int64*)EXPR$1 != 23ll ) goto label$235;
+		if( *(int64*)EXPR$1 != 23ll) goto label$235;
 		{
-			(*(tmp$65*)((uint8*)&IR$ + 376ll))( SYM$1, *(struct $8FBSYMBOL**)((uint8*)EXPR$1 + 24ll), *(int64*)((uint8*)EXPR$1 + 40ll) );
+			(*(tmp$64*)((uint8*)&IR$ + 376ll))( SYM$1, *(struct $8FBSYMBOL**)((uint8*)EXPR$1 + 24ll), *(int64*)((uint8*)EXPR$1 + 40ll) );
 		}
 		goto label$234;
 		label$235:;
@@ -2572,11 +2572,11 @@ static void HFLUSHEXPRSTATIC( struct $7ASTNODE* N$1, struct $8FBSYMBOL* BASESYM$
 				struct $7ASTNODE* LEXPR$4;
 				LEXPR$4 = *(struct $7ASTNODE**)((uint8*)EXPR$1 + 112ll);
 				label$236:;
-				if( LEXPR$4 == (struct $7ASTNODE*)0ull ) goto label$237;
+				if( LEXPR$4 == (struct $7ASTNODE*)0ull) goto label$237;
 				{
-					if( *(int64*)LEXPR$4 != 23ll ) goto label$239;
+					if( *(int64*)LEXPR$4 != 23ll) goto label$239;
 					{
-						(*(tmp$65*)((uint8*)&IR$ + 376ll))( SYM$1, *(struct $8FBSYMBOL**)((uint8*)LEXPR$4 + 24ll), *(int64*)((uint8*)LEXPR$4 + 40ll) );
+						(*(tmp$64*)((uint8*)&IR$ + 376ll))( SYM$1, *(struct $8FBSYMBOL**)((uint8*)LEXPR$4 + 24ll), *(int64*)((uint8*)LEXPR$4 + 40ll) );
 						EXPR$1 = (struct $7ASTNODE*)0ull;
 						goto label$237;
 					}
@@ -2587,30 +2587,30 @@ static void HFLUSHEXPRSTATIC( struct $7ASTNODE* N$1, struct $8FBSYMBOL* BASESYM$
 				goto label$236;
 				label$237:;
 			}
-			if( EXPR$1 == (struct $7ASTNODE*)0ull ) goto label$241;
+			if( EXPR$1 == (struct $7ASTNODE*)0ull) goto label$241;
 			{
-				int64 TMP$105$4;
-				if( EDTYPE$1 == SDTYPE$1 ) goto label$243;
+				int64 TMP$104$4;
+				if( EDTYPE$1 == SDTYPE$1) goto label$243;
 				{
 					struct $7ASTNODE* vr$37 = ASTNEWCONV( SFULLDTYPE$1, *(struct $8FBSYMBOL**)((uint8*)SYM$1 + 64ll), EXPR$1, 8ll, (int64*)0ull );
 					EXPR$1 = vr$37;
 				}
 				label$243:;
 				label$242:;
-				if( (SDTYPE$1 & 480ll) == 0ll ) goto label$244;
-				TMP$105$4 = 24ll;
+				if( (SDTYPE$1 & 480ll) == 0ll) goto label$244;
+				TMP$104$4 = 24ll;
 				goto label$340;
 				label$244:;
-				TMP$105$4 = SDTYPE$1 & 31ll;
+				TMP$104$4 = SDTYPE$1 & 31ll;
 				label$340:;
-				if( *(int64*)((int64)(struct $13SYMB_DATATYPE*)SYMB_DTYPETB$ + (TMP$105$4 * 56ll)) != 1ll ) goto label$246;
+				if( *(int64*)((int64)(struct $13SYMB_DATATYPE*)SYMB_DTYPETB$ + (TMP$104$4 * 56ll)) != 1ll) goto label$246;
 				{
-					(*(tmp$64*)((uint8*)&IR$ + 368ll))( SYM$1, *(double*)((uint8*)EXPR$1 + 40ll) );
+					(*(tmp$63*)((uint8*)&IR$ + 368ll))( SYM$1, *(double*)((uint8*)EXPR$1 + 40ll) );
 				}
 				goto label$245;
 				label$246:;
 				{
-					(*(tmp$63*)((uint8*)&IR$ + 360ll))( SYM$1, *(int64*)((uint8*)EXPR$1 + 40ll) );
+					(*(tmp$62*)((uint8*)&IR$ + 360ll))( SYM$1, *(int64*)((uint8*)EXPR$1 + 40ll) );
 				}
 				label$245:;
 			}
@@ -2622,47 +2622,47 @@ static void HFLUSHEXPRSTATIC( struct $7ASTNODE* N$1, struct $8FBSYMBOL* BASESYM$
 	goto label$232;
 	label$233:;
 	{
-		if( SDTYPE$1 == 7ll ) goto label$248;
+		if( SDTYPE$1 == 7ll) goto label$248;
 		{
-			if( EDTYPE$1 == 7ll ) goto label$250;
+			if( EDTYPE$1 == 7ll) goto label$250;
 			{
 				int64 vr$46 = SYMBGETSTRLENGTH( LITSYM$1 );
 				int64 vr$48 = SYMBGETSTRLENGTH( SYM$1 );
-				(*(tmp$66*)((uint8*)&IR$ + 384ll))( vr$48, *(char**)((uint8*)LITSYM$1 + 96ll), vr$46, (int64)-((*(int64*)((uint8*)SYM$1 + 56ll) & 511ll) == 18ll) );
+				(*(tmp$65*)((uint8*)&IR$ + 384ll))( vr$48, *(char**)((uint8*)LITSYM$1 + 96ll), vr$46, (int64)-((*(int64*)((uint8*)SYM$1 + 56ll) & 511ll) == 18ll) );
 			}
 			goto label$249;
 			label$250:;
 			{
-				FBSTRING TMP$106$4;
+				FBSTRING TMP$105$4;
 				int64 vr$52 = SYMBGETWSTRLENGTH( LITSYM$1 );
-				__builtin_memset( &TMP$106$4, 0, 24ll );
+				__builtin_memset( &TMP$105$4, 0, 24ll );
 				FBSTRING* vr$55 = fb_WstrToStr( (uint32*)*(uint32**)((uint8*)LITSYM$1 + 96ll) );
-				fb_StrAssign( (void*)&TMP$106$4, -1ll, (void*)vr$55, -1ll, 0 );
+				fb_StrAssign( (void*)&TMP$105$4, -1ll, (void*)vr$55, -1ll, 0 );
 				int64 vr$57 = SYMBGETSTRLENGTH( SYM$1 );
-				(*(tmp$66*)((uint8*)&IR$ + 384ll))( vr$57, (char*)*(char**)&TMP$106$4, vr$52, (int64)-((*(int64*)((uint8*)SYM$1 + 56ll) & 511ll) == 18ll) );
-				fb_StrDelete( (FBSTRING*)&TMP$106$4 );
+				(*(tmp$65*)((uint8*)&IR$ + 384ll))( vr$57, (char*)*(char**)&TMP$105$4, vr$52, (int64)-((*(int64*)((uint8*)SYM$1 + 56ll) & 511ll) == 18ll) );
+				fb_StrDelete( (FBSTRING*)&TMP$105$4 );
 			}
 			label$249:;
 		}
 		goto label$247;
 		label$248:;
 		{
-			if( EDTYPE$1 == 7ll ) goto label$252;
+			if( EDTYPE$1 == 7ll) goto label$252;
 			{
-				uint32* TMP$107$4;
+				uint32* TMP$106$4;
 				int64 vr$59 = SYMBGETSTRLENGTH( LITSYM$1 );
 				uint32* vr$61 = fb_StrToWstr( (char*)*(char**)((uint8*)LITSYM$1 + 96ll) );
-				TMP$107$4 = vr$61;
+				TMP$106$4 = vr$61;
 				int64 vr$62 = SYMBGETWSTRLENGTH( SYM$1 );
-				(*(tmp$67*)((uint8*)&IR$ + 392ll))( vr$62, TMP$107$4, vr$59 );
-				fb_WstrDelete( (uint32*)TMP$107$4 );
+				(*(tmp$66*)((uint8*)&IR$ + 392ll))( vr$62, TMP$106$4, vr$59 );
+				fb_WstrDelete( (uint32*)TMP$106$4 );
 			}
 			goto label$251;
 			label$252:;
 			{
 				int64 vr$63 = SYMBGETWSTRLENGTH( LITSYM$1 );
 				int64 vr$65 = SYMBGETWSTRLENGTH( SYM$1 );
-				(*(tmp$67*)((uint8*)&IR$ + 392ll))( vr$65, *(uint32**)((uint8*)LITSYM$1 + 96ll), vr$63 );
+				(*(tmp$66*)((uint8*)&IR$ + 392ll))( vr$65, *(uint32**)((uint8*)LITSYM$1 + 96ll), vr$63 );
 			}
 			label$251:;
 		}
@@ -2681,16 +2681,16 @@ static int64 HEXPRISCONST( struct $7ASTNODE* N$1 )
 	label$263:;
 	struct $8FBSYMBOL* LSYM$1;
 	LSYM$1 = *(struct $8FBSYMBOL**)((uint8*)N$1 + 24ll);
-	if( LSYM$1 == (struct $8FBSYMBOL*)0ull ) goto label$266;
+	if( LSYM$1 == (struct $8FBSYMBOL*)0ull) goto label$266;
 	{
-		int64 TMP$110$2;
-		if( *(int64*)LSYM$1 != 12ll ) goto label$267;
-		TMP$110$2 = (int64)-(*(int64*)((uint8*)LSYM$1 + 192ll) > 0ll);
+		int64 TMP$109$2;
+		if( *(int64*)LSYM$1 != 12ll) goto label$267;
+		TMP$109$2 = (int64)-(*(int64*)((uint8*)LSYM$1 + 192ll) > 0ll);
 		goto label$341;
 		label$267:;
-		TMP$110$2 = 0ll;
+		TMP$109$2 = 0ll;
 		label$341:;
-		if( TMP$110$2 == 0ll ) goto label$269;
+		if( TMP$109$2 == 0ll) goto label$269;
 		{
 			ERRREPORT( 24ll, -1ll, (char*)0ull );
 			fb$result$1 = 0ll;
@@ -2704,11 +2704,11 @@ static int64 HEXPRISCONST( struct $7ASTNODE* N$1 )
 	struct $7ASTNODE* EXPR$1;
 	EXPR$1 = *(struct $7ASTNODE**)((uint8*)N$1 + 112ll);
 	{
-		$13AST_NODECLASS TMP$111$2;
-		TMP$111$2 = *($13AST_NODECLASS*)EXPR$1;
-		if( TMP$111$2 == 23ll ) goto label$272;
+		$13AST_NODECLASS TMP$110$2;
+		TMP$110$2 = *($13AST_NODECLASS*)EXPR$1;
+		if( TMP$110$2 == 23ll) goto label$272;
 		label$273:;
-		if( TMP$111$2 != 16ll ) goto label$271;
+		if( TMP$110$2 != 16ll) goto label$271;
 		label$272:;
 		{
 			fb$result$1 = -1ll;
@@ -2716,22 +2716,22 @@ static int64 HEXPRISCONST( struct $7ASTNODE* N$1 )
 		}
 		goto label$270;
 		label$271:;
-		if( TMP$111$2 != 5ll ) goto label$274;
+		if( TMP$110$2 != 5ll) goto label$274;
 		label$275:;
 		{
 			label$276:;
-			if( EXPR$1 == (struct $7ASTNODE*)0ull ) goto label$277;
+			if( EXPR$1 == (struct $7ASTNODE*)0ull) goto label$277;
 			{
 				{
-					$13AST_NODECLASS TMP$112$5;
-					TMP$112$5 = *($13AST_NODECLASS*)EXPR$1;
-					if( TMP$112$5 != 5ll ) goto label$279;
+					$13AST_NODECLASS TMP$111$5;
+					TMP$111$5 = *($13AST_NODECLASS*)EXPR$1;
+					if( TMP$111$5 != 5ll) goto label$279;
 					label$280:;
 					{
 					}
 					goto label$278;
 					label$279:;
-					if( TMP$112$5 != 23ll ) goto label$281;
+					if( TMP$111$5 != 23ll) goto label$281;
 					label$282:;
 					{
 						fb$result$1 = -1ll;
@@ -2756,15 +2756,15 @@ static int64 HEXPRISCONST( struct $7ASTNODE* N$1 )
 		label$270:;
 	}
 	{
-		int64 TMP$113$2;
-		TMP$113$2 = *(int64*)((uint8*)EXPR$1 + 8ll) & 511ll;
-		if( TMP$113$2 == 4ll ) goto label$286;
+		int64 TMP$112$2;
+		TMP$112$2 = *(int64*)((uint8*)EXPR$1 + 8ll) & 511ll;
+		if( TMP$112$2 == 4ll) goto label$286;
 		label$287:;
-		if( TMP$113$2 != 7ll ) goto label$285;
+		if( TMP$112$2 != 7ll) goto label$285;
 		label$286:;
 		{
 			struct $8FBSYMBOL* vr$11 = ASTGETSTRLITSYMBOL( EXPR$1 );
-			if( vr$11 == (struct $8FBSYMBOL*)0ull ) goto label$289;
+			if( vr$11 == (struct $8FBSYMBOL*)0ull) goto label$289;
 			{
 				fb$result$1 = -1ll;
 				goto label$264;
@@ -2788,21 +2788,21 @@ static struct $7ASTNODE* HWALK( struct $7ASTNODE* N$1, struct $7ASTNODE* PARENT$
 	label$310:;
 	struct $7ASTNODE* EXPR$1;
 	struct $8FBSYMBOL* SYM$1;
-	if( N$1 != (struct $7ASTNODE*)0ull ) goto label$313;
+	if( N$1 != (struct $7ASTNODE*)0ull) goto label$313;
 	{
 		fb$result$1 = (struct $7ASTNODE*)0ull;
 		goto label$311;
 	}
 	label$313:;
 	label$312:;
-	if( *(int64*)N$1 != 36ll ) goto label$315;
+	if( *(int64*)N$1 != 36ll) goto label$315;
 	{
 		struct $8FBSYMBOL* vr$4 = SYMBADDTEMPVAR( *(int64*)((uint8*)N$1 + 8ll), *(struct $8FBSYMBOL**)((uint8*)N$1 + 16ll) );
 		SYM$1 = vr$4;
 		ASTDTORLISTADD( SYM$1 );
 		struct $7ASTNODE* vr$5 = ASTNEWVAR( SYM$1, 0ll, 2147483648ll, (struct $8FBSYMBOL*)0ull );
 		EXPR$1 = vr$5;
-		if( *(struct $7ASTNODE**)((uint8*)PARENT$1 + 112ll) != N$1 ) goto label$317;
+		if( *(struct $7ASTNODE**)((uint8*)PARENT$1 + 112ll) != N$1) goto label$317;
 		{
 			*(struct $7ASTNODE**)((uint8*)PARENT$1 + 112ll) = EXPR$1;
 		}

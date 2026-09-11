@@ -383,9 +383,9 @@ struct $8FBS_ENUM {
 __FB_STATIC_ASSERT( sizeof( struct $8FBS_ENUM ) == 96 );
 typedef int64 $11FB_FUNCMODE;
 typedef int64 $21FB_PROC_RETURN_METHOD;
-typedef int64 (*tmp$35)( struct $8FBSYMBOL* );
+typedef int64 (*tmp$34)( struct $8FBSYMBOL* );
 struct $10FB_PROCRTL {
-	tmp$35 CALLBACK;
+	tmp$34 CALLBACK;
 };
 __FB_STATIC_ASSERT( sizeof( struct $10FB_PROCRTL ) == 8 );
 struct $10FB_PROCOVL {
@@ -515,7 +515,7 @@ struct $9FB_DEFTOK {
 };
 __FB_STATIC_ASSERT( sizeof( struct $9FB_DEFTOK ) == 32 );
 typedef int64 $15FB_DEFINE_FLAGS;
-typedef FBSTRING* (*tmp$29)( void );
+typedef FBSTRING* (*tmp$28)( void );
 struct $8DZSTRING {
 	char* DATA;
 	int64 LEN;
@@ -540,8 +540,8 @@ struct $11LEXPP_ARGTB {
 	int64 COUNT;
 };
 __FB_STATIC_ASSERT( sizeof( struct $11LEXPP_ARGTB ) == 776 );
-typedef FBSTRING* (*tmp$30)( struct $11LEXPP_ARGTB*, int64* );
-typedef uint32* (*tmp$31)( struct $11LEXPP_ARGTB*, int64* );
+typedef FBSTRING* (*tmp$29)( struct $11LEXPP_ARGTB*, int64* );
+typedef uint32* (*tmp$30)( struct $11LEXPP_ARGTB*, int64* );
 struct $10FBS_DEFINE {
 	int64 PARAMS;
 	struct $11FB_DEFPARAM* PARAMHEAD;
@@ -553,11 +553,11 @@ struct $10FBS_DEFINE {
 	int64 ISARGLESS;
 	$15FB_DEFINE_FLAGS FLAGS;
 	union {
-		tmp$29 DPROCZ;
-		tmp$30 MPROCZ;
+		tmp$28 DPROCZ;
+		tmp$29 MPROCZ;
 	};
 	union {
-		tmp$31 MPROCW;
+		tmp$30 MPROCW;
 	};
 };
 __FB_STATIC_ASSERT( sizeof( struct $10FBS_DEFINE ) == 56 );
@@ -779,7 +779,7 @@ struct $8FBARRAY1I10AST_OPINFOE {
 	struct $16__FB_ARRAYDIMTB$ DIMTB[1];
 };
 __FB_STATIC_ASSERT( sizeof( struct $8FBARRAY1I10AST_OPINFOE ) == 72 );
-static struct $8FBARRAY1I10AST_OPINFOE tmp$83$;
+static struct $8FBARRAY1I10AST_OPINFOE tmp$82$;
 typedef int64 $12FB_DATACLASS;
 struct $13SYMB_DATATYPE {
 	$12FB_DATACLASS CLASS;
@@ -801,7 +801,7 @@ struct $8FBARRAY1I13SYMB_DATATYPEE {
 	struct $16__FB_ARRAYDIMTB$ DIMTB[1];
 };
 __FB_STATIC_ASSERT( sizeof( struct $8FBARRAY1I13SYMB_DATATYPEE ) == 72 );
-static struct $8FBARRAY1I13SYMB_DATATYPEE tmp$84$;
+static struct $8FBARRAY1I13SYMB_DATATYPEE tmp$83$;
 struct $8FBARRAY2IlE {
 	int64* DATA;
 	int64* PTR;
@@ -812,7 +812,7 @@ struct $8FBARRAY2IlE {
 	struct $16__FB_ARRAYDIMTB$ DIMTB[2];
 };
 __FB_STATIC_ASSERT( sizeof( struct $8FBARRAY2IlE ) == 96 );
-static struct $8FBARRAY2IlE tmp$85$;
+static struct $8FBARRAY2IlE tmp$84$;
 typedef int64 $10FB_OUTTYPE;
 typedef int64 $10FB_BACKEND;
 typedef int64 $13FB_COMPTARGET;
@@ -972,20 +972,20 @@ int64 CCOMMENT( $8LEXCHECK LEXFLAGS$1 )
 	__builtin_memset( &fb$result$1, 0, 8ll );
 	label$10:;
 	{
-		int64 TMP$96$2;
+		int64 TMP$95$2;
 		int64 vr$1 = LEXGETTOKEN( LEXFLAGS$1 );
-		TMP$96$2 = vr$1;
-		if( TMP$96$2 == 259ll ) goto label$14;
+		TMP$95$2 = vr$1;
+		if( TMP$95$2 == 259ll) goto label$14;
 		label$15:;
-		if( TMP$96$2 != 260ll ) goto label$13;
+		if( TMP$95$2 != 260ll) goto label$13;
 		label$14:;
 		{
 			int64 vr$2 = LEXGETTOKEN( LEXFLAGS$1 );
-			if( vr$2 != 260ll ) goto label$17;
+			if( vr$2 != 260ll) goto label$17;
 			{
-				if( *(int64*)((uint8*)&ENV$ + 272ll) != 3ll ) goto label$19;
+				if( *(int64*)((uint8*)&ENV$ + 272ll) != 3ll) goto label$19;
 				{
-					if( *(int64*)((uint8*)*(struct $7FBTOKEN**)((uint8*)*(struct $9LEX_TKCTX**)((uint8*)&LEX$ + 844696ll) + 16712ll) + 4152ll) == 0ll ) goto label$21;
+					if( *(int64*)((uint8*)*(struct $7FBTOKEN**)((uint8*)*(struct $9LEX_TKCTX**)((uint8*)&LEX$ + 844696ll) + 16712ll) + 4152ll) == 0ll) goto label$21;
 					{
 						fb$result$1 = 0ll;
 						goto label$11;
@@ -1001,7 +1001,7 @@ int64 CCOMMENT( $8LEXCHECK LEXFLAGS$1 )
 			*(int64*)((uint8*)*(struct $9LEX_TKCTX**)((uint8*)&LEX$ + 844696ll) + 16768ll) = *(int64*)((uint8*)*(struct $9LEX_TKCTX**)((uint8*)&LEX$ + 844696ll) + 16768ll) + 1ll;
 			LEXSKIPTOKEN( 523ll );
 			int64 vr$8 = LEXGETTOKEN( 523ll );
-			if( vr$8 != 36ll ) goto label$23;
+			if( vr$8 != 36ll) goto label$23;
 			{
 				LEXSKIPTOKEN( 523ll );
 				CDIRECTIVE(  );
@@ -1042,13 +1042,13 @@ static void CDIRECTIVE( void )
 	static char INCFILE$1[261];
 	static int64 ISONCE$1;
 	{
-		uint64 TMP$97$2;
+		uint64 TMP$96$2;
 		int64 vr$0 = LEXGETTOKEN( 0ll );
-		TMP$97$2 = (uint64)vr$0;
+		TMP$96$2 = (uint64)vr$0;
 		goto label$28;
 		label$29:;
 		{
-			if( (*(int64*)((uint8*)&ENV$ + 1448ll) & 16777216ll) != 0ll ) goto label$31;
+			if( (*(int64*)((uint8*)&ENV$ + 1448ll) & 16777216ll) != 0ll) goto label$31;
 			{
 				ERRREPORTNOTALLOWED( 16777216ll, 146ll, (char*)0ull );
 			}
@@ -1057,13 +1057,13 @@ static void CDIRECTIVE( void )
 			{
 				LEXSKIPTOKEN( 0ll );
 				*(int64*)((uint8*)&ENV$ + 1568ll) = -1ll;
-				if( *(int64*)((uint8*)&ENV$ + 1216ll) <= 0ll ) goto label$33;
+				if( *(int64*)((uint8*)&ENV$ + 1216ll) <= 0ll) goto label$33;
 				{
-					FBSTRING TMP$99$5;
-					__builtin_memset( &TMP$99$5, 0, 24ll );
-					fb_StrAssign( (void*)&TMP$99$5, -1ll, (void*)"'$dynamic", 10ll, 0 );
-					LEXPPONLYEMITTEXT( &TMP$99$5 );
-					fb_StrDelete( (FBSTRING*)&TMP$99$5 );
+					FBSTRING TMP$98$5;
+					__builtin_memset( &TMP$98$5, 0, 24ll );
+					fb_StrAssign( (void*)&TMP$98$5, -1ll, (void*)"'$dynamic", 10ll, 0 );
+					LEXPPONLYEMITTEXT( &TMP$98$5 );
+					fb_StrDelete( (FBSTRING*)&TMP$98$5 );
 				}
 				label$33:;
 				label$32:;
@@ -1073,7 +1073,7 @@ static void CDIRECTIVE( void )
 		goto label$27;
 		label$34:;
 		{
-			if( (*(int64*)((uint8*)&ENV$ + 1448ll) & 16777216ll) != 0ll ) goto label$36;
+			if( (*(int64*)((uint8*)&ENV$ + 1448ll) & 16777216ll) != 0ll) goto label$36;
 			{
 				ERRREPORTNOTALLOWED( 16777216ll, 146ll, (char*)0ull );
 			}
@@ -1082,13 +1082,13 @@ static void CDIRECTIVE( void )
 			{
 				LEXSKIPTOKEN( 0ll );
 				*(int64*)((uint8*)&ENV$ + 1568ll) = 0ll;
-				if( *(int64*)((uint8*)&ENV$ + 1216ll) <= 0ll ) goto label$38;
+				if( *(int64*)((uint8*)&ENV$ + 1216ll) <= 0ll) goto label$38;
 				{
-					FBSTRING TMP$101$5;
-					__builtin_memset( &TMP$101$5, 0, 24ll );
-					fb_StrAssign( (void*)&TMP$101$5, -1ll, (void*)"'$static", 9ll, 0 );
-					LEXPPONLYEMITTEXT( &TMP$101$5 );
-					fb_StrDelete( (FBSTRING*)&TMP$101$5 );
+					FBSTRING TMP$100$5;
+					__builtin_memset( &TMP$100$5, 0, 24ll );
+					fb_StrAssign( (void*)&TMP$100$5, -1ll, (void*)"'$static", 9ll, 0 );
+					LEXPPONLYEMITTEXT( &TMP$100$5 );
+					fb_StrDelete( (FBSTRING*)&TMP$100$5 );
 				}
 				label$38:;
 				label$37:;
@@ -1098,7 +1098,7 @@ static void CDIRECTIVE( void )
 		goto label$27;
 		label$39:;
 		{
-			if( (*(int64*)((uint8*)&ENV$ + 1448ll) & 16777216ll) != 0ll ) goto label$41;
+			if( (*(int64*)((uint8*)&ENV$ + 1448ll) & 16777216ll) != 0ll) goto label$41;
 			{
 				ERRREPORTNOTALLOWED( 16777216ll, 146ll, (char*)0ull );
 			}
@@ -1109,7 +1109,7 @@ static void CDIRECTIVE( void )
 				int64 vr$12 = HMATCHIDORKW( (char*)"ONCE", 2048ll );
 				ISONCE$1 = vr$12;
 				int64 vr$13 = HMATCH( 258ll, 0ll );
-				if( vr$13 != 0ll ) goto label$43;
+				if( vr$13 != 0ll) goto label$43;
 				{
 					ERRREPORT( 17ll, 0ll, (char*)0ull );
 					goto label$27;
@@ -1117,7 +1117,7 @@ static void CDIRECTIVE( void )
 				label$43:;
 				label$42:;
 				int64 vr$14 = LEXGETCLASS( 0ll );
-				if( vr$14 != 4ll ) goto label$45;
+				if( vr$14 != 4ll) goto label$45;
 				{
 					LEXEATTOKEN( (char*)INCFILE$1, 0ll );
 				}
@@ -1125,7 +1125,7 @@ static void CDIRECTIVE( void )
 				label$45:;
 				{
 					int64 vr$15 = LEXGETTOKEN( 527ll );
-					if( vr$15 == 259ll ) goto label$47;
+					if( vr$15 == 259ll) goto label$47;
 					{
 						ERRREPORT( 17ll, 0ll, (char*)0ull );
 						goto label$27;
@@ -1138,7 +1138,7 @@ static void CDIRECTIVE( void )
 					label$46:;
 					LEXREADLINE( 39ull, (char*)INCFILE$1, 0ll );
 					int64 vr$16 = HMATCH( 39ll, 0ll );
-					if( vr$16 != 0ll ) goto label$49;
+					if( vr$16 != 0ll) goto label$49;
 					{
 						ERRREPORT( 17ll, 0ll, (char*)0ull );
 						goto label$27;
@@ -1155,15 +1155,15 @@ static void CDIRECTIVE( void )
 		label$50:;
 		{
 			{
-				int64 TMP$103$4;
+				int64 TMP$102$4;
 				int64 vr$17 = LEXGETCLASS( 0ll );
-				TMP$103$4 = vr$17;
-				if( TMP$103$4 == 1ll ) goto label$53;
+				TMP$102$4 = vr$17;
+				if( TMP$102$4 == 1ll) goto label$53;
 				label$54:;
-				if( TMP$103$4 != 2ll ) goto label$52;
+				if( TMP$102$4 != 2ll) goto label$52;
 				label$53:;
 				{
-					if( (*(int64*)((uint8*)&ENV$ + 1448ll) & 16777216ll) == 0ll ) goto label$56;
+					if( (*(int64*)((uint8*)&ENV$ + 1448ll) & 16777216ll) == 0ll) goto label$56;
 					{
 						ERRREPORT( 17ll, 0ll, (char*)0ull );
 					}
@@ -1174,10 +1174,10 @@ static void CDIRECTIVE( void )
 				label$52:;
 				{
 					int64 vr$19 = HMATCHIDORKW( (char*)"LANG", 0ll );
-					if( vr$19 == 0ll ) goto label$59;
+					if( vr$19 == 0ll) goto label$59;
 					{
 						int64 vr$20 = HMATCH( 258ll, 0ll );
-						if( vr$20 != 0ll ) goto label$61;
+						if( vr$20 != 0ll) goto label$61;
 						{
 							ERRREPORT( 203ll, -1ll, (char*)0ull );
 							goto label$51;
@@ -1185,13 +1185,13 @@ static void CDIRECTIVE( void )
 						label$61:;
 						label$60:;
 						int64 vr$21 = LEXGETCLASS( 0ll );
-						if( vr$21 != 4ll ) goto label$63;
+						if( vr$21 != 4ll) goto label$63;
 						{
 							static $7FB_LANG ID$7;
 							LEXEATTOKEN( (char*)INCFILE$1, 0ll );
 							$7FB_LANG vr$22 = FBGETLANGID( (char*)INCFILE$1 );
 							ID$7 = vr$22;
-							if( ID$7 != -1ll ) goto label$65;
+							if( ID$7 != -1ll) goto label$65;
 							{
 								ERRREPORT( 279ll, 0ll, (char*)0ull );
 							}
@@ -1199,20 +1199,20 @@ static void CDIRECTIVE( void )
 							label$65:;
 							{
 								FBCHANGEOPTION( 10ll, ID$7 );
-								if( *(int64*)((uint8*)&ENV$ + 1216ll) <= 0ll ) goto label$67;
+								if( *(int64*)((uint8*)&ENV$ + 1216ll) <= 0ll) goto label$67;
 								{
+									FBSTRING TMP$106$9;
 									FBSTRING TMP$107$9;
 									FBSTRING TMP$108$9;
-									FBSTRING TMP$109$9;
-									__builtin_memset( &TMP$109$9, 0, 24ll );
-									FBSTRING* vr$24 = FBGETLANGNAME( ID$7 );
-									__builtin_memset( &TMP$107$9, 0, 24ll );
-									FBSTRING* vr$27 = fb_StrConcat( &TMP$107$9, (void*)"'$lang: \x22", 10ll, (void*)vr$24, -1ll );
 									__builtin_memset( &TMP$108$9, 0, 24ll );
-									FBSTRING* vr$30 = fb_StrConcat( &TMP$108$9, (void*)vr$27, -1ll, (void*)"\x22", 2ll );
-									fb_StrAssign( (void*)&TMP$109$9, -1ll, (void*)vr$30, -1ll, 0 );
-									LEXPPONLYEMITTEXT( &TMP$109$9 );
-									fb_StrDelete( (FBSTRING*)&TMP$109$9 );
+									FBSTRING* vr$24 = FBGETLANGNAME( ID$7 );
+									__builtin_memset( &TMP$106$9, 0, 24ll );
+									FBSTRING* vr$27 = fb_StrConcat( &TMP$106$9, (void*)"'$lang: \x22", 10ll, (void*)vr$24, -1ll );
+									__builtin_memset( &TMP$107$9, 0, 24ll );
+									FBSTRING* vr$30 = fb_StrConcat( &TMP$107$9, (void*)vr$27, -1ll, (void*)"\x22", 2ll );
+									fb_StrAssign( (void*)&TMP$108$9, -1ll, (void*)vr$30, -1ll, 0 );
+									LEXPPONLYEMITTEXT( &TMP$108$9 );
+									fb_StrDelete( (FBSTRING*)&TMP$108$9 );
 								}
 								label$67:;
 								label$66:;
@@ -1235,7 +1235,7 @@ static void CDIRECTIVE( void )
 		}
 		goto label$27;
 		label$28:;
-		static const void* tmp$111[11ll] = {
+		static const void* tmp$110[11ll] = {
 			&&label$34,
 			&&label$50,
 			&&label$50,
@@ -1248,19 +1248,19 @@ static void CDIRECTIVE( void )
 			&&label$39,
 			&&label$29,
 		};
-		if( (TMP$97$2 - 307ull) > 10ull ) goto label$50;
-		goto *tmp$111[TMP$97$2 - 307ull];
+		if( (TMP$96$2 - 307ull) > 10ull ) goto label$50;
+		goto *tmp$110[TMP$96$2 - 307ull];
 		label$27:;
 	}
 	label$68:;
 	{
 		{
-			int64 TMP$110$3;
+			int64 TMP$109$3;
 			int64 vr$34 = LEXGETTOKEN( 0ll );
-			TMP$110$3 = vr$34;
-			if( TMP$110$3 == 257ll ) goto label$73;
+			TMP$109$3 = vr$34;
+			if( TMP$109$3 == 257ll) goto label$73;
 			label$74:;
-			if( TMP$110$3 != 256ll ) goto label$72;
+			if( TMP$109$3 != 256ll) goto label$72;
 			label$73:;
 			{
 				goto label$69;

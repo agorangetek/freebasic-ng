@@ -393,9 +393,9 @@ struct $8FBS_ENUM {
 __FB_STATIC_ASSERT( sizeof( struct $8FBS_ENUM ) == 96 );
 typedef int64 $11FB_FUNCMODE;
 typedef int64 $21FB_PROC_RETURN_METHOD;
-typedef int64 (*tmp$35)( struct $8FBSYMBOL* );
+typedef int64 (*tmp$34)( struct $8FBSYMBOL* );
 struct $10FB_PROCRTL {
-	tmp$35 CALLBACK;
+	tmp$34 CALLBACK;
 };
 __FB_STATIC_ASSERT( sizeof( struct $10FB_PROCRTL ) == 8 );
 struct $10FB_PROCOVL {
@@ -525,9 +525,9 @@ struct $9FB_DEFTOK {
 };
 __FB_STATIC_ASSERT( sizeof( struct $9FB_DEFTOK ) == 32 );
 typedef int64 $15FB_DEFINE_FLAGS;
-typedef FBSTRING* (*tmp$29)( void );
-typedef FBSTRING* (*tmp$30)( void*, int64* );
-typedef uint32* (*tmp$31)( void*, int64* );
+typedef FBSTRING* (*tmp$28)( void );
+typedef FBSTRING* (*tmp$29)( void*, int64* );
+typedef uint32* (*tmp$30)( void*, int64* );
 struct $10FBS_DEFINE {
 	int64 PARAMS;
 	struct $11FB_DEFPARAM* PARAMHEAD;
@@ -539,11 +539,11 @@ struct $10FBS_DEFINE {
 	int64 ISARGLESS;
 	$15FB_DEFINE_FLAGS FLAGS;
 	union {
-		tmp$29 DPROCZ;
-		tmp$30 MPROCZ;
+		tmp$28 DPROCZ;
+		tmp$29 MPROCZ;
 	};
 	union {
-		tmp$31 MPROCW;
+		tmp$30 MPROCW;
 	};
 };
 __FB_STATIC_ASSERT( sizeof( struct $10FBS_DEFINE ) == 56 );
@@ -682,14 +682,14 @@ struct $6IRVREG {
 	struct $5IRTAC* TACLAST;
 };
 __FB_STATIC_ASSERT( sizeof( struct $6IRVREG ) == 120 );
-typedef int64 (*tmp$86)( struct $8REGCLASS*, struct $6IRVREG*, struct $6IRVREG*, uint64 );
-typedef int64 (*tmp$87)( struct $8REGCLASS*, int64, struct $6IRVREG*, struct $6IRVREG* );
-typedef void (*tmp$88)( struct $8REGCLASS*, int64 );
-typedef int64 (*tmp$89)( struct $8REGCLASS*, int64 );
-typedef void (*tmp$90)( struct $8REGCLASS*, int64, struct $6IRVREG*, struct $6IRVREG* );
-typedef int64 (*tmp$91)( struct $8REGCLASS* );
-typedef struct $6IRVREG* (*tmp$92)( struct $8REGCLASS*, int64, struct $6IRVREG** );
-typedef void (*tmp$93)( struct $8REGCLASS* );
+typedef int64 (*tmp$85)( struct $8REGCLASS*, struct $6IRVREG*, struct $6IRVREG*, uint64 );
+typedef int64 (*tmp$86)( struct $8REGCLASS*, int64, struct $6IRVREG*, struct $6IRVREG* );
+typedef void (*tmp$87)( struct $8REGCLASS*, int64 );
+typedef int64 (*tmp$88)( struct $8REGCLASS*, int64 );
+typedef void (*tmp$89)( struct $8REGCLASS*, int64, struct $6IRVREG*, struct $6IRVREG* );
+typedef int64 (*tmp$90)( struct $8REGCLASS* );
+typedef struct $6IRVREG* (*tmp$91)( struct $8REGCLASS*, int64, struct $6IRVREG** );
+typedef void (*tmp$92)( struct $8REGCLASS* );
 struct $7REG_REG;
 struct $7REG_REG {
 	int64 NUM;
@@ -712,19 +712,19 @@ struct $10REG_STKCTX {
 };
 __FB_STATIC_ASSERT( sizeof( struct $10REG_STKCTX ) == 72 );
 struct $8REGCLASS {
-	tmp$86 ENSURE;
-	tmp$86 _ALLOCATE;
-	tmp$87 ALLOCATEREG;
-	tmp$88 FREE;
-	tmp$89 ISFREE;
-	tmp$90 SETOWNER;
-	tmp$91 GETMAXREGS;
-	tmp$91 GETFIRST;
-	tmp$89 GETNEXT;
-	tmp$92 GETVREG;
-	tmp$89 GETREALREG;
-	tmp$93 CLEAR;
-	tmp$93 DUMP;
+	tmp$85 ENSURE;
+	tmp$85 _ALLOCATE;
+	tmp$86 ALLOCATEREG;
+	tmp$87 FREE;
+	tmp$88 ISFREE;
+	tmp$89 SETOWNER;
+	tmp$90 GETMAXREGS;
+	tmp$90 GETFIRST;
+	tmp$88 GETNEXT;
+	tmp$91 GETVREG;
+	tmp$88 GETREALREG;
+	tmp$92 CLEAR;
+	tmp$92 DUMP;
 	int64 CLASS;
 	int64 ISSTACK;
 	int64 REGS;
@@ -756,10 +756,10 @@ struct $11TSTRSETITEM {
 	struct $8HASHITEM* HASHITEM;
 };
 __FB_STATIC_ASSERT( sizeof( struct $11TSTRSETITEM ) == 40 );
-typedef void (*tmp$47)( struct $6IRVREG*, struct $6IRVREG* );
-typedef uint64 (*tmp$78)( struct $6IRVREG* );
-typedef void (*tmp$54)( int64, struct $6IRVREG*, struct $6IRVREG* );
-typedef void (*tmp$48)( int64 );
+typedef void (*tmp$46)( struct $6IRVREG*, struct $6IRVREG* );
+typedef uint64 (*tmp$77)( struct $6IRVREG* );
+typedef void (*tmp$53)( int64, struct $6IRVREG*, struct $6IRVREG* );
+typedef void (*tmp$47)( int64 );
 void free( void* );
 FBSTRING* fb_StrAssign( void*, int64, void*, int64, int32 );
 void fb_StrDelete( FBSTRING* );
@@ -804,112 +804,112 @@ static int64 SREGGETNEXT( struct $8REGCLASS*, int64 );
 static struct $6IRVREG* SREGGETVREG( struct $8REGCLASS*, int64, struct $6IRVREG** );
 static void SREGDUMP( struct $8REGCLASS* );
 static void SREGCLEAR( struct $8REGCLASS* );
-typedef void (*tmp$40)( void );
-typedef int64 (*tmp$41)( void );
+typedef void (*tmp$39)( void );
+typedef int64 (*tmp$40)( void );
 typedef int64 $14IR_OPTIONVALUE;
-typedef int64 (*tmp$42)( $14IR_OPTIONVALUE );
-typedef int64 (*tmp$43)( int64, int64 );
-typedef void (*tmp$44)( struct $8FBSYMBOL* );
-typedef void (*tmp$45)( struct $8FBSYMBOL*, struct $8FBSYMBOL* );
-typedef char* (*tmp$46)( void );
-typedef void (*tmp$49)( struct $8FBSYMBOL*, struct $8FBSYMBOL*, struct $8FBSYMBOL* );
-typedef void (*tmp$50)( struct $8FBSYMBOL*, struct $6IRVREG*, int64, int64, struct $6IRVREG* );
-typedef void (*tmp$51)( struct $9ASTASMTOK* );
-typedef void (*tmp$52)( char* );
+typedef int64 (*tmp$41)( $14IR_OPTIONVALUE );
+typedef int64 (*tmp$42)( int64, int64 );
+typedef void (*tmp$43)( struct $8FBSYMBOL* );
+typedef void (*tmp$44)( struct $8FBSYMBOL*, struct $8FBSYMBOL* );
+typedef char* (*tmp$45)( void );
+typedef void (*tmp$48)( struct $8FBSYMBOL*, struct $8FBSYMBOL*, struct $8FBSYMBOL* );
+typedef void (*tmp$49)( struct $8FBSYMBOL*, struct $6IRVREG*, int64, int64, struct $6IRVREG* );
+typedef void (*tmp$50)( struct $9ASTASMTOK* );
+typedef void (*tmp$51)( char* );
 typedef int64 $10IR_EMITOPT;
-typedef void (*tmp$53)( int64, struct $6IRVREG*, struct $6IRVREG*, struct $6IRVREG*, struct $8FBSYMBOL*, $10IR_EMITOPT );
-typedef void (*tmp$55)( struct $6IRVREG* );
-typedef void (*tmp$56)( struct $8FBSYMBOL*, int64, struct $6IRVREG*, int64 );
-typedef void (*tmp$57)( struct $8FBSYMBOL*, struct $6IRVREG*, struct $6IRVREG*, int64, int64 );
-typedef void (*tmp$58)( int64, struct $8FBSYMBOL* );
-typedef void (*tmp$59)( struct $6IRVREG*, struct $8FBSYMBOL*, uint64*, struct $8FBSYMBOL**, int64, struct $8FBSYMBOL*, uint64, uint64 );
-typedef void (*tmp$60)( int64, struct $6IRVREG*, struct $6IRVREG*, int64, int64 );
-typedef void (*tmp$61)( int64, struct $6IRVREG*, struct $6IRVREG*, struct $6IRVREG* );
-typedef void (*tmp$62)( int64, struct $8FBSYMBOL*, int64, char* );
-typedef void (*tmp$63)( struct $8FBSYMBOL*, int64 );
-typedef void (*tmp$64)( struct $8FBSYMBOL*, double );
-typedef void (*tmp$65)( struct $8FBSYMBOL*, struct $8FBSYMBOL*, int64 );
-typedef void (*tmp$66)( int64, char*, int64, int64 );
-typedef void (*tmp$67)( int64, uint32*, int64 );
-typedef void (*tmp$68)( int64, int64 );
-typedef void (*tmp$69)( struct $8FBSYMBOL*, int64 );
-typedef void (*tmp$70)( char* );
-typedef struct $6IRVREG* (*tmp$71)( int64, struct $8FBSYMBOL* );
-typedef struct $6IRVREG* (*tmp$72)( int64, struct $8FBSYMBOL*, int64 );
-typedef struct $6IRVREG* (*tmp$73)( int64, struct $8FBSYMBOL*, double );
-typedef struct $6IRVREG* (*tmp$74)( int64, struct $8FBSYMBOL*, struct $8FBSYMBOL*, int64 );
-typedef struct $6IRVREG* (*tmp$75)( int64, struct $8FBSYMBOL*, struct $8FBSYMBOL*, int64, int64, struct $6IRVREG* );
-typedef struct $6IRVREG* (*tmp$76)( int64, struct $8FBSYMBOL*, int64, struct $6IRVREG* );
-typedef void (*tmp$77)( struct $6IRVREG*, int64, struct $8FBSYMBOL* );
+typedef void (*tmp$52)( int64, struct $6IRVREG*, struct $6IRVREG*, struct $6IRVREG*, struct $8FBSYMBOL*, $10IR_EMITOPT );
+typedef void (*tmp$54)( struct $6IRVREG* );
+typedef void (*tmp$55)( struct $8FBSYMBOL*, int64, struct $6IRVREG*, int64 );
+typedef void (*tmp$56)( struct $8FBSYMBOL*, struct $6IRVREG*, struct $6IRVREG*, int64, int64 );
+typedef void (*tmp$57)( int64, struct $8FBSYMBOL* );
+typedef void (*tmp$58)( struct $6IRVREG*, struct $8FBSYMBOL*, uint64*, struct $8FBSYMBOL**, int64, struct $8FBSYMBOL*, uint64, uint64 );
+typedef void (*tmp$59)( int64, struct $6IRVREG*, struct $6IRVREG*, int64, int64 );
+typedef void (*tmp$60)( int64, struct $6IRVREG*, struct $6IRVREG*, struct $6IRVREG* );
+typedef void (*tmp$61)( int64, struct $8FBSYMBOL*, int64, char* );
+typedef void (*tmp$62)( struct $8FBSYMBOL*, int64 );
+typedef void (*tmp$63)( struct $8FBSYMBOL*, double );
+typedef void (*tmp$64)( struct $8FBSYMBOL*, struct $8FBSYMBOL*, int64 );
+typedef void (*tmp$65)( int64, char*, int64, int64 );
+typedef void (*tmp$66)( int64, uint32*, int64 );
+typedef void (*tmp$67)( int64, int64 );
+typedef void (*tmp$68)( struct $8FBSYMBOL*, int64 );
+typedef void (*tmp$69)( char* );
+typedef struct $6IRVREG* (*tmp$70)( int64, struct $8FBSYMBOL* );
+typedef struct $6IRVREG* (*tmp$71)( int64, struct $8FBSYMBOL*, int64 );
+typedef struct $6IRVREG* (*tmp$72)( int64, struct $8FBSYMBOL*, double );
+typedef struct $6IRVREG* (*tmp$73)( int64, struct $8FBSYMBOL*, struct $8FBSYMBOL*, int64 );
+typedef struct $6IRVREG* (*tmp$74)( int64, struct $8FBSYMBOL*, struct $8FBSYMBOL*, int64, int64, struct $6IRVREG* );
+typedef struct $6IRVREG* (*tmp$75)( int64, struct $8FBSYMBOL*, int64, struct $6IRVREG* );
+typedef void (*tmp$76)( struct $6IRVREG*, int64, struct $8FBSYMBOL* );
 struct $7IR_VTBL {
-	tmp$40 INIT;
-	tmp$40 END;
-	tmp$41 EMITBEGIN;
-	tmp$40 EMITEND;
-	tmp$42 GETOPTIONVALUE;
-	tmp$43 SUPPORTSOP;
-	tmp$44 PROCBEGIN;
-	tmp$44 PROCEND;
-	tmp$45 PROCALLOCARG;
-	tmp$45 PROCALLOCLOCAL;
-	tmp$46 PROCGETFRAMEREGNAME;
-	tmp$44 SCOPEBEGIN;
-	tmp$44 SCOPEEND;
-	tmp$44 PROCALLOCSTATICVARS;
-	tmp$47 EMITCONVERT;
-	tmp$44 EMITLABEL;
-	tmp$44 EMITLABELNF;
-	tmp$48 EMITRETURN;
-	tmp$45 EMITPROCBEGIN;
-	tmp$49 EMITPROCEND;
-	tmp$50 EMITPUSHARG;
-	tmp$51 EMITASMLINE;
-	tmp$52 EMITCOMMENT;
-	tmp$53 EMITBOP;
-	tmp$54 EMITUOP;
-	tmp$47 EMITSTORE;
-	tmp$40 EMITSPILLREGS;
-	tmp$55 EMITLOAD;
-	tmp$47 EMITLOADRES;
-	tmp$54 EMITSTACK;
-	tmp$54 EMITADDR;
-	tmp$56 EMITCALL;
-	tmp$57 EMITCALLPTR;
-	tmp$48 EMITSTACKALIGN;
-	tmp$55 EMITJUMPPTR;
-	tmp$58 EMITBRANCH;
-	tmp$59 EMITJMPTB;
-	tmp$60 EMITMEM;
-	tmp$61 EMITMACRO;
-	tmp$44 EMITSCOPEBEGIN;
-	tmp$44 EMITSCOPEEND;
-	tmp$44 EMITDECL;
-	tmp$62 EMITDBG;
-	tmp$44 EMITVARINIBEGIN;
-	tmp$44 EMITVARINIEND;
-	tmp$63 EMITVARINII;
-	tmp$64 EMITVARINIF;
-	tmp$65 EMITVARINIOFS;
-	tmp$66 EMITVARINISTR;
-	tmp$67 EMITVARINIWSTR;
-	tmp$68 EMITVARINIPAD;
-	tmp$69 EMITVARINISCOPEBEGIN;
-	tmp$40 EMITVARINISCOPEEND;
-	tmp$40 EMITFBCTINFBEGIN;
-	tmp$70 EMITFBCTINFSTRING;
-	tmp$40 EMITFBCTINFEND;
-	tmp$71 ALLOCVREG;
-	tmp$72 ALLOCVRIMM;
-	tmp$73 ALLOCVRIMMF;
-	tmp$74 ALLOCVRVAR;
-	tmp$75 ALLOCVRIDX;
-	tmp$76 ALLOCVRPTR;
-	tmp$74 ALLOCVROFS;
-	tmp$77 SETVREGDATATYPE;
-	tmp$78 GETDISTANCE;
-	tmp$54 LOADVR;
-	tmp$47 STOREVR;
-	tmp$48 XCHGTOS;
+	tmp$39 INIT;
+	tmp$39 END;
+	tmp$40 EMITBEGIN;
+	tmp$39 EMITEND;
+	tmp$41 GETOPTIONVALUE;
+	tmp$42 SUPPORTSOP;
+	tmp$43 PROCBEGIN;
+	tmp$43 PROCEND;
+	tmp$44 PROCALLOCARG;
+	tmp$44 PROCALLOCLOCAL;
+	tmp$45 PROCGETFRAMEREGNAME;
+	tmp$43 SCOPEBEGIN;
+	tmp$43 SCOPEEND;
+	tmp$43 PROCALLOCSTATICVARS;
+	tmp$46 EMITCONVERT;
+	tmp$43 EMITLABEL;
+	tmp$43 EMITLABELNF;
+	tmp$47 EMITRETURN;
+	tmp$44 EMITPROCBEGIN;
+	tmp$48 EMITPROCEND;
+	tmp$49 EMITPUSHARG;
+	tmp$50 EMITASMLINE;
+	tmp$51 EMITCOMMENT;
+	tmp$52 EMITBOP;
+	tmp$53 EMITUOP;
+	tmp$46 EMITSTORE;
+	tmp$39 EMITSPILLREGS;
+	tmp$54 EMITLOAD;
+	tmp$46 EMITLOADRES;
+	tmp$53 EMITSTACK;
+	tmp$53 EMITADDR;
+	tmp$55 EMITCALL;
+	tmp$56 EMITCALLPTR;
+	tmp$47 EMITSTACKALIGN;
+	tmp$54 EMITJUMPPTR;
+	tmp$57 EMITBRANCH;
+	tmp$58 EMITJMPTB;
+	tmp$59 EMITMEM;
+	tmp$60 EMITMACRO;
+	tmp$43 EMITSCOPEBEGIN;
+	tmp$43 EMITSCOPEEND;
+	tmp$43 EMITDECL;
+	tmp$61 EMITDBG;
+	tmp$43 EMITVARINIBEGIN;
+	tmp$43 EMITVARINIEND;
+	tmp$62 EMITVARINII;
+	tmp$63 EMITVARINIF;
+	tmp$64 EMITVARINIOFS;
+	tmp$65 EMITVARINISTR;
+	tmp$66 EMITVARINIWSTR;
+	tmp$67 EMITVARINIPAD;
+	tmp$68 EMITVARINISCOPEBEGIN;
+	tmp$39 EMITVARINISCOPEEND;
+	tmp$39 EMITFBCTINFBEGIN;
+	tmp$69 EMITFBCTINFSTRING;
+	tmp$39 EMITFBCTINFEND;
+	tmp$70 ALLOCVREG;
+	tmp$71 ALLOCVRIMM;
+	tmp$72 ALLOCVRIMMF;
+	tmp$73 ALLOCVRVAR;
+	tmp$74 ALLOCVRIDX;
+	tmp$75 ALLOCVRPTR;
+	tmp$73 ALLOCVROFS;
+	tmp$76 SETVREGDATATYPE;
+	tmp$77 GETDISTANCE;
+	tmp$53 LOADVR;
+	tmp$46 STOREVR;
+	tmp$47 XCHGTOS;
 };
 __FB_STATIC_ASSERT( sizeof( struct $7IR_VTBL ) == 544 );
 typedef int64 $6IR_OPT;
@@ -937,7 +937,7 @@ struct $8FBARRAY1I10AST_OPINFOE {
 	struct $16__FB_ARRAYDIMTB$ DIMTB[1];
 };
 __FB_STATIC_ASSERT( sizeof( struct $8FBARRAY1I10AST_OPINFOE ) == 72 );
-static struct $8FBARRAY1I10AST_OPINFOE tmp$83$;
+static struct $8FBARRAY1I10AST_OPINFOE tmp$82$;
 typedef int64 $12FB_DATACLASS;
 struct $13SYMB_DATATYPE {
 	$12FB_DATACLASS CLASS;
@@ -959,7 +959,7 @@ struct $8FBARRAY1I13SYMB_DATATYPEE {
 	struct $16__FB_ARRAYDIMTB$ DIMTB[1];
 };
 __FB_STATIC_ASSERT( sizeof( struct $8FBARRAY1I13SYMB_DATATYPEE ) == 72 );
-static struct $8FBARRAY1I13SYMB_DATATYPEE tmp$84$;
+static struct $8FBARRAY1I13SYMB_DATATYPEE tmp$83$;
 struct $8FBARRAY2IlE {
 	int64* DATA;
 	int64* PTR;
@@ -970,7 +970,7 @@ struct $8FBARRAY2IlE {
 	struct $16__FB_ARRAYDIMTB$ DIMTB[2];
 };
 __FB_STATIC_ASSERT( sizeof( struct $8FBARRAY2IlE ) == 96 );
-static struct $8FBARRAY2IlE tmp$85$;
+static struct $8FBARRAY2IlE tmp$84$;
 struct $8FBARRAY1IPvE {
 	void** DATA;
 	void** PTR;
@@ -981,7 +981,7 @@ struct $8FBARRAY1IPvE {
 	struct $16__FB_ARRAYDIMTB$ DIMTB[1];
 };
 __FB_STATIC_ASSERT( sizeof( struct $8FBARRAY1IPvE ) == 72 );
-static struct $8FBARRAY1IPvE tmp$107$;
+static struct $8FBARRAY1IPvE tmp$106$;
 
 struct $8REGCLASS* REGNEWCLASS( int64 CLASS_$1, int64 REGS$1, struct $7FBARRAYI12REG_SIZEMASKE* SIZETB$1, int64 ISSTACK$1 )
 {
@@ -995,7 +995,7 @@ struct $8REGCLASS* REGNEWCLASS( int64 CLASS_$1, int64 REGS$1, struct $7FBARRAYI1
 	*(int64*)((uint8*)THIS_$1 + 104ll) = CLASS_$1;
 	*(int64*)((uint8*)THIS_$1 + 120ll) = REGS$1;
 	*(int64*)((uint8*)THIS_$1 + 112ll) = ISSTACK$1;
-	if( *(int64*)((uint8*)THIS_$1 + 112ll) != 0ll ) goto label$13;
+	if( *(int64*)((uint8*)THIS_$1 + 112ll) != 0ll) goto label$13;
 	{
 		REGINITCLASS( THIS_$1, SIZETB$1 );
 	}
@@ -1016,7 +1016,7 @@ int64 REGDELCLASS( struct $8REGCLASS* THIS_$1 )
 	__builtin_memset( &fb$result$1, 0, 8ll );
 	label$14:;
 	fb$result$1 = 0ll;
-	if( THIS_$1 != (struct $8REGCLASS*)0ull ) goto label$17;
+	if( THIS_$1 != (struct $8REGCLASS*)0ull) goto label$17;
 	{
 		goto label$15;
 	}
@@ -1058,11 +1058,11 @@ static int64 REGPOP( struct $8REGCLASS* THIS_$1, int64 SIZE$1 )
 	static struct $7REG_REG* LAST$1;
 	R$1 = *(struct $7REG_REG**)((uint8*)THIS_$1 + 256ll);
 	label$22:;
-	if( R$1 == (struct $7REG_REG*)0ull ) goto label$23;
+	if( R$1 == (struct $7REG_REG*)0ull) goto label$23;
 	{
-		if( (*(int64*)((uint8*)((uint8*)((uint8*)THIS_$1 + 256ll) + (*(int64*)R$1 << (3ll & 63ll))) + 152ll) & SIZE$1) == 0ll ) goto label$25;
+		if( (*(int64*)((uint8*)((uint8*)((uint8*)THIS_$1 + 256ll) + (*(int64*)R$1 << (3ll & 63ll))) + 152ll) & SIZE$1) == 0ll) goto label$25;
 		{
-			if( *(struct $7REG_REG**)((uint8*)THIS_$1 + 256ll) != R$1 ) goto label$27;
+			if( *(struct $7REG_REG**)((uint8*)THIS_$1 + 256ll) != R$1) goto label$27;
 			{
 				*(struct $7REG_REG**)((uint8*)THIS_$1 + 256ll) = *(struct $7REG_REG**)((uint8*)R$1 + 8ll);
 			}
@@ -1096,11 +1096,11 @@ static void REGPOPREG( struct $8REGCLASS* THIS_$1, int64 N$1 )
 	static struct $7REG_REG* LAST$1;
 	R$1 = *(struct $7REG_REG**)((uint8*)THIS_$1 + 256ll);
 	label$30:;
-	if( R$1 == (struct $7REG_REG*)0ull ) goto label$31;
+	if( R$1 == (struct $7REG_REG*)0ull) goto label$31;
 	{
-		if( *(int64*)R$1 != N$1 ) goto label$33;
+		if( *(int64*)R$1 != N$1) goto label$33;
 		{
-			if( *(struct $7REG_REG**)((uint8*)THIS_$1 + 256ll) != R$1 ) goto label$35;
+			if( *(struct $7REG_REG**)((uint8*)THIS_$1 + 256ll) != R$1) goto label$35;
 			{
 				*(struct $7REG_REG**)((uint8*)THIS_$1 + 256ll) = *(struct $7REG_REG**)((uint8*)R$1 + 8ll);
 			}
@@ -1135,8 +1135,8 @@ static void REGCLEAR( struct $8REGCLASS* THIS_$1 )
 	*(struct $7REG_REG**)((uint8*)THIS_$1 + 264ll) = (struct $7REG_REG*)0ull;
 	{
 		N$1 = 0ll;
-		int64 TMP$109$2;
-		TMP$109$2 = *(int64*)((uint8*)THIS_$1 + 120ll) + -1ll;
+		int64 TMP$108$2;
+		TMP$108$2 = *(int64*)((uint8*)THIS_$1 + 120ll) + -1ll;
 		goto label$38;
 		label$41:;
 		{
@@ -1151,7 +1151,7 @@ static void REGCLEAR( struct $8REGCLASS* THIS_$1 )
 		label$39:;
 		N$1 = N$1 + 1ll;
 		label$38:;
-		if( N$1 <= TMP$109$2 ) goto label$41;
+		if( N$1 <= TMP$108$2) goto label$41;
 		label$40:;
 	}
 	label$37:;
@@ -1169,16 +1169,16 @@ static int64 REGFINDFAREST( struct $8REGCLASS* THIS_$1, int64 SIZE$1, int64 RESE
 	{
 		int64 I$2;
 		I$2 = 0ll;
-		int64 TMP$110$2;
-		TMP$110$2 = *(int64*)((uint8*)THIS_$1 + 120ll) + -1ll;
+		int64 TMP$109$2;
+		TMP$109$2 = *(int64*)((uint8*)THIS_$1 + 120ll) + -1ll;
 		goto label$44;
 		label$47:;
 		{
-			if( I$2 == RESERVEDREG$1 ) goto label$49;
+			if( I$2 == RESERVEDREG$1) goto label$49;
 			{
-				if( (*(int64*)((uint8*)((uint8*)((uint8*)THIS_$1 + 256ll) + (I$2 << (3ll & 63ll))) + 152ll) & SIZE$1) == 0ll ) goto label$51;
+				if( (*(int64*)((uint8*)((uint8*)((uint8*)THIS_$1 + 256ll) + (I$2 << (3ll & 63ll))) + 152ll) & SIZE$1) == 0ll) goto label$51;
 				{
-					if( MAXDIST$1 > *(uint64*)((uint8*)((uint8*)((uint8*)THIS_$1 + 256ll) + (I$2 << (3ll & 63ll))) + 216ll) ) goto label$53;
+					if( MAXDIST$1 > *(uint64*)((uint8*)((uint8*)((uint8*)THIS_$1 + 256ll) + (I$2 << (3ll & 63ll))) + 216ll)) goto label$53;
 					{
 						MAXDIST$1 = *(uint64*)((uint8*)((uint8*)((uint8*)THIS_$1 + 256ll) + (I$2 << (3ll & 63ll))) + 216ll);
 						R$1 = I$2;
@@ -1195,7 +1195,7 @@ static int64 REGFINDFAREST( struct $8REGCLASS* THIS_$1, int64 SIZE$1, int64 RESE
 		label$45:;
 		I$2 = I$2 + 1ll;
 		label$44:;
-		if( I$2 <= TMP$110$2 ) goto label$47;
+		if( I$2 <= TMP$109$2) goto label$47;
 		label$46:;
 	}
 	fb$result$1 = R$1;
@@ -1211,18 +1211,18 @@ static int64 REGALLOCATE( struct $8REGCLASS* THIS_$1, struct $6IRVREG* VREG$1, s
 	int64 R$1;
 	int64 vr$1 = REGPOP( THIS_$1, (int64)SIZE$1 );
 	R$1 = vr$1;
-	if( R$1 != -1ll ) goto label$57;
+	if( R$1 != -1ll) goto label$57;
 	{
-		int64 TMP$111$2;
+		int64 TMP$110$2;
 		int64 RESERVEDREG$2;
 		RESERVEDREG$2 = -1ll;
-		if( *(struct $6IRVREG**)((uint8*)VREG$1 + 88ll) == (struct $6IRVREG*)0ull ) goto label$58;
-		TMP$111$2 = (int64)-((struct $6IRVREG*)(int64)-(*(int64*)*(struct $6IRVREG**)((uint8*)VREG$1 + 88ll) == 4ll) != (struct $6IRVREG*)0ull);
+		if( *(struct $6IRVREG**)((uint8*)VREG$1 + 88ll) == (struct $6IRVREG*)0ull) goto label$58;
+		TMP$110$2 = (int64)-((struct $6IRVREG*)(int64)-(*(int64*)*(struct $6IRVREG**)((uint8*)VREG$1 + 88ll) == 4ll) != (struct $6IRVREG*)0ull);
 		goto label$203;
 		label$58:;
-		TMP$111$2 = 0ll;
+		TMP$110$2 = 0ll;
 		label$203:;
-		if( TMP$111$2 == 0ll ) goto label$60;
+		if( TMP$110$2 == 0ll) goto label$60;
 		{
 			RESERVEDREG$2 = *(int64*)((uint8*)*(struct $6IRVREG**)((uint8*)VREG$1 + 88ll) + 24ll);
 		}
@@ -1230,7 +1230,7 @@ static int64 REGALLOCATE( struct $8REGCLASS* THIS_$1, struct $6IRVREG* VREG$1, s
 		label$59:;
 		int64 vr$9 = REGFINDFAREST( THIS_$1, (int64)SIZE$1, RESERVEDREG$2 );
 		R$1 = vr$9;
-		(*(tmp$47*)((uint8*)&IR$ + 528ll))( *(struct $6IRVREG**)((uint8*)((uint8*)THIS_$1 + (R$1 << (3ll & 63ll))) + 128ll), *(struct $6IRVREG**)((uint8*)((uint8*)THIS_$1 + (R$1 << (3ll & 63ll))) + 192ll) );
+		(*(tmp$46*)((uint8*)&IR$ + 528ll))( *(struct $6IRVREG**)((uint8*)((uint8*)THIS_$1 + (R$1 << (3ll & 63ll))) + 128ll), *(struct $6IRVREG**)((uint8*)((uint8*)THIS_$1 + (R$1 << (3ll & 63ll))) + 192ll) );
 		REGPOPREG( THIS_$1, R$1 );
 	}
 	label$57:;
@@ -1238,7 +1238,7 @@ static int64 REGALLOCATE( struct $8REGCLASS* THIS_$1, struct $6IRVREG* VREG$1, s
 	*(int64*)((uint8*)THIS_$1 + 272ll) = *(int64*)((uint8*)THIS_$1 + 272ll) & ~(1ll << (R$1 & 63ll));
 	*(struct $6IRVREG**)((uint8*)((uint8*)THIS_$1 + (R$1 << (3ll & 63ll))) + 128ll) = VREG$1;
 	*(struct $6IRVREG**)((uint8*)((uint8*)THIS_$1 + (R$1 << (3ll & 63ll))) + 192ll) = VAUXPARENT$1;
-	uint64 vr$23 = (*(tmp$78*)((uint8*)&IR$ + 512ll))( VREG$1 );
+	uint64 vr$23 = (*(tmp$77*)((uint8*)&IR$ + 512ll))( VREG$1 );
 	*(uint64*)((uint8*)((uint8*)((uint8*)THIS_$1 + 256ll) + (R$1 << (3ll & 63ll))) + 216ll) = vr$23;
 	fb$result$1 = R$1;
 	label$55:;
@@ -1250,7 +1250,7 @@ static int64 REGALLOCATEREG( struct $8REGCLASS* THIS_$1, int64 R$1, struct $6IRV
 	int64 fb$result$1;
 	__builtin_memset( &fb$result$1, 0, 8ll );
 	label$61:;
-	if( (*(int64*)((uint8*)THIS_$1 + 272ll) & (1ll << (R$1 & 63ll))) == 0ll ) goto label$64;
+	if( (*(int64*)((uint8*)THIS_$1 + 272ll) & (1ll << (R$1 & 63ll))) == 0ll) goto label$64;
 	{
 		REGPOPREG( THIS_$1, R$1 );
 		*(int64*)((uint8*)THIS_$1 + 272ll) = *(int64*)((uint8*)THIS_$1 + 272ll) & ~(1ll << (R$1 & 63ll));
@@ -1259,7 +1259,7 @@ static int64 REGALLOCATEREG( struct $8REGCLASS* THIS_$1, int64 R$1, struct $6IRV
 	label$63:;
 	*(struct $6IRVREG**)((uint8*)((uint8*)THIS_$1 + (R$1 << (3ll & 63ll))) + 128ll) = VREG$1;
 	*(struct $6IRVREG**)((uint8*)((uint8*)THIS_$1 + (R$1 << (3ll & 63ll))) + 192ll) = VAUXPARENT$1;
-	uint64 vr$13 = (*(tmp$78*)((uint8*)&IR$ + 512ll))( VREG$1 );
+	uint64 vr$13 = (*(tmp$77*)((uint8*)&IR$ + 512ll))( VREG$1 );
 	*(uint64*)((uint8*)((uint8*)((uint8*)THIS_$1 + 256ll) + (R$1 << (3ll & 63ll))) + 216ll) = vr$13;
 	fb$result$1 = R$1;
 	label$62:;
@@ -1273,11 +1273,11 @@ static int64 REGENSURE( struct $8REGCLASS* THIS_$1, struct $6IRVREG* VREG$1, str
 	label$65:;
 	int64 R$1;
 	R$1 = *(int64*)((uint8*)VREG$1 + 24ll);
-	if( R$1 != -1ll ) goto label$68;
+	if( R$1 != -1ll) goto label$68;
 	{
 		int64 vr$2 = REGALLOCATE( THIS_$1, VREG$1, VAUXPARENT$1, SIZE$1 );
 		R$1 = vr$2;
-		(*(tmp$54*)((uint8*)&IR$ + 520ll))( R$1, VREG$1, VAUXPARENT$1 );
+		(*(tmp$53*)((uint8*)&IR$ + 520ll))( R$1, VREG$1, VAUXPARENT$1 );
 	}
 	label$68:;
 	label$67:;
@@ -1292,7 +1292,7 @@ static void REGSETOWNER( struct $8REGCLASS* THIS_$1, int64 R$1, struct $6IRVREG*
 	*(int64*)((uint8*)THIS_$1 + 272ll) = *(int64*)((uint8*)THIS_$1 + 272ll) & ~(1ll << (R$1 & 63ll));
 	*(struct $6IRVREG**)((uint8*)((uint8*)THIS_$1 + (R$1 << (3ll & 63ll))) + 128ll) = VREG$1;
 	*(struct $6IRVREG**)((uint8*)((uint8*)THIS_$1 + (R$1 << (3ll & 63ll))) + 192ll) = VAUXPARENT$1;
-	uint64 vr$9 = (*(tmp$78*)((uint8*)&IR$ + 512ll))( VREG$1 );
+	uint64 vr$9 = (*(tmp$77*)((uint8*)&IR$ + 512ll))( VREG$1 );
 	*(uint64*)((uint8*)((uint8*)((uint8*)THIS_$1 + 256ll) + (R$1 << (3ll & 63ll))) + 216ll) = vr$9;
 	label$70:;
 }
@@ -1300,7 +1300,7 @@ static void REGSETOWNER( struct $8REGCLASS* THIS_$1, int64 R$1, struct $6IRVREG*
 static void REGFREE( struct $8REGCLASS* THIS_$1, int64 R$1 )
 {
 	label$71:;
-	if( (*(int64*)((uint8*)THIS_$1 + 272ll) & (1ll << (R$1 & 63ll))) != 0ll ) goto label$74;
+	if( (*(int64*)((uint8*)THIS_$1 + 272ll) & (1ll << (R$1 & 63ll))) != 0ll) goto label$74;
 	{
 		*(int64*)((uint8*)THIS_$1 + 272ll) = *(int64*)((uint8*)THIS_$1 + 272ll) | (1ll << (R$1 & 63ll));
 		*(struct $6IRVREG**)((uint8*)((uint8*)THIS_$1 + (R$1 << (3ll & 63ll))) + 128ll) = (struct $6IRVREG*)0ull;
@@ -1349,10 +1349,10 @@ static int64 REGGETNEXT( struct $8REGCLASS* THIS_$1, int64 R$1 )
 	__builtin_memset( &fb$result$1, 0, 8ll );
 	label$81:;
 	fb$result$1 = -1ll;
-	if( R$1 < 0ll ) goto label$84;
+	if( R$1 < 0ll) goto label$84;
 	{
 		R$1 = R$1 + 1ll;
-		if( R$1 >= *(int64*)((uint8*)THIS_$1 + 120ll) ) goto label$86;
+		if( R$1 >= *(int64*)((uint8*)THIS_$1 + 120ll)) goto label$86;
 		{
 			fb$result$1 = R$1;
 		}
@@ -1399,8 +1399,8 @@ static void REGINITCLASS( struct $8REGCLASS* THIS_$1, struct $7FBARRAYI12REG_SIZ
 	REGCLEAR( THIS_$1 );
 	{
 		I$1 = 0ll;
-		int64 TMP$112$2;
-		TMP$112$2 = *(int64*)((uint8*)THIS_$1 + 120ll) + -1ll;
+		int64 TMP$111$2;
+		TMP$111$2 = *(int64*)((uint8*)THIS_$1 + 120ll) + -1ll;
 		goto label$95;
 		label$98:;
 		{
@@ -1409,22 +1409,22 @@ static void REGINITCLASS( struct $8REGCLASS* THIS_$1, struct $7FBARRAYI12REG_SIZ
 		label$96:;
 		I$1 = I$1 + 1ll;
 		label$95:;
-		if( I$1 <= TMP$112$2 ) goto label$98;
+		if( I$1 <= TMP$111$2) goto label$98;
 		label$97:;
 	}
-	*(tmp$86*)THIS_$1 = (tmp$86)&REGENSURE;
-	*(tmp$86*)((uint8*)THIS_$1 + 8ll) = (tmp$86)&REGALLOCATE;
-	*(tmp$87*)((uint8*)THIS_$1 + 16ll) = (tmp$87)&REGALLOCATEREG;
-	*(tmp$88*)((uint8*)THIS_$1 + 24ll) = (tmp$88)&REGFREE;
-	*(tmp$89*)((uint8*)THIS_$1 + 32ll) = (tmp$89)&REGISFREE;
-	*(tmp$90*)((uint8*)THIS_$1 + 40ll) = (tmp$90)&REGSETOWNER;
-	*(tmp$91*)((uint8*)THIS_$1 + 48ll) = (tmp$91)&REGGETMAXREGS;
-	*(tmp$91*)((uint8*)THIS_$1 + 56ll) = (tmp$91)&REGGETFIRST;
-	*(tmp$89*)((uint8*)THIS_$1 + 64ll) = (tmp$89)&REGGETNEXT;
-	*(tmp$92*)((uint8*)THIS_$1 + 72ll) = (tmp$92)&REGGETVREG;
-	*(tmp$89*)((uint8*)THIS_$1 + 80ll) = (tmp$89)&REGGETREALREG;
-	*(tmp$93*)((uint8*)THIS_$1 + 88ll) = (tmp$93)&REGCLEAR;
-	*(tmp$93*)((uint8*)THIS_$1 + 96ll) = (tmp$93)&REGDUMP;
+	*(tmp$85*)THIS_$1 = (tmp$85)&REGENSURE;
+	*(tmp$85*)((uint8*)THIS_$1 + 8ll) = (tmp$85)&REGALLOCATE;
+	*(tmp$86*)((uint8*)THIS_$1 + 16ll) = (tmp$86)&REGALLOCATEREG;
+	*(tmp$87*)((uint8*)THIS_$1 + 24ll) = (tmp$87)&REGFREE;
+	*(tmp$88*)((uint8*)THIS_$1 + 32ll) = (tmp$88)&REGISFREE;
+	*(tmp$89*)((uint8*)THIS_$1 + 40ll) = (tmp$89)&REGSETOWNER;
+	*(tmp$90*)((uint8*)THIS_$1 + 48ll) = (tmp$90)&REGGETMAXREGS;
+	*(tmp$90*)((uint8*)THIS_$1 + 56ll) = (tmp$90)&REGGETFIRST;
+	*(tmp$88*)((uint8*)THIS_$1 + 64ll) = (tmp$88)&REGGETNEXT;
+	*(tmp$91*)((uint8*)THIS_$1 + 72ll) = (tmp$91)&REGGETVREG;
+	*(tmp$88*)((uint8*)THIS_$1 + 80ll) = (tmp$88)&REGGETREALREG;
+	*(tmp$92*)((uint8*)THIS_$1 + 88ll) = (tmp$92)&REGCLEAR;
+	*(tmp$92*)((uint8*)THIS_$1 + 96ll) = (tmp$92)&REGDUMP;
 	label$94:;
 }
 
@@ -1435,7 +1435,7 @@ static int64 SREGFINDREG( struct $8REGCLASS* THIS_$1, struct $6IRVREG* VREG$1 )
 	label$99:;
 	static int64 R$1;
 	fb$result$1 = -1ll;
-	if( *(int64*)((uint8*)THIS_$1 + 600ll) != *(int64*)((uint8*)THIS_$1 + 120ll) ) goto label$102;
+	if( *(int64*)((uint8*)THIS_$1 + 600ll) != *(int64*)((uint8*)THIS_$1 + 120ll)) goto label$102;
 	{
 		goto label$100;
 	}
@@ -1443,14 +1443,14 @@ static int64 SREGFINDREG( struct $8REGCLASS* THIS_$1, struct $6IRVREG* VREG$1 )
 	label$101:;
 	{
 		R$1 = 0ll;
-		int64 TMP$113$2;
-		TMP$113$2 = *(int64*)((uint8*)THIS_$1 + 120ll) + -1ll;
+		int64 TMP$112$2;
+		TMP$112$2 = *(int64*)((uint8*)THIS_$1 + 120ll) + -1ll;
 		goto label$103;
 		label$106:;
 		{
-			if( *(int64*)((uint8*)((uint8*)THIS_$1 + 536ll) + (R$1 << (3ll & 63ll))) == -1ll ) goto label$108;
+			if( *(int64*)((uint8*)((uint8*)THIS_$1 + 536ll) + (R$1 << (3ll & 63ll))) == -1ll) goto label$108;
 			{
-				if( *(struct $6IRVREG**)((uint8*)((uint8*)THIS_$1 + (R$1 << (3ll & 63ll))) + 128ll) != VREG$1 ) goto label$110;
+				if( *(struct $6IRVREG**)((uint8*)((uint8*)THIS_$1 + (R$1 << (3ll & 63ll))) + 128ll) != VREG$1) goto label$110;
 				{
 					fb$result$1 = R$1;
 					goto label$100;
@@ -1464,7 +1464,7 @@ static int64 SREGFINDREG( struct $8REGCLASS* THIS_$1, struct $6IRVREG* VREG$1 )
 		label$104:;
 		R$1 = R$1 + 1ll;
 		label$103:;
-		if( R$1 <= TMP$113$2 ) goto label$106;
+		if( R$1 <= TMP$112$2) goto label$106;
 		label$105:;
 	}
 	label$100:;
@@ -1476,16 +1476,16 @@ static void SREGXCHG( struct $8REGCLASS* THIS_$1, int64 R1$1 )
 	label$111:;
 	static int64 I$1;
 	static int64 R2$1;
-	(*(tmp$48*)((uint8*)&IR$ + 536ll))( R1$1 );
+	(*(tmp$47*)((uint8*)&IR$ + 536ll))( R1$1 );
 	R2$1 = -1ll;
 	{
 		I$1 = 0ll;
-		int64 TMP$114$2;
-		TMP$114$2 = *(int64*)((uint8*)THIS_$1 + 120ll) + -1ll;
+		int64 TMP$113$2;
+		TMP$113$2 = *(int64*)((uint8*)THIS_$1 + 120ll) + -1ll;
 		goto label$113;
 		label$116:;
 		{
-			if( *(int64*)((uint8*)((uint8*)THIS_$1 + 536ll) + (I$1 << (3ll & 63ll))) != 0ll ) goto label$118;
+			if( *(int64*)((uint8*)((uint8*)THIS_$1 + 536ll) + (I$1 << (3ll & 63ll))) != 0ll) goto label$118;
 			{
 				R2$1 = I$1;
 				goto label$115;
@@ -1496,14 +1496,14 @@ static void SREGXCHG( struct $8REGCLASS* THIS_$1, int64 R1$1 )
 		label$114:;
 		I$1 = I$1 + 1ll;
 		label$113:;
-		if( I$1 <= TMP$114$2 ) goto label$116;
+		if( I$1 <= TMP$113$2) goto label$116;
 		label$115:;
 	}
 	{
-		int64 TMP$115$2;
-		TMP$115$2 = *(int64*)((uint8*)((uint8*)THIS_$1 + 536ll) + (R1$1 << (3ll & 63ll)));
+		int64 TMP$114$2;
+		TMP$114$2 = *(int64*)((uint8*)((uint8*)THIS_$1 + 536ll) + (R1$1 << (3ll & 63ll)));
 		*(int64*)((uint8*)((uint8*)THIS_$1 + 536ll) + (R1$1 << (3ll & 63ll))) = *(int64*)((uint8*)((uint8*)THIS_$1 + 536ll) + (R2$1 << (3ll & 63ll)));
-		*(int64*)((uint8*)((uint8*)THIS_$1 + 536ll) + (R2$1 << (3ll & 63ll))) = TMP$115$2;
+		*(int64*)((uint8*)((uint8*)THIS_$1 + 536ll) + (R2$1 << (3ll & 63ll))) = TMP$114$2;
 	}
 	label$112:;
 }
@@ -1515,7 +1515,7 @@ static int64 SREGFINDFREEREG( struct $8REGCLASS* THIS_$1 )
 	label$119:;
 	static int64 R$1;
 	fb$result$1 = -1ll;
-	if( *(int64*)((uint8*)THIS_$1 + 600ll) != 0ll ) goto label$122;
+	if( *(int64*)((uint8*)THIS_$1 + 600ll) != 0ll) goto label$122;
 	{
 		goto label$120;
 	}
@@ -1523,12 +1523,12 @@ static int64 SREGFINDFREEREG( struct $8REGCLASS* THIS_$1 )
 	label$121:;
 	{
 		R$1 = 0ll;
-		int64 TMP$116$2;
-		TMP$116$2 = *(int64*)((uint8*)THIS_$1 + 120ll) + -1ll;
+		int64 TMP$115$2;
+		TMP$115$2 = *(int64*)((uint8*)THIS_$1 + 120ll) + -1ll;
 		goto label$123;
 		label$126:;
 		{
-			if( *(int64*)((uint8*)((uint8*)THIS_$1 + 536ll) + (R$1 << (3ll & 63ll))) != -1ll ) goto label$128;
+			if( *(int64*)((uint8*)((uint8*)THIS_$1 + 536ll) + (R$1 << (3ll & 63ll))) != -1ll) goto label$128;
 			{
 				fb$result$1 = R$1;
 				goto label$120;
@@ -1539,7 +1539,7 @@ static int64 SREGFINDFREEREG( struct $8REGCLASS* THIS_$1 )
 		label$124:;
 		R$1 = R$1 + 1ll;
 		label$123:;
-		if( R$1 <= TMP$116$2 ) goto label$126;
+		if( R$1 <= TMP$115$2) goto label$126;
 		label$125:;
 	}
 	label$120:;
@@ -1554,12 +1554,12 @@ static int64 SREGFINDTOSREG( struct $8REGCLASS* THIS_$1 )
 	static int64 R$1;
 	{
 		R$1 = 0ll;
-		int64 TMP$118$2;
-		TMP$118$2 = *(int64*)((uint8*)THIS_$1 + 120ll) + -1ll;
+		int64 TMP$117$2;
+		TMP$117$2 = *(int64*)((uint8*)THIS_$1 + 120ll) + -1ll;
 		goto label$141;
 		label$144:;
 		{
-			if( *(int64*)((uint8*)((uint8*)THIS_$1 + 536ll) + (R$1 << (3ll & 63ll))) != 0ll ) goto label$146;
+			if( *(int64*)((uint8*)((uint8*)THIS_$1 + 536ll) + (R$1 << (3ll & 63ll))) != 0ll) goto label$146;
 			{
 				fb$result$1 = R$1;
 				goto label$140;
@@ -1570,7 +1570,7 @@ static int64 SREGFINDTOSREG( struct $8REGCLASS* THIS_$1 )
 		label$142:;
 		R$1 = R$1 + 1ll;
 		label$141:;
-		if( R$1 <= TMP$118$2 ) goto label$144;
+		if( R$1 <= TMP$117$2) goto label$144;
 		label$143:;
 	}
 	fb$result$1 = -1ll;
@@ -1586,11 +1586,11 @@ static int64 SREGALLOCATE( struct $8REGCLASS* THIS_$1, struct $6IRVREG* VREG$1, 
 	int64 R$1;
 	int64 vr$1 = SREGFINDFREEREG( THIS_$1 );
 	R$1 = vr$1;
-	if( R$1 != -1ll ) goto label$150;
+	if( R$1 != -1ll) goto label$150;
 	{
 		int64 vr$2 = SREGFINDTOSREG( THIS_$1 );
 		R$1 = vr$2;
-		(*(tmp$47*)((uint8*)&IR$ + 528ll))( *(struct $6IRVREG**)((uint8*)((uint8*)THIS_$1 + (R$1 << (3ll & 63ll))) + 128ll), *(struct $6IRVREG**)((uint8*)((uint8*)THIS_$1 + (R$1 << (3ll & 63ll))) + 192ll) );
+		(*(tmp$46*)((uint8*)&IR$ + 528ll))( *(struct $6IRVREG**)((uint8*)((uint8*)THIS_$1 + (R$1 << (3ll & 63ll))) + 128ll), *(struct $6IRVREG**)((uint8*)((uint8*)THIS_$1 + (R$1 << (3ll & 63ll))) + 192ll) );
 	}
 	label$150:;
 	label$149:;
@@ -1598,12 +1598,12 @@ static int64 SREGALLOCATE( struct $8REGCLASS* THIS_$1, struct $6IRVREG* VREG$1, 
 	{
 		int64 I$2;
 		I$2 = 0ll;
-		int64 TMP$119$2;
-		TMP$119$2 = *(int64*)((uint8*)THIS_$1 + 120ll) + -1ll;
+		int64 TMP$118$2;
+		TMP$118$2 = *(int64*)((uint8*)THIS_$1 + 120ll) + -1ll;
 		goto label$151;
 		label$154:;
 		{
-			if( *(int64*)((uint8*)((uint8*)THIS_$1 + 536ll) + (I$2 << (3ll & 63ll))) == -1ll ) goto label$156;
+			if( *(int64*)((uint8*)((uint8*)THIS_$1 + 536ll) + (I$2 << (3ll & 63ll))) == -1ll) goto label$156;
 			{
 				*(int64*)((uint8*)((uint8*)THIS_$1 + 536ll) + (I$2 << (3ll & 63ll))) = *(int64*)((uint8*)((uint8*)THIS_$1 + 536ll) + (I$2 << (3ll & 63ll))) + 1ll;
 			}
@@ -1613,7 +1613,7 @@ static int64 SREGALLOCATE( struct $8REGCLASS* THIS_$1, struct $6IRVREG* VREG$1, 
 		label$152:;
 		I$2 = I$2 + 1ll;
 		label$151:;
-		if( I$2 <= TMP$119$2 ) goto label$154;
+		if( I$2 <= TMP$118$2) goto label$154;
 		label$153:;
 	}
 	*(struct $6IRVREG**)((uint8*)((uint8*)THIS_$1 + (R$1 << (3ll & 63ll))) + 128ll) = VREG$1;
@@ -1643,16 +1643,16 @@ static int64 SREGENSURE( struct $8REGCLASS* THIS_$1, struct $6IRVREG* VREG$1, st
 	int64 R$1;
 	int64 vr$1 = SREGFINDREG( THIS_$1, VREG$1 );
 	R$1 = vr$1;
-	if( R$1 != -1ll ) goto label$162;
+	if( R$1 != -1ll) goto label$162;
 	{
 		int64 vr$2 = SREGALLOCATE( THIS_$1, VREG$1, VAUXPARENT$1, 8ull );
 		R$1 = vr$2;
-		(*(tmp$54*)((uint8*)&IR$ + 520ll))( R$1, VREG$1, VAUXPARENT$1 );
+		(*(tmp$53*)((uint8*)&IR$ + 520ll))( R$1, VREG$1, VAUXPARENT$1 );
 	}
 	goto label$161;
 	label$162:;
 	{
-		if( *(int64*)((uint8*)((uint8*)THIS_$1 + 536ll) + (R$1 << (3ll & 63ll))) == 0ll ) goto label$164;
+		if( *(int64*)((uint8*)((uint8*)THIS_$1 + 536ll) + (R$1 << (3ll & 63ll))) == 0ll) goto label$164;
 		{
 			SREGXCHG( THIS_$1, R$1 );
 		}
@@ -1672,7 +1672,7 @@ static void SREGFREE( struct $8REGCLASS* THIS_$1, int64 R$1 )
 	__builtin_memset( &I$1, 0, 8ll );
 	int64 REALREG$1;
 	__builtin_memset( &REALREG$1, 0, 8ll );
-	if( *(int64*)((uint8*)((uint8*)THIS_$1 + 536ll) + (R$1 << (3ll & 63ll))) != -1ll ) goto label$168;
+	if( *(int64*)((uint8*)((uint8*)THIS_$1 + 536ll) + (R$1 << (3ll & 63ll))) != -1ll) goto label$168;
 	{
 		goto label$166;
 	}
@@ -1684,14 +1684,14 @@ static void SREGFREE( struct $8REGCLASS* THIS_$1, int64 R$1 )
 	*(struct $6IRVREG**)((uint8*)((uint8*)THIS_$1 + (R$1 << (3ll & 63ll))) + 192ll) = (struct $6IRVREG*)0ull;
 	{
 		I$1 = 0ll;
-		int64 TMP$120$2;
-		TMP$120$2 = *(int64*)((uint8*)THIS_$1 + 120ll) + -1ll;
+		int64 TMP$119$2;
+		TMP$119$2 = *(int64*)((uint8*)THIS_$1 + 120ll) + -1ll;
 		goto label$169;
 		label$172:;
 		{
-			if( *(int64*)((uint8*)((uint8*)THIS_$1 + 536ll) + (I$1 << (3ll & 63ll))) == -1ll ) goto label$174;
+			if( *(int64*)((uint8*)((uint8*)THIS_$1 + 536ll) + (I$1 << (3ll & 63ll))) == -1ll) goto label$174;
 			{
-				if( *(int64*)((uint8*)((uint8*)THIS_$1 + 536ll) + (I$1 << (3ll & 63ll))) <= REALREG$1 ) goto label$176;
+				if( *(int64*)((uint8*)((uint8*)THIS_$1 + 536ll) + (I$1 << (3ll & 63ll))) <= REALREG$1) goto label$176;
 				{
 					*(int64*)((uint8*)((uint8*)THIS_$1 + 536ll) + (I$1 << (3ll & 63ll))) = *(int64*)((uint8*)((uint8*)THIS_$1 + 536ll) + (I$1 << (3ll & 63ll))) + -1ll;
 				}
@@ -1704,7 +1704,7 @@ static void SREGFREE( struct $8REGCLASS* THIS_$1, int64 R$1 )
 		label$170:;
 		I$1 = I$1 + 1ll;
 		label$169:;
-		if( I$1 <= TMP$120$2 ) goto label$172;
+		if( I$1 <= TMP$119$2) goto label$172;
 		label$171:;
 	}
 	*(int64*)((uint8*)THIS_$1 + 600ll) = *(int64*)((uint8*)THIS_$1 + 600ll) + 1ll;
@@ -1765,7 +1765,7 @@ static int64 SREGGETNEXT( struct $8REGCLASS* THIS_$1, int64 R$1 )
 	int64 fb$result$1;
 	__builtin_memset( &fb$result$1, 0, 8ll );
 	label$187:;
-	if( ((int64)-(R$1 < 0ll) | (int64)-(R$1 >= *(int64*)((uint8*)THIS_$1 + 120ll))) == 0ll ) goto label$190;
+	if( ((int64)-(R$1 < 0ll) | (int64)-(R$1 >= *(int64*)((uint8*)THIS_$1 + 120ll))) == 0ll) goto label$190;
 	{
 		fb$result$1 = -1ll;
 	}
@@ -1804,8 +1804,8 @@ static void SREGCLEAR( struct $8REGCLASS* REG$1 )
 	*(int64*)((uint8*)REG$1 + 600ll) = *(int64*)((uint8*)REG$1 + 120ll);
 	{
 		R$1 = 0ll;
-		int64 TMP$121$2;
-		TMP$121$2 = *(int64*)((uint8*)REG$1 + 120ll) + -1ll;
+		int64 TMP$120$2;
+		TMP$120$2 = *(int64*)((uint8*)REG$1 + 120ll) + -1ll;
 		goto label$197;
 		label$200:;
 		{
@@ -1816,7 +1816,7 @@ static void SREGCLEAR( struct $8REGCLASS* REG$1 )
 		label$198:;
 		R$1 = R$1 + 1ll;
 		label$197:;
-		if( R$1 <= TMP$121$2 ) goto label$200;
+		if( R$1 <= TMP$120$2) goto label$200;
 		label$199:;
 	}
 	label$196:;
@@ -1826,18 +1826,18 @@ static void SREGINITCLASS( struct $8REGCLASS* THIS_$1, struct $7FBARRAYI12REG_SI
 {
 	label$201:;
 	SREGCLEAR( THIS_$1 );
-	*(tmp$86*)THIS_$1 = (tmp$86)&SREGENSURE;
-	*(tmp$86*)((uint8*)THIS_$1 + 8ll) = (tmp$86)&SREGALLOCATE;
-	*(tmp$87*)((uint8*)THIS_$1 + 16ll) = (tmp$87)&SREGALLOCATEREG;
-	*(tmp$88*)((uint8*)THIS_$1 + 24ll) = (tmp$88)&SREGFREE;
-	*(tmp$89*)((uint8*)THIS_$1 + 32ll) = (tmp$89)&SREGISFREE;
-	*(tmp$90*)((uint8*)THIS_$1 + 40ll) = (tmp$90)&SREGSETOWNER;
-	*(tmp$91*)((uint8*)THIS_$1 + 48ll) = (tmp$91)&SREGGETMAXREGS;
-	*(tmp$91*)((uint8*)THIS_$1 + 56ll) = (tmp$91)&SREGGETFIRST;
-	*(tmp$89*)((uint8*)THIS_$1 + 64ll) = (tmp$89)&SREGGETNEXT;
-	*(tmp$92*)((uint8*)THIS_$1 + 72ll) = (tmp$92)&SREGGETVREG;
-	*(tmp$89*)((uint8*)THIS_$1 + 80ll) = (tmp$89)&SREGGETREALREG;
-	*(tmp$93*)((uint8*)THIS_$1 + 88ll) = (tmp$93)&SREGCLEAR;
-	*(tmp$93*)((uint8*)THIS_$1 + 96ll) = (tmp$93)&SREGDUMP;
+	*(tmp$85*)THIS_$1 = (tmp$85)&SREGENSURE;
+	*(tmp$85*)((uint8*)THIS_$1 + 8ll) = (tmp$85)&SREGALLOCATE;
+	*(tmp$86*)((uint8*)THIS_$1 + 16ll) = (tmp$86)&SREGALLOCATEREG;
+	*(tmp$87*)((uint8*)THIS_$1 + 24ll) = (tmp$87)&SREGFREE;
+	*(tmp$88*)((uint8*)THIS_$1 + 32ll) = (tmp$88)&SREGISFREE;
+	*(tmp$89*)((uint8*)THIS_$1 + 40ll) = (tmp$89)&SREGSETOWNER;
+	*(tmp$90*)((uint8*)THIS_$1 + 48ll) = (tmp$90)&SREGGETMAXREGS;
+	*(tmp$90*)((uint8*)THIS_$1 + 56ll) = (tmp$90)&SREGGETFIRST;
+	*(tmp$88*)((uint8*)THIS_$1 + 64ll) = (tmp$88)&SREGGETNEXT;
+	*(tmp$91*)((uint8*)THIS_$1 + 72ll) = (tmp$91)&SREGGETVREG;
+	*(tmp$88*)((uint8*)THIS_$1 + 80ll) = (tmp$88)&SREGGETREALREG;
+	*(tmp$92*)((uint8*)THIS_$1 + 88ll) = (tmp$92)&SREGCLEAR;
+	*(tmp$92*)((uint8*)THIS_$1 + 96ll) = (tmp$92)&SREGDUMP;
 	label$202:;
 }

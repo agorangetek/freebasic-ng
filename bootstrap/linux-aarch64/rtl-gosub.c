@@ -391,9 +391,9 @@ struct $8FBS_ENUM {
 };
 __FB_STATIC_ASSERT( sizeof( struct $8FBS_ENUM ) == 96 );
 typedef int64 $21FB_PROC_RETURN_METHOD;
-typedef int64 (*tmp$35)( struct $8FBSYMBOL* );
+typedef int64 (*tmp$34)( struct $8FBSYMBOL* );
 struct $10FB_PROCRTL {
-	tmp$35 CALLBACK;
+	tmp$34 CALLBACK;
 };
 __FB_STATIC_ASSERT( sizeof( struct $10FB_PROCRTL ) == 8 );
 struct $10FB_PROCOVL {
@@ -523,7 +523,7 @@ struct $9FB_DEFTOK {
 };
 __FB_STATIC_ASSERT( sizeof( struct $9FB_DEFTOK ) == 32 );
 typedef int64 $15FB_DEFINE_FLAGS;
-typedef FBSTRING* (*tmp$29)( void );
+typedef FBSTRING* (*tmp$28)( void );
 struct $8DZSTRING {
 	char* DATA;
 	int64 LEN;
@@ -548,8 +548,8 @@ struct $11LEXPP_ARGTB {
 	int64 COUNT;
 };
 __FB_STATIC_ASSERT( sizeof( struct $11LEXPP_ARGTB ) == 776 );
-typedef FBSTRING* (*tmp$30)( struct $11LEXPP_ARGTB*, int64* );
-typedef uint32* (*tmp$31)( struct $11LEXPP_ARGTB*, int64* );
+typedef FBSTRING* (*tmp$29)( struct $11LEXPP_ARGTB*, int64* );
+typedef uint32* (*tmp$30)( struct $11LEXPP_ARGTB*, int64* );
 struct $10FBS_DEFINE {
 	int64 PARAMS;
 	struct $11FB_DEFPARAM* PARAMHEAD;
@@ -561,11 +561,11 @@ struct $10FBS_DEFINE {
 	int64 ISARGLESS;
 	$15FB_DEFINE_FLAGS FLAGS;
 	union {
-		tmp$29 DPROCZ;
-		tmp$30 MPROCZ;
+		tmp$28 DPROCZ;
+		tmp$29 MPROCZ;
 	};
 	union {
-		tmp$31 MPROCW;
+		tmp$30 MPROCW;
 	};
 };
 __FB_STATIC_ASSERT( sizeof( struct $10FBS_DEFINE ) == 56 );
@@ -673,7 +673,7 @@ struct $14FB_RTL_PROCDEF {
 	char* ALIAS;
 	$11FB_DATATYPE DTYPE;
 	$11FB_FUNCMODE CALLCONV;
-	tmp$35 CALLBACK;
+	tmp$34 CALLBACK;
 	$10FB_RTL_OPT OPTIONS;
 	int64 PARAMS;
 	struct $15FB_RTL_PARAMDEF PARAMTB[16];
@@ -721,7 +721,7 @@ struct $8FBARRAY1I10AST_OPINFOE {
 	struct $16__FB_ARRAYDIMTB$ DIMTB[1];
 };
 __FB_STATIC_ASSERT( sizeof( struct $8FBARRAY1I10AST_OPINFOE ) == 72 );
-static struct $8FBARRAY1I10AST_OPINFOE tmp$83$;
+static struct $8FBARRAY1I10AST_OPINFOE tmp$82$;
 typedef int64 $12FB_DATACLASS;
 struct $13SYMB_DATATYPE {
 	$12FB_DATACLASS CLASS;
@@ -743,7 +743,7 @@ struct $8FBARRAY1I13SYMB_DATATYPEE {
 	struct $16__FB_ARRAYDIMTB$ DIMTB[1];
 };
 __FB_STATIC_ASSERT( sizeof( struct $8FBARRAY1I13SYMB_DATATYPEE ) == 72 );
-static struct $8FBARRAY1I13SYMB_DATATYPEE tmp$84$;
+static struct $8FBARRAY1I13SYMB_DATATYPEE tmp$83$;
 struct $8FBARRAY2IlE {
 	int64* DATA;
 	int64* PTR;
@@ -754,7 +754,7 @@ struct $8FBARRAY2IlE {
 	struct $16__FB_ARRAYDIMTB$ DIMTB[2];
 };
 __FB_STATIC_ASSERT( sizeof( struct $8FBARRAY2IlE ) == 96 );
-static struct $8FBARRAY2IlE tmp$85$;
+static struct $8FBARRAY2IlE tmp$84$;
 typedef int64 $10FB_OUTTYPE;
 typedef int64 $10FB_BACKEND;
 typedef int64 $13FB_COMPTARGET;
@@ -902,21 +902,21 @@ struct $5FBENV {
 };
 __FB_STATIC_ASSERT( sizeof( struct $5FBENV ) == 1824 );
 extern struct $5FBENV ENV$;
-static struct $14FB_RTL_PROCDEF FUNCDATA$[5] = { { (char*)"fb_GosubPush", (char*)0ull, 32ll, -1ll, (tmp$35)0ull, 0ll, 1ll, { { 64ll, 1ll, 0ll } } }, { (char*)"fb_GosubPop", (char*)0ull, 11ll, -1ll, (tmp$35)0ull, 0ll, 1ll, { { 64ll, 1ll, 0ll } } }, { (char*)"fb_GosubReturn", (char*)0ull, 11ll, -1ll, (tmp$35)0ull, 0ll, 1ll, { { 64ll, 1ll, 0ll } } }, { (char*)"fb_GosubExit", (char*)0ull, 0ll, -1ll, (tmp$35)0ull, 0ll, 1ll, { { 64ll, 1ll, 0ll } } }, { (char*)0ull } };
-static struct $14FB_RTL_PROCDEF FUNCDATA1_WIN32$[2] = { { (char*)"fb_SetJmp", (char*)"_setjmp", 11ll, 3ll, (tmp$35)0ull, 0ll, 1ll, { { 32ll, 1ll, 0ll } } }, { (char*)0ull } };
-static struct $14FB_RTL_PROCDEF FUNCDATA1_WIN64$[2] = { { (char*)"fb_SetJmp", (char*)"_setjmp", 11ll, 3ll, (tmp$35)0ull, 0ll, 2ll, { { 32ll, 1ll, 0ll }, { 32ll, 1ll, 0ll } } }, { (char*)0ull } };
-static struct $14FB_RTL_PROCDEF FUNCDATA2$[2] = { { (char*)"fb_SetJmp", (char*)"setjmp", 11ll, 3ll, (tmp$35)0ull, 0ll, 1ll, { { 32ll, 1ll, 0ll } } }, { (char*)0ull } };
+static struct $14FB_RTL_PROCDEF FUNCDATA$[5] = { { (char*)"fb_GosubPush", (char*)0ull, 32ll, -1ll, (tmp$34)0ull, 0ll, 1ll, { { 64ll, 1ll, 0ll } } }, { (char*)"fb_GosubPop", (char*)0ull, 11ll, -1ll, (tmp$34)0ull, 0ll, 1ll, { { 64ll, 1ll, 0ll } } }, { (char*)"fb_GosubReturn", (char*)0ull, 11ll, -1ll, (tmp$34)0ull, 0ll, 1ll, { { 64ll, 1ll, 0ll } } }, { (char*)"fb_GosubExit", (char*)0ull, 0ll, -1ll, (tmp$34)0ull, 0ll, 1ll, { { 64ll, 1ll, 0ll } } }, { (char*)0ull } };
+static struct $14FB_RTL_PROCDEF FUNCDATA1_WIN32$[2] = { { (char*)"fb_SetJmp", (char*)"_setjmp", 11ll, 3ll, (tmp$34)0ull, 0ll, 1ll, { { 32ll, 1ll, 0ll } } }, { (char*)0ull } };
+static struct $14FB_RTL_PROCDEF FUNCDATA1_WIN64$[2] = { { (char*)"fb_SetJmp", (char*)"_setjmp", 11ll, 3ll, (tmp$34)0ull, 0ll, 2ll, { { 32ll, 1ll, 0ll }, { 32ll, 1ll, 0ll } } }, { (char*)0ull } };
+static struct $14FB_RTL_PROCDEF FUNCDATA2$[2] = { { (char*)"fb_SetJmp", (char*)"setjmp", 11ll, 3ll, (tmp$34)0ull, 0ll, 1ll, { { 32ll, 1ll, 0ll } } }, { (char*)0ull } };
 
 void RTLGOSUBMODINIT( void )
 {
 	label$10:;
-	if( (*(int64*)((uint8*)&ENV$ + 1448ll) & 65536ll) == 0ll ) goto label$13;
+	if( (*(int64*)((uint8*)&ENV$ + 1448ll) & 65536ll) == 0ll) goto label$13;
 	{
 		RTLADDINTRINSICPROCS( (struct $14FB_RTL_PROCDEF*)FUNCDATA$ );
-		if( *(int64*)((uint8*)&ENV$ + 216ll) != 0ll ) goto label$15;
+		if( *(int64*)((uint8*)&ENV$ + 216ll) != 0ll) goto label$15;
 		{
 			int64 vr$1 = FBIS64BIT(  );
-			if( vr$1 == 0ll ) goto label$17;
+			if( vr$1 == 0ll) goto label$17;
 			{
 				RTLADDINTRINSICPROCS( (struct $14FB_RTL_PROCDEF*)FUNCDATA1_WIN64$ );
 			}
@@ -956,7 +956,7 @@ struct $7ASTNODE* RTLGOSUBPUSH( struct $7ASTNODE* CTX$1 )
 	struct $7ASTNODE* vr$2 = ASTNEWCALL( vr$1, (struct $7ASTNODE*)0ull, -1ll );
 	PROC$1 = vr$2;
 	struct $7ASTNODE* vr$3 = ASTNEWARG( PROC$1, CTX$1, 2147483648ll, -1ll );
-	if( vr$3 != (struct $7ASTNODE*)0ull ) goto label$23;
+	if( vr$3 != (struct $7ASTNODE*)0ull) goto label$23;
 	{
 		goto label$21;
 	}
@@ -978,7 +978,7 @@ struct $7ASTNODE* RTLGOSUBPOP( struct $7ASTNODE* CTX$1 )
 	struct $7ASTNODE* vr$2 = ASTNEWCALL( vr$1, (struct $7ASTNODE*)0ull, -1ll );
 	PROC$1 = vr$2;
 	struct $7ASTNODE* vr$3 = ASTNEWARG( PROC$1, CTX$1, 2147483648ll, -1ll );
-	if( vr$3 != (struct $7ASTNODE*)0ull ) goto label$27;
+	if( vr$3 != (struct $7ASTNODE*)0ull) goto label$27;
 	{
 		goto label$25;
 	}
@@ -999,7 +999,7 @@ int64 RTLGOSUBRETURN( struct $7ASTNODE* CTX$1 )
 	struct $7ASTNODE* vr$2 = ASTNEWCALL( vr$1, (struct $7ASTNODE*)0ull, -1ll );
 	PROC$1 = vr$2;
 	struct $7ASTNODE* vr$3 = ASTNEWARG( PROC$1, CTX$1, 2147483648ll, -1ll );
-	if( vr$3 != (struct $7ASTNODE*)0ull ) goto label$31;
+	if( vr$3 != (struct $7ASTNODE*)0ull) goto label$31;
 	{
 		goto label$29;
 	}
@@ -1023,7 +1023,7 @@ struct $7ASTNODE* RTLGOSUBEXIT( struct $7ASTNODE* CTX$1 )
 	struct $7ASTNODE* vr$2 = ASTNEWCALL( vr$1, (struct $7ASTNODE*)0ull, -1ll );
 	PROC$1 = vr$2;
 	struct $7ASTNODE* vr$3 = ASTNEWARG( PROC$1, CTX$1, 2147483648ll, -1ll );
-	if( vr$3 != (struct $7ASTNODE*)0ull ) goto label$35;
+	if( vr$3 != (struct $7ASTNODE*)0ull) goto label$35;
 	{
 		goto label$33;
 	}
@@ -1045,20 +1045,20 @@ struct $7ASTNODE* RTLSETJMP( struct $7ASTNODE* CTX$1 )
 	struct $7ASTNODE* vr$2 = ASTNEWCALL( vr$1, (struct $7ASTNODE*)0ull, -1ll );
 	PROC$1 = vr$2;
 	struct $7ASTNODE* vr$3 = ASTNEWARG( PROC$1, CTX$1, 2147483648ll, -1ll );
-	if( vr$3 != (struct $7ASTNODE*)0ull ) goto label$39;
+	if( vr$3 != (struct $7ASTNODE*)0ull) goto label$39;
 	{
 		goto label$37;
 	}
 	label$39:;
 	label$38:;
-	if( *(int64*)((uint8*)&ENV$ + 216ll) != 0ll ) goto label$41;
+	if( *(int64*)((uint8*)&ENV$ + 216ll) != 0ll) goto label$41;
 	{
 		int64 vr$4 = FBIS64BIT(  );
-		if( vr$4 == 0ll ) goto label$43;
+		if( vr$4 == 0ll) goto label$43;
 		{
 			struct $7ASTNODE* vr$5 = ASTNEWCONSTI( 0ll, 8ll, (struct $8FBSYMBOL*)0ull );
 			struct $7ASTNODE* vr$6 = ASTNEWARG( PROC$1, vr$5, 2147483648ll, -1ll );
-			if( vr$6 != (struct $7ASTNODE*)0ull ) goto label$45;
+			if( vr$6 != (struct $7ASTNODE*)0ull) goto label$45;
 			{
 				goto label$37;
 			}

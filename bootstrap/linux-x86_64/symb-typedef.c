@@ -416,9 +416,9 @@ struct $8FBS_ENUM {
 __FB_STATIC_ASSERT( sizeof( struct $8FBS_ENUM ) == 96 );
 typedef int64 $11FB_FUNCMODE;
 typedef int64 $21FB_PROC_RETURN_METHOD;
-typedef int64 (*tmp$35)( struct $8FBSYMBOL* );
+typedef int64 (*tmp$34)( struct $8FBSYMBOL* );
 struct $10FB_PROCRTL {
-	tmp$35 CALLBACK;
+	tmp$34 CALLBACK;
 };
 __FB_STATIC_ASSERT( sizeof( struct $10FB_PROCRTL ) == 8 );
 struct $10FB_PROCOVL {
@@ -523,7 +523,7 @@ struct $9FB_DEFTOK {
 };
 __FB_STATIC_ASSERT( sizeof( struct $9FB_DEFTOK ) == 32 );
 typedef int64 $15FB_DEFINE_FLAGS;
-typedef FBSTRING* (*tmp$29)( void );
+typedef FBSTRING* (*tmp$28)( void );
 struct $8DZSTRING {
 	char* DATA;
 	int64 LEN;
@@ -548,8 +548,8 @@ struct $11LEXPP_ARGTB {
 	int64 COUNT;
 };
 __FB_STATIC_ASSERT( sizeof( struct $11LEXPP_ARGTB ) == 776 );
-typedef FBSTRING* (*tmp$30)( struct $11LEXPP_ARGTB*, int64* );
-typedef uint32* (*tmp$31)( struct $11LEXPP_ARGTB*, int64* );
+typedef FBSTRING* (*tmp$29)( struct $11LEXPP_ARGTB*, int64* );
+typedef uint32* (*tmp$30)( struct $11LEXPP_ARGTB*, int64* );
 struct $10FBS_DEFINE {
 	int64 PARAMS;
 	struct $11FB_DEFPARAM* PARAMHEAD;
@@ -561,11 +561,11 @@ struct $10FBS_DEFINE {
 	int64 ISARGLESS;
 	$15FB_DEFINE_FLAGS FLAGS;
 	union {
-		tmp$29 DPROCZ;
-		tmp$30 MPROCZ;
+		tmp$28 DPROCZ;
+		tmp$29 MPROCZ;
 	};
 	union {
-		tmp$31 MPROCW;
+		tmp$30 MPROCW;
 	};
 };
 __FB_STATIC_ASSERT( sizeof( struct $10FBS_DEFINE ) == 56 );
@@ -707,7 +707,7 @@ struct $8FBARRAY1I10AST_OPINFOE {
 	struct $16__FB_ARRAYDIMTB$ DIMTB[1];
 };
 __FB_STATIC_ASSERT( sizeof( struct $8FBARRAY1I10AST_OPINFOE ) == 72 );
-static struct $8FBARRAY1I10AST_OPINFOE tmp$83$;
+static struct $8FBARRAY1I10AST_OPINFOE tmp$82$;
 struct $12FBHASHTBLIST {
 	struct $8FBHASHTB* HEAD;
 	struct $8FBHASHTB* TAIL;
@@ -834,7 +834,7 @@ struct $8FBARRAY1I13SYMB_DATATYPEE {
 	struct $16__FB_ARRAYDIMTB$ DIMTB[1];
 };
 __FB_STATIC_ASSERT( sizeof( struct $8FBARRAY1I13SYMB_DATATYPEE ) == 72 );
-static struct $8FBARRAY1I13SYMB_DATATYPEE tmp$84$;
+static struct $8FBARRAY1I13SYMB_DATATYPEE tmp$83$;
 struct $8FBARRAY2IlE {
 	int64* DATA;
 	int64* PTR;
@@ -845,7 +845,7 @@ struct $8FBARRAY2IlE {
 	struct $16__FB_ARRAYDIMTB$ DIMTB[2];
 };
 __FB_STATIC_ASSERT( sizeof( struct $8FBARRAY2IlE ) == 96 );
-static struct $8FBARRAY2IlE tmp$85$;
+static struct $8FBARRAY2IlE tmp$84$;
 
 void SYMBFWDREFINIT( void )
 {
@@ -883,7 +883,7 @@ void SYMBREMOVEFROMFWDREF( struct $8FBSYMBOL* F$1, struct $8FBSYMBOL* REF$1 )
 	NXT$1 = (struct $8FBFWDREF*)0ull;
 	label$18:;
 	{
-		if( *(struct $8FBSYMBOL**)N$1 != REF$1 ) goto label$22;
+		if( *(struct $8FBSYMBOL**)N$1 != REF$1) goto label$22;
 		{
 			goto label$19;
 		}
@@ -895,7 +895,7 @@ void SYMBREMOVEFROMFWDREF( struct $8FBSYMBOL* F$1, struct $8FBSYMBOL* REF$1 )
 	label$20:;
 	goto label$18;
 	label$19:;
-	if( NXT$1 != (struct $8FBFWDREF*)0ull ) goto label$24;
+	if( NXT$1 != (struct $8FBFWDREF*)0ull) goto label$24;
 	{
 		*(struct $8FBFWDREF**)((uint8*)F$1 + 96ll) = *(struct $8FBFWDREF**)((uint8*)N$1 + 8ll);
 	}
@@ -916,7 +916,7 @@ void SYMBCHECKFWDREF( struct $8FBSYMBOL* SYM$1 )
 	FWD$1 = SYM$1;
 	label$41:;
 	{
-		if( *(int64*)FWD$1 != 14ll ) goto label$45;
+		if( *(int64*)FWD$1 != 14ll) goto label$45;
 		{
 			HFIXFORWARDREF( FWD$1, SYM$1 );
 			goto label$40;
@@ -926,13 +926,13 @@ void SYMBCHECKFWDREF( struct $8FBSYMBOL* SYM$1 )
 		FWD$1 = *(struct $8FBSYMBOL**)((uint8*)FWD$1 + 280ll);
 	}
 	label$43:;
-	if( FWD$1 != (struct $8FBSYMBOL*)0ull ) goto label$41;
+	if( FWD$1 != (struct $8FBSYMBOL*)0ull) goto label$41;
 	label$42:;
 	FWD$1 = *(struct $8FBSYMBOL**)((uint8*)SYM$1 + 272ll);
 	label$46:;
-	if( FWD$1 == (struct $8FBSYMBOL*)0ull ) goto label$47;
+	if( FWD$1 == (struct $8FBSYMBOL*)0ull) goto label$47;
 	{
-		if( *(int64*)FWD$1 != 14ll ) goto label$49;
+		if( *(int64*)FWD$1 != 14ll) goto label$49;
 		{
 			HFIXFORWARDREF( FWD$1, SYM$1 );
 			goto label$40;
@@ -954,7 +954,7 @@ struct $8FBSYMBOL* SYMBADDTYPEDEF( char* ID$1, int64 DTYPE$1, struct $8FBSYMBOL*
 	struct $8FBSYMBOL* T$1;
 	struct $8FBSYMBOL* vr$1 = SYMBNEWSYMBOL( 32ll, (struct $8FBSYMBOL*)0ull, (struct $10FBSYMBOLTB*)0ull, (struct $8FBHASHTB*)0ull, 13ll, (char*)ID$1, (char*)0ull, DTYPE$1, SUBTYPE$1, 0ll, 0ll );
 	T$1 = vr$1;
-	if( T$1 != (struct $8FBSYMBOL*)0ull ) goto label$53;
+	if( T$1 != (struct $8FBSYMBOL*)0ull) goto label$53;
 	{
 		fb$result$1 = (struct $8FBSYMBOL*)0ull;
 		goto label$51;
@@ -962,7 +962,7 @@ struct $8FBSYMBOL* SYMBADDTYPEDEF( char* ID$1, int64 DTYPE$1, struct $8FBSYMBOL*
 	label$53:;
 	label$52:;
 	*(int64*)((uint8*)T$1 + 80ll) = LGT$1;
-	if( *(int64*)((uint8*)&SYMB$ + 197336ll) <= 0ll ) goto label$55;
+	if( *(int64*)((uint8*)&SYMB$ + 197336ll) <= 0ll) goto label$55;
 	{
 		SYMBCHECKFWDREF( T$1 );
 	}
@@ -981,7 +981,7 @@ struct $8FBSYMBOL* SYMBADDFWDREF( char* ID$1 )
 	struct $8FBSYMBOL* F$1;
 	struct $8FBSYMBOL* vr$1 = SYMBNEWSYMBOL( 33ll, (struct $8FBSYMBOL*)0ull, (struct $10FBSYMBOLTB*)0ull, (struct $8FBHASHTB*)0ull, 14ll, (char*)ID$1, (char*)0ull, 2147483648ll, (struct $8FBSYMBOL*)0ull, 0ll, 0ll );
 	F$1 = vr$1;
-	if( F$1 != (struct $8FBSYMBOL*)0ull ) goto label$59;
+	if( F$1 != (struct $8FBSYMBOL*)0ull) goto label$59;
 	{
 		fb$result$1 = (struct $8FBSYMBOL*)0ull;
 		goto label$57;
@@ -1006,15 +1006,15 @@ static void _ZN11TSTRSETITEMaSERKS_( struct $11TSTRSETITEM* THIS$1, struct $11TS
 
 static void SYMBREPLACEFORWARDREF( struct $8FBSYMBOL* S$1, int64 DTYPE$1, struct $8FBSYMBOL* SUBTYPE$1 )
 {
-	int64 TMP$96$1;
+	int64 TMP$95$1;
 	label$25:;
-	if( *(int64*)S$1 != 4ll ) goto label$27;
-	TMP$96$1 = (int64)-(*(struct $7ASTNODE**)((uint8*)S$1 + 112ll) != (struct $7ASTNODE*)0ull);
+	if( *(int64*)S$1 != 4ll) goto label$27;
+	TMP$95$1 = (int64)-(*(struct $7ASTNODE**)((uint8*)S$1 + 112ll) != (struct $7ASTNODE*)0ull);
 	goto label$60;
 	label$27:;
-	TMP$96$1 = 0ll;
+	TMP$95$1 = 0ll;
 	label$60:;
-	if( TMP$96$1 == 0ll ) goto label$29;
+	if( TMP$95$1 == 0ll) goto label$29;
 	{
 		ASTREPLACEFWDREF( *(struct $7ASTNODE**)((uint8*)S$1 + 112ll), *(struct $8FBSYMBOL**)((uint8*)S$1 + 64ll), DTYPE$1, SUBTYPE$1 );
 	}
@@ -1034,8 +1034,8 @@ static void HFIXFORWARDREF( struct $8FBSYMBOL* FWD$1, struct $8FBSYMBOL* SYM$1 )
 	struct $8FBSYMBOL* SUBTYPE$1;
 	int64 DTYPE$1;
 	{
-		uint64 TMP$97$2;
-		TMP$97$2 = *(uint64*)SYM$1;
+		uint64 TMP$96$2;
+		TMP$96$2 = *(uint64*)SYM$1;
 		goto label$33;
 		label$34:;
 		{
@@ -1056,17 +1056,17 @@ static void HFIXFORWARDREF( struct $8FBSYMBOL* FWD$1, struct $8FBSYMBOL* SYM$1 )
 		}
 		goto label$32;
 		label$33:;
-		static const void* tmp$98[2ll] = {
+		static const void* tmp$97[2ll] = {
 			&&label$35,
 			&&label$34,
 		};
-		if( (TMP$97$2 - 9ull) > 1ull ) goto label$36;
-		goto *tmp$98[TMP$97$2 - 9ull];
+		if( (TMP$96$2 - 9ull) > 1ull ) goto label$36;
+		goto *tmp$97[TMP$96$2 - 9ull];
 		label$32:;
 	}
 	NODE$1 = *(struct $8FBFWDREF**)((uint8*)FWD$1 + 96ll);
 	label$37:;
-	if( NODE$1 == (struct $8FBFWDREF*)0ull ) goto label$38;
+	if( NODE$1 == (struct $8FBFWDREF*)0ull) goto label$38;
 	{
 		SYMBREPLACEFORWARDREF( *(struct $8FBSYMBOL**)NODE$1, DTYPE$1, SUBTYPE$1 );
 		PREV$1 = *(struct $8FBFWDREF**)((uint8*)NODE$1 + 8ll);

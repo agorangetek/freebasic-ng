@@ -391,9 +391,9 @@ struct $8FBS_ENUM {
 __FB_STATIC_ASSERT( sizeof( struct $8FBS_ENUM ) == 96 );
 typedef int64 $11FB_FUNCMODE;
 typedef int64 $21FB_PROC_RETURN_METHOD;
-typedef int64 (*tmp$35)( struct $8FBSYMBOL* );
+typedef int64 (*tmp$34)( struct $8FBSYMBOL* );
 struct $10FB_PROCRTL {
-	tmp$35 CALLBACK;
+	tmp$34 CALLBACK;
 };
 __FB_STATIC_ASSERT( sizeof( struct $10FB_PROCRTL ) == 8 );
 struct $10FB_PROCOVL {
@@ -523,7 +523,7 @@ struct $9FB_DEFTOK {
 };
 __FB_STATIC_ASSERT( sizeof( struct $9FB_DEFTOK ) == 32 );
 typedef int64 $15FB_DEFINE_FLAGS;
-typedef FBSTRING* (*tmp$29)( void );
+typedef FBSTRING* (*tmp$28)( void );
 struct $8DZSTRING {
 	char* DATA;
 	int64 LEN;
@@ -548,8 +548,8 @@ struct $11LEXPP_ARGTB {
 	int64 COUNT;
 };
 __FB_STATIC_ASSERT( sizeof( struct $11LEXPP_ARGTB ) == 776 );
-typedef FBSTRING* (*tmp$30)( struct $11LEXPP_ARGTB*, int64* );
-typedef uint32* (*tmp$31)( struct $11LEXPP_ARGTB*, int64* );
+typedef FBSTRING* (*tmp$29)( struct $11LEXPP_ARGTB*, int64* );
+typedef uint32* (*tmp$30)( struct $11LEXPP_ARGTB*, int64* );
 struct $10FBS_DEFINE {
 	int64 PARAMS;
 	struct $11FB_DEFPARAM* PARAMHEAD;
@@ -561,11 +561,11 @@ struct $10FBS_DEFINE {
 	int64 ISARGLESS;
 	$15FB_DEFINE_FLAGS FLAGS;
 	union {
-		tmp$29 DPROCZ;
-		tmp$30 MPROCZ;
+		tmp$28 DPROCZ;
+		tmp$29 MPROCZ;
 	};
 	union {
-		tmp$31 MPROCW;
+		tmp$30 MPROCW;
 	};
 };
 __FB_STATIC_ASSERT( sizeof( struct $10FBS_DEFINE ) == 56 );
@@ -775,7 +775,7 @@ struct $8FBARRAY1I10AST_OPINFOE {
 	struct $16__FB_ARRAYDIMTB$ DIMTB[1];
 };
 __FB_STATIC_ASSERT( sizeof( struct $8FBARRAY1I10AST_OPINFOE ) == 72 );
-static struct $8FBARRAY1I10AST_OPINFOE tmp$83$;
+static struct $8FBARRAY1I10AST_OPINFOE tmp$82$;
 struct $12FBHASHTBLIST {
 	struct $8FBHASHTB* HEAD;
 	struct $8FBHASHTB* TAIL;
@@ -902,7 +902,7 @@ struct $8FBARRAY1I13SYMB_DATATYPEE {
 	struct $16__FB_ARRAYDIMTB$ DIMTB[1];
 };
 __FB_STATIC_ASSERT( sizeof( struct $8FBARRAY1I13SYMB_DATATYPEE ) == 72 );
-static struct $8FBARRAY1I13SYMB_DATATYPEE tmp$84$;
+static struct $8FBARRAY1I13SYMB_DATATYPEE tmp$83$;
 struct $8FBARRAY2IlE {
 	int64* DATA;
 	int64* PTR;
@@ -913,7 +913,7 @@ struct $8FBARRAY2IlE {
 	struct $16__FB_ARRAYDIMTB$ DIMTB[2];
 };
 __FB_STATIC_ASSERT( sizeof( struct $8FBARRAY2IlE ) == 96 );
-static struct $8FBARRAY2IlE tmp$85$;
+static struct $8FBARRAY2IlE tmp$84$;
 typedef int64 $10FB_OUTTYPE;
 typedef int64 $10FB_BACKEND;
 typedef int64 $13FB_COMPTARGET;
@@ -1220,21 +1220,21 @@ int64 CLABEL( void )
 	struct $10FBSYMCHAIN* CHAIN_$1;
 	fb$result$1 = 0ll;
 	{
-		uint64 TMP$96$2;
+		uint64 TMP$95$2;
 		int64 vr$1 = LEXGETCLASS( 0ll );
-		TMP$96$2 = (uint64)vr$1;
+		TMP$95$2 = (uint64)vr$1;
 		goto label$13;
 		label$14:;
 		{
 			int64 vr$2 = CCOMPSTMTISALLOWED( 1ll );
-			if( vr$2 != 0ll ) goto label$16;
+			if( vr$2 != 0ll) goto label$16;
 			{
 				HSKIPUNTIL( -1ll, 0ll, 0ll, 0ll );
 				goto label$11;
 			}
 			label$16:;
 			label$15:;
-			if( (*(int64*)((uint8*)&ENV$ + 1448ll) & 1048576ll) != 0ll ) goto label$18;
+			if( (*(int64*)((uint8*)&ENV$ + 1448ll) & 1048576ll) != 0ll) goto label$18;
 			{
 				ERRREPORTNOTALLOWED( 1048576ll, 146ll, (char*)0ull );
 				HSKIPUNTIL( -1ll, 0ll, 0ll, 0ll );
@@ -1245,7 +1245,7 @@ int64 CLABEL( void )
 				char* vr$4 = LEXGETTEXT(  );
 				struct $8FBSYMBOL* vr$5 = SYMBADDLABEL( vr$4, 68ll );
 				L$1 = vr$5;
-				if( L$1 != (struct $8FBSYMBOL*)0ull ) goto label$20;
+				if( L$1 != (struct $8FBSYMBOL*)0ull) goto label$20;
 				{
 					ERRREPORT( 4ll, 0ll, (char*)0ull );
 					HSKIPUNTIL( -1ll, 0ll, 0ll, 0ll );
@@ -1264,10 +1264,10 @@ int64 CLABEL( void )
 		label$21:;
 		{
 			int64 vr$7 = LEXGETLOOKAHEAD( 1ll, 0ll );
-			if( vr$7 != 258ll ) goto label$23;
+			if( vr$7 != 258ll) goto label$23;
 			{
 				int64 vr$8 = CCOMPSTMTISALLOWED( 1ll );
-				if( vr$8 != 0ll ) goto label$25;
+				if( vr$8 != 0ll) goto label$25;
 				{
 					HSKIPUNTIL( -1ll, 0ll, 0ll, 0ll );
 					goto label$11;
@@ -1276,7 +1276,7 @@ int64 CLABEL( void )
 				label$24:;
 				CHAIN_$1 = *(struct $10FBSYMCHAIN**)((uint8*)*(struct $7FBTOKEN**)((uint8*)*(struct $9LEX_TKCTX**)((uint8*)&LEX$ + 844696ll) + 16712ll) + 4136ll);
 				struct $8FBSYMBOL* vr$11 = SYMBFINDBYCLASS( CHAIN_$1, 3ll );
-				if( vr$11 == (struct $8FBSYMBOL*)0ull ) goto label$27;
+				if( vr$11 == (struct $8FBSYMBOL*)0ull) goto label$27;
 				{
 					goto label$11;
 				}
@@ -1285,7 +1285,7 @@ int64 CLABEL( void )
 				char* vr$12 = LEXGETTEXT(  );
 				struct $8FBSYMBOL* vr$13 = SYMBADDLABEL( vr$12, 68ll );
 				L$1 = vr$13;
-				if( L$1 != (struct $8FBSYMBOL*)0ull ) goto label$29;
+				if( L$1 != (struct $8FBSYMBOL*)0ull) goto label$29;
 				{
 					ERRREPORT( 4ll, 0ll, (char*)0ull );
 				}
@@ -1299,17 +1299,17 @@ int64 CLABEL( void )
 		}
 		goto label$12;
 		label$13:;
-		static const void* tmp$97[4ll] = {
+		static const void* tmp$96[4ll] = {
 			&&label$21,
 			&&label$12,
 			&&label$12,
 			&&label$14,
 		};
-		if( TMP$96$2 > 3ull ) goto label$12;
-		goto *tmp$97[TMP$96$2 - 0ull];
+		if( TMP$95$2 > 3ull ) goto label$12;
+		goto *tmp$96[TMP$95$2 - 0ull];
 		label$12:;
 	}
-	if( L$1 == (struct $8FBSYMBOL*)0ull ) goto label$31;
+	if( L$1 == (struct $8FBSYMBOL*)0ull) goto label$31;
 	{
 		struct $7ASTNODE* vr$14 = ASTNEWLABEL( L$1, -1ll );
 		ASTADD( vr$14 );

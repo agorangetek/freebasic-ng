@@ -77,7 +77,7 @@ void POOLINIT( struct $5TPOOL* POOL$1, int64 ITEMS$1, int64 MINLEN$1, int64 MAXL
 		label$5:;
 		I$2 = I$2 + 1ll;
 		label$4:;
-		if( I$2 <= TMP$2$2 ) goto label$7;
+		if( I$2 <= TMP$2$2) goto label$7;
 		label$6:;
 	}
 	label$3:;
@@ -99,7 +99,7 @@ void POOLEND( struct $5TPOOL* POOL$1 )
 		label$11:;
 		I$2 = I$2 + 1ll;
 		label$10:;
-		if( I$2 <= TMP$3$2 ) goto label$13;
+		if( I$2 <= TMP$3$2) goto label$13;
 		label$12:;
 	}
 	free( *(void**)((uint8*)POOL$1 + 16ll) );
@@ -113,7 +113,7 @@ void* POOLNEWITEM( struct $5TPOOL* POOL$1, int64 LEN_$1 )
 	label$14:;
 	static struct $9TPOOLITEM* ITEM$1;
 	static int64 IDX$1;
-	if( LEN_$1 > 0ll ) goto label$17;
+	if( LEN_$1 > 0ll) goto label$17;
 	{
 		fb$result$1 = (void*)0ull;
 		goto label$15;
@@ -121,7 +121,7 @@ void* POOLNEWITEM( struct $5TPOOL* POOL$1, int64 LEN_$1 )
 	label$17:;
 	label$16:;
 	IDX$1 = (LEN_$1 + -1ll) / *(int64*)((uint8*)POOL$1 + 8ll);
-	if( IDX$1 < *(int64*)POOL$1 ) goto label$19;
+	if( IDX$1 < *(int64*)POOL$1) goto label$19;
 	{
 		void* vr$7 = XALLOCATE( (int32)(LEN_$1 + 8ll) );
 		ITEM$1 = (struct $9TPOOLITEM*)vr$7;
@@ -143,14 +143,14 @@ void POOLDELITEM( struct $5TPOOL* POOL$1, void* NODE$1 )
 {
 	label$20:;
 	static struct $9TPOOLITEM* ITEM$1;
-	if( NODE$1 != (void*)0ull ) goto label$23;
+	if( NODE$1 != (void*)0ull) goto label$23;
 	{
 		goto label$21;
 	}
 	label$23:;
 	label$22:;
 	ITEM$1 = (struct $9TPOOLITEM*)((uint8*)NODE$1 + -8ll);
-	if( *(int64*)ITEM$1 < *(int64*)POOL$1 ) goto label$25;
+	if( *(int64*)ITEM$1 < *(int64*)POOL$1) goto label$25;
 	{
 		free( (void*)ITEM$1 );
 	}

@@ -391,9 +391,9 @@ struct $8FBS_ENUM {
 __FB_STATIC_ASSERT( sizeof( struct $8FBS_ENUM ) == 96 );
 typedef int64 $11FB_FUNCMODE;
 typedef int64 $21FB_PROC_RETURN_METHOD;
-typedef int64 (*tmp$35)( struct $8FBSYMBOL* );
+typedef int64 (*tmp$34)( struct $8FBSYMBOL* );
 struct $10FB_PROCRTL {
-	tmp$35 CALLBACK;
+	tmp$34 CALLBACK;
 };
 __FB_STATIC_ASSERT( sizeof( struct $10FB_PROCRTL ) == 8 );
 struct $10FB_PROCOVL {
@@ -523,7 +523,7 @@ struct $9FB_DEFTOK {
 };
 __FB_STATIC_ASSERT( sizeof( struct $9FB_DEFTOK ) == 32 );
 typedef int64 $15FB_DEFINE_FLAGS;
-typedef FBSTRING* (*tmp$29)( void );
+typedef FBSTRING* (*tmp$28)( void );
 struct $8DZSTRING {
 	char* DATA;
 	int64 LEN;
@@ -548,8 +548,8 @@ struct $11LEXPP_ARGTB {
 	int64 COUNT;
 };
 __FB_STATIC_ASSERT( sizeof( struct $11LEXPP_ARGTB ) == 776 );
-typedef FBSTRING* (*tmp$30)( struct $11LEXPP_ARGTB*, int64* );
-typedef uint32* (*tmp$31)( struct $11LEXPP_ARGTB*, int64* );
+typedef FBSTRING* (*tmp$29)( struct $11LEXPP_ARGTB*, int64* );
+typedef uint32* (*tmp$30)( struct $11LEXPP_ARGTB*, int64* );
 struct $10FBS_DEFINE {
 	int64 PARAMS;
 	struct $11FB_DEFPARAM* PARAMHEAD;
@@ -561,11 +561,11 @@ struct $10FBS_DEFINE {
 	int64 ISARGLESS;
 	$15FB_DEFINE_FLAGS FLAGS;
 	union {
-		tmp$29 DPROCZ;
-		tmp$30 MPROCZ;
+		tmp$28 DPROCZ;
+		tmp$29 MPROCZ;
 	};
 	union {
-		tmp$31 MPROCW;
+		tmp$30 MPROCW;
 	};
 };
 __FB_STATIC_ASSERT( sizeof( struct $10FBS_DEFINE ) == 56 );
@@ -784,7 +784,7 @@ struct $8FBARRAY1I10AST_OPINFOE {
 	struct $16__FB_ARRAYDIMTB$ DIMTB[1];
 };
 __FB_STATIC_ASSERT( sizeof( struct $8FBARRAY1I10AST_OPINFOE ) == 72 );
-static struct $8FBARRAY1I10AST_OPINFOE tmp$83$;
+static struct $8FBARRAY1I10AST_OPINFOE tmp$82$;
 struct $12FBHASHTBLIST {
 	struct $8FBHASHTB* HEAD;
 	struct $8FBHASHTB* TAIL;
@@ -911,7 +911,7 @@ struct $8FBARRAY1I13SYMB_DATATYPEE {
 	struct $16__FB_ARRAYDIMTB$ DIMTB[1];
 };
 __FB_STATIC_ASSERT( sizeof( struct $8FBARRAY1I13SYMB_DATATYPEE ) == 72 );
-static struct $8FBARRAY1I13SYMB_DATATYPEE tmp$84$;
+static struct $8FBARRAY1I13SYMB_DATATYPEE tmp$83$;
 struct $8FBARRAY2IlE {
 	int64* DATA;
 	int64* PTR;
@@ -922,7 +922,7 @@ struct $8FBARRAY2IlE {
 	struct $16__FB_ARRAYDIMTB$ DIMTB[2];
 };
 __FB_STATIC_ASSERT( sizeof( struct $8FBARRAY2IlE ) == 96 );
-static struct $8FBARRAY2IlE tmp$85$;
+static struct $8FBARRAY2IlE tmp$84$;
 typedef int64 $10FB_OUTTYPE;
 typedef int64 $10FB_BACKEND;
 typedef int64 $13FB_COMPTARGET;
@@ -1082,7 +1082,7 @@ void CTYPEDEFMULTDECL( $13FB_SYMBATTRIB ATTRIB$1 )
 {
 	label$76:;
 	int64 vr$0 = CCOMPSTMTISALLOWED( 9ll );
-	if( vr$0 != 0ll ) goto label$79;
+	if( vr$0 != 0ll) goto label$79;
 	{
 		HSKIPUNTIL( -1ll, 0ll, 0ll, 0ll );
 		goto label$77;
@@ -1110,7 +1110,7 @@ void CTYPEDEFMULTDECL( $13FB_SYMBATTRIB ATTRIB$1 )
 	}
 	label$82:;
 	int64 vr$11 = HMATCH( 44ll, 0ll );
-	if( vr$11 != 0ll ) goto label$80;
+	if( vr$11 != 0ll) goto label$80;
 	label$81:;
 	label$77:;
 }
@@ -1119,7 +1119,7 @@ void CTYPEDEFSINGLEDECL( $13FB_SYMBATTRIB ATTRIB$1, char* PID$1 )
 {
 	label$83:;
 	int64 vr$0 = CCOMPSTMTISALLOWED( 9ll );
-	if( vr$0 != 0ll ) goto label$86;
+	if( vr$0 != 0ll) goto label$86;
 	{
 		HSKIPUNTIL( -1ll, 0ll, 0ll, 0ll );
 		goto label$84;
@@ -1129,7 +1129,7 @@ void CTYPEDEFSINGLEDECL( $13FB_SYMBATTRIB ATTRIB$1, char* PID$1 )
 	label$87:;
 	{
 		int64 vr$1 = HMATCH( 376ll, 2048ll );
-		if( vr$1 != 0ll ) goto label$91;
+		if( vr$1 != 0ll) goto label$91;
 		{
 			ERRREPORT( 17ll, 0ll, (char*)0ull );
 		}
@@ -1148,7 +1148,7 @@ void CTYPEDEFSINGLEDECL( $13FB_SYMBATTRIB ATTRIB$1, char* PID$1 )
 		PFWDNAME$2 = vr$10;
 		HADDTYPEDEF( PID$1, PFWDNAME$2, DTYPE$2, SUBTYPE$2, LGT$2, IS_FIXLENSTR$2, ATTRIB$1 );
 		int64 vr$11 = HMATCH( 44ll, 0ll );
-		if( vr$11 != 0ll ) goto label$93;
+		if( vr$11 != 0ll) goto label$93;
 		{
 			goto label$88;
 		}
@@ -1180,23 +1180,23 @@ static void HPTRDECL( int64* DTYPE$1 )
 	label$12:;
 	{
 		{
-			uint64 TMP$96$3;
+			uint64 TMP$95$3;
 			int64 vr$0 = LEXGETTOKEN( 0ll );
-			TMP$96$3 = (uint64)vr$0;
+			TMP$95$3 = (uint64)vr$0;
 			goto label$16;
 			label$17:;
 			{
 				LEXSKIPTOKEN( 2048ll );
 				{
-					int64 TMP$97$5;
+					int64 TMP$96$5;
 					int64 vr$1 = LEXGETTOKEN( 0ll );
-					TMP$97$5 = vr$1;
-					if( TMP$97$5 == 373ll ) goto label$20;
+					TMP$96$5 = vr$1;
+					if( TMP$96$5 == 373ll) goto label$20;
 					label$21:;
-					if( TMP$97$5 != 374ll ) goto label$19;
+					if( TMP$96$5 != 374ll) goto label$19;
 					label$20:;
 					{
-						if( PTR_CNT$1 < 8ll ) goto label$23;
+						if( PTR_CNT$1 < 8ll) goto label$23;
 						{
 							ERRREPORT( 274ll, 0ll, (char*)0ull );
 						}
@@ -1222,7 +1222,7 @@ static void HPTRDECL( int64* DTYPE$1 )
 			goto label$15;
 			label$25:;
 			{
-				if( PTR_CNT$1 < 8ll ) goto label$27;
+				if( PTR_CNT$1 < 8ll) goto label$27;
 				{
 					ERRREPORT( 274ll, 0ll, (char*)0ull );
 				}
@@ -1242,7 +1242,7 @@ static void HPTRDECL( int64* DTYPE$1 )
 			}
 			goto label$15;
 			label$16:;
-			static const void* tmp$100[40ll] = {
+			static const void* tmp$99[40ll] = {
 				&&label$17,
 				&&label$28,
 				&&label$28,
@@ -1284,8 +1284,8 @@ static void HPTRDECL( int64* DTYPE$1 )
 				&&label$25,
 				&&label$25,
 			};
-			if( (TMP$96$3 - 335ull) > 39ull ) goto label$28;
-			goto *tmp$100[TMP$96$3 - 335ull];
+			if( (TMP$95$3 - 335ull) > 39ull ) goto label$28;
+			goto *tmp$99[TMP$95$3 - 335ull];
 			label$15:;
 		}
 	}
@@ -1302,7 +1302,7 @@ static char* HREADTYPE( int64* DTYPE$1, struct $8FBSYMBOL** SUBTYPE$1, int64* LG
 	label$29:;
 	static char TNAME$1[129];
 	int64 vr$1 = CSYMBOLTYPE( DTYPE$1, SUBTYPE$1, LGT$1, IS_FIXLENSTR$1, 2ll );
-	if( vr$1 == 0ll ) goto label$32;
+	if( vr$1 == 0ll) goto label$32;
 	{
 		fb$result$1 = (char*)0ull;
 		goto label$30;
@@ -1310,12 +1310,12 @@ static char* HREADTYPE( int64* DTYPE$1, struct $8FBSYMBOL** SUBTYPE$1, int64* LG
 	label$32:;
 	label$31:;
 	{
-		int64 TMP$98$2;
+		int64 TMP$97$2;
 		int64 vr$2 = LEXGETCLASS( 0ll );
-		TMP$98$2 = vr$2;
-		if( TMP$98$2 == 0ll ) goto label$35;
+		TMP$97$2 = vr$2;
+		if( TMP$97$2 == 0ll) goto label$35;
 		label$36:;
-		if( TMP$98$2 != 2ll ) goto label$34;
+		if( TMP$97$2 != 2ll) goto label$34;
 		label$35:;
 		{
 			char* vr$3 = LEXGETTEXT(  );
@@ -1349,7 +1349,7 @@ static void HADDFORWARDREF( char* PID$1, char* PFWDNAME$1, int64* DTYPE$1, struc
 	HUCASE( (char*)PFWDNAME$1, PFWDNAME$1 );
 	HUCASE( (char*)PID$1, PID$1 );
 	int32 vr$5 = fb_StrCompare( (void*)PFWDNAME$1, 0ll, (void*)PID$1, 0ll );
-	if( (int64)vr$5 != 0ll ) goto label$41;
+	if( (int64)vr$5 != 0ll) goto label$41;
 	{
 		*DTYPE$1 = 0ll;
 		*SUBTYPE$1 = (struct $8FBSYMBOL*)0ull;
@@ -1363,18 +1363,18 @@ static void HADDFORWARDREF( char* PID$1, char* PFWDNAME$1, int64* DTYPE$1, struc
 		struct $8FBSYMBOL* vr$12 = SYMBADDFWDREF( PFWDNAME$1 );
 		*SUBTYPE$1 = vr$12;
 		*LGT$1 = -1ll;
-		if( *SUBTYPE$1 == (struct $8FBSYMBOL*)0ull ) goto label$43;
+		if( *SUBTYPE$1 == (struct $8FBSYMBOL*)0ull) goto label$43;
 		{
 			*($13FB_SYMBATTRIB*)((uint8*)*SUBTYPE$1 + 8ll) = *(int64*)((uint8*)*SUBTYPE$1 + 8ll) | (ATTRIB$1 & 2097152ll);
 			*($13FB_SYMBATTRIB*)((uint8*)*SUBTYPE$1 + 8ll) = *(int64*)((uint8*)*SUBTYPE$1 + 8ll) | (ATTRIB$1 & 4194304ll);
 		}
 		label$43:;
 		label$42:;
-		if( *SUBTYPE$1 != (struct $8FBSYMBOL*)0ull ) goto label$45;
+		if( *SUBTYPE$1 != (struct $8FBSYMBOL*)0ull) goto label$45;
 		{
 			struct $8FBSYMBOL* vr$29 = SYMBLOOKUPBYNAMEANDCLASS( *(struct $8FBSYMBOL**)((uint8*)&SYMB$ + 197024ll), (char*)PFWDNAME$1, 14ll, -1ll, 0ll );
 			*SUBTYPE$1 = vr$29;
-			if( *SUBTYPE$1 != (struct $8FBSYMBOL*)0ull ) goto label$47;
+			if( *SUBTYPE$1 != (struct $8FBSYMBOL*)0ull) goto label$47;
 			{
 				ERRREPORT( 4ll, 0ll, (char*)0ull );
 				char* vr$32 = SYMBUNIQUELABEL(  );
@@ -1395,7 +1395,7 @@ static void HADDFORWARDREF( char* PID$1, char* PFWDNAME$1, int64* DTYPE$1, struc
 static void HADDTYPEDEF( char* PID$1, char* PFWDNAME$1, int64 DTYPE$1, struct $8FBSYMBOL* SUBTYPE$1, int64 LGT$1, int64 IS_FIXLENSTR$1, $13FB_SYMBATTRIB ATTRIB$1 )
 {
 	label$48:;
-	if( PFWDNAME$1 == (char*)0ull ) goto label$51;
+	if( PFWDNAME$1 == (char*)0ull) goto label$51;
 	{
 		HADDFORWARDREF( PID$1, PFWDNAME$1, &DTYPE$1, &SUBTYPE$1, &LGT$1, &IS_FIXLENSTR$1, ATTRIB$1 );
 	}
@@ -1404,9 +1404,9 @@ static void HADDTYPEDEF( char* PID$1, char* PFWDNAME$1, int64 DTYPE$1, struct $8
 	struct $8FBSYMBOL* TYPEDEF$1;
 	struct $8FBSYMBOL* vr$4 = SYMBADDTYPEDEF( PID$1, DTYPE$1, SUBTYPE$1, LGT$1 );
 	TYPEDEF$1 = vr$4;
-	if( TYPEDEF$1 == (struct $8FBSYMBOL*)0ull ) goto label$53;
+	if( TYPEDEF$1 == (struct $8FBSYMBOL*)0ull) goto label$53;
 	{
-		if( IS_FIXLENSTR$1 == 0ll ) goto label$55;
+		if( IS_FIXLENSTR$1 == 0ll) goto label$55;
 		{
 			*($12FB_SYMBSTATS*)((uint8*)TYPEDEF$1 + 24ll) = *(int64*)((uint8*)TYPEDEF$1 + 24ll) | 2097152ll;
 		}
@@ -1423,11 +1423,11 @@ static void HADDTYPEDEF( char* PID$1, char* PFWDNAME$1, int64 DTYPE$1, struct $8
 		struct $8FBSYMBOL* SYM$2;
 		struct $8FBSYMBOL* vr$16 = SYMBLOOKUPBYNAMEANDCLASS( *(struct $8FBSYMBOL**)((uint8*)&SYMB$ + 197024ll), (char*)PID$1, 13ll, 0ll, 0ll );
 		SYM$2 = vr$16;
-		if( SYM$2 == (struct $8FBSYMBOL*)0ull ) goto label$57;
+		if( SYM$2 == (struct $8FBSYMBOL*)0ull) goto label$57;
 		{
-			if( *(int64*)((uint8*)SYM$2 + 56ll) != DTYPE$1 ) goto label$59;
+			if( *(int64*)((uint8*)SYM$2 + 56ll) != DTYPE$1) goto label$59;
 			{
-				if( *(struct $8FBSYMBOL**)((uint8*)SYM$2 + 64ll) != SUBTYPE$1 ) goto label$61;
+				if( *(struct $8FBSYMBOL**)((uint8*)SYM$2 + 64ll) != SUBTYPE$1) goto label$61;
 				{
 					ISDUP$2 = 0ll;
 				}
@@ -1439,7 +1439,7 @@ static void HADDTYPEDEF( char* PID$1, char* PFWDNAME$1, int64 DTYPE$1, struct $8
 		}
 		label$57:;
 		label$56:;
-		if( ISDUP$2 == 0ll ) goto label$63;
+		if( ISDUP$2 == 0ll) goto label$63;
 		{
 			ERRREPORT( 4ll, -1ll, (char*)0ull );
 		}
@@ -1458,17 +1458,17 @@ static char* HREADID( void )
 	static char ID$1[129];
 	CCURRENTPARENTID(  );
 	{
-		uint64 TMP$99$2;
+		uint64 TMP$98$2;
 		int64 vr$1 = LEXGETCLASS( 0ll );
-		TMP$99$2 = (uint64)vr$1;
+		TMP$98$2 = (uint64)vr$1;
 		goto label$67;
 		label$68:;
 		{
-			if( (*(int64*)((uint8*)&ENV$ + 1448ll) & 524288ll) == 0ll ) goto label$70;
+			if( (*(int64*)((uint8*)&ENV$ + 1448ll) & 524288ll) == 0ll) goto label$70;
 			{
-				if( *(struct $8FBSYMBOL**)((uint8*)&SYMB$ + 197024ll) == (struct $8FBSYMBOL*)((uint8*)&SYMB$ + 196704ll) ) goto label$72;
+				if( *(struct $8FBSYMBOL**)((uint8*)&SYMB$ + 197024ll) == (struct $8FBSYMBOL*)((uint8*)&SYMB$ + 196704ll)) goto label$72;
 				{
-					if( *(int64*)((uint8*)*(struct $7FBTOKEN**)((uint8*)*(struct $9LEX_TKCTX**)((uint8*)&LEX$ + 844696ll) + 16712ll) + 4144ll) <= 0ll ) goto label$74;
+					if( *(int64*)((uint8*)*(struct $7FBTOKEN**)((uint8*)*(struct $9LEX_TKCTX**)((uint8*)&LEX$ + 844696ll) + 16712ll) + 4144ll) <= 0ll) goto label$74;
 					{
 						ERRREPORT( 90ll, 0ll, (char*)0ull );
 					}
@@ -1493,13 +1493,13 @@ static char* HREADID( void )
 		}
 		goto label$66;
 		label$67:;
-		static const void* tmp$101[3ll] = {
+		static const void* tmp$100[3ll] = {
 			&&label$68,
 			&&label$68,
 			&&label$68,
 		};
-		if( TMP$99$2 > 2ull ) goto label$75;
-		goto *tmp$101[TMP$99$2 - 0ull];
+		if( TMP$98$2 > 2ull ) goto label$75;
+		goto *tmp$100[TMP$98$2 - 0ull];
 		label$66:;
 	}
 	fb$result$1 = (char*)ID$1;

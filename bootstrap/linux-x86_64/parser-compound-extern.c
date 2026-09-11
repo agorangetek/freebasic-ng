@@ -183,9 +183,9 @@ struct $8FBS_ENUM {
 __FB_STATIC_ASSERT( sizeof( struct $8FBS_ENUM ) == 96 );
 typedef int64 $11FB_FUNCMODE;
 typedef int64 $21FB_PROC_RETURN_METHOD;
-typedef int64 (*tmp$35)( struct $8FBSYMBOL* );
+typedef int64 (*tmp$34)( struct $8FBSYMBOL* );
 struct $10FB_PROCRTL {
-	tmp$35 CALLBACK;
+	tmp$34 CALLBACK;
 };
 __FB_STATIC_ASSERT( sizeof( struct $10FB_PROCRTL ) == 8 );
 struct $10FB_PROCOVL {
@@ -315,7 +315,7 @@ struct $9FB_DEFTOK {
 };
 __FB_STATIC_ASSERT( sizeof( struct $9FB_DEFTOK ) == 32 );
 typedef int64 $15FB_DEFINE_FLAGS;
-typedef FBSTRING* (*tmp$29)( void );
+typedef FBSTRING* (*tmp$28)( void );
 struct $8DZSTRING {
 	char* DATA;
 	int64 LEN;
@@ -340,8 +340,8 @@ struct $11LEXPP_ARGTB {
 	int64 COUNT;
 };
 __FB_STATIC_ASSERT( sizeof( struct $11LEXPP_ARGTB ) == 776 );
-typedef FBSTRING* (*tmp$30)( struct $11LEXPP_ARGTB*, int64* );
-typedef uint32* (*tmp$31)( struct $11LEXPP_ARGTB*, int64* );
+typedef FBSTRING* (*tmp$29)( struct $11LEXPP_ARGTB*, int64* );
+typedef uint32* (*tmp$30)( struct $11LEXPP_ARGTB*, int64* );
 struct $10FBS_DEFINE {
 	int64 PARAMS;
 	struct $11FB_DEFPARAM* PARAMHEAD;
@@ -353,11 +353,11 @@ struct $10FBS_DEFINE {
 	int64 ISARGLESS;
 	$15FB_DEFINE_FLAGS FLAGS;
 	union {
-		tmp$29 DPROCZ;
-		tmp$30 MPROCZ;
+		tmp$28 DPROCZ;
+		tmp$29 MPROCZ;
 	};
 	union {
-		tmp$31 MPROCW;
+		tmp$30 MPROCW;
 	};
 };
 __FB_STATIC_ASSERT( sizeof( struct $10FBS_DEFINE ) == 56 );
@@ -819,7 +819,7 @@ struct $8FBARRAY1I10AST_OPINFOE {
 	struct $16__FB_ARRAYDIMTB$ DIMTB[1];
 };
 __FB_STATIC_ASSERT( sizeof( struct $8FBARRAY1I10AST_OPINFOE ) == 72 );
-static struct $8FBARRAY1I10AST_OPINFOE tmp$83$;
+static struct $8FBARRAY1I10AST_OPINFOE tmp$82$;
 typedef int64 $12FB_DATACLASS;
 struct $13SYMB_DATATYPE {
 	$12FB_DATACLASS CLASS;
@@ -841,7 +841,7 @@ struct $8FBARRAY1I13SYMB_DATATYPEE {
 	struct $16__FB_ARRAYDIMTB$ DIMTB[1];
 };
 __FB_STATIC_ASSERT( sizeof( struct $8FBARRAY1I13SYMB_DATATYPEE ) == 72 );
-static struct $8FBARRAY1I13SYMB_DATATYPEE tmp$84$;
+static struct $8FBARRAY1I13SYMB_DATATYPEE tmp$83$;
 struct $8FBARRAY2IlE {
 	int64* DATA;
 	int64* PTR;
@@ -852,7 +852,7 @@ struct $8FBARRAY2IlE {
 	struct $16__FB_ARRAYDIMTB$ DIMTB[2];
 };
 __FB_STATIC_ASSERT( sizeof( struct $8FBARRAY2IlE ) == 96 );
-static struct $8FBARRAY2IlE tmp$85$;
+static struct $8FBARRAY2IlE tmp$84$;
 typedef int64 $10FB_OUTTYPE;
 typedef int64 $10FB_BACKEND;
 typedef int64 $13FB_COMPTARGET;
@@ -1064,7 +1064,7 @@ void CEXTERNSTMTBEGIN( void )
 	struct $13FB_CMPSTMTSTK* STK$1;
 	int64 MANGLING$1;
 	char* LITSTR$1;
-	if( (*(int64*)((uint8*)&ENV$ + 1448ll) & 8ll) != 0ll ) goto label$13;
+	if( (*(int64*)((uint8*)&ENV$ + 1448ll) & 8ll) != 0ll) goto label$13;
 	{
 		ERRREPORTNOTALLOWED( 8ll, 146ll, (char*)0ull );
 		HSKIPCOMPOUND( 306ll, -1ll, 0ll );
@@ -1073,7 +1073,7 @@ void CEXTERNSTMTBEGIN( void )
 	label$13:;
 	label$12:;
 	int64 vr$1 = CCOMPSTMTISALLOWED( 16ll );
-	if( vr$1 != 0ll ) goto label$15;
+	if( vr$1 != 0ll) goto label$15;
 	{
 		HSKIPCOMPOUND( 306ll, -1ll, 0ll );
 		goto label$11;
@@ -1082,7 +1082,7 @@ void CEXTERNSTMTBEGIN( void )
 	label$14:;
 	LEXSKIPTOKEN( 2048ll );
 	int64 vr$2 = LEXGETCLASS( 0ll );
-	if( vr$2 == 4ll ) goto label$17;
+	if( vr$2 == 4ll) goto label$17;
 	{
 		ERRREPORT( 17ll, 0ll, (char*)0ull );
 		LITSTR$1 = (char*)"c";
@@ -1095,12 +1095,12 @@ void CEXTERNSTMTBEGIN( void )
 	}
 	label$16:;
 	{
-		FBSTRING TMP$97$2;
+		FBSTRING TMP$96$2;
 		FBSTRING* vr$4 = fb_StrAllocTempDescZ( LITSTR$1 );
 		FBSTRING* vr$5 = fb_StrLcase2( (FBSTRING*)vr$4, 0 );
-		fb_StrInit( (void*)&TMP$97$2, -1ll, (void*)vr$5, -1ll, 0 );
-		int32 vr$8 = fb_StrCompare( (void*)&TMP$97$2, -1ll, (void*)"c", 2ll );
-		if( (int64)vr$8 != 0ll ) goto label$19;
+		fb_StrInit( (void*)&TMP$96$2, -1ll, (void*)vr$5, -1ll, 0 );
+		int32 vr$8 = fb_StrCompare( (void*)&TMP$96$2, -1ll, (void*)"c", 2ll );
+		if( (int64)vr$8 != 0ll) goto label$19;
 		label$20:;
 		{
 			MANGLING$1 = 1ll;
@@ -1108,8 +1108,8 @@ void CEXTERNSTMTBEGIN( void )
 		}
 		goto label$18;
 		label$19:;
-		int32 vr$11 = fb_StrCompare( (void*)&TMP$97$2, -1ll, (void*)"windows", 8ll );
-		if( (int64)vr$11 != 0ll ) goto label$21;
+		int32 vr$11 = fb_StrCompare( (void*)&TMP$96$2, -1ll, (void*)"windows", 8ll );
+		if( (int64)vr$11 != 0ll) goto label$21;
 		label$22:;
 		{
 			MANGLING$1 = 2ll;
@@ -1117,8 +1117,8 @@ void CEXTERNSTMTBEGIN( void )
 		}
 		goto label$18;
 		label$21:;
-		int32 vr$14 = fb_StrCompare( (void*)&TMP$97$2, -1ll, (void*)"windows-ms", 11ll );
-		if( (int64)vr$14 != 0ll ) goto label$23;
+		int32 vr$14 = fb_StrCompare( (void*)&TMP$96$2, -1ll, (void*)"windows-ms", 11ll );
+		if( (int64)vr$14 != 0ll) goto label$23;
 		label$24:;
 		{
 			MANGLING$1 = 3ll;
@@ -1126,8 +1126,8 @@ void CEXTERNSTMTBEGIN( void )
 		}
 		goto label$18;
 		label$23:;
-		int32 vr$17 = fb_StrCompare( (void*)&TMP$97$2, -1ll, (void*)"c++", 4ll );
-		if( (int64)vr$17 != 0ll ) goto label$25;
+		int32 vr$17 = fb_StrCompare( (void*)&TMP$96$2, -1ll, (void*)"c++", 4ll );
+		if( (int64)vr$17 != 0ll) goto label$25;
 		label$26:;
 		{
 			MANGLING$1 = 4ll;
@@ -1135,8 +1135,8 @@ void CEXTERNSTMTBEGIN( void )
 		}
 		goto label$18;
 		label$25:;
-		int32 vr$20 = fb_StrCompare( (void*)&TMP$97$2, -1ll, (void*)"rtlib", 6ll );
-		if( (int64)vr$20 != 0ll ) goto label$27;
+		int32 vr$20 = fb_StrCompare( (void*)&TMP$96$2, -1ll, (void*)"rtlib", 6ll );
+		if( (int64)vr$20 != 0ll) goto label$27;
 		label$28:;
 		{
 			MANGLING$1 = 6ll;
@@ -1151,7 +1151,7 @@ void CEXTERNSTMTBEGIN( void )
 		}
 		label$29:;
 		label$18:;
-		fb_StrDelete( (FBSTRING*)&TMP$97$2 );
+		fb_StrDelete( (FBSTRING*)&TMP$96$2 );
 	}
 	CLIBATTRIBUTE(  );
 	struct $13FB_CMPSTMTSTK* vr$23 = CCOMPSTMTPUSH( 306ll, 4294967262ll );
@@ -1167,7 +1167,7 @@ void CEXTERNSTMTEND( void )
 	struct $13FB_CMPSTMTSTK* STK$1;
 	struct $13FB_CMPSTMTSTK* vr$0 = CCOMPSTMTGETTOS( 306ll, -1ll );
 	STK$1 = vr$0;
-	if( STK$1 != (struct $13FB_CMPSTMTSTK*)0ull ) goto label$33;
+	if( STK$1 != (struct $13FB_CMPSTMTSTK*)0ull) goto label$33;
 	{
 		HSKIPUNTIL( -1ll, 0ll, 0ll, 0ll );
 		goto label$31;

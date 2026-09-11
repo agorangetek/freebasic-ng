@@ -13,6 +13,15 @@ if(FB_BOOTSTRAP_MODE STREQUAL "bootstrap")
     # Fix computed goto for clang before compiling
     if(FB_USING_CLANG)
         find_package(Python3 COMPONENTS Interpreter REQUIRED)
+        # CMake supplies native C:/ paths on Windows, while the CLANGARM64
+        # Python interpreter is an MSYS program and only accepts POSIX paths.
+        # Relative paths from the build directory are understood by both.
+        file(REAL_PATH "${CMAKE_CURRENT_BINARY_DIR}" _fix_working_directory)
+        file(REAL_PATH "${CMAKE_SOURCE_DIR}/cmake/fix_computed_goto.py"
+            _fix_computed_goto_script_absolute)
+        file(RELATIVE_PATH _fix_computed_goto_script
+            "${_fix_working_directory}"
+            "${_fix_computed_goto_script_absolute}")
         set(_fixed_sources "")
         foreach(_src ${FB_BOOTSTRAP_SOURCES})
             get_filename_component(_name ${_src} NAME)
@@ -20,7 +29,8 @@ if(FB_BOOTSTRAP_MODE STREQUAL "bootstrap")
             add_custom_command(
                 OUTPUT "${_fixed}"
                 COMMAND ${CMAKE_COMMAND} -E copy "${_src}" "${_fixed}"
-                COMMAND ${Python3_EXECUTABLE} "${CMAKE_SOURCE_DIR}/cmake/fix_computed_goto.py" "${_fixed}"
+                COMMAND ${Python3_EXECUTABLE} "${_fix_computed_goto_script}" "fixed/${_name}"
+                WORKING_DIRECTORY "${_fix_working_directory}"
                 DEPENDS "${_src}" "${CMAKE_SOURCE_DIR}/cmake/fix_computed_goto.py"
                 COMMENT "Preparing ${_name} for clang"
                 VERBATIM
@@ -54,7 +64,7 @@ if(FB_BOOTSTRAP_MODE STREQUAL "bootstrap")
     endif()
 
     # Link fbrt0
-    set(FBRT0_OBJ "${CMAKE_BINARY_DIR}/src/rtlib/fbrt0${CMAKE_C_OUTPUT_EXTENSION}")
+    set(FBRT0_OBJ "${CMAKE_BINARY_DIR}/src/rtlib/fbrt0.o")
     target_link_options(fbc PRIVATE "${FBRT0_OBJ}")
     add_dependencies(fbc fbrt0)
 
@@ -102,10 +112,23 @@ else()
     # Fix computed goto for clang
     if(FB_USING_CLANG)
         find_package(Python3 COMPONENTS Interpreter REQUIRED)
+        file(REAL_PATH "${CMAKE_CURRENT_BINARY_DIR}" _fix_working_directory)
+        file(REAL_PATH "${CMAKE_SOURCE_DIR}/cmake/fix_computed_goto.py"
+            _fix_computed_goto_script_absolute)
+        file(RELATIVE_PATH _fix_computed_goto_script
+            "${_fix_working_directory}"
+            "${_fix_computed_goto_script_absolute}")
+        set(_existing_gen_c_relative "")
+        foreach(_src ${_existing_gen_c})
+            file(REAL_PATH "${_src}" _real_src)
+            file(RELATIVE_PATH _relative_src "${_fix_working_directory}" "${_real_src}")
+            list(APPEND _existing_gen_c_relative "${_relative_src}")
+        endforeach()
         add_custom_command(
             TARGET fbc PRE_BUILD
-            COMMAND ${Python3_EXECUTABLE} "${CMAKE_SOURCE_DIR}/cmake/fix_computed_goto.py"
-                    ${_existing_gen_c}
+            COMMAND ${Python3_EXECUTABLE} "${_fix_computed_goto_script}"
+                    ${_existing_gen_c_relative}
+            WORKING_DIRECTORY "${_fix_working_directory}"
             COMMENT "Fixing computed goto for clang"
             VERBATIM
         )
@@ -128,7 +151,7 @@ else()
         target_link_libraries(fbc PRIVATE advapi32 user32 kernel32)
     endif()
 
-    set(FBRT0_OBJ "${CMAKE_BINARY_DIR}/src/rtlib/fbrt0${CMAKE_C_OUTPUT_EXTENSION}")
+    set(FBRT0_OBJ "${CMAKE_BINARY_DIR}/src/rtlib/fbrt0.o")
     target_link_options(fbc PRIVATE "${FBRT0_OBJ}")
     add_dependencies(fbc fbrt0)
 

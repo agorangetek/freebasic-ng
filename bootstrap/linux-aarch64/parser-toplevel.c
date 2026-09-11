@@ -391,9 +391,9 @@ struct $8FBS_ENUM {
 __FB_STATIC_ASSERT( sizeof( struct $8FBS_ENUM ) == 96 );
 typedef int64 $11FB_FUNCMODE;
 typedef int64 $21FB_PROC_RETURN_METHOD;
-typedef int64 (*tmp$35)( struct $8FBSYMBOL* );
+typedef int64 (*tmp$34)( struct $8FBSYMBOL* );
 struct $10FB_PROCRTL {
-	tmp$35 CALLBACK;
+	tmp$34 CALLBACK;
 };
 __FB_STATIC_ASSERT( sizeof( struct $10FB_PROCRTL ) == 8 );
 struct $10FB_PROCOVL {
@@ -523,7 +523,7 @@ struct $9FB_DEFTOK {
 };
 __FB_STATIC_ASSERT( sizeof( struct $9FB_DEFTOK ) == 32 );
 typedef int64 $15FB_DEFINE_FLAGS;
-typedef FBSTRING* (*tmp$29)( void );
+typedef FBSTRING* (*tmp$28)( void );
 struct $8DZSTRING {
 	char* DATA;
 	int64 LEN;
@@ -548,8 +548,8 @@ struct $11LEXPP_ARGTB {
 	int64 COUNT;
 };
 __FB_STATIC_ASSERT( sizeof( struct $11LEXPP_ARGTB ) == 776 );
-typedef FBSTRING* (*tmp$30)( struct $11LEXPP_ARGTB*, int64* );
-typedef uint32* (*tmp$31)( struct $11LEXPP_ARGTB*, int64* );
+typedef FBSTRING* (*tmp$29)( struct $11LEXPP_ARGTB*, int64* );
+typedef uint32* (*tmp$30)( struct $11LEXPP_ARGTB*, int64* );
 struct $10FBS_DEFINE {
 	int64 PARAMS;
 	struct $11FB_DEFPARAM* PARAMHEAD;
@@ -561,11 +561,11 @@ struct $10FBS_DEFINE {
 	int64 ISARGLESS;
 	$15FB_DEFINE_FLAGS FLAGS;
 	union {
-		tmp$29 DPROCZ;
-		tmp$30 MPROCZ;
+		tmp$28 DPROCZ;
+		tmp$29 MPROCZ;
 	};
 	union {
-		tmp$31 MPROCW;
+		tmp$30 MPROCW;
 	};
 };
 __FB_STATIC_ASSERT( sizeof( struct $10FBS_DEFINE ) == 56 );
@@ -839,7 +839,7 @@ struct $8FBARRAY1I10AST_OPINFOE {
 	struct $16__FB_ARRAYDIMTB$ DIMTB[1];
 };
 __FB_STATIC_ASSERT( sizeof( struct $8FBARRAY1I10AST_OPINFOE ) == 72 );
-static struct $8FBARRAY1I10AST_OPINFOE tmp$83$;
+static struct $8FBARRAY1I10AST_OPINFOE tmp$82$;
 typedef int64 $12FB_DATACLASS;
 struct $13SYMB_DATATYPE {
 	$12FB_DATACLASS CLASS;
@@ -861,7 +861,7 @@ struct $8FBARRAY1I13SYMB_DATATYPEE {
 	struct $16__FB_ARRAYDIMTB$ DIMTB[1];
 };
 __FB_STATIC_ASSERT( sizeof( struct $8FBARRAY1I13SYMB_DATATYPEE ) == 72 );
-static struct $8FBARRAY1I13SYMB_DATATYPEE tmp$84$;
+static struct $8FBARRAY1I13SYMB_DATATYPEE tmp$83$;
 struct $8FBARRAY2IlE {
 	int64* DATA;
 	int64* PTR;
@@ -872,7 +872,7 @@ struct $8FBARRAY2IlE {
 	struct $16__FB_ARRAYDIMTB$ DIMTB[2];
 };
 __FB_STATIC_ASSERT( sizeof( struct $8FBARRAY2IlE ) == 96 );
-static struct $8FBARRAY2IlE tmp$85$;
+static struct $8FBARRAY2IlE tmp$84$;
 typedef int64 $10FB_OUTTYPE;
 typedef int64 $10FB_BACKEND;
 typedef int64 $13FB_COMPTARGET;
@@ -1248,12 +1248,12 @@ void CPROGRAM( void )
 	label$26:;
 	{
 		int64 vr$0 = LEXGETTOKEN( 0ll );
-		if( vr$0 != 257ll ) goto label$30;
+		if( vr$0 != 257ll) goto label$30;
 		{
 			DZSTRRESET( (struct $8DZSTRING*)((uint8*)*(struct $9LEX_TKCTX**)((uint8*)&LEX$ + 844696ll) + 49656ll) );
 			LEXSKIPTOKEN( 0ll );
 			int64 vr$3 = FBSHOULDCONTINUE(  );
-			if( vr$3 != 0ll ) goto label$32;
+			if( vr$3 != 0ll) goto label$32;
 			{
 				goto label$25;
 			}
@@ -1265,10 +1265,10 @@ void CPROGRAM( void )
 		label$30:;
 		label$29:;
 		int64 vr$5 = CCOMMENT( 0ll );
-		if( vr$5 == 0ll ) goto label$34;
+		if( vr$5 == 0ll) goto label$34;
 		{
 			int64 vr$6 = FBSHOULDCONTINUE(  );
-			if( vr$6 != 0ll ) goto label$36;
+			if( vr$6 != 0ll) goto label$36;
 			{
 				goto label$25;
 			}
@@ -1279,14 +1279,14 @@ void CPROGRAM( void )
 		label$34:;
 		label$33:;
 		int64 vr$7 = FBSHOULDRESTART(  );
-		if( vr$7 == 0ll ) goto label$38;
+		if( vr$7 == 0ll) goto label$38;
 		{
 			goto label$25;
 		}
 		goto label$37;
 		label$38:;
 		int64 vr$8 = FBSHOULDCONTINUE(  );
-		if( vr$8 != 0ll ) goto label$39;
+		if( vr$8 != 0ll) goto label$39;
 		{
 			goto label$25;
 		}
@@ -1299,15 +1299,15 @@ void CPROGRAM( void )
 		CSTATEMENT(  );
 		CCOMMENT( 0ll );
 		int64 vr$11 = FBSHOULDCONTINUE(  );
-		if( vr$11 != 0ll ) goto label$41;
+		if( vr$11 != 0ll) goto label$41;
 		{
 			goto label$25;
 		}
 		label$41:;
 		label$40:;
-		if( *(int64*)((uint8*)&ENV$ + 296ll) == 0ll ) goto label$43;
+		if( *(int64*)((uint8*)&ENV$ + 296ll) == 0ll) goto label$43;
 		{
-			if( *(int64*)((uint8*)&ENV$ + 1296ll) != 0ll ) goto label$45;
+			if( *(int64*)((uint8*)&ENV$ + 1296ll) != 0ll) goto label$45;
 			{
 				HEMITCURRENTLINETEXT(  );
 			}
@@ -1317,17 +1317,17 @@ void CPROGRAM( void )
 		label$43:;
 		label$42:;
 		{
-			int64 TMP$96$3;
+			int64 TMP$95$3;
 			int64 vr$12 = LEXGETTOKEN( 0ll );
-			TMP$96$3 = vr$12;
-			if( TMP$96$3 != 257ll ) goto label$47;
+			TMP$95$3 = vr$12;
+			if( TMP$95$3 != 257ll) goto label$47;
 			label$48:;
 			{
 				LEXSKIPTOKEN( 0ll );
 			}
 			goto label$46;
 			label$47:;
-			if( TMP$96$3 != 256ll ) goto label$49;
+			if( TMP$95$3 != 256ll) goto label$49;
 			label$50:;
 			{
 			}
@@ -1341,7 +1341,7 @@ void CPROGRAM( void )
 			label$46:;
 		}
 		int64 vr$13 = FBSHOULDCONTINUE(  );
-		if( vr$13 != 0ll ) goto label$53;
+		if( vr$13 != 0ll) goto label$53;
 		{
 			goto label$25;
 		}
@@ -1353,16 +1353,16 @@ void CPROGRAM( void )
 	}
 	label$28:;
 	int64 vr$16 = LEXGETTOKEN( 0ll );
-	if( vr$16 != 256ll ) goto label$26;
+	if( vr$16 != 256ll) goto label$26;
 	label$27:;
-	if( *(int64*)((uint8*)&PP$ + 384ll) == STARTLEVEL$1 ) goto label$55;
+	if( *(int64*)((uint8*)&PP$ + 384ll) == STARTLEVEL$1) goto label$55;
 	{
 		ERRREPORT( 290ll, 0ll, (char*)0ull );
 	}
 	label$55:;
 	label$54:;
 	LEXSKIPTOKEN( 0ll );
-	if( *(int64*)((uint8*)&ENV$ + 1296ll) != 0ll ) goto label$57;
+	if( *(int64*)((uint8*)&ENV$ + 1296ll) != 0ll) goto label$57;
 	{
 		CCOMPSTMTCHECK(  );
 	}
@@ -1380,9 +1380,9 @@ void HSKIPUNTIL( int64 TOKEN$1, int64 DOEAT$1, $8LEXCHECK FLAGS$1, int64 STOP_ON
 	label$60:;
 	{
 		{
-			uint64 TMP$97$3;
+			uint64 TMP$96$3;
 			int64 vr$1 = LEXGETTOKEN( FLAGS$1 );
-			TMP$97$3 = (uint64)vr$1;
+			TMP$96$3 = (uint64)vr$1;
 			goto label$64;
 			label$65:;
 			{
@@ -1391,7 +1391,7 @@ void HSKIPUNTIL( int64 TOKEN$1, int64 DOEAT$1, $8LEXCHECK FLAGS$1, int64 STOP_ON
 			goto label$63;
 			label$66:;
 			{
-				if( TOKEN$1 == 257ll ) goto label$68;
+				if( TOKEN$1 == 257ll) goto label$68;
 				{
 					goto label$61;
 				}
@@ -1406,7 +1406,7 @@ void HSKIPUNTIL( int64 TOKEN$1, int64 DOEAT$1, $8LEXCHECK FLAGS$1, int64 STOP_ON
 			goto label$63;
 			label$70:;
 			{
-				if( TOKEN$1 != 40ll ) goto label$72;
+				if( TOKEN$1 != 40ll) goto label$72;
 				{
 					goto label$61;
 				}
@@ -1422,14 +1422,14 @@ void HSKIPUNTIL( int64 TOKEN$1, int64 DOEAT$1, $8LEXCHECK FLAGS$1, int64 STOP_ON
 			goto label$63;
 			label$74:;
 			{
-				if( PRNTCNT$1 <= 0ll ) goto label$76;
+				if( PRNTCNT$1 <= 0ll) goto label$76;
 				{
 					PRNTCNT$1 = PRNTCNT$1 + -1ll;
 				}
 				goto label$75;
 				label$76:;
 				{
-					if( TOKEN$1 != 41ll ) goto label$78;
+					if( TOKEN$1 != 41ll) goto label$78;
 					{
 						goto label$61;
 					}
@@ -1441,14 +1441,14 @@ void HSKIPUNTIL( int64 TOKEN$1, int64 DOEAT$1, $8LEXCHECK FLAGS$1, int64 STOP_ON
 			goto label$63;
 			label$79:;
 			{
-				if( PRNTCNT$1 <= 0ll ) goto label$81;
+				if( PRNTCNT$1 <= 0ll) goto label$81;
 				{
 					PRNTCNT$1 = PRNTCNT$1 + -1ll;
 				}
 				goto label$80;
 				label$81:;
 				{
-					if( TOKEN$1 != 125ll ) goto label$83;
+					if( TOKEN$1 != 125ll) goto label$83;
 					{
 						goto label$61;
 					}
@@ -1460,9 +1460,9 @@ void HSKIPUNTIL( int64 TOKEN$1, int64 DOEAT$1, $8LEXCHECK FLAGS$1, int64 STOP_ON
 			goto label$63;
 			label$84:;
 			{
-				if( ((int64)-(TOKEN$1 == 44ll) | STOP_ON_COMMA$1) == 0ll ) goto label$86;
+				if( ((int64)-(TOKEN$1 == 44ll) | STOP_ON_COMMA$1) == 0ll) goto label$86;
 				{
-					if( PRNTCNT$1 != 0ll ) goto label$88;
+					if( PRNTCNT$1 != 0ll) goto label$88;
 					{
 						goto label$61;
 					}
@@ -1476,7 +1476,7 @@ void HSKIPUNTIL( int64 TOKEN$1, int64 DOEAT$1, $8LEXCHECK FLAGS$1, int64 STOP_ON
 			label$89:;
 			{
 				int64 vr$8 = LEXGETTOKEN( FLAGS$1 );
-				if( vr$8 != TOKEN$1 ) goto label$91;
+				if( vr$8 != TOKEN$1) goto label$91;
 				{
 					goto label$61;
 				}
@@ -1485,7 +1485,7 @@ void HSKIPUNTIL( int64 TOKEN$1, int64 DOEAT$1, $8LEXCHECK FLAGS$1, int64 STOP_ON
 			}
 			goto label$63;
 			label$64:;
-			static const void* tmp$98[221ll] = {
+			static const void* tmp$97[221ll] = {
 				&&label$70,
 				&&label$74,
 				&&label$89,
@@ -1708,8 +1708,8 @@ void HSKIPUNTIL( int64 TOKEN$1, int64 DOEAT$1, $8LEXCHECK FLAGS$1, int64 STOP_ON
 				&&label$66,
 				&&label$66,
 			};
-			if( (TMP$97$3 - 40ull) > 220ull ) goto label$89;
-			goto *tmp$98[TMP$97$3 - 40ull];
+			if( (TMP$96$3 - 40ull) > 220ull ) goto label$89;
+			goto *tmp$97[TMP$96$3 - 40ull];
 			label$63:;
 		}
 		LEXSKIPTOKEN( FLAGS$1 );
@@ -1717,10 +1717,10 @@ void HSKIPUNTIL( int64 TOKEN$1, int64 DOEAT$1, $8LEXCHECK FLAGS$1, int64 STOP_ON
 	label$62:;
 	goto label$60;
 	label$61:;
-	if( DOEAT$1 == 0ll ) goto label$93;
+	if( DOEAT$1 == 0ll) goto label$93;
 	{
 		int64 vr$9 = LEXGETTOKEN( FLAGS$1 );
-		if( TOKEN$1 != vr$9 ) goto label$95;
+		if( TOKEN$1 != vr$9) goto label$95;
 		{
 			LEXSKIPTOKEN( FLAGS$1 );
 		}
@@ -1739,7 +1739,7 @@ void HSKIPCOMPOUND( int64 FOR_TOKEN$1, int64 UNTIL_TOKEN$1, $8LEXCHECK FLAGS$1 )
 	__builtin_memset( &CNT$1, 0, 8ll );
 	int64 ISCOMMENT$1;
 	__builtin_memset( &ISCOMMENT$1, 0, 8ll );
-	if( UNTIL_TOKEN$1 != -1ll ) goto label$99;
+	if( UNTIL_TOKEN$1 != -1ll) goto label$99;
 	{
 		UNTIL_TOKEN$1 = FOR_TOKEN$1;
 	}
@@ -1750,48 +1750,48 @@ void HSKIPCOMPOUND( int64 FOR_TOKEN$1, int64 UNTIL_TOKEN$1, $8LEXCHECK FLAGS$1 )
 	label$100:;
 	{
 		{
-			int64 TMP$99$3;
+			int64 TMP$98$3;
 			int64 vr$2 = LEXGETTOKEN( FLAGS$1 );
-			TMP$99$3 = vr$2;
-			if( TMP$99$3 != 256ll ) goto label$104;
+			TMP$98$3 = vr$2;
+			if( TMP$98$3 != 256ll) goto label$104;
 			label$105:;
 			{
 				goto label$97;
 			}
 			goto label$103;
 			label$104:;
-			if( TMP$99$3 != 257ll ) goto label$106;
+			if( TMP$98$3 != 257ll) goto label$106;
 			label$107:;
 			{
 				ISCOMMENT$1 = 0ll;
 			}
 			goto label$103;
 			label$106:;
-			if( TMP$99$3 == 259ll ) goto label$109;
+			if( TMP$98$3 == 259ll) goto label$109;
 			label$110:;
-			if( TMP$99$3 != 260ll ) goto label$108;
+			if( TMP$98$3 != 260ll) goto label$108;
 			label$109:;
 			{
 				ISCOMMENT$1 = -1ll;
 			}
 			goto label$103;
 			label$108:;
-			if( TMP$99$3 != 340ll ) goto label$111;
+			if( TMP$98$3 != 340ll) goto label$111;
 			label$112:;
 			{
-				if( ISCOMMENT$1 != 0ll ) goto label$114;
+				if( ISCOMMENT$1 != 0ll) goto label$114;
 				{
 					int64 vr$3 = LEXGETLOOKAHEAD( 1ll, FLAGS$1 );
-					if( vr$3 != UNTIL_TOKEN$1 ) goto label$116;
+					if( vr$3 != UNTIL_TOKEN$1) goto label$116;
 					{
 						LEXSKIPTOKEN( FLAGS$1 );
-						if( CNT$1 <= 0ll ) goto label$118;
+						if( CNT$1 <= 0ll) goto label$118;
 						{
 							CNT$1 = CNT$1 + -1ll;
 						}
 						label$118:;
 						label$117:;
-						if( CNT$1 != 0ll ) goto label$120;
+						if( CNT$1 != 0ll) goto label$120;
 						{
 							goto label$101;
 						}
@@ -1806,10 +1806,10 @@ void HSKIPCOMPOUND( int64 FOR_TOKEN$1, int64 UNTIL_TOKEN$1, $8LEXCHECK FLAGS$1 )
 			}
 			goto label$103;
 			label$111:;
-			if( TMP$99$3 != FOR_TOKEN$1 ) goto label$121;
+			if( TMP$98$3 != FOR_TOKEN$1) goto label$121;
 			label$122:;
 			{
-				if( ISCOMMENT$1 != 0ll ) goto label$124;
+				if( ISCOMMENT$1 != 0ll) goto label$124;
 				{
 					CNT$1 = CNT$1 + 1ll;
 				}
@@ -1837,10 +1837,10 @@ struct $7ASTNODE* HMATCHEXPR( int64 DTYPE$1 )
 	__builtin_memset( &EXPR$1, 0, 8ll );
 	struct $7ASTNODE* vr$2 = CEXPRESSION(  );
 	EXPR$1 = vr$2;
-	if( EXPR$1 != (struct $7ASTNODE*)0ull ) goto label$128;
+	if( EXPR$1 != (struct $7ASTNODE*)0ull) goto label$128;
 	{
 		ERRREPORT( 9ll, 0ll, (char*)0ull );
-		if( DTYPE$1 != 2147483648ll ) goto label$130;
+		if( DTYPE$1 != 2147483648ll) goto label$130;
 		{
 			fb$result$1 = (struct $7ASTNODE*)0ull;
 			goto label$126;
@@ -1878,11 +1878,11 @@ static void HEMITCURRENTLINETEXT( void )
 	struct $7ASTNODE* N$1;
 	N$1 = *(struct $7ASTNODE**)((uint8*)*(struct $7ASTNODE**)((uint8*)&AST$ + 80ll) + 120ll);
 	label$18:;
-	if( N$1 == (struct $7ASTNODE*)0ull ) goto label$19;
+	if( N$1 == (struct $7ASTNODE*)0ull) goto label$19;
 	{
-		if( *(int64*)N$1 != 30ll ) goto label$21;
+		if( *(int64*)N$1 != 30ll) goto label$21;
 		{
-			if( *(int64*)((uint8*)N$1 + 56ll) != 114ll ) goto label$23;
+			if( *(int64*)((uint8*)N$1 + 56ll) != 114ll) goto label$23;
 			{
 				struct $7ASTNODE* vr$4 = ASTNEWLIT( *(char**)((uint8*)*(struct $9LEX_TKCTX**)((uint8*)&LEX$ + 844696ll) + 49656ll) );
 				ASTADDAFTER( vr$4, N$1 );

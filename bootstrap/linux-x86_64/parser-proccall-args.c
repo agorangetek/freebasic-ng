@@ -207,9 +207,9 @@ struct $8FBS_ENUM {
 __FB_STATIC_ASSERT( sizeof( struct $8FBS_ENUM ) == 96 );
 typedef int64 $11FB_FUNCMODE;
 typedef int64 $21FB_PROC_RETURN_METHOD;
-typedef int64 (*tmp$35)( struct $8FBSYMBOL* );
+typedef int64 (*tmp$34)( struct $8FBSYMBOL* );
 struct $10FB_PROCRTL {
-	tmp$35 CALLBACK;
+	tmp$34 CALLBACK;
 };
 __FB_STATIC_ASSERT( sizeof( struct $10FB_PROCRTL ) == 8 );
 struct $10FB_PROCOVL {
@@ -314,7 +314,7 @@ struct $9FB_DEFTOK {
 };
 __FB_STATIC_ASSERT( sizeof( struct $9FB_DEFTOK ) == 32 );
 typedef int64 $15FB_DEFINE_FLAGS;
-typedef FBSTRING* (*tmp$29)( void );
+typedef FBSTRING* (*tmp$28)( void );
 struct $8DZSTRING {
 	char* DATA;
 	int64 LEN;
@@ -339,8 +339,8 @@ struct $11LEXPP_ARGTB {
 	int64 COUNT;
 };
 __FB_STATIC_ASSERT( sizeof( struct $11LEXPP_ARGTB ) == 776 );
-typedef FBSTRING* (*tmp$30)( struct $11LEXPP_ARGTB*, int64* );
-typedef uint32* (*tmp$31)( struct $11LEXPP_ARGTB*, int64* );
+typedef FBSTRING* (*tmp$29)( struct $11LEXPP_ARGTB*, int64* );
+typedef uint32* (*tmp$30)( struct $11LEXPP_ARGTB*, int64* );
 struct $10FBS_DEFINE {
 	int64 PARAMS;
 	struct $11FB_DEFPARAM* PARAMHEAD;
@@ -352,11 +352,11 @@ struct $10FBS_DEFINE {
 	int64 ISARGLESS;
 	$15FB_DEFINE_FLAGS FLAGS;
 	union {
-		tmp$29 DPROCZ;
-		tmp$30 MPROCZ;
+		tmp$28 DPROCZ;
+		tmp$29 MPROCZ;
 	};
 	union {
-		tmp$31 MPROCW;
+		tmp$30 MPROCW;
 	};
 };
 __FB_STATIC_ASSERT( sizeof( struct $10FBS_DEFINE ) == 56 );
@@ -742,7 +742,7 @@ struct $8FBARRAY1I10AST_OPINFOE {
 	struct $16__FB_ARRAYDIMTB$ DIMTB[1];
 };
 __FB_STATIC_ASSERT( sizeof( struct $8FBARRAY1I10AST_OPINFOE ) == 72 );
-static struct $8FBARRAY1I10AST_OPINFOE tmp$83$;
+static struct $8FBARRAY1I10AST_OPINFOE tmp$82$;
 typedef int64 $12FB_DATACLASS;
 struct $13SYMB_DATATYPE {
 	$12FB_DATACLASS CLASS;
@@ -764,7 +764,7 @@ struct $8FBARRAY1I13SYMB_DATATYPEE {
 	struct $16__FB_ARRAYDIMTB$ DIMTB[1];
 };
 __FB_STATIC_ASSERT( sizeof( struct $8FBARRAY1I13SYMB_DATATYPEE ) == 72 );
-static struct $8FBARRAY1I13SYMB_DATATYPEE tmp$84$;
+static struct $8FBARRAY1I13SYMB_DATATYPEE tmp$83$;
 struct $8FBARRAY2IlE {
 	int64* DATA;
 	int64* PTR;
@@ -775,7 +775,7 @@ struct $8FBARRAY2IlE {
 	struct $16__FB_ARRAYDIMTB$ DIMTB[2];
 };
 __FB_STATIC_ASSERT( sizeof( struct $8FBARRAY2IlE ) == 96 );
-static struct $8FBARRAY2IlE tmp$85$;
+static struct $8FBARRAY2IlE tmp$84$;
 struct $8TSTACKTB;
 struct $10TSTACKNODE;
 struct $10TSTACKNODE {
@@ -968,9 +968,9 @@ struct $7ASTNODE* CPROCARGLIST( struct $8FBSYMBOL* BASE_PARENT$1, struct $8FBSYM
 	struct $7ASTNODE* PROCEXPR$1;
 	struct $7ASTNODE* EXPR$1;
 	struct $11FB_CALL_ARG* ARG$1;
-	if( (*(int64*)((uint8*)PROC$1 + 16ll) & 1ll) <= 0ll ) goto label$147;
+	if( (*(int64*)((uint8*)PROC$1 + 16ll) & 1ll) <= 0ll) goto label$147;
 	{
-		if( *(struct $8FBSYMBOL**)((uint8*)PROC$1 + 200ll) == (struct $8FBSYMBOL*)0ull ) goto label$149;
+		if( *(struct $8FBSYMBOL**)((uint8*)PROC$1 + 200ll) == (struct $8FBSYMBOL*)0ull) goto label$149;
 		{
 			struct $7ASTNODE* vr$4 = HOVLPROCARGLIST( BASE_PARENT$1, PROC$1, ARG_LIST$1, OPTIONS$1 );
 			fb$result$1 = vr$4;
@@ -984,28 +984,28 @@ struct $7ASTNODE* CPROCARGLIST( struct $8FBSYMBOL* BASE_PARENT$1, struct $8FBSYM
 	fb$result$1 = (struct $7ASTNODE*)0ull;
 	HAVE_EQ_OUTSIDE_PARENS$1 = 0ll;
 	int64 vr$5 = SYMBCHECKACCESS( PROC$1 );
-	if( vr$5 != 0ll ) goto label$151;
+	if( vr$5 != 0ll) goto label$151;
 	{
-		$9FB_ERRMSG TMP$99$2;
+		$9FB_ERRMSG TMP$98$2;
 		char* vr$6 = SYMBGETFULLPROCNAME( PROC$1 );
-		if( (*(int64*)((uint8*)PROC$1 + 16ll) & 4ll) == 0ll ) goto label$152;
-		TMP$99$2 = 205ll;
+		if( (*(int64*)((uint8*)PROC$1 + 16ll) & 4ll) == 0ll) goto label$152;
+		TMP$98$2 = 205ll;
 		goto label$200;
 		label$152:;
-		TMP$99$2 = 202ll;
+		TMP$98$2 = 202ll;
 		label$200:;
-		ERRREPORTEX( TMP$99$2, (char*)vr$6, 0ll, 1ll, (char*)0ull );
+		ERRREPORTEX( TMP$98$2, (char*)vr$6, 0ll, 1ll, (char*)0ull );
 		struct $7ASTNODE* vr$9 = ASTBUILDFAKECALL( PROC$1 );
 		fb$result$1 = vr$9;
 		goto label$145;
 	}
 	label$151:;
 	label$150:;
-	if( (*(int64*)((uint8*)PROC$1 + 16ll) & 2ll) == 0ll ) goto label$154;
+	if( (*(int64*)((uint8*)PROC$1 + 16ll) & 2ll) == 0ll) goto label$154;
 	{
-		if( (OPTIONS$1 & 64ll) != 0ll ) goto label$156;
+		if( (OPTIONS$1 & 64ll) != 0ll) goto label$156;
 		{
-			if( ((int64)-(BASE_PARENT$1 != (struct $8FBSYMBOL*)0ull) | (int64)-((*(int64*)((uint8*)*(struct $8FBSYMBOL**)((uint8*)&PARSER$ + 216ll) + 16ll) & 2ll) == 0ll)) == 0ll ) goto label$158;
+			if( ((int64)-(BASE_PARENT$1 != (struct $8FBSYMBOL*)0ull) | (int64)-((*(int64*)((uint8*)*(struct $8FBSYMBOL**)((uint8*)&PARSER$ + 216ll) + 16ll) & 2ll) == 0ll)) == 0ll) goto label$158;
 			{
 				ERRREPORT( 214ll, -1ll, (char*)0ull );
 				struct $7ASTNODE* vr$18 = ASTBUILDFAKECALL( PROC$1 );
@@ -1028,7 +1028,7 @@ struct $7ASTNODE* CPROCARGLIST( struct $8FBSYMBOL* BASE_PARENT$1, struct $8FBSYM
 	goto label$153;
 	label$154:;
 	{
-		if( (OPTIONS$1 & 64ll) == 0ll ) goto label$160;
+		if( (OPTIONS$1 & 64ll) == 0ll) goto label$160;
 		{
 			ARG$1 = *(struct $11FB_CALL_ARG**)((uint8*)ARG_LIST$1 + 8ll);
 			*(struct $11FB_CALL_ARG**)((uint8*)ARG_LIST$1 + 8ll) = *(struct $11FB_CALL_ARG**)((uint8*)ARG$1 + 16ll);
@@ -1045,12 +1045,12 @@ struct $7ASTNODE* CPROCARGLIST( struct $8FBSYMBOL* BASE_PARENT$1, struct $8FBSYM
 	PARAM$1 = *(struct $8FBSYMBOL**)((uint8*)PROC$1 + 136ll);
 	ARG$1 = *(struct $11FB_CALL_ARG**)((uint8*)ARG_LIST$1 + 8ll);
 	label$161:;
-	if( ARG$1 == (struct $11FB_CALL_ARG*)0ull ) goto label$162;
+	if( ARG$1 == (struct $11FB_CALL_ARG*)0ull) goto label$162;
 	{
 		struct $11FB_CALL_ARG* NXT$2;
 		NXT$2 = *(struct $11FB_CALL_ARG**)((uint8*)ARG$1 + 16ll);
 		struct $7ASTNODE* vr$43 = ASTNEWARG( PROCEXPR$1, *(struct $7ASTNODE**)ARG$1, 2147483648ll, *(int64*)((uint8*)ARG$1 + 8ll) );
-		if( vr$43 != (struct $7ASTNODE*)0ull ) goto label$164;
+		if( vr$43 != (struct $7ASTNODE*)0ull) goto label$164;
 		{
 			ASTDELTREE( PROCEXPR$1 );
 			struct $7ASTNODE* vr$44 = ASTBUILDFAKECALL( PROC$1 );
@@ -1067,16 +1067,16 @@ struct $7ASTNODE* CPROCARGLIST( struct $8FBSYMBOL* BASE_PARENT$1, struct $8FBSYM
 	goto label$161;
 	label$162:;
 	ARGS$1 = 0ll;
-	if( PARAMS$1 != 0ll ) goto label$166;
+	if( PARAMS$1 != 0ll) goto label$166;
 	{
-		if( (OPTIONS$1 & 16ll) != 0ll ) goto label$168;
+		if( (OPTIONS$1 & 16ll) != 0ll) goto label$168;
 		{
 			int64 vr$49 = LEXGETTOKEN( 0ll );
-			if( vr$49 != 40ll ) goto label$170;
+			if( vr$49 != 40ll) goto label$170;
 			{
 				LEXSKIPTOKEN( 0ll );
 				int64 vr$50 = LEXGETTOKEN( 0ll );
-				if( vr$50 == 41ll ) goto label$172;
+				if( vr$50 == 41ll) goto label$172;
 				{
 					ERRREPORT( 7ll, 0ll, (char*)0ull );
 					HSKIPUNTIL( 41ll, -1ll, 0ll, 0ll );
@@ -1098,16 +1098,16 @@ struct $7ASTNODE* CPROCARGLIST( struct $8FBSYMBOL* BASE_PARENT$1, struct $8FBSYM
 	}
 	label$166:;
 	label$165:;
-	if( (OPTIONS$1 & 32ll) != 0ll ) goto label$174;
+	if( (OPTIONS$1 & 32ll) != 0ll) goto label$174;
 	{
 		label$175:;
 		{
-			if( ARGS$1 < PARAMS$1 ) goto label$179;
+			if( ARGS$1 < PARAMS$1) goto label$179;
 			{
-				if( *(int64*)((uint8*)PARAM$1 + 96ll) == 4ll ) goto label$181;
+				if( *(int64*)((uint8*)PARAM$1 + 96ll) == 4ll) goto label$181;
 				{
 					ERRREPORT( 1ll, 0ll, (char*)0ull );
-					if( (OPTIONS$1 & 16ll) == 0ll ) goto label$183;
+					if( (OPTIONS$1 & 16ll) == 0ll) goto label$183;
 					{
 						HSKIPUNTIL( 41ll, 0ll, 0ll, 0ll );
 					}
@@ -1126,16 +1126,16 @@ struct $7ASTNODE* CPROCARGLIST( struct $8FBSYMBOL* BASE_PARENT$1, struct $8FBSYM
 			label$179:;
 			label$178:;
 			int64 vr$58 = HPROCARG( PROC$1, PARAM$1, ARGS$1, &EXPR$1, &MODE$1, &HAVE_EQ_OUTSIDE_PARENS$1, OPTIONS$1 );
-			if( vr$58 != 0ll ) goto label$185;
+			if( vr$58 != 0ll) goto label$185;
 			{
 				goto label$176;
 			}
 			label$185:;
 			label$184:;
 			struct $7ASTNODE* vr$59 = ASTNEWARG( PROCEXPR$1, EXPR$1, 2147483648ll, MODE$1 );
-			if( vr$59 != (struct $7ASTNODE*)0ull ) goto label$187;
+			if( vr$59 != (struct $7ASTNODE*)0ull) goto label$187;
 			{
-				if( (OPTIONS$1 & 16ll) == 0ll ) goto label$189;
+				if( (OPTIONS$1 & 16ll) == 0ll) goto label$189;
 				{
 					HSKIPUNTIL( 41ll, 0ll, 0ll, 0ll );
 				}
@@ -1153,7 +1153,7 @@ struct $7ASTNODE* CPROCARGLIST( struct $8FBSYMBOL* BASE_PARENT$1, struct $8FBSYM
 			label$187:;
 			label$186:;
 			ARGS$1 = ARGS$1 + 1ll;
-			if( ARGS$1 >= PARAMS$1 ) goto label$191;
+			if( ARGS$1 >= PARAMS$1) goto label$191;
 			{
 				PARAM$1 = *(struct $8FBSYMBOL**)((uint8*)PARAM$1 + 312ll);
 			}
@@ -1162,22 +1162,22 @@ struct $7ASTNODE* CPROCARGLIST( struct $8FBSYMBOL* BASE_PARENT$1, struct $8FBSYM
 		}
 		label$177:;
 		int64 vr$64 = HMATCH( 44ll, 0ll );
-		if( vr$64 != 0ll ) goto label$175;
+		if( vr$64 != 0ll) goto label$175;
 		label$176:;
 	}
 	label$174:;
 	label$173:;
 	HMAYBEWARNABOUTEQOUTSIDEPARENS( ARGS$1, HAVE_EQ_OUTSIDE_PARENS$1, PROC$1 );
 	label$192:;
-	if( ARGS$1 >= PARAMS$1 ) goto label$193;
+	if( ARGS$1 >= PARAMS$1) goto label$193;
 	{
-		if( *(int64*)((uint8*)PARAM$1 + 96ll) != 4ll ) goto label$195;
+		if( *(int64*)((uint8*)PARAM$1 + 96ll) != 4ll) goto label$195;
 		{
 			goto label$193;
 		}
 		label$195:;
 		label$194:;
-		if( *(struct $7ASTNODE**)((uint8*)PARAM$1 + 112ll) != (struct $7ASTNODE*)0ull ) goto label$197;
+		if( *(struct $7ASTNODE**)((uint8*)PARAM$1 + 112ll) != (struct $7ASTNODE*)0ull) goto label$197;
 		{
 			ERRREPORT( 1ll, 0ll, (char*)0ull );
 			ASTDELTREE( PROCEXPR$1 );
@@ -1188,7 +1188,7 @@ struct $7ASTNODE* CPROCARGLIST( struct $8FBSYMBOL* BASE_PARENT$1, struct $8FBSYM
 		label$197:;
 		label$196:;
 		struct $7ASTNODE* vr$68 = ASTNEWARG( PROCEXPR$1, (struct $7ASTNODE*)0ull, 2147483648ll, -1ll );
-		if( vr$68 != (struct $7ASTNODE*)0ull ) goto label$199;
+		if( vr$68 != (struct $7ASTNODE*)0ull) goto label$199;
 		{
 			ASTDELTREE( PROCEXPR$1 );
 			struct $7ASTNODE* vr$69 = ASTBUILDFAKECALL( PROC$1 );
@@ -1229,7 +1229,7 @@ static int64 HPROCARG( struct $8FBSYMBOL* PROC$1, struct $8FBSYMBOL* PARAM$1, in
 	*AMODE$1 = -1ll;
 	*EXPR$1 = (struct $7ASTNODE*)0ull;
 	int64 vr$4 = LEXGETTOKEN( 0ll );
-	if( vr$4 != 319ll ) goto label$17;
+	if( vr$4 != 319ll) goto label$17;
 	{
 		LEXSKIPTOKEN( 2048ll );
 		*AMODE$1 = 1ll;
@@ -1254,19 +1254,19 @@ static int64 HPROCARG( struct $8FBSYMBOL* PROC$1, struct $8FBSYMBOL* PARAM$1, in
 		*($12FB_PARSEROPT*)((uint8*)&PARSER$ + 304ll) = *(int64*)((uint8*)&PARSER$ + 304ll) & -2ll;
 	}
 	label$18:;
-	if( *EXPR$1 != (struct $7ASTNODE*)0ull ) goto label$21;
+	if( *EXPR$1 != (struct $7ASTNODE*)0ull) goto label$21;
 	{
-		if( (OPTIONS$1 & 16ll) == 0ll ) goto label$23;
+		if( (OPTIONS$1 & 16ll) == 0ll) goto label$23;
 		{
 			*EXPR$1 = (struct $7ASTNODE*)0ull;
 		}
 		goto label$22;
 		label$23:;
 		{
-			if( ((int64)-(ARGNUM$1 == 0ll) & (int64)-(*AMODE$1 == -1ll)) == 0ll ) goto label$25;
+			if( ((int64)-(ARGNUM$1 == 0ll) & (int64)-(*AMODE$1 == -1ll)) == 0ll) goto label$25;
 			{
 				int64 vr$23 = HMATCH( 319ll, 2048ll );
-				if( vr$23 == 0ll ) goto label$27;
+				if( vr$23 == 0ll) goto label$27;
 				{
 					*AMODE$1 = 1ll;
 					struct $7ASTNODE* vr$25 = CEXPRESSION(  );
@@ -1284,11 +1284,11 @@ static int64 HPROCARG( struct $8FBSYMBOL* PROC$1, struct $8FBSYMBOL* PARAM$1, in
 	label$20:;
 	*(struct $8FBSYMBOL**)((uint8*)&PARSER$ + 320ll) = OLDSYM$1;
 	*(int64*)((uint8*)&PARSER$ + 312ll) = OLD_DTYPE$1;
-	if( *EXPR$1 != (struct $7ASTNODE*)0ull ) goto label$29;
+	if( *EXPR$1 != (struct $7ASTNODE*)0ull) goto label$29;
 	{
-		if( *(struct $7ASTNODE**)((uint8*)PARAM$1 + 112ll) != (struct $7ASTNODE*)0ull ) goto label$31;
+		if( *(struct $7ASTNODE**)((uint8*)PARAM$1 + 112ll) != (struct $7ASTNODE*)0ull) goto label$31;
 		{
-			if( PMODE$1 != 4ll ) goto label$33;
+			if( PMODE$1 != 4ll) goto label$33;
 			{
 				goto label$15;
 			}
@@ -1304,15 +1304,15 @@ static int64 HPROCARG( struct $8FBSYMBOL* PROC$1, struct $8FBSYMBOL* PARAM$1, in
 	goto label$28;
 	label$29:;
 	{
-		if( PMODE$1 != 3ll ) goto label$35;
+		if( PMODE$1 != 3ll) goto label$35;
 		{
 			int64 vr$34 = LEXGETTOKEN( 0ll );
-			if( vr$34 != 40ll ) goto label$37;
+			if( vr$34 != 40ll) goto label$37;
 			{
 				int64 vr$35 = LEXGETLOOKAHEAD( 1ll, 0ll );
-				if( vr$35 != 41ll ) goto label$39;
+				if( vr$35 != 41ll) goto label$39;
 				{
-					if( *AMODE$1 == -1ll ) goto label$41;
+					if( *AMODE$1 == -1ll) goto label$41;
 					{
 						ERRREPORT( 22ll, 0ll, (char*)0ull );
 					}
@@ -1328,9 +1328,9 @@ static int64 HPROCARG( struct $8FBSYMBOL* PROC$1, struct $8FBSYMBOL* PARAM$1, in
 			goto label$36;
 			label$37:;
 			{
-				if( *(int64*)*EXPR$1 != 25ll ) goto label$43;
+				if( *(int64*)*EXPR$1 != 25ll) goto label$43;
 				{
-					if( *AMODE$1 == -1ll ) goto label$45;
+					if( *AMODE$1 == -1ll) goto label$45;
 					{
 						ERRREPORT( 22ll, 0ll, (char*)0ull );
 					}
@@ -1347,15 +1347,15 @@ static int64 HPROCARG( struct $8FBSYMBOL* PROC$1, struct $8FBSYMBOL* PARAM$1, in
 		label$34:;
 	}
 	label$28:;
-	if( *AMODE$1 == -1ll ) goto label$47;
+	if( *AMODE$1 == -1ll) goto label$47;
 	{
-		if( *AMODE$1 == PMODE$1 ) goto label$49;
+		if( *AMODE$1 == PMODE$1) goto label$49;
 		{
-			if( PMODE$1 == 4ll ) goto label$51;
+			if( PMODE$1 == 4ll) goto label$51;
 			{
-				if( *AMODE$1 == 1ll ) goto label$53;
+				if( *AMODE$1 == 1ll) goto label$53;
 				{
-					if( *AMODE$1 == PMODE$1 ) goto label$55;
+					if( *AMODE$1 == PMODE$1) goto label$55;
 					{
 						ERRREPORT( 22ll, 0ll, (char*)0ull );
 						*AMODE$1 = PMODE$1;
@@ -1387,7 +1387,7 @@ static void HOVLPROCARG( int64 ARGNUM$1, struct $11FB_CALL_ARG* ARG$1, int64* HA
 	*(struct $7ASTNODE**)ARG$1 = (struct $7ASTNODE*)0ull;
 	*($12FB_PARAMMODE*)((uint8*)ARG$1 + 8ll) = -1ll;
 	int64 vr$2 = HMATCH( 319ll, 2048ll );
-	if( vr$2 == 0ll ) goto label$59;
+	if( vr$2 == 0ll) goto label$59;
 	{
 		*($12FB_PARAMMODE*)((uint8*)ARG$1 + 8ll) = 1ll;
 	}
@@ -1400,19 +1400,19 @@ static void HOVLPROCARG( int64 ARGNUM$1, struct $11FB_CALL_ARG* ARG$1, int64* HA
 	*(int64*)((uint8*)&PARSER$ + 328ll) = 0ll;
 	struct $7ASTNODE* vr$4 = CEXPRESSION(  );
 	*(struct $7ASTNODE**)ARG$1 = vr$4;
-	if( *(struct $7ASTNODE**)ARG$1 != (struct $7ASTNODE*)0ull ) goto label$61;
+	if( *(struct $7ASTNODE**)ARG$1 != (struct $7ASTNODE*)0ull) goto label$61;
 	{
-		if( (OPTIONS$1 & 16ll) == 0ll ) goto label$63;
+		if( (OPTIONS$1 & 16ll) == 0ll) goto label$63;
 		{
 			*(struct $7ASTNODE**)ARG$1 = (struct $7ASTNODE*)0ull;
 		}
 		goto label$62;
 		label$63:;
 		{
-			if( ((int64)-(ARGNUM$1 == 0ll) & (int64)-(*(int64*)((uint8*)ARG$1 + 8ll) == -1ll)) == 0ll ) goto label$65;
+			if( ((int64)-(ARGNUM$1 == 0ll) & (int64)-(*(int64*)((uint8*)ARG$1 + 8ll) == -1ll)) == 0ll) goto label$65;
 			{
 				int64 vr$13 = HMATCH( 319ll, 2048ll );
-				if( vr$13 == 0ll ) goto label$67;
+				if( vr$13 == 0ll) goto label$67;
 				{
 					*($12FB_PARAMMODE*)((uint8*)ARG$1 + 8ll) = 1ll;
 					struct $7ASTNODE* vr$15 = CEXPRESSION(  );
@@ -1431,15 +1431,15 @@ static void HOVLPROCARG( int64 ARGNUM$1, struct $11FB_CALL_ARG* ARG$1, int64* HA
 	*(struct $8FBSYMBOL**)((uint8*)&PARSER$ + 320ll) = OLDSYM$1;
 	*(int64*)((uint8*)&PARSER$ + 312ll) = OLD_DTYPE$1;
 	*HAVE_EQ_OUTSIDE_PARENS$1 = *HAVE_EQ_OUTSIDE_PARENS$1 | *(int64*)((uint8*)&PARSER$ + 328ll);
-	if( *(struct $7ASTNODE**)ARG$1 == (struct $7ASTNODE*)0ull ) goto label$69;
+	if( *(struct $7ASTNODE**)ARG$1 == (struct $7ASTNODE*)0ull) goto label$69;
 	{
 		int64 vr$21 = LEXGETTOKEN( 0ll );
-		if( vr$21 != 40ll ) goto label$71;
+		if( vr$21 != 40ll) goto label$71;
 		{
 			int64 vr$22 = LEXGETLOOKAHEAD( 1ll, 0ll );
-			if( vr$22 != 41ll ) goto label$73;
+			if( vr$22 != 41ll) goto label$73;
 			{
-				if( *(int64*)((uint8*)ARG$1 + 8ll) == -1ll ) goto label$75;
+				if( *(int64*)((uint8*)ARG$1 + 8ll) == -1ll) goto label$75;
 				{
 					ERRREPORT( 22ll, 0ll, (char*)0ull );
 				}
@@ -1455,9 +1455,9 @@ static void HOVLPROCARG( int64 ARGNUM$1, struct $11FB_CALL_ARG* ARG$1, int64* HA
 		goto label$70;
 		label$71:;
 		{
-			if( *(int64*)*(struct $7ASTNODE**)ARG$1 != 25ll ) goto label$77;
+			if( *(int64*)*(struct $7ASTNODE**)ARG$1 != 25ll) goto label$77;
 			{
-				if( *(int64*)((uint8*)ARG$1 + 8ll) == -1ll ) goto label$79;
+				if( *(int64*)((uint8*)ARG$1 + 8ll) == -1ll) goto label$79;
 				{
 					ERRREPORT( 22ll, 0ll, (char*)0ull );
 				}
@@ -1480,14 +1480,14 @@ static void HMAYBEWARNABOUTEQOUTSIDEPARENS( int64 ARGS$1, int64 HAVE_EQ_OUTSIDE_
 	label$80:;
 	int64 WARN$1;
 	WARN$1 = (int64)-((*(int64*)((uint8*)PROC$1 + 16ll) & 2048ll) != 0ll);
-	if( WARN$1 != 0ll ) goto label$83;
+	if( WARN$1 != 0ll) goto label$83;
 	{
-		if( (*(int64*)((uint8*)PROC$1 + 16ll) & 1ll) <= 0ll ) goto label$85;
+		if( (*(int64*)((uint8*)PROC$1 + 16ll) & 1ll) <= 0ll) goto label$85;
 		{
 			label$86:;
 			{
 				PROC$1 = *(struct $8FBSYMBOL**)((uint8*)PROC$1 + 200ll);
-				if( PROC$1 != (struct $8FBSYMBOL*)0ull ) goto label$90;
+				if( PROC$1 != (struct $8FBSYMBOL*)0ull) goto label$90;
 				{
 					goto label$87;
 				}
@@ -1496,7 +1496,7 @@ static void HMAYBEWARNABOUTEQOUTSIDEPARENS( int64 ARGS$1, int64 HAVE_EQ_OUTSIDE_
 				WARN$1 = (int64)-((*(int64*)((uint8*)PROC$1 + 16ll) & 2048ll) != 0ll);
 			}
 			label$88:;
-			if( WARN$1 == 0ll ) goto label$86;
+			if( WARN$1 == 0ll) goto label$86;
 			label$87:;
 		}
 		label$85:;
@@ -1506,7 +1506,7 @@ static void HMAYBEWARNABOUTEQOUTSIDEPARENS( int64 ARGS$1, int64 HAVE_EQ_OUTSIDE_
 	label$82:;
 	WARN$1 = WARN$1 & (int64)-(ARGS$1 == 1ll);
 	WARN$1 = WARN$1 & HAVE_EQ_OUTSIDE_PARENS$1;
-	if( WARN$1 == 0ll ) goto label$92;
+	if( WARN$1 == 0ll) goto label$92;
 	{
 		ERRREPORTWARN( 34ll, (char*)0ull, 1ll, (char*)0ull );
 	}
@@ -1521,9 +1521,9 @@ static struct $7ASTNODE* HGETVTABLELOOKUPIFNEEDED( struct $8FBSYMBOL* PROC$1, st
 	__builtin_memset( &fb$result$1, 0, 8ll );
 	label$93:;
 	fb$result$1 = (struct $7ASTNODE*)0ull;
-	if( (OPTIONS$1 & 2048ll) == 0ll ) goto label$96;
+	if( (OPTIONS$1 & 2048ll) == 0ll) goto label$96;
 	{
-		if( (*(int64*)((uint8*)PROC$1 + 16ll) & 512ll) == 0ll ) goto label$98;
+		if( (*(int64*)((uint8*)PROC$1 + 16ll) & 512ll) == 0ll) goto label$98;
 		{
 			ERRREPORT( 307ll, 0ll, (char*)0ull );
 		}
@@ -1543,7 +1543,7 @@ static struct $7ASTNODE* HGETVTABLELOOKUPIFNEEDED( struct $8FBSYMBOL* PROC$1, st
 
 static struct $7ASTNODE* HOVLPROCARGLIST( struct $8FBSYMBOL* BASE_PARENT$1, struct $8FBSYMBOL* PROC$1, struct $16FB_CALL_ARG_LIST* ARG_LIST$1, $12FB_PARSEROPT OPTIONS$1 )
 {
-	struct $11FB_CALL_ARG* TMP$96$1;
+	struct $11FB_CALL_ARG* TMP$95$1;
 	struct $7ASTNODE* fb$result$1;
 	__builtin_memset( &fb$result$1, 0, 8ll );
 	label$99:;
@@ -1561,22 +1561,22 @@ static struct $7ASTNODE* HOVLPROCARGLIST( struct $8FBSYMBOL* BASE_PARENT$1, stru
 	HAVE_EQ_OUTSIDE_PARENS$1 = 0ll;
 	PARAMS$1 = (int64)*(int16*)((uint8*)PROC$1 + 194ll);
 	ARGS$1 = *(int64*)ARG_LIST$1;
-	if( (OPTIONS$1 & 64ll) == 0ll ) goto label$102;
+	if( (OPTIONS$1 & 64ll) == 0ll) goto label$102;
 	{
 		ARGS$1 = ARGS$1 + -1ll;
 	}
 	label$102:;
 	label$101:;
-	if( (OPTIONS$1 & 32ll) != 0ll ) goto label$104;
+	if( (OPTIONS$1 & 32ll) != 0ll) goto label$104;
 	{
 		int64 INIT_ARGS$2;
 		INIT_ARGS$2 = ARGS$1;
 		label$105:;
 		{
-			if( ARGS$1 <= PARAMS$1 ) goto label$109;
+			if( ARGS$1 <= PARAMS$1) goto label$109;
 			{
 				ERRREPORT( 1ll, 0ll, (char*)0ull );
-				if( (OPTIONS$1 & 16ll) == 0ll ) goto label$111;
+				if( (OPTIONS$1 & 16ll) == 0ll) goto label$111;
 				{
 					HSKIPUNTIL( 41ll, 0ll, 0ll, 0ll );
 				}
@@ -1595,9 +1595,9 @@ static struct $7ASTNODE* HOVLPROCARGLIST( struct $8FBSYMBOL* BASE_PARENT$1, stru
 			ARG$1 = vr$10;
 			HOVLPROCARG( ARGS$1 - INIT_ARGS$2, ARG$1, &HAVE_EQ_OUTSIDE_PARENS$1, OPTIONS$1 );
 			int64 vr$13 = LEXGETTOKEN( 0ll );
-			if( vr$13 == 44ll ) goto label$113;
+			if( vr$13 == 44ll) goto label$113;
 			{
-				if( *(struct $7ASTNODE**)ARG$1 == (struct $7ASTNODE*)0ull ) goto label$115;
+				if( *(struct $7ASTNODE**)ARG$1 == (struct $7ASTNODE*)0ull) goto label$115;
 				{
 					ARGS$1 = ARGS$1 + 1ll;
 				}
@@ -1619,9 +1619,9 @@ static struct $7ASTNODE* HOVLPROCARGLIST( struct $8FBSYMBOL* BASE_PARENT$1, stru
 	HMAYBEWARNABOUTEQOUTSIDEPARENS( ARGS$1, HAVE_EQ_OUTSIDE_PARENS$1, PROC$1 );
 	$14FB_SYMBFINDOPT FIND_OPTIONS$1;
 	FIND_OPTIONS$1 = 0ll;
-	if( (*(int64*)((uint8*)PROC$1 + 16ll) & 32ll) == 0ll ) goto label$117;
+	if( (*(int64*)((uint8*)PROC$1 + 16ll) & 32ll) == 0ll) goto label$117;
 	{
-		if( (OPTIONS$1 & 128ll) == 0ll ) goto label$119;
+		if( (OPTIONS$1 & 128ll) == 0ll) goto label$119;
 		{
 			FIND_OPTIONS$1 = 1ll;
 		}
@@ -1630,18 +1630,18 @@ static struct $7ASTNODE* HOVLPROCARGLIST( struct $8FBSYMBOL* BASE_PARENT$1, stru
 	}
 	label$117:;
 	label$116:;
-	if( (OPTIONS$1 & 64ll) == 0ll ) goto label$120;
-	TMP$96$1 = *(struct $11FB_CALL_ARG**)((uint8*)*(struct $11FB_CALL_ARG**)((uint8*)ARG_LIST$1 + 8ll) + 16ll);
+	if( (OPTIONS$1 & 64ll) == 0ll) goto label$120;
+	TMP$95$1 = *(struct $11FB_CALL_ARG**)((uint8*)*(struct $11FB_CALL_ARG**)((uint8*)ARG_LIST$1 + 8ll) + 16ll);
 	goto label$201;
 	label$120:;
-	TMP$96$1 = *(struct $11FB_CALL_ARG**)((uint8*)ARG_LIST$1 + 8ll);
+	TMP$95$1 = *(struct $11FB_CALL_ARG**)((uint8*)ARG_LIST$1 + 8ll);
 	label$201:;
-	struct $8FBSYMBOL* vr$25 = SYMBFINDCLOSESTOVLPROC( PROC$1, ARGS$1, TMP$96$1, &ERR_NUM$1, FIND_OPTIONS$1 );
+	struct $8FBSYMBOL* vr$25 = SYMBFINDCLOSESTOVLPROC( PROC$1, ARGS$1, TMP$95$1, &ERR_NUM$1, FIND_OPTIONS$1 );
 	OVLPROC$1 = vr$25;
-	if( OVLPROC$1 != (struct $8FBSYMBOL*)0ull ) goto label$122;
+	if( OVLPROC$1 != (struct $8FBSYMBOL*)0ull) goto label$122;
 	{
 		SYMBFREEOVLCALLARGS( (struct $5TLIST*)((uint8*)&PARSER$ + 232ll), ARG_LIST$1 );
-		if( ERR_NUM$1 != 0ll ) goto label$124;
+		if( ERR_NUM$1 != 0ll) goto label$124;
 		{
 			ERR_NUM$1 = 99ll;
 		}
@@ -1656,28 +1656,28 @@ static struct $7ASTNODE* HOVLPROCARGLIST( struct $8FBSYMBOL* BASE_PARENT$1, stru
 	label$121:;
 	PROC$1 = OVLPROC$1;
 	int64 vr$28 = SYMBCHECKACCESS( PROC$1 );
-	if( vr$28 != 0ll ) goto label$126;
+	if( vr$28 != 0ll) goto label$126;
 	{
-		$9FB_ERRMSG TMP$97$2;
+		$9FB_ERRMSG TMP$96$2;
 		char* vr$29 = SYMBGETFULLPROCNAME( PROC$1 );
-		if( (*(int64*)((uint8*)PROC$1 + 16ll) & 4ll) == 0ll ) goto label$127;
-		TMP$97$2 = 205ll;
+		if( (*(int64*)((uint8*)PROC$1 + 16ll) & 4ll) == 0ll) goto label$127;
+		TMP$96$2 = 205ll;
 		goto label$202;
 		label$127:;
-		TMP$97$2 = 202ll;
+		TMP$96$2 = 202ll;
 		label$202:;
-		ERRREPORTEX( TMP$97$2, (char*)vr$29, 0ll, 1ll, (char*)0ull );
+		ERRREPORTEX( TMP$96$2, (char*)vr$29, 0ll, 1ll, (char*)0ull );
 		struct $7ASTNODE* vr$32 = ASTBUILDFAKECALL( PROC$1 );
 		fb$result$1 = vr$32;
 		goto label$100;
 	}
 	label$126:;
 	label$125:;
-	if( (*(int64*)((uint8*)PROC$1 + 16ll) & 2ll) == 0ll ) goto label$129;
+	if( (*(int64*)((uint8*)PROC$1 + 16ll) & 2ll) == 0ll) goto label$129;
 	{
-		if( (OPTIONS$1 & 64ll) != 0ll ) goto label$131;
+		if( (OPTIONS$1 & 64ll) != 0ll) goto label$131;
 		{
-			if( ((int64)-(BASE_PARENT$1 != (struct $8FBSYMBOL*)0ull) | (int64)-((*(int64*)((uint8*)*(struct $8FBSYMBOL**)((uint8*)&PARSER$ + 216ll) + 16ll) & 2ll) == 0ll)) == 0ll ) goto label$133;
+			if( ((int64)-(BASE_PARENT$1 != (struct $8FBSYMBOL*)0ull) | (int64)-((*(int64*)((uint8*)*(struct $8FBSYMBOL**)((uint8*)&PARSER$ + 216ll) + 16ll) & 2ll) == 0ll)) == 0ll) goto label$133;
 			{
 				ERRREPORT( 214ll, -1ll, (char*)0ull );
 				struct $7ASTNODE* vr$41 = ASTBUILDFAKECALL( PROC$1 );
@@ -1701,7 +1701,7 @@ static struct $7ASTNODE* HOVLPROCARGLIST( struct $8FBSYMBOL* BASE_PARENT$1, stru
 	goto label$128;
 	label$129:;
 	{
-		if( (OPTIONS$1 & 64ll) == 0ll ) goto label$135;
+		if( (OPTIONS$1 & 64ll) == 0ll) goto label$135;
 		{
 			ARG$1 = *(struct $11FB_CALL_ARG**)((uint8*)ARG_LIST$1 + 8ll);
 			*(struct $11FB_CALL_ARG**)((uint8*)ARG_LIST$1 + 8ll) = *(struct $11FB_CALL_ARG**)((uint8*)ARG$1 + 16ll);
@@ -1719,14 +1719,14 @@ static struct $7ASTNODE* HOVLPROCARGLIST( struct $8FBSYMBOL* BASE_PARENT$1, stru
 	ARG$1 = *(struct $11FB_CALL_ARG**)((uint8*)ARG_LIST$1 + 8ll);
 	{
 		I$1 = 0ll;
-		int64 TMP$98$2;
-		TMP$98$2 = ARGS$1 + -1ll;
+		int64 TMP$97$2;
+		TMP$97$2 = ARGS$1 + -1ll;
 		goto label$136;
 		label$139:;
 		{
 			NXT$1 = *(struct $11FB_CALL_ARG**)((uint8*)ARG$1 + 16ll);
 			struct $7ASTNODE* vr$66 = ASTNEWARG( PROCEXPR$1, *(struct $7ASTNODE**)ARG$1, 2147483648ll, *(int64*)((uint8*)ARG$1 + 8ll) );
-			if( vr$66 != (struct $7ASTNODE*)0ull ) goto label$141;
+			if( vr$66 != (struct $7ASTNODE*)0ull) goto label$141;
 			{
 				ERRREPORT( 22ll, 0ll, (char*)0ull );
 				ASTDELTREE( PROCEXPR$1 );
@@ -1743,12 +1743,12 @@ static struct $7ASTNODE* HOVLPROCARGLIST( struct $8FBSYMBOL* BASE_PARENT$1, stru
 		label$137:;
 		I$1 = I$1 + 1ll;
 		label$136:;
-		if( I$1 <= TMP$98$2 ) goto label$139;
+		if( I$1 <= TMP$97$2) goto label$139;
 		label$138:;
 	}
 	PARAMS$1 = (int64)*(int16*)((uint8*)PROC$1 + 120ll);
 	label$142:;
-	if( ARGS$1 >= PARAMS$1 ) goto label$143;
+	if( ARGS$1 >= PARAMS$1) goto label$143;
 	{
 		ASTNEWARG( PROCEXPR$1, (struct $7ASTNODE*)0ull, 2147483648ll, -1ll );
 		ARGS$1 = ARGS$1 + 1ll;

@@ -147,25 +147,28 @@ endif()
 if(NOT FB_TARGET_OS MATCHES "^(amiga|aros|morphos|amigaos4)$")
 # We need the raw .o file, not a .a archive. Compile it directly.
 set(FBRT0_SOURCE "${CMAKE_CURRENT_SOURCE_DIR}/static/fbrt0.c")
-set(FBRT0_OBJ "${CMAKE_CURRENT_BINARY_DIR}/fbrt0${CMAKE_C_OUTPUT_EXTENSION}")
+# fbc has always named its runtime startup object fbrt0.o, including on
+# MinGW.  Do not inherit CMake's .obj default there: the installed compiler
+# resolves the historic .o name at user compile time.
+set(FBRT0_OBJ "${CMAKE_CURRENT_BINARY_DIR}/fbrt0.o")
 
 add_custom_command(
     OUTPUT "${FBRT0_OBJ}"
     COMMAND ${CMAKE_C_COMPILER} -c -I "${CMAKE_CURRENT_SOURCE_DIR}" -o "${FBRT0_OBJ}" "${FBRT0_SOURCE}"
     COMMAND_EXPAND_LISTS
     DEPENDS "${FBRT0_SOURCE}"
-    COMMENT "Compiling fbrt0${CMAKE_C_OUTPUT_EXTENSION}"
+    COMMENT "Compiling fbrt0.o"
     VERBATIM
 )
 add_custom_target(fbrt0 ALL DEPENDS "${FBRT0_OBJ}")
 
 if(FB_NEED_PIC)
-    set(FBRT0PIC_OBJ "${CMAKE_CURRENT_BINARY_DIR}/fbrt0pic${CMAKE_C_OUTPUT_EXTENSION}")
+    set(FBRT0PIC_OBJ "${CMAKE_CURRENT_BINARY_DIR}/fbrt0pic.o")
     add_custom_command(
         OUTPUT "${FBRT0PIC_OBJ}"
         COMMAND ${CMAKE_C_COMPILER} -c -fPIC -I "${CMAKE_CURRENT_SOURCE_DIR}" -o "${FBRT0PIC_OBJ}" "${FBRT0_SOURCE}"
         DEPENDS "${FBRT0_SOURCE}"
-        COMMENT "Compiling fbrt0pic${CMAKE_C_OUTPUT_EXTENSION}"
+        COMMENT "Compiling fbrt0pic.o"
         VERBATIM
     )
     add_custom_target(fbrt0pic ALL DEPENDS "${FBRT0PIC_OBJ}")
@@ -174,8 +177,12 @@ endif() # not amiga
 
 # --- Installation ---
 install(TARGETS fb ARCHIVE DESTINATION "${FB_INSTALL_LIBDIR}")
+# fbc passes this supplemental linker script to GNU ld on non-Darwin
+# targets.  It is part of the compiler runtime layout, rather than a build
+# input, so a staged installation without it cannot compile a program.
+install(FILES "${CMAKE_SOURCE_DIR}/lib/fbextra.x" DESTINATION "${FB_INSTALL_LIBDIR}")
 if(DEFINED FBRT0_OBJ)
-    install(FILES "${FBRT0_OBJ}" DESTINATION "${FB_INSTALL_LIBDIR}" RENAME "fbrt0${CMAKE_C_OUTPUT_EXTENSION}")
+    install(FILES "${FBRT0_OBJ}" DESTINATION "${FB_INSTALL_LIBDIR}" RENAME "fbrt0.o")
 endif()
 
 if(TARGET fbmt)
@@ -184,6 +191,6 @@ endif()
 if(FB_NEED_PIC)
     install(TARGETS fbpic ARCHIVE DESTINATION "${FB_INSTALL_LIBDIR}")
     if(DEFINED FBRT0PIC_OBJ)
-        install(FILES "${FBRT0PIC_OBJ}" DESTINATION "${FB_INSTALL_LIBDIR}" RENAME "fbrt0pic${CMAKE_C_OUTPUT_EXTENSION}")
+        install(FILES "${FBRT0PIC_OBJ}" DESTINATION "${FB_INSTALL_LIBDIR}" RENAME "fbrt0pic.o")
     endif()
 endif()

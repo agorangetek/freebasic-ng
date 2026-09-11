@@ -1,0 +1,3 @@
+# Bootstrap provenance hashes the generated C bytes.  Keep Git for Windows
+# from rewriting those bytes to CRLF during a checkout.
+bootstrap/** text eol=lf

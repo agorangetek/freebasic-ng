@@ -1,30 +1,99 @@
 name: Release Please
 
 on:
-  workflow_dispatch:
+  push:
+    branches: [main]
 
 permissions:
   contents: read
 
+concurrency:
+  group: release-please-${{ github.ref }}
+  cancel-in-progress: false
+
 jobs:
   release-please:
-    name: Prepare release pull request
+    name: Prepare the release
     runs-on: ubuntu-24.04
+    timeout-minutes: 15
     environment: release
+    permissions:
+      contents: write
+      pull-requests: write
+    env:
+      RELEASE_PLEASE_CLIENT_ID: ${{ vars.RELEASE_PLEASE_CLIENT_ID }}
+      RELEASE_PLEASE_APP_PRIVATE_KEY: ${{ secrets.RELEASE_PLEASE_APP_PRIVATE_KEY }}
+    outputs:
+      release_created: ${{ steps.release.outputs.release_created }}
+      tag_name: ${{ steps.release.outputs.tag_name }}
     steps:
+      - id: configuration
+        name: Check the Release Please App configuration
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [[ -n "$RELEASE_PLEASE_CLIENT_ID" && -n "$RELEASE_PLEASE_APP_PRIVATE_KEY" ]]; then
+            echo "configured=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "configured=false" >> "$GITHUB_OUTPUT"
+            echo "::notice::Release Please is inactive until the metaneutrons-release-please credentials are set in the release environment."
+          fi
+
       - name: Create scoped release token
         id: app-token
+        if: steps.configuration.outputs.configured == 'true'
         uses: actions/create-github-app-token@bcd2ba49218906704ab6c1aa796996da409d3eb1 # v3.2.0
         with:
           client-id: ${{ vars.RELEASE_PLEASE_CLIENT_ID }}
           private-key: ${{ secrets.RELEASE_PLEASE_APP_PRIVATE_KEY }}
+          owner: metaneutrons
+          repositories: freebasic-ng
           permission-contents: write
           permission-pull-requests: write
 
+      - name: Verify the scoped token inventory
+        if: steps.configuration.outputs.configured == 'true'
+        env:
+          GH_TOKEN: ${{ steps.app-token.outputs.token }}
+        run: |
+          set -euo pipefail
+          mapfile -t repositories < <(gh api --paginate /installation/repositories --jq '.repositories[].full_name')
+          if [[ ${#repositories[@]} -ne 1 || "${repositories[0]}" != "$GITHUB_REPOSITORY" ]]; then
+            printf '::error::Release Please token has an unexpected repository inventory: %s\n' "${repositories[*]:-<empty>}"
+            exit 1
+          fi
+
       - name: Create or update release pull request
         uses: googleapis/release-please-action@45996ed1f6d02564a971a2fa1b5860e934307cf7 # v5.0.0
+        id: release
+        if: steps.configuration.outputs.configured == 'true'
         with:
           token: ${{ steps.app-token.outputs.token }}
           target-branch: main
           config-file: release-please-config.json
           manifest-file: .release-please-manifest.json
+
+  dispatch:
+    name: Start the release pipeline
+    needs: release-please
+    if: needs.release-please.outputs.release_created == 'true'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    permissions:
+      actions: write
+    steps:
+      - name: Dispatch release.yml against the immutable tag
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TAG: ${{ needs.release-please.outputs.tag_name }}
+        run: |
+          set -euo pipefail
+          for attempt in {1..20}; do
+            gh api "repos/$GITHUB_REPOSITORY/git/ref/tags/$TAG" >/dev/null 2>&1 && break
+            if [[ "$attempt" == 20 ]]; then
+              echo "::error::release-please reported $TAG, but the tag does not exist"
+              exit 1
+            fi
+            sleep 5
+          done
+          gh workflow run release.yml --repo "$GITHUB_REPOSITORY" --ref "$TAG"

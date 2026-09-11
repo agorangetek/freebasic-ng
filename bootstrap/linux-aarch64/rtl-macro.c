@@ -437,9 +437,9 @@ struct $8FBS_ENUM {
 __FB_STATIC_ASSERT( sizeof( struct $8FBS_ENUM ) == 96 );
 typedef int64 $11FB_FUNCMODE;
 typedef int64 $21FB_PROC_RETURN_METHOD;
-typedef int64 (*tmp$35)( struct $8FBSYMBOL* );
+typedef int64 (*tmp$34)( struct $8FBSYMBOL* );
 struct $10FB_PROCRTL {
-	tmp$35 CALLBACK;
+	tmp$34 CALLBACK;
 };
 __FB_STATIC_ASSERT( sizeof( struct $10FB_PROCRTL ) == 8 );
 struct $10FB_PROCOVL {
@@ -548,9 +548,9 @@ struct $9FBS_LABEL {
 	boolean GOSUB;
 };
 __FB_STATIC_ASSERT( sizeof( struct $9FBS_LABEL ) == 32 );
-typedef FBSTRING* (*tmp$29)( void );
-typedef FBSTRING* (*tmp$30)( void*, int64* );
-typedef uint32* (*tmp$31)( void*, int64* );
+typedef FBSTRING* (*tmp$28)( void );
+typedef FBSTRING* (*tmp$29)( void*, int64* );
+typedef uint32* (*tmp$30)( void*, int64* );
 struct $10FBS_DEFINE {
 	int64 PARAMS;
 	struct $11FB_DEFPARAM* PARAMHEAD;
@@ -562,11 +562,11 @@ struct $10FBS_DEFINE {
 	int64 ISARGLESS;
 	$15FB_DEFINE_FLAGS FLAGS;
 	union {
-		tmp$29 DPROCZ;
-		tmp$30 MPROCZ;
+		tmp$28 DPROCZ;
+		tmp$29 MPROCZ;
 	};
 	union {
-		tmp$31 MPROCW;
+		tmp$30 MPROCW;
 	};
 };
 __FB_STATIC_ASSERT( sizeof( struct $10FBS_DEFINE ) == 56 );
@@ -691,7 +691,7 @@ struct $8FBARRAY1I10AST_OPINFOE {
 	struct $16__FB_ARRAYDIMTB$ DIMTB[1];
 };
 __FB_STATIC_ASSERT( sizeof( struct $8FBARRAY1I10AST_OPINFOE ) == 72 );
-static struct $8FBARRAY1I10AST_OPINFOE tmp$83$;
+static struct $8FBARRAY1I10AST_OPINFOE tmp$82$;
 typedef int64 $12FB_DATACLASS;
 struct $13SYMB_DATATYPE {
 	$12FB_DATACLASS CLASS;
@@ -713,7 +713,7 @@ struct $8FBARRAY1I13SYMB_DATATYPEE {
 	struct $16__FB_ARRAYDIMTB$ DIMTB[1];
 };
 __FB_STATIC_ASSERT( sizeof( struct $8FBARRAY1I13SYMB_DATATYPEE ) == 72 );
-static struct $8FBARRAY1I13SYMB_DATATYPEE tmp$84$;
+static struct $8FBARRAY1I13SYMB_DATATYPEE tmp$83$;
 struct $8FBARRAY2IlE {
 	int64* DATA;
 	int64* PTR;
@@ -724,7 +724,7 @@ struct $8FBARRAY2IlE {
 	struct $16__FB_ARRAYDIMTB$ DIMTB[2];
 };
 __FB_STATIC_ASSERT( sizeof( struct $8FBARRAY2IlE ) == 96 );
-static struct $8FBARRAY2IlE tmp$85$;
+static struct $8FBARRAY2IlE tmp$84$;
 typedef int64 $10FB_OUTTYPE;
 typedef int64 $10FB_BACKEND;
 typedef int64 $13FB_COMPTARGET;
@@ -878,7 +878,7 @@ static struct $15FB_RTL_MACRODEF MACRODATAQB$[17] = { { (char*)"__RGB", 0ll, 3ll
 void RTLMACROMODINIT( void )
 {
 	label$47:;
-	if( *(int64*)((uint8*)&ENV$ + 272ll) != 3ll ) goto label$50;
+	if( *(int64*)((uint8*)&ENV$ + 272ll) != 3ll) goto label$50;
 	{
 		HADDMACROS( (struct $15FB_RTL_MACRODEF*)MACRODATAQB$ );
 	}
@@ -926,15 +926,15 @@ static void HADDMACRO( struct $15FB_RTL_MACRODEF* MACDEF$1 )
 	{
 		int64 I$2;
 		I$2 = 0ll;
-		int64 TMP$192$2;
-		TMP$192$2 = *(int64*)((uint8*)MACDEF$1 + 16ll) + -1ll;
+		int64 TMP$191$2;
+		TMP$191$2 = *(int64*)((uint8*)MACDEF$1 + 16ll) + -1ll;
 		goto label$12;
 		label$15:;
 		{
 			FLAGS$1 = FLAGS$1 | 8ll;
 			struct $11FB_DEFPARAM* vr$7 = SYMBADDDEFINEPARAM( LASTPARAM$1, *(char**)((uint8*)((uint8*)MACDEF$1 + (I$2 << (3ll & 63ll))) + 24ll) );
 			LASTPARAM$1 = vr$7;
-			if( PARAMHEAD$1 != (struct $11FB_DEFPARAM*)0ull ) goto label$17;
+			if( PARAMHEAD$1 != (struct $11FB_DEFPARAM*)0ull) goto label$17;
 			{
 				PARAMHEAD$1 = LASTPARAM$1;
 			}
@@ -944,12 +944,12 @@ static void HADDMACRO( struct $15FB_RTL_MACRODEF* MACDEF$1 )
 		label$13:;
 		I$2 = I$2 + 1ll;
 		label$12:;
-		if( I$2 <= TMP$192$2 ) goto label$15;
+		if( I$2 <= TMP$191$2) goto label$15;
 		label$14:;
 	}
-	if( (*(int64*)((uint8*)MACDEF$1 + 8ll) & 16ll) == 0ll ) goto label$19;
+	if( (*(int64*)((uint8*)MACDEF$1 + 8ll) & 16ll) == 0ll) goto label$19;
 	{
-		if( *(int64*)((uint8*)&ENV$ + 304ll) != 0ll ) goto label$21;
+		if( *(int64*)((uint8*)&ENV$ + 304ll) != 0ll) goto label$21;
 		{
 			ADDBODY$1 = 0ll;
 		}
@@ -958,9 +958,9 @@ static void HADDMACRO( struct $15FB_RTL_MACRODEF* MACDEF$1 )
 	}
 	label$19:;
 	label$18:;
-	if( (*(int64*)((uint8*)MACDEF$1 + 8ll) & 8192ll) == 0ll ) goto label$23;
+	if( (*(int64*)((uint8*)MACDEF$1 + 8ll) & 8192ll) == 0ll) goto label$23;
 	{
-		if( *(int64*)((uint8*)&ENV$ + 208ll) != 1ll ) goto label$25;
+		if( *(int64*)((uint8*)&ENV$ + 208ll) != 1ll) goto label$25;
 		{
 			ADDBODY$1 = 0ll;
 			FLAGS$1 = FLAGS$1 | 2ll;
@@ -972,36 +972,36 @@ static void HADDMACRO( struct $15FB_RTL_MACRODEF* MACDEF$1 )
 	label$22:;
 	struct $9FB_DEFTOK* TOKHEAD$1;
 	__builtin_memset( &TOKHEAD$1, 0, 8ll );
-	if( ADDBODY$1 == 0ll ) goto label$27;
+	if( ADDBODY$1 == 0ll) goto label$27;
 	{
 		struct $9FB_DEFTOK* TOK$2;
 		__builtin_memset( &TOK$2, 0, 8ll );
 		struct $17FB_RTL_MACROTOKEN* PTK$2;
 		PTK$2 = (struct $17FB_RTL_MACROTOKEN*)((uint8*)MACDEF$1 + 56ll);
 		label$28:;
-		if( *(int64*)PTK$2 == -1ll ) goto label$29;
+		if( *(int64*)PTK$2 == -1ll) goto label$29;
 		{
 			struct $9FB_DEFTOK* vr$20 = SYMBADDDEFINETOK( TOK$2, *($14FB_DEFTOK_TYPE*)PTK$2 );
 			TOK$2 = vr$20;
-			if( TOKHEAD$1 != (struct $9FB_DEFTOK*)0ull ) goto label$31;
+			if( TOKHEAD$1 != (struct $9FB_DEFTOK*)0ull) goto label$31;
 			{
 				TOKHEAD$1 = TOK$2;
 			}
 			label$31:;
 			label$30:;
 			{
-				$14FB_DEFTOK_TYPE TMP$193$4;
-				TMP$193$4 = *($14FB_DEFTOK_TYPE*)PTK$2;
-				if( TMP$193$4 == 0ll ) goto label$34;
+				$14FB_DEFTOK_TYPE TMP$192$4;
+				TMP$192$4 = *($14FB_DEFTOK_TYPE*)PTK$2;
+				if( TMP$192$4 == 0ll) goto label$34;
 				label$35:;
-				if( TMP$193$4 != 1ll ) goto label$33;
+				if( TMP$192$4 != 1ll) goto label$33;
 				label$34:;
 				{
 					*(int64*)((uint8*)TOK$2 + 8ll) = *(int64*)((uint8*)PTK$2 + 8ll);
 				}
 				goto label$32;
 				label$33:;
-				if( TMP$193$4 != 2ll ) goto label$36;
+				if( TMP$192$4 != 2ll) goto label$36;
 				label$37:;
 				{
 					ZSTRASSIGN( (char**)((uint8*)TOK$2 + 8ll), *(char**)((uint8*)PTK$2 + 8ll) );
@@ -1024,25 +1024,25 @@ static void HADDMACROS( struct $15FB_RTL_MACRODEF* MACDEF$1 )
 {
 	label$38:;
 	label$40:;
-	if( *(char**)MACDEF$1 == (char*)0ull ) goto label$41;
+	if( *(char**)MACDEF$1 == (char*)0ull) goto label$41;
 	{
 		int64 ADD_MACRO$2;
 		ADD_MACRO$2 = -1ll;
-		if( (*(int64*)((uint8*)MACDEF$1 + 8ll) & 32768ll) == 0ll ) goto label$43;
+		if( (*(int64*)((uint8*)MACDEF$1 + 8ll) & 32768ll) == 0ll) goto label$43;
 		{
 			int64 vr$3 = FBIS64BIT(  );
 			ADD_MACRO$2 = ADD_MACRO$2 & ~vr$3;
 		}
 		goto label$42;
 		label$43:;
-		if( (*(int64*)((uint8*)MACDEF$1 + 8ll) & 65536ll) == 0ll ) goto label$44;
+		if( (*(int64*)((uint8*)MACDEF$1 + 8ll) & 65536ll) == 0ll) goto label$44;
 		{
 			int64 vr$8 = FBIS64BIT(  );
 			ADD_MACRO$2 = ADD_MACRO$2 & vr$8;
 		}
 		label$44:;
 		label$42:;
-		if( ADD_MACRO$2 == 0ll ) goto label$46;
+		if( ADD_MACRO$2 == 0ll) goto label$46;
 		{
 			HADDMACRO( MACDEF$1 );
 		}

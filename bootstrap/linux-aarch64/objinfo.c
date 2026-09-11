@@ -231,6 +231,7 @@ struct $10DATABUFFER {
 };
 __FB_STATIC_ASSERT( sizeof( struct $10DATABUFFER ) == 16 );
 #define fb_D2L( value ) ((int64)__builtin_nearbyint( value ))
+void* fb_ErrorThrowAt( int32, char*, void*, void* );
 int32 fb_FileOpen( FBSTRING*, uint32, uint32, uint32, int32, int32 );
 int32 fb_FileClose( int32 );
 int32 fb_FileGetLargeIOB( int32, int64, void*, uint64, uint64* );
@@ -291,46 +292,46 @@ static struct $9ENTRYINFO ENTRIES$[5] = { { (char*)"-l", -1ll }, { (char*)"-p", 
 
 void OBJINFOREADOBJ( FBSTRING* OBJFILE$1 )
 {
-	label$294:;
+	label$295:;
 	OBJINFOINIT( OBJFILE$1 );
 	HLOADFILE( OBJFILE$1, &OBJDATA$ );
-	if( *(int64*)((uint8*)&OBJDATA$ + 8ll) != 0ll ) goto label$297;
+	if( *(int64*)((uint8*)&OBJDATA$ + 8ll) != 0ll) goto label$298;
 	{
-		goto label$295;
+		goto label$296;
 	}
+	label$298:;
 	label$297:;
-	label$296:;
 	HLOADFBCTINFFROMOBJ(  );
-	label$295:;
+	label$296:;
 }
 
 void OBJINFOREADLIBFILE( FBSTRING* LIBFILE$1 )
 {
-	label$298:;
+	label$299:;
 	OBJINFOINIT( LIBFILE$1 );
 	HLOADFILE( LIBFILE$1, &ARDATA$ );
-	if( *(int64*)((uint8*)&ARDATA$ + 8ll) != 0ll ) goto label$301;
+	if( *(int64*)((uint8*)&ARDATA$ + 8ll) != 0ll) goto label$302;
 	{
-		goto label$299;
+		goto label$300;
 	}
-	label$301:;
-	label$300:;
-	HLOADOBJFROMAR(  );
-	if( *(int64*)((uint8*)&OBJDATA$ + 8ll) != 0ll ) goto label$303;
-	{
-		goto label$299;
-	}
-	label$303:;
 	label$302:;
+	label$301:;
+	HLOADOBJFROMAR(  );
+	if( *(int64*)((uint8*)&OBJDATA$ + 8ll) != 0ll) goto label$304;
+	{
+		goto label$300;
+	}
+	label$304:;
+	label$303:;
 	HLOADFBCTINFFROMOBJ(  );
-	label$299:;
+	label$300:;
 }
 
 void OBJINFOREADLIB( FBSTRING* LIBNAME$1, struct $5TLIST* LIBPATHS$1 )
 {
 	FBSTRING TMP$55$1;
 	FBSTRING TMP$56$1;
-	label$304:;
+	label$305:;
 	static FBSTRING LIBFILE$1;
 	static FBSTRING FILENAME$1;
 	struct $11TSTRSETITEM* PATH$1;
@@ -341,8 +342,8 @@ void OBJINFOREADLIB( FBSTRING* LIBNAME$1, struct $5TLIST* LIBPATHS$1 )
 	fb_StrAssign( (void*)&FILENAME$1, -1ll, (void*)vr$5, -1ll, 0 );
 	void* vr$6 = LISTGETHEAD( LIBPATHS$1 );
 	PATH$1 = (struct $11TSTRSETITEM*)vr$6;
-	label$306:;
-	if( PATH$1 == (struct $11TSTRSETITEM*)0ull ) goto label$307;
+	label$307:;
+	if( PATH$1 == (struct $11TSTRSETITEM*)0ull) goto label$308;
 	{
 		FBSTRING TMP$57$2;
 		FBSTRING TMP$58$2;
@@ -352,179 +353,179 @@ void OBJINFOREADLIB( FBSTRING* LIBNAME$1, struct $5TLIST* LIBPATHS$1 )
 		FBSTRING* vr$14 = fb_StrConcat( &TMP$58$2, (void*)vr$11, -1ll, (void*)&FILENAME$1, -1ll );
 		fb_StrAssign( (void*)&LIBFILE$1, -1ll, (void*)vr$14, -1ll, 0 );
 		int64 vr$15 = HFILEEXISTS( (char*)*(char**)&LIBFILE$1 );
-		if( vr$15 == 0ll ) goto label$309;
+		if( vr$15 == 0ll) goto label$310;
 		{
-			goto label$307;
+			goto label$308;
 		}
+		label$310:;
 		label$309:;
-		label$308:;
 		void* vr$16 = LISTGETNEXT( (void*)PATH$1 );
 		PATH$1 = (struct $11TSTRSETITEM*)vr$16;
 	}
-	goto label$306;
-	label$307:;
-	if( PATH$1 != (struct $11TSTRSETITEM*)0ull ) goto label$311;
+	goto label$307;
+	label$308:;
+	if( PATH$1 != (struct $11TSTRSETITEM*)0ull) goto label$312;
 	{
-		goto label$305;
+		goto label$306;
 	}
+	label$312:;
 	label$311:;
-	label$310:;
 	OBJINFOREADLIBFILE( &LIBFILE$1 );
-	label$305:;
+	label$306:;
 }
 
 int64 OBJINFOREADNEXT( FBSTRING* DAT$1 )
 {
 	int64 fb$result$1;
 	__builtin_memset( &fb$result$1, 0, 8ll );
-	label$318:;
-	if( *(int64*)((uint8*)&FBCTINF$ + 8ll) > 0ll ) goto label$321;
+	label$319:;
+	if( *(int64*)((uint8*)&FBCTINF$ + 8ll) > 0ll) goto label$322;
 	{
 		fb$result$1 = -1ll;
-		goto label$319;
+		goto label$320;
 	}
+	label$322:;
 	label$321:;
-	label$320:;
-	if( *(int64*)((uint8*)&PARSER$ + 32ll) == 0ll ) goto label$323;
+	if( *(int64*)((uint8*)&PARSER$ + 32ll) == 0ll) goto label$324;
 	{
-		label$324:;
-		if( *(int64*)&PARSER$ >= *(int64*)((uint8*)&FBCTINF$ + 8ll) ) goto label$325;
+		label$325:;
+		if( *(int64*)&PARSER$ >= *(int64*)((uint8*)&FBCTINF$ + 8ll)) goto label$326;
 		{
-			if( *(int64*)((uint8*)&PARSER$ + 40ll) >= 0ll ) goto label$327;
+			if( *(int64*)((uint8*)&PARSER$ + 40ll) >= 0ll) goto label$328;
 			{
 				*(int64*)((uint8*)&PARSER$ + 40ll) = (int64)*(uint8*)(*(uint8**)&FBCTINF$ + *(int64*)&PARSER$);
 				*(int64*)&PARSER$ = *(int64*)&PARSER$ + 1ll;
-				if( ((int64)-(*(int64*)((uint8*)&PARSER$ + 40ll) <= 0ll) | (int64)-(*(int64*)((uint8*)&PARSER$ + 40ll) > 3ll)) == 0ll ) goto label$329;
+				if( ((int64)-(*(int64*)((uint8*)&PARSER$ + 40ll) <= 0ll) | (int64)-(*(int64*)((uint8*)&PARSER$ + 40ll) > 3ll)) == 0ll) goto label$330;
 				{
 					*(int64*)((uint8*)&PARSER$ + 40ll) = -1ll;
 					*(int64*)&PARSER$ = *(int64*)((uint8*)&FBCTINF$ + 8ll);
 					fb$result$1 = -1ll;
-					goto label$319;
+					goto label$320;
 				}
+				label$330:;
 				label$329:;
-				label$328:;
 			}
+			label$328:;
 			label$327:;
-			label$326:;
-			if( *(int64*)&PARSER$ < *(int64*)((uint8*)&FBCTINF$ + 8ll) ) goto label$331;
+			if( *(int64*)&PARSER$ < *(int64*)((uint8*)&FBCTINF$ + 8ll)) goto label$332;
 			{
 				fb$result$1 = -1ll;
-				goto label$319;
+				goto label$320;
 			}
+			label$332:;
 			label$331:;
-			label$330:;
 			*(int64*)&PARSER$ = *(int64*)&PARSER$ + 1ll;
-			if( (int64)*(uint8*)((uint8*)(*(uint8**)&FBCTINF$ + *(int64*)&PARSER$) + -1ll) != 0ll ) goto label$333;
+			if( (int64)*(uint8*)((uint8*)(*(uint8**)&FBCTINF$ + *(int64*)&PARSER$) + -1ll) != 0ll) goto label$334;
 			{
 				*(int64*)((uint8*)&PARSER$ + 40ll) = -1ll;
-				goto label$324;
+				goto label$325;
 			}
+			label$334:;
 			label$333:;
-			label$332:;
 			char* vr$10 = HGETNEXTSTRING(  );
 			fb_StrAssign( (void*)DAT$1, -1ll, (void*)vr$10, 0ll, 0 );
 			{
 				int64 TMP$59$4;
 				TMP$59$4 = *(int64*)((uint8*)&PARSER$ + 40ll);
-				if( TMP$59$4 != 1ll ) goto label$335;
-				label$336:;
+				if( TMP$59$4 != 1ll) goto label$336;
+				label$337:;
 				{
 					fb$result$1 = 0ll;
-					goto label$319;
+					goto label$320;
 				}
-				goto label$334;
-				label$335:;
-				if( TMP$59$4 != 2ll ) goto label$337;
-				label$338:;
+				goto label$335;
+				label$336:;
+				if( TMP$59$4 != 2ll) goto label$338;
+				label$339:;
 				{
 					fb$result$1 = 1ll;
-					goto label$319;
+					goto label$320;
 				}
-				goto label$334;
-				label$337:;
-				if( TMP$59$4 != 3ll ) goto label$339;
-				label$340:;
+				goto label$335;
+				label$338:;
+				if( TMP$59$4 != 3ll) goto label$340;
+				label$341:;
 				{
 					{
 						FBSTRING TMP$60$6;
 						fb_StrInit( (void*)&TMP$60$6, -1ll, (void*)DAT$1, -1ll, 0 );
 						int32 vr$13 = fb_StrCompare( (void*)&TMP$60$6, -1ll, (void*)"-lang", 6ll );
-						if( (int64)vr$13 != 0ll ) goto label$342;
-						label$343:;
+						if( (int64)vr$13 != 0ll) goto label$343;
+						label$344:;
 						{
 							char* vr$15 = HGETNEXTSTRING(  );
 							fb_StrAssign( (void*)DAT$1, -1ll, (void*)vr$15, 0ll, 0 );
 							int64 vr$16 = fb_StrLen( (void*)DAT$1, -1ll );
-							if( vr$16 <= 0ll ) goto label$345;
+							if( vr$16 <= 0ll) goto label$346;
 							{
 								fb$result$1 = 4ll;
 								fb_StrDelete( (FBSTRING*)&TMP$60$6 );
-								goto label$319;
+								goto label$320;
 							}
+							label$346:;
 							label$345:;
-							label$344:;
 						}
-						goto label$341;
-						label$342:;
+						goto label$342;
+						label$343:;
 						int32 vr$19 = fb_StrCompare( (void*)&TMP$60$6, -1ll, (void*)"-mt", 4ll );
-						if( (int64)vr$19 != 0ll ) goto label$346;
-						label$347:;
+						if( (int64)vr$19 != 0ll) goto label$347;
+						label$348:;
 						{
 							fb$result$1 = 2ll;
 							fb_StrDelete( (FBSTRING*)&TMP$60$6 );
-							goto label$319;
+							goto label$320;
 						}
-						label$346:;
-						label$341:;
+						label$347:;
+						label$342:;
 						fb_StrDelete( (FBSTRING*)&TMP$60$6 );
 					}
 				}
-				label$339:;
-				label$334:;
+				label$340:;
+				label$335:;
 			}
 		}
-		goto label$324;
-		label$325:;
+		goto label$325;
+		label$326:;
 	}
-	goto label$322;
-	label$323:;
+	goto label$323;
+	label$324:;
 	{
 		char* vr$23 = HGETNEXTSTRING(  );
 		fb_StrAssign( (void*)DAT$1, -1ll, (void*)vr$23, 0ll, 0 );
 		{
 			int64 I$3;
 			I$3 = 0ll;
-			label$351:;
+			label$352:;
 			{
 				int32 vr$25 = fb_StrCompare( (void*)DAT$1, -1ll, *(void**)((int64)(struct $9ENTRYINFO*)ENTRIES$ + (I$3 << (4ll & 63ll))), 0ll );
-				if( (int64)vr$25 != 0ll ) goto label$353;
+				if( (int64)vr$25 != 0ll) goto label$354;
 				{
-					if( *(int64*)(((int64)(struct $9ENTRYINFO*)ENTRIES$ + (I$3 << (4ll & 63ll))) + 8ll) == 0ll ) goto label$355;
+					if( *(int64*)(((int64)(struct $9ENTRYINFO*)ENTRIES$ + (I$3 << (4ll & 63ll))) + 8ll) == 0ll) goto label$356;
 					{
 						char* vr$28 = HGETNEXTSTRING(  );
 						fb_StrAssign( (void*)DAT$1, -1ll, (void*)vr$28, 0ll, 0 );
 					}
-					goto label$354;
-					label$355:;
+					goto label$355;
+					label$356:;
 					{
 					}
-					label$354:;
+					label$355:;
 					fb$result$1 = I$3;
-					goto label$319;
+					goto label$320;
 				}
+				label$354:;
 				label$353:;
-				label$352:;
 			}
-			label$349:;
-			I$3 = I$3 + 1ll;
-			label$348:;
-			if( I$3 <= 4ll ) goto label$351;
 			label$350:;
+			I$3 = I$3 + 1ll;
+			label$349:;
+			if( I$3 <= 4ll) goto label$352;
+			label$351:;
 		}
 	}
-	label$322:;
+	label$323:;
 	fb$result$1 = -1ll;
-	label$319:;
+	label$320:;
 	return fb$result$1;
 }
 
@@ -532,38 +533,38 @@ char* OBJINFOGETFILENAME( void )
 {
 	char* fb$result$1;
 	__builtin_memset( &fb$result$1, 0, 8ll );
-	label$356:;
-	fb$result$1 = (char*)*(char**)((uint8*)&PARSER$ + 8ll);
 	label$357:;
+	fb$result$1 = (char*)*(char**)((uint8*)&PARSER$ + 8ll);
+	label$358:;
 	return fb$result$1;
 }
 
 void OBJINFOREADEND( void )
 {
-	label$358:;
-	if( *(uint8**)&ARDATA$ == (uint8*)0ull ) goto label$361;
+	label$359:;
+	if( *(uint8**)&ARDATA$ == (uint8*)0ull) goto label$362;
 	{
 		free( *(void**)&ARDATA$ );
 	}
-	goto label$360;
-	label$361:;
-	if( *(uint8**)&OBJDATA$ == (uint8*)0ull ) goto label$362;
+	goto label$361;
+	label$362:;
+	if( *(uint8**)&OBJDATA$ == (uint8*)0ull) goto label$363;
 	{
 		free( *(void**)&OBJDATA$ );
 	}
-	label$362:;
-	label$360:;
+	label$363:;
+	label$361:;
 	HRESETBUFFERS(  );
-	label$359:;
+	label$360:;
 }
 
 char* OBJINFOENCODE( int64 ENTRY$1 )
 {
 	char* fb$result$1;
 	__builtin_memset( &fb$result$1, 0, 8ll );
-	label$363:;
-	fb$result$1 = *(char**)((int64)(struct $9ENTRYINFO*)ENTRIES$ + (ENTRY$1 << (4ll & 63ll)));
 	label$364:;
+	fb$result$1 = *(char**)((int64)(struct $9ENTRYINFO*)ENTRIES$ + (ENTRY$1 << (4ll & 63ll)));
+	label$365:;
 	return fb$result$1;
 }
 
@@ -617,14 +618,14 @@ static struct $8ELF32_SH* HCHECKELF32_SH( struct $7ELF32_H* H$1, int64 INDEX$1 )
 	struct $8ELF32_SH* SH$1;
 	int64 HEADEROFFSET$1;
 	HEADEROFFSET$1 = (int64)*(uint32*)((uint8*)H$1 + 32ll) + (INDEX$1 * 40ll);
-	if( ((uint64)HEADEROFFSET$1 + 40ull) <= *(uint64*)((uint8*)&OBJDATA$ + 8ll) ) goto label$21;
+	if( ((uint64)HEADEROFFSET$1 + 40ull) <= *(uint64*)((uint8*)&OBJDATA$ + 8ll)) goto label$21;
 	{
 		goto label$19;
 	}
 	label$21:;
 	label$20:;
 	SH$1 = (struct $8ELF32_SH*)((uint8*)*(void**)&OBJDATA$ + HEADEROFFSET$1);
-	if( ((uint64)*(uint32*)((uint8*)SH$1 + 16ll) + (uint64)(int64)*(uint32*)((uint8*)SH$1 + 20ll)) <= *(uint64*)((uint8*)&OBJDATA$ + 8ll) ) goto label$23;
+	if( ((uint64)*(uint32*)((uint8*)SH$1 + 16ll) + (uint64)(int64)*(uint32*)((uint8*)SH$1 + 20ll)) <= *(uint64*)((uint8*)&OBJDATA$ + 8ll)) goto label$23;
 	{
 		goto label$19;
 	}
@@ -647,7 +648,7 @@ static char* HGETSECTIONNAMEELF32_SH( struct $7ELF32_H* H$1, int64 INDEX$1, int6
 	int64 CH$1;
 	struct $8ELF32_SH* vr$1 = HCHECKELF32_SH( H$1, INDEX$1 );
 	SH$1 = vr$1;
-	if( SH$1 != (struct $8ELF32_SH*)0ull ) goto label$27;
+	if( SH$1 != (struct $8ELF32_SH*)0ull) goto label$27;
 	{
 		goto label$25;
 	}
@@ -656,10 +657,10 @@ static char* HGETSECTIONNAMEELF32_SH( struct $7ELF32_H* H$1, int64 INDEX$1, int6
 	I$1 = NAMETB$1 + (int64)*(uint32*)SH$1;
 	J$1 = 0ll;
 	label$28:;
-	if( ((int64)-(I$1 < *(int64*)((uint8*)&OBJDATA$ + 8ll)) & (int64)-(J$1 < 32ll)) == 0ll ) goto label$29;
+	if( ((int64)-(I$1 < *(int64*)((uint8*)&OBJDATA$ + 8ll)) & (int64)-(J$1 < 32ll)) == 0ll) goto label$29;
 	{
 		CH$1 = (int64)*(uint8*)(*(uint8**)&OBJDATA$ + I$1);
-		if( CH$1 != 0ll ) goto label$31;
+		if( CH$1 != 0ll) goto label$31;
 		{
 			goto label$29;
 		}
@@ -686,7 +687,7 @@ static void HLOADFBCTINFFROMELF32_H( int64 ELF_MACHINE$1 )
 	char* SECTIONNAME$1;
 	*(uint8**)&FBCTINF$ = (uint8*)0ull;
 	*(int64*)((uint8*)&FBCTINF$ + 8ll) = 0ll;
-	if( *(int64*)((uint8*)&OBJDATA$ + 8ll) >= 52ll ) goto label$35;
+	if( *(int64*)((uint8*)&OBJDATA$ + 8ll) >= 52ll) goto label$35;
 	{
 		goto label$33;
 	}
@@ -695,7 +696,7 @@ static void HLOADFBCTINFFROMELF32_H( int64 ELF_MACHINE$1 )
 	H$1 = *(struct $7ELF32_H**)&OBJDATA$;
 	*(uint8*)((int64)(uint8*)ELFMAGIC$ + 4ll) = (uint8)1u;
 	int64 vr$0 = FBISHOSTBIGENDIAN(  );
-	if( vr$0 == 0ll ) goto label$37;
+	if( vr$0 == 0ll) goto label$37;
 	{
 		*(uint8*)((int64)(uint8*)ELFMAGIC$ + 5ll) = (uint8)2u;
 	}
@@ -706,7 +707,7 @@ static void HLOADFBCTINFFROMELF32_H( int64 ELF_MACHINE$1 )
 	}
 	label$36:;
 	int64 vr$1 = FBGETOPTION( 3ll );
-	if( vr$1 != 6ll ) goto label$39;
+	if( vr$1 != 6ll) goto label$39;
 	{
 		*(uint8*)((int64)(uint8*)ELFMAGIC$ + 7ll) = (uint8)9u;
 	}
@@ -721,7 +722,7 @@ static void HLOADFBCTINFFROMELF32_H( int64 ELF_MACHINE$1 )
 		I$2 = 0ll;
 		label$43:;
 		{
-			if( (int64)*(uint8*)((uint8*)H$1 + I$2) == (int64)*(uint8*)((int64)(uint8*)ELFMAGIC$ + I$2) ) goto label$45;
+			if( (int64)*(uint8*)((uint8*)H$1 + I$2) == (int64)*(uint8*)((int64)(uint8*)ELFMAGIC$ + I$2)) goto label$45;
 			{
 				goto label$33;
 			}
@@ -731,46 +732,46 @@ static void HLOADFBCTINFFROMELF32_H( int64 ELF_MACHINE$1 )
 		label$41:;
 		I$2 = I$2 + 1ll;
 		label$40:;
-		if( I$2 <= 15ll ) goto label$43;
+		if( I$2 <= 15ll) goto label$43;
 		label$42:;
 	}
-	if( (int64)*(uint16*)((uint8*)H$1 + 40ll) == 52ll ) goto label$47;
+	if( (int64)*(uint16*)((uint8*)H$1 + 40ll) == 52ll) goto label$47;
 	{
 		goto label$33;
 	}
 	label$47:;
 	label$46:;
-	if( (int64)*(uint16*)((uint8*)H$1 + 16ll) == 1ll ) goto label$49;
+	if( (int64)*(uint16*)((uint8*)H$1 + 16ll) == 1ll) goto label$49;
 	{
 		goto label$33;
 	}
 	label$49:;
 	label$48:;
-	if( (int64)*(uint16*)((uint8*)H$1 + 18ll) == ELF_MACHINE$1 ) goto label$51;
+	if( (int64)*(uint16*)((uint8*)H$1 + 18ll) == ELF_MACHINE$1) goto label$51;
 	{
 		goto label$33;
 	}
 	label$51:;
 	label$50:;
-	if( (int64)*(uint16*)((uint8*)H$1 + 46ll) == 40ll ) goto label$53;
+	if( (int64)*(uint16*)((uint8*)H$1 + 46ll) == 40ll) goto label$53;
 	{
 		goto label$33;
 	}
 	label$53:;
 	label$52:;
-	if( ((uint64)*(uint16*)((uint8*)H$1 + 48ll) * 40ull) <= *(uint64*)((uint8*)&OBJDATA$ + 8ll) ) goto label$55;
+	if( ((uint64)*(uint16*)((uint8*)H$1 + 48ll) * 40ull) <= *(uint64*)((uint8*)&OBJDATA$ + 8ll)) goto label$55;
 	{
 		goto label$33;
 	}
 	label$55:;
 	label$54:;
-	if( ((int64)-((int64)*(uint16*)((uint8*)H$1 + 50ll) < 0ll) | (int64)-((int64)*(uint16*)((uint8*)H$1 + 50ll) >= (int64)*(uint16*)((uint8*)H$1 + 48ll))) == 0ll ) goto label$57;
+	if( ((int64)-((int64)*(uint16*)((uint8*)H$1 + 50ll) < 0ll) | (int64)-((int64)*(uint16*)((uint8*)H$1 + 50ll) >= (int64)*(uint16*)((uint8*)H$1 + 48ll))) == 0ll) goto label$57;
 	{
 		goto label$33;
 	}
 	label$57:;
 	label$56:;
-	if( ((uint64)*(uint32*)((uint8*)H$1 + 32ll) + (uint64)((int64)*(uint16*)((uint8*)H$1 + 48ll) * 40ll)) <= *(uint64*)((uint8*)&OBJDATA$ + 8ll) ) goto label$59;
+	if( ((uint64)*(uint32*)((uint8*)H$1 + 32ll) + (uint64)((int64)*(uint16*)((uint8*)H$1 + 48ll) * 40ll)) <= *(uint64*)((uint8*)&OBJDATA$ + 8ll)) goto label$59;
 	{
 		goto label$33;
 	}
@@ -778,7 +779,7 @@ static void HLOADFBCTINFFROMELF32_H( int64 ELF_MACHINE$1 )
 	label$58:;
 	struct $8ELF32_SH* vr$34 = HCHECKELF32_SH( H$1, (int64)*(uint16*)((uint8*)H$1 + 50ll) );
 	NAMETB$1 = vr$34;
-	if( NAMETB$1 != (struct $8ELF32_SH*)0ull ) goto label$61;
+	if( NAMETB$1 != (struct $8ELF32_SH*)0ull) goto label$61;
 	{
 		goto label$33;
 	}
@@ -787,21 +788,21 @@ static void HLOADFBCTINFFROMELF32_H( int64 ELF_MACHINE$1 )
 	{
 		int64 I$2;
 		I$2 = 1ll;
-		int64 TMP$25$2;
-		TMP$25$2 = (int64)*(uint16*)((uint8*)H$1 + 48ll) + -1ll;
+		int64 TMP$24$2;
+		TMP$24$2 = (int64)*(uint16*)((uint8*)H$1 + 48ll) + -1ll;
 		goto label$62;
 		label$65:;
 		{
 			char* vr$40 = HGETSECTIONNAMEELF32_SH( H$1, I$2, (int64)*(uint32*)((uint8*)NAMETB$1 + 16ll) );
 			SECTIONNAME$1 = vr$40;
-			if( SECTIONNAME$1 == (char*)0ull ) goto label$67;
+			if( SECTIONNAME$1 == (char*)0ull) goto label$67;
 			{
 				int32 vr$41 = fb_StrCompare( (void*)SECTIONNAME$1, 0ll, (void*)FBCTINFNAME$, 9ll );
-				if( (int64)vr$41 != 0ll ) goto label$69;
+				if( (int64)vr$41 != 0ll) goto label$69;
 				{
 					struct $8ELF32_SH* vr$43 = HCHECKELF32_SH( H$1, I$2 );
 					SH$1 = vr$43;
-					if( SH$1 == (struct $8ELF32_SH*)0ull ) goto label$71;
+					if( SH$1 == (struct $8ELF32_SH*)0ull) goto label$71;
 					{
 						*(uint8**)&FBCTINF$ = (uint8*)(*(uint8**)&OBJDATA$ + (int64)*(uint32*)((uint8*)SH$1 + 16ll));
 						*(int64*)((uint8*)&FBCTINF$ + 8ll) = (int64)*(uint32*)((uint8*)SH$1 + 20ll);
@@ -819,7 +820,7 @@ static void HLOADFBCTINFFROMELF32_H( int64 ELF_MACHINE$1 )
 		label$63:;
 		I$2 = I$2 + 1ll;
 		label$62:;
-		if( I$2 <= TMP$25$2 ) goto label$65;
+		if( I$2 <= TMP$24$2) goto label$65;
 		label$64:;
 	}
 	label$33:;
@@ -833,14 +834,14 @@ static struct $8ELF64_SH* HCHECKELF64_SH( struct $7ELF64_H* H$1, int64 INDEX$1 )
 	struct $8ELF64_SH* SH$1;
 	int64 HEADEROFFSET$1;
 	HEADEROFFSET$1 = (int64)(*(uint64*)((uint8*)H$1 + 40ll) + (uint64)(INDEX$1 << (6ll & 63ll)));
-	if( ((uint64)HEADEROFFSET$1 + 64ull) <= *(uint64*)((uint8*)&OBJDATA$ + 8ll) ) goto label$75;
+	if( ((uint64)HEADEROFFSET$1 + 64ull) <= *(uint64*)((uint8*)&OBJDATA$ + 8ll)) goto label$75;
 	{
 		goto label$73;
 	}
 	label$75:;
 	label$74:;
 	SH$1 = (struct $8ELF64_SH*)((uint8*)*(void**)&OBJDATA$ + HEADEROFFSET$1);
-	if( (*(uint64*)((uint8*)SH$1 + 24ll) + *(uint64*)((uint8*)SH$1 + 32ll)) <= *(uint64*)((uint8*)&OBJDATA$ + 8ll) ) goto label$77;
+	if( (*(uint64*)((uint8*)SH$1 + 24ll) + *(uint64*)((uint8*)SH$1 + 32ll)) <= *(uint64*)((uint8*)&OBJDATA$ + 8ll)) goto label$77;
 	{
 		goto label$73;
 	}
@@ -863,7 +864,7 @@ static char* HGETSECTIONNAMEELF64_SH( struct $7ELF64_H* H$1, int64 INDEX$1, int6
 	int64 CH$1;
 	struct $8ELF64_SH* vr$1 = HCHECKELF64_SH( H$1, INDEX$1 );
 	SH$1 = vr$1;
-	if( SH$1 != (struct $8ELF64_SH*)0ull ) goto label$81;
+	if( SH$1 != (struct $8ELF64_SH*)0ull) goto label$81;
 	{
 		goto label$79;
 	}
@@ -872,10 +873,10 @@ static char* HGETSECTIONNAMEELF64_SH( struct $7ELF64_H* H$1, int64 INDEX$1, int6
 	I$1 = NAMETB$1 + (int64)*(uint32*)SH$1;
 	J$1 = 0ll;
 	label$82:;
-	if( ((int64)-(I$1 < *(int64*)((uint8*)&OBJDATA$ + 8ll)) & (int64)-(J$1 < 32ll)) == 0ll ) goto label$83;
+	if( ((int64)-(I$1 < *(int64*)((uint8*)&OBJDATA$ + 8ll)) & (int64)-(J$1 < 32ll)) == 0ll) goto label$83;
 	{
 		CH$1 = (int64)*(uint8*)(*(uint8**)&OBJDATA$ + I$1);
-		if( CH$1 != 0ll ) goto label$85;
+		if( CH$1 != 0ll) goto label$85;
 		{
 			goto label$83;
 		}
@@ -902,7 +903,7 @@ static void HLOADFBCTINFFROMELF64_H( int64 ELF_MACHINE$1 )
 	char* SECTIONNAME$1;
 	*(uint8**)&FBCTINF$ = (uint8*)0ull;
 	*(int64*)((uint8*)&FBCTINF$ + 8ll) = 0ll;
-	if( *(int64*)((uint8*)&OBJDATA$ + 8ll) >= 64ll ) goto label$89;
+	if( *(int64*)((uint8*)&OBJDATA$ + 8ll) >= 64ll) goto label$89;
 	{
 		goto label$87;
 	}
@@ -911,7 +912,7 @@ static void HLOADFBCTINFFROMELF64_H( int64 ELF_MACHINE$1 )
 	H$1 = *(struct $7ELF64_H**)&OBJDATA$;
 	*(uint8*)((int64)(uint8*)ELFMAGIC$ + 4ll) = (uint8)2u;
 	int64 vr$0 = FBISHOSTBIGENDIAN(  );
-	if( vr$0 == 0ll ) goto label$91;
+	if( vr$0 == 0ll) goto label$91;
 	{
 		*(uint8*)((int64)(uint8*)ELFMAGIC$ + 5ll) = (uint8)2u;
 	}
@@ -922,7 +923,7 @@ static void HLOADFBCTINFFROMELF64_H( int64 ELF_MACHINE$1 )
 	}
 	label$90:;
 	int64 vr$1 = FBGETOPTION( 3ll );
-	if( vr$1 != 6ll ) goto label$93;
+	if( vr$1 != 6ll) goto label$93;
 	{
 		*(uint8*)((int64)(uint8*)ELFMAGIC$ + 7ll) = (uint8)9u;
 	}
@@ -937,7 +938,7 @@ static void HLOADFBCTINFFROMELF64_H( int64 ELF_MACHINE$1 )
 		I$2 = 0ll;
 		label$97:;
 		{
-			if( (int64)*(uint8*)((uint8*)H$1 + I$2) == (int64)*(uint8*)((int64)(uint8*)ELFMAGIC$ + I$2) ) goto label$99;
+			if( (int64)*(uint8*)((uint8*)H$1 + I$2) == (int64)*(uint8*)((int64)(uint8*)ELFMAGIC$ + I$2)) goto label$99;
 			{
 				goto label$87;
 			}
@@ -947,46 +948,46 @@ static void HLOADFBCTINFFROMELF64_H( int64 ELF_MACHINE$1 )
 		label$95:;
 		I$2 = I$2 + 1ll;
 		label$94:;
-		if( I$2 <= 15ll ) goto label$97;
+		if( I$2 <= 15ll) goto label$97;
 		label$96:;
 	}
-	if( (int64)*(uint16*)((uint8*)H$1 + 52ll) == 64ll ) goto label$101;
+	if( (int64)*(uint16*)((uint8*)H$1 + 52ll) == 64ll) goto label$101;
 	{
 		goto label$87;
 	}
 	label$101:;
 	label$100:;
-	if( (int64)*(uint16*)((uint8*)H$1 + 16ll) == 1ll ) goto label$103;
+	if( (int64)*(uint16*)((uint8*)H$1 + 16ll) == 1ll) goto label$103;
 	{
 		goto label$87;
 	}
 	label$103:;
 	label$102:;
-	if( (int64)*(uint16*)((uint8*)H$1 + 18ll) == ELF_MACHINE$1 ) goto label$105;
+	if( (int64)*(uint16*)((uint8*)H$1 + 18ll) == ELF_MACHINE$1) goto label$105;
 	{
 		goto label$87;
 	}
 	label$105:;
 	label$104:;
-	if( (int64)*(uint16*)((uint8*)H$1 + 58ll) == 64ll ) goto label$107;
+	if( (int64)*(uint16*)((uint8*)H$1 + 58ll) == 64ll) goto label$107;
 	{
 		goto label$87;
 	}
 	label$107:;
 	label$106:;
-	if( ((uint64)*(uint16*)((uint8*)H$1 + 60ll) << (6ull & 63ll)) <= *(uint64*)((uint8*)&OBJDATA$ + 8ll) ) goto label$109;
+	if( ((uint64)*(uint16*)((uint8*)H$1 + 60ll) << (6ull & 63ll)) <= *(uint64*)((uint8*)&OBJDATA$ + 8ll)) goto label$109;
 	{
 		goto label$87;
 	}
 	label$109:;
 	label$108:;
-	if( ((int64)-((int64)*(uint16*)((uint8*)H$1 + 62ll) < 0ll) | (int64)-((int64)*(uint16*)((uint8*)H$1 + 62ll) >= (int64)*(uint16*)((uint8*)H$1 + 60ll))) == 0ll ) goto label$111;
+	if( ((int64)-((int64)*(uint16*)((uint8*)H$1 + 62ll) < 0ll) | (int64)-((int64)*(uint16*)((uint8*)H$1 + 62ll) >= (int64)*(uint16*)((uint8*)H$1 + 60ll))) == 0ll) goto label$111;
 	{
 		goto label$87;
 	}
 	label$111:;
 	label$110:;
-	if( (*(uint64*)((uint8*)H$1 + 40ll) + (uint64)((int64)*(uint16*)((uint8*)H$1 + 60ll) << (6ll & 63ll))) <= *(uint64*)((uint8*)&OBJDATA$ + 8ll) ) goto label$113;
+	if( (*(uint64*)((uint8*)H$1 + 40ll) + (uint64)((int64)*(uint16*)((uint8*)H$1 + 60ll) << (6ll & 63ll))) <= *(uint64*)((uint8*)&OBJDATA$ + 8ll)) goto label$113;
 	{
 		goto label$87;
 	}
@@ -994,7 +995,7 @@ static void HLOADFBCTINFFROMELF64_H( int64 ELF_MACHINE$1 )
 	label$112:;
 	struct $8ELF64_SH* vr$33 = HCHECKELF64_SH( H$1, (int64)*(uint16*)((uint8*)H$1 + 62ll) );
 	NAMETB$1 = vr$33;
-	if( NAMETB$1 != (struct $8ELF64_SH*)0ull ) goto label$115;
+	if( NAMETB$1 != (struct $8ELF64_SH*)0ull) goto label$115;
 	{
 		goto label$87;
 	}
@@ -1003,21 +1004,21 @@ static void HLOADFBCTINFFROMELF64_H( int64 ELF_MACHINE$1 )
 	{
 		int64 I$2;
 		I$2 = 1ll;
-		int64 TMP$26$2;
-		TMP$26$2 = (int64)*(uint16*)((uint8*)H$1 + 60ll) + -1ll;
+		int64 TMP$25$2;
+		TMP$25$2 = (int64)*(uint16*)((uint8*)H$1 + 60ll) + -1ll;
 		goto label$116;
 		label$119:;
 		{
 			char* vr$38 = HGETSECTIONNAMEELF64_SH( H$1, I$2, *(int64*)((uint8*)NAMETB$1 + 24ll) );
 			SECTIONNAME$1 = vr$38;
-			if( SECTIONNAME$1 == (char*)0ull ) goto label$121;
+			if( SECTIONNAME$1 == (char*)0ull) goto label$121;
 			{
 				int32 vr$39 = fb_StrCompare( (void*)SECTIONNAME$1, 0ll, (void*)FBCTINFNAME$, 9ll );
-				if( (int64)vr$39 != 0ll ) goto label$123;
+				if( (int64)vr$39 != 0ll) goto label$123;
 				{
 					struct $8ELF64_SH* vr$41 = HCHECKELF64_SH( H$1, I$2 );
 					SH$1 = vr$41;
-					if( SH$1 == (struct $8ELF64_SH*)0ull ) goto label$125;
+					if( SH$1 == (struct $8ELF64_SH*)0ull) goto label$125;
 					{
 						*(uint8**)&FBCTINF$ = (uint8*)(*(uint8**)&OBJDATA$ + *(int64*)((uint8*)SH$1 + 24ll));
 						*(int64*)((uint8*)&FBCTINF$ + 8ll) = *(int64*)((uint8*)SH$1 + 32ll);
@@ -1035,7 +1036,7 @@ static void HLOADFBCTINFFROMELF64_H( int64 ELF_MACHINE$1 )
 		label$117:;
 		I$2 = I$2 + 1ll;
 		label$116:;
-		if( I$2 <= TMP$26$2 ) goto label$119;
+		if( I$2 <= TMP$25$2) goto label$119;
 		label$118:;
 	}
 	label$87:;
@@ -1049,26 +1050,26 @@ static void HLOADFBCTINFFROMCOFF( uint16 MAGIC$1 )
 	struct $7COFF_SH* SHBASE$1;
 	*(uint8**)&FBCTINF$ = (uint8*)0ull;
 	*(int64*)((uint8*)&FBCTINF$ + 8ll) = 0ll;
-	if( *(int64*)((uint8*)&OBJDATA$ + 8ll) >= 20ll ) goto label$129;
+	if( *(int64*)((uint8*)&OBJDATA$ + 8ll) >= 20ll) goto label$129;
 	{
 		goto label$127;
 	}
 	label$129:;
 	label$128:;
 	H$1 = *(struct $6COFF_H**)&OBJDATA$;
-	if( (int64)*(uint16*)H$1 == (int64)MAGIC$1 ) goto label$131;
+	if( (int64)*(uint16*)H$1 == (int64)MAGIC$1) goto label$131;
 	{
 		goto label$127;
 	}
 	label$131:;
 	label$130:;
-	if( (int64)*(uint16*)((uint8*)H$1 + 16ll) == 0ll ) goto label$133;
+	if( (int64)*(uint16*)((uint8*)H$1 + 16ll) == 0ll) goto label$133;
 	{
 		goto label$127;
 	}
 	label$133:;
 	label$132:;
-	if( ((uint64)*(uint16*)((uint8*)H$1 + 2ll) * 40ull) <= *(uint64*)((uint8*)&OBJDATA$ + 8ll) ) goto label$135;
+	if( ((uint64)*(uint16*)((uint8*)H$1 + 2ll) * 40ull) <= *(uint64*)((uint8*)&OBJDATA$ + 8ll)) goto label$135;
 	{
 		goto label$127;
 	}
@@ -1078,8 +1079,8 @@ static void HLOADFBCTINFFROMCOFF( uint16 MAGIC$1 )
 	{
 		int64 I$2;
 		I$2 = 0ll;
-		int64 TMP$27$2;
-		TMP$27$2 = (int64)*(uint16*)((uint8*)H$1 + 2ll) + -1ll;
+		int64 TMP$26$2;
+		TMP$26$2 = (int64)*(uint16*)((uint8*)H$1 + 2ll) + -1ll;
 		goto label$136;
 		label$139:;
 		{
@@ -1089,7 +1090,7 @@ static void HLOADFBCTINFFROMCOFF( uint16 MAGIC$1 )
 				J$4 = 0ll;
 				label$143:;
 				{
-					if( (int64)*(uint8*)((uint8*)SH$1 + J$4) == (int64)*(uint8*)((uint8*)FBCTINFNAME$ + J$4) ) goto label$145;
+					if( (int64)*(uint8*)((uint8*)SH$1 + J$4) == (int64)*(uint8*)((uint8*)FBCTINFNAME$ + J$4)) goto label$145;
 					{
 						goto label$137;
 					}
@@ -1099,10 +1100,10 @@ static void HLOADFBCTINFFROMCOFF( uint16 MAGIC$1 )
 				label$141:;
 				J$4 = J$4 + 1ll;
 				label$140:;
-				if( J$4 <= 7ll ) goto label$143;
+				if( J$4 <= 7ll) goto label$143;
 				label$142:;
 			}
-			if( ((uint64)*(uint32*)((uint8*)SH$1 + 20ll) + (uint64)(int64)*(uint32*)((uint8*)SH$1 + 16ll)) <= *(uint64*)((uint8*)&OBJDATA$ + 8ll) ) goto label$147;
+			if( ((uint64)*(uint32*)((uint8*)SH$1 + 20ll) + (uint64)(int64)*(uint32*)((uint8*)SH$1 + 16ll)) <= *(uint64*)((uint8*)&OBJDATA$ + 8ll)) goto label$147;
 			{
 				goto label$127;
 			}
@@ -1115,7 +1116,7 @@ static void HLOADFBCTINFFROMCOFF( uint16 MAGIC$1 )
 		label$137:;
 		I$2 = I$2 + 1ll;
 		label$136:;
-		if( I$2 <= TMP$27$2 ) goto label$139;
+		if( I$2 <= TMP$26$2) goto label$139;
 		label$138:;
 	}
 	label$127:;
@@ -1131,7 +1132,7 @@ static int64 HPROCESSMACHOSEGMENT32( struct $14LOAD_COMMAND_H* LOADCMD$1 )
 	struct $10SECTION_32* SECTIONP$1;
 	__builtin_memset( &SECTIONP$1, 0, 8ll );
 	SEGMENTP$1 = (struct $18SEGMENT_COMMAND_32*)LOADCMD$1;
-	if( (uint64)(struct $18SEGMENT_COMMAND_32*)((uint8*)SEGMENTP$1 + 56ll) <= (uint64)(uint8*)(*(uint8**)&OBJDATA$ + *(int64*)((uint8*)&OBJDATA$ + 8ll)) ) goto label$151;
+	if( (uint64)(struct $18SEGMENT_COMMAND_32*)((uint8*)SEGMENTP$1 + 56ll) <= (uint64)(uint8*)(*(uint8**)&OBJDATA$ + *(int64*)((uint8*)&OBJDATA$ + 8ll))) goto label$151;
 	{
 		fb$result$1 = 1ll;
 		goto label$149;
@@ -1142,12 +1143,12 @@ static int64 HPROCESSMACHOSEGMENT32( struct $14LOAD_COMMAND_H* LOADCMD$1 )
 	{
 		int64 SECTIONIDX$2;
 		SECTIONIDX$2 = 0ll;
-		int64 TMP$28$2;
-		TMP$28$2 = (int64)*(uint32*)((uint8*)SEGMENTP$1 + 48ll) + -1ll;
+		int64 TMP$27$2;
+		TMP$27$2 = (int64)*(uint32*)((uint8*)SEGMENTP$1 + 48ll) + -1ll;
 		goto label$152;
 		label$155:;
 		{
-			if( (uint64)(struct $10SECTION_32*)((uint8*)SECTIONP$1 + 68ll) <= (uint64)(uint8*)(*(uint8**)&OBJDATA$ + *(int64*)((uint8*)&OBJDATA$ + 8ll)) ) goto label$157;
+			if( (uint64)(struct $10SECTION_32*)((uint8*)SECTIONP$1 + 68ll) <= (uint64)(uint8*)(*(uint8**)&OBJDATA$ + *(int64*)((uint8*)&OBJDATA$ + 8ll))) goto label$157;
 			{
 				fb$result$1 = 1ll;
 				goto label$149;
@@ -1155,9 +1156,9 @@ static int64 HPROCESSMACHOSEGMENT32( struct $14LOAD_COMMAND_H* LOADCMD$1 )
 			label$157:;
 			label$156:;
 			int32 vr$13 = fb_StrCompare( (void*)SECTIONP$1, 16ll, (void*)"fbctinf", 8ll );
-			if( (int64)vr$13 != 0ll ) goto label$159;
+			if( (int64)vr$13 != 0ll) goto label$159;
 			{
-				if( ((int64)*(uint32*)((uint8*)SECTIONP$1 + 40ll) + (int64)*(uint32*)((uint8*)SECTIONP$1 + 36ll)) <= *(int64*)((uint8*)&OBJDATA$ + 8ll) ) goto label$161;
+				if( ((int64)*(uint32*)((uint8*)SECTIONP$1 + 40ll) + (int64)*(uint32*)((uint8*)SECTIONP$1 + 36ll)) <= *(int64*)((uint8*)&OBJDATA$ + 8ll)) goto label$161;
 				{
 					fb$result$1 = 1ll;
 					goto label$149;
@@ -1175,7 +1176,7 @@ static int64 HPROCESSMACHOSEGMENT32( struct $14LOAD_COMMAND_H* LOADCMD$1 )
 		label$153:;
 		SECTIONIDX$2 = SECTIONIDX$2 + 1ll;
 		label$152:;
-		if( SECTIONIDX$2 <= TMP$28$2 ) goto label$155;
+		if( SECTIONIDX$2 <= TMP$27$2) goto label$155;
 		label$154:;
 	}
 	label$149:;
@@ -1192,7 +1193,7 @@ static int64 HPROCESSMACHOSEGMENT64( struct $14LOAD_COMMAND_H* LOADCMD$1 )
 	struct $10SECTION_64* SECTIONP$1;
 	__builtin_memset( &SECTIONP$1, 0, 8ll );
 	SEGMENTP$1 = (struct $18SEGMENT_COMMAND_64*)LOADCMD$1;
-	if( (uint64)(struct $18SEGMENT_COMMAND_64*)((uint8*)SEGMENTP$1 + 72ll) <= (uint64)(uint8*)(*(uint8**)&OBJDATA$ + *(int64*)((uint8*)&OBJDATA$ + 8ll)) ) goto label$165;
+	if( (uint64)(struct $18SEGMENT_COMMAND_64*)((uint8*)SEGMENTP$1 + 72ll) <= (uint64)(uint8*)(*(uint8**)&OBJDATA$ + *(int64*)((uint8*)&OBJDATA$ + 8ll))) goto label$165;
 	{
 		fb$result$1 = 1ll;
 		goto label$163;
@@ -1203,12 +1204,12 @@ static int64 HPROCESSMACHOSEGMENT64( struct $14LOAD_COMMAND_H* LOADCMD$1 )
 	{
 		int64 SECTIONIDX$2;
 		SECTIONIDX$2 = 0ll;
-		int64 TMP$29$2;
-		TMP$29$2 = (int64)*(uint32*)((uint8*)SEGMENTP$1 + 64ll) + -1ll;
+		int64 TMP$28$2;
+		TMP$28$2 = (int64)*(uint32*)((uint8*)SEGMENTP$1 + 64ll) + -1ll;
 		goto label$166;
 		label$169:;
 		{
-			if( (uint64)(struct $10SECTION_64*)((uint8*)SECTIONP$1 + 80ll) <= (uint64)(uint8*)(*(uint8**)&OBJDATA$ + *(int64*)((uint8*)&OBJDATA$ + 8ll)) ) goto label$171;
+			if( (uint64)(struct $10SECTION_64*)((uint8*)SECTIONP$1 + 80ll) <= (uint64)(uint8*)(*(uint8**)&OBJDATA$ + *(int64*)((uint8*)&OBJDATA$ + 8ll))) goto label$171;
 			{
 				fb$result$1 = 1ll;
 				goto label$163;
@@ -1216,9 +1217,9 @@ static int64 HPROCESSMACHOSEGMENT64( struct $14LOAD_COMMAND_H* LOADCMD$1 )
 			label$171:;
 			label$170:;
 			int32 vr$13 = fb_StrCompare( (void*)SECTIONP$1, 16ll, (void*)"fbctinf", 8ll );
-			if( (int64)vr$13 != 0ll ) goto label$173;
+			if( (int64)vr$13 != 0ll) goto label$173;
 			{
-				if( ((uint64)(int64)*(uint32*)((uint8*)SECTIONP$1 + 48ll) + *(uint64*)((uint8*)SECTIONP$1 + 40ll)) <= *(uint64*)((uint8*)&OBJDATA$ + 8ll) ) goto label$175;
+				if( ((uint64)(int64)*(uint32*)((uint8*)SECTIONP$1 + 48ll) + *(uint64*)((uint8*)SECTIONP$1 + 40ll)) <= *(uint64*)((uint8*)&OBJDATA$ + 8ll)) goto label$175;
 				{
 					fb$result$1 = 1ll;
 					goto label$163;
@@ -1236,7 +1237,7 @@ static int64 HPROCESSMACHOSEGMENT64( struct $14LOAD_COMMAND_H* LOADCMD$1 )
 		label$167:;
 		SECTIONIDX$2 = SECTIONIDX$2 + 1ll;
 		label$166:;
-		if( SECTIONIDX$2 <= TMP$29$2 ) goto label$169;
+		if( SECTIONIDX$2 <= TMP$28$2) goto label$169;
 		label$168:;
 	}
 	label$163:;
@@ -1251,27 +1252,27 @@ static void HLOADFBCTINFFROMMACHO( void )
 	uint8* DATAPTR$1;
 	*(uint8**)&FBCTINF$ = (uint8*)0ull;
 	*(int64*)((uint8*)&FBCTINF$ + 8ll) = 0ll;
-	if( *(int64*)((uint8*)&OBJDATA$ + 8ll) >= 28ll ) goto label$179;
+	if( *(int64*)((uint8*)&OBJDATA$ + 8ll) >= 28ll) goto label$179;
 	{
 		goto label$177;
 	}
 	label$179:;
 	label$178:;
 	HEADER$1 = *(struct $6MACH_H**)&OBJDATA$;
-	if( ((int64)-((int64)*(uint32*)HEADER$1 != 4277009102ll) & (int64)-((int64)*(uint32*)HEADER$1 != 4277009103ll)) == 0ll ) goto label$181;
+	if( ((int64)-((int64)*(uint32*)HEADER$1 != 4277009102ll) & (int64)-((int64)*(uint32*)HEADER$1 != 4277009103ll)) == 0ll) goto label$181;
 	{
 		goto label$177;
 	}
 	label$181:;
 	label$180:;
 	{
-		int64 TMP$30$2;
+		int64 TMP$29$2;
 		int64 vr$7 = FBGETCPUFAMILY(  );
-		TMP$30$2 = vr$7;
-		if( TMP$30$2 != 0ll ) goto label$183;
+		TMP$29$2 = vr$7;
+		if( TMP$29$2 != 0ll) goto label$183;
 		label$184:;
 		{
-			if( (int64)*(uint32*)((uint8*)HEADER$1 + 4ll) == 7ll ) goto label$186;
+			if( (int64)*(uint32*)((uint8*)HEADER$1 + 4ll) == 7ll) goto label$186;
 			{
 				goto label$177;
 			}
@@ -1280,10 +1281,10 @@ static void HLOADFBCTINFFROMMACHO( void )
 		}
 		goto label$182;
 		label$183:;
-		if( TMP$30$2 != 1ll ) goto label$187;
+		if( TMP$29$2 != 1ll) goto label$187;
 		label$188:;
 		{
-			if( (int64)*(uint32*)((uint8*)HEADER$1 + 4ll) == 16777223ll ) goto label$190;
+			if( (int64)*(uint32*)((uint8*)HEADER$1 + 4ll) == 16777223ll) goto label$190;
 			{
 				goto label$177;
 			}
@@ -1292,10 +1293,10 @@ static void HLOADFBCTINFFROMMACHO( void )
 		}
 		goto label$182;
 		label$187:;
-		if( TMP$30$2 != 2ll ) goto label$191;
+		if( TMP$29$2 != 2ll) goto label$191;
 		label$192:;
 		{
-			if( (int64)*(uint32*)((uint8*)HEADER$1 + 4ll) == 12ll ) goto label$194;
+			if( (int64)*(uint32*)((uint8*)HEADER$1 + 4ll) == 12ll) goto label$194;
 			{
 				goto label$177;
 			}
@@ -1304,10 +1305,10 @@ static void HLOADFBCTINFFROMMACHO( void )
 		}
 		goto label$182;
 		label$191:;
-		if( TMP$30$2 != 3ll ) goto label$195;
+		if( TMP$29$2 != 3ll) goto label$195;
 		label$196:;
 		{
-			if( (int64)*(uint32*)((uint8*)HEADER$1 + 4ll) == 16777228ll ) goto label$198;
+			if( (int64)*(uint32*)((uint8*)HEADER$1 + 4ll) == 16777228ll) goto label$198;
 			{
 				goto label$177;
 			}
@@ -1317,14 +1318,14 @@ static void HLOADFBCTINFFROMMACHO( void )
 		label$195:;
 		label$182:;
 	}
-	if( (int64)*(uint32*)((uint8*)HEADER$1 + 12ll) == 1ll ) goto label$200;
+	if( (int64)*(uint32*)((uint8*)HEADER$1 + 12ll) == 1ll) goto label$200;
 	{
 		goto label$177;
 	}
 	label$200:;
 	label$199:;
 	DATAPTR$1 = (uint8*)(*(uint8**)&OBJDATA$ + 28ll);
-	if( (int64)*(uint32*)HEADER$1 != 4277009103ll ) goto label$202;
+	if( (int64)*(uint32*)HEADER$1 != 4277009103ll) goto label$202;
 	{
 		DATAPTR$1 = (uint8*)(DATAPTR$1 + 4ll);
 	}
@@ -1333,22 +1334,22 @@ static void HLOADFBCTINFFROMMACHO( void )
 	{
 		int64 CMDIDX$2;
 		CMDIDX$2 = 0ll;
-		int64 TMP$31$2;
-		TMP$31$2 = (int64)*(uint32*)((uint8*)HEADER$1 + 16ll) + -1ll;
+		int64 TMP$30$2;
+		TMP$30$2 = (int64)*(uint32*)((uint8*)HEADER$1 + 16ll) + -1ll;
 		goto label$203;
 		label$206:;
 		{
 			LOADCMD$1 = (struct $14LOAD_COMMAND_H*)DATAPTR$1;
-			if( (uint64)(struct $14LOAD_COMMAND_H*)((uint8*)LOADCMD$1 + 8ll) <= (uint64)(uint8*)(*(uint8**)&OBJDATA$ + *(int64*)((uint8*)&OBJDATA$ + 8ll)) ) goto label$208;
+			if( (uint64)(struct $14LOAD_COMMAND_H*)((uint8*)LOADCMD$1 + 8ll) <= (uint64)(uint8*)(*(uint8**)&OBJDATA$ + *(int64*)((uint8*)&OBJDATA$ + 8ll))) goto label$208;
 			{
 				goto label$177;
 			}
 			label$208:;
 			label$207:;
-			if( (int64)*(uint32*)LOADCMD$1 != 1ll ) goto label$210;
+			if( (int64)*(uint32*)LOADCMD$1 != 1ll) goto label$210;
 			{
 				int64 vr$29 = HPROCESSMACHOSEGMENT32( LOADCMD$1 );
-				if( vr$29 == 0ll ) goto label$212;
+				if( vr$29 == 0ll) goto label$212;
 				{
 					goto label$177;
 				}
@@ -1357,10 +1358,10 @@ static void HLOADFBCTINFFROMMACHO( void )
 			}
 			goto label$209;
 			label$210:;
-			if( (int64)*(uint32*)LOADCMD$1 != 25ll ) goto label$213;
+			if( (int64)*(uint32*)LOADCMD$1 != 25ll) goto label$213;
 			{
 				int64 vr$32 = HPROCESSMACHOSEGMENT64( LOADCMD$1 );
-				if( vr$32 == 0ll ) goto label$215;
+				if( vr$32 == 0ll) goto label$215;
 				{
 					goto label$177;
 				}
@@ -1374,7 +1375,7 @@ static void HLOADFBCTINFFROMMACHO( void )
 		label$204:;
 		CMDIDX$2 = CMDIDX$2 + 1ll;
 		label$203:;
-		if( CMDIDX$2 <= TMP$31$2 ) goto label$206;
+		if( CMDIDX$2 <= TMP$30$2) goto label$206;
 		label$205:;
 	}
 	label$177:;
@@ -1390,9 +1391,9 @@ static char* HLOADARSTRING( uint8* P$1, int64 LENGTH$1 )
 	int64 I$1;
 	LAST$1 = LENGTH$1 + -1ll;
 	label$218:;
-	if( LAST$1 < 0ll ) goto label$219;
+	if( LAST$1 < 0ll) goto label$219;
 	{
-		if( (uint64)(int64)*(uint8*)(P$1 + LAST$1) == 32ull ) goto label$221;
+		if( (uint64)(int64)*(uint8*)(P$1 + LAST$1) == 32ull) goto label$221;
 		{
 			goto label$219;
 		}
@@ -1404,7 +1405,7 @@ static char* HLOADARSTRING( uint8* P$1, int64 LENGTH$1 )
 	label$219:;
 	I$1 = 0ll;
 	label$222:;
-	if( I$1 > LAST$1 ) goto label$223;
+	if( I$1 > LAST$1) goto label$223;
 	{
 		*(uint8*)((uint8*)S$1 + I$1) = *(uint8*)(P$1 + I$1);
 		I$1 = I$1 + 1ll;
@@ -1427,7 +1428,7 @@ static void HLOADOBJFROMAR( void )
 	int64 FILESIZE$1;
 	*(uint8**)&OBJDATA$ = (uint8*)0ull;
 	*(int64*)((uint8*)&OBJDATA$ + 8ll) = 0ll;
-	if( *(int64*)((uint8*)&ARDATA$ + 8ll) >= 8ll ) goto label$227;
+	if( *(int64*)((uint8*)&ARDATA$ + 8ll) >= 8ll) goto label$227;
 	{
 		fb_StrDelete( (FBSTRING*)&FILENAME$1 );
 		goto label$225;
@@ -1438,7 +1439,7 @@ static void HLOADOBJFROMAR( void )
 		I$1 = 0ll;
 		label$231:;
 		{
-			if( (int64)*(uint8*)(*(uint8**)&ARDATA$ + I$1) == (int64)*(uint8*)((int64)(uint8*)ARMAGIC$ + I$1) ) goto label$233;
+			if( (int64)*(uint8*)(*(uint8**)&ARDATA$ + I$1) == (int64)*(uint8*)((int64)(uint8*)ARMAGIC$ + I$1)) goto label$233;
 			{
 				fb_StrDelete( (FBSTRING*)&FILENAME$1 );
 				goto label$225;
@@ -1449,13 +1450,13 @@ static void HLOADOBJFROMAR( void )
 		label$229:;
 		I$1 = I$1 + 1ll;
 		label$228:;
-		if( I$1 <= 7ll ) goto label$231;
+		if( I$1 <= 7ll) goto label$231;
 		label$230:;
 	}
 	I$1 = 8ll;
 	label$234:;
 	{
-		if( (I$1 + 60ll) <= *(int64*)((uint8*)&ARDATA$ + 8ll) ) goto label$238;
+		if( (I$1 + 60ll) <= *(int64*)((uint8*)&ARDATA$ + 8ll)) goto label$238;
 		{
 			fb_StrDelete( (FBSTRING*)&FILENAME$1 );
 			goto label$225;
@@ -1469,13 +1470,13 @@ static void HLOADOBJFROMAR( void )
 		FBSTRING* vr$17 = fb_StrAllocTempDescZ( (char*)vr$16 );
 		double vr$18 = fb_VAL( (FBSTRING*)vr$17 );
 		FILESIZE$1 = fb_D2L( vr$18 );
-		if( FILESIZE$1 >= 0ll ) goto label$240;
+		if( FILESIZE$1 >= 0ll) goto label$240;
 		{
 			FILESIZE$1 = 0ll;
 		}
 		goto label$239;
 		label$240:;
-		if( ((int64)-(FILESIZE$1 > *(int64*)((uint8*)&ARDATA$ + 8ll)) | (int64)-(FILESIZE$1 > (*(int64*)((uint8*)&ARDATA$ + 8ll) - I$1))) == 0ll ) goto label$241;
+		if( ((int64)-(FILESIZE$1 > *(int64*)((uint8*)&ARDATA$ + 8ll)) | (int64)-(FILESIZE$1 > (*(int64*)((uint8*)&ARDATA$ + 8ll) - I$1))) == 0ll) goto label$241;
 		{
 			FILESIZE$1 = *(int64*)((uint8*)&ARDATA$ + 8ll) - I$1;
 		}
@@ -1484,13 +1485,13 @@ static void HLOADOBJFROMAR( void )
 		I$1 = I$1 + 60ll;
 		{
 			int32 vr$27 = fb_StrCompare( (void*)&FILENAME$1, -1ll, (void*)"__fb_ct.inf", 12ll );
-			if( (int64)vr$27 == 0ll ) goto label$244;
+			if( (int64)vr$27 == 0ll) goto label$244;
 			label$245:;
 			int32 vr$30 = fb_StrCompare( (void*)&FILENAME$1, -1ll, (void*)"__fb_ct.inf/", 13ll );
-			if( (int64)vr$30 != 0ll ) goto label$243;
+			if( (int64)vr$30 != 0ll) goto label$243;
 			label$244:;
 			{
-				if( FILESIZE$1 <= 0ll ) goto label$247;
+				if( FILESIZE$1 <= 0ll) goto label$247;
 				{
 					*(uint8**)&OBJDATA$ = (uint8*)((uint8*)*(void**)&ARDATA$ + I$1);
 					*(int64*)((uint8*)&OBJDATA$ + 8ll) = FILESIZE$1;
@@ -1502,13 +1503,13 @@ static void HLOADOBJFROMAR( void )
 			goto label$242;
 			label$243:;
 			int32 vr$34 = fb_StrCompare( (void*)&FILENAME$1, -1ll, (void*)"/", 2ll );
-			if( (int64)vr$34 == 0ll ) goto label$249;
+			if( (int64)vr$34 == 0ll) goto label$249;
 			label$250:;
 			int32 vr$37 = fb_StrCompare( (void*)&FILENAME$1, -1ll, (void*)"//", 3ll );
-			if( (int64)vr$37 == 0ll ) goto label$249;
+			if( (int64)vr$37 == 0ll) goto label$249;
 			label$251:;
 			int32 vr$40 = fb_StrCompare( (void*)&FILENAME$1, -1ll, (void*)"__.SYMDEF", 10ll );
-			if( (int64)vr$40 != 0ll ) goto label$248;
+			if( (int64)vr$40 != 0ll) goto label$248;
 			label$249:;
 			{
 			}
@@ -1541,7 +1542,7 @@ static void HLOADFILE( FBSTRING* FILENAME$1, struct $10DATABUFFER* BUF$1 )
 	int32 vr$2 = fb_FileFree(  );
 	F$1 = (int64)vr$2;
 	int32 vr$5 = fb_FileOpen( (FBSTRING*)FILENAME$1, 0u, 1u, 0u, (int32)F$1, 0 );
-	if( (int64)vr$5 == 0ll ) goto label$256;
+	if( (int64)vr$5 == 0ll) goto label$256;
 	{
 		goto label$254;
 	}
@@ -1549,12 +1550,12 @@ static void HLOADFILE( FBSTRING* FILENAME$1, struct $10DATABUFFER* BUF$1 )
 	label$255:;
 	int64 vr$8 = fb_FileSize( (int32)F$1 );
 	SIZE$1 = vr$8;
-	if( SIZE$1 <= 0ll ) goto label$258;
+	if( SIZE$1 <= 0ll) goto label$258;
 	{
 		void* vr$9 = malloc( (uint64)SIZE$1 );
 		P$1 = (uint8*)vr$9;
 		int32 vr$12 = fb_FileGetLargeIOB( (int32)F$1, 0ll, (void*)P$1, (uint64)SIZE$1, (uint64*)&SIZE$1 );
-		if( (int64)vr$12 == 0ll ) goto label$260;
+		if( (int64)vr$12 == 0ll) goto label$260;
 		{
 			goto label$254;
 		}
@@ -1565,179 +1566,183 @@ static void HLOADFILE( FBSTRING* FILENAME$1, struct $10DATABUFFER* BUF$1 )
 	}
 	label$258:;
 	label$257:;
-	fb_FileClose( (int32)F$1 );
+	int32 vr$17 = fb_FileClose( (int32)F$1 );
+	if( (int64)vr$17 == 0ll) goto label$261;
+	void* vr$19 = fb_ErrorThrowAt( 860, (char*)"objinfo.bas", (void*)0ull, (void*)0ull );
+	goto *vr$19;
+	label$261:;
 	label$254:;
 }
 
 static void HLOADFBCTINFFROMOBJ( void )
 {
-	label$261:;
+	label$262:;
 	int64 vr$0 = FBTARGETSUPPORTSCOFF(  );
-	if( vr$0 == 0ll ) goto label$264;
+	if( vr$0 == 0ll) goto label$265;
 	{
 		{
 			int64 TMP$45$3;
 			int64 vr$1 = FBGETCPUFAMILY(  );
 			TMP$45$3 = vr$1;
-			if( TMP$45$3 != 1ll ) goto label$266;
-			label$267:;
+			if( TMP$45$3 != 1ll) goto label$267;
+			label$268:;
 			{
 				HLOADFBCTINFFROMCOFF( (uint16)34404u );
 			}
-			goto label$265;
-			label$266:;
-			if( TMP$45$3 != 0ll ) goto label$268;
-			label$269:;
+			goto label$266;
+			label$267:;
+			if( TMP$45$3 != 0ll) goto label$269;
+			label$270:;
 			{
 				HLOADFBCTINFFROMCOFF( (uint16)332u );
 			}
-			label$268:;
-			label$265:;
+			label$269:;
+			label$266:;
 		}
 	}
-	goto label$263;
-	label$264:;
+	goto label$264;
+	label$265:;
 	int64 vr$2 = FBTARGETSUPPORTSELF(  );
-	if( vr$2 == 0ll ) goto label$270;
+	if( vr$2 == 0ll) goto label$271;
 	{
 		{
 			int64 TMP$46$3;
 			int64 vr$3 = FBGETCPUFAMILY(  );
 			TMP$46$3 = vr$3;
-			if( TMP$46$3 != 1ll ) goto label$272;
-			label$273:;
+			if( TMP$46$3 != 1ll) goto label$273;
+			label$274:;
 			{
 				HLOADFBCTINFFROMELF64_H( 62ll );
 			}
-			goto label$271;
-			label$272:;
-			if( TMP$46$3 != 0ll ) goto label$274;
-			label$275:;
+			goto label$272;
+			label$273:;
+			if( TMP$46$3 != 0ll) goto label$275;
+			label$276:;
 			{
 				HLOADFBCTINFFROMELF32_H( 3ll );
 			}
-			goto label$271;
-			label$274:;
-			if( TMP$46$3 != 3ll ) goto label$276;
-			label$277:;
+			goto label$272;
+			label$275:;
+			if( TMP$46$3 != 3ll) goto label$277;
+			label$278:;
 			{
 				HLOADFBCTINFFROMELF64_H( 183ll );
 			}
-			goto label$271;
-			label$276:;
-			if( TMP$46$3 != 2ll ) goto label$278;
-			label$279:;
+			goto label$272;
+			label$277:;
+			if( TMP$46$3 != 2ll) goto label$279;
+			label$280:;
 			{
 				HLOADFBCTINFFROMELF32_H( 40ll );
 			}
-			goto label$271;
-			label$278:;
-			if( TMP$46$3 == 5ll ) goto label$281;
+			goto label$272;
+			label$279:;
+			if( TMP$46$3 == 5ll) goto label$282;
+			label$283:;
+			if( TMP$46$3 != 6ll) goto label$281;
 			label$282:;
-			if( TMP$46$3 != 6ll ) goto label$280;
-			label$281:;
 			{
 				HLOADFBCTINFFROMELF64_H( 21ll );
 			}
-			goto label$271;
-			label$280:;
-			if( TMP$46$3 != 4ll ) goto label$283;
-			label$284:;
+			goto label$272;
+			label$281:;
+			if( TMP$46$3 != 4ll) goto label$284;
+			label$285:;
 			{
 				HLOADFBCTINFFROMELF32_H( 20ll );
 			}
-			label$283:;
-			label$271:;
+			label$284:;
+			label$272:;
 		}
 	}
-	goto label$263;
-	label$270:;
+	goto label$264;
+	label$271:;
 	int64 vr$4 = FBTARGETSUPPORTSMACHO(  );
-	if( vr$4 == 0ll ) goto label$285;
+	if( vr$4 == 0ll) goto label$286;
 	{
 		HLOADFBCTINFFROMMACHO(  );
 	}
-	label$285:;
-	label$263:;
-	if( *(int64*)((uint8*)&FBCTINF$ + 8ll) != 0ll ) goto label$287;
-	{
-		goto label$262;
-	}
-	label$287:;
 	label$286:;
-	if( (int64)*(*(uint8**)&FBCTINF$) != 16ll ) goto label$289;
+	label$264:;
+	if( *(int64*)((uint8*)&FBCTINF$ + 8ll) != 0ll) goto label$288;
+	{
+		goto label$263;
+	}
+	label$288:;
+	label$287:;
+	if( (int64)*(*(uint8**)&FBCTINF$) != 16ll) goto label$290;
 	{
 		*(int64*)((uint8*)&PARSER$ + 32ll) = -1ll;
 		*(int64*)&PARSER$ = 1ll;
 	}
-	goto label$288;
-	label$289:;
+	goto label$289;
+	label$290:;
 	{
 		*(int64*)((uint8*)&PARSER$ + 32ll) = 0ll;
 	}
-	label$288:;
-	label$262:;
+	label$289:;
+	label$263:;
 }
 
 static void HRESETBUFFERS( void )
 {
-	label$290:;
+	label$291:;
 	*(uint8**)&ARDATA$ = (uint8*)0ull;
 	*(int64*)((uint8*)&ARDATA$ + 8ll) = 0ll;
 	*(uint8**)&OBJDATA$ = (uint8*)0ull;
 	*(int64*)((uint8*)&OBJDATA$ + 8ll) = 0ll;
 	*(uint8**)&FBCTINF$ = (uint8*)0ull;
 	*(int64*)((uint8*)&FBCTINF$ + 8ll) = 0ll;
-	label$291:;
+	label$292:;
 }
 
 static void OBJINFOINIT( FBSTRING* FILENAME$1 )
 {
-	label$292:;
+	label$293:;
 	HRESETBUFFERS(  );
 	*(int64*)&PARSER$ = 0ll;
 	fb_StrAssign( (void*)((uint8*)&PARSER$ + 8ll), -1ll, (void*)FILENAME$1, -1ll, 0 );
 	*(int64*)((uint8*)&PARSER$ + 32ll) = 0ll;
 	*(int64*)((uint8*)&PARSER$ + 40ll) = -1ll;
-	label$293:;
+	label$294:;
 }
 
 static char* HGETNEXTSTRING( void )
 {
 	char* fb$result$1;
 	__builtin_memset( &fb$result$1, 0, 8ll );
-	label$312:;
+	label$313:;
 	int64 BEGIN$1;
 	fb$result$1 = (char*)"";
 	BEGIN$1 = *(int64*)&PARSER$;
-	label$314:;
-	if( *(int64*)&PARSER$ >= *(int64*)((uint8*)&FBCTINF$ + 8ll) ) goto label$315;
+	label$315:;
+	if( *(int64*)&PARSER$ >= *(int64*)((uint8*)&FBCTINF$ + 8ll)) goto label$316;
 	{
 		*(int64*)&PARSER$ = *(int64*)&PARSER$ + 1ll;
-		if( (int64)*(uint8*)((uint8*)(*(uint8**)&FBCTINF$ + *(int64*)&PARSER$) + -1ll) != 0ll ) goto label$317;
+		if( (int64)*(uint8*)((uint8*)(*(uint8**)&FBCTINF$ + *(int64*)&PARSER$) + -1ll) != 0ll) goto label$318;
 		{
 			fb$result$1 = (char*)(*(uint8**)&FBCTINF$ + BEGIN$1);
-			goto label$313;
+			goto label$314;
 		}
+		label$318:;
 		label$317:;
-		label$316:;
 	}
-	goto label$314;
-	label$315:;
-	label$313:;
+	goto label$315;
+	label$316:;
+	label$314:;
 	return fb$result$1;
 }
 
 __attribute__(( constructor )) static void _GLOBAL__I( void )
 {
-	label$366:;
-	_ZN16OBJINFOPARSERCTXC1Ev( &PARSER$ );
 	label$367:;
+	_ZN16OBJINFOPARSERCTXC1Ev( &PARSER$ );
+	label$368:;
 }
 
 __attribute__(( destructor )) static void _GLOBAL__D( void )
 {
-	label$369:;
-	_ZN16OBJINFOPARSERCTXD1Ev( &PARSER$ );
 	label$370:;
+	_ZN16OBJINFOPARSERCTXD1Ev( &PARSER$ );
+	label$371:;
 }

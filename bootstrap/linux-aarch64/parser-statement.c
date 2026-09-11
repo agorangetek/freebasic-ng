@@ -63,7 +63,7 @@ struct $8FBARRAY1I10AST_OPINFOE {
 	struct $16__FB_ARRAYDIMTB$ DIMTB[1];
 };
 __FB_STATIC_ASSERT( sizeof( struct $8FBARRAY1I10AST_OPINFOE ) == 72 );
-static struct $8FBARRAY1I10AST_OPINFOE tmp$83$;
+static struct $8FBARRAY1I10AST_OPINFOE tmp$82$;
 typedef int64 $12FB_DATACLASS;
 typedef int64 $11FB_DATATYPE;
 struct $13SYMB_DATATYPE {
@@ -86,7 +86,7 @@ struct $8FBARRAY1I13SYMB_DATATYPEE {
 	struct $16__FB_ARRAYDIMTB$ DIMTB[1];
 };
 __FB_STATIC_ASSERT( sizeof( struct $8FBARRAY1I13SYMB_DATATYPEE ) == 72 );
-static struct $8FBARRAY1I13SYMB_DATATYPEE tmp$84$;
+static struct $8FBARRAY1I13SYMB_DATATYPEE tmp$83$;
 struct $8FBARRAY2IlE {
 	int64* DATA;
 	int64* PTR;
@@ -97,7 +97,7 @@ struct $8FBARRAY2IlE {
 	struct $16__FB_ARRAYDIMTB$ DIMTB[2];
 };
 __FB_STATIC_ASSERT( sizeof( struct $8FBARRAY2IlE ) == 96 );
-static struct $8FBARRAY2IlE tmp$85$;
+static struct $8FBARRAY2IlE tmp$84$;
 struct $8TSTACKTB;
 struct $10TSTACKNODE;
 struct $10TSTACKNODE {
@@ -284,9 +284,9 @@ struct $8FBS_ENUM {
 __FB_STATIC_ASSERT( sizeof( struct $8FBS_ENUM ) == 96 );
 typedef int64 $11FB_FUNCMODE;
 typedef int64 $21FB_PROC_RETURN_METHOD;
-typedef int64 (*tmp$35)( struct $8FBSYMBOL* );
+typedef int64 (*tmp$34)( struct $8FBSYMBOL* );
 struct $10FB_PROCRTL {
-	tmp$35 CALLBACK;
+	tmp$34 CALLBACK;
 };
 __FB_STATIC_ASSERT( sizeof( struct $10FB_PROCRTL ) == 8 );
 struct $10FB_PROCOVL {
@@ -415,7 +415,7 @@ struct $9FB_DEFTOK {
 };
 __FB_STATIC_ASSERT( sizeof( struct $9FB_DEFTOK ) == 32 );
 typedef int64 $15FB_DEFINE_FLAGS;
-typedef FBSTRING* (*tmp$29)( void );
+typedef FBSTRING* (*tmp$28)( void );
 struct $8DZSTRING {
 	char* DATA;
 	int64 LEN;
@@ -440,8 +440,8 @@ struct $11LEXPP_ARGTB {
 	int64 COUNT;
 };
 __FB_STATIC_ASSERT( sizeof( struct $11LEXPP_ARGTB ) == 776 );
-typedef FBSTRING* (*tmp$30)( struct $11LEXPP_ARGTB*, int64* );
-typedef uint32* (*tmp$31)( struct $11LEXPP_ARGTB*, int64* );
+typedef FBSTRING* (*tmp$29)( struct $11LEXPP_ARGTB*, int64* );
+typedef uint32* (*tmp$30)( struct $11LEXPP_ARGTB*, int64* );
 struct $10FBS_DEFINE {
 	int64 PARAMS;
 	struct $11FB_DEFPARAM* PARAMHEAD;
@@ -453,11 +453,11 @@ struct $10FBS_DEFINE {
 	int64 ISARGLESS;
 	$15FB_DEFINE_FLAGS FLAGS;
 	union {
-		tmp$29 DPROCZ;
-		tmp$30 MPROCZ;
+		tmp$28 DPROCZ;
+		tmp$29 MPROCZ;
 	};
 	union {
-		tmp$31 MPROCW;
+		tmp$30 MPROCW;
 	};
 };
 __FB_STATIC_ASSERT( sizeof( struct $10FBS_DEFINE ) == 56 );
@@ -907,7 +907,7 @@ void CSTATEMENT( void )
 {
 	label$10:;
 	int64 vr$0 = LEXGETTOKEN( 0ll );
-	if( vr$0 != 258ll ) goto label$13;
+	if( vr$0 != 258ll) goto label$13;
 	{
 		*(int64*)((uint8*)&PARSER$ + 56ll) = *(int64*)((uint8*)&PARSER$ + 56ll) + 1ll;
 		LEXSKIPTOKEN( 0ll );
@@ -917,19 +917,19 @@ void CSTATEMENT( void )
 	label$14:;
 	{
 		int64 vr$2 = CDECLARATION(  );
-		if( vr$2 != 0ll ) goto label$18;
+		if( vr$2 != 0ll) goto label$18;
 		{
 			int64 vr$3 = CCOMPOUNDSTMT(  );
-			if( vr$3 != 0ll ) goto label$20;
+			if( vr$3 != 0ll) goto label$20;
 			{
 				int64 vr$4 = CPROCCALLORASSIGN(  );
-				if( vr$4 != 0ll ) goto label$22;
+				if( vr$4 != 0ll) goto label$22;
 				{
 					int64 vr$5 = CQUIRKSTMT( -1ll );
-					if( vr$5 != 0ll ) goto label$24;
+					if( vr$5 != 0ll) goto label$24;
 					{
 						int64 vr$6 = CASMBLOCK(  );
-						if( vr$6 != 0ll ) goto label$26;
+						if( vr$6 != 0ll) goto label$26;
 						{
 							CASSIGNMENTORPTRCALL(  );
 						}
@@ -948,7 +948,7 @@ void CSTATEMENT( void )
 		label$18:;
 		label$17:;
 		int64 vr$7 = LEXGETTOKEN( 0ll );
-		if( vr$7 == 258ll ) goto label$28;
+		if( vr$7 == 258ll) goto label$28;
 		{
 			goto label$15;
 		}
@@ -972,12 +972,12 @@ int64 CSTMTSEPARATOR( $8LEXCHECK LEXFLAGS$1 )
 	label$31:;
 	{
 		{
-			int64 TMP$96$3;
+			int64 TMP$95$3;
 			int64 vr$1 = LEXGETTOKEN( LEXFLAGS$1 );
-			TMP$96$3 = vr$1;
-			if( TMP$96$3 == 258ll ) goto label$36;
+			TMP$95$3 = vr$1;
+			if( TMP$95$3 == 258ll) goto label$36;
 			label$37:;
-			if( TMP$96$3 != 257ll ) goto label$35;
+			if( TMP$95$3 != 257ll) goto label$35;
 			label$36:;
 			{
 				*(int64*)((uint8*)&PARSER$ + 56ll) = *(int64*)((uint8*)&PARSER$ + 56ll) + 1ll;
@@ -986,7 +986,7 @@ int64 CSTMTSEPARATOR( $8LEXCHECK LEXFLAGS$1 )
 			}
 			goto label$34;
 			label$35:;
-			if( TMP$96$3 != 256ll ) goto label$38;
+			if( TMP$95$3 != 256ll) goto label$38;
 			label$39:;
 			{
 				fb$result$1 = -1ll;

@@ -182,9 +182,9 @@ struct $8FBS_ENUM {
 __FB_STATIC_ASSERT( sizeof( struct $8FBS_ENUM ) == 96 );
 typedef int64 $11FB_FUNCMODE;
 typedef int64 $21FB_PROC_RETURN_METHOD;
-typedef int64 (*tmp$35)( struct $8FBSYMBOL* );
+typedef int64 (*tmp$34)( struct $8FBSYMBOL* );
 struct $10FB_PROCRTL {
-	tmp$35 CALLBACK;
+	tmp$34 CALLBACK;
 };
 __FB_STATIC_ASSERT( sizeof( struct $10FB_PROCRTL ) == 8 );
 struct $10FB_PROCOVL {
@@ -314,7 +314,7 @@ struct $9FB_DEFTOK {
 };
 __FB_STATIC_ASSERT( sizeof( struct $9FB_DEFTOK ) == 32 );
 typedef int64 $15FB_DEFINE_FLAGS;
-typedef FBSTRING* (*tmp$29)( void );
+typedef FBSTRING* (*tmp$28)( void );
 struct $8DZSTRING {
 	char* DATA;
 	int64 LEN;
@@ -339,8 +339,8 @@ struct $11LEXPP_ARGTB {
 	int64 COUNT;
 };
 __FB_STATIC_ASSERT( sizeof( struct $11LEXPP_ARGTB ) == 776 );
-typedef FBSTRING* (*tmp$30)( struct $11LEXPP_ARGTB*, int64* );
-typedef uint32* (*tmp$31)( struct $11LEXPP_ARGTB*, int64* );
+typedef FBSTRING* (*tmp$29)( struct $11LEXPP_ARGTB*, int64* );
+typedef uint32* (*tmp$30)( struct $11LEXPP_ARGTB*, int64* );
 struct $10FBS_DEFINE {
 	int64 PARAMS;
 	struct $11FB_DEFPARAM* PARAMHEAD;
@@ -352,11 +352,11 @@ struct $10FBS_DEFINE {
 	int64 ISARGLESS;
 	$15FB_DEFINE_FLAGS FLAGS;
 	union {
-		tmp$29 DPROCZ;
-		tmp$30 MPROCZ;
+		tmp$28 DPROCZ;
+		tmp$29 MPROCZ;
 	};
 	union {
-		tmp$31 MPROCW;
+		tmp$30 MPROCW;
 	};
 };
 __FB_STATIC_ASSERT( sizeof( struct $10FBS_DEFINE ) == 56 );
@@ -770,7 +770,7 @@ struct $8FBARRAY1I10AST_OPINFOE {
 	struct $16__FB_ARRAYDIMTB$ DIMTB[1];
 };
 __FB_STATIC_ASSERT( sizeof( struct $8FBARRAY1I10AST_OPINFOE ) == 72 );
-static struct $8FBARRAY1I10AST_OPINFOE tmp$83$;
+static struct $8FBARRAY1I10AST_OPINFOE tmp$82$;
 typedef int64 $12FB_DATACLASS;
 struct $13SYMB_DATATYPE {
 	$12FB_DATACLASS CLASS;
@@ -792,7 +792,7 @@ struct $8FBARRAY1I13SYMB_DATATYPEE {
 	struct $16__FB_ARRAYDIMTB$ DIMTB[1];
 };
 __FB_STATIC_ASSERT( sizeof( struct $8FBARRAY1I13SYMB_DATATYPEE ) == 72 );
-static struct $8FBARRAY1I13SYMB_DATATYPEE tmp$84$;
+static struct $8FBARRAY1I13SYMB_DATATYPEE tmp$83$;
 struct $8FBARRAY2IlE {
 	int64* DATA;
 	int64* PTR;
@@ -803,7 +803,7 @@ struct $8FBARRAY2IlE {
 	struct $16__FB_ARRAYDIMTB$ DIMTB[2];
 };
 __FB_STATIC_ASSERT( sizeof( struct $8FBARRAY2IlE ) == 96 );
-static struct $8FBARRAY2IlE tmp$85$;
+static struct $8FBARRAY2IlE tmp$84$;
 typedef int64 $10FB_OUTTYPE;
 typedef int64 $10FB_BACKEND;
 typedef int64 $13FB_COMPTARGET;
@@ -970,7 +970,7 @@ int64 CERRORSTMT( void )
 	__builtin_memset( &EXPR$1, 0, 8ll );
 	struct $7ASTNODE* vr$2 = HMATCHEXPR( 8ll );
 	EXPR$1 = vr$2;
-	if( EXPR$1 != (struct $7ASTNODE*)0ull ) goto label$13;
+	if( EXPR$1 != (struct $7ASTNODE*)0ull) goto label$13;
 	{
 		goto label$11;
 	}
@@ -990,7 +990,7 @@ int64 CERRSETSTMT( void )
 	fb$result$1 = 0ll;
 	LEXSKIPTOKEN( 2048ll );
 	int64 vr$1 = CASSIGNTOKEN(  );
-	if( vr$1 != 0ll ) goto label$17;
+	if( vr$1 != 0ll) goto label$17;
 	{
 		ERRREPORT( 10ll, 0ll, (char*)0ull );
 	}
@@ -1000,7 +1000,7 @@ int64 CERRSETSTMT( void )
 	__builtin_memset( &EXPR$1, 0, 8ll );
 	struct $7ASTNODE* vr$3 = HMATCHEXPR( 8ll );
 	EXPR$1 = vr$3;
-	if( EXPR$1 != (struct $7ASTNODE*)0ull ) goto label$19;
+	if( EXPR$1 != (struct $7ASTNODE*)0ull) goto label$19;
 	{
 		goto label$15;
 	}
@@ -1019,10 +1019,10 @@ struct $7ASTNODE* CERRORFUNCT( void )
 	label$20:;
 	LEXSKIPTOKEN( 2048ll );
 	int64 vr$1 = HMATCH( 40ll, 0ll );
-	if( vr$1 == 0ll ) goto label$23;
+	if( vr$1 == 0ll) goto label$23;
 	{
 		int64 vr$2 = LEXGETTOKEN( 0ll );
-		if( vr$2 == 41ll ) goto label$25;
+		if( vr$2 == 41ll) goto label$25;
 		{
 			ERRREPORT( 7ll, 0ll, (char*)0ull );
 			HSKIPUNTIL( 41ll, -1ll, 0ll, 0ll );

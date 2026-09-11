@@ -391,9 +391,9 @@ struct $8FBS_ENUM {
 };
 __FB_STATIC_ASSERT( sizeof( struct $8FBS_ENUM ) == 96 );
 typedef int64 $21FB_PROC_RETURN_METHOD;
-typedef int64 (*tmp$35)( struct $8FBSYMBOL* );
+typedef int64 (*tmp$34)( struct $8FBSYMBOL* );
 struct $10FB_PROCRTL {
-	tmp$35 CALLBACK;
+	tmp$34 CALLBACK;
 };
 __FB_STATIC_ASSERT( sizeof( struct $10FB_PROCRTL ) == 8 );
 struct $10FB_PROCOVL {
@@ -523,7 +523,7 @@ struct $9FB_DEFTOK {
 };
 __FB_STATIC_ASSERT( sizeof( struct $9FB_DEFTOK ) == 32 );
 typedef int64 $15FB_DEFINE_FLAGS;
-typedef FBSTRING* (*tmp$29)( void );
+typedef FBSTRING* (*tmp$28)( void );
 struct $8DZSTRING {
 	char* DATA;
 	int64 LEN;
@@ -548,8 +548,8 @@ struct $11LEXPP_ARGTB {
 	int64 COUNT;
 };
 __FB_STATIC_ASSERT( sizeof( struct $11LEXPP_ARGTB ) == 776 );
-typedef FBSTRING* (*tmp$30)( struct $11LEXPP_ARGTB*, int64* );
-typedef uint32* (*tmp$31)( struct $11LEXPP_ARGTB*, int64* );
+typedef FBSTRING* (*tmp$29)( struct $11LEXPP_ARGTB*, int64* );
+typedef uint32* (*tmp$30)( struct $11LEXPP_ARGTB*, int64* );
 struct $10FBS_DEFINE {
 	int64 PARAMS;
 	struct $11FB_DEFPARAM* PARAMHEAD;
@@ -561,11 +561,11 @@ struct $10FBS_DEFINE {
 	int64 ISARGLESS;
 	$15FB_DEFINE_FLAGS FLAGS;
 	union {
-		tmp$29 DPROCZ;
-		tmp$30 MPROCZ;
+		tmp$28 DPROCZ;
+		tmp$29 MPROCZ;
 	};
 	union {
-		tmp$31 MPROCW;
+		tmp$30 MPROCW;
 	};
 };
 __FB_STATIC_ASSERT( sizeof( struct $10FBS_DEFINE ) == 56 );
@@ -673,7 +673,7 @@ struct $14FB_RTL_PROCDEF {
 	char* ALIAS;
 	$11FB_DATATYPE DTYPE;
 	$11FB_FUNCMODE CALLCONV;
-	tmp$35 CALLBACK;
+	tmp$34 CALLBACK;
 	$10FB_RTL_OPT OPTIONS;
 	int64 PARAMS;
 	struct $15FB_RTL_PARAMDEF PARAMTB[16];
@@ -720,7 +720,7 @@ struct $8FBARRAY1I10AST_OPINFOE {
 	struct $16__FB_ARRAYDIMTB$ DIMTB[1];
 };
 __FB_STATIC_ASSERT( sizeof( struct $8FBARRAY1I10AST_OPINFOE ) == 72 );
-static struct $8FBARRAY1I10AST_OPINFOE tmp$83$;
+static struct $8FBARRAY1I10AST_OPINFOE tmp$82$;
 typedef int64 $12FB_DATACLASS;
 struct $13SYMB_DATATYPE {
 	$12FB_DATACLASS CLASS;
@@ -742,7 +742,7 @@ struct $8FBARRAY1I13SYMB_DATATYPEE {
 	struct $16__FB_ARRAYDIMTB$ DIMTB[1];
 };
 __FB_STATIC_ASSERT( sizeof( struct $8FBARRAY1I13SYMB_DATATYPEE ) == 72 );
-static struct $8FBARRAY1I13SYMB_DATATYPEE tmp$84$;
+static struct $8FBARRAY1I13SYMB_DATATYPEE tmp$83$;
 struct $8FBARRAY2IlE {
 	int64* DATA;
 	int64* PTR;
@@ -753,8 +753,8 @@ struct $8FBARRAY2IlE {
 	struct $16__FB_ARRAYDIMTB$ DIMTB[2];
 };
 __FB_STATIC_ASSERT( sizeof( struct $8FBARRAY2IlE ) == 96 );
-static struct $8FBARRAY2IlE tmp$85$;
-static struct $14FB_RTL_PROCDEF FUNCDATA$[17] = { { (char*)"fb_ConsoleView", (char*)0ull, 11ll, -1ll, (tmp$35)0ull, 0ll, 2ll, { { 523ll, 1ll, -1ll, 0ll }, { 523ll, 1ll, -1ll, 0ll } } }, { (char*)"fb_ReadXY", (char*)0ull, 12ll, -1ll, (tmp$35)0ull, 0ll, 3ll, { { 523ll, 1ll, 0ll }, { 523ll, 1ll, 0ll }, { 523ll, 1ll, -1ll, 0ll } } }, { (char*)"fb_Width", (char*)0ull, 11ll, -1ll, (tmp$35)0ull, 0ll, 2ll, { { 523ll, 1ll, -1ll, -1ll }, { 523ll, 1ll, -1ll, -1ll } } }, { (char*)"fb_WidthDev", (char*)0ull, 11ll, -1ll, (tmp$35)0ull, 0ll, 2ll, { { 529ll, 2ll, 0ll }, { 523ll, 1ll, -1ll, -1ll } } }, { (char*)"fb_WidthFile", (char*)0ull, 11ll, -1ll, (tmp$35)0ull, 0ll, 2ll, { { 523ll, 1ll, 0ll }, { 523ll, 1ll, -1ll, -1ll } } }, { (char*)"locate", (char*)"fb_Locate", 11ll, -1ll, (tmp$35)0ull, 0ll, 5ll, { { 523ll, 1ll, -1ll, 0ll }, { 523ll, 1ll, -1ll, 0ll }, { 523ll, 1ll, -1ll, -1ll }, { 523ll, 1ll, -1ll, 0ll }, { 523ll, 1ll, -1ll, 0ll } } }, { (char*)"pos", (char*)"fb_GetX", 11ll, -1ll, (tmp$35)0ull, 1ll, 0ll }, { (char*)"pos", (char*)"fb_Pos", 11ll, -1ll, (tmp$35)0ull, 1ll, 1ll, { { 523ll, 1ll, 0ll } } }, { (char*)"csrlin", (char*)"fb_GetY", 11ll, -1ll, (tmp$35)0ull, 0ll, 0ll }, { (char*)"cls", (char*)"fb_Cls", 0ll, -1ll, (tmp$35)0ull, 0ll, 1ll, { { 523ll, 1ll, -1ll, 4294901760ll } } }, { (char*)"fb_Color", (char*)0ull, 12ll, -1ll, (tmp$35)0ull, 0ll, 3ll, { { 523ll, 1ll, 0ll }, { 523ll, 1ll, 0ll }, { 524ll, 1ll, 0ll } } }, { (char*)"inkey", (char*)"fb_Inkey", 17ll, -1ll, (tmp$35)0ull, 192ll, 0ll }, { (char*)"inkey", (char*)"fb_InkeyQB", 17ll, -1ll, (tmp$35)0ull, 320ll, 0ll }, { (char*)"getkey", (char*)"fb_Getkey", 11ll, -1ll, (tmp$35)0ull, 128ll, 0ll }, { (char*)"pcopy", (char*)"fb_PageCopy", 11ll, -1ll, (tmp$35)0ull, 0ll, 2ll, { { 523ll, 1ll, -1ll, -1ll }, { 523ll, 1ll, -1ll, -1ll } } }, { (char*)"fb_PageSet", (char*)0ull, 11ll, -1ll, (tmp$35)0ull, 0ll, 2ll, { { 523ll, 1ll, -1ll, -1ll }, { 523ll, 1ll, -1ll, -1ll } } }, { (char*)0ull } };
+static struct $8FBARRAY2IlE tmp$84$;
+static struct $14FB_RTL_PROCDEF FUNCDATA$[17] = { { (char*)"fb_ConsoleView", (char*)0ull, 11ll, -1ll, (tmp$34)0ull, 0ll, 2ll, { { 523ll, 1ll, -1ll, 0ll }, { 523ll, 1ll, -1ll, 0ll } } }, { (char*)"fb_ReadXY", (char*)0ull, 12ll, -1ll, (tmp$34)0ull, 0ll, 3ll, { { 523ll, 1ll, 0ll }, { 523ll, 1ll, 0ll }, { 523ll, 1ll, -1ll, 0ll } } }, { (char*)"fb_Width", (char*)0ull, 11ll, -1ll, (tmp$34)0ull, 0ll, 2ll, { { 523ll, 1ll, -1ll, -1ll }, { 523ll, 1ll, -1ll, -1ll } } }, { (char*)"fb_WidthDev", (char*)0ull, 11ll, -1ll, (tmp$34)0ull, 0ll, 2ll, { { 529ll, 2ll, 0ll }, { 523ll, 1ll, -1ll, -1ll } } }, { (char*)"fb_WidthFile", (char*)0ull, 11ll, -1ll, (tmp$34)0ull, 0ll, 2ll, { { 523ll, 1ll, 0ll }, { 523ll, 1ll, -1ll, -1ll } } }, { (char*)"locate", (char*)"fb_Locate", 11ll, -1ll, (tmp$34)0ull, 0ll, 5ll, { { 523ll, 1ll, -1ll, 0ll }, { 523ll, 1ll, -1ll, 0ll }, { 523ll, 1ll, -1ll, -1ll }, { 523ll, 1ll, -1ll, 0ll }, { 523ll, 1ll, -1ll, 0ll } } }, { (char*)"pos", (char*)"fb_GetX", 11ll, -1ll, (tmp$34)0ull, 1ll, 0ll }, { (char*)"pos", (char*)"fb_Pos", 11ll, -1ll, (tmp$34)0ull, 1ll, 1ll, { { 523ll, 1ll, 0ll } } }, { (char*)"csrlin", (char*)"fb_GetY", 11ll, -1ll, (tmp$34)0ull, 0ll, 0ll }, { (char*)"cls", (char*)"fb_Cls", 0ll, -1ll, (tmp$34)0ull, 0ll, 1ll, { { 523ll, 1ll, -1ll, 4294901760ll } } }, { (char*)"fb_Color", (char*)0ull, 12ll, -1ll, (tmp$34)0ull, 0ll, 3ll, { { 523ll, 1ll, 0ll }, { 523ll, 1ll, 0ll }, { 524ll, 1ll, 0ll } } }, { (char*)"inkey", (char*)"fb_Inkey", 17ll, -1ll, (tmp$34)0ull, 192ll, 0ll }, { (char*)"inkey", (char*)"fb_InkeyQB", 17ll, -1ll, (tmp$34)0ull, 320ll, 0ll }, { (char*)"getkey", (char*)"fb_Getkey", 11ll, -1ll, (tmp$34)0ull, 128ll, 0ll }, { (char*)"pcopy", (char*)"fb_PageCopy", 11ll, -1ll, (tmp$34)0ull, 0ll, 2ll, { { 523ll, 1ll, -1ll, -1ll }, { 523ll, 1ll, -1ll, -1ll } } }, { (char*)"fb_PageSet", (char*)0ull, 11ll, -1ll, (tmp$34)0ull, 0ll, 2ll, { { 523ll, 1ll, -1ll, -1ll }, { 523ll, 1ll, -1ll, -1ll } } }, { (char*)0ull } };
 
 void RTLCONSOLEMODINIT( void )
 {
@@ -780,14 +780,14 @@ struct $7ASTNODE* RTLCONSOLEVIEW( struct $7ASTNODE* TOPEXPR$1, struct $7ASTNODE*
 	struct $7ASTNODE* vr$2 = ASTNEWCALL( vr$1, (struct $7ASTNODE*)0ull, -1ll );
 	PROC$1 = vr$2;
 	struct $7ASTNODE* vr$3 = ASTNEWARG( PROC$1, TOPEXPR$1, 2147483648ll, -1ll );
-	if( vr$3 != (struct $7ASTNODE*)0ull ) goto label$17;
+	if( vr$3 != (struct $7ASTNODE*)0ull) goto label$17;
 	{
 		goto label$15;
 	}
 	label$17:;
 	label$16:;
 	struct $7ASTNODE* vr$4 = ASTNEWARG( PROC$1, BOTEXPR$1, 2147483648ll, -1ll );
-	if( vr$4 != (struct $7ASTNODE*)0ull ) goto label$19;
+	if( vr$4 != (struct $7ASTNODE*)0ull) goto label$19;
 	{
 		goto label$15;
 	}
@@ -808,7 +808,7 @@ struct $7ASTNODE* RTLWIDTHSCREEN( struct $7ASTNODE* WIDTH_ARG$1, struct $7ASTNOD
 	struct $8FBSYMBOL* vr$1 = RTLPROCLOOKUP( (char*)"fb_Width", 296ll );
 	struct $7ASTNODE* vr$2 = ASTNEWCALL( vr$1, (struct $7ASTNODE*)0ull, -1ll );
 	PROC$1 = vr$2;
-	if( WIDTH_ARG$1 != (struct $7ASTNODE*)0ull ) goto label$23;
+	if( WIDTH_ARG$1 != (struct $7ASTNODE*)0ull) goto label$23;
 	{
 		struct $7ASTNODE* vr$3 = ASTNEWCONSTI( -1ll, 8ll, (struct $8FBSYMBOL*)0ull );
 		WIDTH_ARG$1 = vr$3;
@@ -816,13 +816,13 @@ struct $7ASTNODE* RTLWIDTHSCREEN( struct $7ASTNODE* WIDTH_ARG$1, struct $7ASTNOD
 	label$23:;
 	label$22:;
 	struct $7ASTNODE* vr$4 = ASTNEWARG( PROC$1, WIDTH_ARG$1, 2147483648ll, -1ll );
-	if( vr$4 != (struct $7ASTNODE*)0ull ) goto label$25;
+	if( vr$4 != (struct $7ASTNODE*)0ull) goto label$25;
 	{
 		goto label$21;
 	}
 	label$25:;
 	label$24:;
-	if( HEIGHT_ARG$1 != (struct $7ASTNODE*)0ull ) goto label$27;
+	if( HEIGHT_ARG$1 != (struct $7ASTNODE*)0ull) goto label$27;
 	{
 		struct $7ASTNODE* vr$5 = ASTNEWCONSTI( -1ll, 8ll, (struct $8FBSYMBOL*)0ull );
 		HEIGHT_ARG$1 = vr$5;
@@ -830,13 +830,13 @@ struct $7ASTNODE* RTLWIDTHSCREEN( struct $7ASTNODE* WIDTH_ARG$1, struct $7ASTNOD
 	label$27:;
 	label$26:;
 	struct $7ASTNODE* vr$6 = ASTNEWARG( PROC$1, HEIGHT_ARG$1, 2147483648ll, -1ll );
-	if( vr$6 != (struct $7ASTNODE*)0ull ) goto label$29;
+	if( vr$6 != (struct $7ASTNODE*)0ull) goto label$29;
 	{
 		goto label$21;
 	}
 	label$29:;
 	label$28:;
-	if( ISFUNC$1 != 0ll ) goto label$31;
+	if( ISFUNC$1 != 0ll) goto label$31;
 	{
 		struct $7ASTNODE* vr$7 = RTLERRORCHECK( PROC$1 );
 		ASTADD( vr$7 );
@@ -860,7 +860,7 @@ struct $7ASTNODE* RTLCOLOR( struct $7ASTNODE* FEXPR$1, struct $7ASTNODE* BEXPR$1
 	struct $8FBSYMBOL* vr$1 = RTLPROCLOOKUP( (char*)"fb_Color", 222ll );
 	struct $7ASTNODE* vr$2 = ASTNEWCALL( vr$1, (struct $7ASTNODE*)0ull, -1ll );
 	PROC$1 = vr$2;
-	if( FEXPR$1 != (struct $7ASTNODE*)0ull ) goto label$35;
+	if( FEXPR$1 != (struct $7ASTNODE*)0ull) goto label$35;
 	{
 		struct $7ASTNODE* vr$3 = ASTNEWCONSTI( 0ll, 8ll, (struct $8FBSYMBOL*)0ull );
 		FEXPR$1 = vr$3;
@@ -869,13 +869,13 @@ struct $7ASTNODE* RTLCOLOR( struct $7ASTNODE* FEXPR$1, struct $7ASTNODE* BEXPR$1
 	label$35:;
 	label$34:;
 	struct $7ASTNODE* vr$5 = ASTNEWARG( PROC$1, FEXPR$1, 2147483648ll, -1ll );
-	if( vr$5 != (struct $7ASTNODE*)0ull ) goto label$37;
+	if( vr$5 != (struct $7ASTNODE*)0ull) goto label$37;
 	{
 		goto label$33;
 	}
 	label$37:;
 	label$36:;
-	if( BEXPR$1 != (struct $7ASTNODE*)0ull ) goto label$39;
+	if( BEXPR$1 != (struct $7ASTNODE*)0ull) goto label$39;
 	{
 		struct $7ASTNODE* vr$6 = ASTNEWCONSTI( 0ll, 8ll, (struct $8FBSYMBOL*)0ull );
 		BEXPR$1 = vr$6;
@@ -884,7 +884,7 @@ struct $7ASTNODE* RTLCOLOR( struct $7ASTNODE* FEXPR$1, struct $7ASTNODE* BEXPR$1
 	label$39:;
 	label$38:;
 	struct $7ASTNODE* vr$8 = ASTNEWARG( PROC$1, BEXPR$1, 2147483648ll, -1ll );
-	if( vr$8 != (struct $7ASTNODE*)0ull ) goto label$41;
+	if( vr$8 != (struct $7ASTNODE*)0ull) goto label$41;
 	{
 		goto label$33;
 	}
@@ -892,13 +892,13 @@ struct $7ASTNODE* RTLCOLOR( struct $7ASTNODE* FEXPR$1, struct $7ASTNODE* BEXPR$1
 	label$40:;
 	struct $7ASTNODE* vr$9 = ASTNEWCONSTI( FLAGS$1, 8ll, (struct $8FBSYMBOL*)0ull );
 	struct $7ASTNODE* vr$10 = ASTNEWARG( PROC$1, vr$9, 2147483648ll, -1ll );
-	if( vr$10 != (struct $7ASTNODE*)0ull ) goto label$43;
+	if( vr$10 != (struct $7ASTNODE*)0ull) goto label$43;
 	{
 		goto label$33;
 	}
 	label$43:;
 	label$42:;
-	if( ISFUNC$1 != 0ll ) goto label$45;
+	if( ISFUNC$1 != 0ll) goto label$45;
 	{
 		ASTADD( PROC$1 );
 	}
@@ -919,7 +919,7 @@ struct $7ASTNODE* RTLPAGESET( struct $7ASTNODE* ACTIVE$1, struct $7ASTNODE* VISI
 	struct $8FBSYMBOL* vr$1 = RTLPROCLOOKUP( (char*)"fb_PageSet", 223ll );
 	struct $7ASTNODE* vr$2 = ASTNEWCALL( vr$1, (struct $7ASTNODE*)0ull, -1ll );
 	PROC$1 = vr$2;
-	if( ACTIVE$1 != (struct $7ASTNODE*)0ull ) goto label$49;
+	if( ACTIVE$1 != (struct $7ASTNODE*)0ull) goto label$49;
 	{
 		struct $7ASTNODE* vr$3 = ASTNEWCONSTI( -1ll, 8ll, (struct $8FBSYMBOL*)0ull );
 		ACTIVE$1 = vr$3;
@@ -927,13 +927,13 @@ struct $7ASTNODE* RTLPAGESET( struct $7ASTNODE* ACTIVE$1, struct $7ASTNODE* VISI
 	label$49:;
 	label$48:;
 	struct $7ASTNODE* vr$4 = ASTNEWARG( PROC$1, ACTIVE$1, 2147483648ll, -1ll );
-	if( vr$4 != (struct $7ASTNODE*)0ull ) goto label$51;
+	if( vr$4 != (struct $7ASTNODE*)0ull) goto label$51;
 	{
 		goto label$47;
 	}
 	label$51:;
 	label$50:;
-	if( VISIBLE$1 != (struct $7ASTNODE*)0ull ) goto label$53;
+	if( VISIBLE$1 != (struct $7ASTNODE*)0ull) goto label$53;
 	{
 		struct $7ASTNODE* vr$5 = ASTNEWCONSTI( -1ll, 8ll, (struct $8FBSYMBOL*)0ull );
 		VISIBLE$1 = vr$5;
@@ -941,13 +941,13 @@ struct $7ASTNODE* RTLPAGESET( struct $7ASTNODE* ACTIVE$1, struct $7ASTNODE* VISI
 	label$53:;
 	label$52:;
 	struct $7ASTNODE* vr$6 = ASTNEWARG( PROC$1, VISIBLE$1, 2147483648ll, -1ll );
-	if( vr$6 != (struct $7ASTNODE*)0ull ) goto label$55;
+	if( vr$6 != (struct $7ASTNODE*)0ull) goto label$55;
 	{
 		goto label$47;
 	}
 	label$55:;
 	label$54:;
-	if( ISFUNC$1 != 0ll ) goto label$57;
+	if( ISFUNC$1 != 0ll) goto label$57;
 	{
 		ASTADD( PROC$1 );
 	}
@@ -969,20 +969,20 @@ struct $7ASTNODE* RTLCONSOLEREADXY( struct $7ASTNODE* ROWEXPR$1, struct $7ASTNOD
 	struct $7ASTNODE* vr$2 = ASTNEWCALL( vr$1, (struct $7ASTNODE*)0ull, -1ll );
 	PROC$1 = vr$2;
 	struct $7ASTNODE* vr$3 = ASTNEWARG( PROC$1, COLUMNEXPR$1, 2147483648ll, -1ll );
-	if( vr$3 != (struct $7ASTNODE*)0ull ) goto label$61;
+	if( vr$3 != (struct $7ASTNODE*)0ull) goto label$61;
 	{
 		goto label$59;
 	}
 	label$61:;
 	label$60:;
 	struct $7ASTNODE* vr$4 = ASTNEWARG( PROC$1, ROWEXPR$1, 2147483648ll, -1ll );
-	if( vr$4 != (struct $7ASTNODE*)0ull ) goto label$63;
+	if( vr$4 != (struct $7ASTNODE*)0ull) goto label$63;
 	{
 		goto label$59;
 	}
 	label$63:;
 	label$62:;
-	if( COLORFLAGEXPR$1 != (struct $7ASTNODE*)0ull ) goto label$65;
+	if( COLORFLAGEXPR$1 != (struct $7ASTNODE*)0ull) goto label$65;
 	{
 		struct $7ASTNODE* vr$5 = ASTNEWCONSTI( 0ll, 8ll, (struct $8FBSYMBOL*)0ull );
 		COLORFLAGEXPR$1 = vr$5;
@@ -990,7 +990,7 @@ struct $7ASTNODE* RTLCONSOLEREADXY( struct $7ASTNODE* ROWEXPR$1, struct $7ASTNOD
 	label$65:;
 	label$64:;
 	struct $7ASTNODE* vr$6 = ASTNEWARG( PROC$1, COLORFLAGEXPR$1, 2147483648ll, -1ll );
-	if( vr$6 != (struct $7ASTNODE*)0ull ) goto label$67;
+	if( vr$6 != (struct $7ASTNODE*)0ull) goto label$67;
 	{
 		goto label$59;
 	}

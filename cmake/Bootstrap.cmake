@@ -30,29 +30,42 @@ if(FB_USE_SYSTEM_FBC)
 endif()
 
 if(NOT FBC_EXECUTABLE)
-    # Check for bootstrap C sources
-    set(_bootstrap_dir "${CMAKE_SOURCE_DIR}/bootstrap/${FB_TARGET_ID}")
-    if(NOT EXISTS "${_bootstrap_dir}")
-        # Cross-compatible fallbacks: the generated C is platform-independent
-        if(FB_TARGET_OS STREQUAL "darwin" AND FB_TARGET_ARCH STREQUAL "aarch64")
-            set(_bootstrap_dir "${CMAKE_SOURCE_DIR}/bootstrap/linux-aarch64")
-        elseif(FB_TARGET_OS STREQUAL "darwin" AND FB_TARGET_ARCH STREQUAL "x86_64")
-            set(_bootstrap_dir "${CMAKE_SOURCE_DIR}/bootstrap/linux-x86_64")
-        endif()
-    endif()
+    # A bootstrap source encodes the compiler's host OS and architecture.  It
+    # must therefore match FB_TARGET_ID exactly; using a nearby platform's C
+    # sources produces a compiler with the wrong runtime layout.
+    set(FB_BOOTSTRAP_DIR "${CMAKE_SOURCE_DIR}/bootstrap/${FB_TARGET_ID}")
 
-    if(EXISTS "${_bootstrap_dir}")
-        file(GLOB FB_BOOTSTRAP_SOURCES "${_bootstrap_dir}/*.c")
+    if(EXISTS "${FB_BOOTSTRAP_DIR}")
+        file(GLOB FB_BOOTSTRAP_SOURCES "${FB_BOOTSTRAP_DIR}/*.c")
         if(FB_BOOTSTRAP_SOURCES)
+            find_package(Python3 COMPONENTS Interpreter REQUIRED)
+            execute_process(
+                # MSYS Python expects POSIX paths while CMake on native
+                # Windows passes C:/ paths.  Run from the source tree and use
+                # a relative script name so the same invocation works for
+                # both MSYS and native Unix Python.
+                COMMAND "${Python3_EXECUTABLE}" "scripts/check-bootstrap-provenance.py"
+                    --target "${FB_TARGET_ID}"
+                WORKING_DIRECTORY "${CMAKE_SOURCE_DIR}"
+                RESULT_VARIABLE _bootstrap_provenance_result
+                OUTPUT_VARIABLE _bootstrap_provenance_output
+                ERROR_VARIABLE _bootstrap_provenance_error
+            )
+            if(NOT _bootstrap_provenance_result EQUAL 0)
+                message(FATAL_ERROR
+                    "Bootstrap provenance verification failed for ${FB_TARGET_ID}.\n"
+                    "${_bootstrap_provenance_output}${_bootstrap_provenance_error}")
+            endif()
             set(FB_BOOTSTRAP_MODE "bootstrap")
-            message(STATUS "No fbc found, will bootstrap from C sources in ${_bootstrap_dir}")
+            message(STATUS "No fbc found, will bootstrap from verified C sources in ${FB_BOOTSTRAP_DIR}")
         else()
-            message(FATAL_ERROR "Bootstrap directory exists but contains no .c files: ${_bootstrap_dir}")
+            message(FATAL_ERROR "Bootstrap directory exists but contains no .c files: ${FB_BOOTSTRAP_DIR}")
         endif()
     else()
         message(FATAL_ERROR
-            "No fbc compiler found and no bootstrap sources available for ${FB_TARGET_ID}.\n"
-            "Either install fbc, or provide bootstrap C sources in bootstrap/${FB_TARGET_ID}/")
+            "No fbc compiler found and no verified bootstrap sources exist for ${FB_TARGET_ID}.\n"
+            "This build never substitutes another host's bootstrap sources.\n"
+            "Either enable FB_USE_SYSTEM_FBC with a working fbc, or add a verified bootstrap/${FB_TARGET_ID}/ entry.")
     endif()
 endif()
 

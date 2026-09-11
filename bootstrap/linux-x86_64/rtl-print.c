@@ -391,9 +391,9 @@ struct $8FBS_ENUM {
 };
 __FB_STATIC_ASSERT( sizeof( struct $8FBS_ENUM ) == 96 );
 typedef int64 $21FB_PROC_RETURN_METHOD;
-typedef int64 (*tmp$35)( struct $8FBSYMBOL* );
+typedef int64 (*tmp$34)( struct $8FBSYMBOL* );
 struct $10FB_PROCRTL {
-	tmp$35 CALLBACK;
+	tmp$34 CALLBACK;
 };
 __FB_STATIC_ASSERT( sizeof( struct $10FB_PROCRTL ) == 8 );
 struct $10FB_PROCOVL {
@@ -523,7 +523,7 @@ struct $9FB_DEFTOK {
 };
 __FB_STATIC_ASSERT( sizeof( struct $9FB_DEFTOK ) == 32 );
 typedef int64 $15FB_DEFINE_FLAGS;
-typedef FBSTRING* (*tmp$29)( void );
+typedef FBSTRING* (*tmp$28)( void );
 struct $8DZSTRING {
 	char* DATA;
 	int64 LEN;
@@ -548,8 +548,8 @@ struct $11LEXPP_ARGTB {
 	int64 COUNT;
 };
 __FB_STATIC_ASSERT( sizeof( struct $11LEXPP_ARGTB ) == 776 );
-typedef FBSTRING* (*tmp$30)( struct $11LEXPP_ARGTB*, int64* );
-typedef uint32* (*tmp$31)( struct $11LEXPP_ARGTB*, int64* );
+typedef FBSTRING* (*tmp$29)( struct $11LEXPP_ARGTB*, int64* );
+typedef uint32* (*tmp$30)( struct $11LEXPP_ARGTB*, int64* );
 struct $10FBS_DEFINE {
 	int64 PARAMS;
 	struct $11FB_DEFPARAM* PARAMHEAD;
@@ -561,11 +561,11 @@ struct $10FBS_DEFINE {
 	int64 ISARGLESS;
 	$15FB_DEFINE_FLAGS FLAGS;
 	union {
-		tmp$29 DPROCZ;
-		tmp$30 MPROCZ;
+		tmp$28 DPROCZ;
+		tmp$29 MPROCZ;
 	};
 	union {
-		tmp$31 MPROCW;
+		tmp$30 MPROCW;
 	};
 };
 __FB_STATIC_ASSERT( sizeof( struct $10FBS_DEFINE ) == 56 );
@@ -673,7 +673,7 @@ struct $14FB_RTL_PROCDEF {
 	char* ALIAS;
 	$11FB_DATATYPE DTYPE;
 	$11FB_FUNCMODE CALLCONV;
-	tmp$35 CALLBACK;
+	tmp$34 CALLBACK;
 	$10FB_RTL_OPT OPTIONS;
 	int64 PARAMS;
 	struct $15FB_RTL_PARAMDEF PARAMTB[16];
@@ -739,7 +739,7 @@ struct $8FBARRAY1I10AST_OPINFOE {
 	struct $16__FB_ARRAYDIMTB$ DIMTB[1];
 };
 __FB_STATIC_ASSERT( sizeof( struct $8FBARRAY1I10AST_OPINFOE ) == 72 );
-static struct $8FBARRAY1I10AST_OPINFOE tmp$83$;
+static struct $8FBARRAY1I10AST_OPINFOE tmp$82$;
 extern struct $13SYMB_DATATYPE SYMB_DTYPETB$[26];
 struct $8FBARRAY1I13SYMB_DATATYPEE {
 	struct $13SYMB_DATATYPE* DATA;
@@ -751,7 +751,7 @@ struct $8FBARRAY1I13SYMB_DATATYPEE {
 	struct $16__FB_ARRAYDIMTB$ DIMTB[1];
 };
 __FB_STATIC_ASSERT( sizeof( struct $8FBARRAY1I13SYMB_DATATYPEE ) == 72 );
-static struct $8FBARRAY1I13SYMB_DATATYPEE tmp$84$;
+static struct $8FBARRAY1I13SYMB_DATATYPEE tmp$83$;
 struct $8FBARRAY2IlE {
 	int64* DATA;
 	int64* PTR;
@@ -762,7 +762,7 @@ struct $8FBARRAY2IlE {
 	struct $16__FB_ARRAYDIMTB$ DIMTB[2];
 };
 __FB_STATIC_ASSERT( sizeof( struct $8FBARRAY2IlE ) == 96 );
-static struct $8FBARRAY2IlE tmp$85$;
+static struct $8FBARRAY2IlE tmp$84$;
 typedef int64 $10FB_OUTTYPE;
 typedef int64 $10FB_BACKEND;
 typedef int64 $10FB_CPUTYPE;
@@ -909,7 +909,7 @@ struct $5FBENV {
 };
 __FB_STATIC_ASSERT( sizeof( struct $5FBENV ) == 1824 );
 extern struct $5FBENV ENV$;
-static struct $14FB_RTL_PROCDEF FUNCDATA$[55] = { { (char*)"fb_PrintVoid", (char*)0ull, 0ll, -1ll, (tmp$35)0ull, 0ll, 2ll, { { 523ll, 1ll, -1ll, 0ll }, { 523ll, 1ll, 0ll } } }, { (char*)"fb_PrintBool", (char*)0ull, 0ll, -1ll, (tmp$35)0ull, 128ll, 3ll, { { 523ll, 1ll, -1ll, 0ll }, { 513ll, 1ll, 0ll }, { 523ll, 1ll, 0ll } } }, { (char*)"fb_PrintByte", (char*)0ull, 0ll, -1ll, (tmp$35)0ull, 0ll, 3ll, { { 523ll, 1ll, -1ll, 0ll }, { 514ll, 1ll, 0ll }, { 523ll, 1ll, 0ll } } }, { (char*)"fb_PrintUByte", (char*)0ull, 0ll, -1ll, (tmp$35)0ull, 0ll, 3ll, { { 523ll, 1ll, -1ll, 0ll }, { 515ll, 1ll, 0ll }, { 523ll, 1ll, 0ll } } }, { (char*)"fb_PrintShort", (char*)0ull, 0ll, -1ll, (tmp$35)0ull, 0ll, 3ll, { { 523ll, 1ll, -1ll, 0ll }, { 517ll, 1ll, 0ll }, { 523ll, 1ll, 0ll } } }, { (char*)"fb_PrintUShort", (char*)0ull, 0ll, -1ll, (tmp$35)0ull, 0ll, 3ll, { { 523ll, 1ll, -1ll, 0ll }, { 518ll, 1ll, 0ll }, { 523ll, 1ll, 0ll } } }, { (char*)"fb_PrintInt", (char*)0ull, 0ll, -1ll, (tmp$35)0ull, 0ll, 3ll, { { 523ll, 1ll, -1ll, 0ll }, { 523ll, 1ll, 0ll }, { 523ll, 1ll, 0ll } } }, { (char*)"fb_PrintUInt", (char*)0ull, 0ll, -1ll, (tmp$35)0ull, 0ll, 3ll, { { 523ll, 1ll, -1ll, 0ll }, { 524ll, 1ll, 0ll }, { 523ll, 1ll, 0ll } } }, { (char*)"fb_PrintLongint", (char*)0ull, 0ll, -1ll, (tmp$35)0ull, 0ll, 3ll, { { 523ll, 1ll, -1ll, 0ll }, { 525ll, 1ll, 0ll }, { 523ll, 1ll, 0ll } } }, { (char*)"fb_PrintULongint", (char*)0ull, 0ll, -1ll, (tmp$35)0ull, 0ll, 3ll, { { 523ll, 1ll, -1ll, 0ll }, { 526ll, 1ll, 0ll }, { 523ll, 1ll, 0ll } } }, { (char*)"fb_PrintSingle", (char*)0ull, 0ll, -1ll, (tmp$35)0ull, 0ll, 3ll, { { 523ll, 1ll, -1ll, 0ll }, { 527ll, 1ll, 0ll }, { 523ll, 1ll, 0ll } } }, { (char*)"fb_PrintDouble", (char*)0ull, 0ll, -1ll, (tmp$35)0ull, 0ll, 3ll, { { 523ll, 1ll, -1ll, 0ll }, { 528ll, 1ll, 0ll }, { 523ll, 1ll, 0ll } } }, { (char*)"fb_PrintString", (char*)0ull, 0ll, -1ll, (tmp$35)0ull, 0ll, 3ll, { { 523ll, 1ll, -1ll, 0ll }, { 529ll, 2ll, 0ll }, { 523ll, 1ll, 0ll } } }, { (char*)"fb_PrintWstr", (char*)0ull, 0ll, -1ll, (tmp$35)0ull, 0ll, 3ll, { { 523ll, 1ll, -1ll, 0ll }, { 1063ll, 1ll, 0ll }, { 523ll, 1ll, 0ll } } }, { (char*)"fb_LPrintVoid", (char*)0ull, 0ll, -1ll, (tmp$35)&RTLPRINTER_CB, 0ll, 2ll, { { 523ll, 1ll, -1ll, 0ll }, { 523ll, 1ll, 0ll } } }, { (char*)"fb_LPrintBool", (char*)0ull, 0ll, -1ll, (tmp$35)&RTLPRINTER_CB, 128ll, 3ll, { { 523ll, 1ll, -1ll, 0ll }, { 513ll, 1ll, 0ll }, { 523ll, 1ll, 0ll } } }, { (char*)"fb_LPrintByte", (char*)0ull, 0ll, -1ll, (tmp$35)&RTLPRINTER_CB, 0ll, 3ll, { { 523ll, 1ll, -1ll, 0ll }, { 514ll, 1ll, 0ll }, { 523ll, 1ll, 0ll } } }, { (char*)"fb_LPrintUByte", (char*)0ull, 0ll, -1ll, (tmp$35)&RTLPRINTER_CB, 0ll, 3ll, { { 523ll, 1ll, -1ll, 0ll }, { 515ll, 1ll, 0ll }, { 523ll, 1ll, 0ll } } }, { (char*)"fb_LPrintShort", (char*)0ull, 0ll, -1ll, (tmp$35)&RTLPRINTER_CB, 0ll, 3ll, { { 523ll, 1ll, -1ll, 0ll }, { 517ll, 1ll, 0ll }, { 523ll, 1ll, 0ll } } }, { (char*)"fb_LPrintUShort", (char*)0ull, 0ll, -1ll, (tmp$35)&RTLPRINTER_CB, 0ll, 3ll, { { 523ll, 1ll, -1ll, 0ll }, { 518ll, 1ll, 0ll }, { 523ll, 1ll, 0ll } } }, { (char*)"fb_LPrintInt", (char*)0ull, 0ll, -1ll, (tmp$35)&RTLPRINTER_CB, 0ll, 3ll, { { 523ll, 1ll, -1ll, 0ll }, { 523ll, 1ll, 0ll }, { 523ll, 1ll, 0ll } } }, { (char*)"fb_LPrintUInt", (char*)0ull, 0ll, -1ll, (tmp$35)&RTLPRINTER_CB, 0ll, 3ll, { { 523ll, 1ll, -1ll, 0ll }, { 524ll, 1ll, 0ll }, { 523ll, 1ll, 0ll } } }, { (char*)"fb_LPrintLongint", (char*)0ull, 0ll, -1ll, (tmp$35)&RTLPRINTER_CB, 0ll, 3ll, { { 523ll, 1ll, -1ll, 0ll }, { 525ll, 1ll, 0ll }, { 523ll, 1ll, 0ll } } }, { (char*)"fb_LPrintULongint", (char*)0ull, 0ll, -1ll, (tmp$35)&RTLPRINTER_CB, 0ll, 3ll, { { 523ll, 1ll, -1ll, 0ll }, { 526ll, 1ll, 0ll }, { 523ll, 1ll, 0ll } } }, { (char*)"fb_LPrintSingle", (char*)0ull, 0ll, -1ll, (tmp$35)&RTLPRINTER_CB, 0ll, 3ll, { { 523ll, 1ll, -1ll, 0ll }, { 527ll, 1ll, 0ll }, { 523ll, 1ll, 0ll } } }, { (char*)"fb_LPrintDouble", (char*)0ull, 0ll, -1ll, (tmp$35)&RTLPRINTER_CB, 0ll, 3ll, { { 523ll, 1ll, -1ll, 0ll }, { 528ll, 1ll, 0ll }, { 523ll, 1ll, 0ll } } }, { (char*)"fb_LPrintString", (char*)0ull, 0ll, -1ll, (tmp$35)&RTLPRINTER_CB, 0ll, 3ll, { { 523ll, 1ll, -1ll, 0ll }, { 529ll, 2ll, 0ll }, { 523ll, 1ll, 0ll } } }, { (char*)"fb_LPrintWstr", (char*)0ull, 0ll, -1ll, (tmp$35)&RTLPRINTER_CB, 0ll, 3ll, { { 523ll, 1ll, -1ll, 0ll }, { 1063ll, 1ll, 0ll }, { 523ll, 1ll, 0ll } } }, { (char*)"fb_PrintSPC", (char*)0ull, 0ll, -1ll, (tmp$35)0ull, 0ll, 2ll, { { 523ll, 1ll, -1ll, 0ll }, { 520ll, 1ll, 0ll } } }, { (char*)"fb_PrintTab", (char*)0ull, 0ll, -1ll, (tmp$35)0ull, 0ll, 2ll, { { 523ll, 1ll, -1ll, 0ll }, { 523ll, 1ll, 0ll } } }, { (char*)"fb_WriteVoid", (char*)0ull, 0ll, -1ll, (tmp$35)0ull, 0ll, 2ll, { { 523ll, 1ll, -1ll, 0ll }, { 523ll, 1ll, 0ll } } }, { (char*)"fb_WriteBool", (char*)0ull, 0ll, -1ll, (tmp$35)0ull, 128ll, 3ll, { { 523ll, 1ll, -1ll, 0ll }, { 513ll, 1ll, 0ll }, { 523ll, 1ll, 0ll } } }, { (char*)"fb_WriteByte", (char*)0ull, 0ll, -1ll, (tmp$35)0ull, 0ll, 3ll, { { 523ll, 1ll, -1ll, 0ll }, { 514ll, 1ll, 0ll }, { 523ll, 1ll, 0ll } } }, { (char*)"fb_WriteUByte", (char*)0ull, 0ll, -1ll, (tmp$35)0ull, 0ll, 3ll, { { 523ll, 1ll, -1ll, 0ll }, { 515ll, 1ll, 0ll }, { 523ll, 1ll, 0ll } } }, { (char*)"fb_WriteShort", (char*)0ull, 0ll, -1ll, (tmp$35)0ull, 0ll, 3ll, { { 523ll, 1ll, -1ll, 0ll }, { 517ll, 1ll, 0ll }, { 523ll, 1ll, 0ll } } }, { (char*)"fb_WriteUShort", (char*)0ull, 0ll, -1ll, (tmp$35)0ull, 0ll, 3ll, { { 523ll, 1ll, -1ll, 0ll }, { 518ll, 1ll, 0ll }, { 523ll, 1ll, 0ll } } }, { (char*)"fb_WriteInt", (char*)0ull, 0ll, -1ll, (tmp$35)0ull, 0ll, 3ll, { { 523ll, 1ll, -1ll, 0ll }, { 523ll, 1ll, 0ll }, { 523ll, 1ll, 0ll } } }, { (char*)"fb_WriteUInt", (char*)0ull, 0ll, -1ll, (tmp$35)0ull, 0ll, 3ll, { { 523ll, 1ll, -1ll, 0ll }, { 524ll, 1ll, 0ll }, { 523ll, 1ll, 0ll } } }, { (char*)"fb_WriteLongint", (char*)0ull, 0ll, -1ll, (tmp$35)0ull, 0ll, 3ll, { { 523ll, 1ll, -1ll, 0ll }, { 525ll, 1ll, 0ll }, { 523ll, 1ll, 0ll } } }, { (char*)"fb_WriteULongint", (char*)0ull, 0ll, -1ll, (tmp$35)0ull, 0ll, 3ll, { { 523ll, 1ll, -1ll, 0ll }, { 526ll, 1ll, 0ll }, { 523ll, 1ll, 0ll } } }, { (char*)"fb_WriteSingle", (char*)0ull, 0ll, -1ll, (tmp$35)0ull, 0ll, 3ll, { { 523ll, 1ll, -1ll, 0ll }, { 527ll, 1ll, 0ll }, { 523ll, 1ll, 0ll } } }, { (char*)"fb_WriteDouble", (char*)0ull, 0ll, -1ll, (tmp$35)0ull, 0ll, 3ll, { { 523ll, 1ll, -1ll, 0ll }, { 528ll, 1ll, 0ll }, { 523ll, 1ll, 0ll } } }, { (char*)"fb_WriteString", (char*)0ull, 0ll, -1ll, (tmp$35)0ull, 0ll, 3ll, { { 523ll, 1ll, -1ll, 0ll }, { 529ll, 2ll, 0ll }, { 523ll, 1ll, 0ll } } }, { (char*)"fb_WriteWstr", (char*)0ull, 0ll, -1ll, (tmp$35)0ull, 0ll, 3ll, { { 523ll, 1ll, -1ll, 0ll }, { 1063ll, 1ll, 0ll }, { 523ll, 1ll, 0ll } } }, { (char*)"fb_PrintUsingInit", (char*)0ull, 11ll, -1ll, (tmp$35)0ull, 0ll, 1ll, { { 529ll, 2ll, 0ll } } }, { (char*)"fb_PrintUsingStr", (char*)0ull, 11ll, -1ll, (tmp$35)0ull, 0ll, 3ll, { { 523ll, 1ll, 0ll }, { 529ll, 2ll, 0ll }, { 523ll, 1ll, 0ll } } }, { (char*)"fb_PrintUsingWstr", (char*)0ull, 11ll, -1ll, (tmp$35)0ull, 0ll, 3ll, { { 523ll, 1ll, 0ll }, { 1063ll, 1ll, 0ll }, { 523ll, 1ll, 0ll } } }, { (char*)"fb_PrintUsingSingle", (char*)0ull, 11ll, -1ll, (tmp$35)0ull, 0ll, 3ll, { { 523ll, 1ll, 0ll }, { 527ll, 1ll, 0ll }, { 523ll, 1ll, 0ll } } }, { (char*)"fb_PrintUsingDouble", (char*)0ull, 11ll, -1ll, (tmp$35)0ull, 0ll, 3ll, { { 523ll, 1ll, 0ll }, { 528ll, 1ll, 0ll }, { 523ll, 1ll, 0ll } } }, { (char*)"fb_PrintUsingLongint", (char*)0ull, 11ll, -1ll, (tmp$35)0ull, 0ll, 3ll, { { 523ll, 1ll, 0ll }, { 525ll, 1ll, 0ll }, { 523ll, 1ll, 0ll } } }, { (char*)"fb_PrintUsingULongint", (char*)0ull, 11ll, -1ll, (tmp$35)0ull, 0ll, 3ll, { { 523ll, 1ll, 0ll }, { 526ll, 1ll, 0ll }, { 523ll, 1ll, 0ll } } }, { (char*)"fb_PrintUsingBoolean", (char*)0ull, 11ll, -1ll, (tmp$35)0ull, 0ll, 3ll, { { 523ll, 1ll, 0ll }, { 513ll, 1ll, 0ll }, { 523ll, 1ll, 0ll } } }, { (char*)"fb_PrintUsingEnd", (char*)0ull, 11ll, -1ll, (tmp$35)0ull, 0ll, 1ll, { { 523ll, 1ll, 0ll } } }, { (char*)"fb_LPrintUsingInit", (char*)0ull, 11ll, -1ll, (tmp$35)&RTLPRINTER_CB, 0ll, 1ll, { { 529ll, 2ll, 0ll } } }, { (char*)0ull } };
+static struct $14FB_RTL_PROCDEF FUNCDATA$[55] = { { (char*)"fb_PrintVoid", (char*)0ull, 0ll, -1ll, (tmp$34)0ull, 0ll, 2ll, { { 523ll, 1ll, -1ll, 0ll }, { 523ll, 1ll, 0ll } } }, { (char*)"fb_PrintBool", (char*)0ull, 0ll, -1ll, (tmp$34)0ull, 128ll, 3ll, { { 523ll, 1ll, -1ll, 0ll }, { 513ll, 1ll, 0ll }, { 523ll, 1ll, 0ll } } }, { (char*)"fb_PrintByte", (char*)0ull, 0ll, -1ll, (tmp$34)0ull, 0ll, 3ll, { { 523ll, 1ll, -1ll, 0ll }, { 514ll, 1ll, 0ll }, { 523ll, 1ll, 0ll } } }, { (char*)"fb_PrintUByte", (char*)0ull, 0ll, -1ll, (tmp$34)0ull, 0ll, 3ll, { { 523ll, 1ll, -1ll, 0ll }, { 515ll, 1ll, 0ll }, { 523ll, 1ll, 0ll } } }, { (char*)"fb_PrintShort", (char*)0ull, 0ll, -1ll, (tmp$34)0ull, 0ll, 3ll, { { 523ll, 1ll, -1ll, 0ll }, { 517ll, 1ll, 0ll }, { 523ll, 1ll, 0ll } } }, { (char*)"fb_PrintUShort", (char*)0ull, 0ll, -1ll, (tmp$34)0ull, 0ll, 3ll, { { 523ll, 1ll, -1ll, 0ll }, { 518ll, 1ll, 0ll }, { 523ll, 1ll, 0ll } } }, { (char*)"fb_PrintInt", (char*)0ull, 0ll, -1ll, (tmp$34)0ull, 0ll, 3ll, { { 523ll, 1ll, -1ll, 0ll }, { 523ll, 1ll, 0ll }, { 523ll, 1ll, 0ll } } }, { (char*)"fb_PrintUInt", (char*)0ull, 0ll, -1ll, (tmp$34)0ull, 0ll, 3ll, { { 523ll, 1ll, -1ll, 0ll }, { 524ll, 1ll, 0ll }, { 523ll, 1ll, 0ll } } }, { (char*)"fb_PrintLongint", (char*)0ull, 0ll, -1ll, (tmp$34)0ull, 0ll, 3ll, { { 523ll, 1ll, -1ll, 0ll }, { 525ll, 1ll, 0ll }, { 523ll, 1ll, 0ll } } }, { (char*)"fb_PrintULongint", (char*)0ull, 0ll, -1ll, (tmp$34)0ull, 0ll, 3ll, { { 523ll, 1ll, -1ll, 0ll }, { 526ll, 1ll, 0ll }, { 523ll, 1ll, 0ll } } }, { (char*)"fb_PrintSingle", (char*)0ull, 0ll, -1ll, (tmp$34)0ull, 0ll, 3ll, { { 523ll, 1ll, -1ll, 0ll }, { 527ll, 1ll, 0ll }, { 523ll, 1ll, 0ll } } }, { (char*)"fb_PrintDouble", (char*)0ull, 0ll, -1ll, (tmp$34)0ull, 0ll, 3ll, { { 523ll, 1ll, -1ll, 0ll }, { 528ll, 1ll, 0ll }, { 523ll, 1ll, 0ll } } }, { (char*)"fb_PrintString", (char*)0ull, 0ll, -1ll, (tmp$34)0ull, 0ll, 3ll, { { 523ll, 1ll, -1ll, 0ll }, { 529ll, 2ll, 0ll }, { 523ll, 1ll, 0ll } } }, { (char*)"fb_PrintWstr", (char*)0ull, 0ll, -1ll, (tmp$34)0ull, 0ll, 3ll, { { 523ll, 1ll, -1ll, 0ll }, { 1063ll, 1ll, 0ll }, { 523ll, 1ll, 0ll } } }, { (char*)"fb_LPrintVoid", (char*)0ull, 0ll, -1ll, (tmp$34)&RTLPRINTER_CB, 0ll, 2ll, { { 523ll, 1ll, -1ll, 0ll }, { 523ll, 1ll, 0ll } } }, { (char*)"fb_LPrintBool", (char*)0ull, 0ll, -1ll, (tmp$34)&RTLPRINTER_CB, 128ll, 3ll, { { 523ll, 1ll, -1ll, 0ll }, { 513ll, 1ll, 0ll }, { 523ll, 1ll, 0ll } } }, { (char*)"fb_LPrintByte", (char*)0ull, 0ll, -1ll, (tmp$34)&RTLPRINTER_CB, 0ll, 3ll, { { 523ll, 1ll, -1ll, 0ll }, { 514ll, 1ll, 0ll }, { 523ll, 1ll, 0ll } } }, { (char*)"fb_LPrintUByte", (char*)0ull, 0ll, -1ll, (tmp$34)&RTLPRINTER_CB, 0ll, 3ll, { { 523ll, 1ll, -1ll, 0ll }, { 515ll, 1ll, 0ll }, { 523ll, 1ll, 0ll } } }, { (char*)"fb_LPrintShort", (char*)0ull, 0ll, -1ll, (tmp$34)&RTLPRINTER_CB, 0ll, 3ll, { { 523ll, 1ll, -1ll, 0ll }, { 517ll, 1ll, 0ll }, { 523ll, 1ll, 0ll } } }, { (char*)"fb_LPrintUShort", (char*)0ull, 0ll, -1ll, (tmp$34)&RTLPRINTER_CB, 0ll, 3ll, { { 523ll, 1ll, -1ll, 0ll }, { 518ll, 1ll, 0ll }, { 523ll, 1ll, 0ll } } }, { (char*)"fb_LPrintInt", (char*)0ull, 0ll, -1ll, (tmp$34)&RTLPRINTER_CB, 0ll, 3ll, { { 523ll, 1ll, -1ll, 0ll }, { 523ll, 1ll, 0ll }, { 523ll, 1ll, 0ll } } }, { (char*)"fb_LPrintUInt", (char*)0ull, 0ll, -1ll, (tmp$34)&RTLPRINTER_CB, 0ll, 3ll, { { 523ll, 1ll, -1ll, 0ll }, { 524ll, 1ll, 0ll }, { 523ll, 1ll, 0ll } } }, { (char*)"fb_LPrintLongint", (char*)0ull, 0ll, -1ll, (tmp$34)&RTLPRINTER_CB, 0ll, 3ll, { { 523ll, 1ll, -1ll, 0ll }, { 525ll, 1ll, 0ll }, { 523ll, 1ll, 0ll } } }, { (char*)"fb_LPrintULongint", (char*)0ull, 0ll, -1ll, (tmp$34)&RTLPRINTER_CB, 0ll, 3ll, { { 523ll, 1ll, -1ll, 0ll }, { 526ll, 1ll, 0ll }, { 523ll, 1ll, 0ll } } }, { (char*)"fb_LPrintSingle", (char*)0ull, 0ll, -1ll, (tmp$34)&RTLPRINTER_CB, 0ll, 3ll, { { 523ll, 1ll, -1ll, 0ll }, { 527ll, 1ll, 0ll }, { 523ll, 1ll, 0ll } } }, { (char*)"fb_LPrintDouble", (char*)0ull, 0ll, -1ll, (tmp$34)&RTLPRINTER_CB, 0ll, 3ll, { { 523ll, 1ll, -1ll, 0ll }, { 528ll, 1ll, 0ll }, { 523ll, 1ll, 0ll } } }, { (char*)"fb_LPrintString", (char*)0ull, 0ll, -1ll, (tmp$34)&RTLPRINTER_CB, 0ll, 3ll, { { 523ll, 1ll, -1ll, 0ll }, { 529ll, 2ll, 0ll }, { 523ll, 1ll, 0ll } } }, { (char*)"fb_LPrintWstr", (char*)0ull, 0ll, -1ll, (tmp$34)&RTLPRINTER_CB, 0ll, 3ll, { { 523ll, 1ll, -1ll, 0ll }, { 1063ll, 1ll, 0ll }, { 523ll, 1ll, 0ll } } }, { (char*)"fb_PrintSPC", (char*)0ull, 0ll, -1ll, (tmp$34)0ull, 0ll, 2ll, { { 523ll, 1ll, -1ll, 0ll }, { 520ll, 1ll, 0ll } } }, { (char*)"fb_PrintTab", (char*)0ull, 0ll, -1ll, (tmp$34)0ull, 0ll, 2ll, { { 523ll, 1ll, -1ll, 0ll }, { 523ll, 1ll, 0ll } } }, { (char*)"fb_WriteVoid", (char*)0ull, 0ll, -1ll, (tmp$34)0ull, 0ll, 2ll, { { 523ll, 1ll, -1ll, 0ll }, { 523ll, 1ll, 0ll } } }, { (char*)"fb_WriteBool", (char*)0ull, 0ll, -1ll, (tmp$34)0ull, 128ll, 3ll, { { 523ll, 1ll, -1ll, 0ll }, { 513ll, 1ll, 0ll }, { 523ll, 1ll, 0ll } } }, { (char*)"fb_WriteByte", (char*)0ull, 0ll, -1ll, (tmp$34)0ull, 0ll, 3ll, { { 523ll, 1ll, -1ll, 0ll }, { 514ll, 1ll, 0ll }, { 523ll, 1ll, 0ll } } }, { (char*)"fb_WriteUByte", (char*)0ull, 0ll, -1ll, (tmp$34)0ull, 0ll, 3ll, { { 523ll, 1ll, -1ll, 0ll }, { 515ll, 1ll, 0ll }, { 523ll, 1ll, 0ll } } }, { (char*)"fb_WriteShort", (char*)0ull, 0ll, -1ll, (tmp$34)0ull, 0ll, 3ll, { { 523ll, 1ll, -1ll, 0ll }, { 517ll, 1ll, 0ll }, { 523ll, 1ll, 0ll } } }, { (char*)"fb_WriteUShort", (char*)0ull, 0ll, -1ll, (tmp$34)0ull, 0ll, 3ll, { { 523ll, 1ll, -1ll, 0ll }, { 518ll, 1ll, 0ll }, { 523ll, 1ll, 0ll } } }, { (char*)"fb_WriteInt", (char*)0ull, 0ll, -1ll, (tmp$34)0ull, 0ll, 3ll, { { 523ll, 1ll, -1ll, 0ll }, { 523ll, 1ll, 0ll }, { 523ll, 1ll, 0ll } } }, { (char*)"fb_WriteUInt", (char*)0ull, 0ll, -1ll, (tmp$34)0ull, 0ll, 3ll, { { 523ll, 1ll, -1ll, 0ll }, { 524ll, 1ll, 0ll }, { 523ll, 1ll, 0ll } } }, { (char*)"fb_WriteLongint", (char*)0ull, 0ll, -1ll, (tmp$34)0ull, 0ll, 3ll, { { 523ll, 1ll, -1ll, 0ll }, { 525ll, 1ll, 0ll }, { 523ll, 1ll, 0ll } } }, { (char*)"fb_WriteULongint", (char*)0ull, 0ll, -1ll, (tmp$34)0ull, 0ll, 3ll, { { 523ll, 1ll, -1ll, 0ll }, { 526ll, 1ll, 0ll }, { 523ll, 1ll, 0ll } } }, { (char*)"fb_WriteSingle", (char*)0ull, 0ll, -1ll, (tmp$34)0ull, 0ll, 3ll, { { 523ll, 1ll, -1ll, 0ll }, { 527ll, 1ll, 0ll }, { 523ll, 1ll, 0ll } } }, { (char*)"fb_WriteDouble", (char*)0ull, 0ll, -1ll, (tmp$34)0ull, 0ll, 3ll, { { 523ll, 1ll, -1ll, 0ll }, { 528ll, 1ll, 0ll }, { 523ll, 1ll, 0ll } } }, { (char*)"fb_WriteString", (char*)0ull, 0ll, -1ll, (tmp$34)0ull, 0ll, 3ll, { { 523ll, 1ll, -1ll, 0ll }, { 529ll, 2ll, 0ll }, { 523ll, 1ll, 0ll } } }, { (char*)"fb_WriteWstr", (char*)0ull, 0ll, -1ll, (tmp$34)0ull, 0ll, 3ll, { { 523ll, 1ll, -1ll, 0ll }, { 1063ll, 1ll, 0ll }, { 523ll, 1ll, 0ll } } }, { (char*)"fb_PrintUsingInit", (char*)0ull, 11ll, -1ll, (tmp$34)0ull, 0ll, 1ll, { { 529ll, 2ll, 0ll } } }, { (char*)"fb_PrintUsingStr", (char*)0ull, 11ll, -1ll, (tmp$34)0ull, 0ll, 3ll, { { 523ll, 1ll, 0ll }, { 529ll, 2ll, 0ll }, { 523ll, 1ll, 0ll } } }, { (char*)"fb_PrintUsingWstr", (char*)0ull, 11ll, -1ll, (tmp$34)0ull, 0ll, 3ll, { { 523ll, 1ll, 0ll }, { 1063ll, 1ll, 0ll }, { 523ll, 1ll, 0ll } } }, { (char*)"fb_PrintUsingSingle", (char*)0ull, 11ll, -1ll, (tmp$34)0ull, 0ll, 3ll, { { 523ll, 1ll, 0ll }, { 527ll, 1ll, 0ll }, { 523ll, 1ll, 0ll } } }, { (char*)"fb_PrintUsingDouble", (char*)0ull, 11ll, -1ll, (tmp$34)0ull, 0ll, 3ll, { { 523ll, 1ll, 0ll }, { 528ll, 1ll, 0ll }, { 523ll, 1ll, 0ll } } }, { (char*)"fb_PrintUsingLongint", (char*)0ull, 11ll, -1ll, (tmp$34)0ull, 0ll, 3ll, { { 523ll, 1ll, 0ll }, { 525ll, 1ll, 0ll }, { 523ll, 1ll, 0ll } } }, { (char*)"fb_PrintUsingULongint", (char*)0ull, 11ll, -1ll, (tmp$34)0ull, 0ll, 3ll, { { 523ll, 1ll, 0ll }, { 526ll, 1ll, 0ll }, { 523ll, 1ll, 0ll } } }, { (char*)"fb_PrintUsingBoolean", (char*)0ull, 11ll, -1ll, (tmp$34)0ull, 0ll, 3ll, { { 523ll, 1ll, 0ll }, { 513ll, 1ll, 0ll }, { 523ll, 1ll, 0ll } } }, { (char*)"fb_PrintUsingEnd", (char*)0ull, 11ll, -1ll, (tmp$34)0ull, 0ll, 1ll, { { 523ll, 1ll, 0ll } } }, { (char*)"fb_LPrintUsingInit", (char*)0ull, 11ll, -1ll, (tmp$34)&RTLPRINTER_CB, 0ll, 1ll, { { 529ll, 2ll, 0ll } } }, { (char*)0ull } };
 
 void RTLPRINTMODINIT( void )
 {
@@ -933,9 +933,9 @@ int64 RTLPRINT( struct $7ASTNODE* FILEEXPR$1, int64 ISCOMMA$1, int64 ISSEMICOLON
 	struct $8FBSYMBOL* F$1;
 	int64 MASK$1;
 	fb$result$1 = 0ll;
-	if( EXPR$1 != (struct $7ASTNODE*)0ull ) goto label$17;
+	if( EXPR$1 != (struct $7ASTNODE*)0ull) goto label$17;
 	{
-		if( ISLPRINT$1 == 0ll ) goto label$19;
+		if( ISLPRINT$1 == 0ll) goto label$19;
 		{
 			struct $8FBSYMBOL* vr$1 = RTLPROCLOOKUP( (char*)"fb_LPrintVoid", 180ll );
 			F$1 = vr$1;
@@ -953,23 +953,23 @@ int64 RTLPRINT( struct $7ASTNODE* FILEEXPR$1, int64 ISCOMMA$1, int64 ISSEMICOLON
 	{
 		ASTTRYOVLSTRINGCONV( &EXPR$1 );
 		{
+			int64 TMP$150$3;
 			int64 TMP$151$3;
-			int64 TMP$152$3;
-			if( ((*(int64*)((uint8*)EXPR$1 + 8ll) & 511ll) & 480ll) == 0ll ) goto label$20;
-			TMP$151$3 = 24ll;
+			if( ((*(int64*)((uint8*)EXPR$1 + 8ll) & 511ll) & 480ll) == 0ll) goto label$20;
+			TMP$150$3 = 24ll;
 			goto label$89;
 			label$20:;
-			TMP$151$3 = (*(int64*)((uint8*)EXPR$1 + 8ll) & 511ll) & 31ll;
+			TMP$150$3 = (*(int64*)((uint8*)EXPR$1 + 8ll) & 511ll) & 31ll;
 			label$89:;
-			TMP$152$3 = TMP$151$3;
-			if( TMP$152$3 == 20ll ) goto label$23;
+			TMP$151$3 = TMP$150$3;
+			if( TMP$151$3 == 20ll) goto label$23;
 			label$24:;
-			if( TMP$152$3 != 10ll ) goto label$22;
+			if( TMP$151$3 != 10ll) goto label$22;
 			label$23:;
 			{
 				struct $7ASTNODE* vr$10 = ASTNEWOVLCONV( 17ll, (struct $8FBSYMBOL*)0ull, EXPR$1 );
 				EXPR$1 = vr$10;
-				if( EXPR$1 != (struct $7ASTNODE*)0ull ) goto label$26;
+				if( EXPR$1 != (struct $7ASTNODE*)0ull) goto label$26;
 				{
 					goto label$15;
 				}
@@ -979,7 +979,7 @@ int64 RTLPRINT( struct $7ASTNODE* FILEEXPR$1, int64 ISCOMMA$1, int64 ISSEMICOLON
 			goto label$21;
 			label$22:;
 			{
-				if( (*(int64*)((uint8*)EXPR$1 + 8ll) & 480ll) == 0ll ) goto label$29;
+				if( (*(int64*)((uint8*)EXPR$1 + 8ll) & 480ll) == 0ll) goto label$29;
 				{
 					struct $7ASTNODE* vr$13 = ASTNEWCONV( 9ll, (struct $8FBSYMBOL*)0ull, EXPR$1, 0ll, (int64*)0ull );
 					EXPR$1 = vr$13;
@@ -991,12 +991,12 @@ int64 RTLPRINT( struct $7ASTNODE* FILEEXPR$1, int64 ISCOMMA$1, int64 ISSEMICOLON
 			label$21:;
 		}
 		{
-			uint64 TMP$153$3;
-			TMP$153$3 = (uint64)(*(int64*)((uint8*)EXPR$1 + 8ll) & 511ll);
+			uint64 TMP$152$3;
+			TMP$152$3 = (uint64)(*(int64*)((uint8*)EXPR$1 + 8ll) & 511ll);
 			goto label$31;
 			label$32:;
 			{
-				if( ISLPRINT$1 == 0ll ) goto label$34;
+				if( ISLPRINT$1 == 0ll) goto label$34;
 				{
 					struct $8FBSYMBOL* vr$16 = RTLPROCLOOKUP( (char*)"fb_LPrintString", 192ll );
 					F$1 = vr$16;
@@ -1012,7 +1012,7 @@ int64 RTLPRINT( struct $7ASTNODE* FILEEXPR$1, int64 ISCOMMA$1, int64 ISSEMICOLON
 			goto label$30;
 			label$35:;
 			{
-				if( ISLPRINT$1 == 0ll ) goto label$37;
+				if( ISLPRINT$1 == 0ll) goto label$37;
 				{
 					struct $8FBSYMBOL* vr$18 = RTLPROCLOOKUP( (char*)"fb_LPrintWstr", 193ll );
 					F$1 = vr$18;
@@ -1028,7 +1028,7 @@ int64 RTLPRINT( struct $7ASTNODE* FILEEXPR$1, int64 ISCOMMA$1, int64 ISSEMICOLON
 			goto label$30;
 			label$38:;
 			{
-				if( ISLPRINT$1 == 0ll ) goto label$40;
+				if( ISLPRINT$1 == 0ll) goto label$40;
 				{
 					struct $8FBSYMBOL* vr$20 = RTLPROCLOOKUP( (char*)"fb_LPrintBool", 181ll );
 					F$1 = vr$20;
@@ -1045,19 +1045,19 @@ int64 RTLPRINT( struct $7ASTNODE* FILEEXPR$1, int64 ISCOMMA$1, int64 ISSEMICOLON
 			label$41:;
 			{
 				{
-					int64 TMP$154$5;
-					uint64 TMP$155$5;
-					if( (*(int64*)((uint8*)EXPR$1 + 8ll) & 480ll) == 0ll ) goto label$42;
-					TMP$154$5 = 24ll;
+					int64 TMP$153$5;
+					uint64 TMP$154$5;
+					if( (*(int64*)((uint8*)EXPR$1 + 8ll) & 480ll) == 0ll) goto label$42;
+					TMP$153$5 = 24ll;
 					goto label$90;
 					label$42:;
-					TMP$154$5 = *(int64*)((uint8*)EXPR$1 + 8ll) & 31ll;
+					TMP$153$5 = *(int64*)((uint8*)EXPR$1 + 8ll) & 31ll;
 					label$90:;
-					TMP$155$5 = *(uint64*)(((int64)(struct $13SYMB_DATATYPE*)SYMB_DTYPETB$ + (TMP$154$5 * 56ll)) + 40ll);
+					TMP$154$5 = *(uint64*)(((int64)(struct $13SYMB_DATATYPE*)SYMB_DTYPETB$ + (TMP$153$5 * 56ll)) + 40ll);
 					goto label$44;
 					label$45:;
 					{
-						if( ISLPRINT$1 == 0ll ) goto label$47;
+						if( ISLPRINT$1 == 0ll) goto label$47;
 						{
 							struct $8FBSYMBOL* vr$27 = RTLPROCLOOKUP( (char*)"fb_LPrintByte", 182ll );
 							F$1 = vr$27;
@@ -1073,7 +1073,7 @@ int64 RTLPRINT( struct $7ASTNODE* FILEEXPR$1, int64 ISCOMMA$1, int64 ISSEMICOLON
 					goto label$43;
 					label$48:;
 					{
-						if( ISLPRINT$1 == 0ll ) goto label$50;
+						if( ISLPRINT$1 == 0ll) goto label$50;
 						{
 							struct $8FBSYMBOL* vr$29 = RTLPROCLOOKUP( (char*)"fb_LPrintUByte", 183ll );
 							F$1 = vr$29;
@@ -1089,7 +1089,7 @@ int64 RTLPRINT( struct $7ASTNODE* FILEEXPR$1, int64 ISCOMMA$1, int64 ISSEMICOLON
 					goto label$43;
 					label$51:;
 					{
-						if( ISLPRINT$1 == 0ll ) goto label$53;
+						if( ISLPRINT$1 == 0ll) goto label$53;
 						{
 							struct $8FBSYMBOL* vr$31 = RTLPROCLOOKUP( (char*)"fb_LPrintShort", 184ll );
 							F$1 = vr$31;
@@ -1105,7 +1105,7 @@ int64 RTLPRINT( struct $7ASTNODE* FILEEXPR$1, int64 ISCOMMA$1, int64 ISSEMICOLON
 					goto label$43;
 					label$54:;
 					{
-						if( ISLPRINT$1 == 0ll ) goto label$56;
+						if( ISLPRINT$1 == 0ll) goto label$56;
 						{
 							struct $8FBSYMBOL* vr$33 = RTLPROCLOOKUP( (char*)"fb_LPrintUShort", 185ll );
 							F$1 = vr$33;
@@ -1121,7 +1121,7 @@ int64 RTLPRINT( struct $7ASTNODE* FILEEXPR$1, int64 ISCOMMA$1, int64 ISSEMICOLON
 					goto label$43;
 					label$57:;
 					{
-						if( ISLPRINT$1 == 0ll ) goto label$59;
+						if( ISLPRINT$1 == 0ll) goto label$59;
 						{
 							struct $8FBSYMBOL* vr$35 = RTLPROCLOOKUP( (char*)"fb_LPrintInt", 186ll );
 							F$1 = vr$35;
@@ -1137,7 +1137,7 @@ int64 RTLPRINT( struct $7ASTNODE* FILEEXPR$1, int64 ISCOMMA$1, int64 ISSEMICOLON
 					goto label$43;
 					label$60:;
 					{
-						if( ISLPRINT$1 == 0ll ) goto label$62;
+						if( ISLPRINT$1 == 0ll) goto label$62;
 						{
 							struct $8FBSYMBOL* vr$37 = RTLPROCLOOKUP( (char*)"fb_LPrintUInt", 187ll );
 							F$1 = vr$37;
@@ -1153,7 +1153,7 @@ int64 RTLPRINT( struct $7ASTNODE* FILEEXPR$1, int64 ISCOMMA$1, int64 ISSEMICOLON
 					goto label$43;
 					label$63:;
 					{
-						if( ISLPRINT$1 == 0ll ) goto label$65;
+						if( ISLPRINT$1 == 0ll) goto label$65;
 						{
 							struct $8FBSYMBOL* vr$39 = RTLPROCLOOKUP( (char*)"fb_LPrintLongint", 188ll );
 							F$1 = vr$39;
@@ -1169,7 +1169,7 @@ int64 RTLPRINT( struct $7ASTNODE* FILEEXPR$1, int64 ISCOMMA$1, int64 ISSEMICOLON
 					goto label$43;
 					label$66:;
 					{
-						if( ISLPRINT$1 == 0ll ) goto label$68;
+						if( ISLPRINT$1 == 0ll) goto label$68;
 						{
 							struct $8FBSYMBOL* vr$41 = RTLPROCLOOKUP( (char*)"fb_LPrintULongint", 189ll );
 							F$1 = vr$41;
@@ -1184,7 +1184,7 @@ int64 RTLPRINT( struct $7ASTNODE* FILEEXPR$1, int64 ISCOMMA$1, int64 ISSEMICOLON
 					}
 					goto label$43;
 					label$44:;
-					static const void* tmp$156[8ll] = {
+					static const void* tmp$155[8ll] = {
 						&&label$45,
 						&&label$48,
 						&&label$51,
@@ -1194,15 +1194,15 @@ int64 RTLPRINT( struct $7ASTNODE* FILEEXPR$1, int64 ISCOMMA$1, int64 ISSEMICOLON
 						&&label$63,
 						&&label$66,
 					};
-					if( (TMP$155$5 - 1ull) > 7ull ) goto label$43;
-					goto *tmp$156[TMP$155$5 - 1ull];
+					if( (TMP$154$5 - 1ull) > 7ull ) goto label$43;
+					goto *tmp$155[TMP$154$5 - 1ull];
 					label$43:;
 				}
 			}
 			goto label$30;
 			label$69:;
 			{
-				if( ISLPRINT$1 == 0ll ) goto label$71;
+				if( ISLPRINT$1 == 0ll) goto label$71;
 				{
 					struct $8FBSYMBOL* vr$43 = RTLPROCLOOKUP( (char*)"fb_LPrintSingle", 190ll );
 					F$1 = vr$43;
@@ -1218,7 +1218,7 @@ int64 RTLPRINT( struct $7ASTNODE* FILEEXPR$1, int64 ISCOMMA$1, int64 ISSEMICOLON
 			goto label$30;
 			label$72:;
 			{
-				if( ISLPRINT$1 == 0ll ) goto label$74;
+				if( ISLPRINT$1 == 0ll) goto label$74;
 				{
 					struct $8FBSYMBOL* vr$45 = RTLPROCLOOKUP( (char*)"fb_LPrintDouble", 191ll );
 					F$1 = vr$45;
@@ -1238,7 +1238,7 @@ int64 RTLPRINT( struct $7ASTNODE* FILEEXPR$1, int64 ISCOMMA$1, int64 ISSEMICOLON
 			}
 			goto label$30;
 			label$31:;
-			static const void* tmp$157[18ll] = {
+			static const void* tmp$156[18ll] = {
 				&&label$38,
 				&&label$41,
 				&&label$41,
@@ -1258,8 +1258,8 @@ int64 RTLPRINT( struct $7ASTNODE* FILEEXPR$1, int64 ISCOMMA$1, int64 ISSEMICOLON
 				&&label$32,
 				&&label$32,
 			};
-			if( (TMP$153$3 - 1ull) > 17ull ) goto label$75;
-			goto *tmp$157[TMP$153$3 - 1ull];
+			if( (TMP$152$3 - 1ull) > 17ull ) goto label$75;
+			goto *tmp$156[TMP$152$3 - 1ull];
 			label$30:;
 		}
 	}
@@ -1267,16 +1267,16 @@ int64 RTLPRINT( struct $7ASTNODE* FILEEXPR$1, int64 ISCOMMA$1, int64 ISSEMICOLON
 	struct $7ASTNODE* vr$47 = ASTNEWCALL( F$1, (struct $7ASTNODE*)0ull, -1ll );
 	PROC$1 = vr$47;
 	struct $7ASTNODE* vr$48 = ASTNEWARG( PROC$1, FILEEXPR$1, 2147483648ll, -1ll );
-	if( vr$48 != (struct $7ASTNODE*)0ull ) goto label$77;
+	if( vr$48 != (struct $7ASTNODE*)0ull) goto label$77;
 	{
 		goto label$15;
 	}
 	label$77:;
 	label$76:;
-	if( EXPR$1 == (struct $7ASTNODE*)0ull ) goto label$79;
+	if( EXPR$1 == (struct $7ASTNODE*)0ull) goto label$79;
 	{
 		struct $7ASTNODE* vr$49 = ASTNEWARG( PROC$1, EXPR$1, 2147483648ll, -1ll );
-		if( vr$49 != (struct $7ASTNODE*)0ull ) goto label$81;
+		if( vr$49 != (struct $7ASTNODE*)0ull) goto label$81;
 		{
 			goto label$15;
 		}
@@ -1286,18 +1286,18 @@ int64 RTLPRINT( struct $7ASTNODE* FILEEXPR$1, int64 ISCOMMA$1, int64 ISSEMICOLON
 	label$79:;
 	label$78:;
 	MASK$1 = 0ll;
-	if( *(int64*)((uint8*)&ENV$ + 272ll) != 3ll ) goto label$83;
+	if( *(int64*)((uint8*)&ENV$ + 272ll) != 3ll) goto label$83;
 	{
 		MASK$1 = MASK$1 | 16ll;
 		label$83:;
 	}
-	if( ISCOMMA$1 == 0ll ) goto label$85;
+	if( ISCOMMA$1 == 0ll) goto label$85;
 	{
 		MASK$1 = MASK$1 | 2ll;
 	}
 	goto label$84;
 	label$85:;
-	if( ISSEMICOLON$1 != 0ll ) goto label$86;
+	if( ISSEMICOLON$1 != 0ll) goto label$86;
 	{
 		MASK$1 = MASK$1 | 1ll;
 	}
@@ -1305,7 +1305,7 @@ int64 RTLPRINT( struct $7ASTNODE* FILEEXPR$1, int64 ISCOMMA$1, int64 ISSEMICOLON
 	label$84:;
 	struct $7ASTNODE* vr$53 = ASTNEWCONSTI( MASK$1, 8ll, (struct $8FBSYMBOL*)0ull );
 	struct $7ASTNODE* vr$54 = ASTNEWARG( PROC$1, vr$53, 2147483648ll, -1ll );
-	if( vr$54 != (struct $7ASTNODE*)0ull ) goto label$88;
+	if( vr$54 != (struct $7ASTNODE*)0ull) goto label$88;
 	{
 		goto label$15;
 	}
@@ -1324,13 +1324,13 @@ int64 RTLPRINTSPCTAB( struct $7ASTNODE* FILEEXPR$1, struct $7ASTNODE* EXPR$1, in
 	label$91:;
 	struct $7ASTNODE* PROC$1;
 	fb$result$1 = 0ll;
-	if( ISLPRINT$1 == 0ll ) goto label$94;
+	if( ISLPRINT$1 == 0ll) goto label$94;
 	{
 		RTLPRINTER_CB( (struct $8FBSYMBOL*)0ull );
 	}
 	label$94:;
 	label$93:;
-	if( ISTAB$1 == 0ll ) goto label$96;
+	if( ISTAB$1 == 0ll) goto label$96;
 	{
 		struct $8FBSYMBOL* vr$1 = RTLPROCLOOKUP( (char*)"fb_PrintTab", 195ll );
 		struct $7ASTNODE* vr$2 = ASTNEWCALL( vr$1, (struct $7ASTNODE*)0ull, -1ll );
@@ -1345,14 +1345,14 @@ int64 RTLPRINTSPCTAB( struct $7ASTNODE* FILEEXPR$1, struct $7ASTNODE* EXPR$1, in
 	}
 	label$95:;
 	struct $7ASTNODE* vr$5 = ASTNEWARG( PROC$1, FILEEXPR$1, 2147483648ll, -1ll );
-	if( vr$5 != (struct $7ASTNODE*)0ull ) goto label$98;
+	if( vr$5 != (struct $7ASTNODE*)0ull) goto label$98;
 	{
 		goto label$92;
 	}
 	label$98:;
 	label$97:;
 	struct $7ASTNODE* vr$6 = ASTNEWARG( PROC$1, EXPR$1, 2147483648ll, -1ll );
-	if( vr$6 != (struct $7ASTNODE*)0ull ) goto label$100;
+	if( vr$6 != (struct $7ASTNODE*)0ull) goto label$100;
 	{
 		goto label$92;
 	}
@@ -1373,7 +1373,7 @@ int64 RTLWRITE( struct $7ASTNODE* FILEEXPR$1, int64 ISCOMMA$1, struct $7ASTNODE*
 	struct $8FBSYMBOL* F$1;
 	int64 MASK$1;
 	fb$result$1 = 0ll;
-	if( EXPR$1 != (struct $7ASTNODE*)0ull ) goto label$104;
+	if( EXPR$1 != (struct $7ASTNODE*)0ull) goto label$104;
 	{
 		struct $8FBSYMBOL* vr$1 = RTLPROCLOOKUP( (char*)"fb_WriteVoid", 196ll );
 		F$1 = vr$1;
@@ -1383,16 +1383,16 @@ int64 RTLWRITE( struct $7ASTNODE* FILEEXPR$1, int64 ISCOMMA$1, struct $7ASTNODE*
 	{
 		ASTTRYOVLSTRINGCONV( &EXPR$1 );
 		{
-			int64 TMP$158$3;
-			TMP$158$3 = *(int64*)((uint8*)EXPR$1 + 8ll) & 511ll;
-			if( TMP$158$3 == 20ll ) goto label$107;
+			int64 TMP$157$3;
+			TMP$157$3 = *(int64*)((uint8*)EXPR$1 + 8ll) & 511ll;
+			if( TMP$157$3 == 20ll) goto label$107;
 			label$108:;
-			if( TMP$158$3 != 10ll ) goto label$106;
+			if( TMP$157$3 != 10ll) goto label$106;
 			label$107:;
 			{
 				struct $7ASTNODE* vr$5 = ASTNEWOVLCONV( 17ll, (struct $8FBSYMBOL*)0ull, EXPR$1 );
 				EXPR$1 = vr$5;
-				if( EXPR$1 != (struct $7ASTNODE*)0ull ) goto label$110;
+				if( EXPR$1 != (struct $7ASTNODE*)0ull) goto label$110;
 				{
 					goto label$102;
 				}
@@ -1402,7 +1402,7 @@ int64 RTLWRITE( struct $7ASTNODE* FILEEXPR$1, int64 ISCOMMA$1, struct $7ASTNODE*
 			goto label$105;
 			label$106:;
 			{
-				if( (*(int64*)((uint8*)EXPR$1 + 8ll) & 480ll) == 0ll ) goto label$113;
+				if( (*(int64*)((uint8*)EXPR$1 + 8ll) & 480ll) == 0ll) goto label$113;
 				{
 					struct $7ASTNODE* vr$8 = ASTNEWCONV( 9ll, (struct $8FBSYMBOL*)0ull, EXPR$1, 0ll, (int64*)0ull );
 					EXPR$1 = vr$8;
@@ -1414,8 +1414,8 @@ int64 RTLWRITE( struct $7ASTNODE* FILEEXPR$1, int64 ISCOMMA$1, struct $7ASTNODE*
 			label$105:;
 		}
 		{
-			uint64 TMP$159$3;
-			TMP$159$3 = (uint64)(*(int64*)((uint8*)EXPR$1 + 8ll) & 511ll);
+			uint64 TMP$158$3;
+			TMP$158$3 = (uint64)(*(int64*)((uint8*)EXPR$1 + 8ll) & 511ll);
 			goto label$115;
 			label$116:;
 			{
@@ -1438,15 +1438,15 @@ int64 RTLWRITE( struct $7ASTNODE* FILEEXPR$1, int64 ISCOMMA$1, struct $7ASTNODE*
 			label$119:;
 			{
 				{
-					int64 TMP$160$5;
-					uint64 TMP$161$5;
-					if( (*(int64*)((uint8*)EXPR$1 + 8ll) & 480ll) == 0ll ) goto label$120;
-					TMP$160$5 = 24ll;
+					int64 TMP$159$5;
+					uint64 TMP$160$5;
+					if( (*(int64*)((uint8*)EXPR$1 + 8ll) & 480ll) == 0ll) goto label$120;
+					TMP$159$5 = 24ll;
 					goto label$144;
 					label$120:;
-					TMP$160$5 = *(int64*)((uint8*)EXPR$1 + 8ll) & 31ll;
+					TMP$159$5 = *(int64*)((uint8*)EXPR$1 + 8ll) & 31ll;
 					label$144:;
-					TMP$161$5 = *(uint64*)(((int64)(struct $13SYMB_DATATYPE*)SYMB_DTYPETB$ + (TMP$160$5 * 56ll)) + 40ll);
+					TMP$160$5 = *(uint64*)(((int64)(struct $13SYMB_DATATYPE*)SYMB_DTYPETB$ + (TMP$159$5 * 56ll)) + 40ll);
 					goto label$122;
 					label$123:;
 					{
@@ -1497,7 +1497,7 @@ int64 RTLWRITE( struct $7ASTNODE* FILEEXPR$1, int64 ISCOMMA$1, struct $7ASTNODE*
 					}
 					goto label$121;
 					label$122:;
-					static const void* tmp$162[8ll] = {
+					static const void* tmp$161[8ll] = {
 						&&label$123,
 						&&label$124,
 						&&label$125,
@@ -1507,8 +1507,8 @@ int64 RTLWRITE( struct $7ASTNODE* FILEEXPR$1, int64 ISCOMMA$1, struct $7ASTNODE*
 						&&label$129,
 						&&label$130,
 					};
-					if( (TMP$161$5 - 1ull) > 7ull ) goto label$121;
-					goto *tmp$162[TMP$161$5 - 1ull];
+					if( (TMP$160$5 - 1ull) > 7ull ) goto label$121;
+					goto *tmp$161[TMP$160$5 - 1ull];
 					label$121:;
 				}
 			}
@@ -1531,7 +1531,7 @@ int64 RTLWRITE( struct $7ASTNODE* FILEEXPR$1, int64 ISCOMMA$1, struct $7ASTNODE*
 			}
 			goto label$114;
 			label$115:;
-			static const void* tmp$163[18ll] = {
+			static const void* tmp$162[18ll] = {
 				&&label$118,
 				&&label$119,
 				&&label$119,
@@ -1551,8 +1551,8 @@ int64 RTLWRITE( struct $7ASTNODE* FILEEXPR$1, int64 ISCOMMA$1, struct $7ASTNODE*
 				&&label$116,
 				&&label$116,
 			};
-			if( (TMP$159$3 - 1ull) > 17ull ) goto label$133;
-			goto *tmp$163[TMP$159$3 - 1ull];
+			if( (TMP$158$3 - 1ull) > 17ull ) goto label$133;
+			goto *tmp$162[TMP$158$3 - 1ull];
 			label$114:;
 		}
 	}
@@ -1560,16 +1560,16 @@ int64 RTLWRITE( struct $7ASTNODE* FILEEXPR$1, int64 ISCOMMA$1, struct $7ASTNODE*
 	struct $7ASTNODE* vr$29 = ASTNEWCALL( F$1, (struct $7ASTNODE*)0ull, -1ll );
 	PROC$1 = vr$29;
 	struct $7ASTNODE* vr$30 = ASTNEWARG( PROC$1, FILEEXPR$1, 2147483648ll, -1ll );
-	if( vr$30 != (struct $7ASTNODE*)0ull ) goto label$135;
+	if( vr$30 != (struct $7ASTNODE*)0ull) goto label$135;
 	{
 		goto label$102;
 	}
 	label$135:;
 	label$134:;
-	if( EXPR$1 == (struct $7ASTNODE*)0ull ) goto label$137;
+	if( EXPR$1 == (struct $7ASTNODE*)0ull) goto label$137;
 	{
 		struct $7ASTNODE* vr$31 = ASTNEWARG( PROC$1, EXPR$1, 2147483648ll, -1ll );
-		if( vr$31 != (struct $7ASTNODE*)0ull ) goto label$139;
+		if( vr$31 != (struct $7ASTNODE*)0ull) goto label$139;
 		{
 			goto label$102;
 		}
@@ -1579,7 +1579,7 @@ int64 RTLWRITE( struct $7ASTNODE* FILEEXPR$1, int64 ISCOMMA$1, struct $7ASTNODE*
 	label$137:;
 	label$136:;
 	MASK$1 = 0ll;
-	if( ISCOMMA$1 == 0ll ) goto label$141;
+	if( ISCOMMA$1 == 0ll) goto label$141;
 	{
 		MASK$1 = MASK$1 | 2ll;
 	}
@@ -1591,7 +1591,7 @@ int64 RTLWRITE( struct $7ASTNODE* FILEEXPR$1, int64 ISCOMMA$1, struct $7ASTNODE*
 	label$140:;
 	struct $7ASTNODE* vr$34 = ASTNEWCONSTI( MASK$1, 8ll, (struct $8FBSYMBOL*)0ull );
 	struct $7ASTNODE* vr$35 = ASTNEWARG( PROC$1, vr$34, 2147483648ll, -1ll );
-	if( vr$35 != (struct $7ASTNODE*)0ull ) goto label$143;
+	if( vr$35 != (struct $7ASTNODE*)0ull) goto label$143;
 	{
 		goto label$102;
 	}
@@ -1611,7 +1611,7 @@ int64 RTLPRINTUSINGINIT( struct $7ASTNODE* USINGEXPR$1, int64 ISLPRINT$1 )
 	struct $7ASTNODE* PROC$1;
 	struct $8FBSYMBOL* F$1;
 	fb$result$1 = 0ll;
-	if( ISLPRINT$1 == 0ll ) goto label$148;
+	if( ISLPRINT$1 == 0ll) goto label$148;
 	{
 		struct $8FBSYMBOL* vr$1 = RTLPROCLOOKUP( (char*)"fb_LPrintUsingInit", 219ll );
 		F$1 = vr$1;
@@ -1626,7 +1626,7 @@ int64 RTLPRINTUSINGINIT( struct $7ASTNODE* USINGEXPR$1, int64 ISLPRINT$1 )
 	struct $7ASTNODE* vr$3 = ASTNEWCALL( F$1, (struct $7ASTNODE*)0ull, -1ll );
 	PROC$1 = vr$3;
 	struct $7ASTNODE* vr$4 = ASTNEWARG( PROC$1, USINGEXPR$1, 2147483648ll, -1ll );
-	if( vr$4 != (struct $7ASTNODE*)0ull ) goto label$150;
+	if( vr$4 != (struct $7ASTNODE*)0ull) goto label$150;
 	{
 		goto label$146;
 	}
@@ -1645,7 +1645,7 @@ int64 RTLPRINTUSINGEND( struct $7ASTNODE* FILEEXPR$1, int64 ISLPRINT$1 )
 	label$151:;
 	struct $7ASTNODE* PROC$1;
 	fb$result$1 = 0ll;
-	if( ISLPRINT$1 == 0ll ) goto label$154;
+	if( ISLPRINT$1 == 0ll) goto label$154;
 	{
 		RTLPRINTER_CB( (struct $8FBSYMBOL*)0ull );
 	}
@@ -1655,7 +1655,7 @@ int64 RTLPRINTUSINGEND( struct $7ASTNODE* FILEEXPR$1, int64 ISLPRINT$1 )
 	struct $7ASTNODE* vr$2 = ASTNEWCALL( vr$1, (struct $7ASTNODE*)0ull, -1ll );
 	PROC$1 = vr$2;
 	struct $7ASTNODE* vr$3 = ASTNEWARG( PROC$1, FILEEXPR$1, 2147483648ll, -1ll );
-	if( vr$3 != (struct $7ASTNODE*)0ull ) goto label$156;
+	if( vr$3 != (struct $7ASTNODE*)0ull) goto label$156;
 	{
 		goto label$152;
 	}
@@ -1676,13 +1676,13 @@ int64 RTLPRINTUSING( struct $7ASTNODE* FILEEXPR$1, struct $7ASTNODE* EXPR$1, int
 	struct $8FBSYMBOL* F$1;
 	int64 MASK$1;
 	fb$result$1 = 0ll;
-	if( ISLPRINT$1 == 0ll ) goto label$160;
+	if( ISLPRINT$1 == 0ll) goto label$160;
 	{
 		RTLPRINTER_CB( (struct $8FBSYMBOL*)0ull );
 	}
 	label$160:;
 	label$159:;
-	if( EXPR$1 != (struct $7ASTNODE*)0ull ) goto label$162;
+	if( EXPR$1 != (struct $7ASTNODE*)0ull) goto label$162;
 	{
 		goto label$158;
 	}
@@ -1690,16 +1690,16 @@ int64 RTLPRINTUSING( struct $7ASTNODE* FILEEXPR$1, struct $7ASTNODE* EXPR$1, int
 	label$161:;
 	ASTTRYOVLSTRINGCONV( &EXPR$1 );
 	{
-		int64 TMP$164$2;
-		TMP$164$2 = *(int64*)((uint8*)EXPR$1 + 8ll) & 511ll;
-		if( TMP$164$2 == 20ll ) goto label$165;
+		int64 TMP$163$2;
+		TMP$163$2 = *(int64*)((uint8*)EXPR$1 + 8ll) & 511ll;
+		if( TMP$163$2 == 20ll) goto label$165;
 		label$166:;
-		if( TMP$164$2 != 10ll ) goto label$164;
+		if( TMP$163$2 != 10ll) goto label$164;
 		label$165:;
 		{
 			struct $7ASTNODE* vr$4 = ASTNEWOVLCONV( 16ll, (struct $8FBSYMBOL*)0ull, EXPR$1 );
 			EXPR$1 = vr$4;
-			if( EXPR$1 != (struct $7ASTNODE*)0ull ) goto label$168;
+			if( EXPR$1 != (struct $7ASTNODE*)0ull) goto label$168;
 			{
 				goto label$158;
 			}
@@ -1710,13 +1710,13 @@ int64 RTLPRINTUSING( struct $7ASTNODE* FILEEXPR$1, struct $7ASTNODE* EXPR$1, int
 		label$163:;
 	}
 	{
-		int64 TMP$165$2;
-		TMP$165$2 = *(int64*)((uint8*)EXPR$1 + 8ll) & 511ll;
-		if( TMP$165$2 == 18ll ) goto label$171;
+		int64 TMP$164$2;
+		TMP$164$2 = *(int64*)((uint8*)EXPR$1 + 8ll) & 511ll;
+		if( TMP$164$2 == 18ll) goto label$171;
 		label$172:;
-		if( TMP$165$2 == 17ll ) goto label$171;
+		if( TMP$164$2 == 17ll) goto label$171;
 		label$173:;
-		if( TMP$165$2 != 4ll ) goto label$170;
+		if( TMP$164$2 != 4ll) goto label$170;
 		label$171:;
 		{
 			struct $8FBSYMBOL* vr$7 = RTLPROCLOOKUP( (char*)"fb_PrintUsingStr", 211ll );
@@ -1724,7 +1724,7 @@ int64 RTLPRINTUSING( struct $7ASTNODE* FILEEXPR$1, struct $7ASTNODE* EXPR$1, int
 		}
 		goto label$169;
 		label$170:;
-		if( TMP$165$2 != 7ll ) goto label$174;
+		if( TMP$164$2 != 7ll) goto label$174;
 		label$175:;
 		{
 			struct $8FBSYMBOL* vr$8 = RTLPROCLOOKUP( (char*)"fb_PrintUsingWstr", 212ll );
@@ -1732,7 +1732,7 @@ int64 RTLPRINTUSING( struct $7ASTNODE* FILEEXPR$1, struct $7ASTNODE* EXPR$1, int
 		}
 		goto label$169;
 		label$174:;
-		if( TMP$165$2 != 15ll ) goto label$176;
+		if( TMP$164$2 != 15ll) goto label$176;
 		label$177:;
 		{
 			struct $8FBSYMBOL* vr$9 = RTLPROCLOOKUP( (char*)"fb_PrintUsingSingle", 213ll );
@@ -1740,15 +1740,15 @@ int64 RTLPRINTUSING( struct $7ASTNODE* FILEEXPR$1, struct $7ASTNODE* EXPR$1, int
 		}
 		goto label$169;
 		label$176:;
-		if( TMP$165$2 == 13ll ) goto label$179;
+		if( TMP$164$2 == 13ll) goto label$179;
 		label$180:;
-		if( TMP$165$2 == 8ll ) goto label$179;
+		if( TMP$164$2 == 8ll) goto label$179;
 		label$181:;
-		if( TMP$165$2 == 11ll ) goto label$179;
+		if( TMP$164$2 == 11ll) goto label$179;
 		label$182:;
-		if( TMP$165$2 == 5ll ) goto label$179;
+		if( TMP$164$2 == 5ll) goto label$179;
 		label$183:;
-		if( TMP$165$2 != 2ll ) goto label$178;
+		if( TMP$164$2 != 2ll) goto label$178;
 		label$179:;
 		{
 			struct $8FBSYMBOL* vr$10 = RTLPROCLOOKUP( (char*)"fb_PrintUsingLongint", 215ll );
@@ -1756,15 +1756,15 @@ int64 RTLPRINTUSING( struct $7ASTNODE* FILEEXPR$1, struct $7ASTNODE* EXPR$1, int
 		}
 		goto label$169;
 		label$178:;
-		if( TMP$165$2 == 14ll ) goto label$185;
+		if( TMP$164$2 == 14ll) goto label$185;
 		label$186:;
-		if( TMP$165$2 == 9ll ) goto label$185;
+		if( TMP$164$2 == 9ll) goto label$185;
 		label$187:;
-		if( TMP$165$2 == 12ll ) goto label$185;
+		if( TMP$164$2 == 12ll) goto label$185;
 		label$188:;
-		if( TMP$165$2 == 6ll ) goto label$185;
+		if( TMP$164$2 == 6ll) goto label$185;
 		label$189:;
-		if( TMP$165$2 != 3ll ) goto label$184;
+		if( TMP$164$2 != 3ll) goto label$184;
 		label$185:;
 		{
 			struct $8FBSYMBOL* vr$11 = RTLPROCLOOKUP( (char*)"fb_PrintUsingULongint", 216ll );
@@ -1772,7 +1772,7 @@ int64 RTLPRINTUSING( struct $7ASTNODE* FILEEXPR$1, struct $7ASTNODE* EXPR$1, int
 		}
 		goto label$169;
 		label$184:;
-		if( TMP$165$2 != 1ll ) goto label$190;
+		if( TMP$164$2 != 1ll) goto label$190;
 		label$191:;
 		{
 			struct $8FBSYMBOL* vr$12 = RTLPROCLOOKUP( (char*)"fb_PrintUsingBoolean", 217ll );
@@ -1790,20 +1790,20 @@ int64 RTLPRINTUSING( struct $7ASTNODE* FILEEXPR$1, struct $7ASTNODE* EXPR$1, int
 	struct $7ASTNODE* vr$14 = ASTNEWCALL( F$1, (struct $7ASTNODE*)0ull, -1ll );
 	PROC$1 = vr$14;
 	struct $7ASTNODE* vr$15 = ASTNEWARG( PROC$1, FILEEXPR$1, 2147483648ll, -1ll );
-	if( vr$15 != (struct $7ASTNODE*)0ull ) goto label$194;
+	if( vr$15 != (struct $7ASTNODE*)0ull) goto label$194;
 	{
 		goto label$158;
 	}
 	label$194:;
 	label$193:;
 	struct $7ASTNODE* vr$16 = ASTNEWARG( PROC$1, EXPR$1, 2147483648ll, -1ll );
-	if( vr$16 != (struct $7ASTNODE*)0ull ) goto label$196;
+	if( vr$16 != (struct $7ASTNODE*)0ull) goto label$196;
 	{
 		goto label$158;
 	}
 	label$196:;
 	label$195:;
-	if( (ISCOMMA$1 | ISSEMICOLON$1) == 0ll ) goto label$198;
+	if( (ISCOMMA$1 | ISSEMICOLON$1) == 0ll) goto label$198;
 	{
 		MASK$1 = 0ll;
 	}
@@ -1815,7 +1815,7 @@ int64 RTLPRINTUSING( struct $7ASTNODE* FILEEXPR$1, struct $7ASTNODE* EXPR$1, int
 	label$197:;
 	struct $7ASTNODE* vr$18 = ASTNEWCONSTI( MASK$1, 8ll, (struct $8FBSYMBOL*)0ull );
 	struct $7ASTNODE* vr$19 = ASTNEWARG( PROC$1, vr$18, 2147483648ll, -1ll );
-	if( vr$19 != (struct $7ASTNODE*)0ull ) goto label$200;
+	if( vr$19 != (struct $7ASTNODE*)0ull) goto label$200;
 	{
 		goto label$158;
 	}
@@ -1839,20 +1839,20 @@ struct $7ASTNODE* RTLWIDTHDEV( struct $7ASTNODE* DEVICE$1, struct $7ASTNODE* WID
 	struct $7ASTNODE* vr$2 = ASTNEWCALL( vr$1, (struct $7ASTNODE*)0ull, -1ll );
 	PROC$1 = vr$2;
 	struct $7ASTNODE* vr$3 = ASTNEWARG( PROC$1, DEVICE$1, 2147483648ll, -1ll );
-	if( vr$3 != (struct $7ASTNODE*)0ull ) goto label$204;
+	if( vr$3 != (struct $7ASTNODE*)0ull) goto label$204;
 	{
 		goto label$202;
 	}
 	label$204:;
 	label$203:;
 	struct $7ASTNODE* vr$4 = ASTNEWARG( PROC$1, WIDTH_ARG$1, 2147483648ll, -1ll );
-	if( vr$4 != (struct $7ASTNODE*)0ull ) goto label$206;
+	if( vr$4 != (struct $7ASTNODE*)0ull) goto label$206;
 	{
 		goto label$202;
 	}
 	label$206:;
 	label$205:;
-	if( ISFUNC$1 != 0ll ) goto label$208;
+	if( ISFUNC$1 != 0ll) goto label$208;
 	{
 		struct $7ASTNODE* vr$5 = RTLERRORCHECK( PROC$1 );
 		ASTADD( vr$5 );
@@ -1872,7 +1872,7 @@ int64 RTLPRINTER_CB( struct $8FBSYMBOL* SYM$1 )
 	static int64 RESTART_COUNT$1;
 	static int64 LIBSADDED$1 = 0ll;
 	int64 vr$1 = FBRESTARTGETCOUNT(  );
-	if( RESTART_COUNT$1 == vr$1 ) goto label$212;
+	if( RESTART_COUNT$1 == vr$1) goto label$212;
 	{
 		int64 vr$2 = FBRESTARTGETCOUNT(  );
 		RESTART_COUNT$1 = vr$2;
@@ -1880,15 +1880,15 @@ int64 RTLPRINTER_CB( struct $8FBSYMBOL* SYM$1 )
 	}
 	label$212:;
 	label$211:;
-	if( LIBSADDED$1 != 0ll ) goto label$214;
+	if( LIBSADDED$1 != 0ll) goto label$214;
 	{
 		LIBSADDED$1 = -1ll;
 		{
-			$13FB_COMPTARGET TMP$167$3;
-			TMP$167$3 = *($13FB_COMPTARGET*)((uint8*)&ENV$ + 216ll);
-			if( TMP$167$3 == 0ll ) goto label$217;
+			$13FB_COMPTARGET TMP$166$3;
+			TMP$166$3 = *($13FB_COMPTARGET*)((uint8*)&ENV$ + 216ll);
+			if( TMP$166$3 == 0ll) goto label$217;
 			label$218:;
-			if( TMP$167$3 != 1ll ) goto label$216;
+			if( TMP$166$3 != 1ll) goto label$216;
 			label$217:;
 			{
 				FBADDLIB( (char*)"winspool" );
