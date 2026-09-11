@@ -5,23 +5,27 @@
 #   "native"    - Use an existing fbc to compile .bas sources directly
 #   "bootstrap" - Compile pre-generated .c sources to build fbc
 
-# Try to find an existing fbc
-find_program(FBC_EXECUTABLE fbc HINTS ${CMAKE_SOURCE_DIR}/bin ENV PATH)
+# A source build must not change merely because another fbc happens to be in
+# PATH.  The bundled generated C sources are therefore the default bootstrap
+# input.  Developers can explicitly opt in to a native compiler build.
+if(FB_USE_SYSTEM_FBC)
+    find_program(FBC_EXECUTABLE fbc HINTS ${CMAKE_SOURCE_DIR}/bin ENV PATH)
 
-if(FBC_EXECUTABLE)
-    execute_process(
-        COMMAND ${FBC_EXECUTABLE} --version
-        OUTPUT_VARIABLE _fbc_version_output
-        ERROR_QUIET
-        OUTPUT_STRIP_TRAILING_WHITESPACE
-        RESULT_VARIABLE _fbc_result
-    )
-    if(_fbc_result EQUAL 0)
-        message(STATUS "Found existing fbc: ${FBC_EXECUTABLE}")
-        message(STATUS "  ${_fbc_version_output}")
-        set(FB_BOOTSTRAP_MODE "native")
-    else()
-        set(FBC_EXECUTABLE "")
+    if(FBC_EXECUTABLE)
+        execute_process(
+            COMMAND ${FBC_EXECUTABLE} --version
+            OUTPUT_VARIABLE _fbc_version_output
+            ERROR_QUIET
+            OUTPUT_STRIP_TRAILING_WHITESPACE
+            RESULT_VARIABLE _fbc_result
+        )
+        if(_fbc_result EQUAL 0)
+            message(STATUS "Found existing fbc: ${FBC_EXECUTABLE}")
+            message(STATUS "  ${_fbc_version_output}")
+            set(FB_BOOTSTRAP_MODE "native")
+        else()
+            set(FBC_EXECUTABLE "")
+        endif()
     endif()
 endif()
 

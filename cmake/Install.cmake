@@ -1,5 +1,5 @@
 # cmake/Install.cmake
-# Installation rules for FreeBASIC
+# Installation rules for FreeBASIC-NG
 
 include(GNUInstallDirs)
 

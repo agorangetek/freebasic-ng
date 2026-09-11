@@ -1,0 +1,28 @@
+name: Bug report
+description: Report a reproducible compiler, runtime or packaging defect.
+title: "bug: "
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: "Please include a minimal reproducer. Do not disclose security vulnerabilities here."
+  - type: input
+    id: version
+    attributes:
+      label: FreeBASIC-NG version and platform
+      placeholder: "freebasic-ng-v1.20.0 on Linux x86_64"
+    validations:
+      required: true
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: Minimal reproducer and steps
+      render: text
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected and actual behaviour
+    validations:
+      required: true

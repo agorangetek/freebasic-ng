@@ -1,10 +1,22 @@
 cmake_minimum_required(VERSION 3.20)
-project(FreeBASIC VERSION 1.10.2 LANGUAGES C)
+
+# version.mk is the source of truth for the compiler version.  Keeping CMake
+# derived from it prevents the build and the legacy packaging metadata from
+# silently drifting apart.
+file(STRINGS "${CMAKE_CURRENT_SOURCE_DIR}/version.mk" _fb_version_line
+    REGEX "^FBVERSION[ \t]*:=[ \t]*[0-9]+\\.[0-9]+\\.[0-9]+$")
+if(NOT _fb_version_line)
+    message(FATAL_ERROR "Could not read a semantic FBVERSION from version.mk")
+endif()
+string(REGEX REPLACE "^FBVERSION[ \t]*:=[ \t]*([0-9]+\\.[0-9]+\\.[0-9]+)$"
+    "\\1" FREEBASIC_NG_VERSION "${_fb_version_line}")
+
+project(FreeBASICNG VERSION ${FREEBASIC_NG_VERSION} LANGUAGES C)
 
 set(CMAKE_C_STANDARD 11)
 set(CMAKE_C_STANDARD_REQUIRED ON)
 
-# FreeBASIC requires GCC or Clang (MinGW on Windows)
+# FreeBASIC-NG requires GCC or Clang (MinGW on Windows)
 if(MSVC)
     message(FATAL_ERROR
         "MSVC is not supported. Use MinGW-w64 on Windows.\n"
@@ -16,6 +28,7 @@ option(FB_STANDALONE "Build as self-contained installation" ON)
 option(FB_BUILD_GFXLIB "Build the graphics library" ON)
 option(FB_BUILD_COMPILER "Build the fbc compiler" ON)
 option(FB_BUILD_TESTS "Build tests" OFF)
+option(FB_USE_SYSTEM_FBC "Use an existing fbc instead of the bundled bootstrap sources" OFF)
 
 # Platform detection (sets FB_TARGET_OS, FB_TARGET_ARCH, FB_TARGET_ID)
 include(cmake/DetectPlatform.cmake)
@@ -43,7 +56,7 @@ endif()
 
 # Summary
 message(STATUS "")
-message(STATUS "FreeBASIC ${PROJECT_VERSION}")
+message(STATUS "FreeBASIC-NG ${PROJECT_VERSION}")
 message(STATUS "  Target:     ${FB_TARGET_ID}")
 message(STATUS "  OS:         ${FB_TARGET_OS}")
 message(STATUS "  Arch:       ${FB_TARGET_ARCH}")

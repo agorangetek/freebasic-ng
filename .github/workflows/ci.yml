@@ -2,13 +2,13 @@ name: CI
 
 on:
   push:
-    branches: [master]
+    branches: [main]
   pull_request:
-    branches: [master]
+    branches: [main]
+  workflow_dispatch:
 
 permissions:
-  contents: write
-  pull-requests: write
+  contents: read
 
 jobs:
   build:
@@ -27,7 +27,12 @@ jobs:
     runs-on: ${{ matrix.os }}
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          persist-credentials: false
+
+      - name: Verify version metadata
+        run: python3 scripts/check-version.py
 
       - name: Install dependencies (Linux)
         if: runner.os == 'Linux'
@@ -39,7 +44,7 @@ jobs:
 
       - name: Setup MSYS2 (Windows)
         if: runner.os == 'Windows'
-        uses: msys2/setup-msys2@v2
+        uses: msys2/setup-msys2@66cd2cce69caa17b53920067426061ca1de3a884 # v2.32.0
         with:
           msystem: MINGW64
           install: mingw-w64-x86_64-cmake mingw-w64-x86_64-ninja mingw-w64-x86_64-gcc
@@ -61,11 +66,21 @@ jobs:
         if: runner.os != 'Windows'
         run: ./build/src/compiler/fbc --version
 
+      - name: Test fbc (Windows)
+        if: runner.os == 'Windows'
+        shell: msys2 {0}
+        run: ./build/src/compiler/fbc.exe --version
+
   amiga-test:
     name: AmigaOS targets (C generation)
     runs-on: ubuntu-24.04
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          persist-credentials: false
+
+      - name: Verify version metadata
+        run: python3 scripts/check-version.py
 
       - name: Build fbc
         run: |
@@ -78,6 +93,11 @@ jobs:
           echo 'Print "Hello Amiga!"' > /tmp/hello.bas
           for target in amiga aros-x86_64 aros-aarch64 morphos amigaos4; do
             ./build/src/compiler/fbc -gen gcc -r -m hello -target $target /tmp/hello.bas
-            grep -q "fb_PrintString" /tmp/hello.c && echo "✅ $target" || (echo "❌ $target" && exit 1)
+            if grep -q "fb_PrintString" /tmp/hello.c; then
+              echo "validated generated C for $target"
+            else
+              echo "missing generated runtime call for $target"
+              exit 1
+            fi
           done
           echo "All Amiga targets generate valid C!"
