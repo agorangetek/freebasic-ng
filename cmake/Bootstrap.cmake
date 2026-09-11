@@ -36,8 +36,8 @@ if(NOT FBC_EXECUTABLE)
     set(FB_BOOTSTRAP_DIR "${CMAKE_SOURCE_DIR}/bootstrap/${FB_TARGET_ID}")
 
     if(EXISTS "${FB_BOOTSTRAP_DIR}")
-        file(GLOB FB_BOOTSTRAP_SOURCES "${FB_BOOTSTRAP_DIR}/*.c")
-        if(FB_BOOTSTRAP_SOURCES)
+        file(GLOB _fb_bootstrap_input_sources "${FB_BOOTSTRAP_DIR}/*.c")
+        if(_fb_bootstrap_input_sources)
             find_package(Python3 COMPONENTS Interpreter REQUIRED)
             execute_process(
                 # MSYS Python expects POSIX paths while CMake on native
@@ -55,6 +55,37 @@ if(NOT FBC_EXECUTABLE)
                 message(FATAL_ERROR
                     "Bootstrap provenance verification failed for ${FB_TARGET_ID}.\n"
                     "${_bootstrap_provenance_output}${_bootstrap_provenance_error}")
+            endif()
+
+            # The checked-in generated C records the compiler version of its
+            # upstream generator.  Derive a build-local copy whose public
+            # version matches version.mk, after verifying the original input.
+            # This preserves bootstrap provenance while preventing a release
+            # archive from reporting the upstream base as its own version.
+            set(_fb_prepared_bootstrap_dir
+                "${CMAKE_BINARY_DIR}/bootstrap/${FB_TARGET_ID}")
+            execute_process(
+                COMMAND "${Python3_EXECUTABLE}" "scripts/prepare-bootstrap.py"
+                    --source-dir "${FB_BOOTSTRAP_DIR}"
+                    --output-dir "${_fb_prepared_bootstrap_dir}"
+                    --version "${FREEBASIC_NG_VERSION}"
+                    --manifest "${CMAKE_SOURCE_DIR}/bootstrap/provenance.json"
+                WORKING_DIRECTORY "${CMAKE_SOURCE_DIR}"
+                RESULT_VARIABLE _bootstrap_prepare_result
+                OUTPUT_VARIABLE _bootstrap_prepare_output
+                ERROR_VARIABLE _bootstrap_prepare_error
+            )
+            if(NOT _bootstrap_prepare_result EQUAL 0)
+                message(FATAL_ERROR
+                    "Versioned bootstrap preparation failed for ${FB_TARGET_ID}.\n"
+                    "${_bootstrap_prepare_output}${_bootstrap_prepare_error}")
+            endif()
+            file(GLOB FB_BOOTSTRAP_SOURCES "${_fb_prepared_bootstrap_dir}/*.c")
+            list(LENGTH _fb_bootstrap_input_sources _fb_bootstrap_input_count)
+            list(LENGTH FB_BOOTSTRAP_SOURCES _fb_prepared_bootstrap_count)
+            if(NOT _fb_bootstrap_input_count EQUAL _fb_prepared_bootstrap_count)
+                message(FATAL_ERROR
+                    "Versioned bootstrap preparation changed the C-source count for ${FB_TARGET_ID}.")
             endif()
             set(FB_BOOTSTRAP_MODE "bootstrap")
             message(STATUS "No fbc found, will bootstrap from verified C sources in ${FB_BOOTSTRAP_DIR}")
