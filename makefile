@@ -689,6 +689,13 @@ endif
 LIBFB_H := $(sort $(foreach i,$(RTLIB_DIRS),$(wildcard $(i)/*.h)))
 LIBFB_C := $(sort $(foreach i,$(RTLIB_DIRS),$(patsubst $(i)/%.c,$(libfbobjdir)/%.o,$(wildcard $(i)/*.c))))
 LIBFB_S := $(sort $(foreach i,$(RTLIB_DIRS),$(patsubst $(i)/%.s,$(libfbobjdir)/%.o,$(wildcard $(i)/*.s))))
+
+# profile_cycles.c uses an ELF-only section attribute.  Keep the historical
+# GNU-make runtime aligned with the CMake runtime on Mach-O hosts.
+ifeq ($(TARGET_OS),darwin)
+  LIBFB_C := $(filter-out $(libfbobjdir)/profile_cycles.o,$(LIBFB_C))
+endif
+
 LIBFBPIC_C   := $(patsubst $(libfbobjdir)/%,$(libfbpicobjdir)/%,$(LIBFB_C))
 LIBFBPIC_S   := $(patsubst $(libfbobjdir)/%,$(libfbpicobjdir)/%,$(LIBFB_S))
 LIBFBMT_C    := $(patsubst $(libfbobjdir)/%,$(libfbmtobjdir)/%,$(LIBFB_C))
@@ -1558,7 +1565,25 @@ else
   BOOTSTRAP_CFLAGS += -Wno-unused-but-set-variable -Wno-main
   BOOTSTRAP_CFLAGS += -fno-strict-aliasing -frounding-math -fwrapv -fno-ident
   BOOTSTRAP_CFLAGS += -Wfatal-errors
-  BOOTSTRAP_OBJ := $(patsubst %.c,%.o,$(sort $(wildcard bootstrap/$(FBTARGET)/*.c)))
+
+  ifeq ($(TARGET_OS),darwin)
+    # Keep checked-in generated C immutable.  Clang requires a harmless label
+    # address in every function with an indirect goto; prepare fixed copies in
+    # the build tree before compiling, as the CMake bootstrap does.
+    BOOTSTRAP_SOURCE_DIR := bootstrap/$(FBTARGET)
+    BOOTSTRAP_BUILD_DIR := build/legacy-bootstrap/$(FBTARGET)
+    BOOTSTRAP_C_SOURCES := $(sort $(wildcard $(BOOTSTRAP_SOURCE_DIR)/*.c))
+    BOOTSTRAP_C := $(patsubst $(BOOTSTRAP_SOURCE_DIR)/%.c,$(BOOTSTRAP_BUILD_DIR)/%.c,$(BOOTSTRAP_C_SOURCES))
+    BOOTSTRAP_OBJ := $(patsubst %.c,%.o,$(BOOTSTRAP_C))
+
+    $(BOOTSTRAP_C): $(BOOTSTRAP_BUILD_DIR)/%.c: $(BOOTSTRAP_SOURCE_DIR)/%.c cmake/fix_computed_goto.py
+	@mkdir -p $(@D)
+	cp $< $@
+	python3 cmake/fix_computed_goto.py $@
+  else
+    BOOTSTRAP_OBJ := $(patsubst %.c,%.o,$(sort $(wildcard bootstrap/$(FBTARGET)/*.c)))
+  endif
+
   $(BOOTSTRAP_OBJ): %.o: %.c
 	$(QUIET_CC)$(CC) -c $(BOOTSTRAP_CFLAGS) $< -o $@
 endif
@@ -1569,8 +1594,9 @@ ifneq ($(filter darwin freebsd dragonfly linux netbsd openbsd solaris,$(TARGET_O
   BOOTSTRAP_LIBS := -lncurses -lm -pthread
 endif
 $(BOOTSTRAP_FBC): rtlib $(BOOTSTRAP_OBJ)
-	$(QUIET_LINK)$(CC) -o $@ $(libdir)/fbrt0.o bootstrap/$(FBTARGET)/*.o $(libdir)/libfb.a $(BOOTSTRAP_LIBS)
+	$(QUIET_LINK)$(CC) -o $@ $(libdir)/fbrt0.o $(BOOTSTRAP_OBJ) $(libdir)/libfb.a $(BOOTSTRAP_LIBS)
 
 .PHONY: clean-bootstrap
 clean-bootstrap:
 	rm -f $(BOOTSTRAP_FBC) bootstrap/$(FBTARGET)/*.o
+	rm -rf build/legacy-bootstrap/$(FBTARGET)
