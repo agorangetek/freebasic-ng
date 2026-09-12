@@ -28,8 +28,13 @@
     "darwin-aarch64": {
       "host": "darwin-aarch64",
       "files": 145,
-      "sha256": "8937a745d96e311a6f333e6dad6fe1a212d9c65bfd10286378df256f9cb6488b",
-      "provenance": "Regenerated in M1 from the FreeBASIC-NG 1.20.0 compiler sources; replaces a bootstrap with a Linux host identity."
+      "sha256": "8ec686d741b38e371ee9537550e1f67c178c05e364e3debecc15459b33491686",
+      "provenance": "Regenerated in M7 from the native Darwin ARM64 compiler to repair the Darwin cva_list ABI; replaces a bootstrap with a Linux host identity.",
+      "generator": {
+        "base_revision": "29c87304e19df068faa48c1f6c849f376beb56a7",
+        "version": "1.22.3",
+        "command": "fbc src/compiler/*.bas -gen gcc -m fbc -i inc -r -target darwin-aarch64"
+      }
     },
     "win64": {
       "host": "win64",

@@ -414,7 +414,7 @@ static void FATALOUTOFMEMORY( void )
 {
 	label$2:;
 	label$4:;
-	void* vr$0 = fb_ErrorThrowEx( 4, 10, (char*)"list.bas", (void*)0ull, (void*)0ull );
+	void* vr$0 = fb_ErrorThrowEx( 4, 10, (char*)"/tmp/freebasic-ng-native-va-list.amEsdi/build/src/compiler/native-source/list.bas", (void*)0ull, (void*)0ull );
 	goto *vr$0;
 	label$5:;
 	label$3:;

@@ -71,68 +71,88 @@ if(FB_BOOTSTRAP_MODE STREQUAL "bootstrap")
 # --- Native mode: use existing fbc to compile .bas sources ---
 else()
 
-    file(GLOB FBC_BAS_SOURCES "${CMAKE_CURRENT_SOURCE_DIR}/*.bas")
-    file(GLOB FBC_BI_SOURCES "${CMAKE_CURRENT_SOURCE_DIR}/*.bi")
+    file(GLOB FBC_BAS_SOURCES CONFIGURE_DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/*.bas")
+    file(GLOB FBC_BI_SOURCES CONFIGURE_DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/*.bi")
 
-    # Generate .c files from .bas using the existing fbc
-    set(_gen_c_dir "${CMAKE_CURRENT_BINARY_DIR}/generated")
-    file(MAKE_DIRECTORY "${_gen_c_dir}")
-
+    # Generate C from a build-tree copy of the compiler sources.  fbc writes
+    # -r output next to its input files; running it on the source tree would
+    # leave generated C behind and, more importantly, the old code globbed
+    # those files at configure time before they existed.  The compiler source
+    # file names are unique, so their known BAS inputs also give CMake the
+    # complete output set up front.
+    set(_native_source_dir "${CMAKE_CURRENT_BINARY_DIR}/native-source")
+    set(_native_copied_inputs "")
+    set(_native_copied_bas_sources "")
     set(_generated_c_files "")
+    foreach(_source IN LISTS FBC_BAS_SOURCES FBC_BI_SOURCES)
+        get_filename_component(_name "${_source}" NAME)
+        set(_copy "${_native_source_dir}/${_name}")
+        add_custom_command(
+            OUTPUT "${_copy}"
+            COMMAND ${CMAKE_COMMAND} -E make_directory "${_native_source_dir}"
+            COMMAND ${CMAKE_COMMAND} -E copy_if_different "${_source}" "${_copy}"
+            DEPENDS "${_source}"
+            COMMENT "Preparing ${_name} for native compiler build"
+            VERBATIM
+        )
+        list(APPEND _native_copied_inputs "${_copy}")
+        if(_source MATCHES "\\.bas$")
+            list(APPEND _native_copied_bas_sources "${_copy}")
+            get_filename_component(_base "${_source}" NAME_WE)
+            list(APPEND _generated_c_files "${_native_source_dir}/${_base}.c")
+        endif()
+    endforeach()
+
+    list(SORT _native_copied_bas_sources)
+    list(SORT _generated_c_files)
     set(_fbc_flags -gen gcc -r -m fbc -i "${CMAKE_SOURCE_DIR}/inc" -target ${FB_TARGET_ID})
     if(FB_STANDALONE)
         list(APPEND _fbc_flags -d ENABLE_STANDALONE)
     endif()
 
-    # Single invocation to compile all .bas to .c
-    # fbc compiles all at once when given -m fbc
-    set(_gen_stamp "${_gen_c_dir}/.generated")
+    # One fbc invocation emits all known C outputs from the copied BAS files.
     add_custom_command(
-        OUTPUT "${_gen_stamp}"
-        COMMAND ${FBC_EXECUTABLE} ${_fbc_flags} ${FBC_BAS_SOURCES}
-        COMMAND ${CMAKE_COMMAND} -E rename_if_different # move .c files to gen dir
-        COMMAND ${CMAKE_COMMAND} -E touch "${_gen_stamp}"
-        WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}"
-        DEPENDS ${FBC_BAS_SOURCES} ${FBC_BI_SOURCES}
-        COMMENT "Compiling FreeBASIC sources with fbc"
+        OUTPUT ${_generated_c_files}
+        COMMAND ${FBC_EXECUTABLE} ${_fbc_flags} ${_native_copied_bas_sources}
+        WORKING_DIRECTORY "${_native_source_dir}"
+        DEPENDS ${_native_copied_inputs}
+        COMMENT "Generating native compiler C sources"
         VERBATIM
     )
 
-    # Collect the generated .c files
-    # Since we can't know them at configure time, use a glob at build time
-    file(GLOB _existing_gen_c "${CMAKE_CURRENT_SOURCE_DIR}/*.c")
-
-    # For native builds, we compile the .c files that fbc generates
-    # The .c files are placed next to the .bas files by fbc -r
-    add_custom_target(fbc_generate DEPENDS "${_gen_stamp}")
-
-    add_executable(fbc ${_existing_gen_c})
-    add_dependencies(fbc fbc_generate)
-
-    # Fix computed goto for clang
+    # The HLC backend emits computed-goto expressions that clang requires us
+    # to rewrite before compilation.  PRE_BUILD runs too late for object-file
+    # compilation, so prepare a fixed generated source for every output.
+    set(_native_compile_sources ${_generated_c_files})
     if(FB_USING_CLANG)
         find_package(Python3 COMPONENTS Interpreter REQUIRED)
-        file(REAL_PATH "${CMAKE_CURRENT_BINARY_DIR}" _fix_working_directory)
-        file(REAL_PATH "${CMAKE_SOURCE_DIR}/cmake/fix_computed_goto.py"
-            _fix_computed_goto_script_absolute)
-        file(RELATIVE_PATH _fix_computed_goto_script
-            "${_fix_working_directory}"
-            "${_fix_computed_goto_script_absolute}")
-        set(_existing_gen_c_relative "")
-        foreach(_src ${_existing_gen_c})
-            file(REAL_PATH "${_src}" _real_src)
-            file(RELATIVE_PATH _relative_src "${_fix_working_directory}" "${_real_src}")
-            list(APPEND _existing_gen_c_relative "${_relative_src}")
+        set(_native_fixed_sources "")
+        foreach(_src ${_generated_c_files})
+            get_filename_component(_name "${_src}" NAME)
+            set(_fixed "${CMAKE_CURRENT_BINARY_DIR}/native-fixed/${_name}")
+            file(RELATIVE_PATH _fixed_relative "${CMAKE_CURRENT_BINARY_DIR}" "${_fixed}")
+            add_custom_command(
+                OUTPUT "${_fixed}"
+                COMMAND ${CMAKE_COMMAND} -E make_directory
+                        "${CMAKE_CURRENT_BINARY_DIR}/native-fixed"
+                COMMAND ${CMAKE_COMMAND} -E copy "${_src}" "${_fixed}"
+                COMMAND ${Python3_EXECUTABLE}
+                        "${CMAKE_SOURCE_DIR}/cmake/fix_computed_goto.py"
+                        "${_fixed_relative}"
+                WORKING_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}"
+                DEPENDS "${_src}" "${CMAKE_SOURCE_DIR}/cmake/fix_computed_goto.py"
+                COMMENT "Preparing ${_name} for clang"
+                VERBATIM
+            )
+            list(APPEND _native_fixed_sources "${_fixed}")
         endforeach()
-        add_custom_command(
-            TARGET fbc PRE_BUILD
-            COMMAND ${Python3_EXECUTABLE} "${_fix_computed_goto_script}"
-                    ${_existing_gen_c_relative}
-            WORKING_DIRECTORY "${_fix_working_directory}"
-            COMMENT "Fixing computed goto for clang"
-            VERBATIM
-        )
+        set(_native_compile_sources ${_native_fixed_sources})
     endif()
+
+    add_custom_target(fbc_generate DEPENDS ${_native_compile_sources})
+
+    add_executable(fbc ${_native_compile_sources})
+    add_dependencies(fbc fbc_generate)
 
     target_compile_options(fbc PRIVATE
         -nostdinc

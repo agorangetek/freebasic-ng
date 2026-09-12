@@ -64,6 +64,28 @@ if(FB_BUILD_COMPILER)
     add_subdirectory(src/compiler)
 endif()
 
+if(FB_BUILD_TESTS)
+    enable_testing()
+
+    # Darwin arm64 uses a pointer __builtin_va_list.  This regression must be
+    # built by the native/self-hosted compiler so it validates the generated
+    # C path as well as the target ABI model.
+    if(FB_BUILD_COMPILER AND FB_TARGET_OS STREQUAL "darwin" AND
+       FB_TARGET_ARCH STREQUAL "aarch64")
+        find_package(Python3 COMPONENTS Interpreter REQUIRED)
+        add_test(
+            NAME compiler.darwin-aarch64-cva-list
+            COMMAND "${Python3_EXECUTABLE}"
+                "${CMAKE_SOURCE_DIR}/scripts/run-compiler-regression.py"
+                --cmake "${CMAKE_COMMAND}"
+                --build-dir "${CMAKE_BINARY_DIR}"
+                --install-prefix "${CMAKE_BINARY_DIR}/tests/darwin-aarch64-cva-list/stage"
+                --source "${CMAKE_SOURCE_DIR}/test/cmake/darwin-aarch64-cva-list.bas"
+                --work-dir "${CMAKE_BINARY_DIR}/tests/darwin-aarch64-cva-list/work"
+        )
+    endif()
+endif()
+
 # Summary
 message(STATUS "")
 message(STATUS "FreeBASIC-NG ${PROJECT_VERSION}")

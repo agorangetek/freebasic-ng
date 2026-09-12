@@ -12,6 +12,11 @@ The source bootstrap is never modified.  Its digest remains the provenance
 anchor checked before this script runs; the small, deterministic derivation is
 therefore reproducible and fails closed if a future bootstrap generator changes
 the relevant C layout.
+
+A bootstrap target may record its own ``generator`` object when it has been
+regenerated more recently than the other checked-in targets.  That lets the
+version-literal preparation remain exact during an incremental bootstrap
+migration rather than incorrectly assuming every target has the same origin.
 """
 
 from __future__ import annotations
@@ -41,6 +46,12 @@ def replace_exactly_once(text: str, pattern: re.Pattern[str], replacement: str,
 def prepare_file(path: Path, *, source_version: str, version: str,
                  parts: dict[str, str]) -> str:
     text = path.read_text(encoding="utf-8")
+
+    # A freshly regenerated bootstrap already exposes the requested version.
+    # Copy it byte-for-byte: reconstructing generated string lengths here would
+    # be needlessly lossy (the bootstrap generator owns those details).
+    if source_version == version:
+        return text
 
     if path.name == "fbc.c":
         prefix = "FreeBASIC Compiler - Version "
@@ -98,6 +109,23 @@ def prepare_file(path: Path, *, source_version: str, version: str,
     return text
 
 
+def source_generator_version(manifest: dict[str, object], source_dir: Path) -> str:
+    """Return the recorded generator version for the selected bootstrap."""
+    generator: object = manifest.get("generator")
+    sources = manifest.get("bootstrap_sources")
+    if isinstance(sources, dict):
+        entry = sources.get(source_dir.name)
+        if isinstance(entry, dict) and "generator" in entry:
+            generator = entry["generator"]
+
+    if not isinstance(generator, dict):
+        fail("bootstrap provenance manifest has no generator metadata")
+    source_version = generator.get("version")
+    if not isinstance(source_version, str) or SEMVER.fullmatch(source_version) is None:
+        fail("bootstrap provenance manifest has no semantic generator.version")
+    return source_version
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--source-dir", type=Path, required=True)
@@ -117,9 +145,7 @@ def main() -> int:
         fail(f"output directory must not be a symlink: {args.output_dir}")
 
     manifest = json.loads(args.manifest.read_text(encoding="utf-8"))
-    source_version = manifest.get("generator", {}).get("version")
-    if not isinstance(source_version, str) or SEMVER.fullmatch(source_version) is None:
-        fail("bootstrap provenance manifest has no semantic generator.version")
+    source_version = source_generator_version(manifest, args.source_dir)
 
     sources = sorted(args.source_dir.glob("*.c"), key=lambda item: item.name)
     if not sources:

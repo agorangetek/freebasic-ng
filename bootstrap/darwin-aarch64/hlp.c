@@ -40,7 +40,6 @@ struct $11TSTRSETITEM {
 	struct $8HASHITEM* HASHITEM;
 };
 __FB_STATIC_ASSERT( sizeof( struct $11TSTRSETITEM ) == 40 );
-void* fb_ErrorThrowAt( int32, char*, void*, void* );
 int32 fb_FileOpen( FBSTRING*, uint32, uint32, uint32, int32, int32 );
 int32 fb_FileClose( int32 );
 int32 fb_FileGetLarge( int32, int64, void*, uint64 );
@@ -375,11 +374,7 @@ int64 HFILEEXISTS( char* FILENAME$1 )
 	if( (int64)vr$5 != 0ll) goto label$53;
 	{
 		fb$result$1 = -1ll;
-		int32 vr$8 = fb_FileClose( (int32)F$1 );
-		if( (int64)vr$8 == 0ll) goto label$54;
-		void* vr$10 = fb_ErrorThrowAt( 161, (char*)"hlp.bas", (void*)0ull, (void*)0ull );
-		goto *vr$10;
-		label$54:;
+		fb_FileClose( (int32)F$1 );
 	}
 	goto label$52;
 	label$53:;
@@ -393,215 +388,215 @@ int64 HFILEEXISTS( char* FILENAME$1 )
 
 void HUCASE( char* SRC$1, char* DST$1 )
 {
-	label$55:;
+	label$54:;
 	static int64 C$1;
 	static char* S$1;
 	static char* D$1;
 	S$1 = SRC$1;
 	D$1 = DST$1;
-	label$57:;
+	label$56:;
 	{
 		C$1 = (int64)(uint8)*S$1;
-		if( C$1 < 97ll) goto label$61;
+		if( C$1 < 97ll) goto label$60;
 		{
-			if( C$1 > 122ll) goto label$63;
+			if( C$1 > 122ll) goto label$62;
 			{
 				C$1 = C$1 + -32ll;
 			}
-			label$63:;
 			label$62:;
+			label$61:;
 		}
-		goto label$60;
-		label$61:;
-		if( C$1 != 0ll) goto label$64;
-		{
-			goto label$58;
-		}
-		label$64:;
+		goto label$59;
 		label$60:;
+		if( C$1 != 0ll) goto label$63;
+		{
+			goto label$57;
+		}
+		label$63:;
+		label$59:;
 		*D$1 = (uint8)C$1;
 		S$1 = (char*)((uint8*)S$1 + 1ll);
 		D$1 = (char*)((uint8*)D$1 + 1ll);
 	}
-	label$59:;
-	goto label$57;
 	label$58:;
+	goto label$56;
+	label$57:;
 	*D$1 = (uint8)0u;
-	label$56:;
+	label$55:;
 }
 
 void HCLEARNAME( char* SRC$1 )
 {
-	label$65:;
+	label$64:;
 	static char* P$1;
 	P$1 = SRC$1;
-	label$67:;
+	label$66:;
 	{
 		{
-			uint64 TMP$123$3;
-			TMP$123$3 = (uint64)(uint8)*P$1;
-			goto label$71;
+			uint64 TMP$122$3;
+			TMP$122$3 = (uint64)(uint8)*P$1;
+			goto label$70;
+			label$71:;
+			{
+				goto label$67;
+			}
+			goto label$69;
 			label$72:;
 			{
-				goto label$68;
 			}
-			goto label$70;
+			goto label$69;
 			label$73:;
-			{
-			}
-			goto label$70;
-			label$74:;
 			{
 				*P$1 = (uint8)122u;
 			}
-			goto label$70;
-			label$71:;
-			static const void* tmp$124[123ll] = {
-				&&label$72,
-				&&label$74,
-				&&label$74,
-				&&label$74,
-				&&label$74,
-				&&label$74,
-				&&label$74,
-				&&label$74,
-				&&label$74,
-				&&label$74,
-				&&label$74,
-				&&label$74,
-				&&label$74,
-				&&label$74,
-				&&label$74,
-				&&label$74,
-				&&label$74,
-				&&label$74,
-				&&label$74,
-				&&label$74,
-				&&label$74,
-				&&label$74,
-				&&label$74,
-				&&label$74,
-				&&label$74,
-				&&label$74,
-				&&label$74,
-				&&label$74,
-				&&label$74,
-				&&label$74,
-				&&label$74,
-				&&label$74,
-				&&label$74,
-				&&label$74,
-				&&label$74,
-				&&label$74,
-				&&label$74,
-				&&label$74,
-				&&label$74,
-				&&label$74,
-				&&label$74,
-				&&label$74,
-				&&label$74,
-				&&label$74,
-				&&label$74,
-				&&label$74,
-				&&label$74,
-				&&label$74,
-				&&label$73,
-				&&label$73,
-				&&label$73,
-				&&label$73,
-				&&label$73,
-				&&label$73,
-				&&label$73,
-				&&label$73,
-				&&label$73,
-				&&label$73,
-				&&label$74,
-				&&label$74,
-				&&label$74,
-				&&label$74,
-				&&label$74,
-				&&label$74,
-				&&label$74,
-				&&label$73,
-				&&label$73,
-				&&label$73,
-				&&label$73,
-				&&label$73,
-				&&label$73,
-				&&label$73,
-				&&label$73,
-				&&label$73,
-				&&label$73,
-				&&label$73,
-				&&label$73,
-				&&label$73,
-				&&label$73,
-				&&label$73,
-				&&label$73,
-				&&label$73,
-				&&label$73,
-				&&label$73,
-				&&label$73,
-				&&label$73,
-				&&label$73,
-				&&label$73,
-				&&label$73,
-				&&label$73,
-				&&label$73,
-				&&label$74,
-				&&label$74,
-				&&label$74,
-				&&label$74,
-				&&label$73,
-				&&label$74,
-				&&label$73,
-				&&label$73,
-				&&label$73,
-				&&label$73,
-				&&label$73,
-				&&label$73,
-				&&label$73,
-				&&label$73,
-				&&label$73,
-				&&label$73,
-				&&label$73,
-				&&label$73,
-				&&label$73,
-				&&label$73,
-				&&label$73,
-				&&label$73,
-				&&label$73,
-				&&label$73,
-				&&label$73,
-				&&label$73,
-				&&label$73,
-				&&label$73,
-				&&label$73,
-				&&label$73,
-				&&label$73,
-				&&label$73,
-			};
-			if( TMP$123$3 > 122ull ) goto label$74;
-			goto *tmp$124[TMP$123$3 - 0ull];
+			goto label$69;
 			label$70:;
+			static const void* tmp$123[123ll] = {
+				&&label$71,
+				&&label$73,
+				&&label$73,
+				&&label$73,
+				&&label$73,
+				&&label$73,
+				&&label$73,
+				&&label$73,
+				&&label$73,
+				&&label$73,
+				&&label$73,
+				&&label$73,
+				&&label$73,
+				&&label$73,
+				&&label$73,
+				&&label$73,
+				&&label$73,
+				&&label$73,
+				&&label$73,
+				&&label$73,
+				&&label$73,
+				&&label$73,
+				&&label$73,
+				&&label$73,
+				&&label$73,
+				&&label$73,
+				&&label$73,
+				&&label$73,
+				&&label$73,
+				&&label$73,
+				&&label$73,
+				&&label$73,
+				&&label$73,
+				&&label$73,
+				&&label$73,
+				&&label$73,
+				&&label$73,
+				&&label$73,
+				&&label$73,
+				&&label$73,
+				&&label$73,
+				&&label$73,
+				&&label$73,
+				&&label$73,
+				&&label$73,
+				&&label$73,
+				&&label$73,
+				&&label$73,
+				&&label$72,
+				&&label$72,
+				&&label$72,
+				&&label$72,
+				&&label$72,
+				&&label$72,
+				&&label$72,
+				&&label$72,
+				&&label$72,
+				&&label$72,
+				&&label$73,
+				&&label$73,
+				&&label$73,
+				&&label$73,
+				&&label$73,
+				&&label$73,
+				&&label$73,
+				&&label$72,
+				&&label$72,
+				&&label$72,
+				&&label$72,
+				&&label$72,
+				&&label$72,
+				&&label$72,
+				&&label$72,
+				&&label$72,
+				&&label$72,
+				&&label$72,
+				&&label$72,
+				&&label$72,
+				&&label$72,
+				&&label$72,
+				&&label$72,
+				&&label$72,
+				&&label$72,
+				&&label$72,
+				&&label$72,
+				&&label$72,
+				&&label$72,
+				&&label$72,
+				&&label$72,
+				&&label$72,
+				&&label$72,
+				&&label$73,
+				&&label$73,
+				&&label$73,
+				&&label$73,
+				&&label$72,
+				&&label$73,
+				&&label$72,
+				&&label$72,
+				&&label$72,
+				&&label$72,
+				&&label$72,
+				&&label$72,
+				&&label$72,
+				&&label$72,
+				&&label$72,
+				&&label$72,
+				&&label$72,
+				&&label$72,
+				&&label$72,
+				&&label$72,
+				&&label$72,
+				&&label$72,
+				&&label$72,
+				&&label$72,
+				&&label$72,
+				&&label$72,
+				&&label$72,
+				&&label$72,
+				&&label$72,
+				&&label$72,
+				&&label$72,
+				&&label$72,
+			};
+			if( TMP$122$3 > 122ull ) goto label$73;
+			goto *tmp$123[TMP$122$3 - 0ull];
+			label$69:;
 		}
 		P$1 = (char*)((uint8*)P$1 + 1ll);
 	}
-	label$69:;
-	goto label$67;
 	label$68:;
-	label$66:;
+	goto label$66;
+	label$67:;
+	label$65:;
 }
 
 FBSTRING* HSTRIPEXT( FBSTRING* PATH$1 )
 {
 	FBSTRING fb$result$1;
 	__builtin_memset( &fb$result$1, 0, 24ll );
-	label$86:;
+	label$85:;
 	int64 vr$1 = HFINDEXTBEGIN( PATH$1 );
 	FBSTRING* vr$2 = fb_LEFT( (FBSTRING*)PATH$1, vr$1 );
 	fb_StrAssign( (void*)&fb$result$1, -1ll, (void*)vr$2, -1ll, 0 );
-	label$87:;
+	label$86:;
 	FBSTRING* vr$5 = fb_StrAllocTempResult( (FBSTRING*)&fb$result$1 );
 	return vr$5;
 }
@@ -610,13 +605,13 @@ FBSTRING* HSTRIPPATH( char* FILENAME$1 )
 {
 	FBSTRING fb$result$1;
 	__builtin_memset( &fb$result$1, 0, 24ll );
-	label$88:;
+	label$87:;
 	static int64 LP$1;
 	static int64 P_FOUND$1;
 	static int64 P$1[2];
-	static struct $8FBARRAY1IlE tmp$126$1 = { (int64*)((uint8*)P$1 + -8ll), (int64*)P$1, 16ll, 8ll, 1ll, 49ll, { { 2ll, 1ll, 2ll } } };
+	static struct $8FBARRAY1IlE tmp$125$1 = { (int64*)((uint8*)P$1 + -8ll), (int64*)P$1, 16ll, 8ll, 1ll, 49ll, { { 2ll, 1ll, 2ll } } };
 	LP$1 = 0ll;
-	label$90:;
+	label$89:;
 	{
 		FBSTRING* vr$1 = fb_StrAllocTempDescZEx( (char*)"\x5C", 1ll );
 		FBSTRING* vr$2 = fb_StrAllocTempDescZ( (char*)FILENAME$1 );
@@ -626,40 +621,40 @@ FBSTRING* HSTRIPPATH( char* FILENAME$1 )
 		FBSTRING* vr$6 = fb_StrAllocTempDescZ( (char*)FILENAME$1 );
 		int64 vr$8 = fb_StrInstr( LP$1 + 1ll, (FBSTRING*)vr$6, (FBSTRING*)vr$5 );
 		*(int64*)((int64)(int64*)P$1 + 8ll) = vr$8;
-		if( ((int64)-(*(int64*)P$1 == 0ll) | ((int64)-(*(int64*)((int64)(int64*)P$1 + 8ll) > 0ll) & (int64)-(*(int64*)((int64)(int64*)P$1 + 8ll) < *(int64*)P$1))) == 0ll) goto label$94;
+		if( ((int64)-(*(int64*)P$1 == 0ll) | ((int64)-(*(int64*)((int64)(int64*)P$1 + 8ll) > 0ll) & (int64)-(*(int64*)((int64)(int64*)P$1 + 8ll) < *(int64*)P$1))) == 0ll) goto label$93;
 		{
 			P_FOUND$1 = *(int64*)((int64)(int64*)P$1 + 8ll);
 		}
-		goto label$93;
-		label$94:;
+		goto label$92;
+		label$93:;
 		{
 			P_FOUND$1 = *(int64*)P$1;
 		}
-		label$93:;
-		if( P_FOUND$1 != 0ll) goto label$96;
+		label$92:;
+		if( P_FOUND$1 != 0ll) goto label$95;
 		{
-			goto label$91;
+			goto label$90;
 		}
-		label$96:;
 		label$95:;
+		label$94:;
 		LP$1 = P_FOUND$1;
 	}
-	label$92:;
-	goto label$90;
 	label$91:;
-	if( LP$1 <= 0ll) goto label$98;
+	goto label$89;
+	label$90:;
+	if( LP$1 <= 0ll) goto label$97;
 	{
 		FBSTRING* vr$15 = fb_StrAllocTempDescZ( (char*)FILENAME$1 );
 		FBSTRING* vr$16 = fb_StrMid( (FBSTRING*)vr$15, LP$1 + 1ll, -1ll );
 		fb_StrAssign( (void*)&fb$result$1, -1ll, (void*)vr$16, -1ll, 0 );
 	}
-	goto label$97;
-	label$98:;
+	goto label$96;
+	label$97:;
 	{
 		fb_StrAssign( (void*)&fb$result$1, -1ll, (void*)FILENAME$1, 0ll, 0 );
 	}
-	label$97:;
-	label$89:;
+	label$96:;
+	label$88:;
 	FBSTRING* vr$20 = fb_StrAllocTempResult( (FBSTRING*)&fb$result$1 );
 	return vr$20;
 }
@@ -668,13 +663,13 @@ FBSTRING* HSTRIPFILENAME( char* FILENAME$1 )
 {
 	FBSTRING fb$result$1;
 	__builtin_memset( &fb$result$1, 0, 24ll );
-	label$99:;
+	label$98:;
 	static int64 LP$1;
 	static int64 P_FOUND$1;
 	static int64 P$1[2];
-	static struct $8FBARRAY1IlE tmp$128$1 = { (int64*)((uint8*)P$1 + -8ll), (int64*)P$1, 16ll, 8ll, 1ll, 49ll, { { 2ll, 1ll, 2ll } } };
+	static struct $8FBARRAY1IlE tmp$127$1 = { (int64*)((uint8*)P$1 + -8ll), (int64*)P$1, 16ll, 8ll, 1ll, 49ll, { { 2ll, 1ll, 2ll } } };
 	LP$1 = 0ll;
-	label$101:;
+	label$100:;
 	{
 		FBSTRING* vr$1 = fb_StrAllocTempDescZEx( (char*)"\x5C", 1ll );
 		FBSTRING* vr$2 = fb_StrAllocTempDescZ( (char*)FILENAME$1 );
@@ -684,40 +679,40 @@ FBSTRING* HSTRIPFILENAME( char* FILENAME$1 )
 		FBSTRING* vr$6 = fb_StrAllocTempDescZ( (char*)FILENAME$1 );
 		int64 vr$8 = fb_StrInstr( LP$1 + 1ll, (FBSTRING*)vr$6, (FBSTRING*)vr$5 );
 		*(int64*)((int64)(int64*)P$1 + 8ll) = vr$8;
-		if( ((int64)-(*(int64*)P$1 == 0ll) | ((int64)-(*(int64*)((int64)(int64*)P$1 + 8ll) > 0ll) & (int64)-(*(int64*)((int64)(int64*)P$1 + 8ll) < *(int64*)P$1))) == 0ll) goto label$105;
+		if( ((int64)-(*(int64*)P$1 == 0ll) | ((int64)-(*(int64*)((int64)(int64*)P$1 + 8ll) > 0ll) & (int64)-(*(int64*)((int64)(int64*)P$1 + 8ll) < *(int64*)P$1))) == 0ll) goto label$104;
 		{
 			P_FOUND$1 = *(int64*)((int64)(int64*)P$1 + 8ll);
 		}
-		goto label$104;
-		label$105:;
+		goto label$103;
+		label$104:;
 		{
 			P_FOUND$1 = *(int64*)P$1;
 		}
-		label$104:;
-		if( P_FOUND$1 != 0ll) goto label$107;
+		label$103:;
+		if( P_FOUND$1 != 0ll) goto label$106;
 		{
-			goto label$102;
+			goto label$101;
 		}
-		label$107:;
 		label$106:;
+		label$105:;
 		LP$1 = P_FOUND$1;
 	}
-	label$103:;
-	goto label$101;
 	label$102:;
-	if( LP$1 <= 0ll) goto label$109;
+	goto label$100;
+	label$101:;
+	if( LP$1 <= 0ll) goto label$108;
 	{
 		FBSTRING* vr$14 = fb_StrAllocTempDescZ( (char*)FILENAME$1 );
 		FBSTRING* vr$15 = fb_LEFT( (FBSTRING*)vr$14, LP$1 );
 		fb_StrAssign( (void*)&fb$result$1, -1ll, (void*)vr$15, -1ll, 0 );
 	}
-	goto label$108;
-	label$109:;
+	goto label$107;
+	label$108:;
 	{
 		fb_StrAssign( (void*)&fb$result$1, -1ll, (void*)"", 1ll, 0 );
 	}
-	label$108:;
-	label$100:;
+	label$107:;
+	label$99:;
 	FBSTRING* vr$19 = fb_StrAllocTempResult( (FBSTRING*)&fb$result$1 );
 	return vr$19;
 }
@@ -726,34 +721,34 @@ FBSTRING* HGETFILEEXT( char* FNAME$1 )
 {
 	FBSTRING fb$result$1;
 	__builtin_memset( &fb$result$1, 0, 24ll );
-	label$110:;
+	label$109:;
 	static int64 P$1;
 	static int64 LP$1;
 	static FBSTRING RES$1;
 	LP$1 = 0ll;
-	label$112:;
+	label$111:;
 	{
 		FBSTRING* vr$1 = fb_StrAllocTempDescZEx( (char*)".", 1ll );
 		FBSTRING* vr$2 = fb_StrAllocTempDescZ( (char*)FNAME$1 );
 		int64 vr$4 = fb_StrInstr( LP$1 + 1ll, (FBSTRING*)vr$2, (FBSTRING*)vr$1 );
 		P$1 = vr$4;
-		if( P$1 != 0ll) goto label$116;
+		if( P$1 != 0ll) goto label$115;
 		{
-			goto label$113;
+			goto label$112;
 		}
-		label$116:;
 		label$115:;
+		label$114:;
 		LP$1 = P$1;
 	}
-	label$114:;
-	goto label$112;
 	label$113:;
-	if( LP$1 != 0ll) goto label$118;
+	goto label$111;
+	label$112:;
+	if( LP$1 != 0ll) goto label$117;
 	{
 		fb_StrAssign( (void*)&fb$result$1, -1ll, (void*)"", 1ll, 0 );
 	}
-	goto label$117;
-	label$118:;
+	goto label$116;
+	label$117:;
 	{
 		FBSTRING* vr$7 = fb_StrAllocTempDescZ( (char*)FNAME$1 );
 		FBSTRING* vr$8 = fb_StrMid( (FBSTRING*)vr$7, LP$1 + 1ll, -1ll );
@@ -763,92 +758,92 @@ FBSTRING* HGETFILEEXT( char* FNAME$1 )
 		int64 vr$11 = fb_StrInstr( 1ll, (FBSTRING*)&RES$1, (FBSTRING*)vr$10 );
 		FBSTRING* vr$13 = fb_StrAllocTempDescZEx( (char*)"/", 1ll );
 		int64 vr$14 = fb_StrInstr( 1ll, (FBSTRING*)&RES$1, (FBSTRING*)vr$13 );
-		if( ((int64)-(vr$11 > 0ll) | (int64)-(vr$14 > 0ll)) == 0ll) goto label$120;
+		if( ((int64)-(vr$11 > 0ll) | (int64)-(vr$14 > 0ll)) == 0ll) goto label$119;
 		{
 			fb_StrAssign( (void*)&fb$result$1, -1ll, (void*)"", 1ll, 0 );
 		}
-		goto label$119;
-		label$120:;
+		goto label$118;
+		label$119:;
 		int64 vr$18 = fb_StrLen( (void*)&RES$1, -1ll );
-		if( vr$18 <= 0ll) goto label$121;
+		if( vr$18 <= 0ll) goto label$120;
 		{
-			if( ((int64)-((uint64)(int64)*(uint8*)*(char**)&RES$1 == 92ull) | (int64)-((uint64)(int64)*(uint8*)*(char**)&RES$1 == 47ull)) == 0ll) goto label$123;
+			if( ((int64)-((uint64)(int64)*(uint8*)*(char**)&RES$1 == 92ull) | (int64)-((uint64)(int64)*(uint8*)*(char**)&RES$1 == 47ull)) == 0ll) goto label$122;
 			{
 				fb_StrAssign( (void*)&fb$result$1, -1ll, (void*)"", 1ll, 0 );
 			}
-			goto label$122;
-			label$123:;
+			goto label$121;
+			label$122:;
 			{
 				fb_StrAssign( (void*)&fb$result$1, -1ll, (void*)&RES$1, -1ll, 0 );
 			}
-			label$122:;
+			label$121:;
 		}
-		label$121:;
-		label$119:;
+		label$120:;
+		label$118:;
 	}
-	label$117:;
-	label$111:;
+	label$116:;
+	label$110:;
 	FBSTRING* vr$29 = fb_StrAllocTempResult( (FBSTRING*)&fb$result$1 );
 	return vr$29;
 }
 
 void HREPLACESLASH( char* S$1, int64 CHAR$1 )
 {
-	label$124:;
+	label$123:;
 	{
 		int64 I$2;
 		I$2 = 0ll;
-		int64 TMP$129$2;
+		int64 TMP$128$2;
 		int64 vr$0 = fb_StrLen( (void*)S$1, 0ll );
-		TMP$129$2 = vr$0 + -1ll;
-		goto label$126;
-		label$129:;
+		TMP$128$2 = vr$0 + -1ll;
+		goto label$125;
+		label$128:;
 		{
-			if( ((int64)-((int64)(uint8)*(char*)((uint8*)S$1 + I$2) == 92ll) | (int64)-((int64)(uint8)*(char*)((uint8*)S$1 + I$2) == 47ll)) == 0ll) goto label$131;
+			if( ((int64)-((int64)(uint8)*(char*)((uint8*)S$1 + I$2) == 92ll) | (int64)-((int64)(uint8)*(char*)((uint8*)S$1 + I$2) == 47ll)) == 0ll) goto label$130;
 			{
 				*(char*)((uint8*)S$1 + I$2) = (uint8)CHAR$1;
 			}
-			label$131:;
 			label$130:;
+			label$129:;
 		}
-		label$127:;
-		I$2 = I$2 + 1ll;
 		label$126:;
-		if( I$2 <= TMP$129$2) goto label$129;
-		label$128:;
+		I$2 = I$2 + 1ll;
+		label$125:;
+		if( I$2 <= TMP$128$2) goto label$128;
+		label$127:;
 	}
-	label$125:;
+	label$124:;
 }
 
 FBSTRING* PATHSTRIPDIV( FBSTRING* PATH$1 )
 {
 	FBSTRING fb$result$1;
 	__builtin_memset( &fb$result$1, 0, 24ll );
-	label$132:;
+	label$131:;
 	int64 LENGTH$1;
 	int64 vr$1 = fb_StrLen( (void*)PATH$1, -1ll );
 	LENGTH$1 = vr$1;
-	if( LENGTH$1 <= 0ll) goto label$135;
+	if( LENGTH$1 <= 0ll) goto label$134;
 	{
 		LENGTH$1 = LENGTH$1 + -1ll;
 		{
-			uint8 TMP$130$3;
-			TMP$130$3 = *(uint8*)((uint8*)*(char**)PATH$1 + LENGTH$1);
-			if( (uint64)(int64)TMP$130$3 != 47ull) goto label$137;
-			label$138:;
+			uint8 TMP$129$3;
+			TMP$129$3 = *(uint8*)((uint8*)*(char**)PATH$1 + LENGTH$1);
+			if( (uint64)(int64)TMP$129$3 != 47ull) goto label$136;
+			label$137:;
 			{
 				FBSTRING* vr$6 = fb_LEFT( (FBSTRING*)PATH$1, LENGTH$1 );
 				fb_StrInit( (void*)&fb$result$1, -1ll, (void*)vr$6, -1ll, 0 );
-				goto label$133;
+				goto label$132;
 			}
-			label$137:;
 			label$136:;
+			label$135:;
 		}
 	}
-	label$135:;
 	label$134:;
-	fb_StrAssign( (void*)&fb$result$1, -1ll, (void*)PATH$1, -1ll, 0 );
 	label$133:;
+	fb_StrAssign( (void*)&fb$result$1, -1ll, (void*)PATH$1, -1ll, 0 );
+	label$132:;
 	FBSTRING* vr$10 = fb_StrAllocTempResult( (FBSTRING*)&fb$result$1 );
 	return vr$10;
 }
@@ -857,9 +852,9 @@ int64 PATHISABSOLUTE( char* PATH$1 )
 {
 	int64 fb$result$1;
 	__builtin_memset( &fb$result$1, 0, 8ll );
-	label$139:;
+	label$138:;
 	fb$result$1 = (int64)-((uint64)(int64)*(uint8*)PATH$1 == 47ull);
-	label$140:;
+	label$139:;
 	return fb$result$1;
 }
 
@@ -867,263 +862,251 @@ int64 HCHECKFILEFORMAT( int64 F$1 )
 {
 	int64 fb$result$1;
 	__builtin_memset( &fb$result$1, 0, 8ll );
-	label$141:;
+	label$140:;
 	uint32 BOM$1;
 	__builtin_memset( &BOM$1, 0, 4ll );
 	$13FBFILE_FORMAT FMT$1;
 	__builtin_memset( &FMT$1, 0, 8ll );
 	FMT$1 = 0ll;
 	int32 vr$5 = fb_FileGetLarge( (int32)F$1, 0ll, (void*)&BOM$1, 4ull );
-	if( (int64)vr$5 != 0ll) goto label$144;
+	if( (int64)vr$5 != 0ll) goto label$143;
 	{
-		if( (int64)BOM$1 != 4294836224ll) goto label$146;
+		if( (int64)BOM$1 != 4294836224ll) goto label$145;
 		{
 			FMT$1 = 5ll;
 		}
-		goto label$145;
-		label$146:;
-		if( (int64)BOM$1 != 65279ll) goto label$147;
+		goto label$144;
+		label$145:;
+		if( (int64)BOM$1 != 65279ll) goto label$146;
 		{
 			FMT$1 = 4ll;
 		}
-		goto label$145;
-		label$147:;
+		goto label$144;
+		label$146:;
 		{
 			BOM$1 = (uint32)((int64)BOM$1 & 16777215ll);
-			if( (int64)BOM$1 != 12565487ll) goto label$149;
+			if( (int64)BOM$1 != 12565487ll) goto label$148;
 			{
 				FMT$1 = 1ll;
 			}
-			goto label$148;
-			label$149:;
+			goto label$147;
+			label$148:;
 			{
 				BOM$1 = (uint32)((int64)BOM$1 & 65535ll);
-				if( (int64)BOM$1 != 65279ll) goto label$151;
+				if( (int64)BOM$1 != 65279ll) goto label$150;
 				{
 					FMT$1 = 2ll;
 				}
-				goto label$150;
-				label$151:;
-				if( (int64)BOM$1 != 65534ll) goto label$152;
+				goto label$149;
+				label$150:;
+				if( (int64)BOM$1 != 65534ll) goto label$151;
 				{
 					FMT$1 = 3ll;
 				}
-				label$152:;
-				label$150:;
+				label$151:;
+				label$149:;
 			}
-			label$148:;
+			label$147:;
 		}
-		label$145:;
+		label$144:;
 		{
-			if( FMT$1 != 0ll) goto label$154;
-			label$155:;
-			{
-				int32 vr$19 = fb_FileSeekLarge( (int32)F$1, 1ll );
-				if( (int64)vr$19 == 0ll) goto label$156;
-				void* vr$21 = fb_ErrorThrowAt( 425, (char*)"hlp.bas", (void*)0ull, (void*)0ull );
-				goto *vr$21;
-				label$156:;
-			}
-			goto label$153;
+			if( FMT$1 != 0ll) goto label$153;
 			label$154:;
-			if( FMT$1 != 1ll) goto label$157;
+			{
+				fb_FileSeekLarge( (int32)F$1, 1ll );
+			}
+			goto label$152;
+			label$153:;
+			if( FMT$1 != 1ll) goto label$155;
+			label$156:;
+			{
+				fb_FileSeekLarge( (int32)F$1, 4ll );
+			}
+			goto label$152;
+			label$155:;
+			if( FMT$1 == 2ll) goto label$158;
+			label$159:;
+			if( FMT$1 != 3ll) goto label$157;
 			label$158:;
 			{
-				int32 vr$23 = fb_FileSeekLarge( (int32)F$1, 4ll );
-				if( (int64)vr$23 == 0ll) goto label$159;
-				void* vr$25 = fb_ErrorThrowAt( 428, (char*)"hlp.bas", (void*)0ull, (void*)0ull );
-				goto *vr$25;
-				label$159:;
+				fb_FileSeekLarge( (int32)F$1, 3ll );
 			}
-			goto label$153;
 			label$157:;
-			if( FMT$1 == 2ll) goto label$161;
-			label$162:;
-			if( FMT$1 != 3ll) goto label$160;
-			label$161:;
-			{
-				int32 vr$27 = fb_FileSeekLarge( (int32)F$1, 3ll );
-				if( (int64)vr$27 == 0ll) goto label$163;
-				void* vr$29 = fb_ErrorThrowAt( 432, (char*)"hlp.bas", (void*)0ull, (void*)0ull );
-				goto *vr$29;
-				label$163:;
-			}
-			label$160:;
-			label$153:;
+			label$152:;
 		}
 	}
-	label$144:;
 	label$143:;
-	fb$result$1 = FMT$1;
 	label$142:;
+	fb$result$1 = FMT$1;
+	label$141:;
 	return fb$result$1;
 }
 
 FBSTRING* HCURDIR( void )
 {
-	FBSTRING TMP$131$1;
+	FBSTRING TMP$130$1;
 	FBSTRING fb$result$1;
 	__builtin_memset( &fb$result$1, 0, 24ll );
-	label$164:;
-	__builtin_memset( &TMP$131$1, 0, 24ll );
+	label$160:;
+	__builtin_memset( &TMP$130$1, 0, 24ll );
 	FBSTRING* vr$2 = fb_CurDir(  );
-	fb_StrAssign( (void*)&TMP$131$1, -1ll, (void*)vr$2, -1ll, 0 );
-	FBSTRING* vr$5 = PATHSTRIPDIV( &TMP$131$1 );
+	fb_StrAssign( (void*)&TMP$130$1, -1ll, (void*)vr$2, -1ll, 0 );
+	FBSTRING* vr$5 = PATHSTRIPDIV( &TMP$130$1 );
 	fb_StrAssign( (void*)&fb$result$1, -1ll, (void*)vr$5, -1ll, 0 );
-	fb_StrDelete( (FBSTRING*)&TMP$131$1 );
-	label$165:;
+	fb_StrDelete( (FBSTRING*)&TMP$130$1 );
+	label$161:;
 	FBSTRING* vr$9 = fb_StrAllocTempResult( (FBSTRING*)&fb$result$1 );
 	return vr$9;
 }
 
 FBSTRING* PATHSTRIPCURDIR( FBSTRING* PATH$1 )
 {
-	FBSTRING TMP$132$1;
+	FBSTRING TMP$131$1;
 	FBSTRING fb$result$1;
 	__builtin_memset( &fb$result$1, 0, 24ll );
-	label$166:;
+	label$162:;
 	FBSTRING PWD$1;
 	FBSTRING* vr$1 = HCURDIR(  );
-	__builtin_memset( &TMP$132$1, 0, 24ll );
-	FBSTRING* vr$4 = fb_StrConcat( &TMP$132$1, (void*)vr$1, -1ll, (void*)"/", 2ll );
+	__builtin_memset( &TMP$131$1, 0, 24ll );
+	FBSTRING* vr$4 = fb_StrConcat( &TMP$131$1, (void*)vr$1, -1ll, (void*)"/", 2ll );
 	fb_StrInit( (void*)&PWD$1, -1ll, (void*)vr$4, -1ll, 0 );
 	int64 vr$8 = fb_StrLen( (void*)&PWD$1, -1ll );
 	FBSTRING* vr$9 = fb_LEFT( (FBSTRING*)PATH$1, vr$8 );
 	int32 vr$10 = fb_StrCompare( (void*)vr$9, -1ll, (void*)&PWD$1, -1ll );
-	if( (int64)vr$10 != 0ll) goto label$169;
+	if( (int64)vr$10 != 0ll) goto label$165;
 	{
 		int64 vr$12 = fb_StrLen( (void*)PATH$1, -1ll );
 		int64 vr$14 = fb_StrLen( (void*)&PWD$1, -1ll );
 		FBSTRING* vr$16 = fb_RIGHT( (FBSTRING*)PATH$1, vr$12 - vr$14 );
 		fb_StrAssign( (void*)&fb$result$1, -1ll, (void*)vr$16, -1ll, 0 );
 	}
-	goto label$168;
-	label$169:;
+	goto label$164;
+	label$165:;
 	{
 		fb_StrAssign( (void*)&fb$result$1, -1ll, (void*)PATH$1, -1ll, 0 );
 	}
-	label$168:;
+	label$164:;
 	fb_StrDelete( (FBSTRING*)&PWD$1 );
-	label$167:;
+	label$163:;
 	FBSTRING* vr$21 = fb_StrAllocTempResult( (FBSTRING*)&fb$result$1 );
 	return vr$21;
 }
 
 int64 HISVALIDSYMBOLNAME( char* SYM$1 )
 {
-	int64 TMP$135$1;
+	int64 TMP$134$1;
+	int64 TMP$136$1;
 	int64 TMP$137$1;
-	int64 TMP$138$1;
-	int64 TMP$140$1;
+	int64 TMP$139$1;
 	int64 fb$result$1;
 	__builtin_memset( &fb$result$1, 0, 8ll );
-	label$170:;
-	if( SYM$1 != (char*)0ull) goto label$173;
+	label$166:;
+	if( SYM$1 != (char*)0ull) goto label$169;
 	{
-		goto label$171;
-		label$173:;
+		goto label$167;
+		label$169:;
 	}
 	int64 SYMLEN$1;
 	int64 vr$1 = fb_StrLen( (void*)SYM$1, 0ll );
 	SYMLEN$1 = vr$1;
-	if( SYMLEN$1 != 0ll) goto label$175;
+	if( SYMLEN$1 != 0ll) goto label$171;
 	{
-		goto label$171;
-		label$175:;
+		goto label$167;
+		label$171:;
 	}
-	if( (uint64)(int64)(uint8)*SYM$1 < 97ull) goto label$176;
-	TMP$135$1 = (int64)-((uint64)(int64)(uint8)*SYM$1 <= 122ull);
-	goto label$194;
-	label$176:;
-	TMP$135$1 = 0ll;
-	label$194:;
-	if( TMP$135$1 != 0ll) goto label$178;
-	if( (uint64)(int64)(uint8)*SYM$1 > 90ull) goto label$177;
-	TMP$137$1 = (int64)-((uint64)(int64)(uint8)*SYM$1 >= 65ull);
-	goto label$196;
-	label$177:;
-	TMP$137$1 = 0ll;
-	label$196:;
-	TMP$138$1 = (int64)-(TMP$137$1 != 0ll);
-	goto label$195;
-	label$178:;
-	TMP$138$1 = -1ll;
-	label$195:;
-	if( TMP$138$1 != 0ll) goto label$179;
-	TMP$140$1 = (int64)-((uint64)(int64)(uint8)*SYM$1 == 95ull);
-	goto label$197;
-	label$179:;
-	TMP$140$1 = -1ll;
-	label$197:;
-	if( TMP$140$1 != 0ll) goto label$181;
+	if( (uint64)(int64)(uint8)*SYM$1 < 97ull) goto label$172;
+	TMP$134$1 = (int64)-((uint64)(int64)(uint8)*SYM$1 <= 122ull);
+	goto label$190;
+	label$172:;
+	TMP$134$1 = 0ll;
+	label$190:;
+	if( TMP$134$1 != 0ll) goto label$174;
+	if( (uint64)(int64)(uint8)*SYM$1 > 90ull) goto label$173;
+	TMP$136$1 = (int64)-((uint64)(int64)(uint8)*SYM$1 >= 65ull);
+	goto label$192;
+	label$173:;
+	TMP$136$1 = 0ll;
+	label$192:;
+	TMP$137$1 = (int64)-(TMP$136$1 != 0ll);
+	goto label$191;
+	label$174:;
+	TMP$137$1 = -1ll;
+	label$191:;
+	if( TMP$137$1 != 0ll) goto label$175;
+	TMP$139$1 = (int64)-((uint64)(int64)(uint8)*SYM$1 == 95ull);
+	goto label$193;
+	label$175:;
+	TMP$139$1 = -1ll;
+	label$193:;
+	if( TMP$139$1 != 0ll) goto label$177;
 	{
-		goto label$171;
-		label$181:;
+		goto label$167;
+		label$177:;
 	}
 	{
 		int64 I$2;
 		I$2 = 1ll;
-		int64 TMP$141$2;
-		TMP$141$2 = SYMLEN$1 + -1ll;
-		goto label$182;
-		label$185:;
+		int64 TMP$140$2;
+		TMP$140$2 = SYMLEN$1 + -1ll;
+		goto label$178;
+		label$181:;
 		{
+			int64 TMP$141$3;
 			int64 TMP$142$3;
 			int64 TMP$143$3;
 			int64 TMP$144$3;
 			int64 TMP$145$3;
 			int64 TMP$146$3;
-			int64 TMP$147$3;
-			if( (uint64)(int64)(uint8)*(char*)((uint8*)SYM$1 + I$2) < 97ull) goto label$186;
-			TMP$142$3 = (int64)-((uint64)(int64)(uint8)*(char*)((uint8*)SYM$1 + I$2) <= 122ull);
-			goto label$198;
-			label$186:;
+			if( (uint64)(int64)(uint8)*(char*)((uint8*)SYM$1 + I$2) < 97ull) goto label$182;
+			TMP$141$3 = (int64)-((uint64)(int64)(uint8)*(char*)((uint8*)SYM$1 + I$2) <= 122ull);
+			goto label$194;
+			label$182:;
+			TMP$141$3 = 0ll;
+			label$194:;
+			if( TMP$141$3 != 0ll) goto label$184;
+			if( (uint64)(int64)(uint8)*(char*)((uint8*)SYM$1 + I$2) > 90ull) goto label$183;
+			TMP$142$3 = (int64)-((uint64)(int64)(uint8)*(char*)((uint8*)SYM$1 + I$2) >= 65ull);
+			goto label$196;
+			label$183:;
 			TMP$142$3 = 0ll;
-			label$198:;
-			if( TMP$142$3 != 0ll) goto label$188;
-			if( (uint64)(int64)(uint8)*(char*)((uint8*)SYM$1 + I$2) > 90ull) goto label$187;
-			TMP$143$3 = (int64)-((uint64)(int64)(uint8)*(char*)((uint8*)SYM$1 + I$2) >= 65ull);
-			goto label$200;
-			label$187:;
-			TMP$143$3 = 0ll;
-			label$200:;
-			TMP$144$3 = (int64)-(TMP$143$3 != 0ll);
-			goto label$199;
-			label$188:;
+			label$196:;
+			TMP$143$3 = (int64)-(TMP$142$3 != 0ll);
+			goto label$195;
+			label$184:;
+			TMP$143$3 = -1ll;
+			label$195:;
+			if( TMP$143$3 != 0ll) goto label$185;
+			TMP$144$3 = (int64)-((uint64)(int64)(uint8)*(char*)((uint8*)SYM$1 + I$2) == 95ull);
+			goto label$197;
+			label$185:;
 			TMP$144$3 = -1ll;
+			label$197:;
+			if( TMP$144$3 != 0ll) goto label$187;
+			if( (uint64)(int64)(uint8)*(char*)((uint8*)SYM$1 + I$2) > 57ull) goto label$186;
+			TMP$145$3 = (int64)-((uint64)(int64)(uint8)*(char*)((uint8*)SYM$1 + I$2) >= 48ull);
+			goto label$199;
+			label$186:;
+			TMP$145$3 = 0ll;
 			label$199:;
-			if( TMP$144$3 != 0ll) goto label$189;
-			TMP$145$3 = (int64)-((uint64)(int64)(uint8)*(char*)((uint8*)SYM$1 + I$2) == 95ull);
-			goto label$201;
-			label$189:;
-			TMP$145$3 = -1ll;
-			label$201:;
-			if( TMP$145$3 != 0ll) goto label$191;
-			if( (uint64)(int64)(uint8)*(char*)((uint8*)SYM$1 + I$2) > 57ull) goto label$190;
-			TMP$146$3 = (int64)-((uint64)(int64)(uint8)*(char*)((uint8*)SYM$1 + I$2) >= 48ull);
-			goto label$203;
-			label$190:;
-			TMP$146$3 = 0ll;
-			label$203:;
-			TMP$147$3 = (int64)-(TMP$146$3 != 0ll);
-			goto label$202;
-			label$191:;
-			TMP$147$3 = -1ll;
-			label$202:;
-			if( TMP$147$3 != 0ll) goto label$193;
+			TMP$146$3 = (int64)-(TMP$145$3 != 0ll);
+			goto label$198;
+			label$187:;
+			TMP$146$3 = -1ll;
+			label$198:;
+			if( TMP$146$3 != 0ll) goto label$189;
 			{
-				goto label$171;
-				label$193:;
+				goto label$167;
+				label$189:;
 			}
 		}
-		label$183:;
+		label$179:;
 		I$2 = I$2 + 1ll;
-		label$182:;
-		if( I$2 <= TMP$141$2) goto label$185;
-		label$184:;
+		label$178:;
+		if( I$2 <= TMP$140$2) goto label$181;
+		label$180:;
 	}
 	fb$result$1 = -1ll;
-	label$171:;
+	label$167:;
 	return fb$result$1;
 }
 
@@ -1131,20 +1114,20 @@ FBSTRING* STRUNQUOTE( FBSTRING* S$1 )
 {
 	FBSTRING fb$result$1;
 	__builtin_memset( &fb$result$1, 0, 24ll );
-	label$208:;
+	label$204:;
 	int64 vr$1 = STRISQUOTED( S$1 );
-	if( vr$1 == 0ll) goto label$211;
+	if( vr$1 == 0ll) goto label$207;
 	{
 		int64 vr$2 = fb_StrLen( (void*)S$1, -1ll );
 		FBSTRING* vr$4 = fb_StrMid( (FBSTRING*)S$1, 2ll, vr$2 + -2ll );
 		fb_StrInit( (void*)&fb$result$1, -1ll, (void*)vr$4, -1ll, 0 );
-		goto label$209;
+		goto label$205;
 	}
-	label$211:;
-	label$210:;
+	label$207:;
+	label$206:;
 	fb_StrInit( (void*)&fb$result$1, -1ll, (void*)S$1, -1ll, 0 );
-	goto label$209;
-	label$209:;
+	goto label$205;
+	label$205:;
 	FBSTRING* vr$8 = fb_StrAllocTempResult( (FBSTRING*)&fb$result$1 );
 	return vr$8;
 }
@@ -1162,43 +1145,43 @@ static int64 HFINDEXTBEGIN( FBSTRING* PATH$1 )
 {
 	int64 fb$result$1;
 	__builtin_memset( &fb$result$1, 0, 8ll );
-	label$75:;
+	label$74:;
 	{
 		int64 I$2;
 		int64 vr$1 = fb_StrLen( (void*)PATH$1, -1ll );
 		I$2 = vr$1 + -1ll;
-		goto label$77;
-		label$80:;
+		goto label$76;
+		label$79:;
 		{
 			{
-				uint8 TMP$125$4;
-				TMP$125$4 = *(uint8*)((uint8*)*(char**)PATH$1 + I$2);
-				if( (uint64)(int64)TMP$125$4 != 46ull) goto label$82;
-				label$83:;
+				uint8 TMP$124$4;
+				TMP$124$4 = *(uint8*)((uint8*)*(char**)PATH$1 + I$2);
+				if( (uint64)(int64)TMP$124$4 != 46ull) goto label$81;
+				label$82:;
 				{
 					fb$result$1 = I$2;
-					goto label$76;
+					goto label$75;
 				}
-				goto label$81;
-				label$82:;
-				if( (uint64)(int64)TMP$125$4 != 47ull) goto label$84;
-				label$85:;
-				{
-					goto label$79;
-				}
-				label$84:;
+				goto label$80;
 				label$81:;
+				if( (uint64)(int64)TMP$124$4 != 47ull) goto label$83;
+				label$84:;
+				{
+					goto label$78;
+				}
+				label$83:;
+				label$80:;
 			}
 		}
-		label$78:;
-		I$2 = I$2 + -1ll;
 		label$77:;
-		if( I$2 >= 0ll) goto label$80;
-		label$79:;
+		I$2 = I$2 + -1ll;
+		label$76:;
+		if( I$2 >= 0ll) goto label$79;
+		label$78:;
 	}
 	int64 vr$8 = fb_StrLen( (void*)PATH$1, -1ll );
 	fb$result$1 = vr$8;
-	label$76:;
+	label$75:;
 	return fb$result$1;
 }
 
@@ -1206,19 +1189,19 @@ static int64 STRISQUOTED( FBSTRING* S$1 )
 {
 	int64 fb$result$1;
 	__builtin_memset( &fb$result$1, 0, 8ll );
-	label$204:;
+	label$200:;
 	int64 LAST$1;
 	int64 vr$1 = fb_StrLen( (void*)S$1, -1ll );
 	LAST$1 = vr$1 + -1ll;
-	if( LAST$1 >= 1ll) goto label$207;
+	if( LAST$1 >= 1ll) goto label$203;
 	{
 		fb$result$1 = 0ll;
-		goto label$205;
+		goto label$201;
 	}
-	label$207:;
-	label$206:;
+	label$203:;
+	label$202:;
 	fb$result$1 = ((int64)-((uint64)(int64)*(uint8*)*(char**)S$1 == 34ull) & (int64)-((uint64)(int64)*(uint8*)((uint8*)*(char**)S$1 + LAST$1) == 34ull)) | ((int64)-((uint64)(int64)*(uint8*)*(char**)S$1 == 39ull) & (int64)-((uint64)(int64)*(uint8*)((uint8*)*(char**)S$1 + LAST$1) == 39ull));
-	goto label$205;
-	label$205:;
+	goto label$201;
+	label$201:;
 	return fb$result$1;
 }
