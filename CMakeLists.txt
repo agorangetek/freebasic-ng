@@ -30,6 +30,8 @@ option(FB_BUILD_COMPILER "Build the fbc compiler" ON)
 option(FB_BUILD_TESTS "Build tests" OFF)
 option(FB_BUILD_LEGACY_UNIT_TESTS
     "Run the historical fbcunit suite through CTest" OFF)
+option(FB_BUILD_LEGACY_LOG_TESTS
+    "Run the historical log-test suite through CTest" OFF)
 option(FB_USE_SYSTEM_FBC "Use an existing fbc instead of the bundled bootstrap sources" OFF)
 
 # The Developer Preview archives use the ordinary Unix-style layout.  A
@@ -66,7 +68,7 @@ if(FB_BUILD_COMPILER)
     add_subdirectory(src/compiler)
 endif()
 
-if(FB_BUILD_TESTS OR FB_BUILD_LEGACY_UNIT_TESTS)
+if(FB_BUILD_TESTS OR FB_BUILD_LEGACY_UNIT_TESTS OR FB_BUILD_LEGACY_LOG_TESTS)
     enable_testing()
 
     # Darwin arm64 uses a pointer __builtin_va_list.  This regression must be
@@ -125,6 +127,38 @@ if(FB_BUILD_TESTS OR FB_BUILD_LEGACY_UNIT_TESTS)
         )
         set_tests_properties(legacy.unit PROPERTIES
             LABELS "legacy;unit"
+            TIMEOUT 1800
+        )
+    endif()
+
+    if(FB_BUILD_LEGACY_LOG_TESTS)
+        if(NOT FB_BUILD_COMPILER)
+            message(FATAL_ERROR
+                "FB_BUILD_LEGACY_LOG_TESTS requires FB_BUILD_COMPILER=ON")
+        endif()
+        if(NOT FB_BUILD_GFXLIB)
+            message(FATAL_ERROR
+                "FB_BUILD_LEGACY_LOG_TESTS requires FB_BUILD_GFXLIB=ON because log tests link -fbgfx")
+        endif()
+
+        find_package(Python3 COMPONENTS Interpreter REQUIRED)
+        find_program(FB_LEGACY_TEST_MAKE NAMES gmake make REQUIRED)
+        set(_fb_legacy_log_dir "${CMAKE_BINARY_DIR}/tests/legacy-log")
+        add_test(
+            NAME legacy.log
+            COMMAND "${Python3_EXECUTABLE}"
+                "${CMAKE_SOURCE_DIR}/scripts/run-legacy-log-tests.py"
+                --cmake "${CMAKE_COMMAND}"
+                --make "${FB_LEGACY_TEST_MAKE}"
+                --build-dir "${CMAKE_BINARY_DIR}"
+                --install-prefix "${_fb_legacy_log_dir}/stage"
+                --source-tests-dir "${CMAKE_SOURCE_DIR}/tests"
+                --source-include-dir "${CMAKE_SOURCE_DIR}/inc"
+                --work-dir "${_fb_legacy_log_dir}/work"
+                --log "${_fb_legacy_log_dir}/log-tests.log"
+        )
+        set_tests_properties(legacy.log PROPERTIES
+            LABELS "legacy;log"
             TIMEOUT 1800
         )
     endif()

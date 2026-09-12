@@ -152,6 +152,42 @@ jobs:
           ctest --test-dir selfhost-build --output-on-failure
           git diff --exit-code
 
+  linux-x86_64-legacy-log:
+    name: Legacy log tests Linux x64
+    runs-on: ubuntu-24.04
+
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Verify version and bootstrap metadata
+        run: |
+          python3 scripts/check-version.py
+          python3 scripts/check-bootstrap-provenance.py --target linux-x86_64
+
+      - name: Install build dependencies
+        run: sudo apt-get update && sudo apt-get install -y cmake ninja-build g++ libncurses-dev libx11-dev libgpm-dev
+
+      - name: Build and stage seed compiler
+        run: |
+          cmake -S . -B seed-build -G Ninja -DCMAKE_BUILD_TYPE=Release \
+            -DFB_BUILD_GFXLIB=OFF -DFB_DISABLE_X11=ON -DFB_DISABLE_GPM=ON \
+            -DFB_DISABLE_FFI=ON -DFB_DISABLE_OPENGL=ON
+          cmake --build seed-build
+          cmake --install seed-build --prefix seed-stage
+
+      - name: Self-host compiler and run legacy log CTest
+        run: |
+          PATH="$PWD/seed-stage/bin:$PATH" cmake -S . -B selfhost-build -G Ninja \
+            -DCMAKE_BUILD_TYPE=Release -DFB_USE_SYSTEM_FBC=ON \
+            -DFB_BUILD_LEGACY_LOG_TESTS=ON -DFB_BUILD_GFXLIB=ON \
+            -DFB_DISABLE_X11=ON -DFB_DISABLE_GPM=ON \
+            -DFB_DISABLE_FFI=ON -DFB_DISABLE_OPENGL=ON
+          cmake --build selfhost-build
+          ctest --test-dir selfhost-build --output-on-failure
+          git diff --exit-code
+
   amigaos-m68k:
     name: AmigaOS 3 m68k runtime smoke
     runs-on: ubuntu-24.04
