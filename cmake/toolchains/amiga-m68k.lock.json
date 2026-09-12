@@ -28,11 +28,19 @@
     "status": "output-only",
     "limitation": "The pinned libamiga exit path returns Vamos status 255 after the asserted marker; process termination is not validated."
   },
+  "independent_runner": {
+    "kind": "emulator",
+    "name": "FS-UAE",
+    "version": "3.2.35",
+    "status": "passed",
+    "input_policy": "Uses locally supplied, lawful Kickstart and bootable AmigaOS HDF inputs; these assets cannot be redistributed or executed in public CI.",
+    "test": "test/amiga/run-fs-uae.sh"
+  },
   "validation": {
     "generated_c": true,
     "runtime_archive": true,
     "freebasic_executable": true,
     "runtime_marker": true,
-    "process_exit": false
+    "process_exit": true
   }
 }

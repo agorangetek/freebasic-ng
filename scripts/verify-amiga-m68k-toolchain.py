@@ -105,9 +105,28 @@ def main() -> None:
     process_exit = require_boolean(validation.get("process_exit"),
                                    "validation.process_exit")
 
+    independent_runner = data.get("independent_runner")
+    if process_exit:
+        if not isinstance(independent_runner, dict):
+            fail("process-exit validation requires independent_runner")
+        if independent_runner.get("kind") != "emulator":
+            fail("independent_runner.kind must be emulator")
+        if independent_runner.get("name") != "FS-UAE":
+            fail("independent_runner.name must be FS-UAE")
+        require_string(independent_runner.get("version"),
+                       "independent_runner.version")
+        if independent_runner.get("status") != "passed":
+            fail("independent_runner.status must be passed")
+        require_string(independent_runner.get("input_policy"),
+                       "independent_runner.input_policy")
+        if independent_runner.get("test") != "test/amiga/run-fs-uae.sh":
+            fail("independent_runner.test must name the FS-UAE harness")
+    elif independent_runner is not None:
+        fail("independent_runner requires process-exit validation")
+
     if target["support_level"] == "supported":
-        if runner_status != "passed" or not (executable and runtime_marker and process_exit):
-            fail("supported requires a passing executable runner and process-exit validation")
+        if not (executable and runtime_marker and process_exit):
+            fail("supported requires executable, runtime-marker and process-exit validation")
     elif runner_status == "passed" and not process_exit:
         fail("a passing runner must validate process termination")
 

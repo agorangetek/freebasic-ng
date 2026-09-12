@@ -1,0 +1,6 @@
+C:smoke >S:m3-fsuae-output
+If Warn
+  C:Echo "M3-FS-UAE-FAIL" >S:m3-fsuae-result
+Else
+  C:Echo "M3-FS-UAE-PASS" >S:m3-fsuae-result
+EndIf
