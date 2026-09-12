@@ -61,6 +61,10 @@ target_compile_options(fbgfx PRIVATE
     -fno-exceptions -fno-unwind-tables -fno-asynchronous-unwind-tables
     -Wall -Wextra -Wno-unused-parameter -Werror-implicit-function-declaration
 )
+if(FB_COMPILER_DEBUG)
+    target_compile_options(fbgfx PRIVATE -g -UNDEBUG -Werror)
+    target_compile_definitions(fbgfx PRIVATE DEBUG)
+endif()
 
 # Feature flags (inherited from rtlib settings)
 if(FB_DISABLE_X11)
@@ -88,6 +92,10 @@ target_compile_options(fbgfxmt PRIVATE
     -fno-exceptions -fno-unwind-tables -fno-asynchronous-unwind-tables
     -Wall -Wextra -Wno-unused-parameter -Werror-implicit-function-declaration
 )
+if(FB_COMPILER_DEBUG)
+    target_compile_options(fbgfxmt PRIVATE -g -UNDEBUG -Werror)
+    target_compile_definitions(fbgfxmt PRIVATE DEBUG)
+endif()
 target_compile_definitions(fbgfxmt PRIVATE ENABLE_MT)
 if(FB_DISABLE_X11)
     target_compile_definitions(fbgfxmt PRIVATE DISABLE_X11)

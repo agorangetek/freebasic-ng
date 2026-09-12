@@ -38,6 +38,10 @@ option(FB_BUILD_LEGACY_SYNTAX_TESTS
     "Run the historical syntax fixtures through CTest" OFF)
 option(FB_BUILD_LEGACY_DOC_TOOLS
     "Build the historical documentation tools through CTest" OFF)
+option(FB_COMPILER_DEBUG
+    "Enable the historical compiler debug configuration" OFF)
+option(FB_LEGACY_TEST_DEBUG
+    "Pass the historical -g -exx flags to legacy runtime test suites" OFF)
 option(FB_USE_SYSTEM_FBC "Use an existing fbc instead of the bundled bootstrap sources" OFF)
 
 # The Developer Preview archives use the ordinary Unix-style layout.  A
@@ -107,6 +111,17 @@ if(FB_BUILD_TESTS OR FB_BUILD_LEGACY_UNIT_TESTS OR FB_BUILD_LEGACY_LOG_TESTS OR
         )
     endif()
 
+    # Travis varied compiler debug and the runtime test flags independently.
+    # Warning and syntax fixtures intentionally stay outside this list: their
+    # expected diagnostic output depends on unstable debug temporary names.
+    set(_fb_legacy_runtime_test_fbc_args)
+    if(FB_LEGACY_TEST_DEBUG)
+        list(APPEND _fb_legacy_runtime_test_fbc_args
+            --fbc-flag=-g
+            --fbc-flag=-exx
+        )
+    endif()
+
     if(FB_BUILD_LEGACY_UNIT_TESTS)
         if(NOT FB_BUILD_COMPILER)
             message(FATAL_ERROR
@@ -132,6 +147,7 @@ if(FB_BUILD_TESTS OR FB_BUILD_LEGACY_UNIT_TESTS OR FB_BUILD_LEGACY_LOG_TESTS OR
                 --source-include-dir "${CMAKE_SOURCE_DIR}/inc"
                 --work-dir "${_fb_legacy_unit_dir}/work"
                 --log "${_fb_legacy_unit_dir}/unit-tests.log"
+                ${_fb_legacy_runtime_test_fbc_args}
         )
         set_tests_properties(legacy.unit PROPERTIES
             LABELS "legacy;unit"
@@ -164,6 +180,7 @@ if(FB_BUILD_TESTS OR FB_BUILD_LEGACY_UNIT_TESTS OR FB_BUILD_LEGACY_LOG_TESTS OR
                 --source-include-dir "${CMAKE_SOURCE_DIR}/inc"
                 --work-dir "${_fb_legacy_log_dir}/work"
                 --log "${_fb_legacy_log_dir}/log-tests.log"
+                ${_fb_legacy_runtime_test_fbc_args}
         )
         set_tests_properties(legacy.log PROPERTIES
             LABELS "legacy;log"
@@ -228,6 +245,7 @@ if(FB_BUILD_TESTS OR FB_BUILD_LEGACY_UNIT_TESTS OR FB_BUILD_LEGACY_LOG_TESTS OR
                 --source-doc-dir "${CMAKE_SOURCE_DIR}/doc"
                 --work-dir "${_fb_legacy_doc_dir}/work"
                 --log "${_fb_legacy_doc_dir}/doc-tools.log"
+                ${_fb_legacy_runtime_test_fbc_args}
         )
         set_tests_properties(legacy.doc-tools PROPERTIES
             LABELS "legacy;documentation"

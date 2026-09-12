@@ -71,6 +71,22 @@ target_compile_options(fb PRIVATE
     -Wall -Wextra -Wno-unused-parameter -Werror-implicit-function-declaration
 )
 
+# The historical compiler-debug job also rebuilt the C runtime with these
+# flags.  They are intentionally not applied to fbc's generated C: DEBUG is
+# a field name in its self-hosted output.
+set(FB_RT_DEBUG_C_FLAGS)
+set(FB_RT_DEBUG_C_DEFINITIONS)
+set(FB_RT_DEBUG_C_DEFINE_FLAGS)
+if(FB_COMPILER_DEBUG)
+    # Release presets add -DNDEBUG.  Travis did not, and DEBUG assertions
+    # would otherwise disappear while their variables still compile in.
+    list(APPEND FB_RT_DEBUG_C_FLAGS -g -UNDEBUG -Werror)
+    list(APPEND FB_RT_DEBUG_C_DEFINITIONS DEBUG)
+    list(APPEND FB_RT_DEBUG_C_DEFINE_FLAGS -DDEBUG)
+endif()
+target_compile_options(fb PRIVATE ${FB_RT_DEBUG_C_FLAGS})
+target_compile_definitions(fb PRIVATE ${FB_RT_DEBUG_C_DEFINITIONS})
+
 target_compile_definitions(fb PRIVATE
     $<$<PLATFORM_ID:Darwin>:DISABLE_GPM>
     $<$<PLATFORM_ID:Darwin>:DISABLE_FFI>
@@ -115,6 +131,8 @@ if(NOT WIN32 OR NOT FB_TARGET_OS STREQUAL "dos")
         -fno-exceptions -fno-unwind-tables -fno-asynchronous-unwind-tables
         -Wall -Wextra -Wno-unused-parameter -Werror-implicit-function-declaration
     )
+    target_compile_options(fbmt PRIVATE ${FB_RT_DEBUG_C_FLAGS})
+    target_compile_definitions(fbmt PRIVATE ${FB_RT_DEBUG_C_DEFINITIONS})
     target_compile_definitions(fbmt PRIVATE ENABLE_MT)
     # Copy the same DISABLE_ defines
     if(FB_DISABLE_X11)
@@ -140,6 +158,8 @@ if(FB_NEED_PIC)
         -fno-exceptions -fno-unwind-tables -fno-asynchronous-unwind-tables
         -Wall -Wextra -Wno-unused-parameter -Werror-implicit-function-declaration
     )
+    target_compile_options(fbpic PRIVATE ${FB_RT_DEBUG_C_FLAGS})
+    target_compile_definitions(fbpic PRIVATE ${FB_RT_DEBUG_C_DEFINITIONS})
     if(FB_DISABLE_X11)
         target_compile_definitions(fbpic PRIVATE DISABLE_X11)
     endif()
@@ -166,7 +186,8 @@ set(FBRT0_OBJ "${CMAKE_CURRENT_BINARY_DIR}/fbrt0.o")
 
 add_custom_command(
     OUTPUT "${FBRT0_OBJ}"
-    COMMAND ${CMAKE_C_COMPILER} -c -I "${CMAKE_CURRENT_SOURCE_DIR}" -o "${FBRT0_OBJ}" "${FBRT0_SOURCE}"
+    COMMAND ${CMAKE_C_COMPILER} ${FB_RT_DEBUG_C_FLAGS} ${FB_RT_DEBUG_C_DEFINE_FLAGS}
+        -c -I "${CMAKE_CURRENT_SOURCE_DIR}" -o "${FBRT0_OBJ}" "${FBRT0_SOURCE}"
     COMMAND_EXPAND_LISTS
     DEPENDS "${FBRT0_SOURCE}"
     COMMENT "Compiling fbrt0.o"
@@ -178,7 +199,8 @@ if(FB_NEED_PIC)
     set(FBRT0PIC_OBJ "${CMAKE_CURRENT_BINARY_DIR}/fbrt0pic.o")
     add_custom_command(
         OUTPUT "${FBRT0PIC_OBJ}"
-        COMMAND ${CMAKE_C_COMPILER} -c -fPIC -I "${CMAKE_CURRENT_SOURCE_DIR}" -o "${FBRT0PIC_OBJ}" "${FBRT0_SOURCE}"
+        COMMAND ${CMAKE_C_COMPILER} ${FB_RT_DEBUG_C_FLAGS} ${FB_RT_DEBUG_C_DEFINE_FLAGS}
+            -c -fPIC -I "${CMAKE_CURRENT_SOURCE_DIR}" -o "${FBRT0PIC_OBJ}" "${FBRT0_SOURCE}"
         DEPENDS "${FBRT0_SOURCE}"
         COMMENT "Compiling fbrt0pic.o"
         VERBATIM

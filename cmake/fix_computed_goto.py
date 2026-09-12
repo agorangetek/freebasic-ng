@@ -10,6 +10,54 @@ import re
 import sys
 
 
+def find_function_end(lines, start):
+    """Return the line closing a C function body, ignoring strings/comments."""
+    depth = 0
+    in_block_comment = False
+
+    for line_number in range(start, len(lines)):
+        line = lines[line_number]
+        character = 0
+        while character < len(line):
+            current = line[character]
+            following = line[character + 1] if character + 1 < len(line) else ""
+
+            if in_block_comment:
+                if current == "*" and following == "/":
+                    in_block_comment = False
+                    character += 2
+                else:
+                    character += 1
+                continue
+            if current == "/" and following == "*":
+                in_block_comment = True
+                character += 2
+                continue
+            if current == "/" and following == "/":
+                break
+            if current in ("'", '\"'):
+                quote = current
+                character += 1
+                while character < len(line):
+                    if line[character] == "\\":
+                        character += 2
+                    elif line[character] == quote:
+                        character += 1
+                        break
+                    else:
+                        character += 1
+                continue
+            if current == "{":
+                depth += 1
+            elif current == "}":
+                depth -= 1
+                if depth == 0:
+                    return line_number
+            character += 1
+
+    raise ValueError("unterminated C function body")
+
+
 def fix_file(filepath):
     with open(filepath) as f:
         content = f.read()
@@ -25,31 +73,33 @@ def fix_file(filepath):
     while i < len(lines):
         new_lines.append(lines[i])
 
-        if (i + 1 < len(lines) and
-            re.match(r'^[a-zA-Z_]', lines[i]) and
-            '(' in lines[i] and ')' in lines[i] and
-            lines[i + 1].strip() == '{'):
+        if (re.match(r'^[a-zA-Z_$]', lines[i]) and
+            not re.match(r'^(if|else|for|while|switch|do)\b', lines[i]) and
+            '(' in lines[i] and ')' in lines[i]):
 
+            # -g makes fbc place a #line directive between a C function
+            # signature and its opening brace.  It is still the same
+            # function, so skip those directives before locating the body.
             func_start = i + 1
-            brace_count = 0
-            func_end = func_start
-            for j in range(func_start, len(lines)):
-                brace_count += lines[j].count('{') - lines[j].count('}')
-                if brace_count == 0:
-                    func_end = j
-                    break
+            while (func_start < len(lines) and
+                   lines[func_start].lstrip().startswith('#line')):
+                func_start += 1
 
-            func_body = '\n'.join(lines[func_start:func_end + 1])
-            has_goto_star = bool(re.search(r'goto \*', func_body))
-            has_label_addr = '&&label' in func_body or '&&__fb_' in func_body
-
-            if has_goto_star and not has_label_addr:
-                i += 1
-                new_lines.append(lines[i])  # the { line
-                new_lines.append('\t__label__ __fb_dummy_label;')
-                new_lines.append('\tif(0) { __fb_dummy_label: ; }')
-                new_lines.append('\t(void)&&__fb_dummy_label;')
-                modified = True
+            if func_start < len(lines) and lines[func_start].strip() == '{':
+                func_end = find_function_end(lines, func_start)
+                func_body = '\n'.join(lines[func_start:func_end + 1])
+                has_goto_star = bool(re.search(r'goto \*', func_body))
+                # It is harmless to add our own label address even if fbc emitted
+                # another one elsewhere in the function.  That is more robust
+                # than trying to parse C braces in generated strings and comments.
+                if has_goto_star:
+                    while i < func_start:
+                        i += 1
+                        new_lines.append(lines[i])
+                    new_lines.append('\t__label__ __fb_dummy_label;')
+                    new_lines.append('\tif(0) { __fb_dummy_label: ; }')
+                    new_lines.append('\t(void)&&__fb_dummy_label;')
+                    modified = True
 
         i += 1
 

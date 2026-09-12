@@ -49,6 +49,7 @@ def main() -> int:
     parser.add_argument("--source-doc-dir", required=True, type=Path)
     parser.add_argument("--work-dir", required=True, type=Path)
     parser.add_argument("--log", required=True, type=Path)
+    parser.add_argument("--fbc-flag", action="append", default=[])
     args = parser.parse_args()
 
     build_dir = args.build_dir.resolve()
@@ -84,7 +85,7 @@ def main() -> int:
 
     doc_dir = work_dir / "doc"
     shutil.copytree(args.source_doc_dir, doc_dir)
-    fbc = f"{compiler} -i {compiler_include_dir}"
+    fbc = " ".join([str(compiler), "-i", str(compiler_include_dir), *args.fbc_flag])
     make_args = [f"FBC={fbc}", "HAVE_ASPELL=1"]
     for component in ("libfbdoc", "fbdoc", "fbchkdoc"):
         run([str(args.make), "-C", str(doc_dir / component), *make_args], log=log_path)

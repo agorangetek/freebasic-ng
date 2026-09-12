@@ -190,6 +190,63 @@ jobs:
           ctest --test-dir selfhost-build --output-on-failure
           git diff --exit-code
 
+  linux-x86_64-legacy-debug:
+    name: Legacy debug Linux x64 (${{ matrix.id }})
+    runs-on: ubuntu-24.04
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - id: release
+            compiler_debug: OFF
+            test_debug: OFF
+          - id: test-debug
+            compiler_debug: OFF
+            test_debug: ON
+          - id: compiler-debug
+            compiler_debug: ON
+            test_debug: OFF
+          - id: full-debug
+            compiler_debug: ON
+            test_debug: ON
+
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Verify version and bootstrap metadata
+        run: |
+          python3 scripts/check-version.py
+          python3 scripts/check-bootstrap-provenance.py --target linux-x86_64
+
+      - name: Install build dependencies
+        run: sudo apt-get update && sudo apt-get install -y cmake ninja-build g++ libncurses-dev libx11-dev libxext-dev libxpm-dev libxrandr-dev libxrender-dev libffi-dev libgpm-dev libaspell-dev libcurl4-openssl-dev libpcre2-dev
+
+      - name: Build and stage seed compiler
+        run: |
+          cmake -S . -B seed-build -G Ninja -DCMAKE_BUILD_TYPE=Release \
+            -DFB_COMPILER_DEBUG=${{ matrix.compiler_debug }} \
+            -DFB_BUILD_GFXLIB=OFF -DFB_DISABLE_X11=ON -DFB_DISABLE_GPM=ON \
+            -DFB_DISABLE_FFI=ON -DFB_DISABLE_OPENGL=ON
+          cmake --build seed-build
+          cmake --install seed-build --prefix seed-stage
+
+      - name: Self-host compiler and run historical suites
+        run: |
+          PATH="$PWD/seed-stage/bin:$PATH" cmake -S . -B selfhost-build -G Ninja \
+            -DCMAKE_BUILD_TYPE=Release -DFB_USE_SYSTEM_FBC=ON \
+            -DFB_COMPILER_DEBUG=${{ matrix.compiler_debug }} \
+            -DFB_LEGACY_TEST_DEBUG=${{ matrix.test_debug }} \
+            -DFB_BUILD_LEGACY_UNIT_TESTS=ON -DFB_BUILD_LEGACY_LOG_TESTS=ON \
+            -DFB_BUILD_LEGACY_WARNING_TESTS=ON -DFB_BUILD_LEGACY_SYNTAX_TESTS=ON \
+            -DFB_BUILD_LEGACY_DOC_TOOLS=ON -DFB_BUILD_GFXLIB=ON \
+            -DFB_DISABLE_X11=ON -DFB_DISABLE_GPM=ON \
+            -DFB_DISABLE_FFI=OFF -DFB_DISABLE_OPENGL=ON
+          cmake --build selfhost-build
+          ctest --test-dir selfhost-build --output-on-failure
+          git diff --exit-code
+
   amigaos-m68k:
     name: AmigaOS 3 m68k runtime smoke
     runs-on: ubuntu-24.04

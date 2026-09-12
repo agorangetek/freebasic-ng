@@ -75,6 +75,7 @@ def main() -> int:
     parser.add_argument("--source-include-dir", required=True, type=Path)
     parser.add_argument("--work-dir", required=True, type=Path)
     parser.add_argument("--log", required=True, type=Path)
+    parser.add_argument("--fbc-flag", action="append", default=[])
     args = parser.parse_args()
 
     build_dir = args.build_dir.resolve()
@@ -118,11 +119,12 @@ def main() -> int:
     if not compiler.is_file() or not compiler_include_dir.is_dir():
         raise FileNotFoundError("CMake installation did not contain fbc and its include directory")
 
+    fbc_command = " ".join([str(compiler), "-i", str(compiler_include_dir), *args.fbc_flag])
     run(
         [
             str(args.make),
             "log-tests",
-            f"FBC={compiler} -i {compiler_include_dir}",
+            f"FBC={fbc_command}",
         ],
         cwd=test_dir,
         log=log_path,
