@@ -560,7 +560,7 @@ jobs:
           done
           brew tap-new --no-git "$tap"
           formula="$(brew --repository "$tap")/Formula/freebasic-ng.rb"
-          sed -E "s#https://github.com/${GITHUB_REPOSITORY}/releases/download/[^/\"]+#http://127.0.0.1:${port}#g" \
+          sed -E "s#https://github.com/${GITHUB_REPOSITORY}/releases/download/[^/\"]+#http://127.0.0.1:${port}#g; s#\\.tar\\.xz\\\"#\\.tar.xz?version=${{ needs.metadata.outputs.version }}\\\"#g" \
             candidate/freebasic-ng.rb > "$formula"
           ruby -c "$formula"
           brew audit --strict "$tap/freebasic-ng"
