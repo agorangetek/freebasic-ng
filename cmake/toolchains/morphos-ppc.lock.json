@@ -1,0 +1,33 @@
+{
+  "schema": 1,
+  "target": {
+    "os": "morphos",
+    "architecture": "powerpc",
+    "support_level": "unqualified"
+  },
+  "toolchain": {
+    "provisioning": "container",
+    "image": "amigadev/crosstools@sha256:a87396db1434dad0d9090da0c74d8ed6a11d83f6f9748e9a73b626744bc2ad80",
+    "sdk_root": "/opt/ppc-morphos",
+    "compiler": {
+      "command": "ppc-morphos-gcc",
+      "target": "ppc-morphos",
+      "version": "15.2.0"
+    },
+    "linker": {
+      "command": "ppc-morphos-ld",
+      "version": "2.45.1",
+      "output_format": "elf32-morphos"
+    },
+    "c_runtime": {
+      "flag": "-noixemul",
+      "flavour": "libnix"
+    }
+  },
+  "validation": {
+    "runtime_archive": true,
+    "freebasic_executable": true,
+    "runtime_marker": false,
+    "process_exit": false
+  }
+}

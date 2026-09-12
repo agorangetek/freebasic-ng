@@ -198,6 +198,62 @@ jobs:
             echo "Vamos completed the smoke output but cannot validate libamiga process termination."
           fi
 
+  morphos-ppc:
+    name: MorphOS PowerPC runtime link
+    runs-on: ubuntu-24.04
+
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Verify version and bootstrap metadata
+        run: |
+          python3 scripts/check-version.py
+          python3 scripts/check-bootstrap-provenance.py --target linux-x86_64
+
+      - name: Load pinned MorphOS SDK inputs
+        run: python3 scripts/verify-morphos-ppc-toolchain.py --github-env "$GITHUB_ENV"
+
+      - name: Install native build dependencies
+        run: sudo apt-get update && sudo apt-get install -y cmake ninja-build libncurses-dev libx11-dev libgpm-dev
+
+      - name: Provision pinned MorphOS SDK
+        run: |
+          docker pull "$MORPHOS_GCC_IMAGE"
+          container_id="$(docker create "$MORPHOS_GCC_IMAGE")"
+          sudo mkdir -p /opt/ppc-morphos
+          sudo docker cp "$container_id":/opt/ppc-morphos/. /opt/ppc-morphos
+          docker rm "$container_id"
+          python3 scripts/verify-morphos-ppc-toolchain.py --verify-installed
+
+      - name: Build native C producer
+        run: |
+          cmake -S . -B host-build -G Ninja -DCMAKE_BUILD_TYPE=Release \
+            -DFB_BUILD_GFXLIB=OFF -DFB_DISABLE_X11=ON -DFB_DISABLE_GPM=ON \
+            -DFB_DISABLE_FFI=ON -DFB_DISABLE_OPENGL=ON
+          cmake --build host-build --target fbc
+
+      - name: Build MorphOS runtime
+        run: |
+          cmake -S . -B morphos-build -G Ninja \
+            -DCMAKE_TOOLCHAIN_FILE=cmake/toolchains/morphos-ppc.cmake \
+            -DMORPHOS_GCC_ROOT=/opt/ppc-morphos \
+            -DFB_BUILD_COMPILER=OFF -DFB_BUILD_GFXLIB=OFF \
+            -DFB_DISABLE_X11=ON -DFB_DISABLE_GPM=ON -DFB_DISABLE_FFI=ON \
+            -DFB_DISABLE_OPENGL=ON
+          cmake --build morphos-build --target fb
+
+      - name: Generate and link MorphOS smoke program
+        run: |
+          FBC="$PWD/host-build/src/compiler/fbc" \
+          FB_MORPHOS_RUNTIME="$PWD/morphos-build/src/rtlib/libfb.a" \
+          FB_MORPHOS_BUILD_DIR="$RUNNER_TEMP/morphos-smoke" \
+          MORPHOS_CC=/opt/ppc-morphos/bin/ppc-morphos-gcc \
+          MORPHOS_OBJDUMP=/opt/ppc-morphos/bin/ppc-morphos-objdump \
+          MORPHOS_READELF=/opt/ppc-morphos/bin/ppc-morphos-readelf \
+          test/morphos/build_and_link.sh test/morphos/smoke.bas
+
   target-generation:
     name: Target generation (C output only)
     runs-on: ubuntu-24.04

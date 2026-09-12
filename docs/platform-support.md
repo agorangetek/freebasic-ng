@@ -39,10 +39,13 @@ The immutable compiler image, SDK root and emulator packages are recorded in
 CI validates that lock file before loading its values into the runtime-smoke
 job, so the published pin and the executed inputs cannot silently diverge.
 
-AROS and MorphOS are explicitly deferred to the later
+AROS remains deferred to the later
 [M6 target-qualification epic](https://github.com/metaneutrons/freebasic-ng/issues/102).
-Their current generated-C checks remain compiler front-end regression checks,
-not ABI, executable or runtime evidence. The remaining M3 work is tracked in
-[toolchain provisioning](https://github.com/metaneutrons/freebasic-ng/issues/67)
+MorphOS M6 has a pinned SDK, a CMake runtime archive and a FreeBASIC
+link check in CI, recorded in
+[`cmake/toolchains/morphos-ppc.lock.json`](../cmake/toolchains/morphos-ppc.lock.json).
+That establishes neither execution nor process termination on MorphOS, so the
+target remains unqualified and is not published as supported. The remaining M3
+work is tracked in [toolchain provisioning](https://github.com/metaneutrons/freebasic-ng/issues/67)
 and [runtime validation](https://github.com/metaneutrons/freebasic-ng/issues/68).
 Package publication to APT, Homebrew and the AUR is M2 work.
