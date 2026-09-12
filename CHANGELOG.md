@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.22.3](https://github.com/metaneutrons/freebasic-ng/compare/v1.22.2...v1.22.3) (2026-09-12)
+
+
+### Bug Fixes
+
+* **release:** use canonical AUR RPC endpoint ([#98](https://github.com/metaneutrons/freebasic-ng/issues/98)) ([8d5366b](https://github.com/metaneutrons/freebasic-ng/commit/8d5366bb88d3e8cae4f36026fd98373d44ff1a19))
+
 ## [1.22.2](https://github.com/metaneutrons/freebasic-ng/compare/v1.22.1...v1.22.2) (2026-09-12)
 
 
