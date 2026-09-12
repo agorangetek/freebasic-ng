@@ -1,34 +1,59 @@
-#!/bin/bash
-# Build and test a FreeBASIC program for AmigaOS m68k
-set -e
+#!/usr/bin/env bash
+# Build and execute a FreeBASIC AmigaOS/m68k smoke program.
+set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
-PROJECT_DIR="$SCRIPT_DIR/../.."
-SYSROOT="${AMIGA_GCC_SYSROOT:-/opt/homebrew/Cellar/amiga-gcc/2025.07.13/m68k-amigaos}"
-CFLAGS="-m68020 -msoft-float -isystem $SYSROOT/ndk-include -isystem $SYSROOT/sys-include -O2 -fno-builtin"
+PROJECT_DIR="$(cd "$SCRIPT_DIR/../.." && pwd)"
+INPUT="${1:-$SCRIPT_DIR/smoke.bas}"
+FBC="${FBC:-$PROJECT_DIR/build/src/compiler/fbc}"
+AMIGA_CC="${AMIGA_CC:-m68k-amigaos-gcc}"
 
-INPUT="$1"
+if [[ ! -x "$FBC" ]]; then
+  echo "FBC must name an executable compiler (got: $FBC)" >&2
+  exit 2
+fi
+if [[ ! -f "$INPUT" ]]; then
+  echo "Input program does not exist: $INPUT" >&2
+  exit 2
+fi
+if [[ -z "${FB_AMIGA_RUNTIME:-}" || ! -f "$FB_AMIGA_RUNTIME" ]]; then
+  echo "FB_AMIGA_RUNTIME must name the CMake-built libfb.a" >&2
+  exit 2
+fi
+
+if [[ -z "${AMIGA_GCC_SYSROOT:-}" ]]; then
+  AMIGA_GCC_SYSROOT="$(brew --prefix amiga-gcc)/m68k-amigaos"
+fi
+if [[ ! -d "$AMIGA_GCC_SYSROOT/lib" ]]; then
+  echo "Amiga GCC sysroot has no lib directory: $AMIGA_GCC_SYSROOT" >&2
+  exit 2
+fi
+
+WORK_DIR="${FB_AMIGA_BUILD_DIR:-$(mktemp -d)}"
+mkdir -p "$WORK_DIR"
 BASENAME="$(basename "$INPUT" .bas)"
-DIR="$(dirname "$INPUT")"
+command cp "$INPUT" "$WORK_DIR/$BASENAME.bas"
 
-echo "=== FreeBASIC → AmigaOS m68k ==="
+echo "=== FreeBASIC-NG -> AmigaOS/m68k ==="
+(
+  cd "$WORK_DIR"
+  "$FBC" -gen gcc -r -m "$BASENAME" -target amiga -arch m68k "$BASENAME.bas"
+)
 
-# 1. Compile .bas to .c
-"$PROJECT_DIR/build/src/compiler/fbc" -gen gcc -r -m "$BASENAME" -target amiga-m68k "$INPUT"
+"$AMIGA_CC" -m68020 -msoft-float \
+  -B"$AMIGA_GCC_SYSROOT/lib" -L"$AMIGA_GCC_SYSROOT/lib" \
+  -I"$PROJECT_DIR/src/rtlib" \
+  "$WORK_DIR/$BASENAME.c" "$FB_AMIGA_RUNTIME" \
+  -lamiga -lgcc -o "$WORK_DIR/$BASENAME"
 
-# 2. Compile .c to .o
-m68k-amigaos-gcc $CFLAGS -c "$DIR/$BASENAME.c" -o "$DIR/$BASENAME.o"
+echo "Built: $WORK_DIR/$BASENAME"
+m68k-amigaos-objdump -f "$WORK_DIR/$BASENAME"
 
-# 3. Link
-m68k-amigaos-gcc $CFLAGS -nostdlib \
-  "$SCRIPT_DIR/startup.o" "$DIR/$BASENAME.o" "$SCRIPT_DIR/fb_mini_rt.o" \
-  -L$SYSROOT/lib/gcc/m68k-amigaos/6.5.0b -lgcc \
-  -o "$DIR/$BASENAME"
-
-echo "Built: $DIR/$BASENAME ($(wc -c < "$DIR/$BASENAME" | tr -d ' ') bytes)"
-
-# 4. Test with vamos if available
-if command -v vamos &>/dev/null; then
-  echo "--- vamos output ---"
-  vamos "$DIR/$BASENAME"
+if [[ -n "${AMIGA_TEST_RUNNER:-}" ]]; then
+  "$AMIGA_TEST_RUNNER" "$WORK_DIR/$BASENAME"
+elif command -v vamos >/dev/null; then
+  vamos -C 68020 "$WORK_DIR/$BASENAME"
+else
+  echo "No runtime runner configured; set AMIGA_TEST_RUNNER or install vamos." >&2
+  exit 2
 fi

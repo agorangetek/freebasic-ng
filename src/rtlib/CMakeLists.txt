@@ -37,6 +37,18 @@ elseif(UNIX)
     set(RTLIB_PLATFORM_SOURCES ${RTLIB_UNIX_SOURCES} ${RTLIB_OS_SOURCES})
 elseif(FB_TARGET_OS MATCHES "^(amiga|aros|morphos|amigaos4)$")
     file(GLOB RTLIB_PLATFORM_SOURCES "${CMAKE_CURRENT_SOURCE_DIR}/amiga/*.c")
+    # The full runtime is assembled from the common sources above plus the
+    # Amiga platform hooks.  These self-contained legacy sources define a
+    # competing startup, raw m68k ABI hooks, or C runtime symbols, and must
+    # not be linked into libfb alongside the regular runtime.
+    list(FILTER RTLIB_PLATFORM_SOURCES EXCLUDE REGEX "/(fb_amiga_rt|startup|mathbase_stub|sprintf)\\.c$")
+
+    # gfx_amiga.c calls the classic AmigaOS graphics ABI directly.  AROS has
+    # no compatible implementation yet; the M3 console-runtime preview must
+    # therefore not advertise graphics support merely by compiling a stub.
+    if(FB_TARGET_OS STREQUAL "aros")
+        list(FILTER RTLIB_PLATFORM_SOURCES EXCLUDE REGEX "/gfx_amiga\\.c$")
+    endif()
 endif()
 
 # Architecture-specific sources (x86 asm helpers, etc.)

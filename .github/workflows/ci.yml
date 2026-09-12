@@ -116,6 +116,89 @@ jobs:
           cmake --install build --prefix stage
           python scripts/verify-installed-fbc.py --prefix stage --expected-host "${{ matrix.expected_host }}"
 
+  amigaos-m68k:
+    name: AmigaOS 3 m68k runtime smoke
+    runs-on: ubuntu-24.04
+    env:
+      AMIGA_GCC_IMAGE: amigadev/m68k-amigaos-gcc@sha256:b18080e6ffca8f793e0f539536a9138e9d2a548ca1a301c7483f43ee15fedfed
+      AMITOOLS_VERSION: 0.8.1
+      MACHINE68K_VERSION: 0.3.0
+
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Verify version and bootstrap metadata
+        run: |
+          python3 scripts/check-version.py
+          python3 scripts/check-bootstrap-provenance.py --target linux-x86_64
+
+      - name: Provision pinned AmigaOS toolchain
+        run: |
+          docker pull "$AMIGA_GCC_IMAGE"
+          container_id="$(docker create "$AMIGA_GCC_IMAGE")"
+          mkdir -p "$RUNNER_TEMP/amiga"
+          docker cp "$container_id":/opt/amiga/. "$RUNNER_TEMP/amiga"
+          docker rm "$container_id"
+          "$RUNNER_TEMP/amiga/bin/m68k-amigaos-gcc" --version | head -1
+          test -f "$RUNNER_TEMP/amiga/m68k-amigaos/lib/libamiga.a"
+          echo "$RUNNER_TEMP/amiga/bin" >> "$GITHUB_PATH"
+
+      - name: Provision pinned Vamos runner
+        run: |
+          python3 -m venv "$RUNNER_TEMP/vamos"
+          "$RUNNER_TEMP/vamos/bin/pip" install --disable-pip-version-check --no-cache-dir \
+            "amitools[vamos]==$AMITOOLS_VERSION" "machine68k==$MACHINE68K_VERSION"
+          "$RUNNER_TEMP/vamos/bin/vamos" --help >/dev/null
+
+      - name: Build native compiler
+        run: |
+          cmake -S . -B host-build -G Ninja -DCMAKE_BUILD_TYPE=Release \
+            -DFB_BUILD_GFXLIB=OFF -DFB_DISABLE_X11=ON -DFB_DISABLE_GPM=ON \
+            -DFB_DISABLE_FFI=ON -DFB_DISABLE_OPENGL=ON
+          cmake --build host-build --target fbc
+
+      - name: Build AmigaOS runtime
+        run: |
+          cmake -S . -B amiga-build -G Ninja \
+            -DCMAKE_TOOLCHAIN_FILE=cmake/toolchains/amiga-m68k.cmake \
+            -DAMIGA_GCC_ROOT="$RUNNER_TEMP/amiga" \
+            -DFB_BUILD_COMPILER=OFF -DFB_BUILD_GFXLIB=OFF \
+            -DFB_DISABLE_X11=ON -DFB_DISABLE_GPM=ON -DFB_DISABLE_FFI=ON \
+            -DFB_DISABLE_OPENGL=ON
+          cmake --build amiga-build --target fb
+
+      - name: Generate and link AmigaOS smoke program
+        run: |
+          FBC="$PWD/host-build/src/compiler/fbc" \
+          FB_AMIGA_RUNTIME="$PWD/amiga-build/src/rtlib/libfb.a" \
+          AMIGA_GCC_SYSROOT="$RUNNER_TEMP/amiga/m68k-amigaos" \
+          AMIGA_TEST_RUNNER=/bin/true \
+          FB_AMIGA_BUILD_DIR="$RUNNER_TEMP/amiga-smoke" \
+          test/amiga/build_and_test.sh test/amiga/smoke.bas
+
+      - name: Run AmigaOS smoke program under Vamos
+        run: |
+          set -o pipefail
+          test -f "$RUNNER_TEMP/amiga-smoke/smoke"
+          file "$RUNNER_TEMP/amiga-smoke/smoke"
+          # The pinned amiga-gcc libamiga exit path reaches Vamos' unimplemented
+          # process-termination handling after the program has printed its marker.
+          # Keep this narrowly scoped: a missing marker or any other exit status fails.
+          set +e
+          "$RUNNER_TEMP/vamos/bin/vamos" -C 68020 "$RUNNER_TEMP/amiga-smoke/smoke" \
+            | tee "$RUNNER_TEMP/amiga-smoke-output.txt"
+          vamos_status="${PIPESTATUS[0]}"
+          set -e
+          grep -Fx 'FreeBASIC-NG AmigaOS M3 smoke' "$RUNNER_TEMP/amiga-smoke-output.txt"
+          if [[ "$vamos_status" -ne 0 && "$vamos_status" -ne 255 ]]; then
+            exit "$vamos_status"
+          fi
+          if [[ "$vamos_status" -eq 255 ]]; then
+            echo "Vamos completed the smoke output but cannot validate libamiga process termination."
+          fi
+
   target-generation:
     name: Target generation (C output only)
     runs-on: ubuntu-24.04

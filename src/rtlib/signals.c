@@ -1,9 +1,10 @@
 /* signal handlers */
 
+#include "fb.h"
+
 // Emscripten doesn't have signals
 #if !defined(HOST_JS) && !defined(HOST_AMIGA)
 
-#include "fb.h"
 #include <signal.h>
 
 #if defined( HOST_WIN32 )

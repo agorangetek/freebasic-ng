@@ -6,6 +6,13 @@
 #include <sys/types.h>
 #include <stdlib.h>
 #include <string.h>
+#include <alloca.h>
+
+/* AROS keeps POSIX declarations such as putenv() in its POSIXC header,
+   separate from the ISO C <stdlib.h> interface. */
+#if defined(HOST_AROS)
+    #include <aros/posixc/stdlib.h>
+#endif
 
 #define FBCALL
 
@@ -24,6 +31,11 @@ typedef long long fb_off_t;
 #else
 typedef long fb_off_t;
 #endif
+
+/* The Amiga-family C libraries expose the ISO C fseek()/ftell() interfaces,
+   not the POSIX fseeko()/ftello() spellings used by the Unix runtime. */
+#define fseeko(stream, offset, whence) fseek((stream), (long)(offset), (whence))
+#define ftello(stream)                 ((fb_off_t)ftell(stream))
 
 /* No background thread locking (no MT support) */
 #define BG_LOCK()
