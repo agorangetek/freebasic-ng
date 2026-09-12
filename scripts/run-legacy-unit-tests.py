@@ -1,0 +1,121 @@
+#!/usr/bin/env python3
+"""Run the historical unit suite from a CMake-built, staged compiler.
+
+The historical tests makefiles create objects and logs next to their inputs.
+This adapter recreates the source layout required by the test suite in the
+CMake binary tree, so CTest can own the execution without modifying the
+checkout or invoking the root makefile.
+"""
+
+from __future__ import annotations
+
+import argparse
+import shutil
+import subprocess
+import sys
+from pathlib import Path
+
+
+def require_child(path: Path, parent: Path, label: str) -> None:
+    """Reject a destructive test-output path outside the CMake build tree."""
+    try:
+        path.resolve().relative_to(parent.resolve())
+    except ValueError as error:
+        raise ValueError(f"{label} must be below build directory: {path}") from error
+
+
+def run(command: list[str], *, cwd: Path | None = None, log: Path | None = None) -> None:
+    print("+", " ".join(command), flush=True)
+    if log is None:
+        subprocess.run(command, cwd=cwd, check=True)
+        return
+
+    with log.open("w", encoding="utf-8") as output:
+        result = subprocess.run(
+            command,
+            cwd=cwd,
+            stdout=output,
+            stderr=subprocess.STDOUT,
+            text=True,
+            check=False,
+        )
+
+    if result.returncode:
+        print(f"legacy unit suite failed; full log: {log}", file=sys.stderr)
+        with log.open("r", encoding="utf-8", errors="replace") as output:
+            tail = output.readlines()[-80:]
+        sys.stderr.writelines(tail)
+        raise subprocess.CalledProcessError(result.returncode, command)
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--cmake", required=True, type=Path)
+    parser.add_argument("--make", required=True, type=Path)
+    parser.add_argument("--build-dir", required=True, type=Path)
+    parser.add_argument("--install-prefix", required=True, type=Path)
+    parser.add_argument("--source-tests-dir", required=True, type=Path)
+    parser.add_argument("--source-include-dir", required=True, type=Path)
+    parser.add_argument("--work-dir", required=True, type=Path)
+    parser.add_argument("--log", required=True, type=Path)
+    args = parser.parse_args()
+
+    build_dir = args.build_dir.resolve()
+    install_prefix = args.install_prefix.resolve()
+    work_dir = args.work_dir.resolve()
+    log_path = args.log.resolve()
+
+    require_child(install_prefix, build_dir, "install prefix")
+    require_child(work_dir, build_dir, "test work directory")
+    require_child(log_path, build_dir, "test log")
+
+    # A prior CTest invocation may have left a failed test tree or staging
+    # area.  Both are verified CMake-build children before being recreated.
+    shutil.rmtree(install_prefix, ignore_errors=True)
+    shutil.rmtree(work_dir, ignore_errors=True)
+    log_path.parent.mkdir(parents=True, exist_ok=True)
+
+    run([
+        str(args.cmake),
+        "--install",
+        str(build_dir),
+        "--prefix",
+        str(install_prefix),
+    ])
+
+    if not args.source_tests_dir.is_dir():
+        raise FileNotFoundError(f"legacy tests directory is missing: {args.source_tests_dir}")
+    if not args.source_include_dir.is_dir():
+        raise FileNotFoundError(
+            f"legacy compiler include directory is missing: {args.source_include_dir}"
+        )
+
+    # Some historic tests include headers via paths such as
+    # "..\\..\\inc\\fbthread.bi".  Keep tests/ and inc/ as siblings, just as
+    # they are in the source checkout, rather than rewriting that input.
+    test_dir = work_dir / "tests"
+    legacy_include_dir = work_dir / "inc"
+    shutil.copytree(args.source_tests_dir, test_dir)
+    shutil.copytree(args.source_include_dir, legacy_include_dir)
+
+    compiler = install_prefix / "bin" / "fbc"
+    if not compiler.is_file():
+        compiler = compiler.with_suffix(".exe")
+    compiler_include_dir = install_prefix / "include" / "freebasic"
+    if not compiler.is_file() or not compiler_include_dir.is_dir():
+        raise FileNotFoundError("CMake installation did not contain fbc and its include directory")
+
+    run(
+        [
+            str(args.make),
+            "unit-tests",
+            f"FBC={compiler} -i {compiler_include_dir}",
+        ],
+        cwd=test_dir,
+        log=log_path,
+    )
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

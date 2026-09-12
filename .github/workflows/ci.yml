@@ -145,7 +145,8 @@ jobs:
         run: |
           PATH="$PWD/seed-stage/bin:$PATH" cmake -S . -B selfhost-build -G Ninja \
             -DCMAKE_BUILD_TYPE=Release -DFB_USE_SYSTEM_FBC=ON -DFB_BUILD_TESTS=ON \
-            -DFB_BUILD_GFXLIB=OFF -DFB_DISABLE_X11=ON -DFB_DISABLE_GPM=ON \
+            -DFB_BUILD_LEGACY_UNIT_TESTS=ON -DFB_BUILD_GFXLIB=ON \
+            -DFB_DISABLE_X11=ON -DFB_DISABLE_GPM=ON \
             -DFB_DISABLE_FFI=ON -DFB_DISABLE_OPENGL=ON
           cmake --build selfhost-build
           ctest --test-dir selfhost-build --output-on-failure

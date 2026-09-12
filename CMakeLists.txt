@@ -28,6 +28,8 @@ option(FB_STANDALONE "Build as self-contained installation" OFF)
 option(FB_BUILD_GFXLIB "Build the graphics library" ON)
 option(FB_BUILD_COMPILER "Build the fbc compiler" ON)
 option(FB_BUILD_TESTS "Build tests" OFF)
+option(FB_BUILD_LEGACY_UNIT_TESTS
+    "Run the historical fbcunit suite through CTest" OFF)
 option(FB_USE_SYSTEM_FBC "Use an existing fbc instead of the bundled bootstrap sources" OFF)
 
 # The Developer Preview archives use the ordinary Unix-style layout.  A
@@ -64,7 +66,7 @@ if(FB_BUILD_COMPILER)
     add_subdirectory(src/compiler)
 endif()
 
-if(FB_BUILD_TESTS)
+if(FB_BUILD_TESTS OR FB_BUILD_LEGACY_UNIT_TESTS)
     enable_testing()
 
     # Darwin arm64 uses a pointer __builtin_va_list.  This regression must be
@@ -92,6 +94,38 @@ if(FB_BUILD_TESTS)
                 --install-prefix "${CMAKE_BINARY_DIR}/tests/darwin-aarch64-consteval-acos/stage"
                 --source "${CMAKE_SOURCE_DIR}/test/cmake/darwin-aarch64-consteval-acos.bas"
                 --work-dir "${CMAKE_BINARY_DIR}/tests/darwin-aarch64-consteval-acos/work"
+        )
+    endif()
+
+    if(FB_BUILD_LEGACY_UNIT_TESTS)
+        if(NOT FB_BUILD_COMPILER)
+            message(FATAL_ERROR
+                "FB_BUILD_LEGACY_UNIT_TESTS requires FB_BUILD_COMPILER=ON")
+        endif()
+        if(NOT FB_BUILD_GFXLIB)
+            message(FATAL_ERROR
+                "FB_BUILD_LEGACY_UNIT_TESTS requires FB_BUILD_GFXLIB=ON because the unit suite links -fbgfx")
+        endif()
+
+        find_package(Python3 COMPONENTS Interpreter REQUIRED)
+        find_program(FB_LEGACY_TEST_MAKE NAMES gmake make REQUIRED)
+        set(_fb_legacy_unit_dir "${CMAKE_BINARY_DIR}/tests/legacy-unit")
+        add_test(
+            NAME legacy.unit
+            COMMAND "${Python3_EXECUTABLE}"
+                "${CMAKE_SOURCE_DIR}/scripts/run-legacy-unit-tests.py"
+                --cmake "${CMAKE_COMMAND}"
+                --make "${FB_LEGACY_TEST_MAKE}"
+                --build-dir "${CMAKE_BINARY_DIR}"
+                --install-prefix "${_fb_legacy_unit_dir}/stage"
+                --source-tests-dir "${CMAKE_SOURCE_DIR}/tests"
+                --source-include-dir "${CMAKE_SOURCE_DIR}/inc"
+                --work-dir "${_fb_legacy_unit_dir}/work"
+                --log "${_fb_legacy_unit_dir}/unit-tests.log"
+        )
+        set_tests_properties(legacy.unit PROPERTIES
+            LABELS "legacy;unit"
+            TIMEOUT 1800
         )
     endif()
 endif()
