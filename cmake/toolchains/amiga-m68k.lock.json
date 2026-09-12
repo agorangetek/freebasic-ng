@@ -1,0 +1,38 @@
+{
+  "schema": 1,
+  "policy": {
+    "release_qualified_support": "AmigaOS/m68k becomes supported only after its exact toolchain is pinned, a FreeBASIC executable is linked, and that executable passes on an independent documented runner.",
+    "generated_c_only": "Generated C establishes neither an ABI-compatible executable nor runtime behaviour."
+  },
+  "target": {
+    "os": "amiga",
+    "architecture": "m68k",
+    "support_level": "preview"
+  },
+  "toolchain": {
+    "provisioning": "container",
+    "image": "amigadev/m68k-amigaos-gcc@sha256:b18080e6ffca8f793e0f539536a9138e9d2a548ca1a301c7483f43ee15fedfed",
+    "compiler": {
+      "command": "m68k-amigaos-gcc",
+      "version": "GCC 6.5.0b"
+    },
+    "sdk_root": "/opt/amiga/m68k-amigaos"
+  },
+  "runner": {
+    "kind": "emulator",
+    "name": "Vamos",
+    "packages": [
+      "amitools[vamos]==0.8.1",
+      "machine68k==0.3.0"
+    ],
+    "status": "output-only",
+    "limitation": "The pinned libamiga exit path returns Vamos status 255 after the asserted marker; process termination is not validated."
+  },
+  "validation": {
+    "generated_c": true,
+    "runtime_archive": true,
+    "freebasic_executable": true,
+    "runtime_marker": true,
+    "process_exit": false
+  }
+}
