@@ -42,7 +42,16 @@ private function hConstUop _
 		case AST_OP_SIN   : d =  sin( d )
 		case AST_OP_ASIN  : d = asin( d )
 		case AST_OP_COS   : d =  cos( d )
-		case AST_OP_ACOS  : d = acos( d )
+		case AST_OP_ACOS
+			'' Match the selected overload at runtime.  Evaluating a SINGLE
+			'' constant through acos(double) can differ by one SINGLE ULP from
+			'' acosf() on Darwin ARM.
+			if( typeGetDtAndPtrOnly( l->dtype ) = FB_DATATYPE_SINGLE ) then
+				dim as single f = l->val.f
+				d = acos( f )
+			else
+				d = acos( d )
+			end if
 		case AST_OP_TAN   : d =  tan( d )
 		case AST_OP_ATAN  : d =  atn( d )
 		case AST_OP_SQRT  : d =  sqr( d )
@@ -81,6 +90,7 @@ private function hConstUop _
 
 	function = l
 end function
+
 
 function astNewUOP _
 	( _
@@ -363,4 +373,3 @@ function astLoadUOP _
 	function = vr
 
 end function
-

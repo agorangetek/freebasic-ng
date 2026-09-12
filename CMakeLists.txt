@@ -83,6 +83,16 @@ if(FB_BUILD_TESTS)
                 --source "${CMAKE_SOURCE_DIR}/test/cmake/darwin-aarch64-cva-list.bas"
                 --work-dir "${CMAKE_BINARY_DIR}/tests/darwin-aarch64-cva-list/work"
         )
+        add_test(
+            NAME compiler.darwin-aarch64-consteval-acos
+            COMMAND "${Python3_EXECUTABLE}"
+                "${CMAKE_SOURCE_DIR}/scripts/run-compiler-regression.py"
+                --cmake "${CMAKE_COMMAND}"
+                --build-dir "${CMAKE_BINARY_DIR}"
+                --install-prefix "${CMAKE_BINARY_DIR}/tests/darwin-aarch64-consteval-acos/stage"
+                --source "${CMAKE_SOURCE_DIR}/test/cmake/darwin-aarch64-consteval-acos.bas"
+                --work-dir "${CMAKE_BINARY_DIR}/tests/darwin-aarch64-consteval-acos/work"
+        )
     endif()
 endif()
 
