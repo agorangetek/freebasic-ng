@@ -8,10 +8,10 @@ Debian packages for `amd64` and `arm64`, a Homebrew formula, and the
 ingests the attested Debian assets after GitHub Release promotion. RPM is not a
 maintained distribution channel.
 
-The historical local assemblers in `contrib/deb/` and `contrib/release/` were
-retired in M5. The versioned GitHub Actions release workflow is the sole
-maintained release path; its qualification and retention boundaries are
-recorded in [the M5 plan](plans/m5.md).
+The historical local Debian and release assemblers were retired in M5. The
+versioned GitHub Actions release workflow is the sole maintained release path;
+its qualification and retention boundaries are recorded in
+[the M5 plan](plans/m5.md).
 
 Release Please observes conventional commits on main, opens a version PR and,
 when that PR is merged, creates a draft GitHub release and an immutable
