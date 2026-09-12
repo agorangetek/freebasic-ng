@@ -1023,7 +1023,7 @@ jobs:
             local count
             count=$(curl --fail --silent --show-error --get \
               --data-urlencode 'v=5' --data-urlencode 'type=info' \
-              --data-urlencode "arg[]=${package}" https://aur.archlinux.org/rpc | \
+              --data-urlencode "arg[]=${package}" https://aur.archlinux.org/rpc/ | \
               jq -r .resultcount)
             case "$count" in
               0)
@@ -1064,7 +1064,7 @@ jobs:
             for attempt in {1..20}; do
               if curl --fail --silent --show-error --get \
                 --data-urlencode 'v=5' --data-urlencode 'type=info' \
-                --data-urlencode "arg[]=${package}" https://aur.archlinux.org/rpc | \
+                --data-urlencode "arg[]=${package}" https://aur.archlinux.org/rpc/ | \
                 jq -e --arg version "${VERSION}-1" \
                   '.resultcount == 1 and .results[0].Version == $version' >/dev/null; then
                 break
