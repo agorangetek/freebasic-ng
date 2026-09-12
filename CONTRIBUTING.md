@@ -25,3 +25,7 @@ the corresponding CI coverage or a tracking issue for it.
 
 Release metadata, package recipes and provenance files are security-sensitive.
 They require review before merge and must not add unscoped publication tokens.
+
+The roadmap is in [docs/plans/m0.md](docs/plans/m0.md). Any change to an
+inherited build or release path must follow the target and removal decisions in
+[docs/plans/m5.md](docs/plans/m5.md).

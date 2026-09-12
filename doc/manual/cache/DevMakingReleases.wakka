@@ -1,5 +1,11 @@
 {{fbdoc item="title" value="Notes on making FB releases"}}----
 
+**FreeBASIC-NG historical note (M5):** This cached upstream page is retained as
+project history, not as current release instructions. The old local
+`contrib/release/` assembler and RPM/Debian helper paths are retired. The
+maintained source-root documents are `docs/releasing.md` and `docs/plans/m5.md`;
+they define the GitHub Actions release path and current distribution targets.
+
 **{{anchor name="GENERAL|In general"}}**
 **{{anchor name="PACKAGING|Packaging and Manifests"}}**
 **{{anchor name="TOOLCHAIN|Toolchain/build environment"}}**

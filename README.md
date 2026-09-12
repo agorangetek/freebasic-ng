@@ -50,9 +50,8 @@ cmake --install build --prefix "$PWD/stage"
 
 ## Platform status
 
-The current CI covers Linux x86_64, macOS arm64 and Windows x86_64. The release
-roadmap adds Linux arm64, macOS x86_64 and Windows arm64 as Tier 1 native host
-releases.
+CI and stable releases cover Linux x86_64/aarch64, macOS x86_64/aarch64 and
+Windows x86_64/aarch64 as Tier 1 native hosts.
 
 AmigaOS, AROS and MorphOS are separate target-SDK work. They are not advertised
 as native host releases until cross-compilation and runtime validation exist.
@@ -68,7 +67,8 @@ an arbitrary `freebasic` dependency.
 
 Read [CONTRIBUTING.md](CONTRIBUTING.md) before opening a pull request and
 [SECURITY.md](SECURITY.md) for vulnerability reporting. The release and
-repository plan is versioned in [docs/plans/m0.md](docs/plans/m0.md).
+repository roadmap is versioned in [docs/plans/m0.md](docs/plans/m0.md); the
+current tidy-up decisions are in [docs/plans/m5.md](docs/plans/m5.md).
 
 ## License and attribution
 
