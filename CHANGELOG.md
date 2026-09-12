@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.22.2](https://github.com/metaneutrons/freebasic-ng/compare/v1.22.1...v1.22.2) (2026-09-12)
+
+
+### Bug Fixes
+
+* **release:** preserve Homebrew version during qualification ([#96](https://github.com/metaneutrons/freebasic-ng/issues/96)) ([26ab191](https://github.com/metaneutrons/freebasic-ng/commit/26ab19198eb2e74a5940430607b3a42329515270))
+
 ## [1.22.1](https://github.com/metaneutrons/freebasic-ng/compare/v1.22.0...v1.22.1) (2026-09-11)
 
 
