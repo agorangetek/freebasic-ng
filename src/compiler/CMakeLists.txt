@@ -74,16 +74,22 @@ else()
     file(GLOB FBC_BAS_SOURCES CONFIGURE_DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/*.bas")
     file(GLOB FBC_BI_SOURCES CONFIGURE_DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/*.bi")
 
-    # Generate C from a build-tree copy of the compiler sources.  fbc writes
-    # -r output next to its input files; running it on the source tree would
-    # leave generated C behind and, more importantly, the old code globbed
-    # those files at configure time before they existed.  The compiler source
-    # file names are unique, so their known BAS inputs also give CMake the
-    # complete output set up front.
+    # Generate backend sources from a build-tree copy of the compiler sources.
+    # fbc writes -r output next to its input files; running it on the source
+    # tree would leave generated files behind and, more importantly, the old
+    # code globbed those files at configure time before they existed.  The
+    # compiler source file names are unique, so their known BAS inputs also
+    # give CMake the complete output set up front.
+    set(_native_backend "${FB_NATIVE_COMPILER_BACKEND}")
+    set(_native_output_extension "c")
+    if(_native_backend STREQUAL "gas64")
+        enable_language(ASM)
+        set(_native_output_extension "asm")
+    endif()
     set(_native_source_dir "${CMAKE_CURRENT_BINARY_DIR}/native-source")
     set(_native_copied_inputs "")
     set(_native_copied_bas_sources "")
-    set(_generated_c_files "")
+    set(_generated_backend_files "")
     foreach(_source IN LISTS FBC_BAS_SOURCES FBC_BI_SOURCES)
         get_filename_component(_name "${_source}" NAME)
         set(_copy "${_native_source_dir}/${_name}")
@@ -99,13 +105,14 @@ else()
         if(_source MATCHES "\\.bas$")
             list(APPEND _native_copied_bas_sources "${_copy}")
             get_filename_component(_base "${_source}" NAME_WE)
-            list(APPEND _generated_c_files "${_native_source_dir}/${_base}.c")
+            list(APPEND _generated_backend_files
+                "${_native_source_dir}/${_base}.${_native_output_extension}")
         endif()
     endforeach()
 
     list(SORT _native_copied_bas_sources)
-    list(SORT _generated_c_files)
-    set(_fbc_flags -gen gcc -r -m fbc -i "${CMAKE_SOURCE_DIR}/inc" -target ${FB_TARGET_ID})
+    list(SORT _generated_backend_files)
+    set(_fbc_flags -gen ${_native_backend} -r -m fbc -i "${CMAKE_SOURCE_DIR}/inc" -target ${FB_TARGET_ID})
     if(FB_COMPILER_DEBUG)
         list(APPEND _fbc_flags -g -exx)
     endif()
@@ -113,24 +120,25 @@ else()
         list(APPEND _fbc_flags -d ENABLE_STANDALONE)
     endif()
 
-    # One fbc invocation emits all known C outputs from the copied BAS files.
+    # One fbc invocation emits all known backend outputs from the copied BAS
+    # files.
     add_custom_command(
-        OUTPUT ${_generated_c_files}
+        OUTPUT ${_generated_backend_files}
         COMMAND ${FBC_EXECUTABLE} ${_fbc_flags} ${_native_copied_bas_sources}
         WORKING_DIRECTORY "${_native_source_dir}"
         DEPENDS ${_native_copied_inputs}
-        COMMENT "Generating native compiler C sources"
+        COMMENT "Generating native compiler ${_native_backend} sources"
         VERBATIM
     )
 
     # The HLC backend emits computed-goto expressions that clang requires us
     # to rewrite before compilation.  PRE_BUILD runs too late for object-file
     # compilation, so prepare a fixed generated source for every output.
-    set(_native_compile_sources ${_generated_c_files})
-    if(FB_USING_CLANG)
+    set(_native_compile_sources ${_generated_backend_files})
+    if(FB_USING_CLANG AND _native_backend STREQUAL "gcc")
         find_package(Python3 COMPONENTS Interpreter REQUIRED)
         set(_native_fixed_sources "")
-        foreach(_src ${_generated_c_files})
+        foreach(_src ${_generated_backend_files})
             get_filename_component(_name "${_src}" NAME)
             set(_fixed "${CMAKE_CURRENT_BINARY_DIR}/native-fixed/${_name}")
             file(RELATIVE_PATH _fixed_relative "${CMAKE_CURRENT_BINARY_DIR}" "${_fixed}")
@@ -152,17 +160,34 @@ else()
         set(_native_compile_sources ${_native_fixed_sources})
     endif()
 
+    if(_native_backend STREQUAL "gas64")
+        set_source_files_properties(${_native_compile_sources} PROPERTIES LANGUAGE ASM)
+    endif()
+
     add_custom_target(fbc_generate DEPENDS ${_native_compile_sources})
 
     add_executable(fbc ${_native_compile_sources})
     add_dependencies(fbc fbc_generate)
 
-    target_compile_options(fbc PRIVATE
-        -nostdinc
-        ${FB_BOOTSTRAP_C_FLAGS}
-        ${FB_BOOTSTRAP_C_WARNINGS}
-        -O2
-    )
+    if(_native_backend STREQUAL "gcc")
+        target_compile_options(fbc PRIVATE
+            -nostdinc
+            ${FB_BOOTSTRAP_C_FLAGS}
+            ${FB_BOOTSTRAP_C_WARNINGS}
+            -O2
+        )
+    else()
+        # fbc writes GNU assembler with a .asm extension.  GCC only infers an
+        # assembler input language from .s/.S, so select it explicitly.
+        target_compile_options(fbc PRIVATE
+            "$<$<COMPILE_LANGUAGE:ASM>:-x>"
+            "$<$<COMPILE_LANGUAGE:ASM>:assembler>"
+        )
+        # The historical gas64 path links with ld directly, producing a
+        # non-PIE executable.  Its raw assembler is not compiled with GCC's
+        # PIE defaults, so retain that ABI when CMake links through GCC.
+        target_link_options(fbc PRIVATE -no-pie)
+    endif()
 
     target_link_libraries(fbc PRIVATE fb)
 

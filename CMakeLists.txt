@@ -43,6 +43,14 @@ option(FB_COMPILER_DEBUG
 option(FB_LEGACY_TEST_DEBUG
     "Pass the historical -g -exx flags to legacy runtime test suites" OFF)
 option(FB_USE_SYSTEM_FBC "Use an existing fbc instead of the bundled bootstrap sources" OFF)
+set(FB_NATIVE_COMPILER_BACKEND "gcc" CACHE STRING
+    "Backend used when a system fbc builds the native compiler (gcc or gas64)")
+set_property(CACHE FB_NATIVE_COMPILER_BACKEND PROPERTY STRINGS gcc gas64)
+if(NOT FB_NATIVE_COMPILER_BACKEND STREQUAL "gcc" AND
+   NOT FB_NATIVE_COMPILER_BACKEND STREQUAL "gas64")
+    message(FATAL_ERROR
+        "FB_NATIVE_COMPILER_BACKEND must be one of: gcc, gas64")
+endif()
 
 # The Developer Preview archives use the ordinary Unix-style layout.  A
 # standalone compiler additionally needs its C toolchain below the prefix, but
@@ -57,9 +65,25 @@ endif()
 # Platform detection (sets FB_TARGET_OS, FB_TARGET_ARCH, FB_TARGET_ID)
 include(cmake/DetectPlatform.cmake)
 
+# The historical gas64 backend emits GNU assembler for the Linux x86_64 ABI.
+# Keep the CMake option equally narrow until another qualified host exists.
+if(FB_NATIVE_COMPILER_BACKEND STREQUAL "gas64" AND
+   (NOT FB_TARGET_OS STREQUAL "linux" OR
+    NOT FB_TARGET_ARCH STREQUAL "x86_64" OR
+    NOT CMAKE_C_COMPILER_ID STREQUAL "GNU"))
+    message(FATAL_ERROR
+        "FB_NATIVE_COMPILER_BACKEND=gas64 currently requires Linux x86_64 with GCC")
+endif()
+
 # Bootstrap logic (determines how to build fbc)
 if(FB_BUILD_COMPILER)
     include(cmake/Bootstrap.cmake)
+    if(FB_NATIVE_COMPILER_BACKEND STREQUAL "gas64" AND
+       NOT FB_BOOTSTRAP_MODE STREQUAL "native")
+        message(FATAL_ERROR
+            "FB_NATIVE_COMPILER_BACKEND=gas64 requires a working system fbc; "
+            "configure with -DFB_USE_SYSTEM_FBC=ON")
+    endif()
 endif()
 
 # Install paths (needed by subdirectories)
@@ -119,6 +143,12 @@ if(FB_BUILD_TESTS OR FB_BUILD_LEGACY_UNIT_TESTS OR FB_BUILD_LEGACY_LOG_TESTS OR
         list(APPEND _fb_legacy_runtime_test_fbc_args
             --fbc-flag=-g
             --fbc-flag=-exx
+        )
+    endif()
+    if(FB_NATIVE_COMPILER_BACKEND STREQUAL "gas64")
+        list(APPEND _fb_legacy_runtime_test_fbc_args
+            --fbc-flag=-gen
+            --fbc-flag=gas64
         )
     endif()
 

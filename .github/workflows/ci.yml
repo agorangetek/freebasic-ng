@@ -191,22 +191,42 @@ jobs:
           git diff --exit-code
 
   linux-x86_64-legacy-debug:
-    name: Legacy debug Linux x64 (${{ matrix.id }})
+    name: Legacy debug Linux x64 (${{ matrix.backend }}, ${{ matrix.id }})
     runs-on: ubuntu-24.04
     strategy:
       fail-fast: false
       matrix:
         include:
           - id: release
+            backend: gcc
             compiler_debug: OFF
             test_debug: OFF
           - id: test-debug
+            backend: gcc
             compiler_debug: OFF
             test_debug: ON
           - id: compiler-debug
+            backend: gcc
             compiler_debug: ON
             test_debug: OFF
           - id: full-debug
+            backend: gcc
+            compiler_debug: ON
+            test_debug: ON
+          - id: release
+            backend: gas64
+            compiler_debug: OFF
+            test_debug: OFF
+          - id: test-debug
+            backend: gas64
+            compiler_debug: OFF
+            test_debug: ON
+          - id: compiler-debug
+            backend: gas64
+            compiler_debug: ON
+            test_debug: OFF
+          - id: full-debug
+            backend: gas64
             compiler_debug: ON
             test_debug: ON
 
@@ -236,6 +256,7 @@ jobs:
         run: |
           PATH="$PWD/seed-stage/bin:$PATH" cmake -S . -B selfhost-build -G Ninja \
             -DCMAKE_BUILD_TYPE=Release -DFB_USE_SYSTEM_FBC=ON \
+            -DFB_NATIVE_COMPILER_BACKEND=${{ matrix.backend }} \
             -DFB_COMPILER_DEBUG=${{ matrix.compiler_debug }} \
             -DFB_LEGACY_TEST_DEBUG=${{ matrix.test_debug }} \
             -DFB_BUILD_LEGACY_UNIT_TESTS=ON -DFB_BUILD_LEGACY_LOG_TESTS=ON \
