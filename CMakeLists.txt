@@ -36,6 +36,8 @@ option(FB_BUILD_LEGACY_WARNING_TESTS
     "Run the historical warning fixtures through CTest" OFF)
 option(FB_BUILD_LEGACY_SYNTAX_TESTS
     "Run the historical syntax fixtures through CTest" OFF)
+option(FB_BUILD_LEGACY_DOC_TOOLS
+    "Build the historical documentation tools through CTest" OFF)
 option(FB_USE_SYSTEM_FBC "Use an existing fbc instead of the bundled bootstrap sources" OFF)
 
 # The Developer Preview archives use the ordinary Unix-style layout.  A
@@ -73,7 +75,8 @@ if(FB_BUILD_COMPILER)
 endif()
 
 if(FB_BUILD_TESTS OR FB_BUILD_LEGACY_UNIT_TESTS OR FB_BUILD_LEGACY_LOG_TESTS OR
-   FB_BUILD_LEGACY_WARNING_TESTS OR FB_BUILD_LEGACY_SYNTAX_TESTS)
+   FB_BUILD_LEGACY_WARNING_TESTS OR FB_BUILD_LEGACY_SYNTAX_TESTS OR
+   FB_BUILD_LEGACY_DOC_TOOLS)
     enable_testing()
 
     # Darwin arm64 uses a pointer __builtin_va_list.  This regression must be
@@ -199,6 +202,38 @@ if(FB_BUILD_TESTS OR FB_BUILD_LEGACY_UNIT_TESTS OR FB_BUILD_LEGACY_LOG_TESTS OR
 
     fb_add_legacy_compiler_output_test(warnings FB_BUILD_LEGACY_WARNING_TESTS)
     fb_add_legacy_compiler_output_test(syntax FB_BUILD_LEGACY_SYNTAX_TESTS)
+
+    if(FB_BUILD_LEGACY_DOC_TOOLS)
+        if(NOT FB_BUILD_COMPILER)
+            message(FATAL_ERROR
+                "FB_BUILD_LEGACY_DOC_TOOLS requires FB_BUILD_COMPILER=ON")
+        endif()
+        if(NOT CMAKE_SYSTEM_NAME STREQUAL "Linux" OR
+           NOT CMAKE_C_COMPILER_ID STREQUAL "GNU")
+            message(FATAL_ERROR
+                "FB_BUILD_LEGACY_DOC_TOOLS requires Linux/GCC: the historical documentation sources emit computed gotos which Clang rejects")
+        endif()
+
+        find_package(Python3 COMPONENTS Interpreter REQUIRED)
+        find_program(FB_LEGACY_TEST_MAKE NAMES gmake make REQUIRED)
+        set(_fb_legacy_doc_dir "${CMAKE_BINARY_DIR}/tests/legacy-doc-tools")
+        add_test(
+            NAME legacy.doc-tools
+            COMMAND "${Python3_EXECUTABLE}"
+                "${CMAKE_SOURCE_DIR}/scripts/run-legacy-doc-tools.py"
+                --cmake "${CMAKE_COMMAND}"
+                --make "${FB_LEGACY_TEST_MAKE}"
+                --build-dir "${CMAKE_BINARY_DIR}"
+                --install-prefix "${_fb_legacy_doc_dir}/stage"
+                --source-doc-dir "${CMAKE_SOURCE_DIR}/doc"
+                --work-dir "${_fb_legacy_doc_dir}/work"
+                --log "${_fb_legacy_doc_dir}/doc-tools.log"
+        )
+        set_tests_properties(legacy.doc-tools PROPERTIES
+            LABELS "legacy;documentation"
+            TIMEOUT 1800
+        )
+    endif()
 endif()
 
 # Summary

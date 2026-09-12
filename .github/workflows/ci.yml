@@ -167,7 +167,7 @@ jobs:
           python3 scripts/check-bootstrap-provenance.py --target linux-x86_64
 
       - name: Install build dependencies
-        run: sudo apt-get update && sudo apt-get install -y cmake ninja-build g++ libncurses-dev libx11-dev libgpm-dev
+        run: sudo apt-get update && sudo apt-get install -y cmake ninja-build g++ libncurses-dev libx11-dev libgpm-dev libaspell-dev libcurl4-openssl-dev libpcre2-dev
 
       - name: Build and stage seed compiler
         run: |
@@ -182,7 +182,8 @@ jobs:
           PATH="$PWD/seed-stage/bin:$PATH" cmake -S . -B selfhost-build -G Ninja \
             -DCMAKE_BUILD_TYPE=Release -DFB_USE_SYSTEM_FBC=ON \
             -DFB_BUILD_LEGACY_LOG_TESTS=ON -DFB_BUILD_LEGACY_WARNING_TESTS=ON \
-            -DFB_BUILD_LEGACY_SYNTAX_TESTS=ON -DFB_BUILD_GFXLIB=ON \
+            -DFB_BUILD_LEGACY_SYNTAX_TESTS=ON -DFB_BUILD_LEGACY_DOC_TOOLS=ON \
+            -DFB_BUILD_GFXLIB=ON \
             -DFB_DISABLE_X11=ON -DFB_DISABLE_GPM=ON \
             -DFB_DISABLE_FFI=ON -DFB_DISABLE_OPENGL=ON
           cmake --build selfhost-build
