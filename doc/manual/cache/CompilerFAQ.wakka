@@ -1,6 +1,10 @@
 {{fbdoc item="title" value="Frequently Asked Questions"}}----
 {{anchor name="item0"}}
 
+**FreeBASIC-NG historical note (M7):** This cached upstream FAQ is retained as
+project history. Current release guidance is maintained in
+[[https://github.com/metaneutrons/freebasic-ng/blob/main/docs/releasing.md|docs/releasing.md]].
+
 **""FreeBASIC"" questions:**
 
 	==- {{anchor name="item1|What is FreeBASIC?"}}==
@@ -111,7 +115,7 @@
 
 {{anchor name="item9"}}==What are the future plans with FB / ""ToDo"" list ?==
 
-	You can find out what's planned for the future releases by directly looking at [[http://sourceforge.net/p/fbc/code/ci/master/tree/todo.txt|fbc's todo.txt]].
+	For current FreeBASIC-NG planning, see the project's [[https://github.com/metaneutrons/freebasic-ng/issues|GitHub issues]] and milestones. The root [[https://github.com/metaneutrons/freebasic-ng/blob/main/todo.txt|todo.txt]] is retained as upstream project history.
 
 {{anchor name="item0|Back to top"}}
 

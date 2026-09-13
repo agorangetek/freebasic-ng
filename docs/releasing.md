@@ -13,6 +13,10 @@ versioned GitHub Actions release workflow is the sole maintained release path;
 its qualification and retention boundaries are recorded in
 [the M5 plan](plans/m5.md).
 
+The upstream release procedure, `todo.txt` and `changelog.txt` remain
+available as historical records in [the history index](history/README.md).
+They do not define this release process or the FreeBASIC-NG roadmap.
+
 Release Please observes conventional commits on main, opens a version PR and,
 when that PR is merged, creates a draft GitHub release and an immutable
 v&lt;version&gt; tag. It authenticates through the existing
