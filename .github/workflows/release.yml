@@ -186,7 +186,8 @@ jobs:
           root="freebasic-ng-${VERSION}-${TARGET}"
           archive="dist/${root}.tar.xz"
           mkdir -p dist clean-room
-          tar -cJf "$archive" -C package "$root"
+          # BSD tar on macOS otherwise serializes Finder metadata as ._ files.
+          COPYFILE_DISABLE=1 tar -cJf "$archive" -C package "$root"
           tar -xJf "$archive" -C clean-room
           python3 scripts/verify-installed-fbc.py --prefix "clean-room/$root" --expected-host "$EXPECTED_HOST"
 
@@ -220,6 +221,91 @@ jobs:
               input.extractall("clean-room")
           PY
           python scripts/verify-installed-fbc.py --prefix "clean-room/$root" --expected-host "$EXPECTED_HOST"
+
+      - id: previous-archive
+        name: Download the preceding stable release archive
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+          VERSION: ${{ needs.metadata.outputs.version }}
+          TARGET: ${{ matrix.name }}
+          EXTENSION: ${{ matrix.extension }}
+        run: |
+          set -euo pipefail
+          version_less() {
+            local left="$1" right="$2"
+            local left_major left_minor left_patch right_major right_minor right_patch
+            IFS=. read -r left_major left_minor left_patch <<< "$left"
+            IFS=. read -r right_major right_minor right_patch <<< "$right"
+            (( left_major < right_major ||
+              (left_major == right_major && left_minor < right_minor) ||
+              (left_major == right_major && left_minor == right_minor && left_patch < right_patch) ))
+          }
+          previous_tag=''
+          while IFS= read -r tag; do
+            tag_version="${tag#v}"
+            if version_less "$tag_version" "$VERSION" && \
+               { [[ -z "$previous_tag" ]] || version_less "${previous_tag#v}" "$tag_version"; }; then
+              previous_tag="$tag"
+            fi
+          done < <(
+            gh api --paginate "repos/${GITHUB_REPOSITORY}/releases?per_page=100" \
+              --jq '.[] | select(.draft | not) | select(.prerelease | not) | .tag_name | select(test("^v[0-9]+\\.[0-9]+\\.[0-9]+$"))'
+          )
+          [[ -n "$previous_tag" ]] || {
+            echo '::error::no earlier stable FreeBASIC-NG release is available for archive replacement qualification'
+            exit 1
+          }
+          previous_dir=previous-release-archive
+          install -d "$previous_dir"
+          gh release download "$previous_tag" --repo "$GITHUB_REPOSITORY" \
+            --pattern "freebasic-ng_*-${TARGET}.${EXTENSION}" --dir "$previous_dir"
+          asset=''
+          asset_count=0
+          while IFS= read -r found; do
+            asset="$found"
+            ((asset_count += 1))
+          done < <(find "$previous_dir" -maxdepth 1 -type f \
+            -name "freebasic-ng_*-${TARGET}.${EXTENSION}" -print)
+          [[ "$asset_count" == 1 ]] || {
+            echo '::error::the previous stable release did not provide exactly one matching archive'
+            exit 1
+          }
+          printf 'tag=%s\nfilename=%s\n' "$previous_tag" "$(basename "$asset")" >> "$GITHUB_OUTPUT"
+
+      - name: Replace a previous Unix archive installation
+        if: matrix.family == 'unix'
+        shell: bash
+        env:
+          PREVIOUS_ARCHIVE: previous-release-archive/${{ steps.previous-archive.outputs.filename }}
+          VERSION: ${{ needs.metadata.outputs.version }}
+          TARGET: ${{ matrix.name }}
+          EXPECTED_HOST: ${{ matrix.expected_host }}
+        run: |
+          set -euo pipefail
+          root="freebasic-ng-${VERSION}-${TARGET}"
+          active=$(python3 scripts/qualify-release-archive-replace.py \
+            --previous "$PREVIOUS_ARCHIVE" \
+            --candidate "dist/${root}.tar.xz" \
+            --work-dir archive-replace)
+          python3 scripts/verify-installed-fbc.py --prefix "$active" --expected-host "$EXPECTED_HOST"
+
+      - name: Replace a previous Windows archive installation
+        if: matrix.family == 'windows'
+        shell: msys2 {0}
+        env:
+          PREVIOUS_ARCHIVE: previous-release-archive/${{ steps.previous-archive.outputs.filename }}
+          VERSION: ${{ needs.metadata.outputs.version }}
+          TARGET: ${{ matrix.name }}
+          EXPECTED_HOST: ${{ matrix.expected_host }}
+        run: |
+          set -euo pipefail
+          root="freebasic-ng-${VERSION}-${TARGET}"
+          active=$(python scripts/qualify-release-archive-replace.py \
+            --previous "$PREVIOUS_ARCHIVE" \
+            --candidate "dist/${root}.zip" \
+            --work-dir archive-replace)
+          python scripts/verify-installed-fbc.py --prefix "$active" --expected-host "$EXPECTED_HOST"
 
       - name: Generate an SPDX SBOM
         uses: anchore/sbom-action@3ad7283483fc7af8ff2b4ea19663c2d5ca935e26 # v0.24.2
@@ -318,6 +404,86 @@ jobs:
               fbc smoke.bas -x smoke
               test "$(./smoke)" = "FreeBASIC-NG Debian package smoke"
               fbc --version | grep -F "Version '"${VERSION}"'"
+            '
+
+      - id: previous-debian
+        name: Download the previous public Debian package
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+          VERSION: ${{ needs.metadata.outputs.version }}
+          ARCHITECTURE: ${{ matrix.architecture }}
+        run: |
+          set -euo pipefail
+          version_less() {
+            local left="$1" right="$2"
+            local left_major left_minor left_patch right_major right_minor right_patch
+            IFS=. read -r left_major left_minor left_patch <<< "$left"
+            IFS=. read -r right_major right_minor right_patch <<< "$right"
+            (( 10#$left_major < 10#$right_major ||
+              (10#$left_major == 10#$right_major && 10#$left_minor < 10#$right_minor) ||
+              (10#$left_major == 10#$right_major && 10#$left_minor == 10#$right_minor && 10#$left_patch < 10#$right_patch) ))
+          }
+          previous_tag=''
+          while IFS= read -r tag; do
+            version_less "${tag#v}" "$VERSION" && previous_tag="$tag"
+          done < <(
+            gh api --paginate --slurp "repos/${GITHUB_REPOSITORY}/releases?per_page=100" |
+              jq -r '.[][] | select(.draft | not) | select(.prerelease | not) | .tag_name | select(test("^v[0-9]+\\.[0-9]+\\.[0-9]+$"))' |
+              sort -V
+          )
+          [[ -n "$previous_tag" ]] || {
+            echo '::error::no earlier stable FreeBASIC-NG release is available for upgrade qualification'
+            exit 1
+          }
+          previous_dir="$RUNNER_TEMP/previous-debian"
+          install -d "$previous_dir"
+          gh release download "$previous_tag" --repo "$GITHUB_REPOSITORY" \
+            --pattern "freebasic-ng_*_1_${ARCHITECTURE}.deb" --dir "$previous_dir"
+          mapfile -t packages < <(find "$previous_dir" -maxdepth 1 -type f -name "freebasic-ng_*_1_${ARCHITECTURE}.deb" | sort)
+          [[ ${#packages[@]} == 1 ]] || {
+            echo '::error::the previous release did not provide exactly one matching Debian package'
+            exit 1
+          }
+          printf 'tag=%s\npackage=%s\n' "$previous_tag" "$(basename "${packages[0]}")" >> "$GITHUB_OUTPUT"
+
+      - name: Upgrade the previous Debian package and prove cleanup
+        shell: bash
+        env:
+          VERSION: ${{ needs.metadata.outputs.version }}
+          ARCHITECTURE: ${{ matrix.architecture }}
+          PREVIOUS_PACKAGE: ${{ steps.previous-debian.outputs.package }}
+        run: |
+          set -euo pipefail
+          CANDIDATE_PACKAGE="freebasic-ng_${VERSION}-1_${ARCHITECTURE}.deb"
+          export CANDIDATE_PACKAGE
+          docker run --rm \
+            --env VERSION --env PREVIOUS_PACKAGE --env CANDIDATE_PACKAGE \
+            --volume "$GITHUB_WORKSPACE/dist:/candidate:ro" \
+            --volume "$RUNNER_TEMP/previous-debian:/previous:ro" \
+            debian:bookworm-slim bash -euxo pipefail -c '
+              apt-get update
+              apt-get install -y "/previous/${PREVIOUS_PACKAGE}"
+              dpkg-query -L freebasic-ng | while IFS= read -r owned; do
+                [[ -f "$owned" || -L "$owned" ]] && printf "%s\\n" "$owned"
+              done | LC_ALL=C sort -u > /tmp/previous-files
+              apt-get install -y "/candidate/${CANDIDATE_PACKAGE}"
+              dpkg-query -W -f="\${Version}" freebasic-ng | grep -Fx "${VERSION}-1"
+              dpkg --verify freebasic-ng
+              dpkg-query -L freebasic-ng | while IFS= read -r owned; do
+                [[ -f "$owned" || -L "$owned" ]] && printf "%s\\n" "$owned"
+              done | LC_ALL=C sort -u > /tmp/current-files
+              while IFS= read -r orphan; do
+                [[ ! -e "$orphan" && ! -L "$orphan" ]] || {
+                  echo "::error::upgrade left unowned file ${orphan}" >&2
+                  exit 1
+                }
+              done < <(comm -23 /tmp/previous-files /tmp/current-files)
+              printf "Print \\\"FreeBASIC-NG Debian upgrade smoke\\\"\\n" > /tmp/smoke.bas
+              cd /tmp
+              fbc smoke.bas -x smoke
+              test "$(./smoke)" = "FreeBASIC-NG Debian upgrade smoke"
+              fbc --version | grep -F "Version ${VERSION}"
             '
 
       - name: Generate an SPDX SBOM
@@ -532,15 +698,35 @@ jobs:
           core: false
           cask: false
 
-      - name: Audit, install and run the exact generated formula
+      - name: Audit, upgrade and clean-install the exact generated formula
         shell: bash
         env:
           HOMEBREW_NO_AUTO_UPDATE: '1'
           HOMEBREW_NO_ANALYTICS: '1'
+          VERSION: ${{ needs.metadata.outputs.version }}
         run: |
           set -euo pipefail
           port=38080
           tap=freebasic-ng/qualification
+          version_less() {
+            local left="$1" right="$2"
+            local left_major left_minor left_patch right_major right_minor right_patch
+            IFS=. read -r left_major left_minor left_patch <<< "$left"
+            IFS=. read -r right_major right_minor right_patch <<< "$right"
+            (( 10#$left_major < 10#$right_major ||
+              (10#$left_major == 10#$right_major && 10#$left_minor < 10#$right_minor) ||
+              (10#$left_major == 10#$right_major && 10#$left_minor == 10#$right_minor && 10#$left_patch < 10#$right_patch) ))
+          }
+          previous_tap="$RUNNER_TEMP/previous-homebrew-tap"
+          git clone --depth 1 https://github.com/metaneutrons/homebrew-tap.git "$previous_tap"
+          previous_formula="$previous_tap/Formula/freebasic-ng.rb"
+          test -f "$previous_formula"
+          previous_version=$(sed -nE 's#.*releases/download/v([0-9]+\.[0-9]+\.[0-9]+)/.*#\1#p' "$previous_formula" | LC_ALL=C sort -u)
+          test "$(printf '%s\\n' "$previous_version" | sed '/^$/d' | wc -l | tr -d ' ')" = 1
+          version_less "$previous_version" "$VERSION" || {
+            echo "::error::the published Homebrew formula version ($previous_version) is not older than candidate $VERSION"
+            exit 1
+          }
           python3 -m http.server "$port" --bind 127.0.0.1 --directory candidate \
             >"$RUNNER_TEMP/http.log" 2>&1 &
           server_pid=$!
@@ -560,14 +746,22 @@ jobs:
           done
           brew tap-new --no-git "$tap"
           formula="$(brew --repository "$tap")/Formula/freebasic-ng.rb"
-          sed -E "s#https://github.com/${GITHUB_REPOSITORY}/releases/download/[^/\"]+#http://127.0.0.1:${port}#g; s#\\.tar\\.xz\\\"#\\.tar.xz?version=${{ needs.metadata.outputs.version }}\\\"#g" \
+          cp "$previous_formula" "$formula"
+          ruby -c "$formula"
+          brew install "$tap/freebasic-ng"
+          test -d "$(brew --cellar freebasic-ng)/$previous_version"
+          sed -E "s#https://github.com/${GITHUB_REPOSITORY}/releases/download/[^/\"]+#http://127.0.0.1:${port}#g; s#\\.tar\\.xz\\\"#\\.tar.xz?version=${VERSION}\\\"#g" \
             candidate/freebasic-ng.rb > "$formula"
           ruby -c "$formula"
           brew audit --strict "$tap/freebasic-ng"
+          brew upgrade "$tap/freebasic-ng"
+          brew test "$tap/freebasic-ng"
+          test -d "$(brew --cellar freebasic-ng)/$VERSION"
+          brew cleanup --prune=all "$tap/freebasic-ng"
+          test "$(find "$(brew --cellar freebasic-ng)" -mindepth 1 -maxdepth 1 -type d | wc -l | tr -d ' ')" = 1
+          brew uninstall freebasic-ng
           brew install "$tap/freebasic-ng"
           brew test "$tap/freebasic-ng"
-          test -d "$(brew --cellar freebasic-ng)/${{ needs.metadata.outputs.version }}"
-          brew uninstall freebasic-ng
           brew untap "$tap"
           kill "$server_pid"
           trap - EXIT
@@ -593,7 +787,7 @@ jobs:
           name: release-candidate
           path: candidate
 
-      - name: Build, install and run both qualified AUR packages
+      - name: Build, upgrade and clean-install both qualified AUR packages
         shell: bash
         env:
           VERSION: ${{ needs.metadata.outputs.version }}
@@ -608,13 +802,29 @@ jobs:
             "$IMAGE" bash -euxo pipefail -c '
               sed -i "/^#DisableSandboxFilesystem/a DisableSandboxFilesystem\\nDisableSandboxSyscalls" /etc/pacman.conf
               pacman -Syu --noconfirm --needed \
-                base-devel cmake gpm libffi libx11 ncurses ninja python
+                base-devel cmake git gpm libffi libx11 ncurses ninja python
               useradd --create-home builder
+
+              record_owned_files() {
+                local package_name="$1"
+                pacman -Qql "$package_name" | while IFS= read -r owned; do
+                  [[ -f "$owned" || -L "$owned" ]] && printf "%s\\n" "$owned"
+                done | LC_ALL=C sort -u
+              }
+
+              smoke() {
+                cd /tmp
+                printf "Print \\\"FreeBASIC-NG AUR package smoke\\\"\\n" > smoke.bas
+                fbc smoke.bas -x smoke
+                test "$(./smoke)" = "FreeBASIC-NG AUR package smoke"
+                fbc --version | grep -F "Version ${VERSION}"
+              }
 
               qualify() {
                 package_name="$1"
                 generated="$2"
                 work="/work/${package_name}"
+                previous_work="/work/previous-${package_name}"
                 install -d -o builder -g builder "$work"
                 cp "/candidate/${generated}" "$work/PKGBUILD"
                 sed -i "s#https://github.com/.*/releases/download/[^/]*#file:///candidate#g" "$work/PKGBUILD"
@@ -624,12 +834,35 @@ jobs:
                   -name "${package_name}-${VERSION}-*.pkg.tar.*" ! -name "*debug*" | sort)
                 test "${#packages[@]}" = 1
                 bsdtar -tf "${packages[0]}" | grep -Fx usr/bin/fbc
+
+                git clone --depth 1 "https://aur.archlinux.org/${package_name}.git" "$previous_work"
+                test -f "$previous_work/PKGBUILD"
+                chown -R builder:builder "$previous_work"
+                su builder -c "cd \"$previous_work\" && makepkg --cleanbuild --noconfirm"
+                mapfile -t previous_packages < <(find "$previous_work" -maxdepth 1 -type f \
+                  -name "${package_name}-*.pkg.tar.*" ! -name "*debug*" | sort)
+                test "${#previous_packages[@]}" = 1
+                pacman -U --noconfirm "${previous_packages[0]}"
+                previous_version=$(pacman -Q "$package_name" | awk "{print \$2}")
+                test "$(vercmp "$previous_version" "${VERSION}-1")" = -1 || {
+                  echo "::error::the published AUR ${package_name} version ($previous_version) is not older than candidate ${VERSION}-1" >&2
+                  return 1
+                }
+                record_owned_files "$package_name" > "$work/previous-files"
                 pacman -U --noconfirm "${packages[0]}"
-                cd /tmp
-                printf "Print \\\"FreeBASIC-NG AUR package smoke\\\"\\n" > smoke.bas
-                fbc smoke.bas -x smoke
-                test "$(./smoke)" = "FreeBASIC-NG AUR package smoke"
-                fbc --version | grep -F "Version ${VERSION}"
+                pacman -Q "$package_name" | grep -Fx "${package_name} ${VERSION}-1"
+                pacman -Qk "$package_name"
+                record_owned_files "$package_name" > "$work/current-files"
+                while IFS= read -r orphan; do
+                  [[ ! -e "$orphan" && ! -L "$orphan" ]] || {
+                    echo "::error::upgrade left unowned file ${orphan}" >&2
+                    return 1
+                  }
+                done < <(comm -23 "$work/previous-files" "$work/current-files")
+                smoke
+                pacman -Rdd --noconfirm "$package_name"
+                pacman -U --noconfirm "${packages[0]}"
+                smoke
                 pacman -Rdd --noconfirm "$package_name"
               }
 

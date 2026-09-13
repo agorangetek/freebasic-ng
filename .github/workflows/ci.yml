@@ -135,7 +135,8 @@ jobs:
         if: matrix.native_unit_suite && matrix.family == 'unix'
         run: |
           if [ "${{ matrix.expected_host }}" = "darwin-x86_64" ]; then
-            export LIBRARY_PATH="$(brew --prefix libffi)/lib${LIBRARY_PATH:+:$LIBRARY_PATH}"
+            LIBRARY_PATH="$(brew --prefix libffi)/lib${LIBRARY_PATH:+:$LIBRARY_PATH}"
+            export LIBRARY_PATH
           fi
           PATH="$PWD/stage/bin:$PATH" cmake -S . -B selfhost-build -G Ninja \
             -DCMAKE_BUILD_TYPE=Release -DFB_USE_SYSTEM_FBC=ON \
@@ -164,6 +165,43 @@ jobs:
           # ignore only that CR-at-EOL conversion rather than every whitespace
           # difference.
           git diff --ignore-cr-at-eol --exit-code
+
+  release-archive-replace:
+    name: Release archive replacement contract
+    runs-on: ubuntu-24.04
+
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Replace TAR.XZ and ZIP fixtures without retaining stale files
+        shell: bash
+        run: |
+          set -euo pipefail
+          work_dir="$(mktemp -d)"
+          trap 'rm -rf "$work_dir"' EXIT
+          old_root="freebasic-ng-1.22.3-linux-x86_64"
+          new_root="freebasic-ng-1.23.0-linux-x86_64"
+          mkdir -p "$work_dir/old/$old_root/bin" "$work_dir/new/$new_root/bin"
+          touch "$work_dir/old/$old_root/bin/fbc" "$work_dir/old/$old_root/obsolete-layout"
+          touch "$work_dir/new/$new_root/bin/fbc" "$work_dir/new/$new_root/current-layout"
+          tar -cJf "$work_dir/previous.tar.xz" -C "$work_dir/old" "$old_root"
+          tar -cJf "$work_dir/candidate.tar.xz" -C "$work_dir/new" "$new_root"
+          active=$(python3 scripts/qualify-release-archive-replace.py \
+            --previous "$work_dir/previous.tar.xz" \
+            --candidate "$work_dir/candidate.tar.xz" \
+            --work-dir "$work_dir/tar-qualification")
+          test -f "$active/current-layout"
+          test ! -e "$active/obsolete-layout"
+          (cd "$work_dir/old" && zip -qr "$work_dir/previous.zip" "$old_root")
+          (cd "$work_dir/new" && zip -qr "$work_dir/candidate.zip" "$new_root")
+          active=$(python3 scripts/qualify-release-archive-replace.py \
+            --previous "$work_dir/previous.zip" \
+            --candidate "$work_dir/candidate.zip" \
+            --work-dir "$work_dir/zip-qualification")
+          test -f "$active/current-layout"
+          test ! -e "$active/obsolete-layout"
 
   darwin-aarch64-selfhost:
     name: Self-host Darwin ARM64

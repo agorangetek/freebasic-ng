@@ -39,6 +39,13 @@ present. Each archive has:
 - a GitHub build-provenance attestation;
 - a signed SHA256SUMS inventory covering the archives, SBOMs and bundles.
 
+Every archive lane also downloads the matching archive from the preceding
+stable release, installs it into a stable active prefix, replaces that prefix
+with the candidate archive, proves files removed by the candidate did not
+survive, and runs the candidate compiler from that prefix. The supported
+archive update is therefore a full versioned-directory replacement; it is not
+an in-place NSIS or shell-installer upgrade.
+
 It downloads the assets from the draft release and verifies the checksum
 inventory before the draft is made visible. M2 adds native Debian packages for
 `amd64` and `arm64`, a signed source archive, and measured Homebrew plus AUR
