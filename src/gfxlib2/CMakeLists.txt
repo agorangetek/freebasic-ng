@@ -42,6 +42,10 @@ endif()
 # x86 asm sources
 if(FB_TARGET_ARCH STREQUAL "x86" AND EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/x86")
     file(GLOB GFXLIB_ARCH_SOURCES "${CMAKE_CURRENT_SOURCE_DIR}/x86/*.s")
+    # The x86 MMX sources include fb_gfx_mmx.h and were historically built
+    # with GCC's preprocessed-assembly mode.
+    set_source_files_properties(${GFXLIB_ARCH_SOURCES}
+        PROPERTIES COMPILE_OPTIONS "-x;assembler-with-cpp")
 endif()
 
 set(GFXLIB_ALL_SOURCES ${GFXLIB_COMMON_SOURCES} ${GFXLIB_PLATFORM_SOURCES} ${GFXLIB_ARCH_SOURCES})

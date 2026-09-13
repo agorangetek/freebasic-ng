@@ -20,37 +20,49 @@ jobs:
             runner: ubuntu-24.04
             family: unix
             expected_host: linux-x86_64
+            native_unit_suite: false
           - name: linux-aarch64
             runner: ubuntu-24.04-arm
             family: unix
             expected_host: linux-aarch64
+            native_unit_suite: true
           - name: darwin-x86_64
             runner: macos-15-intel
             family: unix
             expected_host: darwin-x86_64
+            native_unit_suite: true
           - name: darwin-aarch64
             runner: macos-15
             family: unix
             expected_host: darwin-aarch64
+            native_unit_suite: false
           - name: win64
             runner: windows-2025
             family: windows
             expected_host: win64
+            native_unit_suite: true
             msystem: MINGW64
             packages: >-
               mingw-w64-x86_64-cmake
               mingw-w64-x86_64-ninja
               mingw-w64-x86_64-gcc
+              mingw-w64-x86_64-libffi
+              git
+              make
               python
           - name: win32-aarch64
             runner: windows-11-arm
             family: windows
             expected_host: win32-aarch64
+            native_unit_suite: true
             msystem: CLANGARM64
             packages: >-
               mingw-w64-clang-aarch64-cmake
               mingw-w64-clang-aarch64-ninja
               mingw-w64-clang-aarch64-gcc
+              mingw-w64-clang-aarch64-libffi
+              git
+              make
               python
 
     name: Build ${{ matrix.name }}
@@ -69,11 +81,11 @@ jobs:
 
       - name: Install dependencies (Linux)
         if: runner.os == 'Linux'
-        run: sudo apt-get update && sudo apt-get install -y cmake ninja-build libncurses-dev libx11-dev libgpm-dev
+        run: sudo apt-get update && sudo apt-get install -y cmake ninja-build libncurses-dev libffi-dev libx11-dev libxext-dev libxpm-dev libxrandr-dev libxrender-dev libgpm-dev
 
       - name: Install dependencies (macOS)
         if: runner.os == 'macOS'
-        run: brew install cmake ninja
+        run: brew install cmake ninja libffi
 
       - name: Setup MSYS2 (Windows)
         if: matrix.family == 'windows'
@@ -115,6 +127,43 @@ jobs:
         run: |
           cmake --install build --prefix stage
           python scripts/verify-installed-fbc.py --prefix stage --expected-host "${{ matrix.expected_host }}"
+
+      # The former Travis matrix is Linux-specific.  M7 additionally requires
+      # the complete historical unit suite through a native self-host on every
+      # supported host; Darwin ARM and Linux x64 have dedicated jobs below.
+      - name: Self-host and run native unit suite (Unix)
+        if: matrix.native_unit_suite && matrix.family == 'unix'
+        run: |
+          if [ "${{ matrix.expected_host }}" = "darwin-x86_64" ]; then
+            export LIBRARY_PATH="$(brew --prefix libffi)/lib${LIBRARY_PATH:+:$LIBRARY_PATH}"
+          fi
+          PATH="$PWD/stage/bin:$PATH" cmake -S . -B selfhost-build -G Ninja \
+            -DCMAKE_BUILD_TYPE=Release -DFB_USE_SYSTEM_FBC=ON \
+            -DFB_BUILD_LEGACY_UNIT_TESTS=ON -DFB_BUILD_GFXLIB=ON \
+            -DFB_DISABLE_X11=ON -DFB_DISABLE_GPM=ON \
+            -DFB_DISABLE_FFI=OFF -DFB_DISABLE_OPENGL=ON
+          cmake --build selfhost-build
+          test "$(selfhost-build/src/compiler/fbc -print host)" = "${{ matrix.expected_host }}"
+          ctest --test-dir selfhost-build --output-on-failure
+          git diff --exit-code
+
+      - name: Self-host and run native unit suite (Windows)
+        if: matrix.native_unit_suite && matrix.family == 'windows'
+        shell: msys2 {0}
+        run: |
+          PATH="$PWD/stage/bin:$PATH" cmake -S . -B selfhost-build -G Ninja \
+            -DCMAKE_BUILD_TYPE=Release -DFB_USE_SYSTEM_FBC=ON \
+            -DFB_BUILD_LEGACY_UNIT_TESTS=ON -DFB_BUILD_GFXLIB=ON \
+            -DFB_DISABLE_X11=ON -DFB_DISABLE_GPM=ON \
+            -DFB_DISABLE_FFI=OFF -DFB_DISABLE_OPENGL=ON
+          cmake --build selfhost-build
+          test "$(selfhost-build/src/compiler/fbc.exe -print host)" = "${{ matrix.expected_host }}"
+          ctest --test-dir selfhost-build --output-on-failure
+          # setup-msys2's Git sees CRLF worktree files although actions/checkout
+          # populated the index with LF. Keep the dirty-worktree gate, but
+          # ignore only that CR-at-EOL conversion rather than every whitespace
+          # difference.
+          git diff --ignore-cr-at-eol --exit-code
 
   darwin-aarch64-selfhost:
     name: Self-host Darwin ARM64
@@ -167,7 +216,7 @@ jobs:
           python3 scripts/check-bootstrap-provenance.py --target linux-x86_64
 
       - name: Install build dependencies
-        run: sudo apt-get update && sudo apt-get install -y cmake ninja-build g++ libncurses-dev libx11-dev libgpm-dev libaspell-dev libcurl4-openssl-dev libpcre2-dev
+        run: sudo apt-get update && sudo apt-get install -y cmake ninja-build g++ libncurses-dev libffi-dev libx11-dev libgpm-dev libaspell-dev libcurl4-openssl-dev libpcre2-dev
 
       - name: Build and stage seed compiler
         run: |
@@ -183,9 +232,10 @@ jobs:
             -DCMAKE_BUILD_TYPE=Release -DFB_USE_SYSTEM_FBC=ON \
             -DFB_BUILD_LEGACY_LOG_TESTS=ON -DFB_BUILD_LEGACY_WARNING_TESTS=ON \
             -DFB_BUILD_LEGACY_SYNTAX_TESTS=ON -DFB_BUILD_LEGACY_DOC_TOOLS=ON \
+            -DFB_VERIFY_LEGACY_UNIT_FAILURE_DETECTION=ON \
             -DFB_BUILD_GFXLIB=ON \
             -DFB_DISABLE_X11=ON -DFB_DISABLE_GPM=ON \
-            -DFB_DISABLE_FFI=ON -DFB_DISABLE_OPENGL=ON
+            -DFB_DISABLE_FFI=OFF -DFB_DISABLE_OPENGL=ON
           cmake --build selfhost-build
           ctest --test-dir selfhost-build --output-on-failure
           git diff --exit-code
@@ -265,6 +315,110 @@ jobs:
             -DFB_DISABLE_X11=ON -DFB_DISABLE_GPM=ON \
             -DFB_DISABLE_FFI=OFF -DFB_DISABLE_OPENGL=ON
           cmake --build selfhost-build
+          ctest --test-dir selfhost-build --output-on-failure
+          git diff --exit-code
+
+  linux-x86-legacy-debug:
+    name: Legacy debug Linux x86 (${{ matrix.id }})
+    runs-on: ubuntu-24.04
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - id: release
+            compiler_debug: OFF
+            test_debug: OFF
+          - id: test-debug
+            compiler_debug: OFF
+            test_debug: ON
+          - id: compiler-debug
+            compiler_debug: ON
+            test_debug: OFF
+          - id: full-debug
+            compiler_debug: ON
+            test_debug: ON
+
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Verify version and bootstrap metadata
+        run: |
+          python3 scripts/check-version.py
+          python3 scripts/check-bootstrap-provenance.py --target linux-x86_64
+
+      - name: Install build dependencies
+        run: |
+          sudo dpkg --add-architecture i386
+          sudo apt-get update
+          sudo apt-get install -y cmake ninja-build g++ gcc-multilib g++-multilib \
+            libc6-dev-i386 libcunit1-dev:i386 \
+            libncurses-dev libncurses-dev:i386 libx11-dev:i386 libxext-dev:i386 \
+            libxpm-dev:i386 libxrandr-dev:i386 libxrender-dev:i386 libffi-dev:i386 \
+            libgpm-dev:i386 libaspell-dev:i386 libcurl4-openssl-dev:i386 \
+            libpcre2-dev:i386
+
+      - name: Build verified historical x86 seed compiler
+        run: |
+          archive="$RUNNER_TEMP/FreeBASIC-1.05.0-source-bootstrap.tar.xz"
+          bootstrap_dir="$RUNNER_TEMP/FreeBASIC-1.05.0-source-bootstrap"
+          curl --fail --location --retry 3 --retry-delay 2 \
+            --output "$archive" \
+            https://github.com/freebasic/fbc/releases/download/1.05.0/FreeBASIC-1.05.0-source-bootstrap.tar.xz
+          echo "cbf5c28c8cc0d34dd71c50c8f8e574aab7f7a341c39cb952f6434cfecb06d82f  $archive" \
+            | sha256sum --check --status
+          tar -xJf "$archive" -C "$RUNNER_TEMP"
+          printf '%s\n' \
+            'CC = gcc -m32' \
+            'AS = as --32' \
+            'TARGET_ARCH = x86' \
+            'CFLAGS += -DDISABLE_X11 -DDISABLE_GPM -DDISABLE_FFI -DDISABLE_OPENGL' \
+            > "$bootstrap_dir/config.mk"
+          # The 1.05 bootstrap target omits rtlib from bootstrap/fbc's
+          # prerequisites. Build the shared runtime paths sequentially: both
+          # top-level goals otherwise race to populate lib/freebasic/linux-x86.
+          make -C "$bootstrap_dir" -j"$(nproc)" rtlib
+          make -C "$bootstrap_dir" -j"$(nproc)" gfxlib2
+          make -C "$bootstrap_dir" -j"$(nproc)" bootstrap
+          file "$bootstrap_dir/bin/fbc" | grep -q 'ELF 32-bit'
+          echo "FBC_SEED_DIR=$bootstrap_dir" >> "$GITHUB_ENV"
+
+      - name: Self-host x86 compiler and run historical suites
+        run: |
+          # Travis first built a current fbc1 with the 1.05 seed, then used
+          # fbc1—not the historical seed—to rebuild the final compiler.  The
+          # two stages are both CMake builds here; fbc1 preserves the current
+          # compiler's direct-link semantics for the final x86 GAS objects.
+          PATH="$FBC_SEED_DIR/bin:$PATH" cmake -S . -B seed-selfhost-build -G Ninja \
+            -DCMAKE_BUILD_TYPE=Release -DFB_USE_SYSTEM_FBC=ON \
+            -DCMAKE_TOOLCHAIN_FILE="$PWD/cmake/toolchains/linux-x86.cmake" \
+            -DFB_NATIVE_COMPILER_OBJECTS=ON -DFB_NATIVE_COMPILER_BACKEND=gas \
+            -DFB_NATIVE_COMPILER_LINK_WITH_SEED_RUNTIME=ON \
+            -DFB_COMPILER_DEBUG=${{ matrix.compiler_debug }} \
+            -DFB_BUILD_GFXLIB=OFF \
+            -DFB_DISABLE_X11=ON -DFB_DISABLE_GPM=ON \
+            -DFB_DISABLE_FFI=ON -DFB_DISABLE_OPENGL=ON
+          cmake --build seed-selfhost-build
+          cmake --install seed-selfhost-build --prefix "$PWD/seed-selfhost-stage"
+          test "$(seed-selfhost-stage/bin/fbc -print host)" = "linux-x86"
+          file seed-selfhost-stage/bin/fbc | grep -q 'ELF 32-bit'
+
+          PATH="$PWD/seed-selfhost-stage/bin:$PATH" cmake -S . -B selfhost-build -G Ninja \
+            -DCMAKE_BUILD_TYPE=Release -DFB_USE_SYSTEM_FBC=ON \
+            -DCMAKE_TOOLCHAIN_FILE="$PWD/cmake/toolchains/linux-x86.cmake" \
+            -DFB_NATIVE_COMPILER_OBJECTS=ON -DFB_NATIVE_COMPILER_BACKEND=gas \
+            -DFB_COMPILER_DEBUG=${{ matrix.compiler_debug }} \
+            -DFB_LEGACY_TEST_DEBUG=${{ matrix.test_debug }} \
+            -DFB_BUILD_LEGACY_UNIT_TESTS=ON -DFB_BUILD_LEGACY_LOG_TESTS=ON \
+            -DFB_BUILD_LEGACY_WARNING_TESTS=ON -DFB_BUILD_LEGACY_SYNTAX_TESTS=ON \
+            -DFB_BUILD_LEGACY_DOC_TOOLS=ON -DFB_BUILD_GFXLIB=ON \
+            -DFB_DISABLE_X11=ON -DFB_DISABLE_GPM=ON \
+            -DFB_DISABLE_FFI=OFF -DFB_DISABLE_OPENGL=ON
+          cmake --build selfhost-build
+          test "$(selfhost-build/src/compiler/fbc -print host)" = "linux-x86"
+          test "$(selfhost-build/src/compiler/fbc -print target)" = "linux-x86"
+          file selfhost-build/src/compiler/fbc | grep -q 'ELF 32-bit'
           ctest --test-dir selfhost-build --output-on-failure
           git diff --exit-code
 
@@ -421,7 +575,7 @@ jobs:
 
       - name: Build native producer
         run: |
-          sudo apt-get update && sudo apt-get install -y cmake ninja-build libncurses-dev libx11-dev libgpm-dev
+          sudo apt-get update && sudo apt-get install -y cmake ninja-build libncurses-dev libffi-dev libx11-dev libgpm-dev
           cmake -B build -G Ninja -DCMAKE_BUILD_TYPE=Release -DFB_BUILD_GFXLIB=OFF
           cmake --build build
 

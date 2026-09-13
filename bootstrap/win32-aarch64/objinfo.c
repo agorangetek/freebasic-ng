@@ -1596,7 +1596,13 @@ static void HLOADFBCTINFFROMOBJ( void )
 			{
 				HLOADFBCTINFFROMCOFF( (uint16)332u );
 			}
+			goto label$266;
 			label$269:;
+			if( TMP$47$3 != 3ll) goto label$900;
+			{
+				HLOADFBCTINFFROMCOFF( (uint16)43620u );
+			}
+			label$900:;
 			label$266:;
 		}
 	}

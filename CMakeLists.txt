@@ -11,7 +11,7 @@ endif()
 string(REGEX REPLACE "^FBVERSION[ \t]*:=[ \t]*([0-9]+\\.[0-9]+\\.[0-9]+)$"
     "\\1" FREEBASIC_NG_VERSION "${_fb_version_line}")
 
-project(FreeBASICNG VERSION ${FREEBASIC_NG_VERSION} LANGUAGES C)
+project(FreeBASICNG VERSION ${FREEBASIC_NG_VERSION} LANGUAGES C ASM)
 
 set(CMAKE_C_STANDARD 11)
 set(CMAKE_C_STANDARD_REQUIRED ON)
@@ -30,6 +30,8 @@ option(FB_BUILD_COMPILER "Build the fbc compiler" ON)
 option(FB_BUILD_TESTS "Build tests" OFF)
 option(FB_BUILD_LEGACY_UNIT_TESTS
     "Run the historical fbcunit suite through CTest" OFF)
+option(FB_VERIFY_LEGACY_UNIT_FAILURE_DETECTION
+    "Verify that the historical fbcunit adapter rejects an injected failing fixture" OFF)
 option(FB_BUILD_LEGACY_LOG_TESTS
     "Run the historical log-test suite through CTest" OFF)
 option(FB_BUILD_LEGACY_WARNING_TESTS
@@ -44,12 +46,34 @@ option(FB_LEGACY_TEST_DEBUG
     "Pass the historical -g -exx flags to legacy runtime test suites" OFF)
 option(FB_USE_SYSTEM_FBC "Use an existing fbc instead of the bundled bootstrap sources" OFF)
 set(FB_NATIVE_COMPILER_BACKEND "gcc" CACHE STRING
-    "Backend used when a system fbc builds the native compiler (gcc or gas64)")
-set_property(CACHE FB_NATIVE_COMPILER_BACKEND PROPERTY STRINGS gcc gas64)
+    "Backend used when a system fbc builds the native compiler (gcc, gas, or gas64)")
+set_property(CACHE FB_NATIVE_COMPILER_BACKEND PROPERTY STRINGS gcc gas gas64)
 if(NOT FB_NATIVE_COMPILER_BACKEND STREQUAL "gcc" AND
+   NOT FB_NATIVE_COMPILER_BACKEND STREQUAL "gas" AND
    NOT FB_NATIVE_COMPILER_BACKEND STREQUAL "gas64")
     message(FATAL_ERROR
-        "FB_NATIVE_COMPILER_BACKEND must be one of: gcc, gas64")
+        "FB_NATIVE_COMPILER_BACKEND must be one of: gcc, gas, gas64")
+endif()
+option(FB_NATIVE_COMPILER_OBJECTS
+    "Compile native compiler modules individually through fbc before CMake links them" OFF)
+option(FB_NATIVE_COMPILER_LINK_WITH_SEED_RUNTIME
+    "Link the native x86 GAS bootstrap compiler through the seed runtime" OFF)
+if(FB_NATIVE_COMPILER_OBJECTS AND
+   NOT FB_NATIVE_COMPILER_BACKEND STREQUAL "gcc" AND
+   NOT FB_NATIVE_COMPILER_BACKEND STREQUAL "gas")
+    message(FATAL_ERROR
+        "FB_NATIVE_COMPILER_OBJECTS currently requires FB_NATIVE_COMPILER_BACKEND=gcc or gas")
+endif()
+if(FB_NATIVE_COMPILER_BACKEND STREQUAL "gas" AND
+   NOT FB_NATIVE_COMPILER_OBJECTS)
+    message(FATAL_ERROR
+        "FB_NATIVE_COMPILER_BACKEND=gas requires FB_NATIVE_COMPILER_OBJECTS=ON")
+endif()
+if(FB_NATIVE_COMPILER_LINK_WITH_SEED_RUNTIME AND
+   (NOT FB_NATIVE_COMPILER_BACKEND STREQUAL "gas" OR
+    NOT FB_NATIVE_COMPILER_OBJECTS))
+    message(FATAL_ERROR
+        "FB_NATIVE_COMPILER_LINK_WITH_SEED_RUNTIME requires native x86 GAS objects")
 endif()
 
 # The Developer Preview archives use the ordinary Unix-style layout.  A
@@ -75,6 +99,17 @@ if(FB_NATIVE_COMPILER_BACKEND STREQUAL "gas64" AND
         "FB_NATIVE_COMPILER_BACKEND=gas64 currently requires Linux x86_64 with GCC")
 endif()
 
+# The historical 32-bit Travis matrix built compiler modules through the
+# original GAS backend.  CMake supports it only in the matching object mode;
+# generated assembly is not a general native-build path yet.
+if(FB_NATIVE_COMPILER_BACKEND STREQUAL "gas" AND
+   (NOT FB_TARGET_OS STREQUAL "linux" OR
+    NOT FB_TARGET_ARCH STREQUAL "x86" OR
+    NOT CMAKE_C_COMPILER_ID STREQUAL "GNU"))
+    message(FATAL_ERROR
+        "FB_NATIVE_COMPILER_BACKEND=gas currently requires Linux x86 with GCC")
+endif()
+
 # Bootstrap logic (determines how to build fbc)
 if(FB_BUILD_COMPILER)
     include(cmake/Bootstrap.cmake)
@@ -82,6 +117,12 @@ if(FB_BUILD_COMPILER)
        NOT FB_BOOTSTRAP_MODE STREQUAL "native")
         message(FATAL_ERROR
             "FB_NATIVE_COMPILER_BACKEND=gas64 requires a working system fbc; "
+            "configure with -DFB_USE_SYSTEM_FBC=ON")
+    endif()
+    if(FB_NATIVE_COMPILER_BACKEND STREQUAL "gas" AND
+       NOT FB_BOOTSTRAP_MODE STREQUAL "native")
+        message(FATAL_ERROR
+            "FB_NATIVE_COMPILER_BACKEND=gas requires a working system fbc; "
             "configure with -DFB_USE_SYSTEM_FBC=ON")
     endif()
 endif()
@@ -102,7 +143,8 @@ if(FB_BUILD_COMPILER)
     add_subdirectory(src/compiler)
 endif()
 
-if(FB_BUILD_TESTS OR FB_BUILD_LEGACY_UNIT_TESTS OR FB_BUILD_LEGACY_LOG_TESTS OR
+if(FB_BUILD_TESTS OR FB_BUILD_LEGACY_UNIT_TESTS OR
+   FB_VERIFY_LEGACY_UNIT_FAILURE_DETECTION OR FB_BUILD_LEGACY_LOG_TESTS OR
    FB_BUILD_LEGACY_WARNING_TESTS OR FB_BUILD_LEGACY_SYNTAX_TESTS OR
    FB_BUILD_LEGACY_DOC_TOOLS)
     enable_testing()
@@ -165,23 +207,111 @@ if(FB_BUILD_TESTS OR FB_BUILD_LEGACY_UNIT_TESTS OR FB_BUILD_LEGACY_LOG_TESTS OR
         find_package(Python3 COMPONENTS Interpreter REQUIRED)
         find_program(FB_LEGACY_TEST_MAKE NAMES gmake make REQUIRED)
         set(_fb_legacy_unit_dir "${CMAKE_BINARY_DIR}/tests/legacy-unit")
+        set(_fb_legacy_unit_runner "${CMAKE_SOURCE_DIR}/scripts/run-legacy-unit-tests.py")
+        set(_fb_legacy_unit_cmake "${CMAKE_COMMAND}")
+        set(_fb_legacy_unit_make "${FB_LEGACY_TEST_MAKE}")
+        set(_fb_legacy_unit_build_dir "${CMAKE_BINARY_DIR}")
+        set(_fb_legacy_unit_install_prefix "${_fb_legacy_unit_dir}/stage")
+        set(_fb_legacy_unit_source_tests_dir "${CMAKE_SOURCE_DIR}/tests")
+        set(_fb_legacy_unit_source_include_dir "${CMAKE_SOURCE_DIR}/inc")
+        set(_fb_legacy_unit_work_dir "${_fb_legacy_unit_dir}/work")
+        set(_fb_legacy_unit_log "${_fb_legacy_unit_dir}/unit-tests.log")
+
+        # MSYS Python treats C:/... arguments as POSIX-relative paths. Run
+        # the adapter from the build tree and pass only portable relative
+        # paths to its subprocess calls on Windows.
+        if(WIN32)
+            file(RELATIVE_PATH _fb_legacy_unit_runner "${CMAKE_BINARY_DIR}"
+                "${_fb_legacy_unit_runner}")
+            file(RELATIVE_PATH _fb_legacy_unit_source_tests_dir "${CMAKE_BINARY_DIR}"
+                "${_fb_legacy_unit_source_tests_dir}")
+            file(RELATIVE_PATH _fb_legacy_unit_source_include_dir "${CMAKE_BINARY_DIR}"
+                "${_fb_legacy_unit_source_include_dir}")
+            set(_fb_legacy_unit_cmake cmake)
+            set(_fb_legacy_unit_make make)
+            set(_fb_legacy_unit_build_dir .)
+            set(_fb_legacy_unit_install_prefix tests/legacy-unit/stage)
+            set(_fb_legacy_unit_work_dir tests/legacy-unit/work)
+            set(_fb_legacy_unit_log tests/legacy-unit/unit-tests.log)
+        endif()
         add_test(
             NAME legacy.unit
             COMMAND "${Python3_EXECUTABLE}"
-                "${CMAKE_SOURCE_DIR}/scripts/run-legacy-unit-tests.py"
-                --cmake "${CMAKE_COMMAND}"
-                --make "${FB_LEGACY_TEST_MAKE}"
-                --build-dir "${CMAKE_BINARY_DIR}"
-                --install-prefix "${_fb_legacy_unit_dir}/stage"
-                --source-tests-dir "${CMAKE_SOURCE_DIR}/tests"
-                --source-include-dir "${CMAKE_SOURCE_DIR}/inc"
-                --work-dir "${_fb_legacy_unit_dir}/work"
-                --log "${_fb_legacy_unit_dir}/unit-tests.log"
+                "${_fb_legacy_unit_runner}"
+                --cmake "${_fb_legacy_unit_cmake}"
+                --make "${_fb_legacy_unit_make}"
+                --build-dir "${_fb_legacy_unit_build_dir}"
+                --install-prefix "${_fb_legacy_unit_install_prefix}"
+                --source-tests-dir "${_fb_legacy_unit_source_tests_dir}"
+                --source-include-dir "${_fb_legacy_unit_source_include_dir}"
+                --work-dir "${_fb_legacy_unit_work_dir}"
+                --log "${_fb_legacy_unit_log}"
                 ${_fb_legacy_runtime_test_fbc_args}
         )
         set_tests_properties(legacy.unit PROPERTIES
             LABELS "legacy;unit"
             TIMEOUT 1800
+            WORKING_DIRECTORY "${CMAKE_BINARY_DIR}"
+        )
+    endif()
+
+    if(FB_VERIFY_LEGACY_UNIT_FAILURE_DETECTION)
+        if(NOT FB_BUILD_COMPILER)
+            message(FATAL_ERROR
+                "FB_VERIFY_LEGACY_UNIT_FAILURE_DETECTION requires FB_BUILD_COMPILER=ON")
+        endif()
+        if(NOT FB_BUILD_GFXLIB)
+            message(FATAL_ERROR
+                "FB_VERIFY_LEGACY_UNIT_FAILURE_DETECTION requires FB_BUILD_GFXLIB=ON")
+        endif()
+
+        find_package(Python3 COMPONENTS Interpreter REQUIRED)
+        find_program(FB_LEGACY_TEST_MAKE NAMES gmake make REQUIRED)
+        set(_fb_legacy_unit_negative_dir "${CMAKE_BINARY_DIR}/tests/legacy-unit-negative")
+        set(_fb_legacy_unit_negative_runner "${CMAKE_SOURCE_DIR}/scripts/run-legacy-unit-tests.py")
+        set(_fb_legacy_unit_negative_cmake "${CMAKE_COMMAND}")
+        set(_fb_legacy_unit_negative_make "${FB_LEGACY_TEST_MAKE}")
+        set(_fb_legacy_unit_negative_build_dir "${CMAKE_BINARY_DIR}")
+        set(_fb_legacy_unit_negative_install_prefix "${_fb_legacy_unit_negative_dir}/stage")
+        set(_fb_legacy_unit_negative_source_tests_dir "${CMAKE_SOURCE_DIR}/tests")
+        set(_fb_legacy_unit_negative_source_include_dir "${CMAKE_SOURCE_DIR}/inc")
+        set(_fb_legacy_unit_negative_work_dir "${_fb_legacy_unit_negative_dir}/work")
+        set(_fb_legacy_unit_negative_log "${_fb_legacy_unit_negative_dir}/unit-tests.log")
+
+        if(WIN32)
+            file(RELATIVE_PATH _fb_legacy_unit_negative_runner "${CMAKE_BINARY_DIR}"
+                "${_fb_legacy_unit_negative_runner}")
+            file(RELATIVE_PATH _fb_legacy_unit_negative_source_tests_dir "${CMAKE_BINARY_DIR}"
+                "${_fb_legacy_unit_negative_source_tests_dir}")
+            file(RELATIVE_PATH _fb_legacy_unit_negative_source_include_dir "${CMAKE_BINARY_DIR}"
+                "${_fb_legacy_unit_negative_source_include_dir}")
+            set(_fb_legacy_unit_negative_cmake cmake)
+            set(_fb_legacy_unit_negative_make make)
+            set(_fb_legacy_unit_negative_build_dir .)
+            set(_fb_legacy_unit_negative_install_prefix tests/legacy-unit-negative/stage)
+            set(_fb_legacy_unit_negative_work_dir tests/legacy-unit-negative/work)
+            set(_fb_legacy_unit_negative_log tests/legacy-unit-negative/unit-tests.log)
+        endif()
+        add_test(
+            NAME legacy.unit-negative
+            COMMAND "${Python3_EXECUTABLE}"
+                "${_fb_legacy_unit_negative_runner}"
+                --cmake "${_fb_legacy_unit_negative_cmake}"
+                --make "${_fb_legacy_unit_negative_make}"
+                --build-dir "${_fb_legacy_unit_negative_build_dir}"
+                --install-prefix "${_fb_legacy_unit_negative_install_prefix}"
+                --source-tests-dir "${_fb_legacy_unit_negative_source_tests_dir}"
+                --source-include-dir "${_fb_legacy_unit_negative_source_include_dir}"
+                --work-dir "${_fb_legacy_unit_negative_work_dir}"
+                --log "${_fb_legacy_unit_negative_log}"
+                --inject-failing-fixture
+                --expect-failure
+                ${_fb_legacy_runtime_test_fbc_args}
+        )
+        set_tests_properties(legacy.unit-negative PROPERTIES
+            LABELS "legacy;unit;negative"
+            TIMEOUT 1800
+            WORKING_DIRECTORY "${CMAKE_BINARY_DIR}"
         )
     endif()
 

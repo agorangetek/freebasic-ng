@@ -1804,11 +1804,12 @@ function fbGetBackendValistType _
 			typedef = FB_CVA_LIST_BUILTIN_ARM
 
 		case FB_CPUFAMILY_AARCH64
-			'' Darwin uses a pointer __builtin_va_list on AArch64, unlike
-			'' the five-field AAPCS64 structure used by Linux and other
-			'' ELF AArch64 targets.  Modelling the Darwin type as that
+			'' Darwin and Windows use a pointer __builtin_va_list on AArch64,
+			'' unlike the five-field AAPCS64 structure used by Linux and other
+			'' ELF AArch64 targets. Modelling either pointer type as that
 			'' structure corrupts calls that pass cva_list BYREF.
-			if( env.clopt.target = FB_COMPTARGET_DARWIN ) then
+			if( (env.clopt.target = FB_COMPTARGET_DARWIN) or _
+			    (env.clopt.target = FB_COMPTARGET_WIN32) ) then
 				typedef = FB_CVA_LIST_BUILTIN_POINTER
 			else
 				typedef = FB_CVA_LIST_BUILTIN_AARCH64

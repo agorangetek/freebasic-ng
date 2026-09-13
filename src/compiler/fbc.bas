@@ -3694,16 +3694,37 @@ private function hCompileXpm( ) as integer
 	function = TRUE
 end function
 
+'' Clang's COFF AArch64 assembler cannot resolve a branch to a later local
+'' function label when it reads its own generated assembly back in.  Let the
+'' C compiler emit the object directly for this platform instead.  This keeps
+'' the C backend and its target ABI unchanged while avoiding that broken
+'' intermediate assembly round-trip.
+private function hUseDirectCObjectOutput( ) as integer
+	function = (fbGetOption( FB_COMPOPT_TARGET ) = FB_COMPTARGET_WIN32) andalso _
+		(fbGetCpuFamily( ) = FB_CPUFAMILY_AARCH64) andalso _
+		((fbGetOption( FB_COMPOPT_BACKEND ) = FB_BACKEND_GCC) or _
+		 (fbGetOption( FB_COMPOPT_BACKEND ) = FB_BACKEND_CLANG))
+end function
+
 private function hCompileStage2Module( byval module as FBCIOFILE ptr ) as integer
 	dim as string ln, asmfile
+	dim as integer direct_object
 
-	asmfile = hGetAsmName( module, 2 )
-	'' Clean up stage 2 output (the final .asm for -gen gcc/llvm) unless
-	'' -RR was given.
-	if( (not fbc.keepfinalasm) and _
-		((fbGetOption( FB_COMPOPT_TARGET ) <> FB_COMPTARGET_JS) or _
-		(not fbc.keepobj)) ) then
-		fbcAddTemp( asmfile )
+	direct_object = hUseDirectCObjectOutput( )
+	if( direct_object ) then
+		asmfile = *module->objfile
+		if( fbc.keepobj = FALSE ) then
+			fbcAddTemp( asmfile )
+		end if
+	else
+		asmfile = hGetAsmName( module, 2 )
+		'' Clean up stage 2 output (the final .asm for -gen gcc/llvm) unless
+		'' -RR was given.
+		if( (not fbc.keepfinalasm) and _
+			((fbGetOption( FB_COMPOPT_TARGET ) <> FB_COMPTARGET_JS) or _
+			(not fbc.keepobj)) ) then
+			fbcAddTemp( asmfile )
+		end if
 	end if
 
 	select case( fbGetOption( FB_COMPOPT_BACKEND ) )
@@ -3760,8 +3781,14 @@ private function hCompileStage2Module( byval module as FBCIOFILE ptr ) as intege
 				ln += "-fno-integrated-as "
 			end if
 
-			'' generate assembly
-			ln += "-S "
+			'' Clang on Windows AArch64 can produce a valid COFF object directly,
+			'' but fails when its emitted assembly is sent through an assembler
+			'' as a separate second step.
+			if( direct_object ) then
+				ln += "-c "
+			else
+				ln += "-S "
+			end if
 
 			'' don't use any standard libraries or includes
 			ln += "-nostdlib -nostdinc "
@@ -3971,6 +3998,13 @@ end sub
 
 private function hAssembleModule( byval module as FBCIOFILE ptr ) as integer
 	dim as string ln
+
+	'' hCompileStage2Module() already produced the final object for this
+	'' platform; a second assembler pass would fail on Clang COFF AArch64.
+	if( hUseDirectCObjectOutput( ) ) then
+		function = TRUE
+		exit function
+	end if
 
 	dim as FBCTOOL assembler = FBCTOOL_NONE
 

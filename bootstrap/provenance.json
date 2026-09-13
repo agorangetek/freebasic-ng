@@ -45,8 +45,8 @@
     "win32-aarch64": {
       "host": "win32-aarch64",
       "files": 145,
-      "sha256": "ca128f6e82f0078ce129344563bce8682f458b62e909c29261531a609d781110",
-      "provenance": "Regenerated in M1 from the FreeBASIC-NG 1.20.0 compiler sources for the native Windows ARM64 host."
+      "sha256": "5eae8e102bcce3fbf9dca2c58238a326d664efeb62d9cf1c97761d57c7ddfffb",
+      "provenance": "Regenerated in M1 from the FreeBASIC-NG 1.20.0 compiler sources for the native Windows ARM64 host; patched in M7 for ARM64 COFF object metadata."
     }
   }
 }
