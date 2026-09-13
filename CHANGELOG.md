@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.24.1](https://github.com/metaneutrons/freebasic-ng/compare/v1.24.0...v1.24.1) (2026-09-13)
+
+
+### Bug Fixes
+
+* **release:** force-remove preinstalled Homebrew taps ([#148](https://github.com/metaneutrons/freebasic-ng/issues/148)) ([14d9dc9](https://github.com/metaneutrons/freebasic-ng/commit/14d9dc9746645405939aee23ae4f24242f4b0f7f))
+
 ## [1.24.0](https://github.com/metaneutrons/freebasic-ng/compare/v1.23.2...v1.24.0) (2026-09-13)
 
 
