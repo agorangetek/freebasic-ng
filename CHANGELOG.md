@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.24.4](https://github.com/metaneutrons/freebasic-ng/compare/v1.24.3...v1.24.4) (2026-09-13)
+
+
+### Bug Fixes
+
+* **release:** clean Homebrew qualification install ([#154](https://github.com/metaneutrons/freebasic-ng/issues/154)) ([e8a1ab9](https://github.com/metaneutrons/freebasic-ng/commit/e8a1ab9e01141b419e872844b968d2bbf82b6928))
+
 ## [1.24.3](https://github.com/metaneutrons/freebasic-ng/compare/v1.24.2...v1.24.3) (2026-09-13)
 
 
