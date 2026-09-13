@@ -711,7 +711,9 @@ jobs:
           brew tap | while IFS= read -r installed_tap; do
             case "$installed_tap" in
               homebrew/*) ;;
-              *) brew untap "$installed_tap" ;;
+              # Hosted macOS images may keep formulae from these taps
+              # installed. --force removes that irrelevant image state too.
+              *) brew untap --force "$installed_tap" ;;
             esac
           done
 
