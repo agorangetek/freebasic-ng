@@ -6,7 +6,6 @@
 /fbc
 /fbc-new
 /bin/*
-/bootstrap/fbc
 /lib/*/i386go32.x
 /lib/*/fbextra.x
 /lib/*/fb_rtlib.js

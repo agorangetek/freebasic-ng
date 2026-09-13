@@ -1,10 +1,13 @@
 {{fbdoc item="title" value="Notes on making FB releases"}}----
 
-**FreeBASIC-NG historical note (M5):** This cached upstream page is retained as
-project history, not as current release instructions. The old local
-`contrib/release/` assembler and RPM/Debian helper paths are retired. The
-maintained source-root documents are `docs/releasing.md` and `docs/plans/m5.md`;
-they define the GitHub Actions release path and current distribution targets.
+**FreeBASIC-NG historical note (M7):** This cached upstream page is retained as
+project history, not as current release instructions. The root GNU `makefile`,
+its `bindist` target, and `contrib/manifest/`, `contrib/nsis-installer/` and
+`contrib/unix-installer/` are retired, as are the old local `contrib/release/`
+assembler and RPM/Debian helper paths. The maintained source-root documents are
+`docs/releasing.md` and `docs/plans/m5.md`; they define the GitHub Actions
+release path and current distribution targets. Do not use the commands below
+for FreeBASIC-NG releases.
 
 **{{anchor name="GENERAL|In general"}}**
 **{{anchor name="PACKAGING|Packaging and Manifests"}}**

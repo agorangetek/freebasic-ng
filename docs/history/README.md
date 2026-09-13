@@ -14,8 +14,9 @@ instructions.
   notes.
 - [`DevMakingReleases.wakka`](../../doc/manual/cache/DevMakingReleases.wakka)
   is the cached upstream release procedure. Its in-page FreeBASIC-NG banner
-  identifies it as history; it remains in the manual cache because its Wakka
-  cross-links are part of that record.
+  identifies the retired root GNU-make, bindist, manifest and installer paths;
+  it remains in the manual cache because its Wakka cross-links are part of
+  that record.
 
 Use [the maintained release process](../releasing.md) for current releases.
 The current licence boundaries are declared in [`LICENSE.md`](../../LICENSE.md).
