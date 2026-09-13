@@ -736,10 +736,13 @@ jobs:
               (10#$left_major == 10#$right_major && 10#$left_minor < 10#$right_minor) ||
               (10#$left_major == 10#$right_major && 10#$left_minor == 10#$right_minor && 10#$left_patch < 10#$right_patch) ))
           }
-          previous_tap="$RUNNER_TEMP/previous-homebrew-tap"
-          git clone --depth 1 https://github.com/metaneutrons/homebrew-tap.git "$previous_tap"
-          previous_formula="$previous_tap/Formula/freebasic-ng.rb"
-          test -f "$previous_formula"
+          # Read the published formula directly. Using git clone here inherits
+          # the checkout credential configuration and can fail for a public
+          # sibling repository on hosted runners.
+          previous_formula="$RUNNER_TEMP/freebasic-ng-previous.rb"
+          curl --fail --silent --show-error --retry 3 \
+            --output "$previous_formula" \
+            https://raw.githubusercontent.com/metaneutrons/homebrew-tap/main/Formula/freebasic-ng.rb
           previous_version=$(sed -nE 's#.*releases/download/v([0-9]+\.[0-9]+\.[0-9]+)/.*#\1#p' "$previous_formula" | LC_ALL=C sort -u)
           test "$(printf '%s\\n' "$previous_version" | sed '/^$/d' | wc -l | tr -d ' ')" = 1
           version_less "$previous_version" "$VERSION" || {
