@@ -1,5 +1,20 @@
 # Changelog
 
+## [1.23.0](https://github.com/metaneutrons/freebasic-ng/compare/v1.22.3...v1.23.0) (2026-09-13)
+
+
+### Features
+
+* **amiga:** add m68k runtime smoke coverage ([#100](https://github.com/metaneutrons/freebasic-ng/issues/100)) ([a6fa98c](https://github.com/metaneutrons/freebasic-ng/commit/a6fa98c77bf7dd6033c9278a115140fc6ed0d807)), closes [#67](https://github.com/metaneutrons/freebasic-ng/issues/67) [#68](https://github.com/metaneutrons/freebasic-ng/issues/68)
+* replace generated bootstrap C with verified seeds ([#140](https://github.com/metaneutrons/freebasic-ng/issues/140)) ([8cc25c3](https://github.com/metaneutrons/freebasic-ng/commit/8cc25c3662e75579a7e331edc7519e265f0933ea))
+
+
+### Bug Fixes
+
+* preserve single acos constant evaluation ([#121](https://github.com/metaneutrons/freebasic-ng/issues/121)) ([8ee7147](https://github.com/metaneutrons/freebasic-ng/commit/8ee7147a2626962d2d79334faad73828213c010d))
+* rebuild Darwin bootstrap compiler from generated sources ([#123](https://github.com/metaneutrons/freebasic-ng/issues/123)) ([1275772](https://github.com/metaneutrons/freebasic-ng/commit/1275772fa0f1d4d76dc28dd73be153a8de52fe9e))
+* repair Darwin ARM cva_list and native CMake build ([#120](https://github.com/metaneutrons/freebasic-ng/issues/120)) ([4ccb6cd](https://github.com/metaneutrons/freebasic-ng/commit/4ccb6cd9fc4d1512ecc7509f05f6e4e9c6c1594a))
+
 ## [1.22.3](https://github.com/metaneutrons/freebasic-ng/compare/v1.22.2...v1.22.3) (2026-09-12)
 
 
