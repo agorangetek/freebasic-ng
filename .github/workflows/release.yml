@@ -800,6 +800,7 @@ jobs:
           brew uninstall freebasic-ng
           brew install "$tap/freebasic-ng"
           brew test "$tap/freebasic-ng"
+          brew uninstall freebasic-ng
           brew untap "$tap"
           kill "$server_pid"
           trap - EXIT
