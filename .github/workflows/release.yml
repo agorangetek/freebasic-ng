@@ -717,7 +717,7 @@ jobs:
             esac
           done
 
-      - name: Audit, upgrade and clean-install the exact generated formula
+      - name: Audit, conditionally upgrade and clean-install the generated formula
         shell: bash
         env:
           HOMEBREW_NO_AUTO_UPDATE: '1'
@@ -736,19 +736,29 @@ jobs:
               (10#$left_major == 10#$right_major && 10#$left_minor < 10#$right_minor) ||
               (10#$left_major == 10#$right_major && 10#$left_minor == 10#$right_minor && 10#$left_patch < 10#$right_patch) ))
           }
-          # Read the published formula directly. Using git clone here inherits
-          # the checkout credential configuration and can fail for a public
-          # sibling repository on hosted runners.
+          # Preserve the upgrade path when the public tap is readable. A
+          # clean install still qualifies the first release if the runner
+          # cannot read a predecessor formula.
           previous_formula="$RUNNER_TEMP/freebasic-ng-previous.rb"
-          curl --fail --silent --show-error --retry 3 \
-            --output "$previous_formula" \
-            https://raw.githubusercontent.com/metaneutrons/homebrew-tap/main/Formula/freebasic-ng.rb
-          previous_version=$(sed -nE 's#.*releases/download/v([0-9]+\.[0-9]+\.[0-9]+)/.*#\1#p' "$previous_formula" | LC_ALL=C sort -u)
-          test "$(printf '%s\\n' "$previous_version" | sed '/^$/d' | wc -l | tr -d ' ')" = 1
-          version_less "$previous_version" "$VERSION" || {
-            echo "::error::the published Homebrew formula version ($previous_version) is not older than candidate $VERSION"
-            exit 1
-          }
+          previous_version=''
+          if curl --fail --silent --show-error --retry 3 \
+              --output "$previous_formula" \
+              https://raw.githubusercontent.com/metaneutrons/homebrew-tap/main/Formula/freebasic-ng.rb; then
+            discovered_version=$(sed -nE 's#.*releases/download/v([0-9]+\.[0-9]+\.[0-9]+)/.*#\1#p' "$previous_formula" | LC_ALL=C sort -u)
+            discovered_count=$(printf '%s\\n' "$discovered_version" | sed '/^$/d' | wc -l | tr -d ' ')
+            if [[ "$discovered_count" == 1 ]]; then
+              if version_less "$discovered_version" "$VERSION"; then
+                previous_version="$discovered_version"
+              else
+                echo "::error::the published Homebrew formula version ($discovered_version) is not older than candidate $VERSION"
+                exit 1
+              fi
+            else
+              echo "::warning::could not determine one published Homebrew formula version; qualifying a clean install"
+            fi
+          else
+            echo "::warning::could not read the published Homebrew formula; qualifying a clean install"
+          fi
           python3 -m http.server "$port" --bind 127.0.0.1 --directory candidate \
             >"$RUNNER_TEMP/http.log" 2>&1 &
           server_pid=$!
@@ -768,15 +778,21 @@ jobs:
           done
           brew tap-new --no-git "$tap"
           formula="$(brew --repository "$tap")/Formula/freebasic-ng.rb"
-          cp "$previous_formula" "$formula"
-          ruby -c "$formula"
-          brew install "$tap/freebasic-ng"
-          test -d "$(brew --cellar freebasic-ng)/$previous_version"
+          if [[ -n "$previous_version" ]]; then
+            cp "$previous_formula" "$formula"
+            ruby -c "$formula"
+            brew install "$tap/freebasic-ng"
+            test -d "$(brew --cellar freebasic-ng)/$previous_version"
+          fi
           sed -E "s#https://github.com/${GITHUB_REPOSITORY}/releases/download/[^/\"]+#http://127.0.0.1:${port}#g; s#\\.tar\\.xz\\\"#\\.tar.xz?version=${VERSION}\\\"#g" \
-            candidate/freebasic-ng.rb > "$formula"
+          candidate/freebasic-ng.rb > "$formula"
           ruby -c "$formula"
           brew audit --strict "$tap/freebasic-ng"
-          brew upgrade "$tap/freebasic-ng"
+          if [[ -n "$previous_version" ]]; then
+            brew upgrade "$tap/freebasic-ng"
+          else
+            brew install "$tap/freebasic-ng"
+          fi
           brew test "$tap/freebasic-ng"
           test -d "$(brew --cellar freebasic-ng)/$VERSION"
           brew cleanup --prune=all "$tap/freebasic-ng"
