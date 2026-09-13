@@ -259,14 +259,14 @@ jobs:
           previous_dir=previous-release-archive
           install -d "$previous_dir"
           gh release download "$previous_tag" --repo "$GITHUB_REPOSITORY" \
-            --pattern "freebasic-ng_*-${TARGET}.${EXTENSION}" --dir "$previous_dir"
+            --pattern "freebasic-ng-*-${TARGET}.${EXTENSION}" --dir "$previous_dir"
           asset=''
           asset_count=0
           while IFS= read -r found; do
             asset="$found"
             ((asset_count += 1))
           done < <(find "$previous_dir" -maxdepth 1 -type f \
-            -name "freebasic-ng_*-${TARGET}.${EXTENSION}" -print)
+            -name "freebasic-ng-*-${TARGET}.${EXTENSION}" -print)
           [[ "$asset_count" == 1 ]] || {
             echo '::error::the previous stable release did not provide exactly one matching archive'
             exit 1
@@ -439,8 +439,8 @@ jobs:
           previous_dir="$RUNNER_TEMP/previous-debian"
           install -d "$previous_dir"
           gh release download "$previous_tag" --repo "$GITHUB_REPOSITORY" \
-            --pattern "freebasic-ng_*_1_${ARCHITECTURE}.deb" --dir "$previous_dir"
-          mapfile -t packages < <(find "$previous_dir" -maxdepth 1 -type f -name "freebasic-ng_*_1_${ARCHITECTURE}.deb" | sort)
+            --pattern "freebasic-ng_*-1_${ARCHITECTURE}.deb" --dir "$previous_dir"
+          mapfile -t packages < <(find "$previous_dir" -maxdepth 1 -type f -name "freebasic-ng_*-1_${ARCHITECTURE}.deb" | sort)
           [[ ${#packages[@]} == 1 ]] || {
             echo '::error::the previous release did not provide exactly one matching Debian package'
             exit 1
