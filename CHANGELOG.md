@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.24.2](https://github.com/metaneutrons/freebasic-ng/compare/v1.24.1...v1.24.2) (2026-09-13)
+
+
+### Bug Fixes
+
+* **release:** fetch prior Homebrew formula directly ([#150](https://github.com/metaneutrons/freebasic-ng/issues/150)) ([4ed217d](https://github.com/metaneutrons/freebasic-ng/commit/4ed217d76b3d90c8dd80da5475881d52617ae1c1))
+
 ## [1.24.1](https://github.com/metaneutrons/freebasic-ng/compare/v1.24.0...v1.24.1) (2026-09-13)
 
 
