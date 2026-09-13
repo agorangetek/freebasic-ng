@@ -698,6 +698,23 @@ jobs:
           core: false
           cask: false
 
+      - name: Remove unrelated preinstalled Homebrew taps
+        shell: bash
+        env:
+          HOMEBREW_NO_AUTO_UPDATE: '1'
+          HOMEBREW_NO_ANALYTICS: '1'
+        run: |
+          set -euo pipefail
+          # GitHub's macOS images can include third-party taps whose formulas
+          # no longer load. This qualification only needs Homebrew itself and
+          # the temporary tap created below, so remove unrelated image state.
+          brew tap | while IFS= read -r installed_tap; do
+            case "$installed_tap" in
+              homebrew/*) ;;
+              *) brew untap "$installed_tap" ;;
+            esac
+          done
+
       - name: Audit, upgrade and clean-install the exact generated formula
         shell: bash
         env:
