@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.23.2](https://github.com/metaneutrons/freebasic-ng/compare/v1.23.1...v1.23.2) (2026-09-13)
+
+
+### Bug Fixes
+
+* isolate Homebrew qualification taps ([#145](https://github.com/metaneutrons/freebasic-ng/issues/145)) ([5c9cd32](https://github.com/metaneutrons/freebasic-ng/commit/5c9cd32af4368de2ffd7b58bfff90185e8e151ce))
+
 ## [1.23.1](https://github.com/metaneutrons/freebasic-ng/compare/v1.23.0...v1.23.1) (2026-09-13)
 
 
