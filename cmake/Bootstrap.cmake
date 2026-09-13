@@ -1,13 +1,14 @@
 # cmake/Bootstrap.cmake
-# Handles building fbc from pre-generated C sources when no existing fbc is available.
+# Handles building fbc from an installed compiler or a verified minimal seed.
 #
 # Bootstrap modes:
 #   "native"    - Use an existing fbc to compile .bas sources directly
-#   "bootstrap" - Compile pre-generated .c sources to build fbc
+#   "seed"      - Download a provenance-verified fbc seed, then compile .bas
+#                 sources directly
 
 # A source build must not change merely because another fbc happens to be in
-# PATH.  The bundled generated C sources are therefore the default bootstrap
-# input.  Developers can explicitly opt in to a native compiler build.
+# PATH. Developers can explicitly opt in to a local compiler; otherwise the
+# target-specific seed manifest selects a fixed, checksum-verified compiler.
 if(FB_USE_SYSTEM_FBC)
     find_program(FBC_EXECUTABLE fbc HINTS ${CMAKE_SOURCE_DIR}/bin ENV PATH)
 
@@ -30,77 +31,68 @@ if(FB_USE_SYSTEM_FBC)
 endif()
 
 if(NOT FBC_EXECUTABLE)
-    # A bootstrap source encodes the compiler's host OS and architecture.  It
-    # must therefore match FB_TARGET_ID exactly; using a nearby platform's C
-    # sources produces a compiler with the wrong runtime layout.
-    set(FB_BOOTSTRAP_DIR "${CMAKE_SOURCE_DIR}/bootstrap/${FB_TARGET_ID}")
-
-    if(EXISTS "${FB_BOOTSTRAP_DIR}")
-        file(GLOB _fb_bootstrap_input_sources "${FB_BOOTSTRAP_DIR}/*.c")
-        if(_fb_bootstrap_input_sources)
-            find_package(Python3 COMPONENTS Interpreter REQUIRED)
-            execute_process(
-                # MSYS Python expects POSIX paths while CMake on native
-                # Windows passes C:/ paths.  Run from the source tree and use
-                # a relative script name so the same invocation works for
-                # both MSYS and native Unix Python.
-                COMMAND "${Python3_EXECUTABLE}" "scripts/check-bootstrap-provenance.py"
-                    --target "${FB_TARGET_ID}"
-                WORKING_DIRECTORY "${CMAKE_SOURCE_DIR}"
-                RESULT_VARIABLE _bootstrap_provenance_result
-                OUTPUT_VARIABLE _bootstrap_provenance_output
-                ERROR_VARIABLE _bootstrap_provenance_error
-            )
-            if(NOT _bootstrap_provenance_result EQUAL 0)
-                message(FATAL_ERROR
-                    "Bootstrap provenance verification failed for ${FB_TARGET_ID}.\n"
-                    "${_bootstrap_provenance_output}${_bootstrap_provenance_error}")
-            endif()
-
-            # The checked-in generated C records the compiler version of its
-            # upstream generator.  Derive a build-local copy whose public
-            # version matches version.mk, after verifying the original input.
-            # This preserves bootstrap provenance while preventing a release
-            # archive from reporting the upstream base as its own version.
-            set(_fb_prepared_bootstrap_dir
-                "${CMAKE_BINARY_DIR}/bootstrap/${FB_TARGET_ID}")
-            execute_process(
-                COMMAND "${Python3_EXECUTABLE}" "scripts/prepare-bootstrap.py"
-                    --source-dir "${FB_BOOTSTRAP_DIR}"
-                    --output-dir "${_fb_prepared_bootstrap_dir}"
-                    --version "${FREEBASIC_NG_VERSION}"
-                    --manifest "${CMAKE_SOURCE_DIR}/bootstrap/provenance.json"
-                WORKING_DIRECTORY "${CMAKE_SOURCE_DIR}"
-                RESULT_VARIABLE _bootstrap_prepare_result
-                OUTPUT_VARIABLE _bootstrap_prepare_output
-                ERROR_VARIABLE _bootstrap_prepare_error
-            )
-            if(NOT _bootstrap_prepare_result EQUAL 0)
-                message(FATAL_ERROR
-                    "Versioned bootstrap preparation failed for ${FB_TARGET_ID}.\n"
-                    "${_bootstrap_prepare_output}${_bootstrap_prepare_error}")
-            endif()
-            file(GLOB FB_BOOTSTRAP_SOURCES "${_fb_prepared_bootstrap_dir}/*.c")
-            list(LENGTH _fb_bootstrap_input_sources _fb_bootstrap_input_count)
-            list(LENGTH FB_BOOTSTRAP_SOURCES _fb_prepared_bootstrap_count)
-            if(NOT _fb_bootstrap_input_count EQUAL _fb_prepared_bootstrap_count)
-                message(FATAL_ERROR
-                    "Versioned bootstrap preparation changed the C-source count for ${FB_TARGET_ID}.")
-            endif()
-            set(FB_BOOTSTRAP_MODE "bootstrap")
-            message(STATUS "No fbc found, will bootstrap from verified C sources in ${FB_BOOTSTRAP_DIR}")
-        else()
-            message(FATAL_ERROR "Bootstrap directory exists but contains no .c files: ${FB_BOOTSTRAP_DIR}")
-        endif()
-    else()
+    if(NOT FB_DOWNLOAD_BOOTSTRAP_SEED)
         message(FATAL_ERROR
-            "No fbc compiler found and no verified bootstrap sources exist for ${FB_TARGET_ID}.\n"
-            "This build never substitutes another host's bootstrap sources.\n"
-            "Either enable FB_USE_SYSTEM_FBC with a working fbc, or add a verified bootstrap/${FB_TARGET_ID}/ entry.")
+            "No fbc compiler found and bootstrap-seed download is disabled.\n"
+            "Enable FB_USE_SYSTEM_FBC with a working fbc, or enable FB_DOWNLOAD_BOOTSTRAP_SEED.")
     endif()
+
+    find_package(Python3 COMPONENTS Interpreter REQUIRED)
+    get_filename_component(_fb_seed_cache "${FB_BOOTSTRAP_SEED_CACHE}" ABSOLUTE
+        BASE_DIR "${CMAKE_BINARY_DIR}")
+    if(WIN32)
+        # MSYS Python expects POSIX paths while native CMake passes C:/ paths.
+        # Relative paths from the build directory are understood by both.
+        file(RELATIVE_PATH _fb_seed_script "${CMAKE_BINARY_DIR}"
+            "${CMAKE_SOURCE_DIR}/scripts/fetch-bootstrap-seed.py")
+        file(RELATIVE_PATH _fb_seed_manifest "${CMAKE_BINARY_DIR}"
+            "${CMAKE_SOURCE_DIR}/bootstrap/seed-provenance.json")
+        file(RELATIVE_PATH _fb_seed_cache_argument "${CMAKE_BINARY_DIR}"
+            "${_fb_seed_cache}")
+    else()
+        # Keep native absolute paths on Unix. macOS commonly resolves /tmp via
+        # /private/tmp, so a relative path computed from the logical path can
+        # point at a different directory.
+        set(_fb_seed_script "${CMAKE_SOURCE_DIR}/scripts/fetch-bootstrap-seed.py")
+        set(_fb_seed_manifest "${CMAKE_SOURCE_DIR}/bootstrap/seed-provenance.json")
+        set(_fb_seed_cache_argument "${_fb_seed_cache}")
+    endif()
+    execute_process(
+        COMMAND "${Python3_EXECUTABLE}" "${_fb_seed_script}"
+            --manifest "${_fb_seed_manifest}"
+            --target "${FB_TARGET_ID}"
+            --cache-dir "${_fb_seed_cache_argument}"
+        WORKING_DIRECTORY "${CMAKE_BINARY_DIR}"
+        RESULT_VARIABLE _fb_seed_result
+        OUTPUT_VARIABLE _fb_seed_output
+        ERROR_VARIABLE _fb_seed_error
+        OUTPUT_STRIP_TRAILING_WHITESPACE
+    )
+    if(NOT _fb_seed_result EQUAL 0)
+        message(FATAL_ERROR
+            "Bootstrap seed preparation failed for ${FB_TARGET_ID}.\n"
+            "${_fb_seed_output}${_fb_seed_error}")
+    endif()
+    get_filename_component(FBC_EXECUTABLE "${_fb_seed_output}" ABSOLUTE
+        BASE_DIR "${CMAKE_BINARY_DIR}")
+    execute_process(
+        COMMAND "${FBC_EXECUTABLE}" --version
+        OUTPUT_VARIABLE _fb_seed_version
+        ERROR_VARIABLE _fb_seed_version_error
+        RESULT_VARIABLE _fb_seed_version_result
+        OUTPUT_STRIP_TRAILING_WHITESPACE
+    )
+    if(NOT _fb_seed_version_result EQUAL 0)
+        message(FATAL_ERROR
+            "Verified bootstrap seed cannot execute for ${FB_TARGET_ID}.\n"
+            "${_fb_seed_version}${_fb_seed_version_error}")
+    endif()
+    set(FB_BOOTSTRAP_MODE "seed")
+    message(STATUS "No fbc found, using verified ${FB_TARGET_ID} bootstrap seed")
+    message(STATUS "  ${_fb_seed_version}")
 endif()
 
-# Clang compatibility flags for bootstrap C sources
+# Clang compatibility flags for generated compiler C sources
 set(FB_BOOTSTRAP_C_FLAGS
     -fno-strict-aliasing
     -fwrapv
@@ -112,7 +104,7 @@ if(NOT FB_USING_CLANG)
     list(APPEND FB_BOOTSTRAP_C_FLAGS -frounding-math)
 endif()
 
-# -nostdinc: the bootstrap C sources redeclare everything they need,
+# -nostdinc: generated compiler C sources redeclare everything they need,
 # but on Windows/MinGW we still need system headers for the Windows API
 if(NOT WIN32)
     list(APPEND FB_BOOTSTRAP_C_FLAGS -nostdinc)

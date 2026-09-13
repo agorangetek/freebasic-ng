@@ -52,8 +52,8 @@ mapfile -t roots < <(sed -n 's#^\([^/]*\)/.*#\1#p' "$listing" | LC_ALL=C sort -u
 source_root="${roots[0]}"
 [[ "$source_root" == "freebasic-ng-${VERSION}" ]] ||
   fail "source archive root must be freebasic-ng-${VERSION}, got $source_root"
-for member in CMakeLists.txt LICENSE.md bootstrap/provenance.json \
-  bootstrap/linux-x86_64/fbc.c bootstrap/linux-aarch64/fbc.c; do
+for member in CMakeLists.txt LICENSE.md bootstrap/seed-provenance.json \
+  scripts/fetch-bootstrap-seed.py; do
   grep -Fxq "$source_root/$member" "$listing" || fail "source archive is missing $member"
 done
 source_sha=$(sha256_of "$archive")
@@ -71,7 +71,7 @@ arch=('x86_64' 'aarch64')
 url="https://github.com/metaneutrons/freebasic-ng"
 license=('GPL-2.0-or-later' 'LGPL-2.1-or-later')
 depends=('gcc' 'binutils' 'ncurses')
-makedepends=('cmake' 'ninja' 'python' 'libx11' 'gpm' 'libffi')
+makedepends=('ca-certificates' 'cmake' 'ninja' 'python' 'libx11' 'gpm' 'libffi')
 # fbc invokes ld directly, so its runtime archives must not contain LTO IR.
 options=('!lto' 'staticlibs')
 conflicts=('freebasic' 'freebasic-ng-bin')

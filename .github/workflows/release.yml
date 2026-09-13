@@ -152,7 +152,7 @@ jobs:
         run: |
           set -euo pipefail
           python3 scripts/check-version.py
-          python3 scripts/check-bootstrap-provenance.py --target "${{ matrix.expected_host }}"
+          python3 scripts/fetch-bootstrap-seed.py --target "${{ matrix.expected_host }}" --cache-dir build/seed-check
           cmake -B build -G Ninja -DCMAKE_BUILD_TYPE=Release -DFB_BUILD_GFXLIB=OFF
           cmake --build build
           cmake --install build --prefix package/freebasic-ng-${{ needs.metadata.outputs.version }}-${{ matrix.name }}
@@ -166,7 +166,7 @@ jobs:
         run: |
           set -euo pipefail
           python scripts/check-version.py
-          python scripts/check-bootstrap-provenance.py --target "${{ matrix.expected_host }}"
+          python scripts/fetch-bootstrap-seed.py --target "${{ matrix.expected_host }}" --cache-dir build/seed-check
           cmake -B build -G Ninja -DCMAKE_BUILD_TYPE=Release -DFB_BUILD_GFXLIB=OFF
           cmake --build build
           cmake --install build --prefix package/freebasic-ng-${{ needs.metadata.outputs.version }}-${{ matrix.name }}
@@ -377,7 +377,7 @@ jobs:
             debian:bookworm-slim bash -euxo pipefail -c '
               apt-get update
               apt-get install -y --no-install-recommends \
-                build-essential cmake dpkg-dev libffi-dev libgpm-dev \
+                build-essential ca-certificates cmake dpkg-dev libffi-dev libgpm-dev \
                 libncurses-dev libx11-dev ninja-build python3
               /source/scripts/release/build-debian-package.sh \
                 --source-dir /source --work-dir /work/build --output-dir /out \
@@ -554,7 +554,7 @@ jobs:
           source="candidate/freebasic-ng-${VERSION}-source.tar.gz"
           git archive --format=tar.gz --prefix="freebasic-ng-${VERSION}/" "$GITHUB_SHA" > "$source"
           tar -tzf "$source" | grep -Fx "freebasic-ng-${VERSION}/CMakeLists.txt"
-          tar -tzf "$source" | grep -Fx "freebasic-ng-${VERSION}/bootstrap/provenance.json"
+          tar -tzf "$source" | grep -Fx "freebasic-ng-${VERSION}/bootstrap/seed-provenance.json"
           cosign sign-blob --yes --bundle "${source}.sigstore.json" "$source"
 
       - name: Generate an SPDX SBOM for the source archive
@@ -802,7 +802,7 @@ jobs:
             "$IMAGE" bash -euxo pipefail -c '
               sed -i "/^#DisableSandboxFilesystem/a DisableSandboxFilesystem\\nDisableSandboxSyscalls" /etc/pacman.conf
               pacman -Syu --noconfirm --needed \
-                base-devel cmake git gpm libffi libx11 ncurses ninja python
+                base-devel ca-certificates cmake git gpm libffi libx11 ncurses ninja python
               useradd --create-home builder
 
               record_owned_files() {

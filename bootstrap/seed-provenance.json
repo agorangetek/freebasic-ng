@@ -1,0 +1,72 @@
+{
+  "schema": 1,
+  "source_release": {
+    "repository": "metaneutrons/freebasic-ng",
+    "tag": "v1.22.3",
+    "commit": "e8152c2abe647abadcaa2d32404ec8b331b34c35",
+    "workflow_identity": "https://github.com/metaneutrons/freebasic-ng/.github/workflows/release.yml@refs/tags/v1.22.3",
+    "provenance": "The release assets were signed and received GitHub build-provenance attestations before publication."
+  },
+  "seeds": {
+    "linux-x86_64": {
+      "host": "linux-x86_64",
+      "asset": "freebasic-ng_1.22.3-1_amd64.deb",
+      "url": "https://github.com/metaneutrons/freebasic-ng/releases/download/v1.22.3/freebasic-ng_1.22.3-1_amd64.deb",
+      "format": "deb",
+      "member": "./usr/bin/fbc",
+      "asset_sha256": "41268343d7b491a9830ef475c19c7d016d449058c03f0d96af6a6093e70985ef",
+      "seed": "fbc",
+      "seed_sha256": "936d1d48659fe08f8d5d504cb78457995203ed7518bfe7449633f0802b92f426"
+    },
+    "linux-aarch64": {
+      "host": "linux-aarch64",
+      "asset": "freebasic-ng_1.22.3-1_arm64.deb",
+      "url": "https://github.com/metaneutrons/freebasic-ng/releases/download/v1.22.3/freebasic-ng_1.22.3-1_arm64.deb",
+      "format": "deb",
+      "member": "./usr/bin/fbc",
+      "asset_sha256": "d6ef7369d8bd5d599ecd80b2f2c6fd8952251fc63537e27ac5f1acb4eabfe065",
+      "seed": "fbc",
+      "seed_sha256": "423be927ba3b7fe6c227d4c4681e464937b57a91ad4530adebcc17bb0dc01b50"
+    },
+    "darwin-x86_64": {
+      "host": "darwin-x86_64",
+      "asset": "freebasic-ng-1.22.3-darwin-x86_64.tar.xz",
+      "url": "https://github.com/metaneutrons/freebasic-ng/releases/download/v1.22.3/freebasic-ng-1.22.3-darwin-x86_64.tar.xz",
+      "format": "tar.xz",
+      "member": "freebasic-ng-1.22.3-darwin-x86_64/bin/fbc",
+      "asset_sha256": "82aadc871109efe953d840e3506db49a79206373e21cd1e3bf5c05aeeecae697",
+      "seed": "fbc",
+      "seed_sha256": "42df2467b0de8d0fa543248d641853ef54f68e2baf5f934eaaa56673df379ea4"
+    },
+    "darwin-aarch64": {
+      "host": "darwin-aarch64",
+      "asset": "freebasic-ng-1.22.3-darwin-aarch64.tar.xz",
+      "url": "https://github.com/metaneutrons/freebasic-ng/releases/download/v1.22.3/freebasic-ng-1.22.3-darwin-aarch64.tar.xz",
+      "format": "tar.xz",
+      "member": "freebasic-ng-1.22.3-darwin-aarch64/bin/fbc",
+      "asset_sha256": "ddb4fadc376f7ba4613cd6ea025f0b6887f46c90bb9c718bf0831fb125750c00",
+      "seed": "fbc",
+      "seed_sha256": "2962d0e5ae9379eb202d43ffc848508341a3c0de2b3d345c613b245018c30297"
+    },
+    "win64": {
+      "host": "win64",
+      "asset": "freebasic-ng-1.22.3-win64.zip",
+      "url": "https://github.com/metaneutrons/freebasic-ng/releases/download/v1.22.3/freebasic-ng-1.22.3-win64.zip",
+      "format": "zip",
+      "member": "freebasic-ng-1.22.3-win64/bin/fbc.exe",
+      "asset_sha256": "6bdea88983fcb80b398e0f1a754cc1cbdfb2e7cdf00c943686ed9950ade71d1b",
+      "seed": "fbc.exe",
+      "seed_sha256": "afc6d38f3940d7719b898bd17f5a0a88d59ed7a52a1738cc173744c2d567d18b"
+    },
+    "win32-aarch64": {
+      "host": "win32-aarch64",
+      "asset": "freebasic-ng-1.22.3-win32-aarch64.zip",
+      "url": "https://github.com/metaneutrons/freebasic-ng/releases/download/v1.22.3/freebasic-ng-1.22.3-win32-aarch64.zip",
+      "format": "zip",
+      "member": "freebasic-ng-1.22.3-win32-aarch64/bin/fbc.exe",
+      "asset_sha256": "8a9999d92d500cef8e32657c40dc71ce91a7892ba4629d1f5e703ec0fabeb167",
+      "seed": "fbc.exe",
+      "seed_sha256": "596616a74157d145acc0d6f318f8b9fb272d883839bb0a7746964a244e998522"
+    }
+  }
+}

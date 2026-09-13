@@ -28,7 +28,7 @@ Requirements:
 
 - CMake 3.20 or newer
 - a C compiler (GCC or Clang; MinGW-w64 on Windows)
-- Python 3 when building bootstrap sources with Clang
+- Python 3 and CA certificates when CMake materializes a bootstrap seed
 - ncurses on Linux and macOS
 
 ```bash
@@ -37,10 +37,12 @@ cmake --build build
 ./build/src/compiler/fbc --version
 ```
 
-Builds use the versioned generated C bootstrap sources by default. This keeps
-source builds independent of an arbitrary `fbc` found on `PATH`. Developers who
-specifically want a native bootstrap may opt in with
-`-DFB_USE_SYSTEM_FBC=ON`.
+Builds use a target-specific, provenance-verified compiler seed by default.
+This keeps source builds independent of an arbitrary `fbc` found on `PATH`.
+The verified binary is cached below the build directory after its first use.
+Developers who specifically want a local compiler may opt in with
+`-DFB_USE_SYSTEM_FBC=ON`. See [the bootstrap chain](docs/bootstrap.md)
+for the pinned release provenance and offline reproduction procedure.
 
 To stage an installation:
 

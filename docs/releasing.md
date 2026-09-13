@@ -25,11 +25,12 @@ is acceptable. Although that App has a shared parent key and broad
 installation, this workflow requests and verifies an installation token scoped
 to `metaneutrons/freebasic-ng` only.
 
-The tag dispatches the release workflow. For each Tier 1 host it builds from
-the checked-in, provenance-verified bootstrap C sources, stages a normal
-installation and compiles and runs an independent FreeBASIC program from the
-staged installation. It then repeats that smoke test after extracting the
-archive.
+The tag dispatches the release workflow. For each Tier 1 host it verifies the
+pinned minimal compiler seed, regenerates the compiler from the current source
+checkout, stages a normal installation and compiles and runs an independent
+FreeBASIC program from that installation. It then repeats that smoke test
+after extracting the archive. The seed chain and its rotation procedure are
+documented in [bootstrap.md](bootstrap.md).
 
 The workflow publishes a GitHub prerelease only after all six archives are
 present. Each archive has:

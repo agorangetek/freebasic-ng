@@ -44,7 +44,11 @@ option(FB_COMPILER_DEBUG
     "Enable the historical compiler debug configuration" OFF)
 option(FB_LEGACY_TEST_DEBUG
     "Pass the historical -g -exx flags to legacy runtime test suites" OFF)
-option(FB_USE_SYSTEM_FBC "Use an existing fbc instead of the bundled bootstrap sources" OFF)
+option(FB_USE_SYSTEM_FBC "Use an existing fbc instead of the verified bootstrap seed" OFF)
+option(FB_DOWNLOAD_BOOTSTRAP_SEED
+    "Download the provenance-verified minimal compiler seed when no fbc is available" ON)
+set(FB_BOOTSTRAP_SEED_CACHE "${CMAKE_BINARY_DIR}/bootstrap-seeds" CACHE PATH
+    "Directory used to cache verified minimal compiler seeds")
 set(FB_NATIVE_COMPILER_BACKEND "gcc" CACHE STRING
     "Backend used when a system fbc builds the native compiler (gcc, gas, or gas64)")
 set_property(CACHE FB_NATIVE_COMPILER_BACKEND PROPERTY STRINGS gcc gas gas64)

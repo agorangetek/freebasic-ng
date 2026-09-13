@@ -2,20 +2,22 @@
 
 M1 releases native `fbc` host archives for the following Tier 1 platforms:
 
-| Release ID | Native host | Bootstrap directory | CI runner |
+| Release ID | Native host | Minimal seed transport | CI runner |
 | --- | --- | --- | --- |
-| `linux-x86_64` | Linux x86_64 | `bootstrap/linux-x86_64` | `ubuntu-24.04` |
-| `linux-aarch64` | Linux ARM64 | `bootstrap/linux-aarch64` | `ubuntu-24.04-arm` |
-| `darwin-x86_64` | macOS Intel | `bootstrap/darwin-x86_64` | `macos-15-intel` |
-| `darwin-aarch64` | macOS Apple silicon | `bootstrap/darwin-aarch64` | `macos-15` |
-| `win64` | Windows x86_64 | `bootstrap/win64` | `windows-2025` with MSYS2 `MINGW64` |
-| `win32-aarch64` | Windows ARM64 | `bootstrap/win32-aarch64` | `windows-11-arm` with MSYS2 `CLANGARM64` |
+| `linux-x86_64` | Linux x86_64 | attested Debian amd64 release asset | `ubuntu-24.04` |
+| `linux-aarch64` | Linux ARM64 | attested Debian arm64 release asset | `ubuntu-24.04-arm` |
+| `darwin-x86_64` | macOS Intel | attested macOS Intel host archive | `macos-15-intel` |
+| `darwin-aarch64` | macOS Apple silicon | attested macOS Apple-silicon host archive | `macos-15` |
+| `win64` | Windows x86_64 | attested Windows x64 host archive | `windows-2025` with MSYS2 `MINGW64` |
+| `win32-aarch64` | Windows ARM64 | attested Windows ARM64 host archive | `windows-11-arm` with MSYS2 `CLANGARM64` |
 
-Each directory is an input to a reproducible C bootstrap, not an interchangeable
-source cache. CMake verifies its file count and digest against
-[`bootstrap/provenance.json`](../bootstrap/provenance.json) and fails if the
-exact host bootstrap is absent or changed. `FB_USE_SYSTEM_FBC=ON` is the only
-intentional opt-in to a locally installed compiler.
+Each host obtains exactly one compiler binary from the pinned,
+[provenance-verified seed manifest](../bootstrap/seed-provenance.json). CMake
+verifies both the release transport and extracted seed digests before using it
+to regenerate the compiler from this checkout. The full procedure, including
+offline cache reuse and seed rotation, is documented in
+[the bootstrap chain](bootstrap.md). `FB_USE_SYSTEM_FBC=ON` remains the only
+intentional opt-in to an arbitrary locally installed compiler.
 
 Every Tier 1 CI job builds the complete CMake tree, installs it into an empty
 prefix, confirms the host identity, compiles a small FreeBASIC program with the

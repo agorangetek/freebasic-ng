@@ -82,10 +82,8 @@
 #   warning-tests
 #   clean-tests
 #
-#   bootstrap-dist      Create source package with precompiled fbc sources
-#   bootstrap-dist-arm  Create source package with precompiled fbc sources for arm and aarch64 only
-#   bootstrap           Build fbc from the precompiled sources (only if precompiled sources exist)
-#   bootstrap-minimal   Build fbc from the precompiled sources (only if precompiled sources exist) with only the minimal features needed to compile another fbc
+#   bootstrap           Delegate a fresh compiler bootstrap to CMake's verified seed chain
+#   bootstrap-minimal   Same as bootstrap; retained for command compatibility
 #
 # makefile configuration:
 #   FB[C|L]FLAGS     to set -g -exx etc. for the compiler build and/or link
@@ -1428,175 +1426,24 @@ mingw-libs:
 endif
 endif
 
-#
-# Precompile the compiler sources into .asm/.c files and put them into a
-# bootstrap/ directory, then package the source tree including the bootstrap/
-# sources. This package can then be distributed, and people can do
-# "make bootstrap" to build an fbc from the precompiled sources.
-#
-# The precompiled sources should be compatible to the rtlib in the same source
-# tree, so that it's safe to link the bootstrapped fbc against it. This way
-# there's no need to worry about choosing the right rtlib when bootstrapping
-# fbc -- it's just always possible to use the version from the same source tree.
-#
-FBBOOTSTRAPTITLE := $(FBSOURCETITLE)-bootstrap
-.PHONY: bootstrap-dist
-bootstrap-dist:
-	# Precompile fbc sources for various targets
-	rm -rf bootstrap
-	mkdir -p bootstrap/dos
-	mkdir -p bootstrap/freebsd-x86
-	mkdir -p bootstrap/freebsd-x86_64
-	mkdir -p bootstrap/freebsd-powerpc
-	mkdir -p bootstrap/freebsd-powerpc64
-	mkdir -p bootstrap/freebsd-powerpc64le
-	mkdir -p bootstrap/dragonfly-x86_64
-	mkdir -p bootstrap/solaris-x86_64
-	mkdir -p bootstrap/linux-x86
-	mkdir -p bootstrap/linux-x86_64
-	mkdir -p bootstrap/cygwin-x86_64
-	mkdir -p bootstrap/win32
-	mkdir -p bootstrap/win64
-	mkdir -p bootstrap/linux-arm
-	mkdir -p bootstrap/linux-aarch64
-	./$(FBC_EXE) src/compiler/*.bas -m fbc -i inc -e -r -v $(BOOTFBCFLAGS) -target dos                 && mv src/compiler/*.asm bootstrap/dos
-	./$(FBC_EXE) src/compiler/*.bas -m fbc -i inc -e -r -v $(BOOTFBCFLAGS) -target freebsd-x86         && mv src/compiler/*.asm bootstrap/freebsd-x86
-	./$(FBC_EXE) src/compiler/*.bas -m fbc -i inc -e -r -v $(BOOTFBCFLAGS) -target freebsd-x86_64      && mv src/compiler/*.c   bootstrap/freebsd-x86_64
-	./$(FBC_EXE) src/compiler/*.bas -m fbc -i inc -e -r -v $(BOOTFBCFLAGS) -target freebsd-powerpc     && mv src/compiler/*.c   bootstrap/freebsd-powerpc
-	./$(FBC_EXE) src/compiler/*.bas -m fbc -i inc -e -r -v $(BOOTFBCFLAGS) -target freebsd-powerpc64   && mv src/compiler/*.c   bootstrap/freebsd-powerpc64
-	./$(FBC_EXE) src/compiler/*.bas -m fbc -i inc -e -r -v $(BOOTFBCFLAGS) -target freebsd-powerpc64le && mv src/compiler/*.c   bootstrap/freebsd-powerpc64le
-	./$(FBC_EXE) src/compiler/*.bas -m fbc -i inc -e -r -v $(BOOTFBCFLAGS) -target dragonfly-x86_64    && mv src/compiler/*.c   bootstrap/dragonfly-x86_64
-	./$(FBC_EXE) src/compiler/*.bas -m fbc -i inc -e -r -v $(BOOTFBCFLAGS) -target solaris-x86_64      && mv src/compiler/*.c   bootstrap/solaris-x86_64
-	./$(FBC_EXE) src/compiler/*.bas -m fbc -i inc -e -r -v $(BOOTFBCFLAGS) -target linux-x86           && mv src/compiler/*.asm bootstrap/linux-x86
-	./$(FBC_EXE) src/compiler/*.bas -m fbc -i inc -e -r -v $(BOOTFBCFLAGS) -target linux-x86_64        && mv src/compiler/*.c   bootstrap/linux-x86_64
-	./$(FBC_EXE) src/compiler/*.bas -m fbc -i inc -e -r -v $(BOOTFBCFLAGS) -target cygwin-x86_64       && mv src/compiler/*.c   bootstrap/cygwin-x86_64
-	./$(FBC_EXE) src/compiler/*.bas -m fbc -i inc -e -r -v $(BOOTFBCFLAGS) -target win32               && mv src/compiler/*.asm bootstrap/win32
-	./$(FBC_EXE) src/compiler/*.bas -m fbc -i inc -e -r -v $(BOOTFBCFLAGS) -target win64               && mv src/compiler/*.c   bootstrap/win64
-	./$(FBC_EXE) src/compiler/*.bas -m fbc -i inc -e -r -v $(BOOTFBCFLAGS) -target linux-arm           && mv src/compiler/*.c   bootstrap/linux-arm
-	./$(FBC_EXE) src/compiler/*.bas -m fbc -i inc -e -r -v $(BOOTFBCFLAGS) -target linux-aarch64       && mv src/compiler/*.c   bootstrap/linux-aarch64
-
-	# Ensure to have LFs regardless of host system (LFs will probably work
-	# on DOS/Win32, but CRLFs could cause issues on Linux)
-	dos2unix bootstrap/dos/*
-	dos2unix bootstrap/freebsd-x86/*
-	dos2unix bootstrap/freebsd-x86_64/*
-	dos2unix bootstrap/freebsd-powerpc/*
-	dos2unix bootstrap/freebsd-powerpc64/*
-	dos2unix bootstrap/freebsd-powerpc64le/*
-	dos2unix bootstrap/dragonfly-x86_64/*
-	dos2unix bootstrap/solaris-x86_64/*
-	dos2unix bootstrap/linux-x86/*
-	dos2unix bootstrap/linux-x86_64/*
-	dos2unix bootstrap/cygwin-x86_64/*
-	dos2unix bootstrap/win32/*
-	dos2unix bootstrap/win64/*
-	dos2unix bootstrap/linux-arm/*
-	dos2unix bootstrap/linux-aarch64/*
-
-	# Package FB sources (similar to our "gitdist" command), and add the bootstrap/ directory
-	# Making a .tar.xz should be good enough for now.
-	git -c core.autocrlf=false archive --format tar --prefix "$(FBBOOTSTRAPTITLE)/" HEAD | tar xf -
-	mv bootstrap $(FBBOOTSTRAPTITLE)
-	tar -cJf "$(FBBOOTSTRAPTITLE).tar.xz" "$(FBBOOTSTRAPTITLE)"
-	rm -rf "$(FBBOOTSTRAPTITLE)"
-
-FBBOOTSTRAPTITLEARM := $(FBSOURCETITLE)-bootstrap-arm
-.PHONY: bootstrap-dist-arm
-bootstrap-dist-arm:
-	# Precompile fbc sources for various targets
-	rm -rf bootstrap
-	mkdir -p bootstrap/linux-arm
-	mkdir -p bootstrap/linux-aarch64
-	./$(FBC_EXE) src/compiler/*.bas -m fbc -i inc -e -r -v $(BOOTFBCFLAGS) -target linux-arm           && mv src/compiler/*.c   bootstrap/linux-arm
-	./$(FBC_EXE) src/compiler/*.bas -m fbc -i inc -e -r -v $(BOOTFBCFLAGS) -target linux-aarch64       && mv src/compiler/*.c   bootstrap/linux-aarch64
-	dos2unix bootstrap/linux-arm/*
-	dos2unix bootstrap/linux-aarch64/*
-
-	# Package FB sources (similar to our "gitdist" command), and add the bootstrap/ directory
-	# Making a .tar.xz should be good enough for now.
-	git -c core.autocrlf=false archive --format tar --prefix "$(FBBOOTSTRAPTITLEARM)/" HEAD | tar xf -
-	mv bootstrap $(FBBOOTSTRAPTITLEARM)
-	tar -cJf "$(FBBOOTSTRAPTITLEARM).tar.xz" "$(FBBOOTSTRAPTITLEARM)"
-	rm -rf "$(FBBOOTSTRAPTITLEARM)"
-
-FBBOOTSTRAPTITLETARGET := $(FBSOURCETITLE)-bootstrap-$(FBPACKTARGET)
-ifeq ($(TARGET_ARCH),x86)
-  FBBOOTSTRAPFILEEXT=asm
-else
-  FBBOOTSTRAPFILEEXT=c
-endif
-.PHONY: bootstrap-dist-target
-bootstrap-dist-target:
-	# Precompile fbc sources for a single target
-	rm -rf bootstrap
-	mkdir -p bootstrap/$(FBTARGET)
-
-	./$(FBC_EXE) src/compiler/*.bas -m fbc -i inc -e -r -v $(BOOTFBCFLAGS) -target $(FBTARGET) && mv src/compiler/*.$(FBBOOTSTRAPFILEEXT) bootstrap/$(FBTARGET)
-	dos2unix bootstrap/$(FBTARGET)/*
-
-	# Package FB sources (similar to our "gitdist" command), and add the bootstrap/ directory
-	# Making a .tar.xz should be good enough for now.
-	git -c core.autocrlf=false archive --format tar --prefix "$(FBBOOTSTRAPTITLETARGET)/" HEAD | tar xf -
-	mv bootstrap $(FBBOOTSTRAPTITLETARGET)
-	tar -cJf "$(FBBOOTSTRAPTITLETARGET).tar.xz" "$(FBBOOTSTRAPTITLETARGET)"
-	rm -rf "$(FBBOOTSTRAPTITLETARGET)"
-
-#
-# Build the fbc[.exe] binary from the precompiled sources in the bootstrap/
-# directory.
-#
-.PHONY: bootstrap bootstrap-minimal
-bootstrap: gfxlib2 bootstrap-minimal
-
-BOOTSTRAP_FBC := bootstrap/fbc$(EXEEXT)
-bootstrap-minimal: $(BOOTSTRAP_FBC)
-	mkdir -p bin
-	cp $(BOOTSTRAP_FBC) $(FBC_EXE)
-
-ifeq ($(TARGET_ARCH),x86)
-  # x86: .asm => .o (using the same assembler options as fbc)
-  BOOTSTRAP_OBJ = $(patsubst %.asm,%.o,$(sort $(wildcard bootstrap/$(FBTARGET)/*.asm)))
-  $(BOOTSTRAP_OBJ): %.o: %.asm
-	$(QUIET_AS)$(AS) --strip-local-absolute $< -o $@
-else
-  # x86_64 etc.: .c => .o (using the same gcc options as fbc -gen gcc)
-  BOOTSTRAP_CFLAGS := -nostdinc
-  BOOTSTRAP_CFLAGS += -Wall -Wno-unused-label -Wno-unused-function -Wno-unused-variable
-  BOOTSTRAP_CFLAGS += -Wno-unused-but-set-variable -Wno-main
-  BOOTSTRAP_CFLAGS += -fno-strict-aliasing -frounding-math -fwrapv -fno-ident
-  BOOTSTRAP_CFLAGS += -Wfatal-errors
-
-  ifeq ($(TARGET_OS),darwin)
-    # Keep checked-in generated C immutable.  Clang requires a harmless label
-    # address in every function with an indirect goto; prepare fixed copies in
-    # the build tree before compiling, as the CMake bootstrap does.
-    BOOTSTRAP_SOURCE_DIR := bootstrap/$(FBTARGET)
-    BOOTSTRAP_BUILD_DIR := build/legacy-bootstrap/$(FBTARGET)
-    BOOTSTRAP_C_SOURCES := $(sort $(wildcard $(BOOTSTRAP_SOURCE_DIR)/*.c))
-    BOOTSTRAP_C := $(patsubst $(BOOTSTRAP_SOURCE_DIR)/%.c,$(BOOTSTRAP_BUILD_DIR)/%.c,$(BOOTSTRAP_C_SOURCES))
-    BOOTSTRAP_OBJ := $(patsubst %.c,%.o,$(BOOTSTRAP_C))
-
-    $(BOOTSTRAP_C): $(BOOTSTRAP_BUILD_DIR)/%.c: $(BOOTSTRAP_SOURCE_DIR)/%.c cmake/fix_computed_goto.py
-	@mkdir -p $(@D)
-	cp $< $@
-	python3 cmake/fix_computed_goto.py $@
-  else
-    BOOTSTRAP_OBJ := $(patsubst %.c,%.o,$(sort $(wildcard bootstrap/$(FBTARGET)/*.c)))
-  endif
-
-  $(BOOTSTRAP_OBJ): %.o: %.c
-	$(QUIET_CC)$(CC) -c $(BOOTSTRAP_CFLAGS) $< -o $@
+ifneq ($(filter bootstrap-dist bootstrap-dist-arm bootstrap-dist-target,$(MAKECMDGOALS)),)
+$(error GNU make bootstrap-source packages were retired in M7; use the CMake seed chain documented in docs/bootstrap.md)
 endif
 
-# Use gcc to link fbc from the bootstrap .o's
-# (assuming the rtlib was built already)
-ifneq ($(filter darwin freebsd dragonfly linux netbsd openbsd solaris,$(TARGET_OS)),)
-  BOOTSTRAP_LIBS := -lncurses -lm -pthread
-endif
-$(BOOTSTRAP_FBC): rtlib $(BOOTSTRAP_OBJ)
-	$(QUIET_LINK)$(CC) -o $@ $(libdir)/fbrt0.o $(BOOTSTRAP_OBJ) $(libdir)/libfb.a $(BOOTSTRAP_LIBS)
-
-.PHONY: clean-bootstrap
+ifneq ($(filter bootstrap bootstrap-minimal clean-bootstrap,$(MAKECMDGOALS)),)
+.PHONY: bootstrap bootstrap-minimal clean-bootstrap
+bootstrap: bootstrap-minimal
+bootstrap-minimal:
+	@echo "GNU make bootstrap-minimal delegates to CMake's verified seed chain"
+	cmake -S . -B build/legacy-make-bootstrap -DFB_BUILD_GFXLIB=OFF
+	cmake --build build/legacy-make-bootstrap --target fbc
+	mkdir -p bootstrap bin
+	cp build/legacy-make-bootstrap/src/compiler/fbc$(EXEEXT) bootstrap/fbc$(EXEEXT)
+	cp bootstrap/fbc$(EXEEXT) $(FBC_EXE)
 clean-bootstrap:
-	rm -f $(BOOTSTRAP_FBC) bootstrap/$(FBTARGET)/*.o
-	rm -rf build/legacy-bootstrap/$(FBTARGET)
+	rm -f bootstrap/fbc$(EXEEXT)
+	rm -rf build/legacy-make-bootstrap
+else
+# The generated-C bootstrap package implementation was retired in M7.
+# CMake owns the supported seed chain; retained GNU make targets do not need it.
+endif

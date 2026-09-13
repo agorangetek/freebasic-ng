@@ -77,7 +77,7 @@ jobs:
         if: matrix.family == 'unix'
         run: |
           python3 scripts/check-version.py
-          python3 scripts/check-bootstrap-provenance.py --target "${{ matrix.expected_host }}"
+          python3 scripts/fetch-bootstrap-seed.py --target "${{ matrix.expected_host }}" --cache-dir build/seed-check
 
       - name: Install dependencies (Linux)
         if: runner.os == 'Linux'
@@ -100,7 +100,7 @@ jobs:
         shell: msys2 {0}
         run: |
           python scripts/check-version.py
-          python scripts/check-bootstrap-provenance.py --target "${{ matrix.expected_host }}"
+          python scripts/fetch-bootstrap-seed.py --target "${{ matrix.expected_host }}" --cache-dir build/seed-check
 
       - name: Configure and build (Unix)
         if: matrix.family == 'unix'
@@ -215,7 +215,7 @@ jobs:
       - name: Verify version and bootstrap metadata
         run: |
           python3 scripts/check-version.py
-          python3 scripts/check-bootstrap-provenance.py --target darwin-aarch64
+          python3 scripts/fetch-bootstrap-seed.py --target darwin-aarch64 --cache-dir build/seed-check
 
       - name: Install build dependencies
         run: brew install cmake ninja
@@ -251,7 +251,7 @@ jobs:
       - name: Verify version and bootstrap metadata
         run: |
           python3 scripts/check-version.py
-          python3 scripts/check-bootstrap-provenance.py --target linux-x86_64
+          python3 scripts/fetch-bootstrap-seed.py --target linux-x86_64 --cache-dir build/seed-check
 
       - name: Install build dependencies
         run: sudo apt-get update && sudo apt-get install -y cmake ninja-build g++ libncurses-dev libffi-dev libx11-dev libgpm-dev libaspell-dev libcurl4-openssl-dev libpcre2-dev
@@ -326,7 +326,7 @@ jobs:
       - name: Verify version and bootstrap metadata
         run: |
           python3 scripts/check-version.py
-          python3 scripts/check-bootstrap-provenance.py --target linux-x86_64
+          python3 scripts/fetch-bootstrap-seed.py --target linux-x86_64 --cache-dir build/seed-check
 
       - name: Install build dependencies
         run: sudo apt-get update && sudo apt-get install -y cmake ninja-build g++ libncurses-dev libx11-dev libxext-dev libxpm-dev libxrandr-dev libxrender-dev libffi-dev libgpm-dev libaspell-dev libcurl4-openssl-dev libpcre2-dev
@@ -384,7 +384,7 @@ jobs:
       - name: Verify version and bootstrap metadata
         run: |
           python3 scripts/check-version.py
-          python3 scripts/check-bootstrap-provenance.py --target linux-x86_64
+          python3 scripts/fetch-bootstrap-seed.py --target linux-x86_64 --cache-dir build/seed-check
 
       - name: Install build dependencies
         run: |
@@ -472,7 +472,7 @@ jobs:
       - name: Verify version and bootstrap metadata
         run: |
           python3 scripts/check-version.py
-          python3 scripts/check-bootstrap-provenance.py --target linux-x86_64
+          python3 scripts/fetch-bootstrap-seed.py --target linux-x86_64 --cache-dir build/seed-check
 
       - name: Load pinned AmigaOS/m68k toolchain inputs
         run: python3 scripts/verify-amiga-m68k-toolchain.py --github-env "$GITHUB_ENV"
@@ -554,7 +554,7 @@ jobs:
       - name: Verify version and bootstrap metadata
         run: |
           python3 scripts/check-version.py
-          python3 scripts/check-bootstrap-provenance.py --target linux-x86_64
+          python3 scripts/fetch-bootstrap-seed.py --target linux-x86_64 --cache-dir build/seed-check
 
       - name: Load pinned MorphOS SDK inputs
         run: python3 scripts/verify-morphos-ppc-toolchain.py --github-env "$GITHUB_ENV"
@@ -609,7 +609,7 @@ jobs:
       - name: Verify version and bootstrap metadata
         run: |
           python3 scripts/check-version.py
-          python3 scripts/check-bootstrap-provenance.py --target linux-x86_64
+          python3 scripts/fetch-bootstrap-seed.py --target linux-x86_64 --cache-dir build/seed-check
 
       - name: Build native producer
         run: |
