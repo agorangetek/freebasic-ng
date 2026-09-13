@@ -10,7 +10,6 @@ stated verification.
 | --- | --- | --- |
 | `bootstrap/` | Generated C sources needed to build `fbc` without a pre-existing compiler | Reproducible replacement bootstrap sources for every supported host, with provenance and bootstrap test |
 | Root `makefile` | Builds targets not yet covered by CMake | CMake covers every retained target and the equivalent test suite passes |
-| `contrib/travis/` | Historic CI helper scripts | GitHub Actions covers its still-supported host and test cases |
 | `contrib/deb/` | Retired in M5 | Replaced by the native, attested Debian and APT release path (M5-R1); its DEP-5 copyright record is preserved verbatim at `docs/history/debian-packaging-copyright` |
 | `contrib/rpm/` | Retired in M5 | RPM support was explicitly dropped; no maintained RPM channel is promised (M5-R2) |
 | `contrib/release/` | Retired in M5 | Replaced by attested GitHub release assembly (M5-R3) |
