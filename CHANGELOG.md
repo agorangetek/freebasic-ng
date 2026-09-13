@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.23.1](https://github.com/metaneutrons/freebasic-ng/compare/v1.23.0...v1.23.1) (2026-09-13)
+
+
+### Bug Fixes
+
+* qualify preceding release assets ([#143](https://github.com/metaneutrons/freebasic-ng/issues/143)) ([32aadcb](https://github.com/metaneutrons/freebasic-ng/commit/32aadcbd9b11c8b1c4c3eba5c8a32a7c5980d138))
+
 ## [1.23.0](https://github.com/metaneutrons/freebasic-ng/compare/v1.22.3...v1.23.0) (2026-09-13)
 
 
