@@ -10,6 +10,12 @@ elseif(UNIX)
     # Base unix source (always needed)
     set(GFXLIB_UNIX_SOURCES "${CMAKE_CURRENT_SOURCE_DIR}/unix/gfx_unix.c")
 
+    # Darwin builds the X11 driver only with XQuartz; libfb decides the same
+    # way, and this directory has its own variable scope.
+    if(FB_TARGET_OS STREQUAL "darwin" AND NOT FB_ENABLE_XQUARTZ)
+        set(FB_DISABLE_X11 ON)
+    endif()
+
     # X11 sources (only if X11 is available)
     if(NOT FB_DISABLE_X11)
         find_package(X11)
@@ -23,6 +29,14 @@ elseif(UNIX)
         else()
             set(FB_DISABLE_X11 ON)
         endif()
+    endif()
+
+    # FB's OpenGL support lives in the X11 driver: gfx_driver_opengl_x11.c is
+    # the only unix translation unit that defines fb_hGL_GetProcAddress().
+    # Without it, gfx_opengl.c still calls that hook and libfbgfx keeps an
+    # undefined symbol that surfaces when a user program is linked.
+    if(FB_DISABLE_X11)
+        set(FB_DISABLE_OPENGL ON)
     endif()
 
     # OS-specific overrides

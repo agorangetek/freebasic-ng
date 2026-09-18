@@ -123,6 +123,12 @@ if(FB_TARGET_OS STREQUAL "darwin")
     endif()
 endif()
 
+# The only OpenGL driver on unix is part of the X11 graphics driver.  Without
+# X11 there is no GL driver at all, so keep the two features in step.
+if(UNIX AND FB_DISABLE_X11)
+    set(FB_DISABLE_OPENGL ON)
+endif()
+
 set(FB_FFI_INCLUDE_DIR)
 if(NOT FB_DISABLE_FFI)
     find_path(FB_FFI_INCLUDE_DIR NAMES ffi.h
