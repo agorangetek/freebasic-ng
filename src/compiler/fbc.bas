@@ -963,7 +963,14 @@ private function hLinkFiles( ) as integer
 
 		if( fbGetOption( FB_COMPOPT_OUTTYPE ) = FB_OUTTYPE_DYNAMICLIB ) then
 			dllname = hStripPath( hStripExt( fbc.outname ) )
-			ldcline += " -shared -h" + hStripPath( fbc.outname )
+			if( fbGetOption( FB_COMPOPT_TARGET ) = FB_COMPTARGET_DARWIN ) then
+				'' Darwin has neither -shared nor -h: a shared library is built
+				'' with -dynamiclib, and the name recorded in it, the equivalent
+				'' of an ELF SONAME, comes from -install_name.
+				ldcline += " -dynamiclib -install_name " + QUOTE + hStripPath( fbc.outname ) + QUOTE
+			else
+				ldcline += " -shared -h" + hStripPath( fbc.outname )
+			end if
 
 			'' Turn libfoo into foo, so it can be checked against -l foo below
 			if( left( dllname, 3 ) = "lib" ) then
@@ -1005,7 +1012,13 @@ private function hLinkFiles( ) as integer
 		if( (fbGetOption( FB_COMPOPT_OUTTYPE ) = FB_OUTTYPE_DYNAMICLIB) or _
 			fbGetOption( FB_COMPOPT_EXPORT ) ) and _
 			(fbGetOption( FB_COMPOPT_TARGET ) <> FB_COMPTARGET_SOLARIS) then
-			ldcline += " --export-dynamic"
+			if( fbGetOption( FB_COMPOPT_TARGET ) = FB_COMPTARGET_DARWIN ) then
+				'' ld64 spells it -export_dynamic and is reached through the
+				'' compiler driver, which does not know the option itself.
+				ldcline += " -Wl,-export_dynamic"
+			else
+				ldcline += " --export-dynamic"
+			end if
 		end if
 
 	case FB_COMPTARGET_XBOX
