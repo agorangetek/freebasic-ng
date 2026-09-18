@@ -153,6 +153,22 @@ if(FB_BUILD_TESTS OR FB_BUILD_LEGACY_UNIT_TESTS OR
    FB_BUILD_LEGACY_DOC_TOOLS)
     enable_testing()
 
+    # Portable compiler regressions.  They are built and run by the compiler
+    # from this build, so they cover the generated code, not only the parser.
+    if(FB_BUILD_COMPILER)
+        find_package(Python3 COMPONENTS Interpreter REQUIRED)
+        add_test(
+            NAME compiler.data-statement
+            COMMAND "${Python3_EXECUTABLE}"
+                "${CMAKE_SOURCE_DIR}/scripts/run-compiler-regression.py"
+                --cmake "${CMAKE_COMMAND}"
+                --build-dir "${CMAKE_BINARY_DIR}"
+                --install-prefix "${CMAKE_BINARY_DIR}/tests/data-statement/stage"
+                --source "${CMAKE_SOURCE_DIR}/test/cmake/data-statement.bas"
+                --work-dir "${CMAKE_BINARY_DIR}/tests/data-statement/work"
+        )
+    endif()
+
     # Darwin arm64 uses a pointer __builtin_va_list.  This regression must be
     # built by the native/self-hosted compiler so it validates the generated
     # C path as well as the target ABI model.
