@@ -16,6 +16,12 @@ def main() -> None:
     parser.add_argument("--install-prefix", type=Path, required=True)
     parser.add_argument("--source", type=Path, required=True)
     parser.add_argument("--work-dir", type=Path, required=True)
+    parser.add_argument(
+        "--fbc-flag",
+        action="append",
+        default=[],
+        help="extra option passed to fbc; repeat for several options",
+    )
     args = parser.parse_args()
 
     cmake = args.cmake.resolve()
@@ -39,11 +45,18 @@ def main() -> None:
         [str(cmake), "--install", str(build_dir), "--prefix", str(install_prefix)],
         check=True,
     )
+    if not fbc.is_file() and fbc.with_suffix(".exe").is_file():
+        fbc = fbc.with_suffix(".exe")
     if not fbc.is_file():
         raise RuntimeError(f"installed compiler does not exist: {fbc}")
     work_dir.mkdir(parents=True)
-    subprocess.run([str(fbc), str(source), "-x", str(executable)], check=True)
-    subprocess.run([str(executable)], check=True)
+    subprocess.run(
+        [str(fbc), *args.fbc_flag, str(source), "-x", str(executable)],
+        check=True,
+    )
+    if not executable.is_file() and executable.with_suffix(".exe").is_file():
+        executable = executable.with_suffix(".exe")
+    subprocess.run([str(executable)], check=True, cwd=work_dir)
 
 
 if __name__ == "__main__":
