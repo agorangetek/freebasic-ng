@@ -153,32 +153,91 @@ if(FB_BUILD_TESTS OR FB_BUILD_LEGACY_UNIT_TESTS OR
    FB_BUILD_LEGACY_DOC_TOOLS)
     enable_testing()
 
+    # Registers a compiler regression: the installed compiler builds the
+    # fixture and runs it.  MSYS Python reads a C:/... argument as a relative
+    # POSIX path, so on Windows the adapter is driven from the build tree with
+    # relative paths only, the same way the legacy suites below do it.
+    function(fb_add_compiler_regression name)
+        cmake_parse_arguments(_fbreg "" "SOURCE;LIBRARY_SOURCE" "FBC_FLAGS" ${ARGN})
+
+        find_package(Python3 COMPONENTS Interpreter REQUIRED)
+
+        set(_runner "${CMAKE_SOURCE_DIR}/scripts/run-compiler-regression.py")
+        set(_cmake "${CMAKE_COMMAND}")
+        set(_build_dir "${CMAKE_BINARY_DIR}")
+        set(_install_prefix "${CMAKE_BINARY_DIR}/tests/${name}/stage")
+        set(_work_dir "${CMAKE_BINARY_DIR}/tests/${name}/work")
+        set(_source "${CMAKE_SOURCE_DIR}/${_fbreg_SOURCE}")
+        set(_library_source)
+        if(_fbreg_LIBRARY_SOURCE)
+            set(_library_source "${CMAKE_SOURCE_DIR}/${_fbreg_LIBRARY_SOURCE}")
+        endif()
+
+        if(WIN32)
+            file(RELATIVE_PATH _runner "${CMAKE_BINARY_DIR}" "${_runner}")
+            file(RELATIVE_PATH _source "${CMAKE_BINARY_DIR}" "${_source}")
+            if(_library_source)
+                file(RELATIVE_PATH _library_source "${CMAKE_BINARY_DIR}" "${_library_source}")
+            endif()
+            set(_cmake cmake)
+            set(_build_dir .)
+            set(_install_prefix "tests/${name}/stage")
+            set(_work_dir "tests/${name}/work")
+        endif()
+
+        set(_library_argument)
+        if(_library_source)
+            set(_library_argument --library-source "${_library_source}")
+        endif()
+
+        set(_flag_arguments)
+        foreach(_flag IN LISTS _fbreg_FBC_FLAGS)
+            list(APPEND _flag_arguments "--fbc-flag=${_flag}")
+        endforeach()
+
+        add_test(
+            NAME "compiler.${name}"
+            COMMAND "${Python3_EXECUTABLE}"
+                "${_runner}"
+                --cmake "${_cmake}"
+                --build-dir "${_build_dir}"
+                --install-prefix "${_install_prefix}"
+                --source "${_source}"
+                --work-dir "${_work_dir}"
+                ${_library_argument}
+                ${_flag_arguments}
+        )
+        set_tests_properties("compiler.${name}" PROPERTIES
+            WORKING_DIRECTORY "${CMAKE_BINARY_DIR}")
+    endfunction()
+
+    # Portable compiler regressions.  They are built and run by the compiler
+    # from this build, so they cover the generated code, not only the parser.
+    if(FB_BUILD_COMPILER)
+        fb_add_compiler_regression(data-statement
+            SOURCE test/cmake/data-statement.bas)
+        fb_add_compiler_regression(error-check-handler
+            SOURCE test/cmake/error-check-handler.bas
+            FBC_FLAGS -e)
+    endif()
+
+    # Loading a shared library built by this compiler.  Kept to unix hosts:
+    # the Windows import-library path is a separate story.
+    if(FB_BUILD_COMPILER AND UNIX)
+        fb_add_compiler_regression(dylib-load
+            SOURCE test/cmake/dylib-load.bas
+            LIBRARY_SOURCE test/cmake/dylib-testlib.bas)
+    endif()
+
     # Darwin arm64 uses a pointer __builtin_va_list.  This regression must be
     # built by the native/self-hosted compiler so it validates the generated
     # C path as well as the target ABI model.
     if(FB_BUILD_COMPILER AND FB_TARGET_OS STREQUAL "darwin" AND
        FB_TARGET_ARCH STREQUAL "aarch64")
-        find_package(Python3 COMPONENTS Interpreter REQUIRED)
-        add_test(
-            NAME compiler.darwin-aarch64-cva-list
-            COMMAND "${Python3_EXECUTABLE}"
-                "${CMAKE_SOURCE_DIR}/scripts/run-compiler-regression.py"
-                --cmake "${CMAKE_COMMAND}"
-                --build-dir "${CMAKE_BINARY_DIR}"
-                --install-prefix "${CMAKE_BINARY_DIR}/tests/darwin-aarch64-cva-list/stage"
-                --source "${CMAKE_SOURCE_DIR}/test/cmake/darwin-aarch64-cva-list.bas"
-                --work-dir "${CMAKE_BINARY_DIR}/tests/darwin-aarch64-cva-list/work"
-        )
-        add_test(
-            NAME compiler.darwin-aarch64-consteval-acos
-            COMMAND "${Python3_EXECUTABLE}"
-                "${CMAKE_SOURCE_DIR}/scripts/run-compiler-regression.py"
-                --cmake "${CMAKE_COMMAND}"
-                --build-dir "${CMAKE_BINARY_DIR}"
-                --install-prefix "${CMAKE_BINARY_DIR}/tests/darwin-aarch64-consteval-acos/stage"
-                --source "${CMAKE_SOURCE_DIR}/test/cmake/darwin-aarch64-consteval-acos.bas"
-                --work-dir "${CMAKE_BINARY_DIR}/tests/darwin-aarch64-consteval-acos/work"
-        )
+        fb_add_compiler_regression(darwin-aarch64-cva-list
+            SOURCE test/cmake/darwin-aarch64-cva-list.bas)
+        fb_add_compiler_regression(darwin-aarch64-consteval-acos
+            SOURCE test/cmake/darwin-aarch64-consteval-acos.bas)
     endif()
 
     # Travis varied compiler debug and the runtime test flags independently.

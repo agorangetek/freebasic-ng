@@ -4012,16 +4012,12 @@ private sub _emitProcBegin _
 	hWriteLine( "{" )
 	sectionIndent( )
 
-	if( (env.clopt.backend = FB_BACKEND_CLANG) and (env.clopt.errorcheck = TRUE) ) then
-		'' Compiling with -e
-		'' Work around an error clang unnecessarily throws if a function
-		'' contains a computed goto but no address-of-label operator.
-		'' See https://bugs.llvm.org/show_bug.cgi?id=18658
-		'' (TODO: We emit computed gotos for RESUME/ON ERROR GOTO
-		'' support (-ex) but also unnecessarily use them to terminate
-		'' the program after fb_ErrorThrowAt when compiled only with -e)
-		hWriteLine( "_unusedlabel: ; void *_llvmbug18658 = &&_unusedlabel;" )
-	end if
+	'' Note: clang rejects a computed goto in a function that takes no label
+	'' address, so the error path always emits the resume labels for this
+	'' backend; see hEmitResumeLabels() in rtl-error.bas.  A single unused
+	'' label must not be used for that: it is then the only destination the
+	'' computed goto can have, and both clang and gcc turn the jump into a
+	'' direct branch to it, which makes ON ERROR GOTO loop forever.
 end sub
 
 private sub _emitProcEnd _

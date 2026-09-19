@@ -228,6 +228,32 @@ sub rtlErrorModEnd( )
 
 end sub
 
+'' Whether the error path emits the resume labels and hands their addresses to
+'' the runtime.  -ex always does; the C backend does so even without RESUME
+'' support, because it emits the jump to the error handler as `goto *ptr` and
+'' clang rejects an indirect goto in a function that takes no label address
+'' ("indirect goto in function with no address-of-label expressions").  Without
+'' these labels every procedure containing an error check is such a function,
+'' so `fbc -e` cannot be compiled at all wherever clang translates the emitted
+'' C -- which the compiler cannot tell from the target: Darwin's cc is clang,
+'' the win32 aarch64 toolchain ships clang as its gcc, and any host can have a
+'' clang behind the name.  The C backend therefore always emits them, which is
+'' the shape -ex produces anyway.  The assembly backends emit the jump
+'' themselves and are left alone.
+private function hEmitResumeLabels( ) as integer
+	if( env.clopt.resumeerr ) then
+		function = TRUE
+		exit function
+	end if
+
+	select case as const( env.clopt.backend )
+	case FB_BACKEND_GCC, FB_BACKEND_CLANG
+		function = TRUE
+	case else
+		function = FALSE
+	end select
+end function
+
 private function hErrorThrow _
 	( _
 		byval reslabel as FBSYMBOL ptr, _
@@ -254,7 +280,7 @@ private function hErrorThrow _
 	astNewARG( proc, param )
 
 	'' resnxtlabel
-	if( env.clopt.resumeerr ) then
+	if( hEmitResumeLabels( ) ) then
 		param = astNewADDROF( astNewVAR( nxtlabel ) )
 	else
 		param = astNewCONSTi( NULL, FB_DATATYPE_UINT )
@@ -280,7 +306,7 @@ function rtlErrorCheck( byval expr as ASTNODE ptr ) as ASTNODE ptr
 	dim as FBSYMBOL ptr nxtlabel = any, reslabel = any
 	dim as ASTNODE ptr t = NULL
 
-	if( env.clopt.resumeerr ) then
+	if( hEmitResumeLabels( ) ) then
 		reslabel = symbAddLabel( NULL )
 		t = astNewLINK( t, astNewLABEL( reslabel ), AST_LINK_RETURN_NONE )
 	else
@@ -341,7 +367,7 @@ sub rtlErrorThrow _
 	end if
 
 	'' reslabel
-	if( env.clopt.resumeerr ) then
+	if( hEmitResumeLabels( ) ) then
 		param = astNewADDROF( astNewVAR( reslabel ) )
 	else
 		param = astNewCONSTi( NULL, FB_DATATYPE_UINT )
@@ -351,7 +377,7 @@ sub rtlErrorThrow _
 	end if
 
 	'' resnxtlabel
-	if( env.clopt.resumeerr ) then
+	if( hEmitResumeLabels( ) ) then
 		param = astNewADDROF( astNewVAR( nxtlabel ) )
 	else
 		param = astNewCONSTi( NULL, FB_DATATYPE_UINT )
