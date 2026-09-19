@@ -73,8 +73,17 @@ elseif(FB_TARGET_ARCH STREQUAL "powerpc")
 endif()
 
 # --- PIC requirement (non-x86 on unix-like) ---
+# Darwin is excluded on purpose.  Its ABI is position-independent throughout,
+# mandatory on arm64 and the default on x86_64, so the ordinary runtime already
+# works inside a shared library, and fbc never asks for a pic variant there:
+# hTargetNeedsPIC() in src/compiler/fbc.bas leaves Darwin out, and -pic is
+# rejected for the target.  Building one would install a second copy of libfb
+# plus fbrt0pic.o that nothing can link.
 set(FB_NEED_PIC FALSE)
-if(NOT WIN32 AND NOT FB_TARGET_ARCH STREQUAL "x86" AND NOT FB_TARGET_OS MATCHES "^(amiga|aros|morphos|amigaos4)$")
+if(NOT WIN32
+   AND NOT FB_TARGET_ARCH STREQUAL "x86"
+   AND NOT FB_TARGET_OS STREQUAL "darwin"
+   AND NOT FB_TARGET_OS MATCHES "^(amiga|aros|morphos|amigaos4)$")
     set(FB_NEED_PIC TRUE)
 endif()
 
