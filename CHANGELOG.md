@@ -1,5 +1,14 @@
 # Changelog
 
+## [1.24.5](https://github.com/metaneutrons/freebasic-ng/compare/v1.24.4...v1.24.5) (2026-09-19)
+
+
+### Bug Fixes
+
+* **build:** stop building the PIC runtime for Darwin ([#162](https://github.com/metaneutrons/freebasic-ng/issues/162)) ([b8fa2dd](https://github.com/metaneutrons/freebasic-ng/commit/b8fa2dd7b5abdc8267434feef2e1ba7e63f9934f))
+* **compiler:** read tool output with LINE INPUT ([#163](https://github.com/metaneutrons/freebasic-ng/issues/163)) ([6287bf8](https://github.com/metaneutrons/freebasic-ng/commit/6287bf83c60507ece5b8cc41d3a001c830913ade))
+* repair the Darwin toolchain and the clang error path ([#160](https://github.com/metaneutrons/freebasic-ng/issues/160)) ([b80eb9e](https://github.com/metaneutrons/freebasic-ng/commit/b80eb9edc159484b70ee487942e58ab411916d90))
+
 ## [1.24.4](https://github.com/metaneutrons/freebasic-ng/compare/v1.24.3...v1.24.4) (2026-09-13)
 
 
