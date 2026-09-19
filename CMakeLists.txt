@@ -137,6 +137,14 @@ include(cmake/Install.cmake)
 # Runtime library (libfb)
 add_subdirectory(src/rtlib)
 
+# This fork exists to ship the native Cocoa graphics driver on macOS, so gfxlib
+# is not optional there.  A release built the usual way, with
+# -DFB_BUILD_GFXLIB=OFF, installs no libfbgfx at all and a ScreenRes program
+# cannot link against it.  Other targets keep honouring the option.
+if(FB_TARGET_OS STREQUAL "darwin")
+    set(FB_BUILD_GFXLIB ON)
+endif()
+
 # Graphics library (libfbgfx) - optional
 if(FB_BUILD_GFXLIB)
     add_subdirectory(src/gfxlib2)
