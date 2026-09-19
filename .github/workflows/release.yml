@@ -6,6 +6,15 @@ name: Release
 # until its host archives and all M2 package channels have been qualified.
 on:
   workflow_dispatch:
+    inputs:
+      qualify_channels:
+        description: >-
+          Qualify the AUR package channel before publishing.  Leave enabled
+          upstream.  A fork has no AUR credentials, and its candidate version is
+          by definition not newer than the one already published there, so it
+          cannot pass; disable it so the verified release is still staged.
+        type: boolean
+        default: true
 
 permissions:
   contents: read
@@ -808,6 +817,7 @@ jobs:
   aur-qualify:
     name: Qualify AUR ${{ matrix.architecture }}
     needs: [metadata, candidate]
+    if: ${{ github.event_name != 'workflow_dispatch' || inputs.qualify_channels }}
     runs-on: ${{ matrix.runner }}
     timeout-minutes: 60
     strategy:
@@ -1043,7 +1053,8 @@ jobs:
       needs.metadata.result == 'success' &&
       needs.candidate.result == 'success' &&
       needs.homebrew-qualify.result == 'success' &&
-      needs.aur-qualify.result == 'success' &&
+      (needs.aur-qualify.result == 'success' ||
+      needs.aur-qualify.result == 'skipped') &&
       (needs.metadata.outputs.is_prerelease == 'true' ||
       (needs.preflight-homebrew.result == 'success' &&
       needs.preflight-aur.result == 'success' &&
