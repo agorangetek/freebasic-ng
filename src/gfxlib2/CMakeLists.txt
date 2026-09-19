@@ -48,6 +48,11 @@ elseif(UNIX)
         file(GLOB GFXLIB_OS_SOURCES "${CMAKE_CURRENT_SOURCE_DIR}/openbsd/*.c")
     elseif(FB_TARGET_OS STREQUAL "dragonfly")
         file(GLOB GFXLIB_OS_SOURCES "${CMAKE_CURRENT_SOURCE_DIR}/dragonfly/*.c")
+    elseif(FB_TARGET_OS STREQUAL "darwin")
+        # The native Cocoa driver presents the software framebuffer in a real
+        # window, and in a build without XQuartz it is the only driver.  It is
+        # Objective-C, so it is listed explicitly: the glob above takes only .c.
+        set(GFXLIB_OS_SOURCES "${CMAKE_CURRENT_SOURCE_DIR}/darwin/gfx_driver_cocoa.m")
     endif()
 
     set(GFXLIB_PLATFORM_SOURCES ${GFXLIB_UNIX_SOURCES} ${GFXLIB_OS_SOURCES})
@@ -63,6 +68,12 @@ if(FB_TARGET_ARCH STREQUAL "x86" AND EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/x86")
 endif()
 
 set(GFXLIB_ALL_SOURCES ${GFXLIB_COMMON_SOURCES} ${GFXLIB_PLATFORM_SOURCES} ${GFXLIB_ARCH_SOURCES})
+
+# The Cocoa driver is Objective-C.  Enable the language only on Darwin so the
+# other hosts do not need an Objective-C compiler to build this directory.
+if(FB_TARGET_OS STREQUAL "darwin")
+    enable_language(OBJC)
+endif()
 
 # --- libfbgfx ---
 add_library(fbgfx STATIC ${GFXLIB_ALL_SOURCES})

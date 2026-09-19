@@ -22,6 +22,31 @@ upstream base and the fork's compatibility policy are documented in
 Release tags use `v<version>` and release assets use the
 `freebasic-ng-<version>-<platform>` prefix.
 
+## Local changes in this copy
+
+This is a fork of FreeBASIC-NG with a **native Cocoa 2D graphics driver** for
+macOS on top of it, so a plain `ScreenRes` opens a real window without XQuartz
+and without OpenGL (deprecated on macOS):
+
+| File | Change |
+| --- | --- |
+| `src/gfxlib2/darwin/gfx_driver_cocoa.m` | the driver: presents the software framebuffer in an `NSWindow` through CoreGraphics |
+| `src/rtlib/darwin/fb_private_scancodes_cocoa.h` | keyboard scancodes for the driver |
+| `src/gfxlib2/unix/gfx_unix.c` | registers the Cocoa driver after X11, so an XQuartz build keeps X11 and falls back to Cocoa |
+| `src/compiler/fbc.bas` | links `-framework Cocoa -framework QuartzCore -framework CoreGraphics` for Darwin programs that use gfx |
+| `src/gfxlib2/CMakeLists.txt` | compiles the Objective-C driver and enables the `OBJC` language on Darwin only |
+
+The window, view and event handling is modelled on the Cocoa/OpenGL driver from
+[freebasic/fbc#448](https://github.com/freebasic/fbc/pull/448) by Markos-Th09 –
+including the scancode table; the software-framebuffer present path and the
+driver hooks are new. The upstream work this follows is
+[freebasic/fbc#479](https://github.com/freebasic/fbc/pull/479) and
+[#480](https://github.com/freebasic/fbc/pull/480).
+
+Verified on macOS arm64: a `ScreenRes 320,240,32` program draws a red box and a
+green circle, and `BSave` returns those exact pixels (`line …, b` draws an
+outline, so the interiors are black as expected).
+
 ## Build
 
 Requirements:

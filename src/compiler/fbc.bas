@@ -1300,6 +1300,13 @@ private function hLinkFiles( ) as integer
 		wend
 	end scope
 
+	'' The native Cocoa gfx driver needs these system frameworks.  They ship
+	'' with every macOS install, and are only added for programs that use gfx.
+	if( (fbGetOption( FB_COMPOPT_TARGET ) = FB_COMPTARGET_DARWIN) and _
+	    fbGetOption( FB_COMPOPT_FBGFX ) ) then
+		ldcline += " -framework Cocoa -framework QuartzCore -framework CoreGraphics"
+	end if
+
 	'' Begin of lib group
 	'' All libraries are passed inside -( -) so we don't need to worry as
 	'' much about their order and/or listing them repeatedly. (Not supported by Darwin ld)
